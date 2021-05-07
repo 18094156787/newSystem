@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="JCDatePickerView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vAM-Wd-o6q">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.30340325342465752" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gGa-TR-sEe">
+                    <rect key="frame" x="0.0" y="427" width="375" height="240"/>
+                    <subviews>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="f00-6A-zY8">
+                            <rect key="frame" x="0.0" y="44" width="375" height="196"/>
+                            <date key="date" timeIntervalSinceReferenceDate="570095765.24484706">
+                                <!--2019-01-25 07:56:05 +0000-->
+                            </date>
+                            <locale key="locale" localeIdentifier="zh-Hans"/>
+                        </datePicker>
+                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B10-C9-1v8">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="RmO-gO-2np"/>
+                            </constraints>
+                            <items>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="0XN-f0-JnH"/>
+                                <barButtonItem title="完成    " id="ItH-oX-fo0">
+                                    <connections>
+                                        <action selector="doneItemClick:" destination="iN0-l3-epB" id="qaI-cl-S5s"/>
+                                    </connections>
+                                </barButtonItem>
+                            </items>
+                        </toolbar>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="f00-6A-zY8" secondAttribute="trailing" id="2gU-hI-du7"/>
+                        <constraint firstItem="f00-6A-zY8" firstAttribute="top" secondItem="B10-C9-1v8" secondAttribute="bottom" id="8Xd-ie-GQ0"/>
+                        <constraint firstAttribute="height" constant="240" id="FTv-oZ-2IF"/>
+                        <constraint firstAttribute="trailing" secondItem="B10-C9-1v8" secondAttribute="trailing" id="Pg9-ei-b7O"/>
+                        <constraint firstItem="B10-C9-1v8" firstAttribute="leading" secondItem="gGa-TR-sEe" secondAttribute="leading" id="WkO-ub-jcP"/>
+                        <constraint firstItem="B10-C9-1v8" firstAttribute="top" secondItem="gGa-TR-sEe" secondAttribute="top" id="smc-UN-PMn"/>
+                        <constraint firstItem="f00-6A-zY8" firstAttribute="leading" secondItem="gGa-TR-sEe" secondAttribute="leading" id="tf6-3b-lah"/>
+                        <constraint firstAttribute="bottom" secondItem="f00-6A-zY8" secondAttribute="bottom" id="yyv-uy-NJ4"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="gGa-TR-sEe" secondAttribute="bottom" id="JfV-cS-B79"/>
+                <constraint firstItem="gGa-TR-sEe" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="OB2-8Z-I6e"/>
+                <constraint firstAttribute="bottom" secondItem="vAM-Wd-o6q" secondAttribute="bottom" id="f11-pM-rfJ"/>
+                <constraint firstAttribute="trailing" secondItem="vAM-Wd-o6q" secondAttribute="trailing" id="kJl-Rm-eTC"/>
+                <constraint firstItem="vAM-Wd-o6q" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="msn-49-mO4"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gGa-TR-sEe" secondAttribute="trailing" id="ofF-Ao-7a7"/>
+                <constraint firstItem="vAM-Wd-o6q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="wLz-vu-u4V"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="alertView" destination="gGa-TR-sEe" id="SRa-ET-ArZ"/>
+                <outlet property="backView" destination="vAM-Wd-o6q" id="oww-Wa-N7w"/>
+                <outlet property="datePicker" destination="f00-6A-zY8" id="NKO-aJ-8PR"/>
+            </connections>
+            <point key="canvasLocation" x="-889" y="61"/>
+        </view>
+    </objects>
+</document>

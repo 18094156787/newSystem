@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JNMatchDetailSJVC">
+            <connections>
+                <outlet property="scrollView" destination="39a-aW-r2b" id="mbB-fD-ppt"/>
+                <outlet property="segControl" destination="W6m-uU-3UT" id="ehD-TW-hrg"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="W6m-uU-3UT" customClass="JNSegmentedControl">
+                    <rect key="frame" x="60" y="52" width="300" height="33"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="kKs-MW-HJ0"/>
+                        <constraint firstAttribute="height" constant="32" id="m6a-3D-41V"/>
+                    </constraints>
+                    <segments>
+                        <segment title="厄瓜多"/>
+                        <segment title="墨西哥"/>
+                    </segments>
+                    <color key="tintColor" red="0.89411764705882346" green="0.27058823529411763" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="segChanged:" destination="-1" eventType="valueChanged" id="8KD-Ek-T8e"/>
+                    </connections>
+                </segmentedControl>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39a-aW-r2b">
+                    <rect key="frame" x="0.0" y="95" width="414" height="767"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="sSX-cP-jVD"/>
+                    </connections>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="W6m-uU-3UT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="3" id="588-zO-CWA"/>
+                <constraint firstItem="39a-aW-r2b" firstAttribute="top" secondItem="W6m-uU-3UT" secondAttribute="bottom" constant="11" id="PAq-P1-oqu"/>
+                <constraint firstItem="W6m-uU-3UT" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="8" id="Q4s-jh-bIK"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="39a-aW-r2b" secondAttribute="bottom" id="Thh-Go-J05"/>
+                <constraint firstItem="39a-aW-r2b" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="UX0-qJ-h52"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="39a-aW-r2b" secondAttribute="trailing" id="vP6-xF-V85"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="-2494.202898550725" y="9.375"/>
+        </view>
+    </objects>
+</document>

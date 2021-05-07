@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="JCUpdateView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ltt-3N-sFG">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LZp-oc-BNh">
+                    <rect key="frame" x="50" y="177" width="275" height="313.5"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alert_update" translatesAutoresizingMaskIntoConstraints="NO" id="ZEz-c1-weZ">
+                            <rect key="frame" x="82.5" y="24" width="110" height="110"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="110" id="kAA-vm-qZV"/>
+                                <constraint firstAttribute="height" constant="110" id="rHC-Pt-c7b"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="软件更新提示" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="le8-bk-xMX">
+                            <rect key="frame" x="41.5" y="160" width="192" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <color key="textColor" red="0.94901960784313721" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="97i-OB-mJ1">
+                            <rect key="frame" x="15" y="267.5" width="115" height="38"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="38" id="wa3-02-qSF"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" red="0.22352941176470587" green="0.23529411764705882" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="cancelBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="EEm-lT-2XV"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fch-mk-3Ck">
+                            <rect key="frame" x="145" y="267.5" width="115" height="38"/>
+                            <color key="backgroundColor" red="0.94901960784313721" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="38" id="WSM-Yv-x71"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="下载更新">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="updateBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="N9F-Ib-Z2d"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="stD-Mr-SRy">
+                            <rect key="frame" x="41.5" y="208" width="192" height="33.5"/>
+                            <string key="text">1.11鲸猜足球版本1.11
+鲸猜足球版本</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.63529411764705879" green="0.63529411764705879" blue="0.63529411764705879" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLI-wj-p4J">
+                            <rect key="frame" x="82" y="267" width="115" height="38"/>
+                            <color key="backgroundColor" red="0.94901960780000005" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="115" id="1FQ-kp-H4s"/>
+                                <constraint firstAttribute="height" constant="38" id="wZy-6d-KFk"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="下载更新">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="updateBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Udr-kF-4vf"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="le8-bk-xMX" firstAttribute="centerX" secondItem="LZp-oc-BNh" secondAttribute="centerX" id="1da-PQ-kYy"/>
+                        <constraint firstItem="fch-mk-3Ck" firstAttribute="top" secondItem="stD-Mr-SRy" secondAttribute="bottom" constant="26" id="20i-cW-MJN"/>
+                        <constraint firstItem="dLI-wj-p4J" firstAttribute="centerX" secondItem="LZp-oc-BNh" secondAttribute="centerX" constant="2" id="8wV-WK-Y2k"/>
+                        <constraint firstItem="ZEz-c1-weZ" firstAttribute="centerX" secondItem="LZp-oc-BNh" secondAttribute="centerX" id="9Ja-30-aPz"/>
+                        <constraint firstItem="stD-Mr-SRy" firstAttribute="top" secondItem="le8-bk-xMX" secondAttribute="bottom" constant="24" id="Dyq-JS-dhX"/>
+                        <constraint firstAttribute="trailing" secondItem="fch-mk-3Ck" secondAttribute="trailing" constant="15" id="EHf-0i-qAd"/>
+                        <constraint firstItem="fch-mk-3Ck" firstAttribute="leading" secondItem="97i-OB-mJ1" secondAttribute="trailing" constant="15" id="F1L-B8-IzD"/>
+                        <constraint firstAttribute="bottom" secondItem="dLI-wj-p4J" secondAttribute="bottom" constant="8.5" id="Fwz-pd-bt6"/>
+                        <constraint firstItem="le8-bk-xMX" firstAttribute="leading" secondItem="LZp-oc-BNh" secondAttribute="leading" constant="41.5" id="PIJ-93-YeQ"/>
+                        <constraint firstItem="ZEz-c1-weZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LZp-oc-BNh" secondAttribute="leading" constant="24" id="XkV-5R-6We"/>
+                        <constraint firstItem="stD-Mr-SRy" firstAttribute="centerX" secondItem="LZp-oc-BNh" secondAttribute="centerX" id="bms-3q-FuM"/>
+                        <constraint firstItem="le8-bk-xMX" firstAttribute="top" secondItem="ZEz-c1-weZ" secondAttribute="bottom" constant="26" id="eC1-sa-P4H"/>
+                        <constraint firstItem="97i-OB-mJ1" firstAttribute="leading" secondItem="LZp-oc-BNh" secondAttribute="leading" constant="15" id="hRe-Zu-3cW"/>
+                        <constraint firstAttribute="bottom" secondItem="97i-OB-mJ1" secondAttribute="bottom" constant="8" id="mYc-Ml-e6f"/>
+                        <constraint firstAttribute="trailing" secondItem="stD-Mr-SRy" secondAttribute="trailing" constant="41.5" id="oyS-vU-vjM"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZEz-c1-weZ" secondAttribute="trailing" constant="24" id="qVJ-KL-apD"/>
+                        <constraint firstAttribute="bottom" secondItem="fch-mk-3Ck" secondAttribute="bottom" constant="8" id="qa2-Dw-zai"/>
+                        <constraint firstItem="97i-OB-mJ1" firstAttribute="top" secondItem="stD-Mr-SRy" secondAttribute="bottom" constant="26" id="spp-aR-g6X"/>
+                        <constraint firstAttribute="trailing" secondItem="le8-bk-xMX" secondAttribute="trailing" constant="41.5" id="udM-us-dHb"/>
+                        <constraint firstItem="fch-mk-3Ck" firstAttribute="width" secondItem="97i-OB-mJ1" secondAttribute="width" id="vDa-CN-NGb"/>
+                        <constraint firstAttribute="width" constant="275" id="vox-Y7-6X9"/>
+                        <constraint firstItem="ZEz-c1-weZ" firstAttribute="top" secondItem="LZp-oc-BNh" secondAttribute="top" constant="24" id="vpX-y9-GFV"/>
+                        <constraint firstItem="stD-Mr-SRy" firstAttribute="leading" secondItem="LZp-oc-BNh" secondAttribute="leading" constant="41.5" id="zam-fs-hLo"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="13"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Ltt-3N-sFG" secondAttribute="bottom" id="5pr-Rp-jxN"/>
+                <constraint firstItem="Ltt-3N-sFG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="H2M-V5-4Ln"/>
+                <constraint firstItem="LZp-oc-BNh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="49" id="IyY-Vc-mtD"/>
+                <constraint firstItem="LZp-oc-BNh" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="PpR-7y-pSP"/>
+                <constraint firstAttribute="trailing" secondItem="Ltt-3N-sFG" secondAttribute="trailing" id="UNi-fe-FTR"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="LZp-oc-BNh" secondAttribute="bottom" constant="49" id="qYj-rP-BA9"/>
+                <constraint firstItem="LZp-oc-BNh" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="wZf-OK-nsB"/>
+                <constraint firstItem="Ltt-3N-sFG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zqD-B0-bgr"/>
+            </constraints>
+            <connections>
+                <outlet property="alertView" destination="LZp-oc-BNh" id="Bw9-KC-UjJ"/>
+                <outlet property="backView" destination="Ltt-3N-sFG" id="e62-fe-SEy"/>
+                <outlet property="cancelButton" destination="97i-OB-mJ1" id="vWM-SQ-Goo"/>
+                <outlet property="forceUpdateBtn" destination="dLI-wj-p4J" id="zcC-0f-mb5"/>
+                <outlet property="msgLabel" destination="stD-Mr-SRy" id="Zpx-Kk-8gy"/>
+                <outlet property="updateBtn" destination="fch-mk-3Ck" id="6mq-Ss-RSB"/>
+            </connections>
+            <point key="canvasLocation" x="-1346.4000000000001" y="-158.77061469265368"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="alert_update" width="220" height="160"/>
+    </resources>
+</document>

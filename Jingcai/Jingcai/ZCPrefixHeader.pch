@@ -1,0 +1,253 @@
+//
+//  ZCPrefixHeader.pch
+//  Jingcai
+//
+//  Created by Rain on 2018/12/20.
+//  Copyright © 2018 blockstar. All rights reserved.
+//
+
+#ifndef ZCPrefixHeader_pch
+#define ZCPrefixHeader_pch
+
+#import <UIKit/UIKit.h>
+#import <UMAnalytics/MobClick.h>
+
+// ****
+#pragma mark - 常用
+#if DEBUG
+#define NSLog(FORMAT, ...) fprintf(stderr,"\nfunction:%s line:%d content:%s\n", __FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+#else
+#define NSLog(FORMAT, ...) nil
+#endif
+#define NonNil(str) str.length > 0 ? str : @""
+#define Integet_ToString(value) [NSString stringWithFormat:@"%ld",value]
+#define WeakSelf __weak typeof(self) weakSelf = self
+#define StrongSelf(strongSelf)  __strong__typeof(&*self)strongSelf = weakSelf
+// 判断全面屏X
+#define IPHONE_X \
+({BOOL isPhoneX = NO;\
+if (@available(iOS 11.0, *)) {\
+isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bottom > 0.0;\
+}\
+(isPhoneX);})
+
+// ****
+#pragma mark - 尺寸大小
+#define StatusBar_HEIGHT ((IPHONE_X) ? 44 : 20)
+//[[UIApplication sharedApplication] statusBarFrame].size.height
+#define NavigationBar_HEIGHT 44
+//self.navigationController.navigationBar.frame.size.height
+#define TabBar_HEIGHT 49
+#define  NavigationStatusBarHeight  (IPHONE_X ? 88.f : 64.f)
+#define kTabBarHeight (CGFloat)(IPHONE_X?(49.0 + 34.0):(49.0))
+#define kBottomTabSafeAreaHeight (CGFloat)(IPHONE_X?(34):(0))
+//self.tabBarController.tabBar.frame.size.height //49、83
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+#define kWMHomeHeaderViewHeight  (AUTO(280)+AUTO(260))
+#define kWMRankHeaderViewHeight  (100+NavigationStatusBarHeight)
+#define kWMHeaderViewHeight  (190)
+#define kWHongbangHeaderViewHeight  (AUTO(155)+NavigationStatusBarHeight)
+#define kWHongbangDetailHeaderViewHeight  (AUTO(160)+NavigationStatusBarHeight)
+#define kWJingCaiBigDataHeaderViewHeight  AUTO(410)
+#define kWMTopHeadHeight  AUTO(273)
+#define kWMCommunityTopHeadHeight  AUTO(135)
+
+
+#define kWMMatchDetailHeaderViewHeight  (150+NavigationStatusBarHeight)
+#define kWActivityHeaderViewHeight  (136+NavigationStatusBarHeight)
+#define kWMMyHeaderViewHeight  (190+NavigationStatusBarHeight)
+#define kWExpertHeaderViewHeight  (110+NavigationStatusBarHeight)
+#define kWMTeamMatchHeaderViewHeight  (140+NavigationStatusBarHeight)
+#define kNavigationBarHeight  NavigationStatusBarHeight
+
+//屏幕适配
+#define SET_FIX_SIZE_WIDTH (SCREEN_WIDTH / 375.0f)
+//获取适配后的数据大小
+#define AUTO(num)  num * SET_FIX_SIZE_WIDTH
+
+// ****
+#pragma mark - 颜色
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#define COLOR(R, G, B, A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
+#define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
+#define RGB(r,g,b) RGBA(r,g,b,1.0f)
+
+#define JCTestColor [UIColor redColor]
+#define JCWhiteColor [UIColor whiteColor]
+#define JCBlackColor [UIColor blackColor]
+#define JCClearColor [UIColor clearColor]
+
+#define COLOR_E4463E UIColorFromRGB(0xE4463E)//主要用于导航栏、选择块、按钮（主）
+#define COLOR_F9605F UIColorFromRGB(0xF9605F)//主要用于导航栏、选择块、按钮（没用到）
+#define COLOR_FF4642 UIColorFromRGB(0xFF4642)//界面主要颜色，线框按钮选择
+#define COLOR_F72D27 UIColorFromRGB(0xF72D27)//用于界面消息提醒，底部标签栏文字
+#define COLOR_5194E3 UIColorFromRGB(0x5194E3)//界面辅助颜色、重要或警示信息展示(蓝色)
+#define COLOR_78BE28 UIColorFromRGB(0x78BE28)//界面辅助颜色、失败、扣款信息展示（绿色）
+#define COLOR_FFB85F UIColorFromRGB(0xFFB85F)//界面辅助颜色、比赛未开始信息展示
+#define COLOR_F4782C UIColorFromRGB(0xF4782C)//界面辅助颜色
+#define COLOR_DDDDDD UIColorFromRGB(0xDDDDDD)//用于模块内的分割、按钮不可点击状态
+#define COLOR_F6F6F6 UIColorFromRGB(0xF6F6F6)//界面背景、分割
+#define COLOR_333333 UIColorFromRGB(0x333333)//一级重要信息、标题等文字
+#define COLOR_666666 UIColorFromRGB(0x666666)//二级重要信息、标签等文字
+#define COLOR_999999 UIColorFromRGB(0x999999)//辅助次要文字、icon、未选择状态
+#define COLOR_5285B5 UIColorFromRGB(0x5285B5)
+#define COLOR_F4F6F9 UIColorFromRGB(0xF0F0F0)
+#define COLOR_B2BACD UIColorFromRGB(0xB2BACD)
+
+//#define JCBaseColor UIColorFromRGB(0xFF4642)
+#define JCBaseColor UIColorFromRGB(0xEF2F2F)
+#define JCBtnColor UIColorFromRGB(0xE4463E)
+#define JCNavColor UIColorFromRGB(0xE4463E)//主要用于导航栏颜色
+
+//新全民竞猜颜色
+#define COLOR_350649 UIColorFromRGB(0x350649)
+#define COLOR_39198A UIColorFromRGB(0x39198A)
+#define COLOR_F0F0F0 UIColorFromRGB(0xF0F0F0)
+#define COLOR_141416 UIColorFromRGB(0x141416)
+#define COLOR_FE644D UIColorFromRGB(0xFE644D)
+#define COLOR_F2F2F2 UIColorFromRGB(0xF2F2F2)
+#define COLOR_2F2F2F UIColorFromRGB(0x2F2F2F)
+#define COLOR_EF2F2F UIColorFromRGB(0xEF2F2F)
+#define COLOR_A9A9A9 UIColorFromRGB(0xA9A9A9)
+#define COLOR_27272B UIColorFromRGB(0x27272B)
+#define COLOR_DADADA UIColorFromRGB(0xDADADA)
+#define COLOR_1B1B1B UIColorFromRGB(0x1B1B1B)
+#define COLOR_81060F UIColorFromRGB(0x81060F)
+#define COLOR_E4E4E4 UIColorFromRGB(0xE4E4E4)
+#define COLOR_E4E4E4 UIColorFromRGB(0xE4E4E4)
+#define COLOR_F2F2F2 UIColorFromRGB(0xF2F2F2)
+#define COLOR_FCFCFC UIColorFromRGB(0xFCFCFC)
+#define COLOR_FE4D62 UIColorFromRGB(0xFE4D62)
+#define COLOR_FF3060 UIColorFromRGB(0xFF3060)
+
+
+
+#define COLOR_F74F4F UIColorFromRGB(0xF74F4F)
+#define COLOR_FE1F19 UIColorFromRGB(0xFE1F19)
+#define COLOR_FF0927 UIColorFromRGB(0xFF0927)
+#define COLOR_FF0000 UIColorFromRGB(0xFF0000)
+#define COLOR_FCA17F UIColorFromRGB(0xFCA17F)
+#define COLOR_E53332 UIColorFromRGB(0xE53332)//cornor
+#define COLOR_000000 UIColorFromRGB(0x000000)
+#define COLOR_FFE1E1 UIColorFromRGB(0xFFE1E1)
+#define COLOR_FFFEFF UIColorFromRGB(0xFFFEFF)
+#define COLOR_F3F3F3 UIColorFromRGB(0xF3F3F3)
+#define COLOR_F64626 UIColorFromRGB(0xF64626)
+#define COLOR_DDDDDD UIColorFromRGB(0xDDDDDD)
+#define COLOR_FFDCA3 UIColorFromRGB(0xFFDCA3)
+#define COLOR_4A90E2 UIColorFromRGB(0x4A90E2)
+#define COLOR_D7D7D7 UIColorFromRGB(0xD7D7D7)
+#define COLOR_30B320 UIColorFromRGB(0x30B320)
+#define COLOR_7997B9 UIColorFromRGB(0x7997B9)
+#define COLOR_030303 UIColorFromRGB(0x030303)
+#define COLOR_EA2525 UIColorFromRGB(0xEA2525)
+#define COLOR_444444 UIColorFromRGB(0x444444)
+#define COLOR_F8F8F8 UIColorFromRGB(0xF8F8F8)
+#define COLOR_EF5C52 UIColorFromRGB(0xEF5C52)
+#define COLOR_4A77CB UIColorFromRGB(0x4A77CB)
+#define COLOR_FF3E39 UIColorFromRGB(0xFF3E39)
+#define COLOR_FA6400 UIColorFromRGB(0xFA6400)
+#define COLOR_E02020 UIColorFromRGB(0xE02020)
+#define COLOR_FDD552 UIColorFromRGB(0xFDD552)
+#define COLOR_D16406 UIColorFromRGB(0xD16406)
+#define COLOR_FAFAFA UIColorFromRGB(0xFAFAFA)
+#define COLOR_6CC40C UIColorFromRGB(0x6CC40C)
+#define COLOR_C63333 UIColorFromRGB(0xC63333)
+#define COLOR_E7221D UIColorFromRGB(0xE7221D)
+#define COLOR_B9B9B9 UIColorFromRGB(0xB9B9B9)
+#define COLOR_F4782C UIColorFromRGB(0xF4782C)
+#define COLOR_0091FF UIColorFromRGB(0x0091FF)
+#define COLOR_D9301B UIColorFromRGB(0xD9301B)
+#define COLOR_D5D5D5 UIColorFromRGB(0xD5D5D5)
+#define COLOR_FFB946 UIColorFromRGB(0xFFB946)
+#define COLOR_767C89 UIColorFromRGB(0x767C89)
+#define COLOR_F76B1C UIColorFromRGB(0xF76B1C)
+#define COLOR_EA9A25 UIColorFromRGB(0xEA9A25)
+#define COLOR_FFDF95 UIColorFromRGB(0xFFDF95)
+#define COLOR_FFC971 UIColorFromRGB(0xFFC971)
+#define COLOR_FFE591 UIColorFromRGB(0xFFE591)
+#define COLOR_DD2744 UIColorFromRGB(0xDD2744)
+#define COLOR_FFDF89 UIColorFromRGB(0xFFDF89)
+#define COLOR_FFEBEB UIColorFromRGB(0xFFEBEB)
+#define COLOR_E24F00 UIColorFromRGB(0xE24F00)
+#define COLOR_F94B4A UIColorFromRGB(0xF94B4A)
+#define COLOR_50310B UIColorFromRGB(0x50310B)
+#define COLOR_4775CA UIColorFromRGB(0x4775CA)
+#define COLOR_369DEB UIColorFromRGB(0x369DEB)
+#define COLOR_78BE28 UIColorFromRGB(0x78BE28)
+#define COLOR_CCCCCC UIColorFromRGB(0xCCCCCC)
+#define COLOR_F9F9F9 UIColorFromRGB(0xF9F9F9)
+#define COLOR_EF2F2F UIColorFromRGB(0xEF2F2F)
+#define COLOR_A9A9A9 UIColorFromRGB(0xA9A9A9)
+#define COLOR_2F2F2F UIColorFromRGB(0x2F2F2F)
+#define COLOR_60BA02 UIColorFromRGB(0x30B27A)
+#define COLOR_E3241F UIColorFromRGB(0xE3241F)
+#define COLOR_979797 UIColorFromRGB(0x979797)
+#define COLOR_505050 UIColorFromRGB(0xC505050)
+#define COLOR_E4E4E4 UIColorFromRGB(0xE4E4E4)
+#define COLOR_F2F2F2 UIColorFromRGB(0xF2F2F2)
+#define COLOR_27272B UIColorFromRGB(0x27272B)
+#define COLOR_F0F0F0 UIColorFromRGB(0xF0F0F0)
+#define COLOR_FE644D UIColorFromRGB(0xFE644D)
+#define COLOR_81060F UIColorFromRGB(0x81060F)
+#define COLOR_DADADA UIColorFromRGB(0xDADADA)
+#define COLOR_1B1B1B UIColorFromRGB(0x1B1B1B)
+#define COLOR_6DD400 UIColorFromRGB(0x6DD400)
+#define COLOR_F7B500 UIColorFromRGB(0xF7B500)
+#define COLOR_FF8242 UIColorFromRGB(0xFF8242)
+#define COLOR_FFBA42 UIColorFromRGB(0xFFBA42)
+#define COLOR_B3B3B3 UIColorFromRGB(0xB3B3B3)
+#define COLOR_2655B3 UIColorFromRGB(0x2655B3)
+#define COLOR_E35858 UIColorFromRGB(0xE35858)
+#define COLOR_F77800 UIColorFromRGB(0xF77800)
+#define COLOR_9FDA94 UIColorFromRGB(0x9FDA94)
+#define COLOR_94ABDA UIColorFromRGB(0x94ABDA)
+#define COLOR_94ABDA UIColorFromRGB(0x94ABDA)
+#define COLOR_FF6B6B UIColorFromRGB(0xFF6B6B)
+#define COLOR_FFC7B0 UIColorFromRGB(0xFFC7B0)
+#define COLOR_DBDEE6 UIColorFromRGB(0xDBDEE6)
+#define COLOR_DBDBDB UIColorFromRGB(0xDBDBDB)
+#define COLOR_002868 UIColorFromRGB(0x002868)
+#define COLOR_9F9F9F UIColorFromRGB(0x9F9F9F)
+#define COLOR_30B27A UIColorFromRGB(0x30B27A)
+#define COLOR_A7A7A7 UIColorFromRGB(0xA7A7A7)
+#define COLOR_F4F4F8 UIColorFromRGB(0xF4F4F8)
+#define COLOR_48041F UIColorFromRGB(0x48041F)
+#define COLOR_BB003D UIColorFromRGB(0xBB003D)
+#define COLOR_C1C1C1 UIColorFromRGB(0xC1C1C1)
+#define COLOR_FFBC3B UIColorFromRGB(0xFFBC3B)
+#define COLOR_E0D0AD UIColorFromRGB(0xE0D0AD)
+#define COLOR_98989F UIColorFromRGB(0x98989F)
+#define COLOR_A3A3A3 UIColorFromRGB(0xA3A3A3)
+#define COLOR_057AFF UIColorFromRGB(0x057AFF)
+#define COLOR_FFC6C6 UIColorFromRGB(0xFFC6C6)
+#define COLOR_C3B5AB UIColorFromRGB(0xC3B5AB)
+#define COLOR_F75050 UIColorFromRGB(0xF75050)
+#define COLOR_713A08 UIColorFromRGB(0x713A08)
+#define COLOR_870202 UIColorFromRGB(0x870202)
+#define COLOR_FFE3A9 UIColorFromRGB(0xFFE3A9)
+#define COLOR_F88727 UIColorFromRGB(0xF88727)
+#define COLOR_A32020 UIColorFromRGB(0xA32020)
+#define COLOR_FF924B UIColorFromRGB(0xFF924B)
+#define COLOR_FFE9E9 UIColorFromRGB(0xFFE9E9)
+#define COLOR_FF8D4D UIColorFromRGB(0xFF8D4D)
+#define COLOR_FBAD54 UIColorFromRGB(0xFBAD54)
+#define COLOR_969BA3 UIColorFromRGB(0x969BA3)
+#define COLOR_E6EAF1 UIColorFromRGB(0xE6EAF1)
+#define COLOR_212121 UIColorFromRGB(0x212121)
+#define COLOR_F9502A UIColorFromRGB(0xF9502A)
+#define COLOR_13AE13 UIColorFromRGB(0x13AE13)
+#define COLOR_FFF4E5 UIColorFromRGB(0xFFF4E5)
+#define COLOR_C3C6CA UIColorFromRGB(0xC3C6CA)
+#define COLOR_F0F1F3 UIColorFromRGB(0xF0F1F3)
+#define COLOR_006DAB UIColorFromRGB(0x006DAB)
+#define COLOR_F37E22 UIColorFromRGB(0xF37E22)
+#define COLOR_812BF1 UIColorFromRGB(0x812BF1)
+#define COLOR_F2A15E UIColorFromRGB(0xF2A15E)
+
+#define JCIMAGE(name)    [UIImage imageNamed:(name)]
+
+#import "ZCClassConfig.h"
+
+#endif /* ZCPrefixHeader_pch */

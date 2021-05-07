@@ -1,0 +1,228 @@
+PODS:
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
+  - ATNavigationController (0.0.18)
+  - BlocksKit (2.2.5):
+    - BlocksKit/All (= 2.2.5)
+  - BlocksKit/All (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+    - BlocksKit/MessageUI
+    - BlocksKit/UIKit
+  - BlocksKit/Core (2.2.5)
+  - BlocksKit/DynamicDelegate (2.2.5)
+  - BlocksKit/MessageUI (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - BlocksKit/UIKit (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - IQKeyboardManager (6.5.5)
+  - JCore (2.2.5)
+  - JPush (3.3.2):
+    - JCore (< 3.0.0, >= 2.0.0)
+  - JXCategoryView (1.5.5)
+  - LBXScan (2.3):
+    - LBXScan/All (= 2.3)
+  - LBXScan/All (2.3):
+    - LBXScan/Types (~> 2.2)
+    - ZBarSDK (~> 1.3.1)
+  - LBXScan/Types (2.3)
+  - Masonry (1.1.0)
+  - MJRefresh (3.4.1)
+  - Reachability (3.2)
+  - ReactiveObjC (3.1.1)
+  - SDCycleScrollView (1.80):
+    - SDWebImage (>= 5.0.0)
+  - SDWebImage (5.7.3):
+    - SDWebImage/Core (= 5.7.3)
+  - SDWebImage/Core (5.7.3)
+  - SJBaseVideoPlayer (3.2.7):
+    - Masonry
+    - Reachability
+    - SJBaseVideoPlayer/AVPlayer (= 3.2.7)
+    - SJBaseVideoPlayer/Common (= 3.2.7)
+    - SJUIKit/AttributesFactory (>= 0.0.0.38)
+    - SJUIKit/ObserverHelper
+    - SJUIKit/Queues
+    - SJUIKit/SQLite3
+  - SJBaseVideoPlayer/AVPlayer (3.2.7):
+    - Masonry
+    - Reachability
+    - SJBaseVideoPlayer/Common
+    - SJUIKit/AttributesFactory (>= 0.0.0.38)
+    - SJUIKit/ObserverHelper
+    - SJUIKit/Queues
+    - SJUIKit/SQLite3
+  - SJBaseVideoPlayer/Common (3.2.7):
+    - Masonry
+    - Reachability
+    - SJBaseVideoPlayer/ResourceLoader
+    - SJUIKit/AttributesFactory (>= 0.0.0.38)
+    - SJUIKit/ObserverHelper
+    - SJUIKit/Queues
+    - SJUIKit/SQLite3
+  - SJBaseVideoPlayer/ResourceLoader (3.2.7):
+    - Masonry
+    - Reachability
+    - SJUIKit/AttributesFactory (>= 0.0.0.38)
+    - SJUIKit/ObserverHelper
+    - SJUIKit/Queues
+    - SJUIKit/SQLite3
+  - SJUIKit/AttributesFactory (0.0.0.42):
+    - SJUIKit/AttributesFactory/Deprecated (= 0.0.0.42)
+    - SJUIKit/AttributesFactory/UIKitText (= 0.0.0.42)
+  - SJUIKit/AttributesFactory/Deprecated (0.0.0.42)
+  - SJUIKit/AttributesFactory/UIKitText (0.0.0.42)
+  - SJUIKit/ObserverHelper (0.0.0.42)
+  - SJUIKit/Queues (0.0.0.42)
+  - SJUIKit/SQLite3 (0.0.0.42):
+    - SJUIKit/SQLite3/Core (= 0.0.0.42)
+    - SJUIKit/SQLite3/Protocol (= 0.0.0.42)
+  - SJUIKit/SQLite3/Core (0.0.0.42):
+    - SJUIKit/SQLite3/Protocol
+  - SJUIKit/SQLite3/Protocol (0.0.0.42)
+  - SJVideoPlayer (3.2.4):
+    - SJBaseVideoPlayer (>= 3.2.5)
+    - SJVideoPlayer/Common (= 3.2.4)
+    - SJVideoPlayer/ControlLayers (= 3.2.4)
+    - SJVideoPlayer/ResourceLoader (= 3.2.4)
+  - SJVideoPlayer/Common (3.2.4):
+    - Masonry
+    - SJBaseVideoPlayer (>= 3.2.5)
+    - SJUIKit/AttributesFactory
+    - SJVideoPlayer/ResourceLoader
+  - SJVideoPlayer/ControlLayers (3.2.4):
+    - SJBaseVideoPlayer (>= 3.2.5)
+    - SJVideoPlayer/Common
+  - SJVideoPlayer/ResourceLoader (3.2.4):
+    - SJBaseVideoPlayer (>= 3.2.5)
+  - SocketRocket (0.5.1)
+  - SVProgressHUD (2.2.5)
+  - TTTAttributedLabel (2.0.0)
+  - UMCAnalytics (6.1.0):
+    - UMCCommon
+  - UMCCommon (2.1.4)
+  - UMCCommonLog (1.0.0)
+  - UMCShare/Core (6.9.8):
+    - UMCCommon
+  - UMCShare/Social/ReducedQQ (6.9.8):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/ReducedSina (6.9.8):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/ReducedWeChat (6.9.8):
+    - UMCCommon
+    - UMCShare/Core
+  - WechatOpenSDK (1.8.7.1)
+  - YYKit (1.0.9):
+    - YYKit/no-arc (= 1.0.9)
+  - YYKit/no-arc (1.0.9)
+  - YYModel (1.0.4)
+  - ZBarSDK (1.3.1)
+
+DEPENDENCIES:
+  - AFNetworking
+  - ATNavigationController
+  - BlocksKit
+  - IQKeyboardManager
+  - JPush
+  - JXCategoryView
+  - LBXScan (~> 2.3)
+  - Masonry
+  - MJRefresh
+  - ReactiveObjC
+  - SDCycleScrollView
+  - SDWebImage
+  - SJVideoPlayer
+  - SocketRocket
+  - SVProgressHUD
+  - TTTAttributedLabel
+  - UMCAnalytics
+  - UMCCommon
+  - UMCCommonLog
+  - UMCShare/Social/ReducedQQ
+  - UMCShare/Social/ReducedSina
+  - UMCShare/Social/ReducedWeChat
+  - WechatOpenSDK
+  - YYKit
+  - YYModel
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - AFNetworking
+    - ATNavigationController
+    - BlocksKit
+    - IQKeyboardManager
+    - JCore
+    - JPush
+    - JXCategoryView
+    - LBXScan
+    - Masonry
+    - MJRefresh
+    - Reachability
+    - ReactiveObjC
+    - SDCycleScrollView
+    - SDWebImage
+    - SJBaseVideoPlayer
+    - SJUIKit
+    - SJVideoPlayer
+    - SocketRocket
+    - SVProgressHUD
+    - TTTAttributedLabel
+    - UMCAnalytics
+    - UMCCommon
+    - UMCCommonLog
+    - UMCShare
+    - WechatOpenSDK
+    - YYKit
+    - YYModel
+    - ZBarSDK
+
+SPEC CHECKSUMS:
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  ATNavigationController: e938686c363847103539c5aad224fa73661bb878
+  BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
+  IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
+  JCore: d75c0306dc99875d323d23e5a063b3a3ef22335a
+  JPush: 9468c84a3809dc3ac2fc1c89c6d1d6c858a91bf5
+  JXCategoryView: 0293fcb356f10a5c2e679dac0a1a5f1899ee0c87
+  LBXScan: e51449f0832d1fe17da632af0d22adeb3cfa3543
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MJRefresh: 3153c59a363159092c08b2177ec3a7d09f90bfaf
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
+  SDCycleScrollView: b3c9a5ed840c771c4938978174c7c9d9feefeb96
+  SDWebImage: 97351f6582ceca541ea294ba66a1fcb342a331c2
+  SJBaseVideoPlayer: f08787efb5154bf08f9439441b36bd86efcc4ec3
+  SJUIKit: 1356488a2488a9aafeddaf6a098006277c0eb9b8
+  SJVideoPlayer: acee9fab2b384fc87ed7636c05977d8dd3cdb4ee
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
+  UMCAnalytics: 3503f179f7af932b30af9ac161ac11fb48fa72b6
+  UMCCommon: b0703b0053323f598e01670ea702b8eb1e66e611
+  UMCCommonLog: 05a2d5de21858e3d870551562cff405c1366d244
+  UMCShare: a250203b34a56cde25cc4c28335449b542f0255d
+  WechatOpenSDK: 6a4d1436c15b3b5fe2a0bd383f3046010186da44
+  YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+  ZBarSDK: 4c1b5daeb7d6cc67dc9355e690af0230a661f6ec
+
+PODFILE CHECKSUM: 9c2fe1076be29eb8549c5dd8abb53887be0d41ef
+
+COCOAPODS: 1.10.0.beta.2

@@ -1,0 +1,40 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '10.0'
+use_frameworks!
+inhibit_all_warnings!
+target 'Jingcai' do
+    pod 'Masonry'
+    pod 'YYModel'
+    pod 'MJRefresh'
+    pod 'SDWebImage'
+    pod 'AFNetworking'
+    pod 'SVProgressHUD'
+    pod 'JXCategoryView'
+    pod 'IQKeyboardManager'
+    pod 'SDCycleScrollView'
+    pod 'TTTAttributedLabel'
+    pod 'ATNavigationController'
+    pod 'WechatOpenSDK'# 微信SDK
+    pod 'JPush' # 极光推送
+    pod 'UMCCommon'
+#    pod 'UMCSecurityPlugins'
+    pod 'UMCCommonLog'
+    pod 'UMCAnalytics' # 统计SDK
+    pod 'UMCShare/Social/ReducedWeChat'
+    pod 'UMCShare/Social/ReducedQQ'
+    pod 'UMCShare/Social/ReducedSina'
+    
+    
+#    pod 'AlipaySDK-iOS', '~> 15.6.8'
+#    pod 'WMPageController'
+#    pod 'AlipaySDK_No_UTDID'
+    pod 'BlocksKit'
+    pod 'ReactiveObjC'
+#    pod 'YYKit'
+    pod 'LBXScan', '~> 2.3'
+    pod 'SJVideoPlayer'
+#    pod 'YBImageBrowser'
+    pod 'YYKit'
+    pod 'SocketRocket'
+end
+

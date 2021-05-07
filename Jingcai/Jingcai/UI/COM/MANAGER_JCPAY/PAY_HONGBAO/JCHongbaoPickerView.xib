@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="UWG-Ct-Dix" customClass="JCHongbaoPickerView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="81r-gq-J2w">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ed-aP-VrB">
+                    <rect key="frame" x="0.0" y="463" width="375" height="204"/>
+                    <subviews>
+                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qZa-nC-v8q">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="kH3-Kt-sv6"/>
+                            </constraints>
+                            <items>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="Cph-rG-E9j"/>
+                                <barButtonItem title="    完成    " id="eLc-4b-SS7">
+                                    <connections>
+                                        <action selector="doneItemClick:" destination="UWG-Ct-Dix" id="958-0U-Imp"/>
+                                    </connections>
+                                </barButtonItem>
+                            </items>
+                            <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        </toolbar>
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUD-If-T3C">
+                            <rect key="frame" x="0.0" y="44" width="375" height="160"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="160" id="BYS-QS-2zd"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="dataSource" destination="UWG-Ct-Dix" id="HwC-Ny-xuZ"/>
+                                <outlet property="delegate" destination="UWG-Ct-Dix" id="rnm-rv-4Oj"/>
+                            </connections>
+                        </pickerView>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="fUD-If-T3C" secondAttribute="trailing" id="7o2-WQ-d3k"/>
+                        <constraint firstItem="qZa-nC-v8q" firstAttribute="leading" secondItem="4Ed-aP-VrB" secondAttribute="leading" id="IYQ-7E-ayt"/>
+                        <constraint firstItem="qZa-nC-v8q" firstAttribute="top" secondItem="4Ed-aP-VrB" secondAttribute="top" id="J1Q-Z0-Ugs"/>
+                        <constraint firstAttribute="trailing" secondItem="qZa-nC-v8q" secondAttribute="trailing" id="Md5-y6-PyV"/>
+                        <constraint firstItem="fUD-If-T3C" firstAttribute="top" secondItem="qZa-nC-v8q" secondAttribute="bottom" id="byv-Lk-puz"/>
+                        <constraint firstItem="fUD-If-T3C" firstAttribute="leading" secondItem="4Ed-aP-VrB" secondAttribute="leading" id="pt8-pb-4M9"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="4Ed-aP-VrB" secondAttribute="trailing" id="34o-mA-jjx"/>
+                <constraint firstAttribute="trailing" secondItem="81r-gq-J2w" secondAttribute="trailing" id="A9U-cS-EKe"/>
+                <constraint firstItem="81r-gq-J2w" firstAttribute="top" secondItem="UWG-Ct-Dix" secondAttribute="top" id="CLh-6S-3cg"/>
+                <constraint firstItem="81r-gq-J2w" firstAttribute="bottom" secondItem="UWG-Ct-Dix" secondAttribute="bottom" id="IVn-7q-AYL"/>
+                <constraint firstAttribute="bottom" secondItem="4Ed-aP-VrB" secondAttribute="bottom" id="LQ3-P8-HXr"/>
+                <constraint firstItem="4Ie-qY-FD4" firstAttribute="bottom" secondItem="fUD-If-T3C" secondAttribute="bottom" id="WTU-Rg-wtW"/>
+                <constraint firstItem="4Ed-aP-VrB" firstAttribute="leading" secondItem="UWG-Ct-Dix" secondAttribute="leading" id="lfo-xb-FGB"/>
+                <constraint firstItem="81r-gq-J2w" firstAttribute="leading" secondItem="UWG-Ct-Dix" secondAttribute="leading" id="xnj-72-TtS"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="4Ie-qY-FD4"/>
+            <connections>
+                <outlet property="backView" destination="81r-gq-J2w" id="Z09-gv-ieV"/>
+                <outlet property="bottomConstraint" destination="WTU-Rg-wtW" id="WUf-Fe-XnI"/>
+                <outlet property="contentView" destination="4Ed-aP-VrB" id="Pw9-eI-7Nx"/>
+                <outlet property="hbPickerView" destination="fUD-If-T3C" id="E6r-AS-dkW"/>
+                <outlet property="hbToolbar" destination="qZa-nC-v8q" id="jwu-Oh-aKI"/>
+            </connections>
+            <point key="canvasLocation" x="-1828" y="-406"/>
+        </view>
+    </objects>
+</document>

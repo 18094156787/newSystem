@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="396" id="KGk-i7-Jjw" customClass="JNMatchDrawCell">
+            <rect key="frame" x="0.0" y="0.0" width="188" height="396"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="188" height="396"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="match_zr_bg" translatesAutoresizingMaskIntoConstraints="NO" id="7ZO-f2-3gX">
+                        <rect key="frame" x="15" y="15" width="359" height="718"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="7ZO-f2-3gX" secondAttribute="height" multiplier="180:360" id="H5b-e1-kqk"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="7ZO-f2-3gX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="HqA-J3-c5a"/>
+                    <constraint firstAttribute="bottom" secondItem="7ZO-f2-3gX" secondAttribute="bottom" constant="15" id="OTm-Zc-u6F"/>
+                    <constraint firstItem="7ZO-f2-3gX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="dwq-0L-sNY"/>
+                    <constraint firstAttribute="trailing" secondItem="7ZO-f2-3gX" secondAttribute="trailing" constant="15" id="fwk-JD-CIP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="-310.14492753623193" y="9.375"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="match_zr_bg" width="359" height="718"/>
+    </resources>
+</document>

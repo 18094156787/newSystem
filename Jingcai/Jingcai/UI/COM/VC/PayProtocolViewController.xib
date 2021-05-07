@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PayProtocolViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Dg-9w-Mrm">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oTj-5K-iPw">
+                            <rect key="frame" x="0.0" y="7.5" width="375" height="811"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UvP-LA-Yky">
+                                    <rect key="frame" x="15" y="15" width="345" height="0.0"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                    <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RnB-2f-bcW">
+                                    <rect key="frame" x="15" y="15" width="345" height="781"/>
+                                    <attributedString key="attributedText">
+                                        <fragment>
+                                            <string key="content">在您注册、登录足球竞猜网，使用足球竞猜网平台服务（以下简称“本服务”或“足球竞猜网服务”）之前，应当仔细阅读并充分理解《足球竞猜网服务条款》（以下简称“本服务条款”）全部内容。免除或者限制责任的条款将以粗体下划线标识，您应重点阅读。未成年人则应在法定监护人陪同下阅读。如果您对本服务条款的任何条款表示异议，或者无法准确理解本服务条款，请不要访问和/或使用足球竞猜网及本服务。您的注册、登录、访问足球竞猜网、使用本服务等行为视为对本服务条款全部内容的接受，也意味您将接受本服务条款以及未来针对本服务条款更新版本条款的约束，并服从足球竞猜网的统一管理。足球竞猜网可能会不定期的更新本服务条款内容，您可在足球竞猜网软件内页或网页上查阅最新版服务条款。更新后的服务条款一旦公布即代替原来的服务条款。服务条款更新后，如您不同意接受，您应停止使用足球竞猜网提供的服务。
+一、服务条款的确认和接纳
+服务条款是您（以下简称“用户”）与足球竞猜网平台（以下简称“本平台”或“足球竞猜网”）之间关于注册、登录足球竞猜网、使用足球竞猜网服务所订立的协议。“用户”是指注册、登录、使用足球竞猜网的个人。本服务的条款，内容包括条款正文、足球竞猜网已经发布的或将来可能发布的各类公告、规则、协议，包括但不限于《足球竞猜网用户购买协议》。所有公告、规则、协议为本
+2）危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的；
+（3）损害国家荣誉和利益的，损害公共利益的；
+（4）煽动民族仇恨、民族歧视，破坏民族团结的；
+（5）破坏国家宗教政策，宣扬邪教和封建迷信的；
+（6）散布谣言，扰乱社会秩序，破坏社会稳定的
+（7）散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的；
+（8）侮辱或者诽谤他人，侵害他人合法权益的；
+（9）含有法律、行政法规禁止的其他内容的。</string>
+                                            <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="13" name="PingFangSC-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.3" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="RnB-2f-bcW" firstAttribute="leading" secondItem="oTj-5K-iPw" secondAttribute="leading" constant="15" id="1lJ-CM-wG7"/>
+                                <constraint firstAttribute="trailing" secondItem="RnB-2f-bcW" secondAttribute="trailing" constant="15" id="1rL-gU-YBW"/>
+                                <constraint firstAttribute="bottom" secondItem="RnB-2f-bcW" secondAttribute="bottom" constant="15" id="GDs-RT-9KP"/>
+                                <constraint firstItem="RnB-2f-bcW" firstAttribute="top" secondItem="UvP-LA-Yky" secondAttribute="bottom" id="hs3-Sc-lMJ"/>
+                                <constraint firstAttribute="trailing" secondItem="UvP-LA-Yky" secondAttribute="trailing" constant="15" id="jsW-iB-N3b"/>
+                                <constraint firstItem="UvP-LA-Yky" firstAttribute="top" secondItem="oTj-5K-iPw" secondAttribute="top" constant="15" id="pXZ-F9-0Dg"/>
+                                <constraint firstItem="UvP-LA-Yky" firstAttribute="leading" secondItem="oTj-5K-iPw" secondAttribute="leading" constant="15" id="r7m-a0-vrn"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="oTj-5K-iPw" firstAttribute="leading" secondItem="8Dg-9w-Mrm" secondAttribute="leading" id="UZV-RS-oyU"/>
+                        <constraint firstItem="oTj-5K-iPw" firstAttribute="top" secondItem="8Dg-9w-Mrm" secondAttribute="top" constant="7.5" id="aFE-NC-dyB"/>
+                        <constraint firstAttribute="bottom" secondItem="oTj-5K-iPw" secondAttribute="bottom" id="j1F-Jg-vNc"/>
+                        <constraint firstItem="oTj-5K-iPw" firstAttribute="centerX" secondItem="8Dg-9w-Mrm" secondAttribute="centerX" id="rhe-cl-oC7"/>
+                        <constraint firstAttribute="trailing" secondItem="oTj-5K-iPw" secondAttribute="trailing" id="vPI-9n-Oqt"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="8Dg-9w-Mrm" secondAttribute="bottom" id="4NL-ha-ka9"/>
+                <constraint firstItem="8Dg-9w-Mrm" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="5tT-xz-Dgc"/>
+                <constraint firstItem="8Dg-9w-Mrm" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="PEg-WP-w97"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="8Dg-9w-Mrm" secondAttribute="trailing" id="h6B-sT-IPL"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="-162" y="125"/>
+        </view>
+    </objects>
+</document>
