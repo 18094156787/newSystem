@@ -306,11 +306,19 @@ static CGFloat const kWMMenuViewHeight = 44;
     if (index==0) {
         JCCommunity_GZHVC *vc = [JCCommunity_GZHVC new];
         vc.fatherView = self.view;
+        WeakSelf;
+        vc.JCRefreshBlock = ^{
+            [weakSelf getBannerData];
+        };
         return vc;
     }
     if (index==1) {
         JCCommunity_HBVC *vc =  [JCCommunity_HBVC new];
         vc.fatherView = self.view;
+        WeakSelf;
+        vc.JCRefreshBlock = ^{
+            [weakSelf getBannerData];
+        };
          return vc;
      }
    JCYCHomeWMStickVC *vc = [JCYCHomeWMStickVC new];

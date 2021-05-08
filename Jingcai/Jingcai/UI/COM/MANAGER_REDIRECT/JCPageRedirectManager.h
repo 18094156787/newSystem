@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)redirectToHongbao;
 - (void)redirectToInviteFriend;//跳转邀请新人页面
 - (void)redirectToMyGuess;//跳转竞猜页面
+- (void)redirectToActivity;//跳转活动广场
+
 - (void)redirectToTjUserWithTjUserId:(NSString *)tjUserId;//专家主页
 @end
 NS_ASSUME_NONNULL_END

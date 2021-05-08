@@ -53,9 +53,27 @@
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     
     if (cycleScrollView==self.cycleScrollView) {
+        //跳转模块
         JCWSlideBall * slide = self.bannerArray[index];
-        
-        if ([slide.type integerValue]==1) {
+        if ([slide.app_url containsString:@"huodong_"]) {
+            NSArray *array = [slide.app_url componentsSeparatedByString:@"_"];
+            if (array.count==3) {
+                NSString *type = array[1];
+                NSString *act_id = array[2];
+                if ([type integerValue]==2||[type integerValue]==3) {
+                    JCActivityDetailCommomVC *vc = [JCActivityDetailCommomVC new];
+                    vc.actID = act_id;
+                    [[self getViewController].navigationController pushViewController:vc animated:YES];
+                }
+                if ([type integerValue]==4) {
+                    JCActivityGuessVC *vc = [JCActivityGuessVC new];
+                    vc.actID = act_id;
+                    [[self getViewController].navigationController pushViewController:vc animated:YES];
+                }
+                
+                
+            }
+        }else {
             if (![JCWStringTool isEmptyStr:slide.app_url]) {
                 [JCPageRedirectManager redirectWithRoute:slide.app_url vc:[self getViewController]];
                 return ;
@@ -67,20 +85,10 @@
             WebViewController *webVC = [WebViewController new];
             webVC.urlStr = slide.url;
             [[self getViewController].navigationController pushViewController:webVC animated:YES];
+            
         }
-        
 
-        
-        if ([slide.type integerValue]==2||[slide.type integerValue]==3) {
-            JCActivityDetailCommomVC *vc = [JCActivityDetailCommomVC new];
-            vc.actID = slide.id;
-            [[self getViewController].navigationController pushViewController:vc animated:YES];
-        }
-        if ([slide.type integerValue]==4) {
-            JCActivityGuessVC *vc = [JCActivityGuessVC new];
-            vc.actID = slide.id;
-            [[self getViewController].navigationController pushViewController:vc animated:YES];
-        }
+
     }
 
     

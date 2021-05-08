@@ -17,6 +17,7 @@
 #import "JCYCMyFriendViewController.h"
 #import "JCHongbangWMstckyVC.h"
 #import "JCYCHongBaoWMVC.h"
+#import "JcActivitySquareVC.h"
 @interface JCPageRedirectManager ()
 @property (nonatomic, strong) JCMainTabBarController * tabBarController;
 @end
@@ -49,6 +50,11 @@
     //全民预测
     if ([route isEqualToString:@"mine_guess"]) {
         [[JCPageRedirectManager sharedManager] redirectToMyGuess];
+        return ;
+    }
+    //活动广场
+    if ([route isEqualToString:@"mine_huodong"]) {
+        [[JCPageRedirectManager sharedManager] redirectToActivity];
         return ;
     }
     
@@ -113,6 +119,11 @@
 - (void)redirectToMyGuess {
     [self.tabBarController showYCVC];
     
+}
+
+- (void)redirectToActivity {
+    JCBaseViewController * currentVC = (JCBaseViewController *)[self.tabBarController.view getCurrentVC];
+    [currentVC.navigationController pushViewController:[JcActivitySquareVC new] animated:YES];
 }
 
 - (JCMainTabBarController *)tabBarController {

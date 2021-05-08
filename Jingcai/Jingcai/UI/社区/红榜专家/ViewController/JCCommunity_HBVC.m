@@ -191,6 +191,9 @@
         weakSelf.end = @"";
         weakSelf.tuijianid = @"";
         [weakSelf refreshData];
+        if (weakSelf.JCRefreshBlock) {
+            weakSelf.JCRefreshBlock();
+        }
     }];
     
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{

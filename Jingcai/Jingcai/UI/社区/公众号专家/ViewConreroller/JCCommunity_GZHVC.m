@@ -138,6 +138,9 @@
         weakSelf.tuijianid = @"";
         weakSelf.pageNo = 1;
         [weakSelf refreshData];
+        if (weakSelf.JCRefreshBlock) {
+            weakSelf.JCRefreshBlock();
+        }
     }];
 //
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{

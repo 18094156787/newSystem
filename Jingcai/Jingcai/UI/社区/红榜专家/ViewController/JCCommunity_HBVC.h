@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JCCommunity_HBVC : JCBaseTableViewController
 
+@property (nonatomic,copy) void(^JCRefreshBlock)(void);
+
 
 @end
 
