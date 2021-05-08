@@ -71,7 +71,7 @@
     UIView *headView = [UIView new];
     JCActivityGoodsTitleModel *titleModel = self.dataSource[section];
     UILabel *lab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:2 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:0];
-    if ([titleModel.grade integerValue]>0) {
+    if ([titleModel.grade integerValue]>0&&[self.detailModel.type integerValue]==3&&[self.detailModel.pay_type integerValue]==2) {
         lab.text = [NSString stringWithFormat:@"累积充值%@元",NonNil(titleModel.grade)];
     }else{
         lab.text = @"";
@@ -85,7 +85,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     JCActivityGoodsTitleModel *titleModel = self.dataSource[section];
-    if ([titleModel.grade integerValue]>0) {
+    if ([titleModel.grade integerValue]>0&&[self.detailModel.type integerValue]==3&&[self.detailModel.pay_type integerValue]==2) {
         return 30;
     }else{
         return 0.01f;
@@ -126,7 +126,7 @@
             make.top.offset(AUTO(30)+kNavigationBarHeight);
             make.left.offset(AUTO(30));
             make.right.offset(AUTO(-30));
-            if ([obj.grade integerValue]>0) {
+            if ([obj.grade integerValue]>0&&[self.detailModel.type integerValue]==3&&[self.detailModel.pay_type integerValue]==2) {
                 make.height.mas_equalTo(AUTO(180)+AUTO(92)*dataArray.count);
             }else{
                 make.height.mas_equalTo(AUTO(160)+AUTO(92)*dataArray.count);

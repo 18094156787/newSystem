@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)refreshUserData;
 
+- (void)getHomeTopCycle;
+
 @end
 
 NS_ASSUME_NONNULL_END

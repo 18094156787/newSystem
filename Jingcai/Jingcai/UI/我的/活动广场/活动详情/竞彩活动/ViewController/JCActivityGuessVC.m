@@ -96,7 +96,7 @@
             self.shareView.desc = self.detailModel.wechat_share.share_desc;
             self.shareView.webPageUrl =self.detailModel.wechat_share.share_url;
             self.shareView.friend_url =self.detailModel.wechat_share.friend_url;
-            
+            self.shareView.imageUrl = self.detailModel.wechat_share.share_image;
 //            self.detailModel.goods_info = @[];
             [self.tableView reloadData];
             

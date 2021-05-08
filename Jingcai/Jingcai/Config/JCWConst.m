@@ -9,7 +9,8 @@
 #import "JCWConst.h"
 
 #pragma mark - 预配置项
-NSString * const JCTestApiUrl_New           = @"http://106.75.32.127:9503/";//测试
+//NSString * const JCTestApiUrl_New           = @"http://106.75.32.127:9503/";//测试
+NSString * const JCTestApiUrl_New           = @"http://ios.yixinzuqiu.com/";//上架专用,会自己映射
 //NSString * const JCTestApiUrl_New           = @"http://pay.yixinzuqiu.com/";//正式
 
 //NSString * const JCTestApiUrl_New           = @"http://117.50.88.188:9803/";

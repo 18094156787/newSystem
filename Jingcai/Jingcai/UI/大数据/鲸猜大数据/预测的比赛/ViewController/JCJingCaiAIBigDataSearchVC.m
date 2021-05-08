@@ -297,6 +297,7 @@
     JCMatchInfoModel *model = self.dataArray[indexPath.section];
     JCMatchDetailWMStickVC * detailVC = [JCMatchDetailWMStickVC new];//JNMatchDetailVC
     detailVC.matchNum = model.match_id;//JCMatchDetailWMStickVC
+    detailVC.is_bigData = YES;
 //    detailVC.matchNum = @"3518682";
     
     [self.navigationController pushViewController:detailVC animated:YES];

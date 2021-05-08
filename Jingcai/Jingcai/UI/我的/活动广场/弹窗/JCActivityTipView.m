@@ -79,6 +79,7 @@
     if (!_imgView) {
         _imgView = [UIImageView new];
         _imgView.userInteractionEnabled = YES;
+        _imgView.contentMode = UIViewContentModeScaleAspectFit;
         [_imgView hg_setAllCornerWithCornerRadius:20];
     }
     return _imgView;

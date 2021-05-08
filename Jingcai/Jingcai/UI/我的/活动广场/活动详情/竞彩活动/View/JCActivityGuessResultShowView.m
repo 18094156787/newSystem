@@ -27,6 +27,13 @@
         make.height.mas_equalTo(AUTO(44));
     }];
     
+    [self.bgView addSubview:self.lineView];
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.offset(0);
+        make.top.equalTo(self.titleLab.mas_bottom);
+        make.height.mas_equalTo(1);
+    }];
+    
     [self.bgView addSubview:self.closeBtn];
     [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(0);
@@ -163,6 +170,14 @@
     }
     
     return _tableView;
+}
+
+- (UIView *)lineView {
+    if (!_lineView) {
+        _lineView = [UIView new];
+        _lineView.backgroundColor = COLOR_F4F4F8;
+    }
+    return _lineView;
 }
 
 @end

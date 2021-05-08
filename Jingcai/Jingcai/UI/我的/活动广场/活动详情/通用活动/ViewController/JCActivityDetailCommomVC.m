@@ -179,6 +179,7 @@
         
         WeakSelf;
         cell.JCClickBlock = ^{
+            weakSelf.prizeView.detailModel = weakSelf.detailModel;
             weakSelf.prizeView.dataArray = weakSelf.detailModel.goods_info;
             [weakSelf.jcWindow addSubview:weakSelf.prizeView];
         };

@@ -169,6 +169,7 @@ static CGFloat const kWMMenuViewHeight = 0;
         }
         [self.jcWindow showLoading];
         [self getUserInfo];
+        [self.mineVC getHomeTopCycle];
         [self.contentView.mj_header endRefreshing];
     }];
 }

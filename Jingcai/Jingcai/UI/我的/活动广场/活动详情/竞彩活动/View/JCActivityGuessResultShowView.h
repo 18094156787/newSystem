@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UILabel *titleLab;
 
+@property (nonatomic,strong) UIView *lineView;
+
 @property (nonatomic,strong) UIButton *closeBtn;
 
 @property (nonatomic,strong) NSArray *dataArray;
