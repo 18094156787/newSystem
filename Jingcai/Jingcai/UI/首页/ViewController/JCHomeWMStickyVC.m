@@ -96,7 +96,7 @@ static CGFloat const kWMMenuViewHeight = 44;
     }else{
         [self setNavEffect];
     }
-    self.activityImgView.hidden = self.show_activity==1?NO:YES;
+//    self.activityImgView.hidden = self.show_activity==1?NO:YES;
     
 }
 - (void)viewDidAppear:(BOOL)animated {
@@ -109,7 +109,7 @@ static CGFloat const kWMMenuViewHeight = 44;
 //    self.navigationBarStyle = JCNavigationBarStyleTransparent;
     self.topColorView.alpha = 0;
     self.navShadow.alpha = 0;
-    self.activityImgView.hidden = YES;
+//    self.activityImgView.hidden = YES;
 }
 
 
@@ -211,11 +211,16 @@ static CGFloat const kWMMenuViewHeight = 44;
     }
     
 
+//    self.activityImgView.frame = CGRectMake(SCREEN_WIDTH-88, SCREEN_HEIGHT-150-kTabBarHeight, 58, 64);
+//    self.activityImgView.animationImages = imageArray;
+//    self.activityImgView.animationDuration = 0.9;
+//    [self.activityImgView startAnimating];
+//    [self.jcWindow addSubview:self.activityImgView];
     self.activityImgView.frame = CGRectMake(SCREEN_WIDTH-88, SCREEN_HEIGHT-150-kTabBarHeight, 58, 64);
     self.activityImgView.animationImages = imageArray;
     self.activityImgView.animationDuration = 0.9;
     [self.activityImgView startAnimating];
-    [self.jcWindow addSubview:self.activityImgView];
+    [self.view addSubview:self.activityImgView];
     WeakSelf;
     [self.activityImgView bk_whenTapped:^{
         [weakSelf.navigationController pushViewController:[JCActivityModuleWMVC new] animated:YES];
@@ -289,7 +294,7 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-
+    [self.view bringSubviewToFront:self.activityImgView];
 }
 
 - (void)btnClicked:(id)sender {
@@ -315,6 +320,9 @@ static CGFloat const kWMMenuViewHeight = 44;
     if (scrollView.contentOffset.x>0&&scrollView.contentOffset.y==0) {
         self.topHeadView.clickEnable = 1;
     }
+   
+//    [self.view addSubview:self.activityImgView];
+    self.activityImgView.frame = CGRectMake(SCREEN_WIDTH-88, scrollView.contentOffset.y+SCREEN_HEIGHT-150-kTabBarHeight, 58, 64);
     NSLog(@"x=%.2f--y=%.2f",scrollView.contentOffset.x,scrollView.contentOffset.y);
 //    self.activityImgView.frame = CGRectMake(SCREEN_WIDTH-88, SCREEN_HEIGHT-200-kTabBarHeight, 58, 64);
     

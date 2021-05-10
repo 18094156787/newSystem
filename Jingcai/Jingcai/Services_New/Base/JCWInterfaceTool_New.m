@@ -28,7 +28,6 @@
     NSString *token = @"";
     if ([JCWUserBall currentUser].token.length>0) {
         token = [JCWUserBall currentUser].token;
-        
     }
     [dic setObject:token forKey:@"token"];
     NSMutableArray *remoArray = [NSMutableArray array];

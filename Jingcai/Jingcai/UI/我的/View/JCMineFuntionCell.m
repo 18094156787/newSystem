@@ -62,21 +62,29 @@
         make.height.mas_equalTo(AUTO(96));
     }];
     
-    [bgView addSubview:self.aboutView];
-    [self.aboutView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [bgView addSubview:self.questionView];
+    [self.questionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.kefuView);
         make.left.equalTo(self.kefuView.mas_right);
         make.width.mas_equalTo(width);
         make.height.mas_equalTo(AUTO(96));
     }];
     
-    [bgView addSubview:self.questionView];
-    [self.questionView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [bgView addSubview:self.aboutView];
+    [self.aboutView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.kefuView);
-        make.left.equalTo(self.aboutView.mas_right);
+        make.left.equalTo(self.questionView.mas_right);
         make.width.mas_equalTo(width);
         make.height.mas_equalTo(AUTO(96));
     }];
+    
+//    [bgView addSubview:self.questionView];
+//    [self.questionView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.kefuView);
+//        make.left.equalTo(self.aboutView.mas_right);
+//        make.width.mas_equalTo(width);
+//        make.height.mas_equalTo(AUTO(96));
+//    }];
     WeakSelf;
     [self.inviteView bk_whenTapped:^{
         if (weakSelf.JCMineClick) {
