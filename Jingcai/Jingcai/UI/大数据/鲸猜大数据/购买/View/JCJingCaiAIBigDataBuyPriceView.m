@@ -67,7 +67,7 @@
     }
     self.priceLab.attributedText = attr;
     
-    if (productModel.old_total.length>0) {
+    if ([productModel.old_total integerValue]>[productModel.total integerValue]) {
         self.thIconImgView.hidden = NO;
         NSInteger old_price= [productModel.old_total integerValue]/100.0;
         NSString *oriPrice = [NSString stringWithFormat:@"原价%ld红币/月",old_price];
@@ -83,7 +83,7 @@
         self.thIconImgView.hidden = YES;
         [self.priceLab mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.offset(AUTO(15));
-            make.centerY.equalTo(self);
+            make.centerY.equalTo(self.sureBtn);
             make.height.mas_equalTo(AUTO(30));
         }];
     }

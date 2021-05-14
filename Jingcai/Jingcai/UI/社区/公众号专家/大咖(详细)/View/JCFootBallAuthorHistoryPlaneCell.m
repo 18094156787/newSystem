@@ -127,7 +127,7 @@
     }
     self.ysImgView.hidden = [model.pre_sale integerValue]==1?NO:YES;
     
-    self.refundLab.text = @"";
+//    self.refundLab.text = @"";
     if (isRefund) {
         self.refundLab.text = [NSString stringWithFormat:@"  %@  ",@"不中返还"];
         self.refundLab.textColor = JCBaseColor;
@@ -146,29 +146,18 @@
         [self.timeLab mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.refundLab.mas_right).offset(AUTO(8));
             make.centerY.equalTo(self.refundLab);
-            make.bottom.offset(AUTO(-12));
+//            make.bottom.offset(AUTO(-12));
         }];
     }else{
 
         [self.timeLab mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.refundLab.mas_left);
             make.centerY.equalTo(self.refundLab);
-            make.bottom.offset(AUTO(-12));
+//            make.bottom.offset(AUTO(-12));
         }];
-        self.refundLab.text = @"";
-    }
-//    if (model.refund.length>0) {
-//        self.refundLab.text = [NSString stringWithFormat:@"  %@  ",model.refund];
-//        [self.timeLab mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.refundLab.mas_right).offset(AUTO(8));
-//        }];
-//    }else{
-//        [self.timeLab mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.refundLab.mas_left);
-//        }];
 //        self.refundLab.text = @"";
-//    }
-    
+    }
+
 
     if (model.result.length>0) {
         self.scroeLab.text = model.result;

@@ -16,9 +16,8 @@ NSString * const JCTestApiUrl_New           = @"http://ios.yixinzuqiu.com/";//ä¸
 //NSString * const JCTestApiUrl_New           = @"http://117.50.88.188:9803/";
 //NSString * const JCApiUrl           = @"http://api.yixinzuqiu.com/";
 //NSString * const JCApiUrl           = @"http://apitest.yixinzuqiu.com/";
-NSString * const JCApiUrl           = @"http://apitask.yixinzuqiu.com/";
-NSString * const JCTestApiUrl           = @"http://apitest.yixinzuqiu.com/";
-NSString * const JCApiUrlOneLine          = @"http://api.yixinzuqiu.com/";
+NSString * const JCApiUrl           = @"http://ios.yixinzuqiu.com/";
+NSString * const JCTestApiUrl           = @"http://ios.yixinzuqiu.com/";
 
 NSString * const JCEnvironmentUrl           = @"environmentUrl";
 NSString * const JCScheme           = @"zsjc";//wxc1e405dd35db384e

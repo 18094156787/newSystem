@@ -163,6 +163,10 @@
         if (indexPath.row==2) {
             cell.titleLab.text = @"订单编号：";
             cell.contentLab.text = self.detailModel.order_id;
+            if (self.is_benefit==YES) {
+                cell.titleLab.text = @"";
+                cell.contentLab.text = @"";
+            }
         }
         if (indexPath.row==3) {
             cell.titleLab.text = @"订单状态：";
@@ -194,6 +198,9 @@
         if ([self.detailModel.hongbao_price integerValue]==0){
             return 0.001f;
         }
+    }
+    if (indexPath.section==2&&indexPath.row==2&&self.is_benefit) {
+        return 0.001f;
     }
 
 

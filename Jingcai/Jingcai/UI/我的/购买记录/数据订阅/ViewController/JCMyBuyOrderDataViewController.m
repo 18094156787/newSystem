@@ -112,7 +112,7 @@
         cell.JCDetailBlock = ^{
             JCMyBuyOrderDataDetail_Single_VC *vc = [JCMyBuyOrderDataDetail_Single_VC new];
             vc.order_id = model.zucai_order_id;
-            [self.navigationController pushViewController:vc animated:YES];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
 
 
         };

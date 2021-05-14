@@ -32,9 +32,14 @@
     
 }
 - (void)presentLogin {
-    WeakSelf;
+
+    for (UIViewController *vc in [self getViewController].navigationController.viewControllers) {
+        if ([vc isKindOfClass:[JCLoginWMStickVC class]]) {
+            return;
+        }
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[weakSelf getViewController].navigationController pushViewController:[JCLoginWMStickVC new] animated:YES];
+        [[self getViewController].navigationController pushViewController:[JCLoginWMStickVC new] animated:YES];
     });
 }
 

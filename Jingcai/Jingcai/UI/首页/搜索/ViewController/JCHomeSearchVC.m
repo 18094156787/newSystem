@@ -442,15 +442,15 @@
     }
     [self.view showLoading];
     JCHomeService_New * service = [JCHomeService_New service];
-//    //默认是公众号
-    NSString *type = @"1";
-//    NSString *user_ID =model.user_id;
-//
-    if ([model.type integerValue]==1) {
-        //如果是红榜
-        type = @"2";
-    }
-    [service gzUserWithId:model.user_id type:type success:^(id  _Nullable object) {
+////    //默认是公众号
+//    NSString *type = @"1";
+////    NSString *user_ID =model.user_id;
+////
+//    if ([model.type integerValue]==1) {
+//        //如果是红榜
+//        type = @"2";
+//    }
+    [service gzUserWithId:model.user_id type:model.type success:^(id  _Nullable object) {
         [self endRefresh];
         if ([JCWJsonTool isSuccessResponse:object]) {
             //1是未关注.2是已关注

@@ -69,6 +69,8 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 @property (nonatomic,assign) NSInteger first_login;//首登
 
+@property (nonatomic,assign) BOOL is_hide;
+
 
 @end
 
@@ -96,20 +98,18 @@ static CGFloat const kWMMenuViewHeight = 44;
     }else{
         [self setNavEffect];
     }
-//    self.activityImgView.hidden = self.show_activity==1?NO:YES;
-    
+    self.activityImgView.hidden = self.show_activity==1?NO:YES;
+    self.is_hide = NO;
 }
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self setNavEffect];
-}
+
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 //    self.navigationBarStyle = JCNavigationBarStyleTransparent;
     self.topColorView.alpha = 0;
     self.navShadow.alpha = 0;
-//    self.activityImgView.hidden = YES;
+    self.activityImgView.hidden = YES;
+    self.is_hide = YES;
 }
 
 
@@ -220,7 +220,7 @@ static CGFloat const kWMMenuViewHeight = 44;
     self.activityImgView.animationImages = imageArray;
     self.activityImgView.animationDuration = 0.9;
     [self.activityImgView startAnimating];
-    [self.view addSubview:self.activityImgView];
+    [self.jcWindow addSubview:self.activityImgView];
     WeakSelf;
     [self.activityImgView bk_whenTapped:^{
         [weakSelf.navigationController pushViewController:[JCActivityModuleWMVC new] animated:YES];
@@ -322,7 +322,8 @@ static CGFloat const kWMMenuViewHeight = 44;
     }
    
 //    [self.view addSubview:self.activityImgView];
-    self.activityImgView.frame = CGRectMake(SCREEN_WIDTH-88, scrollView.contentOffset.y+SCREEN_HEIGHT-150-kTabBarHeight, 58, 64);
+//    self.activityImgView.frame = CGRectMake(SCREEN_WIDTH-88, scrollView.contentOffset.y+SCREEN_HEIGHT-150-kTabBarHeight, 58, 64);
+//    self.activity_top = scrollView.contentOffset.y+SCREEN_HEIGHT-150-kTabBarHeight;
     NSLog(@"x=%.2f--y=%.2f",scrollView.contentOffset.x,scrollView.contentOffset.y);
 //    self.activityImgView.frame = CGRectMake(SCREEN_WIDTH-88, SCREEN_HEIGHT-200-kTabBarHeight, 58, 64);
     
@@ -385,6 +386,12 @@ static CGFloat const kWMMenuViewHeight = 44;
     CGFloat originY = _viewTop + kWMMenuViewHeight;
     return CGRectMake(0, originY, SCREEN_WIDTH, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-kWMMenuViewHeight-10);
 }
+//- (void)pageController:(WMPageController *)pageController didEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info {
+//    self.activityImgView.frame = CGRectMake(SCREEN_WIDTH-88, self.activity_top, 58, 64);
+//}
+//- (void)pageController:(WMPageController *)pageController willEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info {
+//    self.activityImgView.frame = CGRectMake(SCREEN_WIDTH-88, self.activity_top, 58, 64);
+//}
 
 #pragma mark UISearchBar Delegate
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
@@ -598,6 +605,9 @@ static CGFloat const kWMMenuViewHeight = 44;
         NSString *show_activity = object[@"data"][@"is_show_icon"];
         self.show_activity = [show_activity integerValue];
         self.activityImgView.hidden = self.show_activity==1?NO:YES;
+        if (self.is_hide == YES) {
+            self.activityImgView.hidden = YES;
+        }
     }
 
     self.topHeadView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.headerViewHeigh);

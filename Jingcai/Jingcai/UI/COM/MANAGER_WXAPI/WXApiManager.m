@@ -7,7 +7,6 @@
 //
 
 #import "WXApiManager.h"
-#import "JCWInterfaceTool.h"
 #import "JCWJsonTool.h"
 #import "JCWConst.h"
 #import "JCWUserBall.h"

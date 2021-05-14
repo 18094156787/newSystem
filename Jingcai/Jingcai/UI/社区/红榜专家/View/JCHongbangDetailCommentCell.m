@@ -487,7 +487,6 @@
         NSString *value2 = [NSString stringWithFormat:@"%@",resultArray.lastObject];
         result2 = [value2 intValue];
     }
-        
         //开奖结果  根据 is_rq来区分
         switch (result1) {
             case 1:
@@ -530,7 +529,7 @@
             case 4:
             {
                 
-                [self.topView addSubview:self.tuijianImgView];
+                [self.bottomView addSubview:self.tuijianImgView];
                  [self.tuijianImgView mas_remakeConstraints:^(MASConstraintMaker *make) {
                      make.left.equalTo(self.rq_WinLab).offset(AUTO(5));
                      make.centerY.equalTo(self.rq_WinLab);
@@ -543,7 +542,7 @@
             {
 
                 
-                [self.topView addSubview:self.tuijianImgView];
+                [self.bottomView addSubview:self.tuijianImgView];
                  [self.tuijianImgView mas_remakeConstraints:^(MASConstraintMaker *make) {
                      make.left.equalTo(self.rq_EqualLab).offset(AUTO(5));
                      make.centerY.equalTo(self.rq_EqualLab);
@@ -557,7 +556,7 @@
             {
 
                 
-                [self.topView addSubview:self.tuijianImgView];
+                [self.bottomView addSubview:self.tuijianImgView];
                  [self.tuijianImgView mas_remakeConstraints:^(MASConstraintMaker *make) {
                      make.left.equalTo(self.rq_loseLab).offset(AUTO(5));
                      make.centerY.equalTo(self.rq_loseLab);
@@ -579,7 +578,7 @@
             {
 
                 
-                [self.bottomView addSubview:self.tuijianImgView2];
+                [self.topView addSubview:self.tuijianImgView2];
                  [self.tuijianImgView2 mas_remakeConstraints:^(MASConstraintMaker *make) {
                      make.left.equalTo(self.norq_WinLab).offset(AUTO(5));
                      make.centerY.equalTo(self.norq_WinLab);
@@ -593,7 +592,7 @@
             {
 
                 
-                [self.bottomView addSubview:self.tuijianImgView2];
+                [self.topView addSubview:self.tuijianImgView2];
                  [self.tuijianImgView2 mas_remakeConstraints:^(MASConstraintMaker *make) {
                      make.left.equalTo(self.norq_EqualLab).offset(AUTO(5));
                      make.centerY.equalTo(self.norq_EqualLab);
@@ -607,7 +606,7 @@
             {
 
                 
-                [self.bottomView addSubview:self.tuijianImgView2];
+                [self.topView addSubview:self.tuijianImgView2];
                  [self.tuijianImgView2 mas_remakeConstraints:^(MASConstraintMaker *make) {
                      make.left.equalTo(self.norq_loseLab).offset(AUTO(5));
                      make.centerY.equalTo(self.norq_loseLab);

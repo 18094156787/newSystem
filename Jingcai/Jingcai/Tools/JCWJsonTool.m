@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger, ResponseCode) {
         [class yy_modelWithJSON:json];
 
     } @catch (NSException *exception) {
-        NSLog(@"补货到异常")
+        NSLog(@"捕获到异常");
     } @finally {
         //
         if (![json isKindOfClass:[NSDictionary class]]) {

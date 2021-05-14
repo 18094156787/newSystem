@@ -81,7 +81,7 @@
     }
     [self.headImgView sd_setImageWithURL:[NSURL URLWithString:model.logo]];
     self.contentLab.text = model.title;
-    self.countLab.text = [NSString stringWithFormat:@"共%@人购买",model.user_count];
+//    self.countLab.text = [NSString stringWithFormat:@"共%@人购买",model.user_count];
     self.priceLab.text = [NSString stringWithFormat:@"实付金额：%@红币",model.pay_price];
 }
 

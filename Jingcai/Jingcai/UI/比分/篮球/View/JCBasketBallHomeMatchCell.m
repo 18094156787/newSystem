@@ -308,7 +308,7 @@
     if ([model.status_id integerValue]>1&&[model.status_id integerValue]<10) {
         //进行中的比赛
         self.sectionTimeLab.textColor = JCBaseColor;
-        self.homeSectionTotalLab.text = model.home_scores_sum.length>0?model.home_scores_sum:@"0";
+        self.homeSectionTotalLab.text = model.away_scores_sum.length>0?model.away_scores_sum:@"0";
         self.awaySectionTotalLab.text = model.home_scores_sum.length>0?model.home_scores_sum:@"0";;
     }else{
         self.sectionTimeLab.textColor = [COLOR_000000 colorWithAlphaComponent:0.6];

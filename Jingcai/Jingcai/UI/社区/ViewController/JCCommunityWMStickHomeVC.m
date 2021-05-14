@@ -149,10 +149,10 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 
 - (void)getBannerData {
-    [self.jcWindow showLoading];
+//    [self.jcWindow showLoading];
     JCHomeService_New *service = [JCHomeService_New service];
     [service getAppBannerWithType:@"6" success:^(id  _Nullable object) {
-        [self.jcWindow endLoading];
+//        [self.jcWindow endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
             [[NSUserDefaults standardUserDefaults] setObject:object forKey:JCCommunity_Banner];
             [self deathWithData:object];

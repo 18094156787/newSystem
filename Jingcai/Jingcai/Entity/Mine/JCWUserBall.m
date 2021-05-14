@@ -7,7 +7,6 @@
 //
 
 #import "JCWUserBall.h"
-#import "JCWInterfaceTool.h"
 #import "JCWStringTool.h"
 #import "JCWCacheTool.h"
 #import "JCWConst.h"

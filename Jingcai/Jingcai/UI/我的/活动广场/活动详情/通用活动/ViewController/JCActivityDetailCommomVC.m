@@ -65,15 +65,17 @@
 
             
             self.title = self.detailModel.title;
-            NSString *accumulate = [NSString stringWithFormat:@"累计充值：%@ | ",self.detailModel.cumulative_recharge];
+            NSString *accumulate = [NSString stringWithFormat:@"累计充值：%@ | 我已领取：%@",self.detailModel.cumulative_recharge,self.detailModel.quantity_received];
+ 
+            if ([self.detailModel.pay_type integerValue]==3||[self.detailModel.pay_type integerValue]==4) {
+                //首冲,用后台带的文本
+                accumulate = self.detailModel.recharge_information;
+            }
             if ([self.detailModel.type integerValue]==2) {
                 accumulate = @"";
             }
-            if ([self.detailModel.pay_type integerValue]==3||[self.detailModel.pay_type integerValue]==4) {
-                accumulate = @"";
-            }
-                NSString *infoStr = [NSString stringWithFormat:@"%@我已领取：%@ ",accumulate,self.detailModel.quantity_received];
-            self.infoLab.text = infoStr;
+//                NSString *infoStr = [NSString stringWithFormat:@"%@我已领取：%@ ",accumulate,self.detailModel.quantity_received];
+            self.infoLab.text = accumulate;
 
             self.sureBtn.backgroundColor = [self.detailModel.text_can_click integerValue]==1?JCBaseColor:COLOR_9F9F9F;
             self.sureBtn.userInteractionEnabled = [self.detailModel.text_can_click integerValue]==1?YES: NO;

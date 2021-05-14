@@ -43,9 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *rule;//活动规则
 
-@property (nonatomic,strong) NSString *activity_cycle;//活动周期 1每天 2每周 3每月 4整个活动周期
+@property (nonatomic,strong) NSString *activity_cycle;//活动周期 1每天 2每周 3每月  4整个活动周期(4没有了)
 
-@property (nonatomic,strong) NSString *receive_cycle;//奖励领取周期 1每天 2每周 3每月 4整个活动周期
+@property (nonatomic,strong) NSString *receive_cycle;//奖励领取周期 1每天 2每周 3每月 4整个活动周期(4没有了)
 
 @property (nonatomic,strong) NSString *url;//活动跳转url
 
@@ -82,6 +82,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSString *text_can_click;//获取文字是否可以点击 1是 2否
 
 @property (nonatomic,assign) NSInteger is_guess;//是否猜中 1是 2否
+
+@property (nonatomic,strong) NSString *recharge_information;//文本
 
 @property (strong, nonatomic) JCShareModel *wechat_share;
 

@@ -69,7 +69,9 @@
 
 - (void)deathWithSuccessInfo:(id)object {
     if([JCWJsonTool isNotLoginResponse:object]){
-       [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUserNotLogin object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUserNotLogin object:nil];
+
+      
    }
 }
 @end

@@ -201,9 +201,10 @@
           self.is_voice = [is_voice integerValue];
           self.is_shock = [is_shock integerValue];
 //          [self.tableView reloadData];
-      }else{
-          [JCWToastTool showHint:object[@"msg"]];
       }
+//      else{
+//          [JCWToastTool showHint:object[@"msg"]];
+//      }
 
     } failure:^(NSError * _Nonnull error) {
 //        [self endRefresh];
@@ -502,6 +503,7 @@
     JCBaseNavigationController * nav = self.showVCArray[self.tabSelIndex];;
 //    (JCBaseNavigationController *)self.selectedViewController;
     JCBaseViewController * vc = [nav.viewControllers lastObject];
+    NSLog(@"所有=%@",nav.viewControllers);
     if ([vc isKindOfClass:[JCLoginWMStickVC class]]) {
         return;
     }
@@ -510,7 +512,19 @@
             return;
         }
     }
-    [vc presentLogin];
+    //记录token过期,防止重复push登陆页
+    if (self.isLogout==NO) {
+        [vc presentLogin];
+        self.isLogout = YES;
+    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.isLogout = NO;
+    });
+
+    
+    
+   
+    
 }
 //获取app信息
 - (void)getAppInfo {

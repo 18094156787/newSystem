@@ -14,7 +14,6 @@ UIKIT_EXTERN NSString * const JCTestApiUrl_New;
 
 UIKIT_EXTERN NSString * const JCApiUrl;             // 正式服接口统一地址
 UIKIT_EXTERN NSString * const JCTestApiUrl;             // 测试服接口统一地址
-UIKIT_EXTERN NSString * const JCApiUrlOneLine;             // 数数据库接口地址
 UIKIT_EXTERN NSString * const JCEnvironmentUrl;
 UIKIT_EXTERN NSString * const JCScheme;             // Scheme
 UIKIT_EXTERN NSString * const WXAppID;

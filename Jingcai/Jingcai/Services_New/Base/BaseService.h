@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString * dev;
 @property (nonatomic, copy) successBlock successBlock;
 @property (nonatomic, copy) failureBlock failureBlock;
+@property (nonatomic, assign) BOOL isLogout;
 + (instancetype)service;
 - (void)dealWithError:(NSError *)error;
 - (void)deathWithSuccessInfo:(id)object;

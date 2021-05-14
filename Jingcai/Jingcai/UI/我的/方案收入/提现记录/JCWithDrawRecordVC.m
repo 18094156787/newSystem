@@ -118,7 +118,7 @@
 - (void)refreshData {
 
     if (self.dataArray.count==0) {
-        [self.view showLoading];
+        [self.jcWindow showLoading];
     }
     JCUserService_New *service = [JCUserService_New service];
     [service getMyWithDrawDetailLsitWithPage:self.pageNo success:^(id  _Nullable object) {

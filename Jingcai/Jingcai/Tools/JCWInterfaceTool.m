@@ -76,10 +76,6 @@
     return [NSString stringWithFormat:@"%@%@?sv=%@&dev=1&app_name=zszq&channel_dev=0", [self serviceJingcaiCommunity], route,[JCWInterfaceTool appVersion]];
 }
 
-+ (NSString *)serviceUrlWithDataBaseRoute_V2:(NSString *)route {
-    return [NSString stringWithFormat:@"%@%@?sv=%@&dev=1&app_name=zszq&channel_dev=0", [NSString stringWithFormat:@"%@v2/zucai/",JCApiUrlOneLine], route,[JCWInterfaceTool appVersion]];
-}
-
 + (NSString *)appVersion {
     NSDictionary * infoDictionary = [[NSBundle mainBundle] infoDictionary];
     return [infoDictionary objectForKey:@"CFBundleShortVersionString"];

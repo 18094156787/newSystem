@@ -71,15 +71,23 @@
     self.priceLab.attributedText = attr;
     NSInteger oriPirce_inter = [productModel.old_total integerValue]/100;
     NSString *oriPrice = [NSString stringWithFormat:@"%ld红币/月",oriPirce_inter];
+
     NSRange range = [oriPrice rangeOfString:[NSString stringWithFormat:@"%ld",oriPirce_inter]];
-     //中划线
-//     NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
-    
-     NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:oriPrice];
-    [attribtStr addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:range];
-//    [attribtStr addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle] range:range];
-    [attribtStr setAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSBaselineOffsetAttributeName:@(NSUnderlineStyleSingle)} range:range];
-    self.oriPriceLab.attributedText = attribtStr;
+    if (oriPirce_inter>total) {
+//        oriPrice = @"红币/月";
+        //中划线
+   //     NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+       
+        NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:oriPrice];
+       [attribtStr addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:range];
+   //    [attribtStr addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle] range:range];
+       [attribtStr setAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSBaselineOffsetAttributeName:@(NSUnderlineStyleSingle)} range:range];
+
+       self.oriPriceLab.attributedText = attribtStr;
+    }else{
+        self.oriPriceLab.text = @"红币/月";
+    }
+
 
 }
 

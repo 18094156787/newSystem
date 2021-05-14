@@ -31,6 +31,8 @@ static CGFloat const kWMMenuViewHeight = 44.0;
 
 @property (nonatomic, strong) JCJingCaiAIBigDataHomeVC *bigDataVC;
 
+@property (nonatomic, strong) JCJingCaiAIBigDataMatchListVC *matchVC;
+
 @property (nonatomic, strong) JCJingCaiAIBigDataHeadView *headView;
 
 @property (nonatomic, assign) float height;
@@ -49,7 +51,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self initViews];
+//    [self initViews];
 
 }
 
@@ -78,7 +80,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
         self.maximumHeaderViewHeight = kWJingCaiBigDataHeaderViewHeight;
 //        self.minimumHeaderViewHeight = kNavigationBarHeight;
 
-        self.contentView.bounces = NO;
+        self.contentView.bounces = YES;
     }
     return self;
 }
@@ -89,10 +91,11 @@ static CGFloat const kWMMenuViewHeight = 44.0;
         [super viewDidLoad];
     // Do any additional setup after loading the view.
 //    self.view.backgroundColor = JCNavColor;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTopInfoData) name:NotificationUserLogin object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTopInfoData) name:NotificationUserLogout object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTopInfoData) name:JingcaiAIProduceBuy object:nil];//包月购买
     [self initViews];
     [self getTopInfoData];
-
-
 }
 
 - (void)getTopInfoData {
@@ -100,6 +103,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
     JCDataBaseService_New *service = [JCDataBaseService_New service];
     [service getBigDataTopInfoWithsuccess:^(id  _Nullable object) {
         [self.jcWindow endLoading];
+        [self.contentView.mj_header endRefreshing];
         if ([JCWJsonTool isSuccessResponse:object]) {
             JCBigDataMonthProduceModel *productModel = (JCBigDataMonthProduceModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCBigDataMonthProduceModel class]];
             NSArray *noticeArray = [JCWJsonTool arrayWithJson:object[@"data"][@"now_match"] class:[JCJingCaiAINoticeModel class]];
@@ -121,7 +125,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
         
             self.viewTop = self.height;
             self.maximumHeaderViewHeight = self.height;
-            [self reloadData];
+//            [self reloadData];
         }else{
             [JCWToastTool showHint:object[@"msg"]];
         }
@@ -148,22 +152,34 @@ static CGFloat const kWMMenuViewHeight = 44.0;
         [weakSelf.navigationController pushViewController:vc animated:YES];
     };
     
+    self.contentView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
+        [weakSelf getTopInfoData];
+        if (weakSelf.selectIndex==0) {
+            [weakSelf.bigDataVC refreshData];
+        }
+        if (weakSelf.selectIndex==1) {
+            [weakSelf.matchVC refreshData];
+        }
+    }];
+        
+
+    
 
 
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    CGFloat headerViewHeight = self.height;
-//    CGFloat headerViewHeight = kWJingCaiBigDataHeaderViewHeight;
-    CGFloat headerViewX = 0;
-    UIScrollView *scrollView = (UIScrollView *)self.view;
-    if (scrollView.contentOffset.y < 0) {
-        headerViewX = scrollView.contentOffset.y;
-        headerViewHeight -= headerViewX;
-
-    }
-    self.headView.frame = CGRectMake(0, headerViewX, CGRectGetWidth(self.view.bounds), self.height);
+//    CGFloat headerViewHeight = self.height;
+////    CGFloat headerViewHeight = kWJingCaiBigDataHeaderViewHeight;
+//    CGFloat headerViewX = 0;
+//    UIScrollView *scrollView = (UIScrollView *)self.view;
+//    if (scrollView.contentOffset.y < 0) {
+//        headerViewX = scrollView.contentOffset.y;
+//        headerViewHeight -= headerViewX;
+//
+//    }
+//    self.headView.frame = CGRectMake(0, headerViewX, CGRectGetWidth(self.view.bounds), self.height);
 }
 
 - (void)btnClicked:(id)sender {
@@ -206,7 +222,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
     if (index==0) {
         return self.bigDataVC;
     }
-    return [JCJingCaiAIBigDataMatchListVC new];
+    return self.matchVC;
 
 }
 
@@ -236,6 +252,13 @@ static CGFloat const kWMMenuViewHeight = 44.0;
         _bigDataVC = [JCJingCaiAIBigDataHomeVC new];
     }
     return _bigDataVC;
+}
+
+- (JCJingCaiAIBigDataMatchListVC *)matchVC {
+    if (!_matchVC) {
+        _matchVC = [JCJingCaiAIBigDataMatchListVC new];
+    }
+    return _matchVC;
 }
 
 - (JCJingCaiAIBigDataHeadView *)headView {

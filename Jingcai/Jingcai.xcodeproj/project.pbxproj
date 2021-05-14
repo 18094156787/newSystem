@@ -1036,7 +1036,6 @@
 		C324C43E221870C8000DF310 /* UILabel+JCAlignment.m in Sources */ = {isa = PBXBuildFile; fileRef = C324C43D221870C8000DF310 /* UILabel+JCAlignment.m */; };
 		C32C71A4219ABE5C0012B17C /* JCWMyHuodongBall.m in Sources */ = {isa = PBXBuildFile; fileRef = C32C71A3219ABE5C0012B17C /* JCWMyHuodongBall.m */; };
 		C32C71A7219AC7C50012B17C /* JCWMySubscribeBall.m in Sources */ = {isa = PBXBuildFile; fileRef = C32C71A6219AC7C50012B17C /* JCWMySubscribeBall.m */; };
-		C32E16542195675D008C0B28 /* JCWShowBall.m in Sources */ = {isa = PBXBuildFile; fileRef = C32E16532195675D008C0B28 /* JCWShowBall.m */; };
 		C32F3734219975E500DC9C87 /* JCWActivityBall.m in Sources */ = {isa = PBXBuildFile; fileRef = C32F3733219975E500DC9C87 /* JCWActivityBall.m */; };
 		C32F3737219976C100DC9C87 /* JCWActivityMatchBall.m in Sources */ = {isa = PBXBuildFile; fileRef = C32F3736219976C100DC9C87 /* JCWActivityMatchBall.m */; };
 		C3330A34219183770090B160 /* UITableView+JCRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = C3330A2D219183770090B160 /* UITableView+JCRefresh.m */; };
@@ -1082,8 +1081,6 @@
 		C3B01CF22268228C00F5D057 /* JCBackRefreshManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B01CF12268228C00F5D057 /* JCBackRefreshManager.m */; };
 		C3B1057E21771228000B7E4E /* UIView+CurrentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B1057C21771228000B7E4E /* UIView+CurrentVC.m */; };
 		C3B3FF3621BBFA1400AFC259 /* JCWNewsDetailBall.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B3FF3521BBFA1400AFC259 /* JCWNewsDetailBall.m */; };
-		C3B4ECC92198C780007617D5 /* JCWCommentBall.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B4ECC82198C780007617D5 /* JCWCommentBall.m */; };
-		C3B562D5219D68010063F61F /* JCWReplyBall.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B562D4219D68010063F61F /* JCWReplyBall.m */; };
 		C3B5815D21D479E4002C297B /* JCBaseAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B5815C21D479E4002C297B /* JCBaseAlertView.m */; };
 		C3B843C321A2561C0080016C /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B843C221A2561C0080016C /* JKCountDownButton.m */; };
 		C3B8CA3822602955001E04DF /* JCTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B8CA3622602955001E04DF /* JCTestVC.m */; };
@@ -3192,8 +3189,6 @@
 		C32C71A3219ABE5C0012B17C /* JCWMyHuodongBall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCWMyHuodongBall.m; sourceTree = "<group>"; };
 		C32C71A5219AC7C50012B17C /* JCWMySubscribeBall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCWMySubscribeBall.h; sourceTree = "<group>"; };
 		C32C71A6219AC7C50012B17C /* JCWMySubscribeBall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCWMySubscribeBall.m; sourceTree = "<group>"; };
-		C32E16522195675D008C0B28 /* JCWShowBall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JCWShowBall.h; path = Jingcai/Entity/Show/JCWShowBall.h; sourceTree = SOURCE_ROOT; };
-		C32E16532195675D008C0B28 /* JCWShowBall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = JCWShowBall.m; path = Jingcai/Entity/Show/JCWShowBall.m; sourceTree = SOURCE_ROOT; };
 		C32F3732219975E500DC9C87 /* JCWActivityBall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCWActivityBall.h; sourceTree = "<group>"; };
 		C32F3733219975E500DC9C87 /* JCWActivityBall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCWActivityBall.m; sourceTree = "<group>"; };
 		C32F3735219976C100DC9C87 /* JCWActivityMatchBall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCWActivityMatchBall.h; sourceTree = "<group>"; };
@@ -3272,10 +3267,6 @@
 		C3B1057D21771228000B7E4E /* UIView+CurrentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CurrentVC.h"; sourceTree = "<group>"; };
 		C3B3FF3421BBFA1400AFC259 /* JCWNewsDetailBall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCWNewsDetailBall.h; sourceTree = "<group>"; };
 		C3B3FF3521BBFA1400AFC259 /* JCWNewsDetailBall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCWNewsDetailBall.m; sourceTree = "<group>"; };
-		C3B4ECC72198C780007617D5 /* JCWCommentBall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCWCommentBall.h; sourceTree = "<group>"; };
-		C3B4ECC82198C780007617D5 /* JCWCommentBall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCWCommentBall.m; sourceTree = "<group>"; };
-		C3B562D3219D68010063F61F /* JCWReplyBall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCWReplyBall.h; sourceTree = "<group>"; };
-		C3B562D4219D68010063F61F /* JCWReplyBall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCWReplyBall.m; sourceTree = "<group>"; };
 		C3B5815B21D479E4002C297B /* JCBaseAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCBaseAlertView.h; sourceTree = "<group>"; };
 		C3B5815C21D479E4002C297B /* JCBaseAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCBaseAlertView.m; sourceTree = "<group>"; };
 		C3B843C121A2561C0080016C /* JKCountDownButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKCountDownButton.h; sourceTree = "<group>"; };
@@ -8784,7 +8775,6 @@
 				C3E6E2D021D1C9C800CCF3F8 /* Expert */,
 				C3E6E2D121D1CC0400CCF3F8 /* Match */,
 				C3E6E2D421D1D1E900CCF3F8 /* Activity */,
-				C3E6E2D321D1D0E200CCF3F8 /* Show */,
 				C3E6E2D521D1D4D200CCF3F8 /* News */,
 				C3E6E2D221D1CC1900CCF3F8 /* Mine */,
 			);
@@ -9270,19 +9260,6 @@
 				7B94A76F25F76B1200A93B8F /* JCConfigModel.m */,
 			);
 			path = Mine;
-			sourceTree = "<group>";
-		};
-		C3E6E2D321D1D0E200CCF3F8 /* Show */ = {
-			isa = PBXGroup;
-			children = (
-				C32E16522195675D008C0B28 /* JCWShowBall.h */,
-				C32E16532195675D008C0B28 /* JCWShowBall.m */,
-				C3B4ECC72198C780007617D5 /* JCWCommentBall.h */,
-				C3B4ECC82198C780007617D5 /* JCWCommentBall.m */,
-				C3B562D3219D68010063F61F /* JCWReplyBall.h */,
-				C3B562D4219D68010063F61F /* JCWReplyBall.m */,
-			);
-			path = Show;
 			sourceTree = "<group>";
 		};
 		C3E6E2D421D1D1E900CCF3F8 /* Activity */ = {
@@ -10118,7 +10095,6 @@
 				7B44C39823BD8A01008B8E6C /* UITextView+Placeholder.m in Sources */,
 				7BDA571524EFCB9100A0E1C8 /* TZTestCell.m in Sources */,
 				7B53C4DB2486376100BE1262 /* JCNoSubscribeView.m in Sources */,
-				C32E16542195675D008C0B28 /* JCWShowBall.m in Sources */,
 				7B5C59E2254A6F0800E6A3B7 /* JCYCExpertYcRecondWMStickyVC.m in Sources */,
 				7BB8B483255D41AF00E7EAD1 /* JCHomeGanHuoHeadView.m in Sources */,
 				7B61BEFE24ED4DF00068F148 /* YBIBTopView.m in Sources */,
@@ -10189,7 +10165,6 @@
 				7B5E26CF247F66F6008CAEE4 /* JCYCMyYcTopView.m in Sources */,
 				7B8A28DA25B6770A0031D671 /* JCMatchBall.m in Sources */,
 				7B1BDD7A2510665700D7C034 /* UICountingLabel.m in Sources */,
-				C3B562D5219D68010063F61F /* JCWReplyBall.m in Sources */,
 				7B11DB56261EEC2800C1F7D6 /* JCFootBallAuthorCodeNodataView.m in Sources */,
 				7B0B375E25C15C8600CC2FD8 /* JCPostPlanMathInfoModel_New.m in Sources */,
 				C3D6E322216AEA2A003300D8 /* UIView+Corner.m in Sources */,
@@ -10324,7 +10299,6 @@
 				7B20657F256B9353006149BB /* SandBoxHelper.m in Sources */,
 				7B61BEF524ED4DEF0068F148 /* YBIBImageData.m in Sources */,
 				7BDA572424EFCB9100A0E1C8 /* TZImageRequestOperation.m in Sources */,
-				C3B4ECC92198C780007617D5 /* JCWCommentBall.m in Sources */,
 				7BE891FD24B6EFA600AE2E79 /* JCDatabaseAllMatchCollectionCell.m in Sources */,
 				C3B9937A225F290F002E2AD3 /* JCUpdateBall.m in Sources */,
 				7B8AE2A925A3042700B805EA /* JCBasketBallGZHCell.m in Sources */,
@@ -10900,7 +10874,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jingcai/Jingcai.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MFKWUW9XYJ;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -10920,7 +10894,7 @@
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/UPPayPlugin",
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/WeChatSDK1.8.6.1",
 				);
-				MARKETING_VERSION = 3.1;
+				MARKETING_VERSION = 3.31;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -10983,7 +10957,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MFKWUW9XYJ;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -11003,7 +10977,7 @@
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/UPPayPlugin",
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/WeChatSDK1.8.6.1",
 				);
-				MARKETING_VERSION = 3.1;
+				MARKETING_VERSION = 3.31;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -11052,7 +11026,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhisheng.zq;
 				PRODUCT_NAME = "鲸猜足球";
-				PROVISIONING_PROFILE_SPECIFIER = zhisheng_dev_0409;
+				PROVISIONING_PROFILE_SPECIFIER = zhisheng_dis_0511;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

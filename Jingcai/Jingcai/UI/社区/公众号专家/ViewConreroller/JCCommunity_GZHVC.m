@@ -51,6 +51,8 @@
 }
 
 - (void)refreshData {
+
+    [self.jcWindow showLoading];
     JCCommunityService_New *service = [JCCommunityService_New service];
     [service getDakaExpertLsitWithPage:self.pageNo success:^(id  _Nullable object) {
         [self endRefresh];

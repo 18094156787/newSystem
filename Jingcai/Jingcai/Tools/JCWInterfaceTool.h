@@ -19,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)serviceUrlWithJingCaiRoute_V2:(NSString *)route;//预测相关接口,第二版本
 + (NSString *)serviceUrlWithCommunityRoute:(NSString *)route;//社区相关
 + (NSString *)serviceUrlWithJingcaiCommunityRoute:(NSString *)route;
-+ (NSString *)serviceUrlWithDataBaseRoute_V2:(NSString *)route;//数据库相关
 + (NSString *)serviceUrlWithRoutes:(NSString *)route;
 + (NSString *)serviceUrlWithJingCaiNewRoute:(NSString *)route;
 + (NSString *)appVersion;//获取当前APP版本号

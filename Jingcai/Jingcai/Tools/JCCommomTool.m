@@ -45,6 +45,7 @@
 }
 +(NSString *)formatePointZero1:(NSString *)text
 {
+    //这边的%.2f,是知道最多有2位小数,去除多余的0. ps:如果不知道有多少位小数,可能默认取个10位,%.10f
     NSString *numstr = [NSString stringWithFormat:@"%.2f",[text floatValue]/100.0f];
     NSArray *array = [numstr componentsSeparatedByString:@"."];
     if (array.count == 1) return array[0];

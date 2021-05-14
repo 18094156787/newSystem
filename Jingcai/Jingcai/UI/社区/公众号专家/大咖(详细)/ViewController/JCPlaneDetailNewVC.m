@@ -232,6 +232,11 @@
             return UITableViewAutomaticDimension;
         }
     }else {
+        if (indexPath.section==1) {
+            if (indexPath.row==1&&self.planDetailModel.analyse.length==0) {
+                return 0.01f;
+            }
+        }
         return UITableViewAutomaticDimension;
     }
 
@@ -241,6 +246,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
+        //引文
         JCPlaneDetailNewSubTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailNewSubTitleCell"];
         cell.planDetailModel= self.planDetailModel;
         return cell;

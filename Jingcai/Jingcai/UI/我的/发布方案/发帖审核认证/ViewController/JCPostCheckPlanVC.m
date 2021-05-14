@@ -28,6 +28,7 @@
 #import "JCPostPlanRequest_integerModel.h"
 #import "JCBaseTitleAlertView.h"
 #import "JCWSensitiveWordsModel.h"
+#import "JCImageModel.h"
 @interface JCPostCheckPlanVC ()
 
 @property (nonatomic,strong) JCPostPlanHeadView *headView;
@@ -880,9 +881,12 @@
         
                 JCUserService_New * service = [JCUserService_New service];
                 [service uploadAvatarWithImage:data.url type:@"1" width:[NSString stringWithFormat:@"%ld",data.width] height:[NSString stringWithFormat:@"%ld",data.height] success:^(id  _Nullable object) {
+                   
                     [self endRefresh];
                     if ([JCWJsonTool isSuccessResponse:object]) {
+                        NSLog(@"上传完成图片下标:%ld",idx);
                         if (object[@"data"][@"image_id"]) {
+//                            JCImageModel *imaeModel = [JCImageModel]
                             [imageArray addObject:object[@"data"][@"image_id"]];
                         }
                         if (imageArray.count==imgArray.count) {

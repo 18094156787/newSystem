@@ -7,43 +7,11 @@
 //
 
 #import "JCWMatchBall.h"
-#import "JCWInterfaceTool.h"
 #import "JCWStringTool.h"
 #import "JCWDateTool.h"
 
 @implementation JCWMatchBall
-//- (NSString *)checked_homeLogo {
-//    if ([JCWStringTool isUrlAddress:_homeLogo]) {
-//        return _homeLogo;
-//    }
-//    return [NSString stringWithFormat:@"%@%@", [JCWInterfaceTool imageUrl], _homeLogo];
-//}
-//- (NSString *)checked_awayLogo {
-//    if ([JCWStringTool isUrlAddress:_awayLogo]) {
-//        return _awayLogo;
-//    }
-//    return [NSString stringWithFormat:@"%@%@", [JCWInterfaceTool imageUrl], _awayLogo];
-//}
-//- (NSString *)matchStatusString {
-//    switch (self.matchStatus) {
-//        case 1: //未开始
-//            return @"未开始";
-//        case 2: //进行中
-//            return self.matchNowScore;
-//        case 3: //已结束
-//            return self.fullScore;
-//        default:
-//            return @"";
-//    }
-//}
-//- (NSString *)introString {
-//    //NSString * dateStr = [JCWDateTool dateStringWithDate:self.kickoffTime format:@"yyyy-MM-dd HH:mm"];
-//    return [NSString stringWithFormat:@"%@ %@", self.matchName, self.kickoffTime];
-//}
-//- (NSString *)introFullString {
-//    //NSString * dateStr = [JCWDateTool dateStringWithDate:self.kickoffTime format:@"yyyy-MM-dd HH:mm"];
-//    return [NSString stringWithFormat:@"%@ %@ %@", self.matchName, self.kickoffTime, self.leagueName];
-//}
+
 - (NSString *)matchCountString {
     return self.matchCount > 0 ? [NSString stringWithFormat:@"%ld个方案 >", self.matchCount] : @"";
 }

@@ -115,9 +115,9 @@
     
     _model = model;
 
-    NSString *title = [NSString stringWithFormat:@"%@",model.zctj_newtuijian_title];
+    NSString *title = [NSString stringWithFormat:@"%@",NonNil(model.zctj_newtuijian_title)];
     if (model.zctj_newtuijian_is_bd==1) {
-        title = [NSString stringWithFormat:@"【补】%@",model.zctj_newtuijian_title];
+        title = [NSString stringWithFormat:@"【补】%@",NonNil(model.zctj_newtuijian_title)];
     }
 
     NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:title];

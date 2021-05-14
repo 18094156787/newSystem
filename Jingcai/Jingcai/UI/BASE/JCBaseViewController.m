@@ -172,10 +172,10 @@
     return 0;
 }
 - (void)presentLogin {
-    WeakSelf;
+
     dispatch_async(dispatch_get_main_queue(), ^{
 
-        [weakSelf.navigationController pushViewController:[JCLoginWMStickVC new] animated:YES];//
+        [self.navigationController pushViewController:[JCLoginWMStickVC new] animated:YES];//
     });//
 }
 //- (void)refreshData {

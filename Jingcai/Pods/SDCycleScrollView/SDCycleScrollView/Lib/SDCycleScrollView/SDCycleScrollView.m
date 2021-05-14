@@ -176,6 +176,9 @@ NSString * const ID = @"SDCycleScrollViewCell";
     }
     
     self.backgroundImageView.image = placeholderImage;
+    dispatch_async(dispatch_get_main_queue(), ^{
+    self.backgroundImageView.contentMode = self.bannerImageViewContentMode;
+    });
 }
 
 - (void)setPageControlDotSize:(CGSize)pageControlDotSize
