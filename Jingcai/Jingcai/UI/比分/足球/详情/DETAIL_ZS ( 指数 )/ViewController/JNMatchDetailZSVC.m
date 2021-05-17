@@ -37,6 +37,7 @@
     [self.segControl setTitleTextAttributes:@{NSForegroundColorAttributeName:JCWhiteColor} forState:UIControlStateSelected];
     [self.segControl setTintColor:JCBaseColor normalColor:COLOR_2F2F2F];
     [self loadDataWithMatchNum:self.matchBall type:1];
+
 }
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];

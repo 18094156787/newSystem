@@ -246,7 +246,7 @@
                             @"type":type,
                             @"match_id":match_id,
                             @"page":Integet_ToString(page),
-                            @"page_size":@"10"
+                            @"page_size":@"100"
     };
 
 

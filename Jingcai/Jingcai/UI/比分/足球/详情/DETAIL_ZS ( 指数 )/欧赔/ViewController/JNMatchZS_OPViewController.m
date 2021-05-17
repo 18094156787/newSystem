@@ -43,6 +43,8 @@
     self.pageNo = 1;
     [self initViews];
     [self getDataList];
+    
+
 }
 
 - (void)getDataList {
@@ -55,6 +57,12 @@
 //    self.tableView.scrollEnabled = NO;
     self.tableView.separatorStyle = 0;
     [self.tableView registerClass:[JNMatchZS_OP_TableViewCell class] forCellReuseIdentifier:@"JNMatchZS_OP_TableViewCell"];
+    
+    self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
+        self.pageNo = 1;
+        
+        [self getDataList];
+    }];
 
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [self getDataList];
@@ -69,9 +77,11 @@
     
     JCMatchService_New * service = [JCMatchService_New service];//
     [service getOPZhishuWithMatch_id:matchNum type:type Page:self.pageNo Success:^(id  _Nullable object) {
-        [self.jcWindow endLoading];
+        [self endRefresh];
+        
         if ([JCWJsonTool isSuccessResponse:object]) {
             if (self.pageNo==1) {
+                self.tableView.tableFooterView = [UIView new];
                 [self.dataArray removeAllObjects];
             }
             NSArray *array = object[@"data"];
@@ -83,7 +93,7 @@
             [weakSelf.tableView reloadData];
             
             self.pageNo++;
-            if (array.count < PAGE_LIMIT) {
+            if (array.count < 100) {
                 [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
                 self.footView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(50));
                 self.tableView.tableFooterView = self.footView;
@@ -99,7 +109,7 @@
 
         }
     } failure:^(NSError * _Nonnull error) {
-        [self.jcWindow endLoading];
+        [self endRefresh];
         [weakSelf.view showTopNoData];
     }];
 

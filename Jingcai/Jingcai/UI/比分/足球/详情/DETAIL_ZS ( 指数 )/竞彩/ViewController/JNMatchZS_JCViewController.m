@@ -32,6 +32,10 @@
 
 @property (nonatomic, strong) JCDiXianFootView *footView;
 
+@property (nonatomic, strong) NSString * matchNum;
+
+@property (nonatomic, assign) NSInteger type;
+
 @end
 
 @implementation JNMatchZS_JCViewController
@@ -49,6 +53,7 @@
     [super viewDidLoad];
     self.view.backgroundColor= COLOR_F4F6F9;
     [self initViews];
+
 }
 
 - (void)initViews {
@@ -63,7 +68,9 @@
     [self.tableView registerClass:[JNMatchZS_JC_BCSPF_TableViewCell class] forCellReuseIdentifier:@"JNMatchZS_JC_BCSPF_TableViewCell"];
 
     
-    
+    self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
+        [self loadDataWithMatchNum:self.matchNum type:self.type];
+    }];
     
 
     
@@ -72,12 +79,14 @@
 }
 
 - (void)loadDataWithMatchNum:(NSString *)matchNum type:(NSInteger)type {
+    self.type = type;
+    self.matchNum = matchNum;
 //    [self.tableView showTopNoData];
-//    [self.jcWindow showLoading];
+    [self.jcWindow showLoading];
     WeakSelf;
     JCMatchService_New * service = [JCMatchService_New service];
     [service getJZZhishuWithMatch_id:matchNum success:^(id  _Nullable object) {
-        [self.jcWindow endLoading];
+        [self endRefresh];
         if ([JCWJsonTool isSuccessResponse:object]) {
             if (![object[@"data"] isKindOfClass:[NSDictionary class]]) {
                 return;
@@ -100,7 +109,7 @@
             }
         }
     } failure:^(NSError * _Nonnull error) {
-        [self.jcWindow endLoading];
+        [self endRefresh];
     }];
 
 }

@@ -37,6 +37,10 @@
 
 @property (nonatomic, strong) JCDiXianFootView *footView;
 
+@property (nonatomic, strong) NSString * matchNum;
+
+@property (nonatomic, assign) NSInteger type;
+
 @end
 
 @implementation JNMatchZS_BDViewController
@@ -66,30 +70,46 @@
     [self.tableView registerClass:[JNMatchZS_JC_BF_BD_TableViewCell class] forCellReuseIdentifier:@"JNMatchZS_JC_BF_BD_TableViewCell"];
     [self.tableView registerClass:[JNMatchZS_JC_ZJQ_TableViewCell class] forCellReuseIdentifier:@"JNMatchZS_JC_ZJQ_TableViewCell"];
     [self.tableView registerClass:[JNMatchZS_JC_BCSPF_TableViewCell class] forCellReuseIdentifier:@"JNMatchZS_JC_BCSPF_TableViewCell"];
+    self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
+        [self loadDataWithMatchNum:self.matchNum type:self.type];
+    }];
 }
 
 - (void)loadDataWithMatchNum:(NSString *)matchNum type:(NSInteger)type {
+    self.matchNum = matchNum;
+    self.type = type;
     [self.jcWindow showLoading];
     WeakSelf;
     JCMatchService_New * service = [JCMatchService_New service];
 //    matchNum = @"3373011";
     [service getBDZhishuWithMatch_id:matchNum success:^(id  _Nullable object) {
-        [self.jcWindow endLoading];
+        [self endRefresh];
+        
         if ([JCWJsonTool isSuccessResponse:object]) {
+            weakSelf.isShowAll = NO;
             weakSelf.spfTotalArr = [JCWJsonTool arrayWithJson:object[@"data"][@"odds_spf"] class:[JNMatchSPFBall class]];
             weakSelf.spfArr = [NSMutableArray array];
-            
             if (weakSelf.spfTotalArr.count>5) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    for (int i=0; i<weakSelf.spfTotalArr.count; i++) {
-                        JNMatchSPFBall *obj = weakSelf.spfTotalArr[i];
-                        [weakSelf.spfArr addObject:obj];
-                        if (i==4) {
-                            break;
-                        }
-                        [self.tableView reloadData];
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    for (int i=0; i<weakSelf.spfTotalArr.count; i++) {
+//                        JNMatchSPFBall *obj = weakSelf.spfTotalArr[i];
+//                        [weakSelf.spfArr addObject:obj];
+//                        if (i==4) {
+//                            break;
+//                        }
+//                        [self.tableView reloadData];
+//                    }
+//                });
+                for (int i=0; i<weakSelf.spfTotalArr.count; i++) {
+                    JNMatchSPFBall *obj = weakSelf.spfTotalArr[i];
+                    [weakSelf.spfArr addObject:obj];
+                    if (i==4) {
+                        break;
                     }
-                });
+                   
+//                    [self.tableView reloadData];
+                }
+                
 
             }else{
                 weakSelf.spfArr = [NSMutableArray arrayWithArray:weakSelf.spfTotalArr];
@@ -110,7 +130,7 @@
             }
         }
     } failure:^(NSError * _Nonnull error) {
-        [self.jcWindow endLoading];
+        [self endRefresh];
     }];
 
 }

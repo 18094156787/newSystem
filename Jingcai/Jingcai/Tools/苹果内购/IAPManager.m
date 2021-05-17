@@ -59,9 +59,14 @@ singleton_implementation(IAPManager)
         /**
          阶段一正在进中,app退出。
          在程序启动时，设置监听，监听是否有未完成订单，有的话恢复订单。
+         
+         
          */
-        [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
         
+        NSArray *array =  [[SKPaymentQueue defaultQueue] transactions];
+        NSLog(@"%@",array);
+        [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+
         /**
          阶段二正在进行中,app退出。
          在程序启动时，检测本地是否有receipt文件，有的话，去二次验证。
