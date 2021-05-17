@@ -13,6 +13,7 @@
 #import "JCPostCheckingVC.h"
 #import "JCPostCheckRuleVC.h"
 #import "JCBaseTitleAlertView.h"
+#import "IAPManager.h"
 static CGFloat const kWMMenuViewHeight = 0;
 @interface JCMineWMStickViewController ()
 
@@ -39,6 +40,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [self getUserInfo];
+//    [[IAPManager shared] checkMyBuyGoods];
     
 
 }
@@ -99,7 +101,15 @@ static CGFloat const kWMMenuViewHeight = 0;
     [self initView];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserData) name:NotificationNameUserChange object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearUser) name:NotificationUserLogout object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresgUserInfo) name:UserRechargeSuccess object:nil];
+    
 
+}
+
+- (void)refresgUserInfo {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self getUserInfo];
+    });
 }
 
 - (void)getUserInfo {
@@ -162,16 +172,20 @@ static CGFloat const kWMMenuViewHeight = 0;
         [weakSelf qyClick];
     };
 
+    
     self.contentView.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
         if (![JCWUserBall currentUser]) {
-            [self.contentView.mj_header endRefreshing];
+            [weakSelf.contentView.mj_header endRefreshing];
             return;
         }
-        [self.jcWindow showLoading];
-        [self getUserInfo];
-        [self.mineVC getHomeTopCycle];
-        [self.contentView.mj_header endRefreshing];
+        [weakSelf.jcWindow showLoading];
+        [weakSelf getUserInfo];
+        [[IAPManager shared] checkMyBuyGoods];
+        [weakSelf.mineVC getHomeTopCycle];
+        
+        [weakSelf.contentView.mj_header endRefreshing];
     }];
+
 }
 
 - (void)viewDidLayoutSubviews {

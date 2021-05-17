@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import <StoreKit/StoreKit.h>
+#import "CountDown.h"
 
 typedef NS_ENUM(NSInteger, IAPFiledCode) {
     /**
@@ -55,7 +55,11 @@ singleton_interface(IAPManager)
 
 @property (nonatomic, copy) void(^JNSuccessBlock)(void);
 
+@property (nonatomic, copy) void(^JNRechargeSuccessBlock)(void);//
+
 @property (nonatomic, copy) NSString *order_id;//订单id
+
+@property (strong, nonatomic)  CountDown *countDown;
 
 /**
  启动工具
@@ -72,5 +76,7 @@ singleton_interface(IAPManager)
  */
 - (void)requestProductWithId:(NSString *)productId order_id:(NSString *)order_id;
 
+
+- (void)checkMyBuyGoods;
 
 @end

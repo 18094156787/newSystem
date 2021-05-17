@@ -61,7 +61,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 }
 
 -(void)sendPing:(id)sender{
-    NSLog(@"sendPing heart");
+//    NSLog(@"sendPing heart");
 //    NSString *heart = @"heart";
     NSData *heartData = [[NSData alloc] initWithBase64EncodedString:@"heart" options:NSUTF8StringEncoding];
     [self.webScoket sendPing:heartData];
@@ -155,7 +155,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
  心跳包是我们用来告诉服务端：客户端还在线，心跳包是ping消息，于此同时服务端也会返回给我们一个pong消息
  */
 -(void)webSocket:(SRWebSocket *)webSocket didReceivePong:(NSData *)pongData{
-    NSLog(@"接受ping 数据  --> %@",pongData);
+//    NSLog(@"接受ping 数据  --> %@",pongData);
 }
 
 #pragma mark NSTimer
@@ -201,7 +201,7 @@ dispatch_async(dispatch_get_main_queue(), block);\
 
 //发送心跳
 -(void)senderheartBeat{
-    NSLog(@"senderheartBeat");
+//    NSLog(@"senderheartBeat");
     //和服务端约定好发送什么作为心跳标识，尽可能的减小心跳包大小
     __weak typeof (self) ws = self;
     dispatch_main_async_safe(^{

@@ -63,8 +63,7 @@ singleton_implementation(IAPManager)
          
          */
         
-        NSArray *array =  [[SKPaymentQueue defaultQueue] transactions];
-        NSLog(@"%@",array);
+
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
 
         /**
@@ -180,6 +179,7 @@ singleton_implementation(IAPManager)
 //                [self saveReceipt]; //存储交易凭证
 //
 //                [self checkIAPFiles];//把self.receipt发送到服务器验证是否有效
+                NSLog(@"交易号=%@",transaction.transactionIdentifier);
                 [self sendRequestWithStransaction:transaction];
                 
 //                [self completeTransaction:transaction];
@@ -310,74 +310,7 @@ singleton_implementation(IAPManager)
     }
 }
 
-//-(void)sendAppStoreRequestBuyPlist:(NSString *)plistPath {
-//    if ([JCWUserBall currentUser].token.length==0) {
-//        return;
-//    }
-//
-//    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-//
-//    NSString *value = [dic objectForKey:receiptKey];
-//    //这里的参数请根据自己公司后台服务器接口定制，但是必须发送的是持久化保存购买凭证
-//    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-//                                   [dic objectForKey:receiptKey],          receiptKey,
-//                                   [dic objectForKey:dateKey],             dateKey,
-//                                   [dic objectForKey:userIdKey],           userIdKey,
-//                                   nil];
-//
-//    NSLog(@"参数%@",params);
-//    NSLog(@"金额%@",value);
-//    NSLog(@"请求次数");
-//    [SVProgressHUD show];
-////    [self removeReceipt];
-//
-//
-//    NSString *receipt_data = [dic objectForKey:receiptKey];
-//    NSString *order_id = [dic objectForKey:userIdKey];
-//
-////    if (!receipt_data) {
-////        return;
-////    }
-//////    order_id = @"";
-////    if ([self.dataArray containsObject:receipt_data]) {
-////        return;
-////    }else{
-////
-////        [self.dataArray addObject:receipt_data];
-////    }
-//
-//
-//
-//    JCPayService_New * service = [[JCPayService_New alloc] init];
-//    [service getUserRechareSuccessWithOrder_id:order_id receipt_data:receipt_data success:^(id  _Nullable object) {
-//        self.goodsRequestFinished = YES;
-//        [SVProgressHUD dismiss];
-//       if ([JCWJsonTool isSuccessResponse:object]) {
-//
-//           if (self.JNSuccessBlock) {
-//               self.JNSuccessBlock();
-//           }
-//             [self removeReceipt];
-////           [JCWToastTool showHint:@"充值成功"];
-//       }else{
-//           //10004 订单号重复使用
-//           if ([object[@"code"] integerValue]==10004) {
-//               [self removeReceipt];
-//           }else{
-//               [JCWToastTool showHint:object[@"msg"]];
-//           }
-//
-////           [self removeReceipt];
-//       }
-//
-//    } failure:^(NSError * _Nonnull error) {
-////        [self removeReceipt];
-//        self.goodsRequestFinished = YES;
-//        [SVProgressHUD dismiss];
-//    }];
-//
-//
-//#warning 在这里将凭证发送给服务器
+#warning 在这里将凭证发送给服务器
 //
 ////    if(@"凭证有效"){
 ////
@@ -407,6 +340,8 @@ singleton_implementation(IAPManager)
            if (self.JNSuccessBlock) {
                self.JNSuccessBlock();
            }
+           [[NSNotificationCenter defaultCenter] postNotificationName:UserRechargeSuccess object:nil];
+
 
            [self completeTransaction:transaction];
        }else{
@@ -480,5 +415,23 @@ singleton_implementation(IAPManager)
         }
     }
 }
+
+
+//检查是否有未完成订单
+- (void)checkMyBuyGoods {
+    NSArray *array =  [[SKPaymentQueue defaultQueue] transactions];
+    NSLog(@"%@",array);
+    if (array.count>0) {
+        SKPaymentTransaction *transaction = array.firstObject;
+        if (transaction.transactionState==SKPaymentTransactionStatePurchased) {
+            [self sendRequestWithStransaction:transaction];
+
+        }
+       
+    }
+
+}
+
+
 
 @end

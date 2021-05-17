@@ -62,6 +62,7 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
     [super viewWillAppear:animated];
     self.navigationBarStyle = JCNavigationBarStyleDefault;
     [self setNavBackImg];
+    [[IAPManager shared] checkMyBuyGoods];
 
 }
 
@@ -76,12 +77,23 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
     [IAPManager shared].delegate = self;
     WeakSelf;
     [IAPManager shared].JNSuccessBlock = ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:UserRechargeSuccess object:nil];
+        
         [weakSelf getChargeList];
         [JCWToastTool showHint:@"充值成功"];
     };
+    
+    [[IAPManager shared] checkMyBuyGoods];//重新进入该页面,重新检查是否有未完成的订单
+
+
+//    [[IAPManager shared] startManager];
 //
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCaiyun) name:UserRechargeSuccess object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[IAPManager shared] checkMyBuyGoods];//退出该页面,重新检查是否有未完成的订单
+
 }
 
 - (void)initSubViews {
