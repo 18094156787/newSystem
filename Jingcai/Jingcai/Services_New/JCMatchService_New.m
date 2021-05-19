@@ -11,6 +11,7 @@
 @implementation JCMatchService_New
 
 //获取日期列表
+//type 1赛程 2已完场 不传 默认1
 - (void)getMatchTimeListWithType:(NSString *)type success:(successBlock)successBlock failure:(failureBlock)failureBlock {
 
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];

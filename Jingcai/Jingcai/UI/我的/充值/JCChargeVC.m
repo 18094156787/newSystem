@@ -44,6 +44,7 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 
 @interface JCChargeVC () <UITableViewDelegate, UITableViewDataSource, TTTAttributedLabelDelegate,IApRequestResultsDelegate>
 @property (weak, nonatomic) IBOutlet UITableView * tableView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollow;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint * tableHeightConstraint;
 @property (weak, nonatomic) IBOutlet TTTAttributedLabel * agreeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *rechargeBgView;
@@ -126,6 +127,13 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
     
    NSString *info = [NSString stringWithFormat:@"温馨提示：\n1.鲸猜足球非购彩平台，红币一经充值成功，只可用于购买专家方案，不支持提现、购彩等操作。\n2.红币充值和消费过程上遇到问题，请及时联系客服。客服微信号：%@。\n3.严禁未满18周岁的未成年人参与购买方案",[JCConfigModel currentConfigModel].customer];
     self.infoLab.text = info;
+    
+
+    WeakSelf;
+    self.scrollow.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
+        [[IAPManager shared] checkMyBuyGoods];
+        [weakSelf getChargeList];
+    }];
 }
 
 - (void)getChargeList {
@@ -133,6 +141,7 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
     JCPayService_New * service = [JCPayService_New new];
     [service getChargeListWithType:@"1" success:^(id  _Nullable object) {
         [self.view endLoading];
+        [self.scrollow.mj_header endRefreshing];
         if ([JCWJsonTool isSuccessResponse:object]) {
             self.chargeItemArray = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCCaiyunBall class]];
             self.caiyun = [NSString stringWithFormat:@"%@",object[@"data"][@"hongbi"]];
@@ -146,6 +155,7 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
         }
         
     } failure:^(NSError * _Nonnull error) {
+        [self.scrollow.mj_header endRefreshing];
         [self.view endLoading];
         [JCWToastTool showHint:@"网络异常"];
     }];

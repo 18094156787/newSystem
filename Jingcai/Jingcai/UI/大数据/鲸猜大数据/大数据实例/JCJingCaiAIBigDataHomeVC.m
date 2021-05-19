@@ -169,6 +169,7 @@
 
     } failure:^(NSError * _Nonnull error) {
         [self endRefresh];
+        
         self.tableView.hidden= NO;
     }];
 

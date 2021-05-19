@@ -8,7 +8,6 @@
 
 #import "JCHomeWM_HeadView.h"
 #import "JCYCHomeWMStickVC.h"
-
 #import "JCHomeTitleView.h"
 #import "JCExpertWMViewController.h"
 #import "JCTopRankListWMVC.h"
@@ -17,6 +16,7 @@
 #import "JNTabBar.h"
 #import "JCActivityDetailCommomVC.h"
 #import "JCActivityGuessVC.h"
+#import "WebViewController.h"
 @implementation JCHomeWM_HeadView
 
 - (void)initViews {
@@ -69,8 +69,8 @@
 
     
     float length = (SCREEN_WIDTH - AUTO(48)*4)/4.0f;
-    NSArray *imgArray = @[JCIMAGE(@"icon_mjtj"),JCIMAGE(@"icon_hbdr"),JCIMAGE(@"icon_tbgx"),JCIMAGE(@"icon_ghjq")];
-    NSArray *titleArray = @[@"公众号专家",@"红榜达人",@"特别关注",@"排行榜"];
+    NSArray *imgArray = @[JCIMAGE(@"icon_mjtj"),JCIMAGE(@"icon_hbdr"),JCIMAGE(@"icon_tbgx"),JCIMAGE(@"icon_help")];
+    NSArray *titleArray = @[@"公众号专家",@"红榜达人",@"特别关注",@"帮助&客服"];
     for (int i=0; i<4; i++) {
         UIButton *btn = [UIButton new];
         [btn setImage:imgArray[i] forState:0];
@@ -147,7 +147,10 @@
         [[self getViewController].navigationController pushViewController:vc animated:YES];
     }
     if (sender.tag==103) {
-        JCTopRankListWMVC *vc = [JCTopRankListWMVC new];
+        WebViewController *vc = [WebViewController new];
+        vc.titleStr = @"帮助&客服";
+        NSString *url = [NSString stringWithFormat:@"%@?dev=1",[JCConfigModel currentConfigModel].get_customer];
+        vc.urlStr = NonNil(url);
         [[self getViewController].navigationController pushViewController:vc animated:YES];
     }
 }

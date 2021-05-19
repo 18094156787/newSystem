@@ -226,9 +226,7 @@
         if (index==305) {
             [weakSelf pushAbout];//关于我们
         }
-        if (index==306) {
-            [weakSelf pushQuestion];//常见问题
-        }
+
         
     };
     return cell;
@@ -339,17 +337,8 @@
 }
 - (void)pushContact {
     WebViewController *vc = [WebViewController new];
-    vc.titleStr = @"联系客服";
+    vc.titleStr = @"帮助&客服";
     NSString *url = [NSString stringWithFormat:@"%@?dev=1",[JCConfigModel currentConfigModel].get_customer];
-    vc.urlStr = NonNil(url);
-    [self.navigationController pushViewController:vc animated:YES];
-//    [self.navigationController pushViewController:[JCContractUsViewController new] animated:YES];
-}
-
-- (void)pushQuestion {
-    WebViewController *vc = [WebViewController new];
-    vc.titleStr = @"常见问题";
-    NSString *url = [NSString stringWithFormat:@"%@?dev=1",[JCConfigModel currentConfigModel].get_question];
     vc.urlStr = NonNil(url);
     [self.navigationController pushViewController:vc animated:YES];
 

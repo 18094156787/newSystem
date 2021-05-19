@@ -62,18 +62,12 @@
         make.height.mas_equalTo(AUTO(96));
     }];
     
-    [bgView addSubview:self.questionView];
-    [self.questionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.kefuView);
-        make.left.equalTo(self.kefuView.mas_right);
-        make.width.mas_equalTo(width);
-        make.height.mas_equalTo(AUTO(96));
-    }];
+
     
     [bgView addSubview:self.aboutView];
     [self.aboutView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.kefuView);
-        make.left.equalTo(self.questionView.mas_right);
+        make.left.equalTo(self.kefuView.mas_right);
         make.width.mas_equalTo(width);
         make.height.mas_equalTo(AUTO(96));
     }];
@@ -122,12 +116,7 @@
         }
     }];
     
-    [self.questionView bk_whenTapped:^{
-        if (weakSelf.JCMineClick) {
-            weakSelf.JCMineClick(306);
-        }
-    }];
-    
+
 }
 
 - (JCMineCellFunctionView *)inviteView {
@@ -170,7 +159,7 @@
     if (!_kefuView) {
         _kefuView = [JCMineCellFunctionView new];
         _kefuView.iconImg = JCIMAGE(@"me_ic_customer");
-        _kefuView.title = @"联系客服";
+        _kefuView.title = @"帮助&客服";
     }
     return _kefuView;
 }
@@ -182,15 +171,6 @@
         _aboutView.title = @"关于我们";
     }
     return _aboutView;
-}
-
-- (JCMineCellFunctionView *)questionView {
-    if (!_questionView) {
-        _questionView = [JCMineCellFunctionView new];
-        _questionView.iconImg = JCIMAGE(@"me_ic_question");
-        _questionView.title = @"常见问题";
-    }
-    return _questionView;
 }
 
 

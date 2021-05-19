@@ -36,11 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UILabel *timeLab;
 
-
-
 @property (nonatomic,strong) UILabel *countLab;//购买人数
 
-@property (nonatomic,strong) UILabel *infoLab;//
 
 @property (nonatomic,strong) UIImageView *iconImageView;
 

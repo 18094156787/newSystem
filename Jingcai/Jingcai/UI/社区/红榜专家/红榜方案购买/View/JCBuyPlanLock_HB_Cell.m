@@ -80,13 +80,20 @@
 //        make.bottom.offset(AUTO(-15));
     }];
     
-    UILabel *tipLab = [UILabel initWithTitle:@"*文章为比赛分析，仅作参考使用，请理性购买。" andFont:AUTO(10) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+    UILabel *tipLab = [UILabel initWithTitle:@"" andFont:AUTO(10) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+    tipLab.numberOfLines= 0;
     [self.topBgView addSubview:tipLab];
     [tipLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView);
         make.top.equalTo(self.endTimeLab.mas_bottom).offset(AUTO(15));
 //        make.bottom.offset(AUTO(0));
     }];
+    
+    NSString *tipStr = @"*本文章为比赛分析，仅作参考使用，请理性购买\n非购彩、非合买、非跟单！";
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:tipStr];
+    NSRange range = [tipStr rangeOfString:@"非购彩、非合买、非跟单！"];
+    [attr addAttributes:@{NSForegroundColorAttributeName: JCBaseColor} range:range];
+    tipLab.attributedText = attr;
 
 
     UILabel *infoLab = [UILabel initWithTitle:@"免责声明：鲸猜足球仅为信息发布平台，并不对第三方发布的信息真实性及准确性负责，且不提供彩票售卖服务，请您注意投资风险，理性购买！" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];//友情提示：文章内容不代表平台观点！关于文章有疑问请联系我们。务必谨防诈骗，避免财产损失。
@@ -306,7 +313,7 @@
 
 - (UILabel *)infoLab {
     if (!_infoLab) {
-        _infoLab = [UILabel initWithTitle:@"*文章为比赛分析，仅作参考使用，请理性购买。" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
+        _infoLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
         _infoLab.hidden = YES;
     }
     return _infoLab;

@@ -165,7 +165,7 @@
     
     if (indexPath.section==0) {
         JCBuyPlanLock_GZH_Cell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCBuyPlanLock_GZH_Cell"];
-        cell.infoLab.hidden = NO;
+//        cell.infoLab.hidden = NO;
         cell.payInfoModel = self.payInfoModel;
         return cell;
     }

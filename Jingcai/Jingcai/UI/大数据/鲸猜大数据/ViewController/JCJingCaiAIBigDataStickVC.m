@@ -131,6 +131,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
         }
 
     } failure:^(NSError * _Nonnull error) {
+        [self.contentView.mj_header endRefreshing];
         [self.jcWindow endLoading];
     }];
 

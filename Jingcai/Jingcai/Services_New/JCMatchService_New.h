@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark 足球
 //获取日期列表
+//type 1赛程 2已完场 不传 默认1
 - (void)getMatchTimeListWithType:(NSString *)type success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //获取比赛列表数据
 - (void)getMatchListWithType:(NSString *)type EventID:(NSString *)eventID Time:(NSString *)time screening:(NSString *)screening Page:(NSInteger)page Success:(successBlock)successBlock failure:(failureBlock)failureBlock;

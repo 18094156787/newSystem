@@ -13,6 +13,7 @@
                 <outlet property="agreeLabel" destination="j7J-9q-gs9" id="YfP-L0-8AE"/>
                 <outlet property="infoLab" destination="99e-NU-Ge7" id="KtD-yb-lHq"/>
                 <outlet property="rechargeBgView" destination="DSY-hd-tng" id="GAC-Mo-a1J"/>
+                <outlet property="scrollow" destination="fW9-ST-hck" id="wmu-7S-lR5"/>
                 <outlet property="tableHeightConstraint" destination="fLy-YQ-uJq" id="LXc-Md-ahJ"/>
                 <outlet property="tableView" destination="KL1-uv-0xn" id="cjY-DX-Ebj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
