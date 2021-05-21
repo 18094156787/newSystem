@@ -42,6 +42,8 @@
 #import "JCPostPlanVC.h"
 #import "IAPManager.h"
 #import "JCBaseTitleAlertView.h"
+#import "KSGuaidViewManager.h"
+
 @interface AppDelegate () <JPUSHRegisterDelegate>
 
 @property (nonatomic,strong) NSDictionary *launchOptions;
@@ -68,6 +70,7 @@
     [self.window makeKeyAndVisible];
     /**启动IAP工具类*/
      [[IAPManager shared] startManager];
+    [self appGuide];
 
     return YES;
 }
@@ -351,6 +354,28 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
     
 
+}
+
+- (void)appGuide {
+    KSGuaidManager.images = @[[UIImage imageNamed:@"guid01"],
+                              [UIImage imageNamed:@"guid02"],
+                              [UIImage imageNamed:@"guid03"],
+                              [UIImage imageNamed:@"guid04"]];
+    
+    
+//     方式一:
+     
+     CGSize size = [UIScreen mainScreen].bounds.size;
+     
+     KSGuaidManager.dismissButtonImage = [UIImage imageNamed:@"hidden"];
+     
+     KSGuaidManager.dismissButtonCenter = CGPointMake(size.width / 2, size.height - 80);
+     
+    
+    //方式二:
+//    KSGuaidManager.shouldDismissWhenDragging = YES;
+        
+    [KSGuaidManager begin];
 }
 - (void)configIQKeyboard {
     //键盘防遮挡

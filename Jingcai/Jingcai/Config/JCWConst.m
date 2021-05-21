@@ -102,3 +102,4 @@ NSString * const JCSearch_BigData = @"JCSearch_BigData";//搜索-大数据
 
 NSString * const JCActivity_show_date = @"JCActivity_show_date";//活动弹窗日期
 NSString * const JCActivity_data = @"JCActivity_data";//活动弹窗数据
+NSString * const JCAppGuide = @"JCAppGuide";//引导页

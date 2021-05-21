@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *url;
 
+@property (nonatomic,assign) NSInteger index;
+
 @end
 
 NS_ASSUME_NONNULL_END

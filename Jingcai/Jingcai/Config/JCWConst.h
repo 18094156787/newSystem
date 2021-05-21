@@ -103,6 +103,9 @@ UIKIT_EXTERN NSString * const JCSearch_BF_FootBall;//搜索-足球比分
 UIKIT_EXTERN NSString * const JCSearch_BF_BasketBall;//搜索-篮球比分
 UIKIT_EXTERN NSString * const JCSearch_BigData;//社区-大数据
 
+UIKIT_EXTERN NSString * const JCAppGuide;//引导页
+
+
 //活动
 UIKIT_EXTERN NSString * const JCActivity_show_date;//活动弹窗日期
 UIKIT_EXTERN NSString * const JCActivity_data;//活动弹窗数据

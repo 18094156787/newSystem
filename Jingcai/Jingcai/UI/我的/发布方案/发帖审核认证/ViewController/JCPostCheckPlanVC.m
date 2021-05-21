@@ -161,7 +161,7 @@
                 model.issue_num = model.round_num;
                 model.match_long_time = [NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd HH:mm" time:[model.get_match_time doubleValue]];
                 if ([self.type integerValue]==1) {
-                    if (model.odds_spf.length>0) {
+                    if (model.odds_spf.length>0||model.odds_rq.length>0) {
                         
                         //非让球
                         JCPostPlanMathInfoSPFModel *odds_spf_model = [JCPostPlanMathInfoSPFModel new];
@@ -179,7 +179,10 @@
                                 odds_spf_model.lost = value;
                             }
                         }
-                        model.odds_spf_model = odds_spf_model;
+                        if (model.odds_spf.length>0) {
+                            model.odds_spf_model = odds_spf_model;
+                        }
+                        
                         
                         //让球
                         JCPostPlanMathInfoSPFModel *odds_rq_model = [JCPostPlanMathInfoSPFModel new];
@@ -200,7 +203,10 @@
                                 odds_rq_model.lost = value;
                             }
                         }
-                        model.odds_rq_model = odds_rq_model;
+                        if (model.odds_rq.length>0) {
+                            model.odds_rq_model = odds_rq_model;
+                        }
+                        
                     }
                     
                 }else if([self.type integerValue]==2){
@@ -882,16 +888,52 @@
                 JCUserService_New * service = [JCUserService_New service];
                 [service uploadAvatarWithImage:data.url type:@"1" width:[NSString stringWithFormat:@"%ld",data.width] height:[NSString stringWithFormat:@"%ld",data.height] success:^(id  _Nullable object) {
                    
-                    [self endRefresh];
                     if ([JCWJsonTool isSuccessResponse:object]) {
-                        NSLog(@"上传完成图片下标:%ld",idx);
                         if (object[@"data"][@"image_id"]) {
-//                            JCImageModel *imaeModel = [JCImageModel]
-                            [imageArray addObject:object[@"data"][@"image_id"]];
+                            JCImageModel *imaeModel = [JCImageModel new];
+                            imaeModel.id = [NSString stringWithFormat:@"%@",object[@"data"][@"image_id"]];
+                            imaeModel.index = idx;
+                            [imageArray addObject:imaeModel];
                         }
-                        if (imageArray.count==imgArray.count) {
+                        if (imageArray.count==self.selectedPhotos.count) {
+                            [self endRefresh];
+                            NSMutableArray *imageObject_Array = [NSMutableArray array];
+                            NSMutableArray *imageID_Array = [NSMutableArray array];
+                            for (id image_object in imageArray) {
+                                if ([image_object isKindOfClass:[JCImageModel class]]) {
+                                    [imageObject_Array addObject:image_object];
+                                }else {
+                                    [imageID_Array addObject:image_object];
+                                }
+                            }
+                            
+                            //对图片进行排序
+                            NSArray *result = [imageObject_Array sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                                JCImageModel *objModel1 = (JCImageModel *)obj1;
+                                JCImageModel *objModel2 = (JCImageModel *)obj2;
+                                  if (objModel1.index>objModel2.index) {
+                                      return NSOrderedDescending;
+                                  }else if(objModel1.index<objModel2.index){
+                                      return NSOrderedAscending;
+                                  }else{
+                                      return NSOrderedSame;
+                                  }
+                              }];
+                            NSMutableArray *array = [NSMutableArray array];
+                            if (imageID_Array.count>0) {
+                                [array addObjectsFromArray:imageID_Array];
+                            }
+                            
+                            for (JCImageModel *model in result) {
+                                if (model.id) {
+                                    [array addObject:model.id];
+                                }
+                                
+                            }
 
-                            [self submitSuggestionUploadWithImages:imageArray];
+
+
+                            [self submitSuggestionUploadWithImages:array];
                         }
                     }else{
 

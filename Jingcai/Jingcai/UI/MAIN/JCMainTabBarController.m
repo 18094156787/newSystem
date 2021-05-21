@@ -97,7 +97,7 @@
     [WebSocketManager shared].delegate = self;
     [self startConnect];
 
-    
+
     NSLog(@"构建版本号：%@",[JCWInterfaceTool appBuildVersion]);
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyUserInfo) name:NotificationApplyExpertSuccess object:nil];

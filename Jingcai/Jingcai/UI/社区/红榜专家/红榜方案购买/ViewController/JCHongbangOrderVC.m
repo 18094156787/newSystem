@@ -109,6 +109,10 @@
             if ([highest integerValue]>0) {
                 self.highest = [NSString stringWithFormat:@"%@",@([highest integerValue]/100.f)];
             }
+            if (object[@"data"][@"recommend"]) {
+                self.useHbModel = (JCWMyHongbaoBall *)[JCWJsonTool entityWithJson:object[@"data"][@"recommend"] class:[JCWMyHongbaoBall class]];
+                [self caculatePrice];
+            }
             [self.tableView reloadData];
 
         }else{

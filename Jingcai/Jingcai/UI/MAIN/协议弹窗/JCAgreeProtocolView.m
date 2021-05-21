@@ -104,8 +104,8 @@
         JCService_ShowVC *vc = [JCService_ShowVC new];
         vc.titleStr = @"服务协议";
         UINavigationController *presentNav = [[UINavigationController alloc] initWithRootViewController:vc];
-        
-        [nav presentViewController:presentNav animated:YES completion:^{
+        UIViewController *rootVC = [UIApplication sharedApplication].windows.lastObject.rootViewController;
+        [rootVC presentViewController:presentNav animated:YES completion:^{
             
             
         }];
@@ -117,8 +117,8 @@
         JCPrivacy_ShowVC *vc = [JCPrivacy_ShowVC new];
         vc.titleStr = @" ";
         UINavigationController *presentNav = [[UINavigationController alloc] initWithRootViewController:vc];
-        
-        [nav presentViewController:presentNav animated:YES completion:^{
+        UIViewController *rootVC = [UIApplication sharedApplication].windows.lastObject.rootViewController;
+        [rootVC presentViewController:presentNav animated:YES completion:^{
             
             
         }];

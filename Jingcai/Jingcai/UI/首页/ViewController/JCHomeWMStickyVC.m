@@ -24,6 +24,7 @@
 #import "JCActivityTipView.h"
 #import "JCActivityDetailCommomVC.h"
 #import "JCActivityGuessVC.h"
+#import "JCAppGuideView.h"
 static CGFloat const kWMMenuViewHeight = 44;
 @interface JCHomeWMStickyVC ()<UISearchBarDelegate>
 
@@ -160,8 +161,10 @@ static CGFloat const kWMMenuViewHeight = 44;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCommomData) name:NotificationUserLogin object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCommomData) name:UserRegisterSuccess object:nil];//新用户注册成功,获取新人红包
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(topViewClickEnable) name:@"WMPageControllerScrollowStop" object:nil];
+
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGuideView) name:JCAppGuide object:nil];
+
     
     
 }
@@ -211,11 +214,6 @@ static CGFloat const kWMMenuViewHeight = 44;
     }
     
 
-//    self.activityImgView.frame = CGRectMake(SCREEN_WIDTH-88, SCREEN_HEIGHT-150-kTabBarHeight, 58, 64);
-//    self.activityImgView.animationImages = imageArray;
-//    self.activityImgView.animationDuration = 0.9;
-//    [self.activityImgView startAnimating];
-//    [self.jcWindow addSubview:self.activityImgView];
     self.activityImgView.frame = CGRectMake(SCREEN_WIDTH-88, SCREEN_HEIGHT-150-kTabBarHeight, 58, 64);
     self.activityImgView.animationImages = imageArray;
     self.activityImgView.animationDuration = 0.9;
@@ -225,9 +223,6 @@ static CGFloat const kWMMenuViewHeight = 44;
     [self.activityImgView bk_whenTapped:^{
         [weakSelf.navigationController pushViewController:[JCActivityModuleWMVC new] animated:YES];
     }];
-    
- 
-
 
 }
 
@@ -297,6 +292,12 @@ static CGFloat const kWMMenuViewHeight = 44;
     [self.view bringSubviewToFront:self.activityImgView];
 }
 
+- (void)showGuideView {
+    JCAppGuideView *view = [JCAppGuideView new];
+    view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    [self.jcWindow addSubview:view];
+}
+
 - (void)btnClicked:(id)sender {
     NSLog(@"touch up inside");
 }
@@ -320,13 +321,7 @@ static CGFloat const kWMMenuViewHeight = 44;
     if (scrollView.contentOffset.x>0&&scrollView.contentOffset.y==0) {
         self.topHeadView.clickEnable = 1;
     }
-   
-//    [self.view addSubview:self.activityImgView];
-//    self.activityImgView.frame = CGRectMake(SCREEN_WIDTH-88, scrollView.contentOffset.y+SCREEN_HEIGHT-150-kTabBarHeight, 58, 64);
-//    self.activity_top = scrollView.contentOffset.y+SCREEN_HEIGHT-150-kTabBarHeight;
-    NSLog(@"x=%.2f--y=%.2f",scrollView.contentOffset.x,scrollView.contentOffset.y);
-//    self.activityImgView.frame = CGRectMake(SCREEN_WIDTH-88, SCREEN_HEIGHT-200-kTabBarHeight, 58, 64);
-    
+
 }
 
 - (void)topViewClickEnable {
@@ -386,12 +381,7 @@ static CGFloat const kWMMenuViewHeight = 44;
     CGFloat originY = _viewTop + kWMMenuViewHeight;
     return CGRectMake(0, originY, SCREEN_WIDTH, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-kWMMenuViewHeight-10);
 }
-//- (void)pageController:(WMPageController *)pageController didEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info {
-//    self.activityImgView.frame = CGRectMake(SCREEN_WIDTH-88, self.activity_top, 58, 64);
-//}
-//- (void)pageController:(WMPageController *)pageController willEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info {
-//    self.activityImgView.frame = CGRectMake(SCREEN_WIDTH-88, self.activity_top, 58, 64);
-//}
+
 
 #pragma mark UISearchBar Delegate
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
@@ -608,6 +598,7 @@ static CGFloat const kWMMenuViewHeight = 44;
         if (self.is_hide == YES) {
             self.activityImgView.hidden = YES;
         }
+
     }
 
     self.topHeadView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.headerViewHeigh);

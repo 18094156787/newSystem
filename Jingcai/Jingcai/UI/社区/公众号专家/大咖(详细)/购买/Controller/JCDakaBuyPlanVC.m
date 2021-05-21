@@ -505,6 +505,10 @@
             if ([highest integerValue]>0) {
                 self.highest = [NSString stringWithFormat:@"%@",@([highest integerValue]/100.f)];
             }
+            if (object[@"data"][@"recommend"]) {
+                self.useHbModel = (JCWMyHongbaoBall *)[JCWJsonTool entityWithJson:object[@"data"][@"recommend"] class:[JCWMyHongbaoBall class]];
+                [self caculatePrice];
+            }
             [self.tableView reloadData];
 
         }else{
@@ -523,11 +527,11 @@
         return;
     }
     @weakify(self);
-    [self.view showLoading];
+    [self.jcWindow showLoading];
     JCHomeService_New *service = [JCHomeService_New service];
     [service getPlanLookWithTuijian_id:self.payInfoModel.id Page:self.pageNo success:^(id  _Nullable object) {
         @strongify(self);
-        [self.view endLoading];
+        [self endRefresh];
         if ([JCWJsonTool isSuccessResponse:object]) {
             NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"brown_info"] class:[JCPlanBuyPersonModel class]];
             NSString *number = [NSString stringWithFormat:@"%@",object[@"data"][@"brown_num"]];
@@ -567,7 +571,7 @@
         }
     } failure:^(NSError * _Nonnull error) {
         self.footView.moreBtn.hidden = YES;
-        [self.view endLoading];
+        [self endRefresh];
     }];
 
 

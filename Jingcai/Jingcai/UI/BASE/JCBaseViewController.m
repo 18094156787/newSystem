@@ -302,6 +302,9 @@
 }
 
 - (UIWindow *)jcWindow {
+    if ([UIApplication sharedApplication].windows.count>0) {
+        return [UIApplication sharedApplication].windows.firstObject;
+    }
     return [UIApplication sharedApplication].keyWindow;
 }
 
@@ -372,14 +375,13 @@
         JCWSlideBall *actModel = self.activtyArray.firstObject;
         [activityTipView.imgView sd_setImageWithURL:[NSURL URLWithString:actModel.img_url]];
         activityTipView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-        if (self.jcWindow.subviews.count>0) {
-            [self.jcWindow insertSubview:activityTipView atIndex:self.jcWindow.subviews.count-1];
-        }else {
-            [self.jcWindow addSubview:activityTipView];
-        }
-//
-//        [self.jcWindow addSubview:activityTipView];
-//        [self.jcWindow insertSubview:activityTipView atIndex:0];
+//        if (self.jcWindow.subviews.count>0) {
+//            NSArray *array = self.jcWindow.subviews;
+//            [self.jcWindow insertSubview:activityTipView atIndex:self.jcWindow.subviews.count-1];
+//        }else {
+//            [self.jcWindow addSubview:activityTipView];
+//        }
+        [self.jcWindow addSubview:activityTipView];
         WeakSelf;
 
         activityTipView.JCSureBlock = ^{
