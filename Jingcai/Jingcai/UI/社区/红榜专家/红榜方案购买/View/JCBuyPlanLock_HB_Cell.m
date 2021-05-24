@@ -103,6 +103,14 @@
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
         make.top.equalTo(tipLab.mas_bottom).offset(AUTO(15));
+    }];
+    self.infoLab = infoLab;
+    
+    [self.topBgView addSubview:self.tipLab];
+    [self.tipLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(15));
+        make.right.offset(AUTO(-15));
+        make.top.equalTo(infoLab.mas_bottom).offset(AUTO(10));
         make.bottom.offset(AUTO(0));
     }];
 
@@ -229,6 +237,14 @@
      }
     
     self.priceLab.text = tjInfoDetailBall.sf;
+    
+    if (tjInfoDetailBall.refund.length>0) {
+        self.tipLab.text = @"不中返还：在比赛分析结果预测不正确的情况下将全额退款购买预测方案的费用。退款的路径一般是在24小时内原路径返还。";
+    }else{
+        [self.tipLab mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.infoLab.mas_bottom).offset(0);
+        }];
+    }
 
 }
 
@@ -311,12 +327,12 @@
     return _bzfhImageView;
 }
 
-- (UILabel *)infoLab {
-    if (!_infoLab) {
-        _infoLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
-        _infoLab.hidden = YES;
+- (UILabel *)tipLab {
+    if (!_tipLab) {
+        _tipLab = [UILabel initWithTitle:@"" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
+        _tipLab.numberOfLines = 0;
     }
-    return _infoLab;
+    return _tipLab;
 }
 
 -(UIImageView *)iconImageView {

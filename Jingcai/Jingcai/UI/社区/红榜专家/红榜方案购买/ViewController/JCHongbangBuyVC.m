@@ -214,14 +214,7 @@
         return cell;
     }
     if (indexPath.section==1) {
-//        if (self.match_end) {
-//            JCFootBallBuyPlanEndBuyCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCFootBallBuyPlanEndBuyCell"];
-//            //JCFootBallBuyPlanEndBuyCell,JCBuyPlanLock_HB_Cell
-//            cell.tjInfoDetailBall = self.tjInfoDetailBall;
-//            return cell;
-//        }
         JCBuyPlanLock_HB_Cell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCBuyPlanLock_HB_Cell"];
-        //JCFootBallBuyPlanEndBuyCell,JCBuyPlanLock_HB_Cell
         cell.tjInfoDetailBall = self.tjInfoDetailBall;
         return cell;
     }

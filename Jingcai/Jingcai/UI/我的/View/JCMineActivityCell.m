@@ -99,6 +99,7 @@
         }
 
         if ([slide.type integerValue]==2||[slide.type integerValue]==3) {
+//            [[self getViewController].navigationController pushViewController:[JcActivitySquareVC new] animated:NO];
             JCActivityDetailCommomVC *vc = [JCActivityDetailCommomVC new];
             vc.actID = slide.id;
             [[self getViewController].navigationController pushViewController:vc animated:YES];

@@ -21,6 +21,7 @@
     cycleScrollView.localizationImageNamesGroup = @[JCIMAGE(@"guid01"),JCIMAGE(@"guid02"),JCIMAGE(@"guid03"),JCIMAGE(@"guid04")];
     [self addSubview:cycleScrollView];
     self.cycleScrollView = cycleScrollView;
+    [cycleScrollView disableScrollGesture];
 }
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
@@ -30,7 +31,7 @@
         [self.cycleScrollView makeScrollViewScrollToIndex:index+1];
     }
 }
-//- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index {
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index {
 //    [self.cycleScrollView makeScrollViewScrollToIndex:index];
-//}
+}
 @end

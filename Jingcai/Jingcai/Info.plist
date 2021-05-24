@@ -44,11 +44,20 @@
 				<string>wxe99e1574a32a16f5</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>jingcai</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>jingcai</string>
 		<string>weixin</string>
 		<string>weixinULAPI</string>
 		<string>weixinulapi</string>

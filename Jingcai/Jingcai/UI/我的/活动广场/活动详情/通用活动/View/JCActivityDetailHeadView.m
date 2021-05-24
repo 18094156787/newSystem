@@ -55,22 +55,25 @@
     }
     _detailModel = detailModel;
     [self.imgView sd_setImageWithURL:[NSURL URLWithString:detailModel.top_image_url] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-        float rate = image.size.width/SCREEN_WIDTH;
-        float height = image.size.height;
-        if (rate>0) {
-            height = height/rate;
-        }
-        
-
-        [self.imgView mas_updateConstraints:^(MASConstraintMaker *make) {
-            NSLog(@"图片高度%.0f",image.size.height);
-          
-            make.height.mas_equalTo(height);//240+25
-        }];
-        if (self.JCHeightBlock) {
+        if (!error) {
+            float rate = image.size.width/SCREEN_WIDTH;
+            float height = image.size.height;
+            if (rate>0) {
+                height = height/rate;
+            }
             
-            self.JCHeightBlock(height+35);
+
+            [self.imgView mas_updateConstraints:^(MASConstraintMaker *make) {
+                NSLog(@"图片高度%.0f",image.size.height);
+              
+                make.height.mas_equalTo(height);//240+25
+            }];
+            if (self.JCHeightBlock) {
+                
+                self.JCHeightBlock(height+35);
+            }
         }
+ 
     }];
     self.timeLab.text = [NSString stringWithFormat:@"%@-%@",detailModel.start_time,detailModel.end_time];
 }

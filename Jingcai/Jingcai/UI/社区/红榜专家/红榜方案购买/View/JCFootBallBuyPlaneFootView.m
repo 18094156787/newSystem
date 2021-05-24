@@ -76,47 +76,11 @@
 
 }
 
-
--(UIImage *) getImageFromURL:(NSString *)fileURL {
-    //NSLog(@"执行图片下载函数");
-    UIImage * result;
-    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
-    result = [UIImage imageWithData:data];
-    return result;
-}
-
-
 - (void)moreBtnClick {
     if (self.JCMoreBlock) {
         self.JCMoreBlock();
     }
 }
-
-//- (UIImage *)clipImage
-//{
-//    // 1.开启位图上下文，跟图片尺寸一样大
-//    float width = (SCREEN_WIDTH-AUTO(20))/8.0f;
-//    CGSize imageSize = CGSizeMake(width, width);
-//
-//    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
-//
-//    // 2.设置圆形裁剪区域，正切与图片
-//    UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, imageSize.width, imageSize.height)];
-//
-//    // 2.2把路径设置为裁剪区域
-//    [path addClip];
-//
-//    // 3.绘制图片
-//    [self drawAtPoint:CGPointZero];
-//
-//    // 4.从上下文中获取图片
-//    UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
-//
-//    // 5.关闭上下文
-//    UIGraphicsEndImageContext();
-//
-//    return clipImage;
-//}
 
 - (UILabel *)countLab {
     if (!_countLab) {

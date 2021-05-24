@@ -78,16 +78,7 @@
 //        [mineVC pushWithSection:section];
 //    }
 }
-- (void)redirectToLatest {
-    self.tabBarController.tabSelIndex = 0;
-    //todo向上滑至最新方案
-}
-- (void)redirectToMatch {
-    self.tabBarController.tabSelIndex = 1;
-}
-- (void)redirectToCal {
-    self.tabBarController.tabSelIndex = 3;
-}
+
 - (void)redirectToCharge {
     JCBaseViewController * currentVC = (JCBaseViewController *)[self.tabBarController.view getCurrentVC];
     if (![JCWUserBall currentUser]) {

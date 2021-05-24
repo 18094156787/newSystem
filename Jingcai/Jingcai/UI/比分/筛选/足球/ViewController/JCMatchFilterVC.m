@@ -15,6 +15,8 @@
 
 @property(nonatomic,strong)NSMutableArray *firstLetterArray;
 
+@property(nonatomic,strong)JNDIYemptyView *emptyView;
+
 @end
 
 @implementation JCMatchFilterVC
@@ -39,11 +41,16 @@
     UIView * headView= [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     self.tableView.tableHeaderView = headView;
     
-    JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
-        [self refreshData];
+    
+    self.emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
+//        [self refreshData];
     }];
-    self.tableView.ly_emptyView = emptyView;
-//    [self showNoDataViewImageStr:@"empty_img_follow_expert" Title:@"暂时没有比赛" BtnTitle:@"" Btnwidth:0 HiddenBtn:YES];
+    self.emptyView.imageStr = @"nodata";
+    self.emptyView.titleStr = @"当前暂无符合条件赛事！";
+    self.emptyView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    [self.view addSubview:self.emptyView];
+    self.emptyView.hidden = YES;
+
 
 }
 
@@ -181,6 +188,7 @@
 
     [self selectAllWithStatus:YES];//默认全选中
     [self.tableView reloadData];
+    self.emptyView.hidden = self.dataSource.count==0?NO:YES;
 }
 
 

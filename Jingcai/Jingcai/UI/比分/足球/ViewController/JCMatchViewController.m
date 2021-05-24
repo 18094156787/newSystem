@@ -155,14 +155,6 @@
             
             NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCMatchInfoModel class]];
 
-//            if (self.time.length==0) {
-//                self.time = [NSString stringWithFormat:@"%@",object[@"data"][@"now_time"]];
-//            }
-//            if (self.time.length>0&&self.dateHeadView.hidden) {
-//                self.time = [NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd" time:[self.time doubleValue]];
-//                self.dateHeadView.today = self.time;
-//                self.dateHeadView.hidden = NO;
-//            }
              [self.dataArray addObjectsFromArray:array];
             [self.dataSource addObjectsFromArray:array];
 

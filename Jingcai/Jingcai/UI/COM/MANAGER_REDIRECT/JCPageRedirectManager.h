@@ -12,9 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JCPageRedirectManager : NSObject
 + (instancetype)sharedManager;
 + (void)redirectWithRoute:(NSString *)route vc:(UIViewController *)vc;
-- (void)redirectToLatest;
-- (void)redirectToMatch;
-- (void)redirectToCal;
 - (void)redirectToCharge;
 - (void)redirectToHongbao;
 - (void)redirectToInviteFriend;//跳转邀请新人页面

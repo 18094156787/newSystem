@@ -128,23 +128,8 @@
 //IOS9+
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
     //widget跳转
-    if ([[url absoluteString] containsString:@"jingcai://"]) {
-        if ([url.host isEqualToString:@"fa"]) {
-            [[JCPageRedirectManager sharedManager] redirectToLatest];
-            return YES;
-        }
-        if ([url.host isEqualToString:@"match"]) {
-            [[JCPageRedirectManager sharedManager] redirectToMatch];
-            return YES;
-        }
-        if ([url.host isEqualToString:@"cal"]) {
-            [[JCPageRedirectManager sharedManager] redirectToCal];
-            return YES;
-        }
-        if ([url.host isEqualToString:@"charge"]) {
-            [[JCPageRedirectManager sharedManager] redirectToCharge];
-            return YES;
-        }
+    if ([url.scheme containsString:@"jingcai://"]) {
+        return YES;
     }
     // 微信登录(解决与友盟分享SDK的冲突问题)
     if ([options[UIApplicationOpenURLOptionsSourceApplicationKey] isEqualToString:@"com.tencent.xin"] && [url.absoluteString containsString:WXSendAuthReqStateLogin]) {

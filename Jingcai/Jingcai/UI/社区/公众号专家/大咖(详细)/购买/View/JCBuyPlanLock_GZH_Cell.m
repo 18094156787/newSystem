@@ -27,7 +27,7 @@
         make.left.right.offset(0);
         make.top.equalTo(self.introduceLab.mas_bottom).offset(AUTO(15));
 //        make.height.mas_equalTo(AUTO(180));
-        make.bottom.offset(-AUTO(15));
+        make.bottom.offset(-AUTO(10));
     }];
 
     UIView *lineView = [UIView new];
@@ -80,14 +80,22 @@
     //        make.bottom.offset(AUTO(-15));
         }];
     
-    UILabel *tipLab = [UILabel initWithTitle:@"" andFont:AUTO(10) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+    UILabel *tipLab = [UILabel initWithTitle:@"" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     tipLab.numberOfLines = 0;
     [self.topBgView addSubview:tipLab];
     [tipLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView);
         make.top.equalTo(self.endTimeLab.mas_bottom).offset(AUTO(10));
+    }];
+    
+    [self.topBgView addSubview:self.infoLab];
+    [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(15));
+        make.right.offset(AUTO(-15));
+        make.top.equalTo(tipLab.mas_bottom).offset(AUTO(10));
         make.bottom.offset(AUTO(0));
     }];
+    
     NSString *tipStr = @"*本文章为比赛分析，仅作参考使用，请理性购买\n非购彩、非合买、非跟单！";
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:tipStr];
     NSRange range = [tipStr rangeOfString:@"非购彩、非合买、非跟单！"];
@@ -187,6 +195,25 @@
         }];
     }
         self.endTimeLab.text = [NSString stringWithFormat:@"%@ 截止购买",[NSDate wholeTimeStringToMinuteWithInterval:[payInfoModel.end_time longLongValue]]];
+    self.infoLab.text = @"";
+    if ([payInfoModel.pre_sale integerValue]==1) {
+        //预售
+        self.infoLab.text = @"购买须知：\n预售方案：方案当前暂无具体的比赛分析内容，但是会在某个时间进行更新，购买后请注意即时查看方案内容以及提示。";
+    }
+    if ([payInfoModel.refund integerValue]==1) {
+        //不中返还
+        self.infoLab.text = @"购买须知：\n不中返还：在比赛分析结果预测不正确的情况下将全额退款购买预测方案的费用。退款的路径一般是在24小时内原路径返还";
+    }
+    if ([payInfoModel.refund integerValue]==2) {
+        //不中补单
+        self.infoLab.text = @"不中补单：在比赛分析结果预测不正确的情况下将会有新的方案免费补单给购买的用户。可以在购买记录中进行查看。查看具有【补】字的方案，即为补单的方案。";
+    }
+    if ([payInfoModel.pre_sale integerValue]==1&&[payInfoModel.refund integerValue]==1) {
+        self.infoLab.text = @"购买须知：\n预售方案：方案当前暂无具体的比赛分析内容，但是会在某个时间进行更新，购买后请注意即时查看方案内容以及提示。\n不中返还：在比赛分析结果预测不正确的情况下将全额退款购买预测方案的费用。退款的路径一般是在24小时内原路径返还";
+    }
+    if ([payInfoModel.pre_sale integerValue]==1&&[payInfoModel.refund integerValue]==2) {
+        self.infoLab.text = @"购买须知：\n预售方案：方案当前暂无具体的比赛分析内容，但是会在某个时间进行更新，购买后请注意即时查看方案内容以及提示。\n不中补单：在比赛分析结果预测不正确的情况下将会有新的方案免费补单给购买的用户。可以在购买记录中进行查看。查看具有【补】字的方案，即为补单的方案。";
+    }
 
  
 }
@@ -279,6 +306,14 @@
 - (void)setSeconds:(NSString *)seconds {
     _seconds = seconds;
     self.secondsLab.text = seconds;
+}
+
+- (UILabel *)infoLab {
+    if(!_infoLab){
+        _infoLab = [UILabel initWithTitle:@"" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
+        _infoLab.numberOfLines = 0;
+    }
+    return _infoLab;
 }
 
 - (UILabel *)introduceLab {

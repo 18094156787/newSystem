@@ -96,10 +96,19 @@
             [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
            NSArray *hotArray = [JCWJsonTool arrayWithJson:object[@"data"][@"hot_match"] class:[JCMatchFilterModel class]];//热门数据
+            if (!hotArray||hotArray.count==0) {
+                hotArray = @[];
+            }
             self.hotVC.dataSource = [hotArray mutableCopy];
             NSArray *allArray = [JCWJsonTool arrayWithJson:object[@"data"][@"all_match"] class:[JCMatchSelectModel class]];//全部赛事
+            if (!allArray||allArray.count==0) {
+                allArray = @[];
+            }
             self.allVC.dataSource = [allArray mutableCopy];
            NSArray *jcArray = [JCWJsonTool arrayWithJson:object[@"data"][@"get_guess"] class:[JCMatchFilterModel class]];//精彩数据
+            if (!jcArray||jcArray.count==0) {
+                jcArray = @[];
+            }
             self.jcVC.dataSource = [jcArray mutableCopy];
             [self selMatchCountWithIndex:0];
         }else{
