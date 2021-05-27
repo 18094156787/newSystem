@@ -14,6 +14,8 @@
 #import "JCActivityDetailModel.h"
 #import "JCShareView.h"
 #import "JCChargeVC.h"
+#import "JCActivityResultTipView.h"
+#import "JCActivityRechargeResultTipView.h"
 @interface JCActivityDetailCommomVC ()
 
 @property (nonatomic,strong) JCActivityDetailHeadView *headView;
@@ -29,6 +31,10 @@
 @property (nonatomic,strong) JCActivityDetailModel *detailModel;
 
 @property (nonatomic,strong) JCShareView *shareView;
+
+@property (nonatomic,strong) JCActivityResultTipView *activity_commom_tipView;
+
+@property (nonatomic,strong) JCActivityRechargeResultTipView *activity_recharge_tipView;
 
 @end
 
@@ -72,9 +78,9 @@
                 accumulate = self.detailModel.recharge_information;
             }
             if ([self.detailModel.type integerValue]==2) {
-                accumulate = @"";
+                accumulate = [NSString stringWithFormat:@"我已领取: %@",self.detailModel.quantity_received];
             }
-//                NSString *infoStr = [NSString stringWithFormat:@"%@我已领取：%@ ",accumulate,self.detailModel.quantity_received];
+
             self.infoLab.text = accumulate;
 
             self.sureBtn.backgroundColor = [self.detailModel.text_can_click integerValue]==1?JCBaseColor:COLOR_9F9F9F;
@@ -88,9 +94,11 @@
             self.shareView.webPageUrl =self.detailModel.wechat_share.share_url;
             self.shareView.friend_url =self.detailModel.wechat_share.friend_url;
             self.shareView.imageUrl = self.detailModel.wechat_share.share_image;
-            
-//            self.detailModel.goods_info = @[];
             [self.tableView reloadData];
+            if ([self.detailModel.is_popover integerValue]==1) {
+                [self showRechargeResult];
+            }
+      
         }else{
             [JCWToastTool showHint:object[@"msg"]];
         }
@@ -254,7 +262,12 @@
     }
     //type 活动类型 1跳转已有的活动 2福利活动 3充值活动 4竞猜活动
     if ([self.detailModel.type integerValue]==3) {
-        [self.navigationController pushViewController:[JCChargeVC new] animated:YES];
+        JCChargeVC *vc =[JCChargeVC new];
+        WeakSelf;
+        vc.JCRefreshBlock = ^{
+            [weakSelf refreshData];
+        };
+        [self.navigationController pushViewController:vc animated:YES];
         return;
     }
     
@@ -264,8 +277,10 @@
         [service getActivityPrizeWithActID:self.detailModel.id success:^(id  _Nullable object) {
             [self.view endLoading];
             if ([JCWJsonTool isSuccessResponse:object]) {
+                [self showFuliResult];
                 [self refreshData];
-                [JCWToastTool showHint:object[@"data"][@"get_content"]];
+                
+//                [JCWToastTool showHint:object[@"data"][@"get_content"]];
             }else{
                 [JCWToastTool showHint:object[@"msg"]];
             }
@@ -312,6 +327,32 @@
     }];
 
 }
+//福利活动领奖
+- (void)showFuliResult {
+    self.activity_commom_tipView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    self.activity_commom_tipView.dataSource = self.detailModel.goods_info;
+    [self.jcWindow addSubview:self.activity_commom_tipView];
+    
+    WeakSelf;
+    self.activity_commom_tipView.JCClickBlock = ^{
+        weakSelf.prizeView.detailModel = weakSelf.detailModel;
+        weakSelf.prizeView.dataArray = weakSelf.detailModel.goods_info;
+        [weakSelf.jcWindow addSubview:weakSelf.prizeView];
+    };
+}
+//充值奖励弹窗
+- (void)showRechargeResult {
+    self.activity_recharge_tipView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    self.activity_recharge_tipView.detailModel = self.detailModel;
+    self.activity_recharge_tipView.dataSource = self.detailModel.goods_popover_info;
+    [self.jcWindow addSubview:self.activity_recharge_tipView];
+    WeakSelf;
+    self.activity_recharge_tipView.JCClickBlock = ^{
+        weakSelf.prizeView.detailModel = weakSelf.detailModel;
+        weakSelf.prizeView.dataArray = weakSelf.detailModel.goods_popover_info;
+        [weakSelf.jcWindow addSubview:weakSelf.prizeView];
+    };
+}
 
 - (JCActivityDetailHeadView *)headView {
     if (!_headView) {
@@ -350,4 +391,19 @@
     }
     return _shareView;
 }
+
+- (JCActivityResultTipView *)activity_commom_tipView {
+    if (!_activity_commom_tipView) {
+        _activity_commom_tipView = [JCActivityResultTipView new];
+    }
+    return _activity_commom_tipView;
+}
+
+- (JCActivityRechargeResultTipView *)activity_recharge_tipView {
+    if (!_activity_recharge_tipView) {
+        _activity_recharge_tipView = [JCActivityRechargeResultTipView new];
+    }
+    return _activity_recharge_tipView;
+}
+
 @end

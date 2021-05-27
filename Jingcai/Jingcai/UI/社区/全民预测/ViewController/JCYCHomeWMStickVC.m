@@ -32,6 +32,7 @@
 #import "JCCommunityWMStickHomeVC.h"
 #import "JCPostCheckRuleVC.h"
 #import "JCYuceSettingModel.h"
+#import "JCAppGuideView.h"
 static CGFloat const kWMMenuViewHeight = 0;
 @interface JCYCHomeWMStickVC ()<WMStickyPageControllerDelegate>
 
@@ -151,6 +152,7 @@ static CGFloat const kWMMenuViewHeight = 0;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(jcRefresh) name:NotificationUserLogin object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginOutRefresh) name:NotificationUserLogout object:nil];
+    [self showGuideView];
 //    [self showQianYueView];
     
     
@@ -377,6 +379,22 @@ static CGFloat const kWMMenuViewHeight = 0;
     return YES;
 }
 
+- (void)showGuideView {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"JCAppGuide_guess"]) {
+        JCAppGuideView *view = [JCAppGuideView new];
+        if (SCREEN_HEIGHT>667){
+            view.dataArray = @[JCIMAGE(@"course_3")];
+        }else{
+            view.dataArray = @[JCIMAGE(@"course_min_3")];
+        }
+        view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        view.JCBlock = ^{
+            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JCAppGuide_guess"];
+        };
+        [self.jcWindow addSubview:view];
+    }
+
+}
 
 
 #pragma mark 点击事件

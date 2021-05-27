@@ -176,7 +176,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
     }
  
     if ([scrollView isKindOfClass:[WMMagicScrollView class]]) {
-        if (scrollView.contentOffset.y>AUTO(50)) {
+        if (scrollView.contentOffset.y>kNavigationBarHeight) {
             self.autherHeadView.bgView.hidden = YES;
 //            self.title = self.expertDetailModel.user_name;
         }else {

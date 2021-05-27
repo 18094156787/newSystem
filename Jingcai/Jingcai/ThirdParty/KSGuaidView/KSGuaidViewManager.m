@@ -66,7 +66,7 @@ static dispatch_once_t _onceToken;
             
             save_current_version();
             [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:JCAppGuide];
-            [[NSNotificationCenter defaultCenter] postNotificationName:JCAppGuide object:nil];
+            
             [weakSelf end];
         };
         

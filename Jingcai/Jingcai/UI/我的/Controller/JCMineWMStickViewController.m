@@ -14,6 +14,8 @@
 #import "JCPostCheckRuleVC.h"
 #import "JCBaseTitleAlertView.h"
 #import "IAPManager.h"
+#import "JCActivityGuessVC.h"
+#import "JCAppGuideView.h"
 static CGFloat const kWMMenuViewHeight = 0;
 @interface JCMineWMStickViewController ()
 
@@ -59,12 +61,6 @@ static CGFloat const kWMMenuViewHeight = 0;
 
 - (instancetype)init {
     if (self = [super init]) {
-//        if (IPHONE_X) {
-//            self.headerViewHeigh = AUTO(280);
-//        }else{
-//             self.headerViewHeigh = AUTO(280);
-//        }
-        
         self.headerViewHeigh = kNavigationBarHeight+AUTO(205);
 
         self.menuViewStyle = WMMenuViewStyleLine;
@@ -76,12 +72,6 @@ static CGFloat const kWMMenuViewHeight = 0;
         self.titleSizeSelected = 17;
         self.progressHeight = 2;
         self.viewTop = self.headerViewHeigh;
-//        self.maximumHeaderViewHeight = 30+NavigationStatusBarHeight-kBottomTabSafeAreaHeight;
-//        if (IPHONE_X) {
-//             self.maximumHeaderViewHeight =   AUTO(240);
-//         }else{
-//             self.maximumHeaderViewHeight =   AUTO(220)-StatusBar_HEIGHT;
-//         }
         self.maximumHeaderViewHeight = AUTO(205);
         self.minimumHeaderViewHeight = AUTO(205);
 //        self.itemsMargins =
@@ -99,7 +89,8 @@ static CGFloat const kWMMenuViewHeight = 0;
     self.topHeadView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.headerViewHeigh);
     [self.view addSubview:self.topHeadView];
     [self initView];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserData) name:NotificationNameUserChange object:nil];
+    [self showGuideView];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearUser) name:NotificationUserLogout object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresgUserInfo) name:UserRechargeSuccess object:nil];
     
@@ -136,27 +127,24 @@ static CGFloat const kWMMenuViewHeight = 0;
             [JCWUserBall save:userBall];
             self.topHeadView.userBall = userBall;
 
-//            if ([userBall.fabu intValue]==1) {
-//                if (SCREEN_HEIGHT==667) {
-//                    self.minimumHeaderViewHeight = AUTO(240)-kNavigationBarHeight-AUTO(50);
-//                }else{
-//                    self.minimumHeaderViewHeight = AUTO(240)-kNavigationBarHeight-AUTO(35);
-//                }
-//
-//            }
             [self.mineVC refreshUserData];
-//            [self.navigationController popViewControllerAnimated:YES];
+            [self showJingCaiActivityResultView];//活动弹窗展示
+
             NSLog(@"user_id == %@",[JCWUserBall currentUser].user_id);
             NSLog(@"user_token == %@",[JCWUserBall currentUser].token);
-            return ;
+
+        }else {
+            [JCWToastTool showHint:object[@"msg"]];
         }
-        [JCWToastTool showHint:object[@"msg"]];
+        
     } failure:^(NSError * _Nonnull error) {
         [self.jcWindow endLoading];
         [JCWToastTool showHint:@"获取用户信息失败"];
     }];
 
 }
+
+
 
 
 
@@ -307,6 +295,44 @@ static CGFloat const kWMMenuViewHeight = 0;
     }
 
 
+
+}
+
+
+- (void)showGuideView {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"JCAppGuide_mine"]) {
+        JCAppGuideView *view = [JCAppGuideView new];
+        
+        if (SCREEN_HEIGHT>667){
+            view.dataArray = @[JCIMAGE(@"course_4")];
+        }else{
+            view.dataArray = @[JCIMAGE(@"course_min_4")];
+        }
+        view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        view.JCBlock = ^{
+            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JCAppGuide_mine"];
+        };
+        [self.jcWindow addSubview:view];
+    }
+
+}
+//竞猜活动开奖提示弹窗
+- (void)showJingCaiActivityResultView {
+
+    if ([JCWUserBall currentUser].guess_activity_text.length>0&&[JCWUserBall currentUser].guess_activity_id.length>0) {
+        JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
+        alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(16)];
+        [alertView alertTitle:@"" TitleColor:COLOR_2F2F2F Mesasge:[JCWUserBall currentUser].guess_activity_text MessageColor:COLOR_666666 SureTitle:@"前往查看" SureColor:JCWhiteColor SureHandler:^{        JCActivityGuessVC *vc = [JCActivityGuessVC new];
+            vc.actID = [JCWUserBall currentUser].guess_activity_id;
+            [self.navigationController pushViewController:vc animated:YES];
+            [alertView removeFromSuperview];
+        } CancleTitle:@"我知道了" CancleColor:JCBaseColor CancelHandler:^{
+           [alertView removeFromSuperview];
+        }];
+        alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+
+    }
 
 }
 

@@ -170,4 +170,18 @@
         failureBlock(error);
     }];
 }
+
+//充值界面奖励信息
+- (void)getRechargeBannerInfoWithsuccess:(successBlock)successBlock failure:(failureBlock)failureBlock {
+    NSDictionary *param = @{};
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"recharge_reward_information" paramDic:param ignoreArray:@[]];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self deathWithSuccessInfo:responseObject];
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+        [self dealWithError:error];
+    }];
+}
 @end

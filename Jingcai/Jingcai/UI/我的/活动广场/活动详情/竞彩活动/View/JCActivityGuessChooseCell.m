@@ -122,14 +122,21 @@
     if (self.selCount>[self.detailModel.option integerValue]) {
         return;
     }
-    if (self.selCount==[self.detailModel.option integerValue]&&[model.local_choice integerValue]==0) {
+    if (self.selCount==[self.detailModel.option integerValue]&&[model.local_choice integerValue]==0&&[self.detailModel.option integerValue]>1) {
         [JCWToastTool showHint:[NSString stringWithFormat:@"最多只可选择%@个！",self.detailModel.option]];
         return;
     }
     
+    if ([self.detailModel.option integerValue]==1) {
+        for (JCActivityOptionModel *aModel in self.dataSource) {
+            aModel.local_choice = @"0";
+        }
+        model.local_choice = @"1";
+    }else {
+        model.local_choice =  [model.local_choice integerValue]==1?@"0":@"1";
+    }
     
     
-    model.local_choice =  [model.local_choice integerValue]==1?@"0":@"1";
     [self.collectionView reloadData];
     
     self.selCount = 0;

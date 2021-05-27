@@ -11,10 +11,12 @@
 #import "JCActivityPrizeCell.h"
 #import "JCActivityRuleCell.h"
 #import "JCActivityPrizeShowView.h"
-
 #import "JCActivitytTimeCell.h"
 #import "JCActivityGuessChooseCell.h"
 #import "JCShareView.h"
+#import "JCActivityGuessCompleteVC.h"
+#import "JCActivityGuessFailureTipView.h"
+#import "JCActivityGuessSuccessTipView.h"
 @interface JCActivityGuessVC ()
 
 @property (nonatomic,strong) JCActivityHeadView *headView;
@@ -68,10 +70,6 @@
         [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
             self.detailModel = (JCActivityDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCActivityDetailModel class]];
-//            float rate = [self.detailModel.top_image_url_width floatValue]/SCREEN_WIDTH;
-//            float height = [self.detailModel.top_image_url_height floatValue];
-//            height = height/rate;
-//            self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, height+35);
             self.headView.detailModel = self.detailModel;
             self.title = self.detailModel.title;
             self.tableView.backgroundColor = [UIColor colorWithHexString:NonNil(self.detailModel.background_color)];
@@ -107,6 +105,36 @@
                 }
             }
             self.headView.dataSource = dataArray;
+            
+            if ([self.detailModel.is_guessing_reminder integerValue]==1) {
+                if (self.detailModel.is_guess==1) {
+                    //猜中
+                    JCActivityGuessSuccessTipView *guess_failureView = [JCActivityGuessSuccessTipView new];
+                    guess_failureView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                    guess_failureView.dataSource = self.detailModel.goods_info;
+                    WeakSelf;
+                    guess_failureView.JCClickBlock = ^{
+                        weakSelf.prizeView.detailModel = weakSelf.detailModel;
+                        weakSelf.prizeView.dataArray = weakSelf.detailModel.goods_info;
+                        [weakSelf.jcWindow addSubview:weakSelf.prizeView];
+                    };
+                    
+                    [self.jcWindow addSubview:guess_failureView];
+                }
+                if (self.detailModel.is_guess==2) {
+                    //没猜中
+                    JCActivityGuessFailureTipView *guess_failureView = [JCActivityGuessFailureTipView new];
+                    guess_failureView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                    [self.jcWindow addSubview:guess_failureView];
+                }
+            }
+            
+
+            
+
+            
+            
+            
         }else{
             [JCWToastTool showHint:object[@"msg"]];
         }
@@ -296,6 +324,10 @@
 }
 
 - (void)sureBtnClick {
+
+ 
+    
+    
     if (![JCWUserBall currentUser]) {
         [self presentLogin];
         return;
@@ -312,7 +344,42 @@
         [JCWToastTool showHint:@"您还未选择任何选项，请选择后再提交！"];
         return;
     }
+    if (dataArray.count<[self.detailModel.option integerValue]) {
+        JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
+        alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(16)];
+        WeakSelf;
+        [alertView alertTitle:@"" TitleColor:COLOR_2F2F2F Mesasge:@"" MessageColor:COLOR_666666 SureTitle:@"确认提交" SureColor:JCWhiteColor SureHandler:^{
+            [alertView removeFromSuperview];
+            [weakSelf finalSubmitWithDataArray:dataArray];
+        } CancleTitle:@"取消" CancleColor:JCBaseColor CancelHandler:^{
+           [alertView removeFromSuperview];
+        }];
+        NSString *title = [NSString stringWithFormat:@"当前可提交%@个选项，您只选择了%ld个，是否确认提交？",self.detailModel.option,dataArray.count];
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+        NSRange count_range = [title rangeOfString:self.detailModel.option];
+        if (count_range.location!=NSNotFound) {
+            [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:count_range];
+        }
+        NSRange sel_range = [title rangeOfString:[NSString stringWithFormat:@"%ld",dataArray.count]];
+        if (sel_range.location!=NSNotFound) {
+            [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:sel_range];
+        }
+        alertView.contentLab.attributedText = attr;
+        alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+        return;
+    }
+    
+    
+    [self finalSubmitWithDataArray:dataArray];
+    
 
+
+
+ 
+}
+
+- (void)finalSubmitWithDataArray:(NSArray *)dataArray {
     NSString *options = @"";
     for (int i=0; i<dataArray.count; i++) {
         JCActivityOptionModel *model = dataArray[i];
@@ -328,16 +395,17 @@
     [service getSubmitJingCaiUserWithActID:self.detailModel.id options:options success:^(id  _Nullable object) {
         [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
+            JCActivityGuessCompleteVC *vc = [JCActivityGuessCompleteVC new];
+            vc.actID = self.actID;
+            [self.navigationController pushViewController:vc animated:YES];
             [self refreshData];
-            [JCWToastTool showHint:@"提交成功"];
+//            [JCWToastTool showHint:@"提交成功"];
         }else{
             [JCWToastTool showHint:object[@"msg"]];
         }
     } failure:^(NSError * _Nonnull error) {
         [self.view endLoading];
     }];
-
- 
 }
 
 - (void)shareItemClick {

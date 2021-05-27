@@ -85,11 +85,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *recharge_information;//文本
 
+@property (nonatomic,strong) NSString *is_guessing_reminder;//竞猜类型弹窗,1弹2不弹,只弹一次
+
+@property (nonatomic,strong) NSString *is_popover;//充值类型弹窗,1弹2不弹
+
+@property (nonatomic,strong) NSString *recharge_amount;//充值活动的金额
+
 @property (strong, nonatomic) JCShareModel *wechat_share;
 
 @property (strong, nonatomic)  NSArray <JCActivityGoodsModel *> *goods_info;
 
 @property (strong, nonatomic)  NSArray <JCActivityOptionModel *> *activity_option;//竞猜活动选项
+
+@property (strong, nonatomic)  NSArray <JCActivityGoodsModel *> *goods_popover_info;//充值活动奖品弹窗
 
 
 @end

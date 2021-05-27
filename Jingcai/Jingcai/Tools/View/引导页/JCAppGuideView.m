@@ -15,21 +15,33 @@
     cycleScrollView.delegate = self;
     cycleScrollView.backgroundColor = JCWhiteColor;
 //    cycleScrollView.currentPageDotColor = JCBaseColor;
-    cycleScrollView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
+    cycleScrollView.bannerImageViewContentMode = UIViewContentModeScaleToFill;
     cycleScrollView.clipsToBounds = YES;
     cycleScrollView.autoScroll = NO;
-    cycleScrollView.localizationImageNamesGroup = @[JCIMAGE(@"guid01"),JCIMAGE(@"guid02"),JCIMAGE(@"guid03"),JCIMAGE(@"guid04")];
+    cycleScrollView.showPageControl = NO;
+    
     [self addSubview:cycleScrollView];
     self.cycleScrollView = cycleScrollView;
     [cycleScrollView disableScrollGesture];
 }
 
+- (void)setDataArray:(NSArray *)dataArray {
+    _dataArray = dataArray;
+    self.cycleScrollView.localizationImageNamesGroup = dataArray;
+}
+
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
-    if (index==3) {
-        [self removeFromSuperview];
-    }else{
-        [self.cycleScrollView makeScrollViewScrollToIndex:index+1];
+    if (self.dataArray.count>0) {
+        if (index==self.dataArray.count-1) {
+            [self removeFromSuperview];
+            if (self.JCBlock) {
+                self.JCBlock();
+            }
+        }else{
+            [self.cycleScrollView makeScrollViewScrollToIndex:index+1];
+        }
     }
+
 }
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index {
 //    [self.cycleScrollView makeScrollViewScrollToIndex:index];

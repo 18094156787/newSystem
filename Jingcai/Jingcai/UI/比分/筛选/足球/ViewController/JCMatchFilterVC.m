@@ -48,8 +48,9 @@
     self.emptyView.imageStr = @"nodata";
     self.emptyView.titleStr = @"当前暂无符合条件赛事！";
     self.emptyView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    [self.view addSubview:self.emptyView];
     self.emptyView.hidden = YES;
+    [self.view addSubview:self.emptyView];
+    
 
 
 }
@@ -188,6 +189,16 @@
 
     [self selectAllWithStatus:YES];//默认全选中
     [self.tableView reloadData];
+    if (!self.emptyView) {
+        self.emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
+    //        [self refreshData];
+        }];
+        self.emptyView.imageStr = @"nodata";
+        self.emptyView.titleStr = @"当前暂无符合条件赛事！";
+        self.emptyView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        self.emptyView.hidden = YES;
+        [self.view addSubview:self.emptyView];
+    }
     self.emptyView.hidden = self.dataSource.count==0?NO:YES;
 }
 

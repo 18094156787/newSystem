@@ -90,7 +90,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString  *can_change_introduction;//是否可以修改简介 1是 2审核中 3本月已修改 4禁止修改
 
+@property (strong, nonatomic) NSString  *guess_activity_id;//竞猜活动弹窗id
 
+@property (strong, nonatomic) NSString  *guess_activity_text;//竞猜活动弹窗文本
 
 
 

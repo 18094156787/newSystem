@@ -144,6 +144,9 @@
     }
     return YES;
 }
+
+
+
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
@@ -342,19 +345,19 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
 
 - (void)appGuide {
-    KSGuaidManager.images = @[[UIImage imageNamed:@"guid01"],
-                              [UIImage imageNamed:@"guid02"],
-                              [UIImage imageNamed:@"guid03"],
-                              [UIImage imageNamed:@"guid04"]];
+    KSGuaidManager.images = @[[UIImage imageNamed:@"guide_1"],
+                              [UIImage imageNamed:@"guide_2"],
+                              [UIImage imageNamed:@"guide_3"],
+                              [UIImage imageNamed:@"guide_4"]];
     
     
 //     方式一:
      
      CGSize size = [UIScreen mainScreen].bounds.size;
      
-     KSGuaidManager.dismissButtonImage = [UIImage imageNamed:@"hidden"];
+     KSGuaidManager.dismissButtonImage = [UIImage imageNamed:@"rightNow"];
      
-     KSGuaidManager.dismissButtonCenter = CGPointMake(size.width / 2, size.height - 80);
+     KSGuaidManager.dismissButtonCenter = CGPointMake(size.width / 2, size.height - 160);
      
     
     //方式二:

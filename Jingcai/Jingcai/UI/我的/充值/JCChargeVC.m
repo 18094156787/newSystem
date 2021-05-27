@@ -30,6 +30,7 @@
 //#import "JCPayManager.h"
 #import "JCDakaBuyPayWayTopView.h"
 #import "IAPManager.h"
+#import "JCRechareHeadView.h"
 static NSString * const productId001 = @"com.zhisheng.zq.price.001";
 static NSString * const productId002 = @"com.zhisheng.zq.price.002";
 static NSString * const productId003 = @"com.zhisheng.zq.price.003";
@@ -54,6 +55,7 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 @property (strong, nonatomic) NSString *user_name;
 @property (strong, nonatomic) UIButton *rechargeBtn;
 @property (weak, nonatomic) IBOutlet UILabel *infoLab;
+@property (strong, nonatomic) JCRechareHeadView *headView;
 
 @end
 
@@ -67,7 +69,12 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 
 }
 
-
+- (void)back:(UIButton *)sender {
+    if (self.JCRefreshBlock) {
+        self.JCRefreshBlock();
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -75,6 +82,7 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 
     
     [self getChargeList];
+    [self getBanner];
     [IAPManager shared].delegate = self;
     WeakSelf;
     [IAPManager shared].JNSuccessBlock = ^{
@@ -86,9 +94,6 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
     [[IAPManager shared] checkMyBuyGoods];//重新进入该页面,重新检查是否有未完成的订单
 
 
-//    [[IAPManager shared] startManager];
-//
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCaiyun) name:UserRechargeSuccess object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -98,6 +103,10 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 }
 
 - (void)initSubViews {
+//    self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 136);
+//    self.tableView.tableHeaderView = self.headView;
+    self.tableHeightConstraint.constant = JCChargeAccountH + JCChargeInputH + JCChargeWayH*self.chargeWayArray.count + JCChargeHeaderH+AUTO(16);
+    
     self.rechargeBgView.backgroundColor = JCWhiteColor;
 
     [self.rechargeBgView addSubview:self.rechargeBtn];
@@ -112,7 +121,7 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
     [self.tableView registerNib:[UINib nibWithNibName:@"JCChargeAreaCell" bundle:nil] forCellReuseIdentifier:@"JCChargeAreaCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"JCChargeWayCell" bundle:nil] forCellReuseIdentifier:@"JCChargeWayCell"];
     
-    self.tableHeightConstraint.constant = JCChargeAccountH + JCChargeInputH + JCChargeWayH*self.chargeWayArray.count + JCChargeHeaderH+AUTO(16);
+
     
     //self.agreeLabel.textAlignment = NSTextAlignmentCenter;
     self.agreeLabel.delegate = self;
@@ -161,7 +170,26 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
     }];
 }
 
+- (void)getBanner {
 
+    JCActivityService *service = [JCActivityService service];
+    [service getRechargeBannerInfoWithsuccess:^(id  _Nullable object) {
+        if ([JCWJsonTool isSuccessResponse:object]) {
+           NSArray *array = [NSArray yy_modelArrayWithClass:[JCWSlideBall class] json:object[@"data"][@"banner_info"]];
+//            if (array.count) {
+//                <#statements#>
+//            }
+//
+//                self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 500)];
+       }else{
+           [JCWToastTool showHint:object[@"msg"]];
+       }
+
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+
+}
 
 #pragma mark -
 - (void)kefuBtnClick {
@@ -390,4 +418,12 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
     }
     return _rechargeBtn;
 }
+
+- (JCRechareHeadView *)headView {
+    if (!_headView) {
+        _headView = [JCRechareHeadView new];
+    }
+    return _headView;
+}
+
 @end

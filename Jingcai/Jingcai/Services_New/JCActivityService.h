@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 //提交竞猜
 //options 选项 列入 1,2,3  id  活动ID
 - (void)getSubmitJingCaiUserWithActID:(NSString *)ID options:(NSString *)options success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//充值界面奖励信息
+- (void)getRechargeBannerInfoWithsuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END

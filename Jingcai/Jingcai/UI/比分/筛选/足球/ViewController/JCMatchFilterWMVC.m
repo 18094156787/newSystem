@@ -32,7 +32,7 @@
 
 @property (nonatomic,strong) NSString *lastTime;
 
-
+@property (nonatomic,assign) BOOL isLoad;
 
 @end
 
@@ -63,11 +63,6 @@
 - (void)setTime:(NSString *)time {
     _time = time;
 
-    
-//    self.hotVC.time = self.time;
-//    if (![self.lastTime isEqualToString:time]&&) {
-//        [self getDataList];
-//    }
     [self getDataList];
     self.lastTime = time;
     
@@ -89,11 +84,15 @@
 }
 
 - (void)getDataList {
-    [self resetData];
+    if (self.isLoad) {
+        [self resetData];
+    }
+    
     
     [self.view showLoading];
     JCMatchService_New *service = [JCMatchService_New new];
     [service getMatchEventListWithTime:self.time type:self.type Success:^(id  _Nullable object) {
+        self.isLoad = YES;
         [self.view endLoading];
     if ([JCWJsonTool isSuccessResponse:object]) {
        NSArray *hotArray = [JCWJsonTool arrayWithJson:object[@"data"][@"hot_match"] class:[JCMatchFilterModel class]];//热门数据

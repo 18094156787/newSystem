@@ -30,6 +30,8 @@
 
 @property (nonatomic,strong) NSString *lastTime;
 
+@property (nonatomic,assign) BOOL isLoad;
+
 @end
 
 @implementation JCBasketBalMatchFilterWMVC
@@ -88,12 +90,16 @@
 }
 
 - (void)getDataList {
-    [self resetData];
+    if (self.isLoad) {
+        [self resetData];
+    }
+    
     
     [self.view showLoading];
     JCBasketBallMatchService_New *service = [JCBasketBallMatchService_New new];
     [service getMatchEventListWithTime:self.time type:self.type Success:^(id  _Nullable object) {
             [self.view endLoading];
+        self.isLoad = YES;
         if ([JCWJsonTool isSuccessResponse:object]) {
            NSArray *hotArray = [JCWJsonTool arrayWithJson:object[@"data"][@"hot_match"] class:[JCMatchFilterModel class]];//热门数据
             if (!hotArray||hotArray.count==0) {

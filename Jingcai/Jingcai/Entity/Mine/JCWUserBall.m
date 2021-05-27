@@ -77,7 +77,9 @@
         self.can_change_nickname = [aDecoder decodeObjectForKey:@"can_change_nickname"];
         self.can_change_avatar = [aDecoder decodeObjectForKey:@"can_change_avatar"];
         self.can_change_introduction = [aDecoder decodeObjectForKey:@"can_change_introduction"];
-
+        self.guess_activity_id = [aDecoder decodeObjectForKey:@"guess_activity_id"];
+        self.guess_activity_text = [aDecoder decodeObjectForKey:@"guess_activity_text"];
+        
         
 
     }
@@ -119,7 +121,8 @@
     [aCoder encodeObject:self.can_change_nickname forKey:@"can_change_nickname"];
     [aCoder encodeObject:self.can_change_avatar forKey:@"can_change_avatar"];
     [aCoder encodeObject:self.can_change_introduction forKey:@"can_change_introduction"];
-
+    [aCoder encodeObject:self.guess_activity_id forKey:@"guess_activity_id"];
+    [aCoder encodeObject:self.guess_activity_text forKey:@"guess_activity_text"];
 }
 
 #pragma mark - 扩展

@@ -493,6 +493,7 @@ static CGFloat const kWMMenuViewHeight = 44;
     NSLog(@"%.2f",percent);
 }
 
+
 - (JCCommunityWMHeadView *)topHeadView {
     if (!_topHeadView) {
         _topHeadView = [JCCommunityWMHeadView new];

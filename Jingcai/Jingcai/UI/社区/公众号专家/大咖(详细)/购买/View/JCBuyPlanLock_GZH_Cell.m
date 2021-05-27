@@ -83,10 +83,12 @@
     UILabel *tipLab = [UILabel initWithTitle:@"" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     tipLab.numberOfLines = 0;
     [self.topBgView addSubview:tipLab];
+    
     [tipLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView);
         make.top.equalTo(self.endTimeLab.mas_bottom).offset(AUTO(10));
     }];
+    
     
     [self.topBgView addSubview:self.infoLab];
     [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,11 +98,7 @@
         make.bottom.offset(AUTO(0));
     }];
     
-    NSString *tipStr = @"*本文章为比赛分析，仅作参考使用，请理性购买\n非购彩、非合买、非跟单！";
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:tipStr];
-    NSRange range = [tipStr rangeOfString:@"非购彩、非合买、非跟单！"];
-    [attr addAttributes:@{NSForegroundColorAttributeName: JCBaseColor} range:range];
-    tipLab.attributedText = attr;
+
 
 
 }
@@ -310,7 +308,7 @@
 
 - (UILabel *)infoLab {
     if(!_infoLab){
-        _infoLab = [UILabel initWithTitle:@"" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
+        _infoLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
         _infoLab.numberOfLines = 0;
     }
     return _infoLab;

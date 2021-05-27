@@ -14,6 +14,7 @@ typedef void(^JCChargePayClickBlock)(NSInteger prize);
 NS_ASSUME_NONNULL_BEGIN
 @interface JCChargeVC : JCBaseViewController
 @property (nonatomic, copy) JCChargePayClickBlock payClickBlock;
+@property (nonatomic, copy) void(^JCRefreshBlock)(void);
 - (void)getChargeList;
 @end
 NS_ASSUME_NONNULL_END

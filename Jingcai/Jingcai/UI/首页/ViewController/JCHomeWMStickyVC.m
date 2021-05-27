@@ -156,16 +156,14 @@ static CGFloat const kWMMenuViewHeight = 44;
     [self getHomeTab];
     [self getHomeTopCycle];//首页轮播数据
     [self getHomeData];
-    [self getCommomData];//,包含拉新,节日红包
+    
+    [self showGuideView];
   
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCommomData) name:NotificationUserLogin object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCommomData) name:UserRegisterSuccess object:nil];//新用户注册成功,获取新人红包
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(topViewClickEnable) name:@"WMPageControllerScrollowStop" object:nil];
 
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGuideView) name:JCAppGuide object:nil];
-
-    
+    NSLog(@"屏幕宽%.0f--%.0f",SCREEN_WIDTH,SCREEN_HEIGHT);
     
 }
 
@@ -289,13 +287,28 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    [self.view bringSubviewToFront:self.activityImgView];
+//    [self.view bringSubviewToFront:self.activityImgView];
 }
 
 - (void)showGuideView {
-    JCAppGuideView *view = [JCAppGuideView new];
-    view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    [self.jcWindow addSubview:view];
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:JCAppGuide]) {
+        JCAppGuideView *view = [JCAppGuideView new];
+        if (SCREEN_HEIGHT>667) {
+            view.dataArray = @[JCIMAGE(@"course_1"),JCIMAGE(@"course_2")];
+        }else {
+            view.dataArray = @[JCIMAGE(@"course_min_1"),JCIMAGE(@"course_min_2")];
+        }
+        
+        view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        WeakSelf;
+        view.JCBlock = ^{
+            [weakSelf getCommomData];//,包含拉新,节日红包
+        };
+        [self.jcWindow addSubview:view];
+    }else{
+        [[NSUserDefaults standardUserDefaults] objectForKey:JCAppGuide];
+    }
+
 }
 
 - (void)btnClicked:(id)sender {
