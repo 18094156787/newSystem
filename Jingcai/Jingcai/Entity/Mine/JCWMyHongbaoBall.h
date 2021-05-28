@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString *name;
 
-
+@property (assign, nonatomic) BOOL is_select;
 
 @end
 

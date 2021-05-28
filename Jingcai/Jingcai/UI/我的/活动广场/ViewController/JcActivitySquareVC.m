@@ -11,7 +11,7 @@
 #import "JcActivityHistoryVC.h"
 #import "JCActivityDetailCommomVC.h"
 #import "JCActivityGuessVC.h"
-
+#import "JCActivityKindVC.h"
 @interface JcActivitySquareVC ()
 
 @end
@@ -181,9 +181,21 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     if ([model.type integerValue]==4) {
+//        JCActivityKindVC *vc = [JCActivityKindVC new];
+//        vc.actID = model.id;
+//        [self.navigationController pushViewController:vc animated:YES];
+//        return;
+        
         JCActivityGuessVC *vc = [JCActivityGuessVC new];
         vc.actID = model.id;
         [self.navigationController pushViewController:vc animated:YES];
+    }
+    if ([model.type integerValue]==5) {
+        
+        JCActivityKindVC *vc = [JCActivityKindVC new];
+        vc.actID = model.id;
+        [self.navigationController pushViewController:vc animated:YES];
+
     }
 
 }

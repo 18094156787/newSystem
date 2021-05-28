@@ -19,7 +19,7 @@
         make.size.mas_equalTo(CGSizeMake(AUTO(315), AUTO(393)));
     }];
     
-    UILabel *titleLab = [UILabel initWithTitle:@"恭喜您达成活动条件" andFont:AUTO(20) andWeight:2 andTextColor:JCWhiteColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+    UILabel *titleLab = [UILabel initWithTitle:@"恭喜您获得活动奖励" andFont:AUTO(20) andWeight:2 andTextColor:JCWhiteColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     [self.bgView addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(AUTO(185));
@@ -131,7 +131,7 @@
     }else{
         self.typeLab.text = @"我的首充";
     }
-    self.moneyLab.text = detailModel.recharge_amount;
+    self.moneyLab.text = [NSString stringWithFormat:@"%@元",detailModel.recharge_amount];
 
 }
 

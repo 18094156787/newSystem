@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString *square_image;//活动广场图ID
 
-@property (strong, nonatomic) NSString *type;//活动类型 1跳转已有的活动 2福利活动 3充值活动 4竞猜活动
+@property (strong, nonatomic) NSString *type;//活动类型 1跳转已有的活动 2福利活动 3充值活动 4竞猜活动 5.慈善活动
 
 @property (strong, nonatomic) NSString *img_url;//图片地址
 

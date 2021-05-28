@@ -313,6 +313,8 @@
 		7B5D03E2265F7D2800C65F51 /* course_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5D03DC265F7D2700C65F51 /* course_2@3x.png */; };
 		7B5D03E3265F7D2800C65F51 /* course_min_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5D03DD265F7D2800C65F51 /* course_min_2@2x.png */; };
 		7B5D03E4265F7D2800C65F51 /* course_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5D03DE265F7D2800C65F51 /* course_2@2x.png */; };
+		7B5D04712660BC0E00C65F51 /* JCActivityKindVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5D04702660BC0E00C65F51 /* JCActivityKindVC.m */; };
+		7B5D047D2660C8A100C65F51 /* JCActivityKindCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5D047C2660C8A100C65F51 /* JCActivityKindCell.m */; };
 		7B5E1BF8254A92810029747D /* JCCommunity_HBVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E1BF7254A92810029747D /* JCCommunity_HBVC.m */; };
 		7B5E1BFB254A92960029747D /* JCCommunity_HB_HeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E1BFA254A92960029747D /* JCCommunity_HB_HeadView.m */; };
 		7B5E1BFE254A943F0029747D /* JCCommunity_HB_Item_HeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5E1BFD254A943F0029747D /* JCCommunity_HB_Item_HeadView.m */; };
@@ -1823,6 +1825,10 @@
 		7B5D03DC265F7D2700C65F51 /* course_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "course_2@3x.png"; sourceTree = "<group>"; };
 		7B5D03DD265F7D2800C65F51 /* course_min_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "course_min_2@2x.png"; sourceTree = "<group>"; };
 		7B5D03DE265F7D2800C65F51 /* course_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "course_2@2x.png"; sourceTree = "<group>"; };
+		7B5D046F2660BC0E00C65F51 /* JCActivityKindVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityKindVC.h; sourceTree = "<group>"; };
+		7B5D04702660BC0E00C65F51 /* JCActivityKindVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityKindVC.m; sourceTree = "<group>"; };
+		7B5D047B2660C8A100C65F51 /* JCActivityKindCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityKindCell.h; sourceTree = "<group>"; };
+		7B5D047C2660C8A100C65F51 /* JCActivityKindCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityKindCell.m; sourceTree = "<group>"; };
 		7B5E1BF6254A92810029747D /* JCCommunity_HBVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCCommunity_HBVC.h; sourceTree = "<group>"; };
 		7B5E1BF7254A92810029747D /* JCCommunity_HBVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCCommunity_HBVC.m; sourceTree = "<group>"; };
 		7B5E1BF9254A92960029747D /* JCCommunity_HB_HeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCCommunity_HB_HeadView.h; sourceTree = "<group>"; };
@@ -5024,6 +5030,33 @@
 			path = "引导页";
 			sourceTree = "<group>";
 		};
+		7B5D046E2660BBC800C65F51 /* 慈善活动 */ = {
+			isa = PBXGroup;
+			children = (
+				7B5D04742660C37900C65F51 /* Controller */,
+				7B5D04732660C37000C65F51 /* View */,
+			);
+			path = "慈善活动";
+			sourceTree = "<group>";
+		};
+		7B5D04732660C37000C65F51 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7B5D047B2660C8A100C65F51 /* JCActivityKindCell.h */,
+				7B5D047C2660C8A100C65F51 /* JCActivityKindCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7B5D04742660C37900C65F51 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7B5D046F2660BC0E00C65F51 /* JCActivityKindVC.h */,
+				7B5D04702660BC0E00C65F51 /* JCActivityKindVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		7B5E25FD247F66F5008CAEE4 /* 全民预测 */ = {
 			isa = PBXGroup;
 			children = (
@@ -5828,6 +5861,7 @@
 				7B6DE9B2262E716C00B673B8 /* Model */,
 				7BB8398C260B327D00F68800 /* 竞彩活动 */,
 				7B6AE49D2609E79300152781 /* 通用活动 */,
+				7B5D046E2660BBC800C65F51 /* 慈善活动 */,
 			);
 			path = "活动详情";
 			sourceTree = "<group>";
@@ -10063,6 +10097,7 @@
 				C30C8E36224C6373001ECA18 /* JCChargeItemCell.m in Sources */,
 				C3B8CA3822602955001E04DF /* JCTestVC.m in Sources */,
 				7B99E69C2316644C00AA5AB6 /* JNMatchDrawItemView.m in Sources */,
+				7B5D047D2660C8A100C65F51 /* JCActivityKindCell.m in Sources */,
 				7B61BEFA24ED4DEF0068F148 /* YBIBSentinel.m in Sources */,
 				C388C86F216DA11D001649FA /* JCBaseCollectionViewCell.m in Sources */,
 				7B80CA7724BE9B1300C14117 /* JNMatchZS_BD_SPF_TableViewCell.m in Sources */,
@@ -10272,6 +10307,7 @@
 				7B8AE30225A460A900B805EA /* JJStockScrollView.m in Sources */,
 				C35F8FCE218F4E3100C6CBE7 /* JCWConvertTool.m in Sources */,
 				7BB585BF260046FE0060AD04 /* JCSpecialAttentionVC.m in Sources */,
+				7B5D04712660BC0E00C65F51 /* JCActivityKindVC.m in Sources */,
 				7B2DAD2C24810A4E000E2282 /* JCHomeSearchVC.m in Sources */,
 				7B80CA6424BD9AB800C14117 /* JCTeamMatchTongjiModel.m in Sources */,
 				7B99E6972316644C00AA5AB6 /* JNMatchDetailQBVC.m in Sources */,

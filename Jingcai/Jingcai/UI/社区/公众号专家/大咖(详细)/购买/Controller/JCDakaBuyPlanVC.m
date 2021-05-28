@@ -499,16 +499,25 @@
                 hbModel.total = 0;
                 [hongbao_Array insertObject:hbModel atIndex:0];
                 self.hongbaoArray = [NSArray arrayWithArray:hongbao_Array];
+                
+                
+                if (object[@"data"][@"recommend"]) {
+                    self.useHbModel = (JCWMyHongbaoBall *)[JCWJsonTool entityWithJson:object[@"data"][@"recommend"] class:[JCWMyHongbaoBall class]];
+                    [self caculatePrice];
+                    for (JCWMyHongbaoBall *hmModel in self.hongbaoArray) {
+                        if ([self.useHbModel.id integerValue]==[hmModel.id integerValue]) {
+                            hmModel.is_select = YES;
+                            break;
+                        }
+                    }
+                }
                 self.hbPickerView.dataArray = self.hongbaoArray;
             }
             NSString *highest =  object[@"data"][@"highest"];
             if ([highest integerValue]>0) {
                 self.highest = [NSString stringWithFormat:@"%@",@([highest integerValue]/100.f)];
             }
-            if (object[@"data"][@"recommend"]) {
-                self.useHbModel = (JCWMyHongbaoBall *)[JCWJsonTool entityWithJson:object[@"data"][@"recommend"] class:[JCWMyHongbaoBall class]];
-                [self caculatePrice];
-            }
+
             [self.tableView reloadData];
 
         }else{

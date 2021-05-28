@@ -261,7 +261,7 @@
 
 
 - (NSArray<NSString *> *)titles {
-    return @[@"重要",@"全部",@"竞篮"];
+    return @[@"热门",@"全部",@"竞篮"];
 }
 
 - (void)configSelectStatus {

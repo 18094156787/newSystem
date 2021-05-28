@@ -29,8 +29,6 @@
 
 @property (nonatomic,strong) JCMathEnterGaolTipView *goalTipView;
 
-@property (nonatomic,strong) NSMutableArray *activtyArray;
-
 @property (nonatomic,strong) UIView *lineView;
 
 @end

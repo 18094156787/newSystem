@@ -52,7 +52,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.eventArray = @"";
-    self.screening = @"3";
+    self.screening = @"1";
     self.view.backgroundColor = COLOR_F0F0F0;
     [self initViews];
     [self getTimeList];
@@ -494,6 +494,7 @@
 - (JCMatchFilterSegmentView *)filterView {
     if (!_filterView) {
         _filterView = [JCMatchFilterSegmentView new];
+        [_filterView showImportmant];
     }
     return _filterView;
 }
@@ -501,6 +502,7 @@
 - (JCMatchFilterSegmentCurrentView *)currentFilterView {
     if (!_currentFilterView) {
         _currentFilterView = [JCMatchFilterSegmentCurrentView new];
+        _currentFilterView.index = 1;
         _currentFilterView.hidden = YES;
     }
     return _currentFilterView;

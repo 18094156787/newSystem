@@ -48,6 +48,7 @@
 //        self.titleLab.text  = title;
         self.titleLab.text  = [NSString stringWithFormat:@"%@元红包券(%@)",title,model.end_time];
     }
+    self.backgroundColor = model.is_select?COLOR_F0F0F0:JCClearColor;
 }
 
 - (UILabel *)titleLab {

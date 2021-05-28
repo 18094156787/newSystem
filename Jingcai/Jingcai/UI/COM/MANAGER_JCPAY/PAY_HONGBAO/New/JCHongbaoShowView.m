@@ -92,6 +92,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     JCHongbaoShowCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCHongbaoShowCell"];
+    
     cell.model = self.dataArray[indexPath.row];
     
     return cell;
@@ -122,33 +123,46 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.section==0) {
-//        [self hide];
-//        if (self.JCNoUserHongbao) {
-//            self.JCNoUserHongbao();
-//            [self hide];
-//        }
-//    }else{
-//        JCWMyHongbaoBall *model = self.dataArray[indexPath.row];
-//
-//        if (self.hbPickerSelBlock) {
-//            self.hbPickerSelBlock(model);
-//            [self hide];
-//        }
-//    }
+    [self.dataArray enumerateObjectsUsingBlock:^(JCWMyHongbaoBall *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.is_select = NO;
+        
+    }];
     JCWMyHongbaoBall *model = self.dataArray[indexPath.row];
-     
+    model.is_select = YES;
      if (self.hbPickerSelBlock) {
          self.hbPickerSelBlock(model);
          [self hide];
      }
+    [self.tableView reloadData];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 
 }
 
 - (void)setDataArray:(NSArray *)dataArray {
     _dataArray = dataArray;
-    
+    if (!dataArray) {
+        return;
+    }
     [self.tableView reloadData];
+    
+    NSInteger index = 0;
+    for (int i=0; i<dataArray.count; i++) {
+        JCWMyHongbaoBall *obj = dataArray[i];
+        if (obj.is_select) {
+            index = i;
+            break;;
+        }
+    }
+
+
+    
+    if (index>0) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
+        });
+    }
+    
+
 }
 
 
