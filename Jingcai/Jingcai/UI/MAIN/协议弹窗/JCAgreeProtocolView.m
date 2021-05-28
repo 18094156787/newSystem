@@ -10,6 +10,7 @@
 #import "JCMainTabBarController.h"
 #import "JCPrivacy_ShowVC.h"
 #import "JCService_ShowVC.h"
+#import "AppDelegate.h"
 @implementation JCAgreeProtocolView
 
 - (void)initViews {
@@ -19,7 +20,6 @@
     self.titleLab.text = @"服务协议和隐私政策";
     self.titleLab.textColor = COLOR_2F2F2F;
     self.contentLab.textColor = COLOR_2F2F2F;
-    [self.sureBtn setTitle:@"同意" forState:0];
     self.sureBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(14)];
     
     
@@ -50,11 +50,6 @@
         
         [self.bgView addSubview:self.contentLab];
         [self.contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//            if (title.length>0) {
-//                make.top.equalTo(self.titleLab.mas_bottom).offset(AUTO(25));
-//            }else{
-//                make.top.offset(AUTO(35));
-//            }
             make.top.equalTo(self.titleLab.mas_bottom).offset(AUTO(25));
             make.left.offset(AUTO(15));
             make.right.offset(AUTO(-15));
@@ -66,20 +61,34 @@
         [self.bgView addSubview:self.sureBtn];
         [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.bgView);
-            make.size.mas_equalTo(CGSizeMake(AUTO(275), AUTO(44)));
+            make.size.mas_equalTo(CGSizeMake(AUTO(275), AUTO(40)));
             make.top.equalTo(self.contentLab.mas_bottom).offset(AUTO(25));
-            make.bottom.equalTo(self.bgView).offset(AUTO(-15));
         }];
     
-//      if(confirmActionHandler){
-//          [self.sureBtn bk_whenTapped:^{
-//              confirmActionHandler();
-//          }];
-//      }
+    [self.bgView addSubview:self.cancelBtn];
+    [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.bgView);
+        make.size.mas_equalTo(CGSizeMake(AUTO(275), AUTO(40)));
+        make.top.equalTo(self.sureBtn.mas_bottom).offset(AUTO(5));
+        make.bottom.equalTo(self.bgView).offset(AUTO(-15));
+    }];
+    
     WeakSelf;
     [self.sureBtn bk_whenTapped:^{
 //        confirmActionHandler();
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"firstApp"];
         [weakSelf removeFromSuperview];
+    }];
+    
+    [self.cancelBtn bk_whenTapped:^{
+        AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        //此处如果不强转 AppDelegate，会报警告：Initializing 'AppDelegate *__strong' with
+        // an expression of incompatible type 'id<UIApplicationDelegate>
+        UIWindow *window = app.window;
+        window.alpha = 0;
+        window.frame = CGRectMake(0, window.bounds.size.width, 0, 0);
+        exit(0);
+
     }];
     
     
@@ -178,8 +187,8 @@
 
 - (UIButton *)sureBtn {
     if (!_sureBtn) {
-        _sureBtn = [UIButton initWithText:@"" FontSize:AUTO(16) Weight:2 BackGroundColor:JCBaseColor TextColors:JCWhiteColor];
-        [_sureBtn hg_setAllCornerWithCornerRadius:AUTO(22)];
+        _sureBtn = [UIButton initWithText:@"同意并进入" FontSize:AUTO(16) Weight:2 BackGroundColor:JCBaseColor TextColors:JCWhiteColor];
+        [_sureBtn hg_setAllCornerWithCornerRadius:AUTO(4)];
         
     }
     return _sureBtn;
@@ -187,12 +196,10 @@
 
 - (UIButton *)cancelBtn {
     if (!_cancelBtn) {
-        _cancelBtn = [UIButton initWithText:@"" FontSize:AUTO(16) Weight:2 BackGroundColor:JCClearColor TextColors:JCBaseColor];
+        _cancelBtn = [UIButton initWithText:@"暂不使用" FontSize:AUTO(16) Weight:1 BackGroundColor:JCClearColor TextColors:COLOR_9F9F9F];
 //        [_cancelBtn hg_setAllCornerWithCornerRadius:AUTO(22)];
-        _cancelBtn.layer.cornerRadius = AUTO(22);
-        _cancelBtn.layer.masksToBounds = YES;
-        _cancelBtn.layer.borderColor = JCBaseColor.CGColor;
-        _cancelBtn.layer.borderWidth = 1;
+        _cancelBtn.layer.cornerRadius = AUTO(4);
+
         
     }
     return _cancelBtn;

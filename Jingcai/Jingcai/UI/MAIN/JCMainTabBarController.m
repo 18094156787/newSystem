@@ -143,7 +143,7 @@
             JCAgreeProtocolView *alertView = [JCAgreeProtocolView new];
             alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
             [[UIApplication sharedApplication].keyWindow addSubview:alertView];
-            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"firstApp"];
+  
         }
 
     });

@@ -242,11 +242,11 @@
     }];
     
     
-    [self.view addSubview:self.filterView];
-    self.filterView.frame = CGRectMake(SCREEN_WIDTH-120, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-120, 112, 46);
-    
-    [self.view addSubview:self.currentFilterView];
-    self.currentFilterView.frame = CGRectMake(SCREEN_WIDTH-54, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-120, 54, 46);
+//    [self.view addSubview:self.filterView];
+//    self.filterView.frame = CGRectMake(SCREEN_WIDTH-120, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-120, 112, 46);
+//    
+//    [self.view addSubview:self.currentFilterView];
+//    self.currentFilterView.frame = CGRectMake(SCREEN_WIDTH-54, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-120, 54, 46);
 
     
     self.tableView.backgroundColor = COLOR_F4F6F9;

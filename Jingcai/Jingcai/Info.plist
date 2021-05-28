@@ -121,13 +121,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>是否允许APP访问您的相机用于拍照并设置您的头像</string>
+	<string>是否允许APP访问您的相机用于设置头像、发布文章时选择照片、图片</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>是否允许App访问您面前的位置信息</string>
+	<string>是否允许App访问您面前的位置信息用于用户来源地区数据的统计</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>是否允许App访问您的相册用于保存微信二维码名片</string>
+	<string>是否允许App访问您的相册用于设置头像、发布文章时选择照片、图保存微信二维码名片</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>是否允许App读取您的相册用于设置您的头像</string>
+	<string>是否允许App读取您的相册用于设置头像、发布文章时选择照片、图片</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>

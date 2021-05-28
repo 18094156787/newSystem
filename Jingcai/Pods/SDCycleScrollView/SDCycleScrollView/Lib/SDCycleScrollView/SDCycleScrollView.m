@@ -170,15 +170,16 @@ NSString * const ID = @"SDCycleScrollViewCell";
     
     if (!self.backgroundImageView) {
         UIImageView *bgImageView = [UIImageView new];
-        bgImageView.contentMode = UIViewContentModeScaleAspectFill;
+        bgImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self insertSubview:bgImageView belowSubview:self.mainView];
         self.backgroundImageView = bgImageView;
     }
     
     self.backgroundImageView.image = placeholderImage;
     dispatch_async(dispatch_get_main_queue(), ^{
-    self.backgroundImageView.contentMode = self.bannerImageViewContentMode;
-    });
+        self.backgroundImageView.contentMode = self.bannerImageViewContentMode;
+        });
+
 }
 
 - (void)setPageControlDotSize:(CGSize)pageControlDotSize
@@ -513,6 +514,13 @@ NSString * const ID = @"SDCycleScrollViewCell";
         size = [pageControl sizeForNumberOfPages:self.imagePathsGroup.count];
     } else {
         size = CGSizeMake(self.imagePathsGroup.count * self.pageControlDotSize.width * 1.5, self.pageControlDotSize.height);
+        // ios14 需要按照系统规则适配pageControl size
+        if (@available(iOS 14.0, *)) {
+            if ([self.pageControl isKindOfClass:[UIPageControl class]]) {
+                UIPageControl *pageControl = (UIPageControl *)_pageControl;
+                size.width = [pageControl sizeForNumberOfPages:self.imagePathsGroup.count].width;
+            }
+        }
     }
     CGFloat x = (self.sd_width - size.width) * 0.5;
     if (self.pageControlAliment == SDCycleScrollViewPageContolAlimentRight) {
@@ -528,22 +536,7 @@ NSString * const ID = @"SDCycleScrollViewCell";
     CGRect pageControlFrame = CGRectMake(x, y, size.width, size.height);
     pageControlFrame.origin.y -= self.pageControlBottomOffset;
     pageControlFrame.origin.x -= self.pageControlRightOffset;
-//    self.pageControl.frame = pageControlFrame;
-//    self.pageControl.frame = pageControlFrame;
-//    修改为：
-    if ([self.pageControl isKindOfClass:[TAPageControl class]]) {
     self.pageControl.frame = pageControlFrame;
-    }else{
-
-        self.pageControl.translatesAutoresizingMaskIntoConstraints = NO;
-        [[self.pageControl.topAnchor constraintEqualToAnchor:self.topAnchor constant:pageControlFrame.origin.y] setActive:YES];
-        [[self.pageControl.heightAnchor constraintEqualToConstant:pageControlFrame.size.height] setActive:YES];
-        if (_pageControlAliment == SDCycleScrollViewPageContolAlimentRight) {
-            [[self.pageControl.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-_pageControlRightOffset] setActive:YES];
-        } else {
-            [[self.pageControl.centerXAnchor constraintEqualToAnchor:self.centerXAnchor] setActive:YES];
-        }
-    }
     self.pageControl.hidden = !_showPageControl;
     
     if (self.backgroundImageView) {

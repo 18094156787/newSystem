@@ -31,6 +31,7 @@
 #import "JCDakaBuyPayWayTopView.h"
 #import "IAPManager.h"
 #import "JCRechareHeadView.h"
+#import "JCRechareBannerCell.h"
 static NSString * const productId001 = @"com.zhisheng.zq.price.001";
 static NSString * const productId002 = @"com.zhisheng.zq.price.002";
 static NSString * const productId003 = @"com.zhisheng.zq.price.003";
@@ -56,7 +57,9 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 @property (strong, nonatomic) UIButton *rechargeBtn;
 @property (weak, nonatomic) IBOutlet UILabel *infoLab;
 @property (strong, nonatomic) JCRechareHeadView *headView;
-
+@property (strong, nonatomic) NSArray *bannnerArray;
+@property (strong, nonatomic) NSArray *actTipArray;
+@property (assign, nonatomic) float bannerHeight;
 @end
 
 @implementation JCChargeVC
@@ -79,7 +82,7 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"充值";
-
+    self.bannerHeight = 0;
     
     [self getChargeList];
     [self getBanner];
@@ -88,6 +91,7 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
     [IAPManager shared].JNSuccessBlock = ^{
         
         [weakSelf getChargeList];
+        [weakSelf getBanner];
         [JCWToastTool showHint:@"充值成功"];
     };
     
@@ -105,7 +109,7 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 - (void)initSubViews {
 //    self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 136);
 //    self.tableView.tableHeaderView = self.headView;
-    self.tableHeightConstraint.constant = JCChargeAccountH + JCChargeInputH + JCChargeWayH*self.chargeWayArray.count + JCChargeHeaderH+AUTO(16);
+    self.tableHeightConstraint.constant = JCChargeAccountH + JCChargeInputH + JCChargeWayH*self.chargeWayArray.count + JCChargeHeaderH+AUTO(16)+self.bannerHeight;
     
     self.rechargeBgView.backgroundColor = JCWhiteColor;
 
@@ -120,8 +124,8 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
     [self.tableView registerNib:[UINib nibWithNibName:@"JCChargeAccountCell" bundle:nil] forCellReuseIdentifier:@"JCChargeAccountCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"JCChargeAreaCell" bundle:nil] forCellReuseIdentifier:@"JCChargeAreaCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"JCChargeWayCell" bundle:nil] forCellReuseIdentifier:@"JCChargeWayCell"];
-    
-
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
+    [self.tableView registerClass:[JCRechareBannerCell class] forCellReuseIdentifier:@"JCRechareBannerCell"];
     
     //self.agreeLabel.textAlignment = NSTextAlignmentCenter;
     self.agreeLabel.delegate = self;
@@ -141,6 +145,8 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
     WeakSelf;
     self.scrollow.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
         [[IAPManager shared] checkMyBuyGoods];
+        [weakSelf getBanner];
+//        weakSelf.actTipArray = @[];
         [weakSelf getChargeList];
     }];
 }
@@ -174,19 +180,36 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 
     JCActivityService *service = [JCActivityService service];
     [service getRechargeBannerInfoWithsuccess:^(id  _Nullable object) {
+        [self.scrollow.mj_header endRefreshing];
         if ([JCWJsonTool isSuccessResponse:object]) {
-           NSArray *array = [NSArray yy_modelArrayWithClass:[JCWSlideBall class] json:object[@"data"][@"banner_info"]];
-//            if (array.count) {
-//                <#statements#>
-//            }
-//
-//                self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 500)];
+            
+            NSLog(@"想要的%@",object);
+           self.bannnerArray = [NSArray yy_modelArrayWithClass:[JCWSlideBall class] json:object[@"data"][@"banner_info"]];
+            self.actTipArray = [NSArray yy_modelArrayWithClass:[JCWSlideBall class] json:object[@"data"][@"activity_notable"]];
+
+//            JCWSlideBall *model = [JCWSlideBall new];
+//            model.desc = @"54sdfdf";
+//            self.actTipArray = @[model];
+
+            
+            float bannerHeihgt = 0;
+            float tipHeihgt = 0;
+            if (self.bannnerArray.count>0) {
+                bannerHeihgt = 128;
+            }
+            if (self.actTipArray.count>0) {
+                tipHeihgt = 40;
+            }
+            self.bannerHeight = bannerHeihgt+tipHeihgt;
+            self.tableHeightConstraint.constant = JCChargeAccountH + JCChargeInputH + JCChargeWayH*self.chargeWayArray.count + JCChargeHeaderH+AUTO(16)+self.bannerHeight;
+            [self.tableView reloadData];
+
        }else{
            [JCWToastTool showHint:object[@"msg"]];
        }
 
     } failure:^(NSError * _Nonnull error) {
-        
+        [self.scrollow.mj_header endRefreshing];
     }];
 
 }
@@ -217,23 +240,26 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
-    if (section==1) {
+    if (section==2) {
         return JCChargeHeaderH;
     }
     return 0.001f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return JCChargeAccountH;
+        return self.bannerHeight;
     }
     if (indexPath.section == 1) {
+        return JCChargeAccountH;
+    }
+    if (indexPath.section == 2) {
         return JCChargeInputH;
     }
     return JCChargeWayH;
@@ -242,7 +268,7 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 //    JCChargeHeaderView * headerView = [JCChargeHeaderView viewFromXib];
     JCDakaBuyPayWayTopView *headerView = [JCDakaBuyPayWayTopView new];
     
-    if (section == 1) {
+    if (section == 2) {
        headerView.titleLab.text = @"充值金额";
         headerView.infoLab.text = @"1元 = 1红币";
         return headerView;
@@ -254,11 +280,14 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *view = [UIView new];
     view.backgroundColor = COLOR_F0F0F0;
+    if (section==2) {
+        view.backgroundColor = JCWhiteColor;
+    }
     return view;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section==2) {
+    if (section==3) {
         return 0.001f;
     }
     return AUTO(8);
@@ -267,12 +296,23 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
+        if (self.bannnerArray.count>0||self.actTipArray.count>0) {
+            JCRechareBannerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCRechareBannerCell"];
+            cell.bannerArray = self.bannnerArray;
+            cell.tipArray = self.actTipArray;
+            return cell;
+        }
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+
+        return cell;
+    }
+    if (indexPath.section == 1) {
         JCChargeAccountCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCChargeAccountCell"];
         cell.name = self.user_name;
         cell.caiyun = self.caiyun;
         return cell;
     }
-    if (indexPath.section == 1) {
+    if (indexPath.section == 2) {
         JCChargeAreaCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCChargeAreaCell"];
         cell.chargeItemArray = self.chargeItemArray;
         return cell;

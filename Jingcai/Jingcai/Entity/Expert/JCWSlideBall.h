@@ -25,6 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *start_color;
 @property (strong, nonatomic) NSString *end_color;
 #pragma mark//活动广场
+
+@property (strong, nonatomic) NSString *activity_id;//活动ID
+
 @property (strong, nonatomic) NSString *square_image;//活动广场图ID
 
 @property (strong, nonatomic) NSString *type;//活动类型 1跳转已有的活动 2福利活动 3充值活动 4竞猜活动
@@ -40,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *is_participate;//是否参加了 1是 2否
 
 @property (strong, nonatomic) NSString *active_state;//活动状态 1未开始 2进行中 3已结束
+
+@property (strong, nonatomic) NSString *desc;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -36,6 +36,8 @@
 
 @property (nonatomic,strong) JCActivityRechargeResultTipView *activity_recharge_tipView;
 
+@property (assign,nonatomic) BOOL showPrze;//奖励弹窗
+
 @end
 
 @implementation JCActivityDetailCommomVC
@@ -55,6 +57,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.showPrze = YES;//默认可以显示奖励弹窗
     [self refreshData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:UserRechargeSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:NotificationUserLogin object:nil];
@@ -95,7 +98,7 @@
             self.shareView.friend_url =self.detailModel.wechat_share.friend_url;
             self.shareView.imageUrl = self.detailModel.wechat_share.share_image;
             [self.tableView reloadData];
-            if ([self.detailModel.is_popover integerValue]==1) {
+            if ([self.detailModel.is_popover integerValue]==1&&self.showPrze) {
                 [self showRechargeResult];
             }
       
@@ -263,8 +266,10 @@
     //type 活动类型 1跳转已有的活动 2福利活动 3充值活动 4竞猜活动
     if ([self.detailModel.type integerValue]==3) {
         JCChargeVC *vc =[JCChargeVC new];
+        self.showPrze = NO;
         WeakSelf;
         vc.JCRefreshBlock = ^{
+            weakSelf.showPrze = YES;
             [weakSelf refreshData];
         };
         [self.navigationController pushViewController:vc animated:YES];
@@ -277,10 +282,16 @@
         [service getActivityPrizeWithActID:self.detailModel.id success:^(id  _Nullable object) {
             [self.view endLoading];
             if ([JCWJsonTool isSuccessResponse:object]) {
-                [self showFuliResult];
-                [self refreshData];
+                NSString *success = object[@"data"][@"is_success"];
+                if ([success integerValue]==1) {
+                    [self showFuliResult];
+                    [self refreshData];
+                }else{
+                    [JCWToastTool showHint:object[@"data"][@"get_content"]];
+                }
+
                 
-//                [JCWToastTool showHint:object[@"data"][@"get_content"]];
+                
             }else{
                 [JCWToastTool showHint:object[@"msg"]];
             }

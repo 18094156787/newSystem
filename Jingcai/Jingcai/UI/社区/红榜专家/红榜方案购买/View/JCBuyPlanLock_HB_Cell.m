@@ -241,7 +241,7 @@
     self.priceLab.text = tjInfoDetailBall.sf;
     
     if (tjInfoDetailBall.refund.length>0) {
-        self.tipLab.text = @"购买须知：\n不中返还：在比赛分析结果预测不正确的情况下将全额退款购买预测方案的费用。退款的路径一般是在24小时内原路径返还。";
+        self.tipLab.text = @"购买须知：\n不中返还：在比赛分析结果预测不正确的情况下将全额退款购买预测方案的费用。退款的路径一般是在24小时内原路径返还（如遇节假日则顺延）";
     }else{
 //        [self.tipLab mas_updateConstraints:^(MASConstraintMaker *make) {
 //            make.top.equalTo(self.infoLab.mas_bottom).offset(0);
