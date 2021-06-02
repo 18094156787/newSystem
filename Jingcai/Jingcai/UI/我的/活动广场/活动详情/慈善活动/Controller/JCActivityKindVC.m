@@ -7,7 +7,7 @@
 //
 
 #import "JCActivityKindVC.h"
-#import "JCActivityHeadView.h"
+#import "JCKindActivityHeadView.h"
 #import "JCActivityPrizeCell.h"
 #import "JCActivityRuleCell.h"
 #import "JCActivityPrizeShowView.h"
@@ -17,23 +17,73 @@
 #import "JCActivityGuessCompleteVC.h"
 #import "JCActivityGuessFailureTipView.h"
 #import "JCActivityGuessSuccessTipView.h"
+#import "JCActivityKindGetPrizeCell.h"
+#import "JCActivityKindProgressCell.h"
+#import "JCKindScoreCompleteView.h"
+#import "JCActivityDetailModel.h"
+#import "JCKindSignTipView.h"
+#import "JCKindInviteView.h"
+#import "JCKindActivityInfoModel.h"
+#import "JCActivityPrizeShowView.h"
+#import "JCShareView.h"
+#import "JCKindShareView.h"
+#import "JCKindSignReturnModel.h"
+#import "JCYCInviteShareVC.h"
+#import "JCYuceShareInfoModel.h"
+
 @interface JCActivityKindVC ()
 
-@property (nonatomic,strong) JCActivityHeadView *headView;
+@property (nonatomic,strong) JCKindActivityHeadView *headView;
 
 @property (nonatomic,strong) UILabel *infoLab;
-
-@property (nonatomic,strong) UIButton *sureBtn;
 
 @property (nonatomic,strong) JCActivityPrizeShowView *prizeView;
 
 @property (nonatomic,strong) UIImageView *resultImgView;
+
+@property (nonatomic,strong) UIButton *signBtn;
+
+@property (nonatomic,strong) UILabel *signLab;
+
+@property (nonatomic,strong) UIButton *shareBtn;
+
+@property (nonatomic,strong) UILabel *shareLab;
+
+@property (nonatomic,strong) UIButton *inviteBtn;
+
+@property (nonatomic,strong) UILabel *endLab;
+
+@property (nonatomic,strong)CAGradientLayer *signGl;
+
+@property (nonatomic,strong)CAGradientLayer *shareGl;
+
+@property (nonatomic,strong)CAGradientLayer *inviteGl;
+
+@property (nonatomic,strong) UIButton *completeBtn;
+
+@property (nonatomic,strong) UIButton *shareImageBtn;
+
+@property (nonatomic,strong) UIButton *endBtn;
+
+@property (nonatomic,assign) float kindHeight;
 
 @property (nonatomic,assign) float cellHeight;
 
 @property (nonatomic,strong) JCActivityDetailModel *detailModel;
 
 @property (nonatomic,strong) JCShareView *shareView;
+
+@property (nonatomic,strong) JCKindScoreCompleteView *scoreTipView;//阶段奖励
+
+@property (nonatomic,strong) JCKindInviteView *inviteView;//邀请海报二维码
+
+@property (nonatomic,strong) UIView *bottomView;
+
+@property (nonatomic,strong) JCKindShareView *shareBottomView;
+
+@property (nonatomic,strong) NSMutableArray *popImageArray;//弹窗数组
+
+@property (nonatomic,strong) JCKindSignTipView *signTipView;
 
 @end
 
@@ -46,7 +96,6 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    [self.headView.countDown destoryTimer];
 }
 
 - (void)backItemClick {
@@ -59,24 +108,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.kindHeight = 444;
     [self refreshData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:NotificationUserLogin object:nil];
+
 }
 
+
 - (void)refreshData {
-    [self.view showLoading];
+//    [self.view showLoading];
     JCActivityService *service = [JCActivityService service];
-    [service getActivityDetailWithActID:NonNil(self.actID) success:^(id  _Nullable object) {
+    [service getKindActivityDetailWithActID:NonNil(self.actID) success:^(id  _Nullable object) {
         [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
             self.detailModel = (JCActivityDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCActivityDetailModel class]];
+//            self.detailModel.user_info.is_finish = @"1";
             self.headView.detailModel = self.detailModel;
             self.title = self.detailModel.title;
             self.tableView.backgroundColor = [UIColor colorWithHexString:NonNil(self.detailModel.background_color)];
             
-            [self.sureBtn setTitle:NonNil(self.detailModel.text_prompt) forState:0];
-            self.sureBtn.backgroundColor = [self.detailModel.text_can_click integerValue]==1?JCBaseColor:COLOR_9F9F9F;
-            self.sureBtn.userInteractionEnabled = [self.detailModel.text_can_click integerValue]==1?YES: NO;
+
             
             if ([self.detailModel.prize integerValue]>1&&[self.detailModel.is_participate integerValue]==1) {
                     self.resultImgView.hidden = NO;
@@ -98,46 +149,82 @@
 //            self.detailModel.goods_info = @[];
             [self.tableView reloadData];
             
-            NSMutableArray *dataArray = [NSMutableArray array];
-            for (JCActivityOptionModel *model in self.detailModel.activity_option) {
-                if ([model.correct integerValue]==1) {
-                    [dataArray addObject:model];
-                }
+            if ([self.detailModel.user_info.is_sign integerValue]==1) {
+                self.signBtn.userInteractionEnabled = NO;
+                self.signGl.colors = @[(__bridge id)UIColorFromRGB(0xABAFB7).CGColor, (__bridge id)UIColorFromRGB(0x9B9FA8).CGColor];
+                self.signLab.text = @"今日已签到";
             }
-            self.headView.dataSource = dataArray;
-            
-            if ([self.detailModel.is_guessing_reminder integerValue]==1) {
-                if (self.detailModel.is_guess==1) {
-                    //猜中
-                    JCActivityGuessSuccessTipView *guess_failureView = [JCActivityGuessSuccessTipView new];
-                    guess_failureView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-                    guess_failureView.dataSource = self.detailModel.goods_info;
-                    WeakSelf;
-                    guess_failureView.JCClickBlock = ^{
-                        weakSelf.prizeView.detailModel = weakSelf.detailModel;
-                        weakSelf.prizeView.dataArray = weakSelf.detailModel.goods_info;
-                        [weakSelf.jcWindow addSubview:weakSelf.prizeView];
-                    };
-                    
-                    [self.jcWindow addSubview:guess_failureView];
-                }
-                if (self.detailModel.is_guess==2) {
-                    //没猜中
-                    JCActivityGuessFailureTipView *guess_failureView = [JCActivityGuessFailureTipView new];
-                    guess_failureView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-                    [self.jcWindow addSubview:guess_failureView];
-                }
+            if ([self.detailModel.user_info.is_share integerValue]==1) {
+                self.shareBtn.userInteractionEnabled = NO;
+                self.shareGl.colors = @[(__bridge id)UIColorFromRGB(0xABAFB7).CGColor, (__bridge id)UIColorFromRGB(0x9B9FA8).CGColor];
+                self.signLab.text = @"今日已分享";
             }
             
+            
+            //展示底部按钮
+            if ([self.detailModel.active_state integerValue]==1||[self.detailModel.active_state integerValue]==3) {
+                //活动未开始或者活动已结束
+                self.signBtn.hidden = YES;
+                self.shareBtn.hidden = YES;
+                self.inviteBtn.hidden = YES;
+                if ([self.detailModel.active_state integerValue]==1) {
+                    //未开始
+                    self.endLab.text = @"活动未开始";
+                    [self.bottomView addSubview:self.endBtn];
+                }
+                if ([self.detailModel.active_state integerValue]==3) {
+                    //已结束
+                    self.endLab.text = @"本期活动已结束";
+                    [self.bottomView addSubview:self.endBtn];
+                }
+                
+            }else{
+                
+                //进行中
+                if ([self.detailModel.user_info.is_finish integerValue]==1) {
+                    self.signBtn.hidden = YES;
+                    self.shareBtn.hidden = YES;
+                    self.inviteBtn.hidden = YES;
+
+                    [self.bottomView addSubview:self.completeBtn];
+                    [self.bottomView addSubview:self.shareImageBtn];
+                }
+                
+                
+
+            }
+
+            
+            //展示活动海报
+            if ([self.detailModel.is_stage integerValue]==1) {
+                self.scoreTipView.detailModel = self.detailModel;
+                self.scoreTipView.dataSource = self.detailModel.stage_grade;
+                
+                if (![self.popImageArray containsObject:self.scoreTipView]) {
+                    [self.popImageArray addObject:self.scoreTipView];
+                }
+
+            }
+            if ([self.detailModel.is_popup integerValue]==2) {
+                //活动海报弹窗
+                self.inviteView.imgUrl = self.detailModel.popup_image;
+                
+                if (![self.popImageArray containsObject:self.inviteView]) {
+                    [self.popImageArray addObject:self.inviteView];
+                }
+
+            }
+            [self showPopTipView];
 
             
 
             
-            
+
             
         }else{
             [JCWToastTool showHint:object[@"msg"]];
         }
+
     } failure:^(NSError * _Nonnull error) {
         [self.view endLoading];
     }];
@@ -169,6 +256,9 @@
     
     [self.tableView registerClass:[JCActivityPrizeCell class] forCellReuseIdentifier:@"JCActivityPrizeCell"];
     [self.tableView registerClass:[JCActivityRuleCell class] forCellReuseIdentifier:@"JCActivityRuleCell"];
+    [self.tableView registerClass:[JCActivityKindGetPrizeCell class] forCellReuseIdentifier:@"JCActivityKindGetPrizeCell"];
+    [self.tableView registerClass:[JCActivityKindProgressCell class] forCellReuseIdentifier:@"JCActivityKindProgressCell"];
+    
     
     [self.view addSubview:self.tableView];
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -180,6 +270,7 @@
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = JCWhiteColor;
     [self.view addSubview:bottomView];
+    self.bottomView = bottomView;
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(AUTO(100));
         make.left.right.equalTo(self.view);
@@ -187,37 +278,116 @@
         
     }];
     
-    [bottomView addSubview:self.infoLab];
-    [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(AUTO(15));
-        make.centerX.equalTo(bottomView);
-        make.left.right.offset(0);
+    float width = (SCREEN_WIDTH-AUTO(113)-AUTO(104)*2)/4.0f;
+    
+    [bottomView addSubview:self.signBtn];
+//    self.signBtn.frame= CGRectMake(width, 10, AUTO(104), AUTO(44));
+    [self.signBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(width);
+        make.top.offset(10);
+        make.size.mas_equalTo(CGSizeMake(AUTO(104), AUTO(44)));
+    }];
+    UILabel *signLab = [UILabel initWithTitle:@"签到+1" andFont:16 andWeight:1 andTextColor:JCWhiteColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+    [self.signBtn addSubview:signLab];
+    [signLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.insets(UIEdgeInsetsZero);
+    }];
+    self.signLab = signLab;
+//
+    [bottomView addSubview:self.shareBtn];
+    [self.shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.signBtn.mas_right).offset(width);
+        make.top.offset(10);
+        make.size.mas_equalTo(CGSizeMake(AUTO(104), AUTO(44)));
     }];
     
-    [bottomView addSubview:self.sureBtn];
-    [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.infoLab.mas_bottom).offset(AUTO(15));
-        make.centerX.equalTo(bottomView);
-        make.size.mas_equalTo(CGSizeMake(AUTO(275), AUTO(44)));
+    UILabel *shareLab = [UILabel initWithTitle:@"分享+5" andFont:16 andWeight:1 andTextColor:JCWhiteColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+    [self.shareBtn addSubview:shareLab];
+    [shareLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.insets(UIEdgeInsetsZero);
     }];
+    self.shareLab = shareLab;
+    
+
+    [bottomView addSubview:self.inviteBtn];
+    [self.inviteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.shareBtn.mas_right).offset(width);
+        make.top.offset(10);
+        make.size.mas_equalTo(CGSizeMake(AUTO(113), AUTO(44)));
+    }];
+    UILabel *inviteLab = [UILabel initWithTitle:@"邀请注册+10" andFont:16 andWeight:1 andTextColor:JCWhiteColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+    [self.inviteBtn addSubview:inviteLab];
+    [inviteLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.insets(UIEdgeInsetsZero);
+    }];
+    
+    
     
     [bottomView addSubview:self.resultImgView];
     [self.resultImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.offset(0);
         make.size.mas_equalTo(CGSizeMake(AUTO(80), AUTO(68)));
     }];
-
+    
     WeakSelf;
+    [self.signBtn bk_whenTapped:^{
+        [weakSelf signBtnClick];
+    }];
+    
+    [self.shareBtn bk_whenTapped:^{
+        [weakSelf shareItemClick];
+    }];
+    
+    [self.inviteBtn bk_whenTapped:^{
+        [weakSelf inviteBtnClick];
+    }];
+
+    
+   
     self.headView.JCHeightBlock = ^(float height) {
         weakSelf.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, height);
         weakSelf.tableView.tableHeaderView = weakSelf.headView;
         
     };
+    //签到
+    self.signTipView.JCCloseBlock = ^{
+        if ([weakSelf.popImageArray containsObject:weakSelf.signTipView]) {
+            [weakSelf.popImageArray removeObject:weakSelf.signTipView];
+            [weakSelf showPopTipView];
+        }
+    };
+    
+    //阶段奖励
+    self.scoreTipView.JCClickBlock = ^(NSArray * _Nonnull dataArray) {
+        weakSelf.prizeView.detailModel = weakSelf.detailModel;
+        weakSelf.prizeView.dataArray = dataArray;
+        [weakSelf.jcWindow addSubview:weakSelf.prizeView];
+    };
+    self.scoreTipView.JCCloseBlock = ^{
+        if ([weakSelf.popImageArray containsObject:weakSelf.scoreTipView]) {
+            [weakSelf.popImageArray removeObject:weakSelf.scoreTipView];
+            [weakSelf showPopTipView];
+        }
+    };
+    
+    //分享海报弹窗
+    self.inviteView.JCBlock = ^(UIImage * _Nonnull image) {
+        weakSelf.shareBottomView.frame = CGRectMake(0, SCREEN_HEIGHT-100-kBottomTabSafeAreaHeight, SCREEN_WIDTH, 100+kBottomTabSafeAreaHeight);
+        weakSelf.shareBottomView.shareImage = image;
+        [weakSelf.inviteView addSubview:weakSelf.shareBottomView];
+        [weakSelf.shareBottomView show];
+    };
+    self.inviteView.JCCloseBlock = ^{
+        if ([weakSelf.popImageArray containsObject:weakSelf.inviteView]) {
+            [weakSelf.popImageArray removeObject:weakSelf.inviteView];
+            [weakSelf showPopTipView];
+        }
+    };
 }
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -229,14 +399,41 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
-        JCActivityKindCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityKindCell"];
-
+        JCActivityKindGetPrizeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityKindGetPrizeCell"];
+//        JCWSlideBall *slide = [JCWSlideBall new];
+//        slide.desc = @"地方代购复古风格快递费";
+        cell.tipArray = self.detailModel.banner;
         return cell;
     }
     if (indexPath.section==1) {
+        JCActivityKindProgressCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityKindProgressCell"];
+        cell.detailModel = self.detailModel;
+        return cell;
+    }
+    
+    
+    if (indexPath.section==2) {
+        JCActivityKindCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityKindCell"];
+//        WeakSelf;
+//        cell.JCHeightBlock = ^(float heihgt) {
+//            weakSelf.kindHeight = heihgt+20;
+//            [weakSelf.tableView reloadData];
+//        };
+        cell.actID = self.actID;
+        cell.detailModel = self.detailModel;
+        return cell;
+    }
+    if (indexPath.section==3) {
+        JCActivitytTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivitytTimeCell"];
+        cell.detailModel = self.detailModel;
+        cell.kindImageView = JCIMAGE(@"ic_kind_title");
+        return cell;
+    }
+    if (indexPath.section==4) {
         JCActivityPrizeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityPrizeCell"];
         cell.detailModel = self.detailModel;
         cell.dataSource = self.detailModel.goods_info;
+        cell.kindImageView = JCIMAGE(@"ic_kind_title");
         WeakSelf;
         cell.JCClickBlock = ^{
             weakSelf.prizeView.dataArray = weakSelf.detailModel.goods_info;
@@ -244,15 +441,12 @@
         };
         return cell;
     }
-    if (indexPath.section==2) {
-        JCActivitytTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivitytTimeCell"];
-        cell.detailModel = self.detailModel;
-        return cell;
-    }
-    if (indexPath.section==3) {
+
+    if (indexPath.section==5) {
         JCActivityRuleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityRuleCell"];
         WeakSelf;
         cell.detailModel = self.detailModel;
+        cell.kindImageView = JCIMAGE(@"ic_kind_title");
         cell.JCRefreshBlock = ^(float height) {
             weakSelf.cellHeight = height+20;
             [weakSelf.tableView reloadData];
@@ -270,31 +464,46 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
-
-        return 410;
+        if (self.detailModel.banner.count>0) {
+            return 32;
+        }
+        return 0.01f;
     }
     if (indexPath.section==1) {
+        return 102;
+    }
+    if (indexPath.section==2) {
+
+        return self.kindHeight;
+    }
+
+    if (indexPath.section==3) {
+        return 100;
+    }
+    if (indexPath.section==4) {
         if (self.detailModel.goods_info.count>0) {
-            return 136;
+            return 146;
         }
         return 0.01f;
         
     }
-    if (indexPath.section==2) {
-        return 92;
-    }
-    
     return self.cellHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section==1) {
-        if (self.detailModel.goods_info.count>0) {
-            return 12;
-        }
+    if (self.detailModel.banner.count==0) {
         return 0.01f;
     }
-    return 12;
+    if (section==1) {
+        if (self.detailModel.goods_info.count==0) {
+            return 0.01f;
+        }
+        
+    }
+    if (section==2) {
+        return 0.01;
+    }
+    return 20;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -314,92 +523,87 @@
 
 }
 
-- (void)sureBtnClick {
+- (void)signBtnClick {
 
- 
-    
-    
     if (![JCWUserBall currentUser]) {
         [self presentLogin];
         return;
     }
-    //type 活动类型 1跳转已有的活动 2福利活动 3充值活动 4竞猜活动
-    NSMutableArray *dataArray = [NSMutableArray array];
-    NSArray *array = [NSArray arrayWithArray:self.detailModel.activity_option];
-    for (JCActivityOptionModel *model in array) {
-        if ([model.local_choice integerValue]==1) {
-            [dataArray addObject:model];
-        }
-    }
-    if (dataArray.count==0) {
-        [JCWToastTool showHint:@"您还未选择任何选项，请选择后再提交！"];
-        return;
-    }
-    if (dataArray.count<[self.detailModel.option integerValue]) {
-        JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
-        alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(16)];
-        WeakSelf;
-        [alertView alertTitle:@"" TitleColor:COLOR_2F2F2F Mesasge:@"" MessageColor:COLOR_666666 SureTitle:@"确认提交" SureColor:JCWhiteColor SureHandler:^{
-            [alertView removeFromSuperview];
-            [weakSelf finalSubmitWithDataArray:dataArray];
-        } CancleTitle:@"取消" CancleColor:JCBaseColor CancelHandler:^{
-           [alertView removeFromSuperview];
-        }];
-        NSString *title = [NSString stringWithFormat:@"当前可提交%@个选项，您只选择了%ld个，是否确认提交？",self.detailModel.option,dataArray.count];
-        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
-        NSRange count_range = [title rangeOfString:self.detailModel.option];
-        if (count_range.location!=NSNotFound) {
-            [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:count_range];
-        }
-        NSRange sel_range = [title rangeOfString:[NSString stringWithFormat:@"%ld",dataArray.count]];
-        if (sel_range.location!=NSNotFound) {
-            [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:sel_range];
-        }
-        alertView.contentLab.attributedText = attr;
-        alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-        [[UIApplication sharedApplication].keyWindow addSubview:alertView];
-        return;
-    }
-    
-    
-    [self finalSubmitWithDataArray:dataArray];
-    
-
-
-
- 
-}
-
-- (void)finalSubmitWithDataArray:(NSArray *)dataArray {
-    NSString *options = @"";
-    for (int i=0; i<dataArray.count; i++) {
-        JCActivityOptionModel *model = dataArray[i];
-        if (i==0) {
-            options = model.id;
-        }else{
-            options = [NSString stringWithFormat:@"%@,%@",options,model.id];
-        }
-    }
-    
-    
+//    [self.navigationController.topViewController isKindOfClass:[UIViewController class]];
+    [self.view showLoading];
     JCActivityService *service = [JCActivityService service];
-    [service getSubmitJingCaiUserWithActID:self.detailModel.id options:options success:^(id  _Nullable object) {
+    [service getKindActivitySignWithActID:self.actID type:@"1" success:^(id  _Nullable object) {
         [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
-            JCActivityGuessCompleteVC *vc = [JCActivityGuessCompleteVC new];
-            vc.actID = self.actID;
-            [self.navigationController pushViewController:vc animated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshKindActivityDetail" object:nil];
+            JCKindSignReturnModel *user_info = (JCKindSignReturnModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKindSignReturnModel class]];
+            [self.tableView reloadData];
+            
+            if ([user_info.is_sign integerValue]==1) {
+                self.signBtn.userInteractionEnabled = NO;
+                self.signGl.colors = @[(__bridge id)UIColorFromRGB(0xABAFB7).CGColor, (__bridge id)UIColorFromRGB(0x9B9FA8).CGColor];
+                self.signLab.text = @"今日已签到";
+//                [self.jcWindow addSubview:self.signTipView];
+                if (![self.popImageArray containsObject:self.signTipView]) {
+                    [self.popImageArray addObject:self.signTipView];
+                }
+                
+            }
+            if ([user_info.is_stage integerValue]==1) {
+                self.scoreTipView.detailModel = self.detailModel;
+                self.scoreTipView.dataSource = user_info.stage_grade;
+                
+                if (![self.popImageArray containsObject:self.scoreTipView]) {
+                    [self.popImageArray addObject:self.scoreTipView];
+                }
+
+            }
+            if ([user_info.is_popup integerValue]==2) {
+                //活动海报弹窗
+                self.inviteView.imgUrl = user_info.popup_image;
+                
+                if (![self.popImageArray containsObject:self.inviteView]) {
+                    [self.popImageArray addObject:self.inviteView];
+                }
+
+            }
+            [self showPopTipView];
+            
+
+            
             [self refreshData];
-//            [JCWToastTool showHint:@"提交成功"];
         }else{
             [JCWToastTool showHint:object[@"msg"]];
         }
     } failure:^(NSError * _Nonnull error) {
         [self.view endLoading];
     }];
+
+}
+
+
+//邀请注册
+- (void)inviteBtnClick {
+    if (![JCWUserBall currentUser]) {
+        [self presentLogin];
+        return;
+    }
+    JCYCInviteShareVC *vc = [JCYCInviteShareVC new];
+    JCYuceShareInfoModel *model = [JCYuceShareInfoModel new];
+    model.friend_url = self.detailModel.share_resiger.share_resiger_url;
+    model.url = self.detailModel.share_resiger.share_resiger_url;
+    model.information = self.detailModel.share_resiger.share_title;
+    model.desc = self.detailModel.share_resiger.share_desc;
+    vc.infoModel = model;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 - (void)shareItemClick {
+    if (![JCWUserBall currentUser]) {
+        [self presentLogin];
+        return;
+    }
     WeakSelf;
     [JCWAppTool isUserNotificationEnable:^(BOOL isEnabled) {
         if (!isEnabled) {
@@ -431,10 +635,27 @@
     }];
 
 }
+//分享海报
+- (void)sharePosterClick {
+//    self.inviteView.imgUrl = @"http://imagetest.yixinzuqiu.com/upload/image/1109/47b87ab5cad3451bf3484dc385e408aa.jpg";
+    self.inviteView.imgUrl = self.detailModel.popup_image;
+    [self.jcWindow addSubview:self.inviteView];
 
-- (JCActivityHeadView *)headView {
+}
+//展示弹窗,可能存在多个
+- (void)showPopTipView {
+    if (self.popImageArray.count>0) {
+        UIView *view = self.popImageArray.firstObject;
+        [self.jcWindow addSubview:view];
+    }
+    
+    
+}
+
+
+- (JCKindActivityHeadView *)headView {
     if (!_headView) {
-        _headView = [JCActivityHeadView new];
+        _headView = [JCKindActivityHeadView new];
     }
     return _headView;
 }
@@ -446,14 +667,7 @@
     return _infoLab;
 }
 
-- (UIButton *)sureBtn {
-    if (!_sureBtn) {
-        _sureBtn = [UIButton initWithText:@"提交竞猜" FontSize:AUTO(16) BackGroundColor:JCBaseColor TextColor:JCWhiteColor];
-        [_sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        [_sureBtn hg_setAllCornerWithCornerRadius:AUTO(22)];
-    }
-    return _sureBtn;
-}
+
 
 - (JCActivityPrizeShowView *)prizeView {
     if (!_prizeView) {
@@ -478,4 +692,151 @@
     return _resultImgView;
 }
 
+- (UIButton *)signBtn {
+    if (!_signBtn) {
+        _signBtn = [UIButton initWithText:@"签到+1" FontSize:16 BackGroundColor:JCClearColor TextColor:JCWhiteColor];
+        [_signBtn hg_setAllCornerWithCornerRadius:22];
+        self.signGl = [CAGradientLayer layer];
+        self.signGl.frame = CGRectMake(0,0,AUTO(104),AUTO(44));
+        self.signGl.startPoint = CGPointMake(0, 0);
+        self.signGl.endPoint = CGPointMake(0, 1);
+        self.signGl.colors = @[(__bridge id)UIColorFromRGB(0xFFC152).CGColor, (__bridge id)UIColorFromRGB(0xFD8F39).CGColor];
+        self.signGl.locations = @[@(0), @(1.0f)];
+        [_signBtn.layer addSublayer:self.signGl];
+        
+
+    }
+    return _signBtn;
+}
+
+- (UIButton *)shareBtn {
+    if (!_shareBtn) {
+        _shareBtn = [UIButton initWithText:@"分享+5" FontSize:16 BackGroundColor:JCClearColor TextColor:JCWhiteColor];
+        [_shareBtn hg_setAllCornerWithCornerRadius:22];
+        
+        self.shareGl = [CAGradientLayer layer];
+        self.shareGl.frame = CGRectMake(0,0,AUTO(104),AUTO(44));
+        self.shareGl.startPoint = CGPointMake(0, 0);
+        self.shareGl.endPoint = CGPointMake(1, 1);
+        self.shareGl.colors = @[(__bridge id)UIColorFromRGB(0xFFC152).CGColor, (__bridge id)UIColorFromRGB(0xFD8F39).CGColor];
+        self.shareGl.locations = @[@(0), @(1.0f)];
+        [_shareBtn.layer addSublayer:self.shareGl];
+    }
+    return _shareBtn;
+}
+
+- (UIButton *)inviteBtn {
+    if (!_inviteBtn) {
+        _inviteBtn = [UIButton initWithText:@"邀请注册+10" FontSize:16 BackGroundColor:JCClearColor TextColor:JCWhiteColor];
+        [_inviteBtn hg_setAllCornerWithCornerRadius:22];
+        self.inviteGl = [CAGradientLayer layer];
+        self.inviteGl.frame = CGRectMake(0,0,AUTO(113),AUTO(44));
+        self.inviteGl.startPoint = CGPointMake(0, 0);
+        self.inviteGl.endPoint = CGPointMake(1, 0);
+        self.inviteGl.colors = @[(__bridge id)UIColorFromRGB(0xFB5735).CGColor, (__bridge id)UIColorFromRGB(0xFF3125).CGColor];
+        self.inviteGl.locations = @[@(0), @(1.0f)];
+        [_inviteBtn.layer addSublayer:self.inviteGl];
+    }
+    return _inviteBtn;
+}
+
+- (UIButton *)completeBtn {
+    if (!_completeBtn) {
+        float width = (SCREEN_WIDTH-45)/2.0f;
+        _completeBtn = [UIButton initWithText:@"" FontSize:16 BackGroundColor:JCClearColor TextColor:JCWhiteColor];
+        _completeBtn.frame = CGRectMake(15, 10, width, 44);
+        [_completeBtn hg_setAllCornerWithCornerRadius:22];
+        CAGradientLayer *gl = [CAGradientLayer layer];
+        gl.frame = CGRectMake(0,0,width,AUTO(44));
+        gl.startPoint = CGPointMake(0, 0);
+        gl.endPoint = CGPointMake(1, 0);
+        gl.colors = @[(__bridge id)UIColorFromRGB(0xABAFB7).CGColor, (__bridge id)UIColorFromRGB(0x9B9FA8).CGColor];
+        gl.locations = @[@(0), @(1.0f)];
+        [_completeBtn.layer addSublayer:gl];
+        
+        UILabel *completeLab = [UILabel initWithTitle:@"活动目标已达成" andFont:16 andWeight:1 andTextColor:JCWhiteColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        
+        completeLab.frame = CGRectMake(0, 0, width, 44);
+        [_completeBtn addSubview:completeLab];
+    }
+    return _completeBtn;
+}
+
+- (UIButton *)shareImageBtn {
+    if (!_shareImageBtn) {
+        float width = (SCREEN_WIDTH-45)/2.0f;
+        _shareImageBtn = [UIButton initWithText:@"" FontSize:16 BackGroundColor:JCClearColor TextColor:JCWhiteColor];
+        [_shareImageBtn addTarget:self action:@selector(sharePosterClick) forControlEvents:UIControlEventTouchUpInside];
+        _shareImageBtn.frame = CGRectMake(30+width, 10, width, 44);
+        [_shareImageBtn hg_setAllCornerWithCornerRadius:22];
+        CAGradientLayer *gl = [CAGradientLayer layer];
+        gl.frame = CGRectMake(0,0,width,AUTO(44));
+        gl.startPoint = CGPointMake(0, 0);
+        gl.endPoint = CGPointMake(1, 0);
+        gl.colors = @[(__bridge id)UIColorFromRGB(0xFB5735).CGColor, (__bridge id)UIColorFromRGB(0xFF3125).CGColor];
+        gl.locations = @[@(0), @(1.0f)];
+        [_shareImageBtn.layer addSublayer:gl];
+        
+        UILabel *shareLab = [UILabel initWithTitle:@"分享活动图片" andFont:16 andWeight:1 andTextColor:JCWhiteColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        
+        shareLab.frame = CGRectMake(0, 0, width, 44);
+        [_shareImageBtn addSubview:shareLab];
+    }
+    return _shareImageBtn;
+}
+
+- (UIButton *)endBtn {
+    if (!_endBtn) {
+        _endBtn = [UIButton initWithText:@"" FontSize:16 BackGroundColor:JCClearColor TextColor:JCWhiteColor];
+        [_endBtn hg_setAllCornerWithCornerRadius:22];
+        _endBtn.frame = CGRectMake(15, 10, SCREEN_WIDTH-30, 44);
+        CAGradientLayer *gl = [CAGradientLayer layer];
+        gl.frame = CGRectMake(0,0,SCREEN_WIDTH-30,AUTO(44));
+        gl.startPoint = CGPointMake(0, 0);
+        gl.endPoint = CGPointMake(1, 0);
+        gl.colors = @[(__bridge id)UIColorFromRGB(0xABAFB7).CGColor, (__bridge id)UIColorFromRGB(0x9B9FA8).CGColor];
+        gl.locations = @[@(0), @(1.0f)];
+        [_endBtn.layer addSublayer:gl];
+        self.endLab = [UILabel initWithTitle:@"本期活动已结束" andFont:16 andWeight:1 andTextColor:JCWhiteColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        self.endLab.frame = CGRectMake(0, 0, SCREEN_WIDTH-30, 44);
+        [_endBtn addSubview:self.endLab];
+    }
+    return _endBtn;
+}
+- (JCKindScoreCompleteView *)scoreTipView {
+    if (!_scoreTipView) {
+        _scoreTipView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        _scoreTipView = [JCKindScoreCompleteView new];
+    }
+    return _scoreTipView;
+}
+
+- (JCKindInviteView *)inviteView {
+    if (!_inviteView) {
+        _inviteView = [JCKindInviteView new];
+        _inviteView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    }
+    return _inviteView;
+}
+
+- (JCKindShareView *)shareBottomView {
+    if (!_shareBottomView) {
+        _shareBottomView = [JCKindShareView new];
+    }
+    return _shareBottomView;;
+}
+
+- (NSMutableArray *)popImageArray {
+    if (!_popImageArray) {
+        _popImageArray = [NSMutableArray array];
+    }
+    return _popImageArray;
+}
+- (JCKindSignTipView *)signTipView {
+    if (!_signTipView) {
+        _signTipView = [JCKindSignTipView new];
+        _signTipView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    }
+    return _signTipView;
+}
 @end

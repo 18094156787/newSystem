@@ -14,9 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UIImageView *timeBgView;
 
+@property (nonatomic, strong) UILabel *titleLab;
+
 @property (nonatomic, strong) UILabel *infoLab;
 
 @property (nonatomic, strong) UICollectionView *collectionView;
+
+@property (nonatomic,strong) UIImage *kindImageView;
 
 @property (nonatomic,strong) NSArray *dataSource;
 

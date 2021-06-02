@@ -239,7 +239,8 @@
     NSString *zouString = [NSString stringWithFormat:@"%ld走",zou];
     NSString *zsString = [NSString stringWithFormat:@"%@   %@   %@",hongString,zouString,heiString];
     
-    self.mizhongLab.text = [NSString stringWithFormat:@"%.0f%%",hong/rateArray.count*100];
+//    self.mizhongLab.text = [NSString stringWithFormat:@"%.0f%%",hong/rateArray.count*100];
+    self.mizhongLab.text = exprtModel.late_mingzhong_rate;
     
     NSMutableAttributedString *zsAttr = [[NSMutableAttributedString alloc] initWithString:zsString];
     NSRange hong_range = [zsString rangeOfString:hongString];

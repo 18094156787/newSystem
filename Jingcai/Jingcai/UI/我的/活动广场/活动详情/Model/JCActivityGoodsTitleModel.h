@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *grade;
 
+@property (nonatomic,strong) NSString *is_own;//是否已领取
+
 @property (nonatomic,strong) NSMutableArray *dataArray;
 
 @end

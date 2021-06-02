@@ -7,12 +7,34 @@
 //
 
 #import "JCBaseTableViewCell_New.h"
-#import "HMSegmentedControl.h"
+#import <JXCategoryView.h>
+#import "JCActivityKindUserVC.h"
+#import "JCActivityKindScoreVC.h"
+#import "JCActivityKindMyPrizeVC.h"
+#import "JCActivityDetailModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JCActivityKindCell : JCBaseTableViewCell_New
+@interface JCActivityKindCell : JCBaseTableViewCell_New<JXCategoryViewDelegate, JXCategoryListContainerViewDelegate>
 
-@property (nonatomic,strong) HMSegmentedControl *segment;
+@property (nonatomic, strong) NSArray *titleArr;// 标题数据
+@property (nonatomic, strong) JXCategoryTitleView *categoryView;// 标题view
+@property (nonatomic, strong) JXCategoryListContainerView *listContainerView;//listView
+
+@property (nonatomic, strong) UIImageView *getScoreImgView;
+
+@property (nonatomic, assign) float height;
+
+@property (nonatomic, copy) void(^JCHeightBlock)(float heihgt);
+
+@property (nonatomic,strong) NSString *actID;
+
+@property (nonatomic,strong) JCActivityDetailModel *detailModel;
+
+@property (nonatomic, strong) JCActivityKindUserVC *userVC;
+
+@property (nonatomic, strong) JCActivityKindScoreVC *scoreVC;
+
+@property (nonatomic, strong) JCActivityKindMyPrizeVC *prizeVC;
 
 @end
 

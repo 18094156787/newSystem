@@ -184,4 +184,64 @@
         [self dealWithError:error];
     }];
 }
+
+#pragma mark  慈善活动相关
+//慈善活动详情
+- (void)getKindActivityDetailWithActID:(NSString *)ID success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+                            @"activity_id":ID
+    };
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"charity_info" paramDic:param ignoreArray:@[]];
+
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self deathWithSuccessInfo:responseObject];
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+        [self dealWithError:error];
+    }];
+    
+}
+//活动签到
+//type 1签到 2分享转发
+- (void)getKindActivitySignWithActID:(NSString *)ID type:(NSString *)type success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+                            @"activity_id":ID,
+                            @"type":type
+    };
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"charity_sign" paramDic:param ignoreArray:@[]];
+
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self deathWithSuccessInfo:responseObject];
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+        [self dealWithError:error];
+    }];
+    
+}
+
+//签到活动内部详情
+//type 1活动完成用户 2用户积分明细 3我的奖励 4返回全部列表 默认为4
+- (void)getKindActivityDetailContentWithActID:(NSString *)ID  type:(NSString *)type Page:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+                            @"activity_id":ID,
+                            @"type":type,
+                            @"page":Integet_ToString(page),
+                            @"page_size":@"5"
+    };
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"charity_play_info" paramDic:param ignoreArray:@[]];
+
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self deathWithSuccessInfo:responseObject];
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+        [self dealWithError:error];
+    }];
+    
+}
 @end

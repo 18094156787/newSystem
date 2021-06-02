@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     
 //   NSString *url = [JCWInterfaceTool serviceUrlWithRoute:@"privacypolicy/鲸猜足球"];
-    NSString *url = @"http://api.yixinzuqiu.com/v1/zucai/privacypolicy/鲸猜足球";
+    NSString *url = [NSString stringWithFormat:@"%@?dev=1",[JCConfigModel currentConfigModel].get_privacy];
     
     self.urlStr = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [super viewDidLoad];

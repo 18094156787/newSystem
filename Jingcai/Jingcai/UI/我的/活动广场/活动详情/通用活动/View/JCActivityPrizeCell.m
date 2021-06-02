@@ -35,6 +35,7 @@
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.insets(UIEdgeInsetsZero);
     }];
+    self.titleLab = titleLab;
     
     [bgView addSubview:self.infoLab];
     [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -141,6 +142,16 @@
     if ([self.detailModel.count integerValue]>0) {
         self.infoLab.text = [NSString stringWithFormat:@" 剩余奖品数量：%@ | 奖品总数：%@",self.detailModel.remaining_quantity,self.detailModel.count];
                 }
+}
+
+- (void)setKindImageView:(UIImage *)kindImageView {
+    _kindImageView = kindImageView;
+    self.titleLab.textColor = COLOR_FB5835;
+    self.timeBgView.backgroundColor = UIColorFromRGB(0xFFFDFA);
+    self.timeBgView.image = kindImageView;
+    [self.timeBgView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(119, 22));
+    }];
 }
 
 

@@ -9,6 +9,9 @@
 #import "JCWBaseBall.h"
 #import "JCActivityGoodsModel.h"
 #import "JCActivityOptionModel.h"
+#import "JCKindActivityInfoModel.h"
+#import "JCSignBannerModel.h"
+#import "JCKindShareResigerModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCActivityDetailModel : JCWBaseBall
@@ -51,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *show;//上架状态 1已上架 2未上架
 
-@property (nonatomic,strong) NSString *pay_type;//充值金额计算方式 1 每累计充值金额 2累计充值金额 3账户首充 4周期首充
+@property (nonatomic,strong) NSString *pay_type;//充值金额计算方式 1 每累计充值金额 2累计充值金额 3账户首充 4周期首充 5.
 
 @property (nonatomic,strong) NSString *option;//用户可选个数
 
@@ -98,6 +101,35 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic)  NSArray <JCActivityOptionModel *> *activity_option;//竞猜活动选项
 
 @property (strong, nonatomic)  NSArray <JCActivityGoodsModel *> *goods_popover_info;//充值活动奖品弹窗
+
+#pragma mark 慈善活动专属
+
+@property (strong, nonatomic) JCKindActivityInfoModel *user_info;
+
+@property (strong, nonatomic) JCKindShareResigerModel *share_resiger;
+
+@property (strong, nonatomic)  NSArray <JCSignBannerModel *> *banner;//阶段奖励
+
+
+@property (nonatomic,strong) NSString *score;//动积分满值
+
+@property (nonatomic,strong) NSString *finish_num;//活动达成人数
+
+@property (nonatomic,strong) NSString *is_new;//0否 1是
+
+@property (nonatomic,strong) NSString *is_stage;//阶段活动是否弹窗 0未弹出 1弹出
+
+@property (strong, nonatomic)  NSArray <JCActivityGoodsModel *> *stage_grade;//阶段奖励
+
+
+
+@property (nonatomic,strong) NSString *is_popup;//海报是否弹出 1不弹 2弹出
+
+@property (nonatomic,strong) NSString *popup_image;//活动海报图
+
+
+
+
 
 
 @end

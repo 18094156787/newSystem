@@ -155,6 +155,9 @@ dispatch_async(queue, block);\
             break;
         case 103:
         {
+            if (self.infoModel.url.length==0) {
+                return;
+            }
             UIPasteboard * pasteBoard = [UIPasteboard generalPasteboard];
             pasteBoard.string = self.infoModel.url;
             [JCWToastTool showHint:@"已复制"];

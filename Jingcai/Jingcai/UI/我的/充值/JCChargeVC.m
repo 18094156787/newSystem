@@ -90,9 +90,13 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
     WeakSelf;
     [IAPManager shared].JNSuccessBlock = ^{
         
-        [weakSelf getChargeList];
-        [weakSelf getBanner];
+       
+       
         [JCWToastTool showHint:@"充值成功"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf getBanner];
+            [weakSelf getChargeList];
+        });
     };
     
     [[IAPManager shared] checkMyBuyGoods];//重新进入该页面,重新检查是否有未完成的订单
@@ -289,6 +293,9 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section==3) {
         return 0.001f;
+    }
+    if (section==0) {
+        return self.bannerHeight>0?AUTO(8):0;
     }
     return AUTO(8);
 }

@@ -181,11 +181,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     if ([model.type integerValue]==4) {
-//        JCActivityKindVC *vc = [JCActivityKindVC new];
-//        vc.actID = model.id;
-//        [self.navigationController pushViewController:vc animated:YES];
-//        return;
-        
+
         JCActivityGuessVC *vc = [JCActivityGuessVC new];
         vc.actID = model.id;
         [self.navigationController pushViewController:vc animated:YES];
@@ -194,6 +190,7 @@
         
         JCActivityKindVC *vc = [JCActivityKindVC new];
         vc.actID = model.id;
+//        vc.actID = @"122";
         [self.navigationController pushViewController:vc animated:YES];
 
     }

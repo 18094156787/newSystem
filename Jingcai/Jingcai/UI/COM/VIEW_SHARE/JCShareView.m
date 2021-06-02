@@ -142,14 +142,15 @@
     shareObject.webpageUrl = self.webPageUrl;
     if (platformType == UMSocialPlatformType_WechatTimeLine) {
         shareObject.webpageUrl = self.friend_url;
-//        if (self.content.length>0) {
-////            [NSString stringWithFormat:@"[%@]%@",self.title,self.content]
-//            shareObject = [UMShareWebpageObject shareObjectWithTitle:self.title descr:self.desc thumImage:self.imageUrl];
-//        }
-       
+
     }
     //分享消息对象设置分享内容对象
     messageObject.shareObject = shareObject;
+    
+//    UMShareImageObject  *imageObj = [UMShareImageObject new];
+//    imageObj.shareImage = @"http://imagetest.yixinzuqiu.com/upload/image/1109/47b87ab5cad3451bf3484dc385e408aa.jpg";
+//    messageObject.shareObject = imageObj;
+    
     
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
         if (error) {

@@ -53,6 +53,12 @@
         make.top.right.equalTo(self.photoImgView);
         make.width.height.mas_equalTo(AUTO(28));
     }];
+    
+    [self.contentView addSubview:self.reasonInfoLab];
+    [self.reasonInfoLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.photoImgView.mas_bottom).offset(AUTO(3));
+        make.left.right.offset(0);
+    }];
 }
 
 - (UILabel *)titleLab {
@@ -102,5 +108,11 @@
     }
     return _deleteBtn;
 }
-
+- (UILabel *)reasonInfoLab {
+    if (!_reasonInfoLab) {
+        _reasonInfoLab = [UILabel initWithTitle:@"签约作者需要您的身份证，用于验证是您本人以及身份的合法性" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        
+    }
+    return _reasonInfoLab;
+}
 @end

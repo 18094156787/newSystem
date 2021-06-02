@@ -120,7 +120,7 @@
     }
     
     
-    if (([model.type integerValue]>=12&&[model.type integerValue]<=14&&[model.status integerValue]!=3)) {
+    if (([model.type integerValue]>=12&&[model.type integerValue]<=15&&[model.status integerValue]!=3)) {
        self.sureLab.text= @"前往活动";
        [self.sureLab mas_updateConstraints:^(MASConstraintMaker *make) {
            make.bottom.offset(AUTO(-10));

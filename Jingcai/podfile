@@ -36,5 +36,6 @@ target 'Jingcai' do
 #    pod 'YBImageBrowser'
     pod 'YYKit'
     pod 'SocketRocket'
+    pod 'JXCategoryView'
 end
 

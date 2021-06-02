@@ -245,6 +245,8 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 #define COLOR_F37E22 UIColorFromRGB(0xF37E22)
 #define COLOR_812BF1 UIColorFromRGB(0x812BF1)
 #define COLOR_F2A15E UIColorFromRGB(0xF2A15E)
+#define COLOR_FB5835 UIColorFromRGB(0xFB5835)
+
 
 #define JCIMAGE(name)    [UIImage imageNamed:(name)]
 

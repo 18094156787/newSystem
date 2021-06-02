@@ -15,11 +15,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) WKWebView *webView;
 
+@property (nonatomic,strong) UIImageView *timeBgView;
+
+@property (nonatomic, strong) UILabel *titleLab;
+
 @property (nonatomic,strong) void(^JCRefreshBlock)(float height);
 
 @property (nonatomic,assign) float height;
 
 @property (nonatomic,strong) JCActivityDetailModel *detailModel;
+
+@property (nonatomic,strong) UIImage *kindImageView;
 
 @end
 

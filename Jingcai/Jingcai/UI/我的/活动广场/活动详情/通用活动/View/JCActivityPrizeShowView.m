@@ -8,6 +8,7 @@
 
 #import "JCActivityPrizeShowView.h"
 #import "JCActivityPrizeTableViewCell.h"
+#import "JCActivityPrizeTitleView.h"
 @implementation JCActivityPrizeShowView
 - (void)initViews {
     self.backgroundColor = [JCBlackColor colorWithAlphaComponent:0.5];
@@ -68,17 +69,19 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *headView = [UIView new];
+    JCActivityPrizeTitleView *headView = [JCActivityPrizeTitleView new];
+    headView.detailModel = self.detailModel;
     JCActivityGoodsTitleModel *titleModel = self.dataSource[section];
-    UILabel *lab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:2 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:0];
-    if ([titleModel.grade integerValue]>0&&[self.detailModel.type integerValue]==3&&[self.detailModel.pay_type integerValue]==2) {
-        lab.text = [NSString stringWithFormat:@"累积充值%@元",NonNil(titleModel.grade)];
-    }else{
-        lab.text = @"";
-    }
-    
-    lab.frame = CGRectMake(AUTO(15),2, SCREEN_WIDTH-30, 30);
-    [headView addSubview:lab];
+    headView.titleModel = titleModel;
+//    UILabel *lab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:2 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:0];
+//    if ([titleModel.grade integerValue]>0&&[self.detailModel.type integerValue]==3&&[self.detailModel.pay_type integerValue]==2) {
+//        lab.text = [NSString stringWithFormat:@"累计充值%@元",NonNil(titleModel.grade)];
+//    }else{
+//        lab.text = @"";
+//    }
+//
+//    lab.frame = CGRectMake(AUTO(15),2, SCREEN_WIDTH-30, 30);
+//    [headView addSubview:lab];
     return headView;
     
 }
@@ -87,14 +90,18 @@
     JCActivityGoodsTitleModel *titleModel = self.dataSource[section];
     if ([titleModel.grade integerValue]>0&&[self.detailModel.type integerValue]==3&&[self.detailModel.pay_type integerValue]==2) {
         return 30;
-    }else{
+    }else if([titleModel.grade integerValue]>0&&[self.detailModel.type integerValue]==5){
+        
+        return 30;
+    }
+    else{
         return 0.01f;
     }
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0.01f;
+    return 5;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -128,7 +135,11 @@
             make.right.offset(AUTO(-30));
             if ([obj.grade integerValue]>0&&[self.detailModel.type integerValue]==3&&[self.detailModel.pay_type integerValue]==2) {
                 make.height.mas_equalTo(AUTO(180)+AUTO(92)*dataArray.count);
+            }else if([obj.grade integerValue]>0&&[self.detailModel.type integerValue]==5){
+                
+                make.height.mas_equalTo(AUTO(180)+AUTO(92)*dataArray.count);
             }else{
+                
                 make.height.mas_equalTo(AUTO(160)+AUTO(92)*dataArray.count);
             }
         }];
@@ -140,6 +151,7 @@
             
             JCActivityGoodsTitleModel *titleModel = [JCActivityGoodsTitleModel new];
             titleModel.grade = obj.grade;
+            titleModel.is_own = obj.is_own;
             [titleModel.dataArray addObject:obj];
             [self.dataSource addObject:titleModel];
             self.titleModel = titleModel;

@@ -18,7 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UILabel *timeLab;
 
+@property (nonatomic,strong) UIImageView *timeBackView;
+
 @property (nonatomic,strong) JCActivityDetailModel *detailModel;
+
+@property (nonatomic,strong) UIImage *kindImageView;
 
 @end
 

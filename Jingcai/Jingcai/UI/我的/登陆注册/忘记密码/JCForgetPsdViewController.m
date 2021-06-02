@@ -325,8 +325,7 @@
     if (!_agreeBtn) {
         _agreeBtn = [UIButton new];
         [_agreeBtn setImage:JCIMAGE(@"login_choose_nor") forState:0];
-        [_agreeBtn setImage:JCIMAGE(@"login_choose_sel") forState:UIControlStateSelected];
-        _agreeBtn.selected = YES;
+        [_agreeBtn setImage:JCIMAGE(@"login_choose_sel") forState:UIControlStateSelected];\
         [_agreeBtn addTarget:self action:@selector(agreeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _agreeBtn;

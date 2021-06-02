@@ -34,6 +34,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getSubmitJingCaiUserWithActID:(NSString *)ID options:(NSString *)options success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //充值界面奖励信息
 - (void)getRechargeBannerInfoWithsuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;
+
+#pragma mark  慈善活动相关
+//慈善活动详情
+- (void)getKindActivityDetailWithActID:(NSString *)ID success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+
+//活动签到
+//type 1签到 2分享转发
+- (void)getKindActivitySignWithActID:(NSString *)ID type:(NSString *)type success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//签到活动内部详情
+//type 1活动完成用户 2用户积分明细 3我的奖励 4返回全部列表 默认为4
+- (void)getKindActivityDetailContentWithActID:(NSString *)ID  type:(NSString *)type Page:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END

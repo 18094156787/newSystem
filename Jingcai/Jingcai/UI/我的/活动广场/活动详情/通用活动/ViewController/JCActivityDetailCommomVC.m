@@ -76,7 +76,7 @@
             self.title = self.detailModel.title;
             NSString *accumulate = [NSString stringWithFormat:@"累计充值：%@ | 我已领取：%@",self.detailModel.cumulative_recharge,self.detailModel.quantity_received];
  
-            if ([self.detailModel.pay_type integerValue]==3||[self.detailModel.pay_type integerValue]==4) {
+            if ([self.detailModel.pay_type integerValue]!=1&&[self.detailModel.pay_type integerValue]!=2) {
                 //首冲,用后台带的文本
                 accumulate = self.detailModel.recharge_information;
             }

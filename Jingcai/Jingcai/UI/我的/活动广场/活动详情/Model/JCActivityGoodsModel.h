@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *status;//状态 1 正常 2禁用
 
+@property (nonatomic,strong) NSString *is_own;//是否已领取
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -219,7 +219,7 @@
     CGFloat fontSize = font.pointSize;
     UIColor *textColor = self.titleLabTextColor ? self.titleLabTextColor : kBlackColor;
     CGFloat titleMargin = self.titleLabMargin > 0 ? self.titleLabMargin : (contentHeight == 0 ?: subViweMargin);
-    CGSize size = [self returnTextWidth:titleStr size:CGSizeMake(contentMaxWidth, fontSize + 5) font:font];
+    CGSize size = [self returnTextWidth:titleStr size:CGSizeMake(contentMaxWidth, fontSize + 50) font:font];
     
     CGFloat width = size.width;
     CGFloat height = size.height;
@@ -584,6 +584,7 @@
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
+        _titleLabel.numberOfLines = 0;
         [self.contentView addSubview:_titleLabel];
     }
     return _titleLabel;

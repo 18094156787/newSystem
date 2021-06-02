@@ -325,9 +325,9 @@
         return AUTO(85);
     }
     if (indexPath.section==1) {
-        return AUTO(AUTO(255));
+        return AUTO(270);
     }
-    return AUTO(AUTO(230));
+    return AUTO(230);
 }
 
 

@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UIButton *deleteBtn;
 
+@property (nonatomic,strong) UILabel *reasonInfoLab;
+
 @end
 
 NS_ASSUME_NONNULL_END

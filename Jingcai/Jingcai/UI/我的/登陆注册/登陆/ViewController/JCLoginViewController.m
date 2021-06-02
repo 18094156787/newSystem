@@ -306,10 +306,10 @@
 
 
         }else {
-            if (!weakSelf.agreeBtn.selected) {
-                 [JCWToastTool showHint:@"请阅读“服务协议”并点击同意"];
-                 return ;
-             }
+//            if (!weakSelf.agreeBtn.selected) {
+//                 [JCWToastTool showHint:@"请阅读“服务协议”并点击同意"];
+//                 return ;
+//             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
 
@@ -432,7 +432,6 @@
         _agreeBtn = [UIButton new];
         [_agreeBtn setImage:JCIMAGE(@"login_choose_nor") forState:0];
         [_agreeBtn setImage:JCIMAGE(@"login_choose_sel") forState:UIControlStateSelected];
-        _agreeBtn.selected = YES;
         [_agreeBtn addTarget:self action:@selector(agreeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _agreeBtn;

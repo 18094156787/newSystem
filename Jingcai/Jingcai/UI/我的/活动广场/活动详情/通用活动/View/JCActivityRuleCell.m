@@ -29,12 +29,14 @@
         make.centerX.equalTo(bgView);
         make.size.mas_equalTo(CGSizeMake(98, 16));
     }];
+    self.timeBgView = timeBgView;
     
     UILabel *titleLab = [UILabel initWithTitle:@"活动规则" andFont:16 andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     [timeBgView addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.insets(UIEdgeInsetsZero);
     }];
+    self.titleLab = titleLab;
     
     [bgView addSubview:self.webView];
     [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -62,22 +64,7 @@
     
 //    [self.webView loadHTMLString:self.detailModel.rule baseURL:nil];
 }
-//- (void)setNewsDetailBall:(JCWNewsDetailBall *)newsDetailBall {
-//    _newsDetailBall = newsDetailBall;
-//    if (!newsDetailBall) {
-//        return;
-//    }
-//    if (self.loadSuccess&&newsDetailBall) {
-//        return;
-//    }
-////    [self.webView loadHTMLString:[self html] baseURL:nil];
-//    NSString *imgWidth = [NSString stringWithFormat:@"<head><style>img{width:%fpx !important;height:auto}</style></head>",SCREEN_WIDTH-AUTO(30)];
-//    NSString *style = [NSString stringWithFormat:@"<html><head><meta content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0\" name=\"viewport\"><style type=\"text/css\"></style></head>%@<body></body></html>",imgWidth];
-//    NSString *str = [NSString stringWithFormat:@"%@%@",self.newsDetailBall.content,style];
-////    [self.newsDetailBall.content stringByAppendingString: @"<html><head><meta content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0\" name=\"viewport\"><style type=\"text/css\"></style></head><body></body></html>"];
-////       [self.webView loadHTMLString:[self html] baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]bundlePath]]];
-//    [self.webView loadHTMLString:str baseURL:nil];
-//}
+
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     
     [webView evaluateJavaScript:@"document.body.scrollHeight" completionHandler:^(id _Nullable result,NSError *_Nullable error) {
@@ -110,6 +97,17 @@
 
     }];
 }
+
+- (void)setKindImageView:(UIImage *)kindImageView {
+    _kindImageView = kindImageView;
+    self.titleLab.textColor = COLOR_FB5835;
+    self.timeBgView.backgroundColor = UIColorFromRGB(0xFFFDFA);
+    self.timeBgView.image = kindImageView;
+    [self.timeBgView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(119, 22));
+    }];
+}
+
 - (WKWebView *)webView {
     if (!_webView) {
         _webView = [WKWebView new];

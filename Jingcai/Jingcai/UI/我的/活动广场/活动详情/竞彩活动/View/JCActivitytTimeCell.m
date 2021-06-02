@@ -12,9 +12,6 @@
 
 - (void)initViews {
     self.backgroundColor = JCClearColor;
-
-
-    
     [self addSubview:self.timeBgView];
     [self.timeBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(16);
@@ -32,6 +29,7 @@
         make.centerX.equalTo(self.timeBgView);
         make.size.mas_equalTo(CGSizeMake(98, 16));
     }];
+    self.timeBackView = timeBgView;
     
     [timeBgView addSubview:self.titleLab];
     [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -55,7 +53,15 @@
     }
     self.timeLab.text = [NSString stringWithFormat:@"%@-%@",detailModel.start_time,detailModel.end_time];
 }
-
+- (void)setKindImageView:(UIImage *)kindImageView {
+    _kindImageView = kindImageView;
+    self.titleLab.textColor = COLOR_FB5835;
+    self.timeBgView.backgroundColor = UIColorFromRGB(0xFFFDFA);
+    self.timeBackView.image = kindImageView;
+    [self.timeBackView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(119, 22));
+    }];
+}
 
 - (UIView *)timeBgView {
     if (!_timeBgView) {
