@@ -192,6 +192,7 @@
         
         WeakSelf;
         cell.JCClickBlock = ^{
+            weakSelf.prizeView.showHeader = YES;
             weakSelf.prizeView.detailModel = weakSelf.detailModel;
             weakSelf.prizeView.dataArray = weakSelf.detailModel.goods_info;
             [weakSelf.jcWindow addSubview:weakSelf.prizeView];
@@ -346,6 +347,7 @@
     
     WeakSelf;
     self.activity_commom_tipView.JCClickBlock = ^{
+        weakSelf.prizeView.showHeader = NO;
         weakSelf.prizeView.detailModel = weakSelf.detailModel;
         weakSelf.prizeView.dataArray = weakSelf.detailModel.goods_info;
         [weakSelf.jcWindow addSubview:weakSelf.prizeView];
@@ -359,6 +361,7 @@
     [self.jcWindow addSubview:self.activity_recharge_tipView];
     WeakSelf;
     self.activity_recharge_tipView.JCClickBlock = ^{
+        weakSelf.prizeView.showHeader = NO;
         weakSelf.prizeView.detailModel = weakSelf.detailModel;
         weakSelf.prizeView.dataArray = weakSelf.detailModel.goods_popover_info;
         [weakSelf.jcWindow addSubview:weakSelf.prizeView];

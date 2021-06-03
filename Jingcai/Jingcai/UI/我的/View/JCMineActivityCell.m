@@ -73,7 +73,10 @@
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     
-
+//    WebViewController *webVC = [WebViewController new];
+//    webVC.urlStr = @"http://wap.weicaizq.com/zucai/informationdetails/5335";
+//    [[self getViewController].navigationController pushViewController:webVC animated:YES];
+//    return;
     
     if (self.bannerArray.count==0) {
         [self pushInviteFriendVC];

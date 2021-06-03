@@ -9,7 +9,11 @@
 #import "JCActivityKindMyPrizeVC.h"
 #import "JCActivityPrizeTableViewCell.h"
 #import "JCKindUserCompleteModel.h"
+#import "JCKindMoreFootView.h"
 @interface JCActivityKindMyPrizeVC ()
+
+@property (nonatomic,strong) JCKindMoreFootView *footView;
+
 
 @end
 
@@ -40,7 +44,7 @@
             if (self.pageNo==1) {
                 [self.dataArray removeAllObjects];
             }
-            NSArray *dataArray = [JCWJsonTool arrayWithJson:object[@"data"] class:[JCKindUserCompleteModel class]];
+            NSArray *dataArray = [JCWJsonTool arrayWithJson:object[@"data"] class:[JCActivityGoodsModel class]];
             [self.dataArray addObjectsFromArray:dataArray];
             self.pageNo++;
             [self.tableView reloadData];
@@ -48,7 +52,19 @@
             
             
             [self chageImageStr:@"ic_empty_gift" Title:@"您还未获得任何奖励！\n快去参与活动领取奖励吧！" BtnTitle:@""];
+            self.tableView.ly_emptyView.titleLabTextColor = UIColorFromRGB(0x9DAAB8);
+            
+            if (dataArray.count<5) {
+                [self.footView showNoMore];
+            }else {
+                [self.footView showMore];
+            }
+            
+            if (self.dataArray.count>0) {
 
+                self.footView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
+                self.tableView.tableFooterView = self.footView;
+            }
 
             
         }else{
@@ -62,6 +78,8 @@
 }
 
 - (void)initViews {
+    self.tableView.bounces = NO;
+    self.tableView.separatorStyle = 0;
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(0);
         make.left.right.bottom.equalTo(self.view);
@@ -72,15 +90,19 @@
     [self.tableView registerClass:[JCActivityPrizeTableViewCell class] forCellReuseIdentifier:@"JCActivityPrizeTableViewCell"];
     
 
+
+    WeakSelf;
     JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
-        [self refreshData];
+        [weakSelf refreshData];
     }];
     emptyView.contentViewOffset = -30;
     self.tableView.ly_emptyView = emptyView;
 
+    self.footView.JCBlock = ^{
+        [weakSelf getDataList];
+    };
     
-    
-    emptyView.titleLabTextColor = UIColorFromRGB(0x9DAAB8);
+//    emptyView.titleLabTextColor = UIColorFromRGB(0x9DAAB8);
 }
 
 #pragma mark <UITableViewDataSource>
@@ -92,7 +114,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     
-    return 0;
+    return self.dataArray.count;
     
 }
 
@@ -120,7 +142,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0.0001;
+    return 10;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -138,7 +160,40 @@
     return self.view;
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
+    CGFloat height = scrollView.frame.size.height;
+        CGFloat contentOffsetY = scrollView.contentOffset.y;
+        CGFloat bottomOffset = scrollView.contentSize.height - contentOffsetY;
+
+    
+        NSLog(@"整体高度%.5f--偏移量%.5f",bottomOffset,height);
+        if (bottomOffset-1 <= height)
+        {
+            //在最底部
+//            self.currentIsInBottom = YES;
+            scrollView.scrollEnabled = NO;
+        }
+        else
+        {
+            if (scrollView.contentOffset.y==0) {
+                scrollView.scrollEnabled = NO;
+            }else {
+                scrollView.scrollEnabled = YES;
+            }
+            
+//            self.currentIsInBottom = NO;
+        }
+
+
+}
+
+- (JCKindMoreFootView *)footView {
+    if (!_footView) {
+        _footView = [JCKindMoreFootView new];
+    }
+    return _footView;
+}
 /*
 #pragma mark - Navigation
 

@@ -140,8 +140,8 @@
 - (void)setDetailModel:(JCActivityDetailModel *)detailModel {
     _detailModel = detailModel;
     if ([self.detailModel.count integerValue]>0) {
-        self.infoLab.text = [NSString stringWithFormat:@" 剩余奖品数量：%@ | 奖品总数：%@",self.detailModel.remaining_quantity,self.detailModel.count];
-                }
+        self.infoLab.text = [NSString stringWithFormat:@"奖励剩余：%@ | 奖励总量：%@",self.detailModel.remaining_quantity,self.detailModel.count];
+    }
 }
 
 - (void)setKindImageView:(UIImage *)kindImageView {

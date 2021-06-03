@@ -29,6 +29,8 @@
     [self initViews];
     [self refreshData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"refreshKindActivityDetail" object:nil];
+//    self.tableView.panGestureRecognizer.delegate = self;
+
 }
 
 - (void)refreshData {
@@ -48,13 +50,14 @@
             NSArray *dataArray = [JCWJsonTool arrayWithJson:object[@"data"] class:[JCKindUserCompleteModel class]];
             [self.dataArray addObjectsFromArray:dataArray];
 //            [self.dataArray addObject:dataArray.firstObject];
-            [self.dataArray addObjectsFromArray:dataArray];
+//            [self.dataArray addObjectsFromArray:dataArray];
             self.pageNo++;
             [self.tableView reloadData];
             
             
             
             [self chageImageStr:@"ic_empty_user" Title:@"暂无达成目标用户！" BtnTitle:@""];
+            self.tableView.ly_emptyView.titleLabTextColor = UIColorFromRGB(0x9DAAB8);
             if (dataArray.count<5) {
                 [self.footView showNoMore];
             }else {
@@ -87,6 +90,7 @@
 //    self.tableView.tableFooterView = self.footView;
     
 //    [self.vi ]
+//    self.tableView.panGestureRecognizer.delaysTouchesBegan = YES;
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(0);
         make.left.right.bottom.equalTo(self.view);
@@ -108,9 +112,11 @@
 //    self.tableView.userInteractionEnabled = NO;
 //    self.tableView.contentSize = CGSizeMake(SCREEN_WIDTH, 5000);
     self.tableView.bounces = NO;
+//    self.tableView.scrollEnabled = NO;
     
     
-    emptyView.titleLabTextColor = UIColorFromRGB(0x9DAAB8);
+//    emptyView.titleLabTextColor = UIColorFromRGB(0x9DAAB8);
+   
 }
 
 #pragma mark <UITableViewDataSource>
@@ -158,7 +164,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    self.tableView.scrollEnabled = YES;
 }
 
 - (UIView *)listView {
@@ -166,14 +172,32 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    [NSUserDefaults]
-//    NSLog(@"%.0f",scrollView.contentOffset.y);
-//    if (scrollView.contentOffset.y<0) {
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"aaaa" object:nil];
-//    }
-    
-}
 
+    CGFloat height = scrollView.frame.size.height;
+        CGFloat contentOffsetY = scrollView.contentOffset.y;
+        CGFloat bottomOffset = scrollView.contentSize.height - contentOffsetY;
+
+    
+        NSLog(@"整体高度%.5f--偏移量%.5f",bottomOffset,height);
+        if (bottomOffset-1 <= height)
+        {
+            //在最底部
+//            self.currentIsInBottom = YES;
+            scrollView.scrollEnabled = NO;
+        }
+        else
+        {
+            if (scrollView.contentOffset.y==0) {
+                scrollView.scrollEnabled = NO;
+            }else {
+                scrollView.scrollEnabled = YES;
+            }
+            
+//            self.currentIsInBottom = NO;
+        }
+
+
+}
 - (void)setDetailModel:(JCActivityDetailModel *)detailModel {
     _detailModel = detailModel;
     self.headView.content = detailModel.finish_num;

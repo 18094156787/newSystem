@@ -69,28 +69,22 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
     JCActivityPrizeTitleView *headView = [JCActivityPrizeTitleView new];
+    headView.showHeader = self.showHeader;
     headView.detailModel = self.detailModel;
     JCActivityGoodsTitleModel *titleModel = self.dataSource[section];
     headView.titleModel = titleModel;
-//    UILabel *lab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:2 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:0];
-//    if ([titleModel.grade integerValue]>0&&[self.detailModel.type integerValue]==3&&[self.detailModel.pay_type integerValue]==2) {
-//        lab.text = [NSString stringWithFormat:@"累计充值%@元",NonNil(titleModel.grade)];
-//    }else{
-//        lab.text = @"";
-//    }
-//
-//    lab.frame = CGRectMake(AUTO(15),2, SCREEN_WIDTH-30, 30);
-//    [headView addSubview:lab];
+
     return headView;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     JCActivityGoodsTitleModel *titleModel = self.dataSource[section];
-    if ([titleModel.grade integerValue]>0&&[self.detailModel.type integerValue]==3&&[self.detailModel.pay_type integerValue]==2) {
+    if ([titleModel.grade integerValue]>0&&[self.detailModel.type integerValue]==3&&[self.detailModel.pay_type integerValue]==2&&self.showHeader) {
         return 30;
-    }else if([titleModel.grade integerValue]>0&&[self.detailModel.type integerValue]==5){
+    }else if([titleModel.grade integerValue]>0&&self.showHeader){
         
         return 30;
     }
@@ -130,12 +124,12 @@
     if (dataArray.count<5) {
         JCActivityGoodsModel *obj = dataArray.firstObject;
         [self.bgView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.offset(AUTO(30)+kNavigationBarHeight);
+            make.centerY.equalTo(self);
             make.left.offset(AUTO(30));
             make.right.offset(AUTO(-30));
-            if ([obj.grade integerValue]>0&&[self.detailModel.type integerValue]==3&&[self.detailModel.pay_type integerValue]==2) {
+            if ([obj.grade integerValue]>0&&[self.detailModel.type integerValue]==3&&[self.detailModel.pay_type integerValue]==2&&self.showHeader) {
                 make.height.mas_equalTo(AUTO(180)+AUTO(92)*dataArray.count);
-            }else if([obj.grade integerValue]>0&&[self.detailModel.type integerValue]==5){
+            }else if([obj.grade integerValue]>0&&self.showHeader){
                 
                 make.height.mas_equalTo(AUTO(180)+AUTO(92)*dataArray.count);
             }else{

@@ -31,7 +31,7 @@
 #import "JCYCInviteShareVC.h"
 #import "JCYuceShareInfoModel.h"
 
-@interface JCActivityKindVC ()
+@interface JCActivityKindVC ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) JCKindActivityHeadView *headView;
 
@@ -122,6 +122,9 @@
         [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
             self.detailModel = (JCActivityDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCActivityDetailModel class]];
+            if (!self.detailModel.type) {
+                self.detailModel.type = @"5";
+            }
 //            self.detailModel.user_info.is_finish = @"1";
             self.headView.detailModel = self.detailModel;
             self.title = self.detailModel.title;
@@ -157,25 +160,33 @@
             if ([self.detailModel.user_info.is_share integerValue]==1) {
                 self.shareBtn.userInteractionEnabled = NO;
                 self.shareGl.colors = @[(__bridge id)UIColorFromRGB(0xABAFB7).CGColor, (__bridge id)UIColorFromRGB(0x9B9FA8).CGColor];
-                self.signLab.text = @"今日已分享";
+                self.shareLab.text = @"今日已分享";
             }
             
             
             //展示底部按钮
-            if ([self.detailModel.active_state integerValue]==1||[self.detailModel.active_state integerValue]==3) {
+            if ([self.detailModel.active_state integerValue]==1||[self.detailModel.active_state integerValue]==3||[self.detailModel.active_state integerValue]==4) {
                 //活动未开始或者活动已结束
                 self.signBtn.hidden = YES;
                 self.shareBtn.hidden = YES;
                 self.inviteBtn.hidden = YES;
                 if ([self.detailModel.active_state integerValue]==1) {
                     //未开始
-                    self.endLab.text = @"活动未开始";
+                   
                     [self.bottomView addSubview:self.endBtn];
+                    self.endLab.text = @"活动未开始";
                 }
                 if ([self.detailModel.active_state integerValue]==3) {
                     //已结束
-                    self.endLab.text = @"本期活动已结束";
+                    
                     [self.bottomView addSubview:self.endBtn];
+                    self.endLab.text = @"本期活动已结束";
+                }
+                if ([self.detailModel.active_state integerValue]==4) {
+                    //已结束
+                   
+                    [self.bottomView addSubview:self.endBtn];
+                    self.endLab.text = @"活动太火爆，奖励已经发完了。";
                 }
                 
             }else{
@@ -198,7 +209,7 @@
             //展示活动海报
             if ([self.detailModel.is_stage integerValue]==1) {
                 self.scoreTipView.detailModel = self.detailModel;
-                self.scoreTipView.dataSource = self.detailModel.stage_grade;
+                self.scoreTipView.dataSource = self.detailModel.stage_info;
                 
                 if (![self.popImageArray containsObject:self.scoreTipView]) {
                     [self.popImageArray addObject:self.scoreTipView];
@@ -219,7 +230,9 @@
             
 
             
-
+//            self.scoreTipView.detailModel = self.detailModel;
+//            self.scoreTipView.dataSource = self.detailModel.goods_info;
+//            [self.jcWindow addSubview:self.scoreTipView];
             
         }else{
             [JCWToastTool showHint:object[@"msg"]];
@@ -249,7 +262,7 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 265);//240+25
     self.tableView.tableHeaderView = self.headView;
-    
+//    self.tableView.bounces = NO;
     
     [self.tableView registerClass:[JCActivityKindCell class] forCellReuseIdentifier:@"JCActivityKindCell"];
     [self.tableView registerClass:[JCActivitytTimeCell class] forCellReuseIdentifier:@"JCActivitytTimeCell"];
@@ -259,7 +272,7 @@
     [self.tableView registerClass:[JCActivityKindGetPrizeCell class] forCellReuseIdentifier:@"JCActivityKindGetPrizeCell"];
     [self.tableView registerClass:[JCActivityKindProgressCell class] forCellReuseIdentifier:@"JCActivityKindProgressCell"];
     
-    
+    self.tableView.panGestureRecognizer.delaysTouchesBegan = YES;
     [self.view addSubview:self.tableView];
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(0);
@@ -359,6 +372,7 @@
     
     //阶段奖励
     self.scoreTipView.JCClickBlock = ^(NSArray * _Nonnull dataArray) {
+        weakSelf.prizeView.showHeader = NO;
         weakSelf.prizeView.detailModel = weakSelf.detailModel;
         weakSelf.prizeView.dataArray = dataArray;
         [weakSelf.jcWindow addSubview:weakSelf.prizeView];
@@ -399,11 +413,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
-        JCActivityKindGetPrizeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityKindGetPrizeCell"];
-//        JCWSlideBall *slide = [JCWSlideBall new];
-//        slide.desc = @"地方代购复古风格快递费";
-        cell.tipArray = self.detailModel.banner;
-        return cell;
+        if (self.detailModel.banner.count>0) {
+            JCActivityKindGetPrizeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityKindGetPrizeCell"];
+    //        JCWSlideBall *slide = [JCWSlideBall new];
+    //        slide.desc = @"地方代购复古风格快递费";
+            cell.tipArray = self.detailModel.banner;
+            return cell;
+        }
+
     }
     if (indexPath.section==1) {
         JCActivityKindProgressCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityKindProgressCell"];
@@ -436,6 +453,8 @@
         cell.kindImageView = JCIMAGE(@"ic_kind_title");
         WeakSelf;
         cell.JCClickBlock = ^{
+            weakSelf.prizeView.showHeader = YES;
+            weakSelf.prizeView.detailModel = weakSelf.detailModel;
             weakSelf.prizeView.dataArray = weakSelf.detailModel.goods_info;
             [weakSelf.jcWindow addSubview:weakSelf.prizeView];
         };
@@ -456,6 +475,8 @@
     }
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+    cell.contentView.backgroundColor = JCClearColor;
+    cell.backgroundColor = JCClearColor;
     return cell;
 
 }
@@ -470,7 +491,7 @@
         return 0.01f;
     }
     if (indexPath.section==1) {
-        return 102;
+        return 86;
     }
     if (indexPath.section==2) {
 
@@ -480,9 +501,13 @@
     if (indexPath.section==3) {
         return 100;
     }
+    
     if (indexPath.section==4) {
         if (self.detailModel.goods_info.count>0) {
-            return 146;
+            if ([self.detailModel.count integerValue]>0) {
+                return 170;
+            }
+            return 136;
         }
         return 0.01f;
         
@@ -491,17 +516,21 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (self.detailModel.banner.count==0) {
-        return 0.01f;
+    if (section==0) {
+        if (self.detailModel.banner.count==0) {
+            return 0.01f;
+        }
     }
-    if (section==1) {
+
+
+    if (section==2) {
+        return 0.01;
+    }
+    if (section==4) {
         if (self.detailModel.goods_info.count==0) {
             return 0.01f;
         }
         
-    }
-    if (section==2) {
-        return 0.01;
     }
     return 20;
 }
@@ -550,8 +579,9 @@
                 
             }
             if ([user_info.is_stage integerValue]==1) {
+                self.detailModel.stage_grade = user_info.stage_grade;
                 self.scoreTipView.detailModel = self.detailModel;
-                self.scoreTipView.dataSource = user_info.stage_grade;
+                self.scoreTipView.dataSource = user_info.stage_info;
                 
                 if (![self.popImageArray containsObject:self.scoreTipView]) {
                     [self.popImageArray addObject:self.scoreTipView];
@@ -652,7 +682,23 @@
     
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return [gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]];
+}
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+//    if ([scrollView isKindOfClass:[UITableView class]]) {
+//        NSLog(@"------是列表---");
+//    }
+//    else {
+//        NSLog(@"------是滚动试图----");
+//    }
+    JCActivityKindCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
+    cell.userVC.tableView.scrollEnabled = YES;
+    cell.scoreVC.tableView.scrollEnabled = YES;
+    cell.prizeVC.tableView.scrollEnabled = YES;
+}
 - (JCKindActivityHeadView *)headView {
     if (!_headView) {
         _headView = [JCKindActivityHeadView new];
@@ -797,7 +843,7 @@
         gl.colors = @[(__bridge id)UIColorFromRGB(0xABAFB7).CGColor, (__bridge id)UIColorFromRGB(0x9B9FA8).CGColor];
         gl.locations = @[@(0), @(1.0f)];
         [_endBtn.layer addSublayer:gl];
-        self.endLab = [UILabel initWithTitle:@"本期活动已结束" andFont:16 andWeight:1 andTextColor:JCWhiteColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        self.endLab = [UILabel initWithTitle:@"" andFont:16 andWeight:1 andTextColor:JCWhiteColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
         self.endLab.frame = CGRectMake(0, 0, SCREEN_WIDTH-30, 44);
         [_endBtn addSubview:self.endLab];
     }
@@ -805,8 +851,9 @@
 }
 - (JCKindScoreCompleteView *)scoreTipView {
     if (!_scoreTipView) {
-        _scoreTipView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        
         _scoreTipView = [JCKindScoreCompleteView new];
+        _scoreTipView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
     return _scoreTipView;
 }

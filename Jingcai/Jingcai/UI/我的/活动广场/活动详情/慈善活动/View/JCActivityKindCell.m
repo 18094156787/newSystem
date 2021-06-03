@@ -51,17 +51,23 @@
     lineView.indicatorColor = COLOR_FB5835;
     self.categoryView.indicators = @[lineView];
 
-    self.listContainerView = [[JXCategoryListContainerView alloc] initWithType:JXCategoryListContainerType_CollectionView delegate:self];
+    self.listContainerView = [[JXCategoryListContainerView alloc] initWithType:JXCategoryListContainerType_ScrollView delegate:self];
     self.listContainerView.frame = CGRectMake(0, 44, SCREEN_WIDTH-32, 380);//390
+//    self.listContainerView.scrollView.contentSize =  CGSizeMake(SCREEN_WIDTH-32, 1000);
 //    self.listContainerView.scrollView.scrollEnabled = NO;
-    self.listContainerView.scrollView.bounces = NO;
+//    self.listContainerView.scrollView.bounces = NO;
     [bgView addSubview:self.listContainerView];
     //关联到categoryView
     self.categoryView.listContainer = self.listContainerView;
-    
+//    self.listContainerView.scrollView = NO;
 
+    
+//    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(aaaa)];
+//    pan.delegate = self;
+//    [self.listContainerView addGestureRecognizer:pan];
 
 }
+
 //4、代理JXCategoryViewDelegate
 
 -(void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {

@@ -179,6 +179,9 @@
         tabbar.tabSelIndex = 2;
     }
 
+    if ([webView.URL.absoluteString containsString:@"wap.jingcai.com"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
       NSLog(@"%@",webView.URL.absoluteString);
 }
 
@@ -186,15 +189,20 @@
 -(void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{}
 
 //服务器请求跳转的时候调用
--(void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation{}
+-(void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation{
+    
+    
+}
 
 //服务器开始请求的时候调用
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     // 如果不添加这个，那么wkwebview跳转不了AppStore
+    NSLog(@"%@",webView.URL.absoluteString);
     if ([webView.URL.absoluteString hasPrefix:@"https://itunes.apple.com"]) {
         [[UIApplication sharedApplication] openURL:navigationAction.request.URL options:@{} completionHandler:nil];
         decisionHandler(WKNavigationActionPolicyCancel);
-    } else {
+    }
+    else  {
         decisionHandler(WKNavigationActionPolicyAllow);
     }
 }

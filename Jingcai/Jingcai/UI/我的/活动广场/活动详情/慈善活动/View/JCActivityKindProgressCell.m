@@ -21,15 +21,15 @@
         make.top.bottom.offset(0);
     }];
     
-    UILabel *titleLab = [UILabel initWithTitle:@"总进度" andFont:14 andWeight:2 andTextColor:COLOR_FB5835 andBackgroundColor:JCClearColor andTextAlignment:0];
+    UILabel *titleLab = [UILabel initWithTitle:@"我的积分" andFont:14 andWeight:2 andTextColor:COLOR_FB5835 andBackgroundColor:JCClearColor andTextAlignment:0];
     [self.tipBgView addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(12);
-        make.top.offset(50);
-        make.size.mas_equalTo(CGSizeMake(42, 20));
+        make.top.offset(38);
+        make.size.mas_equalTo(CGSizeMake(56, 20));
     }];
     
-    float totalWidth = SCREEN_WIDTH-170;
+    float totalWidth = SCREEN_WIDTH-184;
     self.totalWidth = totalWidth;
     UIView *progressBgView = [UIView new];
     [self.tipBgView addSubview:progressBgView];
@@ -80,11 +80,11 @@
     }];
 
     [self.tipBgView addSubview:self.numImgView];
-    self.numImgView.frame = CGRectMake(77, 20, 76, 34);
+    self.numImgView.frame = CGRectMake(77, 8, 76, 34);
     self.numImgView.centerX = self.progressView.right+80;
     
-//    [self.numImgView addSubview:self.numLab];
-//    self.numLab.frame = CGRectMake(0, -8, 76, 34);
+    [self.numImgView addSubview:self.numLab];
+    self.numLab.frame = CGRectMake(0, -8, 76, 34);
 
     
     [self.contentView addSubview:self.resultImgView];
@@ -95,8 +95,8 @@
     }];
     
         
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick)];
-    [self.tipBgView addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick)];
+//    [self.tipBgView addGestureRecognizer:tap];
 
 }
 
@@ -118,7 +118,8 @@
 - (void)setDetailModel:(JCActivityDetailModel *)detailModel {
     _detailModel = detailModel;
     self.countLab.text = [NSString stringWithFormat:@"%@/%@",detailModel.user_info.my_score,detailModel.score];
-    self.numLab.text = [NSString stringWithFormat:@"还差%ld分",[detailModel.score integerValue]-[detailModel.user_info.my_score integerValue]];
+    NSString *title = [NSString stringWithFormat:@"还差%ld分",[detailModel.score integerValue]-[detailModel.user_info.my_score integerValue]];
+    self.numLab.text = title;
 
 
 

@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *cumulative_recharge;//累计充值金额
 
-@property (nonatomic,strong) NSString *active_state;//活动状态 1未开始 2进行中 3已结结束
+@property (nonatomic,strong) NSString *active_state;//活动状态 1未开始 2进行中 3已结结束 4奖品发完,活动提前结束
 
 @property (nonatomic,strong) NSString * text_prompt;//文字提示
 
@@ -119,7 +119,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *is_stage;//阶段活动是否弹窗 0未弹出 1弹出
 
-@property (strong, nonatomic)  NSArray <JCActivityGoodsModel *> *stage_grade;//阶段奖励
+@property (nonatomic,strong) NSString *stage_grade;//满足条件弹层的积分值
+
+@property (strong, nonatomic)  NSArray <JCActivityGoodsModel *> *stage_info;//阶段奖励
 
 
 

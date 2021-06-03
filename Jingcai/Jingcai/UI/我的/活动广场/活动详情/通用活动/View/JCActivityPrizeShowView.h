@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSArray *dataArray;
 
+@property (nonatomic,assign) BOOL showHeader;
+
 @property (nonatomic,strong) NSMutableArray *dataSource;
 
 @property (nonatomic,strong) JCActivityGoodsTitleModel *titleModel;

@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *content;
 
+@property (nonatomic,strong) NSString *score;
+
 @end
 
 NS_ASSUME_NONNULL_END

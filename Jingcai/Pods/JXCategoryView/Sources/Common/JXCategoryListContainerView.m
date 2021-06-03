@@ -153,7 +153,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-
+//    self.scrollView.scrollEnabled = NO;
     self.containerVC.view.frame = self.bounds;
     if (self.containerType == JXCategoryListContainerType_ScrollView) {
         if (CGRectEqualToRect(self.scrollView.frame, CGRectZero) ||  !CGSizeEqualToSize(self.scrollView.bounds.size, self.bounds.size)) {

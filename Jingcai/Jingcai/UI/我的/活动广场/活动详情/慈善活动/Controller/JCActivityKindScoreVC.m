@@ -47,6 +47,7 @@
             
             
             [self chageImageStr:@"ic_empty_integral" Title:@"暂无积分信息！" BtnTitle:@""];
+            self.tableView.ly_emptyView.titleLabTextColor = UIColorFromRGB(0x9DAAB8);
             if (dataArray.count<5) {
                 [self.footView showNoMore];
             }else {
@@ -94,14 +95,14 @@
     
 
     JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
-        [self refreshData];
+        [weakSelf refreshData];
     }];
     emptyView.contentViewOffset = -30;
     self.tableView.ly_emptyView = emptyView;
 
     
    
-    emptyView.titleLabTextColor = UIColorFromRGB(0x9DAAB8);
+//    emptyView.titleLabTextColor = UIColorFromRGB(0x9DAAB8);
 }
 
 #pragma mark <UITableViewDataSource>
@@ -128,7 +129,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 56;
+    return 36;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -154,11 +155,39 @@
 
 - (void)setDetailModel:(JCActivityDetailModel *)detailModel {
     _detailModel = detailModel;
-    self.headView.content = detailModel.finish_num;
+    self.headView.score = detailModel.user_info.my_score;
 }
 
 - (UIView *)listView {
     return self.view;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+
+    CGFloat height = scrollView.frame.size.height;
+        CGFloat contentOffsetY = scrollView.contentOffset.y;
+        CGFloat bottomOffset = scrollView.contentSize.height - contentOffsetY;
+
+    
+        NSLog(@"整体高度%.5f--偏移量%.5f",bottomOffset,height);
+        if (bottomOffset-1 <= height)
+        {
+            //在最底部
+//            self.currentIsInBottom = YES;
+            scrollView.scrollEnabled = NO;
+        }
+        else
+        {
+            if (scrollView.contentOffset.y==0) {
+                scrollView.scrollEnabled = NO;
+            }else {
+                scrollView.scrollEnabled = YES;
+            }
+            
+//            self.currentIsInBottom = NO;
+        }
+
+
 }
 
 - (JCKindCompleteUserHeadView *)headView {

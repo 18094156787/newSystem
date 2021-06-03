@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) JCActivityGoodsTitleModel *titleModel;
 
+@property (nonatomic,assign) BOOL showHeader;
+
 @end
 
 NS_ASSUME_NONNULL_END

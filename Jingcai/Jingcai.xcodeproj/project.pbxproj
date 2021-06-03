@@ -201,6 +201,8 @@
 		7B44A6C92667523A00AF56B0 /* JCKindSignReturnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B44A6C82667523A00AF56B0 /* JCKindSignReturnModel.m */; };
 		7B44A6CD266782F300AF56B0 /* JCSignBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B44A6CC266782F200AF56B0 /* JCSignBannerModel.m */; };
 		7B44A6D1266785AE00AF56B0 /* JCKindShareResigerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B44A6D0266785AE00AF56B0 /* JCKindShareResigerModel.m */; };
+		7B44A6D526679F9400AF56B0 /* JCActivityKindDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B44A6D426679F9400AF56B0 /* JCActivityKindDetailCell.m */; };
+		7B44A6DA2667A86C00AF56B0 /* JCActivityKindUserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B44A6D92667A86C00AF56B0 /* JCActivityKindUserView.m */; };
 		7B44C39823BD8A01008B8E6C /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B44C39623BD8A00008B8E6C /* UITextView+Placeholder.m */; };
 		7B44C3A723C47120008B8E6C /* JNMatchDetailView_New.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B44C3A623C47120008B8E6C /* JNMatchDetailView_New.m */; };
 		7B453BA125A2A9AF009B00D6 /* JCMatchAllWMVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B453BA025A2A9AF009B00D6 /* JCMatchAllWMVC.m */; };
@@ -1663,6 +1665,10 @@
 		7B44A6CC266782F200AF56B0 /* JCSignBannerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCSignBannerModel.m; sourceTree = "<group>"; };
 		7B44A6CF266785AE00AF56B0 /* JCKindShareResigerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCKindShareResigerModel.h; sourceTree = "<group>"; };
 		7B44A6D0266785AE00AF56B0 /* JCKindShareResigerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCKindShareResigerModel.m; sourceTree = "<group>"; };
+		7B44A6D326679F9400AF56B0 /* JCActivityKindDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityKindDetailCell.h; sourceTree = "<group>"; };
+		7B44A6D426679F9400AF56B0 /* JCActivityKindDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityKindDetailCell.m; sourceTree = "<group>"; };
+		7B44A6D82667A86C00AF56B0 /* JCActivityKindUserView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityKindUserView.h; sourceTree = "<group>"; };
+		7B44A6D92667A86C00AF56B0 /* JCActivityKindUserView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityKindUserView.m; sourceTree = "<group>"; };
 		7B44C39623BD8A00008B8E6C /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
 		7B44C39723BD8A00008B8E6C /* UITextView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Placeholder.h"; sourceTree = "<group>"; };
 		7B44C3A523C47120008B8E6C /* JNMatchDetailView_New.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JNMatchDetailView_New.h; sourceTree = "<group>"; };
@@ -4627,6 +4633,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		7B44A6D72667A84600AF56B0 /* 新的测试 */ = {
+			isa = PBXGroup;
+			children = (
+				7B44A6D82667A86C00AF56B0 /* JCActivityKindUserView.h */,
+				7B44A6D92667A86C00AF56B0 /* JCActivityKindUserView.m */,
+			);
+			path = "新的测试";
+			sourceTree = "<group>";
+		};
 		7B453B9C25A2A8F0009B00D6 /* 篮球 */ = {
 			isa = PBXGroup;
 			children = (
@@ -5143,6 +5158,8 @@
 				7B44A68D2664CB9F00AF56B0 /* JCKindActivityHeadView.m */,
 				7B5D047B2660C8A100C65F51 /* JCActivityKindCell.h */,
 				7B5D047C2660C8A100C65F51 /* JCActivityKindCell.m */,
+				7B44A6D326679F9400AF56B0 /* JCActivityKindDetailCell.h */,
+				7B44A6D426679F9400AF56B0 /* JCActivityKindDetailCell.m */,
 				7B44A67F2664813F00AF56B0 /* JCActivityKindGetPrizeCell.h */,
 				7B44A6802664813F00AF56B0 /* JCActivityKindGetPrizeCell.m */,
 				7B44A688266489C200AF56B0 /* JCActivityKindProgressCell.h */,
@@ -5162,6 +5179,7 @@
 		7B5D04742660C37900C65F51 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7B44A6D72667A84600AF56B0 /* 新的测试 */,
 				7B5D046F2660BC0E00C65F51 /* JCActivityKindVC.h */,
 				7B5D04702660BC0E00C65F51 /* JCActivityKindVC.m */,
 				7B5D04C22660EB0500C65F51 /* JCActivityKindUserVC.h */,
@@ -10380,6 +10398,7 @@
 				7BBB2019248E0A7700EED4FD /* JCYCHomeMatchSelectView.m in Sources */,
 				7B31AE1425F71A52003FD686 /* JCContractUsViewController.m in Sources */,
 				C30C8E3B224C6373001ECA18 /* JCChargeVC.m in Sources */,
+				7B44A6DA2667A86C00AF56B0 /* JCActivityKindUserView.m in Sources */,
 				7B6D33EB2537E94B0038FD5D /* JCMatchNoDataFootView.m in Sources */,
 				C3C3E1782178623D00466AAF /* JCAboutVC.m in Sources */,
 				7B1BDD712510665600D7C034 /* SCLineChart.m in Sources */,
@@ -10453,6 +10472,7 @@
 				7BB827D624B2F0120012EDA8 /* JCDataBaseTitleHeadView.m in Sources */,
 				7B5E26A6247F66F6008CAEE4 /* JCYCRuleWMPageController.m in Sources */,
 				7B5D03A6265E497900C65F51 /* JCActivityGuessCompleteVC.m in Sources */,
+				7B44A6D526679F9400AF56B0 /* JCActivityKindDetailCell.m in Sources */,
 				7B5C2E2125A6E41300777964 /* JNBasketBallMatchZS_ZSDetailInfoTableView.m in Sources */,
 				7B5E269E247F66F6008CAEE4 /* JCYCFriendCell.m in Sources */,
 				7B6D343B253FDADD0038FD5D /* JNMatchSJAgainstSectionTitleView.m in Sources */,

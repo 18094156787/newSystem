@@ -36,7 +36,7 @@
     
     NSString *type = @"";
     if (model.type==1) {
-        type = @"签到";
+        type = @"活动签到";
     }
     if (model.type==2) {
         type = @"分享转发";
@@ -50,7 +50,7 @@
 
 - (UILabel *)titleLab {
     if (!_titleLab) {
-        _titleLab = [UILabel initWithTitle:@"" andFont:16 andWeight:1 andTextColor:UIColorFromRGB(0x252424) andBackgroundColor:JCClearColor andTextAlignment:0];
+        _titleLab = [UILabel initWithTitle:@"" andFont:14 andWeight:1 andTextColor:UIColorFromRGB(0x252424) andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _titleLab;
 }

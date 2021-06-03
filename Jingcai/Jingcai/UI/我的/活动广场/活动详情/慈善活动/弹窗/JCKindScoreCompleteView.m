@@ -75,7 +75,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    return CGSizeMake(AUTO(64), AUTO(64));
+    return CGSizeMake(64, 64);
     
 }
 
@@ -109,7 +109,7 @@
 
 - (void)setDetailModel:(JCActivityDetailModel *)detailModel {
     _detailModel = detailModel;
-    self.scoreLab.text = @"累计积分条件：100";
+    self.scoreLab.text = [NSString stringWithFormat:@"累计积分条件：%@",detailModel.stage_grade];
 }
 
 - (void)setDataSource:(NSArray *)dataSource {
@@ -118,10 +118,10 @@
         return;
     }
     if (dataSource.count<=3) {
-        float width = (AUTO(315)-AUTO(72)*dataSource.count)/2.0f;
+        float width = (345-72*dataSource.count)/2.0f;
         [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
             
-            make.bottom.offset(-15);
+            make.bottom.offset(-20);
 //            make.centerX.equalTo(self.contentView);
             make.left.offset(width);
             make.height.mas_equalTo(64);
@@ -129,10 +129,10 @@
         }];
     }else{
         [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.offset(-15);
+            make.bottom.offset(-20);
             make.height.mas_equalTo(64);
-            make.left.offset(AUTO(40));
-            make.right.offset(AUTO(-40));
+            make.left.offset(AUTO(50));
+            make.right.offset(AUTO(-50));
         }];
     }
     [self.collectionView reloadData];

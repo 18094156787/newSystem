@@ -24,6 +24,10 @@
     self.contentLab.text = [NSString stringWithFormat:@"达成人数：%@人",content];
 }
 
+- (void)setScore:(NSString *)score {
+    _score = score;
+    self.contentLab.text = [NSString stringWithFormat:@"我的积分：%@",score];
+}
 
 - (KKPaddingLabel *)contentLab {
     if (!_contentLab) {

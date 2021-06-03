@@ -22,7 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *is_stage;//阶段活动是否弹窗 0未弹出 1弹出
 
-@property (strong, nonatomic)  NSArray <JCActivityGoodsModel *> *stage_grade;//阶段奖励
+@property (nonatomic,strong) NSString *stage_grade;//满足条件弹层的积分值
+
+@property (strong, nonatomic)  NSArray <JCActivityGoodsModel *> *stage_info;//阶段奖励
 
 @property (nonatomic,strong) NSString *is_popup;//海报是否弹出 1不弹 2弹出
 
