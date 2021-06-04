@@ -46,11 +46,12 @@
 #import "JCMatchInfoModel.h"
 #import "JCAgreeProtocolView.h"
 @interface JCMainTabBarController ()<WebSocketManagerDelegate>
-@property (strong, nonatomic) UINavigationController * expertNav;
-@property (strong, nonatomic) UINavigationController * matchNav;
-@property (strong, nonatomic) UINavigationController * commentNav;
-@property (strong, nonatomic) UINavigationController * mineNav;
-@property (strong, nonatomic) UINavigationController * communityNav;
+@property (strong, nonatomic) UINavigationController * homeNav;//首页
+@property (strong, nonatomic) UINavigationController * matchNav;//比分
+@property (strong, nonatomic) UINavigationController * communityNav;//社区
+@property (strong, nonatomic) UINavigationController * bigDataNav;//大数据
+@property (strong, nonatomic) UINavigationController * mineNav;//我的
+
 
 @property (strong, nonatomic) NSArray * showVCArray;
 
@@ -389,16 +390,16 @@
 }
 
 #pragma mark - Getter
-- (UINavigationController *)expertNav {
-    if (!_expertNav) {
+- (UINavigationController *)homeNav {
+    if (!_homeNav) {
         CGSize size = CGSizeMake(18.f, 18.f);
         UIImage * expertIcon = [JCWConvertTool scaleImage:[UIImage imageNamed:@"tab_expert"] toSize:size];
-        _expertNav = [[JCBaseNavigationController alloc] initWithRootViewController:[JCHomeWMStickyVC new]];
-        _expertNav.tabBarItem.image = expertIcon;//JCHomeWMStickyVC
-        _expertNav.tabBarItem.selectedImage = expertIcon;
-        _expertNav.tabBarItem.title = @"首页";
+        _homeNav = [[JCBaseNavigationController alloc] initWithRootViewController:[JCHomeWMStickyVC new]];
+        _homeNav.tabBarItem.image = expertIcon;//JCHomeWMStickyVC
+        _homeNav.tabBarItem.selectedImage = expertIcon;
+//        _homeNav.tabBarItem.title = @"首页";
     }
-    return _expertNav;
+    return _homeNav;
 }
 - (UINavigationController *)matchNav {
     if (!_matchNav) {
@@ -407,20 +408,20 @@
         _matchNav = [[JCBaseNavigationController alloc] initWithRootViewController:[JCMatchAllWMVC new]];//JCMatchAllWMVC
         _matchNav.tabBarItem.image = raceIcon;//JCMatchHomeWMVC
         _matchNav.tabBarItem.selectedImage = raceIcon;
-        _matchNav.tabBarItem.title = @"赛程";
+//        _matchNav.tabBarItem.title = @"比分";
     }
     return _matchNav;
 }
 
-- (UINavigationController *)commentNav {
-    if (!_commentNav) {
+- (UINavigationController *)bigDataNav {
+    if (!_bigDataNav) {
         CGSize size = CGSizeMake(18.f, 18.f);
         UIImage * showIcon = [JCWConvertTool scaleImage:[UIImage imageNamed:@"tab_zixun"] toSize:size];
-        _commentNav = [[JCBaseNavigationController alloc] initWithRootViewController:[JCBigDataWMVC new]];        _commentNav.tabBarItem.image = showIcon;//JCYCHomeWMStickVC
-        _commentNav.tabBarItem.selectedImage = showIcon;//
-        _commentNav.tabBarItem.title = @"方案";
+        _bigDataNav = [[JCBaseNavigationController alloc] initWithRootViewController:[JCBigDataWMVC new]];        _bigDataNav.tabBarItem.image = showIcon;//JCYCHomeWMStickVC
+        _bigDataNav.tabBarItem.selectedImage = showIcon;//
+//        _bigDataNav.tabBarItem.title = @"社区";
     }
-    return _commentNav;
+    return _bigDataNav;
 }
 - (UINavigationController *)mineNav {
     if (!_mineNav) {
@@ -429,7 +430,7 @@
         _mineNav = [[JCBaseNavigationController alloc] initWithRootViewController:[JCMineWMStickViewController new]];
         _mineNav.tabBarItem.image = mineIcon;//JCMineTableViewController
         _mineNav.tabBarItem.selectedImage = mineIcon;//JCMineViewController
-        _mineNav.tabBarItem.title = @"我的";
+//        _mineNav.tabBarItem.title = @"我的";
     }
     return _mineNav;
 }
@@ -441,17 +442,17 @@
         _communityNav = [[JCBaseNavigationController alloc] initWithRootViewController:[JCCommunityWMStickHomeVC new]];//
         _communityNav.tabBarItem.image = mineIcon;//JCYCHomeWMStickVC
         _communityNav.tabBarItem.selectedImage = mineIcon;
-        _communityNav.tabBarItem.title = @"预测";
+//        _communityNav.tabBarItem.title = @"预测";
     }
     return _communityNav;
 }
 
 - (NSArray *)showVCArray {
     if (!_showVCArray) {
-        _showVCArray = @[self.expertNav,
+        _showVCArray = @[self.homeNav,
                          self.matchNav,
                          self.communityNav,
-                         self.commentNav,
+                         self.bigDataNav,
                          self.mineNav];
     }
     return _showVCArray;
@@ -551,12 +552,8 @@
 //是否处于当前控制器 index表示对应的控制器下标
 - (BOOL)isCurrentBaseVCWtihIndex:(NSInteger)index {
     UINavigationController *nav = self.viewControllers.firstObject;
-    //        _showVCArray = @[self.expertNav,
-    //                         self.matchNav,
-    //                         self.communityNav,
-    //                         self.commentNav,
-    //                         self.mineNav];
-    if (index==0&&nav==self.expertNav) {
+
+    if (index==0&&nav==self.homeNav) {
         return YES;
     }
     if (index==1&&nav==self.matchNav) {
@@ -565,7 +562,7 @@
     if (index==2&&nav==self.communityNav) {
         return YES;
     }
-    if (index==3&&nav==self.commentNav) {
+    if (index==3&&nav==self.bigDataNav) {
         return YES;
     }
     if (index==4&&nav==self.mineNav) {

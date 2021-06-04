@@ -97,7 +97,7 @@
     }];
     
     
-    NSString *content = @"请你务必审慎阅读、充分理解“服务协议”和“隐私政策”各条款，包括但不限于：为了向你提供即时通讯、内容分享等服务，我们需要或者通过第三方SDK(极光推送、友盟、Openinstall)收集你的设备信息、操作日志、地理位置等个人信息并管理你的授权。\n\n你可阅读《服务协议》和《隐私政策》了解详细信息。如你同意，请点击“同意”开始接受我们的服务。";
+    NSString *content = @"请你务必审慎阅读、充分理解“服务协议”和“隐私政策”各条款，包括但不限于：为了向你提供即时通讯、内容分享等服务，我们需要或者通过第三方SDK(极光推送、友盟)收集你的设备信息、操作日志、地理位置等个人信息并管理你的授权。\n\n你可阅读《服务协议》和《隐私政策》了解详细信息。如你同意，请点击“同意”开始接受我们的服务。";
     NSMutableAttributedString* atext = [[NSMutableAttributedString alloc] initWithString:content attributes:@{NSForegroundColorAttributeName:COLOR_2F2F2F,NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(15)]}];
     NSRange fwRange = [content rangeOfString:@"《服务协议》"];
     NSRange yinsiRange = [content rangeOfString:@"《隐私政策》"];
