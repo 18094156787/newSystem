@@ -16,6 +16,7 @@
 #import "IAPManager.h"
 #import "JCActivityGuessVC.h"
 #import "JCAppGuideView.h"
+#import "JCMainTabBarController.h"
 static CGFloat const kWMMenuViewHeight = 0;
 @interface JCMineWMStickViewController ()
 
@@ -26,7 +27,6 @@ static CGFloat const kWMMenuViewHeight = 0;
 @property (nonatomic,assign) float headerViewHeigh;
 
 @property (nonatomic,assign) BOOL isLoad;
-
 
 @end
 
@@ -42,6 +42,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [self getUserInfo];
+ 
 //    [[IAPManager shared] checkMyBuyGoods];
     
 
@@ -128,7 +129,7 @@ static CGFloat const kWMMenuViewHeight = 0;
             self.topHeadView.userBall = userBall;
 
             [self.mineVC refreshUserData];
-            [self showJingCaiActivityResultView];//活动弹窗展示
+            [self isInCurrentVC];//活动弹窗展示
 
             NSLog(@"user_id == %@",[JCWUserBall currentUser].user_id);
             NSLog(@"user_token == %@",[JCWUserBall currentUser].token);
@@ -320,6 +321,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 - (void)showJingCaiActivityResultView {
 
     if ([JCWUserBall currentUser].guess_activity_text.length>0&&[JCWUserBall currentUser].guess_activity_id.length>0) {
+
         JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
         alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(16)];
         [alertView alertTitle:@"" TitleColor:COLOR_2F2F2F Mesasge:[JCWUserBall currentUser].guess_activity_text MessageColor:COLOR_666666 SureTitle:@"前往查看" SureColor:JCWhiteColor SureHandler:^{        JCActivityGuessVC *vc = [JCActivityGuessVC new];
@@ -334,6 +336,14 @@ static CGFloat const kWMMenuViewHeight = 0;
 
     }
 
+}
+- (void)isInCurrentVC {
+    
+    JCMainTabBarController *tabBarController = (JCMainTabBarController *)[UIApplication sharedApplication].delegate.window.rootViewController;
+    BOOL value =  [tabBarController isCurrentBaseVCWtihIndex:4];
+    if (value) {
+        [self showJingCaiActivityResultView];
+    }
 }
 
 - (void)clearUser {

@@ -9,7 +9,7 @@
  * Copyright (c) 2011 ~ 2017 Shenzhen HXHG. All rights reserved.
  */
 
-#define JPUSH_VERSION_NUMBER 3.3.2
+#define JPUSH_VERSION_NUMBER 3.6.2
 
 #import <Foundation/Foundation.h>
 
@@ -20,12 +20,15 @@
 @class UNNotificationSettings;
 @class UNNotificationRequest;
 @class UNNotification;
+@class UIView;
 @protocol JPUSHRegisterDelegate;
 @protocol JPUSHGeofenceDelegate;
+@protocol JPushInMessageDelegate;
 
 typedef void (^JPUSHTagsOperationCompletion)(NSInteger iResCode, NSSet *iTags, NSInteger seq);
 typedef void (^JPUSHTagValidOperationCompletion)(NSInteger iResCode, NSSet *iTags, NSInteger seq, BOOL isBind);
 typedef void (^JPUSHAliasOperationCompletion)(NSInteger iResCode, NSString *iAlias, NSInteger seq);
+typedef void (^JPUSHInMssageCompletion)(NSInteger iResCode);
 
 extern NSString *const kJPFNetworkIsConnectingNotification; // 正在连接中
 extern NSString *const kJPFNetworkDidSetupNotification;     // 建立连接
@@ -53,6 +56,17 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
     JPAuthorizationStatusDenied,    // The application is not authorized to post user notifications.
     JPAuthorizationStatusAuthorized,    // The application is authorized to post user notifications.
     JPAuthorizationStatusProvisional NS_AVAILABLE_IOS(12.0),    // The application is authorized to post non-interruptive user notifications.
+};
+
+typedef NS_ENUM(NSInteger,JPushInMessageContentType){
+    JPushAdContentType = 1,         //广告类型的inMessage
+    JPushNotiContentType = 2,       //通知类型的inMessage
+};
+
+typedef NS_OPTIONS(NSUInteger, JPInMessageType) {
+    JPInMessageTypeBanner    = (1 << 0),   // 横幅
+    JPInMessageTypeModal     = (1 << 1),   // 模态
+    JPInMessageTypeFloat     = (1 << 2),   // 小浮窗
 };
 
 /*!
@@ -415,7 +429,14 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  默认值为 10 ，iOS系统默认地理围栏最大个数为20
  @param count 个数 count
  */
-+ (void)setGeofenecMaxCount:(NSInteger)count;
++ (void)setGeofeneceMaxCount:(NSInteger)count;
+
+/**
+ 设置地理围栏'圈内'类型的检测周期
+ 默认15分钟检测一次
+ */
++ (void)setGeofenecePeriodForInside:(NSInteger)seconds;
+
 /**
  注册地理围栏的代理
 
@@ -641,6 +662,63 @@ typedef NS_ENUM(NSUInteger, JPAuthorizationStatus) {
  */
 + (void)setLocationEanable:(BOOL)isEanble;
 
+/*!
+* @abstract 设置应用内消息的代理
+*
+* @discussion 遵守JPushInMessageDelegate的代理对象
+*
+*/
++ (void)setInMessageDelegate:(id<JPushInMessageDelegate>)inMessageDelegate;
+
+/*!
+* @abstract 设置应用内消息的inMessageView的父控件
+*
+* @discussion 建议设置成当前展示的window，SDK默认取当前APP顶层的Window。
+*
+*/
++ (void)setInMessageSuperView:(UIView *)view;
+
+
+/*!
+* @abstract 主动拉取应用内消息的接口
+*
+* @discussion 拉取结果的回调
+*
+*/
++ (void)pullInMessageCompletion:(JPUSHInMssageCompletion)completion;
+
+
+/*!
+* @abstract 主动拉取应用内消息的接口
+*
+* @param types 应用内消息样式
+*
+* @discussion 拉取结果的回调
+*/
++ (void)pullInMessageWithTypes:(NSUInteger)types completion:(JPUSHInMssageCompletion)completion;
+
+
+/*!
+* @abstract 主动拉取应用内消息的接口
+*
+* @param adPosition 广告位
+*
+* @discussion 拉取结果的回调
+*/
++ (void)pullInMessageWithAdPosition:(NSString *)adPosition completion:(JPUSHInMssageCompletion)completion;
+
+
+/*!
+* @abstract 向sdk报告当前展示的控制器的名称
+*
+* @param className 当前页面的类名
+*
+* @discussion 如果类名在黑名单内，就会关闭所有处于曝光状态的inapp
+*
+*/
++ (void)currentViewControllerName:(NSString *)className;
+
+
 ///----------------------------------------------------
 ///********************下列方法已过期********************
 ///**************请使用新版tag/alias操作接口**************
@@ -713,6 +791,20 @@ callbackSelector:(SEL)cbSelector
 @end
 
 @protocol JPUSHGeofenceDelegate <NSObject>
+/**
+ 触发地理围栏
+ @param geofence 地理围栏触发时返回的信息
+ @param error 错误信息
+ */
+- (void)jpushGeofenceRegion:(NSDictionary *)geofence
+                      error:(NSError *)error;
+
+/**
+ 拉取地理围栏列表的回调
+ 
+ @param geofenceList 地理围栏列表
+ */
+- (void)jpushCallbackGeofenceReceived:(NSArray<NSDictionary*> *)geofenceList;
 
 /**
  进入地理围栏区域
@@ -721,7 +813,7 @@ callbackSelector:(SEL)cbSelector
  @param userInfo 地理围栏触发时返回的信息
  @param error 错误信息
  */
-- (void)jpushGeofenceIdentifer:(NSString *)geofenceId didEnterRegion:(NSDictionary *)userInfo error:(NSError *)error;
+- (void)jpushGeofenceIdentifer:(NSString *)geofenceId didEnterRegion:(NSDictionary *)userInfo error:(NSError *)error __attribute__((deprecated("JPush 3.6.0 版本已过期")));
 
 /**
  离开地理围栏区域
@@ -730,6 +822,46 @@ callbackSelector:(SEL)cbSelector
  @param userInfo 地理围栏触发时返回的信息
  @param error 错误信息
  */
-- (void)jpushGeofenceIdentifer:(NSString *)geofenceId didExitRegion:(NSDictionary *)userInfo error:(NSError *)error;
+- (void)jpushGeofenceIdentifer:(NSString *)geofenceId didExitRegion:(NSDictionary *)userInfo error:(NSError *)error __attribute__((deprecated("JPush 3.6.0 版本已过期")));
+
+
+@end
+
+@protocol JPushInMessageDelegate <NSObject>
+
+@optional
+/**
+ *是否允许应用内消息弹出,默认为允许
+*/
+- (BOOL)jPushInMessageIsAllowedInMessagePop;
+
+/**
+ *应用内消息展示的回调
+*/
+- (void)jPushInMessageAlreadyPop __attribute__((deprecated("JPush 3.4.0 版本已过期")));
+
+/**
+ *应用内消息已消失
+*/
+- (void)jPushInMessageAlreadyDisappear;
+
+
+/**
+ inMessage展示的回调
+ 
+ @param messageType inMessage
+ @param content 下发的数据，广告类的返回数据为空时返回的信息
+
+ */
+- (void)jPushInMessageAlreadyPopInMessageType:(JPushInMessageContentType)messageType Content:(NSDictionary *)content;
+
+/**
+ inMessage点击的回调
+ 
+ @param messageType inMessage
+ @param content 下发的数据，广告类的返回数据为空时返回的信息
+
+ */
+- (void)jpushInMessagedidClickInMessageType:(JPushInMessageContentType)messageType Content:(NSDictionary *)content;
 
 @end

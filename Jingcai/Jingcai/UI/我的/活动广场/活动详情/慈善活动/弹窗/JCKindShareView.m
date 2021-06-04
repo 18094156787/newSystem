@@ -127,7 +127,7 @@
 //        messageObject.shareObject = shareObject;
         
         UMShareImageObject  *imageObj = [UMShareImageObject new];
-        imageObj.shareImage = @"http://imagetest.yixinzuqiu.com/upload/image/1109/47b87ab5cad3451bf3484dc385e408aa.jpg";
+        imageObj.shareImage = self.shareImage;
         messageObject.shareObject = imageObj;
         
         

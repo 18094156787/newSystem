@@ -1,6 +1,6 @@
 CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
 CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/UMCShare
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/UMCCommon" "${PODS_ROOT}/UMCShare/UMShare"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/UMAPM/UMAPM_1.2.1" "${PODS_ROOT}/UMCCommon/UMCommon_7.2.9" "${PODS_ROOT}/UMCShare/UMShare" "${PODS_ROOT}/UMDevice/UMDevice_1.2.0"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/UMCShare" "${PODS_ROOT}/Headers/Public"
 LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/UMCShare/UMShare/SocialLibraries/QQ" "${PODS_ROOT}/UMCShare/UMShare/SocialLibraries/Sina" "${PODS_ROOT}/UMCShare/UMShare/SocialLibraries/WeChat"

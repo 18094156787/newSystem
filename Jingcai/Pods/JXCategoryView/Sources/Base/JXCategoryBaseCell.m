@@ -7,6 +7,7 @@
 //
 
 #import "JXCategoryBaseCell.h"
+#import "RTLManager.h"
 
 @interface JXCategoryBaseCell ()
 @property (nonatomic, strong) JXCategoryBaseCellModel *cellModel;
@@ -16,8 +17,9 @@
 
 @implementation JXCategoryBaseCell
 
-- (void)dealloc
-{
+#pragma mark - Initialize
+
+- (void)dealloc {
     [self.animator stop];
 }
 
@@ -35,8 +37,21 @@
     return self;
 }
 
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self initializeViews];
+    }
+    return self;
+}
+
+#pragma mark - Public
+
 - (void)initializeViews {
     _animationBlockArray = [NSMutableArray array];
+
+    [RTLManager horizontalFlipViewIfNeeded:self];
+    [RTLManager horizontalFlipViewIfNeeded:self.contentView];
 }
 
 - (void)reloadData:(JXCategoryBaseCellModel *)cellModel {
@@ -45,19 +60,17 @@
     if (cellModel.isSelectedAnimationEnabled) {
         [self.animationBlockArray removeLastObject];
         if ([self checkCanStartSelectedAnimation:cellModel]) {
-            _animator = [[JXCategoryViewAnimator alloc] init];
+            self.animator = [[JXCategoryViewAnimator alloc] init];
             self.animator.duration = cellModel.selectedAnimationDuration;
-        }else {
+        } else {
             [self.animator stop];
         }
     }
 }
 
 - (BOOL)checkCanStartSelectedAnimation:(JXCategoryBaseCellModel *)cellModel {
-    if (cellModel.selectedType == JXCategoryCellSelectedTypeCode || cellModel.selectedType == JXCategoryCellSelectedTypeClick) {
-        return YES;
-    }
-    return NO;
+    BOOL canStartSelectedAnimation = ((cellModel.selectedType == JXCategoryCellSelectedTypeCode) || (cellModel.selectedType == JXCategoryCellSelectedTypeClick));
+    return canStartSelectedAnimation;
 }
 
 - (void)addSelectedAnimationBlock:(JXCategoryCellSelectedAnimationBlock)block {
@@ -66,7 +79,7 @@
 
 - (void)startSelectedAnimationIfNeeded:(JXCategoryBaseCellModel *)cellModel {
     if (cellModel.isSelectedAnimationEnabled && [self checkCanStartSelectedAnimation:cellModel]) {
-        //需要更新isTransitionAnimating，用于处理在过滤时，禁止响应点击，避免界面异常。
+        // 需要更新 isTransitionAnimating，用于处理在过滤时，禁止响应点击，避免界面异常。
         cellModel.transitionAnimating = YES;
         __weak typeof(self)weakSelf = self;
         self.animator.progressCallback = ^(CGFloat percent) {

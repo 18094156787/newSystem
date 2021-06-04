@@ -251,7 +251,6 @@
 #import "ZXMultiFormatReader.h"
 #import "ZXMultiFormatWriter.h"
 #import "ZXingWrapper.h"
-#import "LBXZBarWrapper.h"
 #import "LBXScanLineAnimation.h"
 #import "LBXScanNetAnimation.h"
 #import "LBXScanVideoZoomView.h"

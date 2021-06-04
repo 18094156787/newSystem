@@ -681,7 +681,6 @@ static CGFloat const kWMMenuViewHeight = 44;
     JCMainTabBarController *tabBarController = (JCMainTabBarController *)[UIApplication sharedApplication].delegate.window.rootViewController;
     BOOL value =  [tabBarController isCurrentBaseVCWtihIndex:0];
     self.needNextGetData = !value;//是否需要下次页面出现的时候请求数据
-//    self.needNextGetData = YES;
     if (value) {
         [self getCommomData];
     }

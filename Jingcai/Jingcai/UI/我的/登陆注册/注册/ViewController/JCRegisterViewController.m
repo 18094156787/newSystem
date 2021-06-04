@@ -242,7 +242,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:UserRegisterSuccess object:nil];
             [JCWToastTool showHint:@"注册成功"];
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-            [MobClick profileSignInWithPUID:[JCWUserBall currentUser].user_id];
+//            [MobClick profileSignInWithPUID:[JCWUserBall currentUser].user_id];
 //            [self dismissViewControllerAnimated:YES completion:^{
 //                [JCWToastTool showHint:@"注册成功"];
 //                [weakSelf.navigationController popToRootViewControllerAnimated:YES];

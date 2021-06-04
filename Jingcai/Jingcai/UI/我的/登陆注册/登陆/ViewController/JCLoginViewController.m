@@ -269,7 +269,7 @@
             NSLog(@"user_id == %@",[JCWUserBall currentUser].user_id);
             NSLog(@"user_token == %@",[JCWUserBall currentUser].token);
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationUserLogin object:nil];
-            [MobClick profileSignInWithPUID:[JCWUserBall currentUser].user_id];
+//            [MobClick profileSignInWithPUID:[JCWUserBall currentUser].user_id];
             
             
             //老用户微信登录,如果没有手机号,则跳转一次绑定手机页面,但是不强制绑定.oauth_id是微信登录后获取的字段

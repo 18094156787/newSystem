@@ -42,7 +42,7 @@
         type = @"分享转发";
     }
     if (model.type==3) {
-        type = @"好友注册";
+        type = [NSString stringWithFormat:@"好友注册(%@)",model.user_name];
     }
     self.titleLab.text = type;
     self.contentLab.text = [NSString stringWithFormat:@"+%@",model.score];

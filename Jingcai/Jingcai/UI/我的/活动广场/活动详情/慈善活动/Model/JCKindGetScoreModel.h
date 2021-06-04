@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *score;
 
+@property (nonatomic,strong) NSString *user_name;
+
 @property (nonatomic,strong) NSString *created_at;
 
 @end

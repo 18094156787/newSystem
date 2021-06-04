@@ -10,7 +10,7 @@
 #define ZCPrefixHeader_pch
 
 #import <UIKit/UIKit.h>
-#import <UMAnalytics/MobClick.h>
+//#import <UMAnalytics/MobClick.h>
 
 // ****
 #pragma mark - 常用

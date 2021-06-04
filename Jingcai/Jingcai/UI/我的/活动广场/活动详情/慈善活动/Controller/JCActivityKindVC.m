@@ -111,6 +111,8 @@
     self.kindHeight = 444;
     [self refreshData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:NotificationUserLogin object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"refreshKindActivityDetail" object:nil];
+    
 
 }
 
@@ -597,7 +599,7 @@
             
 
             
-            [self refreshData];
+//            [self refreshData];
         }else{
             [JCWToastTool showHint:object[@"msg"]];
         }
@@ -620,6 +622,7 @@
     model.url = self.detailModel.share_resiger.share_resiger_url;
     model.information = self.detailModel.share_resiger.share_title;
     model.desc = self.detailModel.share_resiger.share_desc;
+    vc.activity_id = self.actID;
     vc.infoModel = model;
     [self.navigationController pushViewController:vc animated:YES];
     

@@ -19,7 +19,7 @@ target 'Jingcai' do
     pod 'UMCCommon'
 #    pod 'UMCSecurityPlugins'
     pod 'UMCCommonLog'
-    pod 'UMCAnalytics' # 统计SDK
+#    pod 'UMCAnalytics' # 统计SDK
     pod 'UMCShare/Social/ReducedWeChat'
     pod 'UMCShare/Social/ReducedQQ'
     pod 'UMCShare/Social/ReducedSina'
@@ -37,6 +37,6 @@ target 'Jingcai' do
     pod 'YYKit'
     pod 'SocketRocket'
     pod 'JXCategoryView'
-    pod 'libOpenInstallSDK'
+#    pod 'libOpenInstallSDK'
 end
 

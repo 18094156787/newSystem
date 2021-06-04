@@ -21,6 +21,7 @@
 #import "JCPostPlanVC.h"
 #import "JCPostCheckPlanVC.h"
 #import "JCPostCheckUserInfoVC.h"
+#import "JCMainTabBarController.h"
 static CGFloat const kWMMenuViewHeight = 44;
 @interface JCCommunityWMStickHomeVC ()<UISearchBarDelegate>
 
@@ -39,6 +40,8 @@ static CGFloat const kWMMenuViewHeight = 44;
 @property (nonatomic,strong) UILabel *fbLab;
 
 @property (nonatomic,strong) UIView *navShadow;
+
+@property (nonatomic,assign) BOOL needNextGetData;//是否需要下次页面出现的时候请求数据
 
 @end
 
@@ -72,13 +75,10 @@ static CGFloat const kWMMenuViewHeight = 44;
     }else{
         [self setNavEffect];
     }
+    if (self.needNextGetData) {
+        [self showActivityTipView];
+    }
 
-//      [[UINavigationBar appearance]setShadowImage:[self imageWithColor:color];
-//    self.navigationController.navigationBar.layer.masksToBounds = NO;
-
-     //设置阴影的高度
-
-     
 }
 
 
@@ -121,8 +121,25 @@ static CGFloat const kWMMenuViewHeight = 44;
     [self getCache];
     [self getHomeTab];
     [self getBannerData];
-    [self showActivityPresentWithPosition:@"3" ViewController:self];//获取活动弹窗
+    [self showActivityTipView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isInCurrentVC) name:NotificationUserLogin object:nil];
 
+}
+
+- (void)showActivityTipView {
+    self.needNextGetData = NO;
+    [self showActivityPresentWithPosition:@"3" ViewController:self];//获取活动弹窗
+}
+
+//当前页面处于JCMainTabBarController的选中页面
+- (void)isInCurrentVC {
+    
+    JCMainTabBarController *tabBarController = (JCMainTabBarController *)[UIApplication sharedApplication].delegate.window.rootViewController;
+    BOOL value =  [tabBarController isCurrentBaseVCWtihIndex:2];
+    self.needNextGetData = !value;//是否需要下次页面出现的时候请求数据
+    if (value) {
+        [self showActivityTipView];
+    }
 }
 
 - (void)getHomeTab {

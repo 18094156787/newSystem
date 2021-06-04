@@ -128,7 +128,7 @@ dispatch_async(queue, block);\
     switch (sender.tag) {
         case 100:
         {
-            
+//            [self activityAnalysis];
             NSString *title = self.infoModel.information;
             if (self.infoModel.position.length>0) {
                 title =  [NSString stringWithFormat:@"%@,%@",self.infoModel.position,self.infoModel.information];
@@ -139,6 +139,7 @@ dispatch_async(queue, block);\
             break;
         case 101:
         {
+//            [self activityAnalysis];
             NSString *title = self.infoModel.information;
             if (self.infoModel.position.length>0) {
                 title =  [NSString stringWithFormat:@"%@,%@",self.infoModel.position,self.infoModel.information];
@@ -298,14 +299,26 @@ dispatch_async(queue, block);\
         [JCWToastTool showHint:@"保存成功"];
     }
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+//活动统计
+//- (void)activityAnalysis {
+//
+//    if (self.activity_id.length==0) {
+//        return;
+//    }
+//    JCActivityService *service = [JCActivityService service];
+//    [service getActivityAnalysisWithActID:self.activity_id success:^(id  _Nullable object) {
+//        if ([JCWJsonTool isSuccessResponse:object]) {
+//
+//        }else{
+//            [JCWToastTool showHint:object[@"msg"]];
+//        }
+//
+//
+//    } failure:^(NSError * _Nonnull error) {
+//
+//    }];
+//
+//
+//}
 
 @end

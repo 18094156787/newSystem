@@ -47,12 +47,51 @@ static NSNotificationName const SJFitOnScreenManagerTransitioningValueDidChangeN
 #pragma mark -
 
 @interface SJFitOnScreenModeViewController : UIViewController
-@property (nonatomic, weak, nullable) id<SJViewControllerManager> viewControllerManager;
 @end
 
 @implementation SJFitOnScreenModeViewController
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+- (BOOL)prefersHomeIndicatorAutoHidden {
+    return YES;
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return _viewControllerManager.preferredStatusBarStyle;
+    return UIStatusBarStyleLightContent;
+}
+@end
+
+@interface SJFitOnScreenModeNavigationController : UINavigationController
+@property (nonatomic, weak, nullable) id<SJViewControllerManager> viewControllerManager;
+@end
+
+@implementation SJFitOnScreenModeNavigationController
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.navigationBarHidden = YES;
+}
+
+- (void)setNavigationBarHidden:(BOOL)navigationBarHidden {
+    [super setNavigationBarHidden:YES];
+}
+
+- (void)setNavigationBarHidden:(BOOL)hidden animated:(BOOL)animated {
+    [super setNavigationBarHidden:YES animated:animated];
+}
+
+- (BOOL)shouldAutorotate {
+    return self.topViewController.shouldAutorotate;
+}
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return self.topViewController.supportedInterfaceOrientations;
+}
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return self.topViewController.preferredInterfaceOrientationForPresentation;
+}
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return self.topViewController.preferredStatusBarStyle;
 }
 - (BOOL)prefersStatusBarHidden {
     return _viewControllerManager.prefersStatusBarHidden;
@@ -69,7 +108,7 @@ static NSNotificationName const SJFitOnScreenManagerTransitioningValueDidChangeN
 @property (nonatomic) BOOL innerFitOnScreen;
 @property (nonatomic, strong, readonly) UIView *target;
 @property (nonatomic, strong, readonly) UIView *superview;
-@property (nonatomic, strong, readonly) SJFitOnScreenModeViewController *viewController;
+@property (nonatomic, strong, readonly) SJFitOnScreenModeNavigationController *viewController;
 @end
 
 @implementation SJFitOnScreenManager
@@ -107,9 +146,9 @@ static NSNotificationName const SJFitOnScreenManagerTransitioningValueDidChangeN
         self.innerFitOnScreen = fitOnScreen;
         self.transitioning = YES;
         if ( fitOnScreen ) {
-            UIViewController *rootViewController = UIApplication.sharedApplication.keyWindow.rootViewController;
+            UIViewController *top = [self topMostController];
             if ( !animated ) [self _presentedAnimationWithDuration:0 completionHandler:nil];
-            [rootViewController presentViewController:self.viewController animated:animated completion:^{
+            [top presentViewController:self.viewController animated:animated completion:^{
                 if ( completionHandler ) completionHandler(self);
             }];
         }
@@ -120,6 +159,18 @@ static NSNotificationName const SJFitOnScreenManagerTransitioningValueDidChangeN
             }];
         } 
     });
+}
+
+- (UIView *)superviewInFitOnScreen {
+    return self.viewController.view;
+}
+
+- (UIViewController *)topMostController {
+    UIViewController *topController = UIApplication.sharedApplication.keyWindow.rootViewController;
+    while( topController.presentedViewController != nil ) {
+        topController = topController.presentedViewController;
+    }
+    return topController;
 }
 
 - (void)setInnerFitOnScreen:(BOOL)innerFitOnScreen {
@@ -142,9 +193,10 @@ static NSNotificationName const SJFitOnScreenManagerTransitioningValueDidChangeN
 }
 
 @synthesize viewController = _viewController;
-- (SJFitOnScreenModeViewController *)viewController {
+- (SJFitOnScreenModeNavigationController *)viewController {
     if ( _viewController == nil ) {
-        _viewController = SJFitOnScreenModeViewController.alloc.init;
+        SJFitOnScreenModeViewController *vc = SJFitOnScreenModeViewController.alloc.init;
+        _viewController = [SJFitOnScreenModeNavigationController.alloc initWithRootViewController:vc];
         NSTimeInterval duration = self.duration;
         __weak typeof(self) _self = self;
         [_viewController setTransitionDuration:duration presentedAnimation:^(__kindof UIViewController * _Nonnull vc, SJAnimationCompletionHandler  _Nonnull completion) {

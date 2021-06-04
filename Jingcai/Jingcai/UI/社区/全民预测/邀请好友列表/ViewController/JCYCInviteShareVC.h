@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) JCYuceShareInfoModel *infoModel;
 
+@property (nonatomic,strong) NSString *activity_id;
+
 @end
 
 NS_ASSUME_NONNULL_END

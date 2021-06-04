@@ -43,8 +43,7 @@
 #import "IAPManager.h"
 #import "JCBaseTitleAlertView.h"
 #import "KSGuaidViewManager.h"
-#import "OpenInstallSDK.h"
-@interface AppDelegate () <JPUSHRegisterDelegate,OpenInstallDelegate>
+@interface AppDelegate () <JPUSHRegisterDelegate>
 
 @property (nonatomic,strong) NSDictionary *launchOptions;
 
@@ -81,7 +80,6 @@
         if (isEnabled) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self configUM];
-                [self configOpeninstall];
                 //刷新UI的代码放到主线程执行
                 //极光推送--初始化APNs
                 JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -122,7 +120,7 @@
 }
 - (void)applicationDidBecomeActive:(UIApplication *)application {}
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [MobClick profileSignOff];
+//    [MobClick profileSignOff];
 }
 
 
@@ -215,25 +213,12 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // 配置友盟AppKey
     [UMConfigure initWithAppkey:UMShareAppKey channel:@"App Store"];
     [UMConfigure setEncryptEnabled:YES];
-    [MobClick setScenarioType:E_UM_NORMAL];
+//    [MobClick setScenarioType:E_UM_NORMAL];
     // U-Share 平台设置
     [self configUSharePlatforms];
     [self confitUShareSettings];
 }
-- (void)configOpeninstall {
-    [OpenInstallSDK initWithDelegate:self];
-    [[OpenInstallSDK defaultManager] getInstallParmsCompleted:^(OpeninstallData*_Nullable appData) {
-        //在主线程中回调
-        if (appData.data) {//(动态安装参数)
-           //e.g.如免填邀请码建立邀请关系、自动加好友、自动进入某个群组或房间等
-        }
-        if (appData.channelCode) {//(通过渠道链接或二维码安装会返回渠道编号)
-            //e.g.可自己统计渠道相关数据等
-        }
-//        [JCWToastTool showHint:[NSString stringWithFormat:@"安装OpenInstallSDK:\n动态参数：%@;\n渠道编号：%@",appData.data,appData.channelCode]];
-        NSLog(@"OpenInstallSDK:\n动态参数：%@;\n渠道编号：%@",appData.data,appData.channelCode);
-    }];
-}
+
 - (void)confitUShareSettings
 {
     /*
@@ -298,7 +283,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JpushResult"];
                         [self configUM];
-                        [self configOpeninstall];
                         //刷新UI的代码放到主线程执行
                         //极光推送--初始化APNs
                         JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -355,7 +339,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [self configUM];
-        [self configOpeninstall];
         //刷新UI的代码放到主线程执行
         //极光推送--初始化APNs
         JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -648,10 +631,5 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     return self.topViewController;
 }
 
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler{
-    //处理通过openinstall一键唤起App时传递的数据
-    [OpenInstallSDK continueUserActivity:userActivity];
-    //其他第三方回调；
-     return YES;
-}
+
 @end

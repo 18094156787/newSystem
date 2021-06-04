@@ -244,4 +244,22 @@
     }];
     
 }
+
+//活动分享统计
+- (void)getActivityAnalysisWithActID:(NSString *)ID success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+                            @"activity_id":ID,
+    };
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"activity_register_share" paramDic:param ignoreArray:@[]];
+
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self deathWithSuccessInfo:responseObject];
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+        [self dealWithError:error];
+    }];
+    
+}
 @end

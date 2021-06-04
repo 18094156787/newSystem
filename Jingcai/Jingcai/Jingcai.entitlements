@@ -7,7 +7,6 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>applinks:m.jingcai.com</string>
-		<string>applinks: i9x1qi.openinstall.io</string>
 	</array>
 </dict>
 </plist>

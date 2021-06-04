@@ -45,8 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 //签到活动内部详情
 //type 1活动完成用户 2用户积分明细 3我的奖励 4返回全部列表 默认为4
 - (void)getKindActivityDetailContentWithActID:(NSString *)ID  type:(NSString *)type Page:(NSInteger)page page_size:(NSString *)pageSize success:(successBlock)successBlock failure:(failureBlock)failureBlock;
-//- (void)getKindActivityDetailContentWithActID:(NSString *)ID  type:(NSString *)type Page:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock;
-
+//活动分享统计
+- (void)getActivityAnalysisWithActID:(NSString *)ID success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END

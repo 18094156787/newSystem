@@ -112,8 +112,10 @@
         if (self.content.length>0) {
             title =  [NSString stringWithFormat:@"[%@]%@",self.title,self.content];
         }
+
     }
     if (cell.shareType == JCShareTypeEnumWeChatSession) {
+
         
 
         platformType = UMSocialPlatformType_WechatSession;
@@ -166,6 +168,9 @@
         if (self.JCShareBlock) {
             self.JCShareBlock();
         }
+    }
+    if (cell.shareType == JCShareTypeEnumWeChatTimeLine||cell.shareType == JCShareTypeEnumWeChatSession) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshKindActivityDetail" object:nil];
     }
     
 }
