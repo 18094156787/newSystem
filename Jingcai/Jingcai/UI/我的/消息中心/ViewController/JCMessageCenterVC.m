@@ -17,6 +17,7 @@
 #import "JCMainTabBarController.h"
 #import "JCActivityDetailCommomVC.h"
 #import "JCActivityGuessVC.h"
+#import "JCActivityKindVC.h"
 @interface JCMessageCenterVC ()
 
 @end
@@ -152,6 +153,11 @@
     }
     if ([model.type intValue]==14&&[model.status integerValue]!=3) {
         JCActivityGuessVC *vc = [JCActivityGuessVC new];
+        vc.actID = model.other_id;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if ([model.type intValue]==15&&[model.status integerValue]!=3) {
+        JCActivityKindVC *vc = [JCActivityKindVC new];
         vc.actID = model.other_id;
         [self.navigationController pushViewController:vc animated:YES];
     }

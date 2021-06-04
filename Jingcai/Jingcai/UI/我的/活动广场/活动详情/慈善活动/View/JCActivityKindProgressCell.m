@@ -146,31 +146,21 @@
 
     }];
     
-    if ([self.detailModel.active_state integerValue]==2) {
-        //活动进行中
-        if ([self.detailModel.user_info.is_finish integerValue]==1) {
+    
+    if ([self.detailModel.user_info.is_finish integerValue]==1) {
             self.resultImgView.image = JCIMAGE(@"ic_kind_success");
+            self.resultImgView.hidden = NO;
+    }else{
+        if ([self.detailModel.active_state integerValue]==3) {
+            //活动已结束
+            self.resultImgView.image = JCIMAGE(@"ic_kind_defeat");
             self.resultImgView.hidden = NO;
         }else{
             self.resultImgView.hidden = YES;
-            
         }
-    } else   if ([self.detailModel.active_state integerValue]==3) {
-        self.resultImgView.hidden = NO;
-        //活动已结束
-        if ([self.detailModel.user_info.is_finish integerValue]==1) {
-            self.resultImgView.image = JCIMAGE(@"ic_kind_success");
-   
-        }else{
-            self.resultImgView.image = JCIMAGE(@"ic_kind_defeat");
-            
-        }
-    }else {
-        //活动未开始
-        self.resultImgView.hidden = YES;
+        
     }
     
-
 
 }
 

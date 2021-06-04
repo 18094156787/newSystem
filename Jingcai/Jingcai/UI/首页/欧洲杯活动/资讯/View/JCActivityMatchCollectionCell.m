@@ -101,11 +101,18 @@
 
 - (void)setModel:(JCWMatchBall *)model {
     _model = model;
-    NSString *matchTime = [NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd HH:mm" time:[model.first_half_time doubleValue]];
+    NSString *matchTime = [NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd HH:mm" time:[model.first_half_time doubleValue]];//group_num_new
     NSString *title = [NSString stringWithFormat:@"%@ %@",model.competition_name,matchTime];
-    if (model.round_num.length>0) {
-        title = [NSString stringWithFormat:@"%@ %@ %@",model.competition_name,model.round_num,matchTime];
+    NSString *group = @"";
+    NSString *round_num = @"";
+    if (model.group_num_new.length>0) {
+        group = [NSString stringWithFormat:@" %@",model.group_num_new];
     }
+    if (model.round_num.length>0) {
+        round_num = [NSString stringWithFormat:@" %@",model.round_num];
+
+    }
+    title = [NSString stringWithFormat:@"%@%@%@ %@",model.competition_name,group,round_num,matchTime];
     if (model.competition_name.length>0) {
         NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
         NSRange range = [title rangeOfString:model.competition_name];

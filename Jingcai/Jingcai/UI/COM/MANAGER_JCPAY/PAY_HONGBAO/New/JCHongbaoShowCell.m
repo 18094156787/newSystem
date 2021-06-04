@@ -43,10 +43,10 @@
 
     
     if (model.total==0) {
-        self.titleLab.text  = @"不使用红包";
+        self.titleLab.text  = @"不使用优惠券";
     }else{
 //        self.titleLab.text  = title;
-        self.titleLab.text  = [NSString stringWithFormat:@"%@元红包券(%@)",title,model.end_time];
+        self.titleLab.text  = [NSString stringWithFormat:@"%@元优惠券(%@)",title,model.end_time];
     }
     self.backgroundColor = model.is_select?COLOR_F0F0F0:JCClearColor;
 }

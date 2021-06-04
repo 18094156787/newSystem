@@ -11,5 +11,6 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, WXApiDelegate>
 @property (strong, nonatomic) UIWindow *window;
+- (void)agreeConfigWithLaunchOptions;
 @end
 

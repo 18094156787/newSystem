@@ -11,11 +11,18 @@
 #import "JCKindCompleteUserHeadView.h"
 #import "JCKindMoreFootView.h"
 #import "JCKindUserCompleteModel.h"
+#import "JCActivityKindUserShowView.h"
 @interface JCActivityKindUserVC ()
 
 @property (nonatomic,strong) JCKindCompleteUserHeadView *headView;
 
 @property (nonatomic,strong) JCKindMoreFootView *footView;
+
+@property (nonatomic,strong) NSMutableArray *showDataArray;
+
+@property (nonatomic,strong) JCActivityKindUserShowView *userShowView;
+
+@property (nonatomic,assign) NSInteger showPage;
 
 @end
 
@@ -26,6 +33,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.contentHeight = 440;
+    self.showPage = 1;
     [self initViews];
     [self refreshData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"refreshKindActivityDetail" object:nil];
@@ -41,7 +49,7 @@
 - (void)getDataList {
     [self.jcWindow showLoading];
     JCActivityService *service = [JCActivityService service];
-    [service getKindActivityDetailContentWithActID:NonNil(self.actID) type:@"1" Page:self.pageNo success:^(id  _Nullable object) {
+    [service getKindActivityDetailContentWithActID:NonNil(self.actID) type:@"1" Page:self.pageNo page_size:@"5" success:^(id  _Nullable object) {
         [self.jcWindow endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
             if (self.pageNo==1) {
@@ -58,39 +66,78 @@
             
             [self chageImageStr:@"ic_empty_user" Title:@"暂无达成目标用户！" BtnTitle:@""];
             self.tableView.ly_emptyView.titleLabTextColor = UIColorFromRGB(0x9DAAB8);
-            if (dataArray.count<5) {
-                [self.footView showNoMore];
-            }else {
-                [self.footView showMore];
-            }
-            
-            if (self.dataArray.count>0) {
-                self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
-                self.tableView.tableHeaderView = self.headView;
+
+//            if (dataArray.count<5) {
+//                [self.footView showNoMore];
+//            }else {
+//                [self.footView showMore];
+//            }
+            if (self.dataArray.count>=5) {
                 self.footView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
                 self.tableView.tableFooterView = self.footView;
+                self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
+                self.tableView.tableHeaderView = self.headView;
+
+                [self.footView showMore];
+            }else{
+                [self.footView showNoMore];
             }
+            
+
             
 
             
         }else{
             [JCWToastTool showHint:object[@"msg"]];
         }
+    } failure:^(NSError * _Nonnull error) {
+        [self.jcWindow endLoading];
+    }];
+ 
+}
+
+- (void)getShowViewDataList {
+    [self.jcWindow showLoading];
+    JCActivityService *service = [JCActivityService service];
+    [service getKindActivityDetailContentWithActID:NonNil(self.actID) type:@"1" Page:self.showPage page_size:@"10" success:^(id  _Nullable object) {
+        [self.userShowView.tableView.mj_footer endRefreshing];
+        [self.jcWindow endLoading];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            if (self.showPage==1) {
+                [self.showDataArray removeAllObjects];
+            }
+            NSArray *dataArray = [JCWJsonTool arrayWithJson:object[@"data"] class:[JCKindUserCompleteModel class]];
+            if (dataArray.count < 10) {
+                [self.userShowView.tableView.mj_footer endRefreshingWithNoMoreData];
+
+            }
+
+            [self.showDataArray addObjectsFromArray:dataArray];
+            
+            if (self.showPage==1) {
+                self.userShowView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                self.userShowView.dataArray = self.showDataArray;
+                [self.jcWindow addSubview:self.userShowView];
+                [self.userShowView show];
+            }else{
+                self.userShowView.dataArray = self.showDataArray;
+            }
+            self.showPage++;
+
+
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
 
     } failure:^(NSError * _Nonnull error) {
+        [self.userShowView.tableView.mj_footer endRefreshing];
         [self.jcWindow endLoading];
     }];
 
 }
-
 - (void)initViews {
-//    self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
-//    self.tableView.tableHeaderView = self.headView;
-//    self.footView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
-//    self.tableView.tableFooterView = self.footView;
-    
-//    [self.vi ]
-//    self.tableView.panGestureRecognizer.delaysTouchesBegan = YES;
+
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(0);
         make.left.right.bottom.equalTo(self.view);
@@ -98,7 +145,15 @@
     
     WeakSelf;
     self.footView.JCBlock = ^{
-        [weakSelf getDataList];
+        if (weakSelf.showDataArray.count==0) {
+            [weakSelf getShowViewDataList];
+        }else {
+            weakSelf.userShowView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            weakSelf.userShowView.dataArray = weakSelf.showDataArray;
+            [weakSelf.jcWindow addSubview:weakSelf.userShowView];
+            [weakSelf.userShowView show];
+        }
+        
     };
     
     self.tableView.separatorStyle = 0;
@@ -112,10 +167,11 @@
 //    self.tableView.userInteractionEnabled = NO;
 //    self.tableView.contentSize = CGSizeMake(SCREEN_WIDTH, 5000);
     self.tableView.bounces = NO;
-//    self.tableView.scrollEnabled = NO;
-    
-    
-//    emptyView.titleLabTextColor = UIColorFromRGB(0x9DAAB8);
+
+    self.userShowView.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+
+        [self getShowViewDataList];
+    }];
    
 }
 
@@ -171,33 +227,33 @@
     return self.view;
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-
-    CGFloat height = scrollView.frame.size.height;
-        CGFloat contentOffsetY = scrollView.contentOffset.y;
-        CGFloat bottomOffset = scrollView.contentSize.height - contentOffsetY;
-
-    
-        NSLog(@"整体高度%.5f--偏移量%.5f",bottomOffset,height);
-        if (bottomOffset-1 <= height)
-        {
-            //在最底部
-//            self.currentIsInBottom = YES;
-            scrollView.scrollEnabled = NO;
-        }
-        else
-        {
-            if (scrollView.contentOffset.y==0) {
-                scrollView.scrollEnabled = NO;
-            }else {
-                scrollView.scrollEnabled = YES;
-            }
-            
-//            self.currentIsInBottom = NO;
-        }
-
-
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//
+//    CGFloat height = scrollView.frame.size.height;
+//        CGFloat contentOffsetY = scrollView.contentOffset.y;
+//        CGFloat bottomOffset = scrollView.contentSize.height - contentOffsetY;
+//
+//    
+//        NSLog(@"整体高度%.5f--偏移量%.5f",bottomOffset,height);
+//        if (bottomOffset-1 <= height)
+//        {
+//            //在最底部
+////            self.currentIsInBottom = YES;
+//            scrollView.scrollEnabled = NO;
+//        }
+//        else
+//        {
+//            if (scrollView.contentOffset.y==0) {
+//                scrollView.scrollEnabled = NO;
+//            }else {
+//                scrollView.scrollEnabled = YES;
+//            }
+//            
+////            self.currentIsInBottom = NO;
+//        }
+//
+//
+//}
 - (void)setDetailModel:(JCActivityDetailModel *)detailModel {
     _detailModel = detailModel;
     self.headView.content = detailModel.finish_num;
@@ -215,6 +271,19 @@
         _footView = [JCKindMoreFootView new];
     }
     return _footView;
+}
+- (NSMutableArray *)showDataArray {
+    if (!_showDataArray) {
+        _showDataArray = [NSMutableArray array];
+    }
+    return _showDataArray;
+}
+
+- (JCActivityKindUserShowView *)userShowView {
+    if (!_userShowView) {
+        _userShowView = [JCActivityKindUserShowView new];
+    }
+    return _userShowView;
 }
 
 /*

@@ -72,6 +72,7 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 @property (nonatomic,assign) BOOL is_hide;
 
+@property (nonatomic,assign) BOOL needNextGetData;//是否需要下次页面出现的时候请求数据
 
 @end
 
@@ -98,6 +99,9 @@ static CGFloat const kWMMenuViewHeight = 44;
         [self.navigationController.view insertSubview:self.navShadow belowSubview:self.navigationController.navigationBar];
     }else{
         [self setNavEffect];
+    }
+    if (self.needNextGetData) {
+        [self getCommomData];
     }
     self.activityImgView.hidden = self.show_activity==1?NO:YES;
     self.is_hide = NO;
@@ -156,16 +160,18 @@ static CGFloat const kWMMenuViewHeight = 44;
     [self getHomeTab];
     [self getHomeTopCycle];//首页轮播数据
     [self getHomeData];
-    
+//    [self getCommomData]
     [self showGuideView];
   
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCommomData) name:NotificationUserLogin object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isInCurrentVC) name:NotificationUserLogin object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCommomData) name:UserRegisterSuccess object:nil];//新用户注册成功,获取新人红包
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(topViewClickEnable) name:@"WMPageControllerScrollowStop" object:nil];
-
-    NSLog(@"屏幕宽%.0f--%.0f",SCREEN_WIDTH,SCREEN_HEIGHT);
+#pragma mark test
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isInCurrentVC) name:NotificationUserLogin object:nil];
     
 }
+
+
 
 - (void)initView {
     
@@ -306,6 +312,7 @@ static CGFloat const kWMMenuViewHeight = 44;
         };
         [self.jcWindow addSubview:view];
     }else{
+        [self getCommomData];
         [[NSUserDefaults standardUserDefaults] objectForKey:JCAppGuide];
     }
 
@@ -620,7 +627,7 @@ static CGFloat const kWMMenuViewHeight = 44;
 }
 
 - (void)getCommomData {
-    
+    self.needNextGetData = NO;
 //    [self.view showLoading];
     if (![JCWUserBall currentUser]) {
         [self showActivityPresentWithPosition:@"1" ViewController:self];//获取活动弹窗
@@ -666,6 +673,17 @@ static CGFloat const kWMMenuViewHeight = 44;
     id object = [JCWAppTool dictionaryForJsonData:object_data];
     if (object) {
         [self deathWithTopData:object];
+    }
+}
+//当前页面处于JCMainTabBarController的选中页面
+- (void)isInCurrentVC {
+    
+    JCMainTabBarController *tabBarController = (JCMainTabBarController *)[UIApplication sharedApplication].delegate.window.rootViewController;
+    BOOL value =  [tabBarController isCurrentBaseVCWtihIndex:0];
+    self.needNextGetData = !value;//是否需要下次页面出现的时候请求数据
+//    self.needNextGetData = YES;
+    if (value) {
+        [self getCommomData];
     }
 }
 

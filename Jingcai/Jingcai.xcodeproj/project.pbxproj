@@ -203,6 +203,9 @@
 		7B44A6D1266785AE00AF56B0 /* JCKindShareResigerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B44A6D0266785AE00AF56B0 /* JCKindShareResigerModel.m */; };
 		7B44A6D526679F9400AF56B0 /* JCActivityKindDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B44A6D426679F9400AF56B0 /* JCActivityKindDetailCell.m */; };
 		7B44A6DA2667A86C00AF56B0 /* JCActivityKindUserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B44A6D92667A86C00AF56B0 /* JCActivityKindUserView.m */; };
+		7B44A7012668EEB200AF56B0 /* JCActivityKindUserShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B44A7002668EEB100AF56B0 /* JCActivityKindUserShowView.m */; };
+		7B44A7052668F8FE00AF56B0 /* JCActivityKindScoreShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B44A7042668F8FE00AF56B0 /* JCActivityKindScoreShowView.m */; };
+		7B44A70F2669B2A800AF56B0 /* JCActivityKindMyPrizeShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B44A70E2669B2A800AF56B0 /* JCActivityKindMyPrizeShowView.m */; };
 		7B44C39823BD8A01008B8E6C /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B44C39623BD8A00008B8E6C /* UITextView+Placeholder.m */; };
 		7B44C3A723C47120008B8E6C /* JNMatchDetailView_New.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B44C3A623C47120008B8E6C /* JNMatchDetailView_New.m */; };
 		7B453BA125A2A9AF009B00D6 /* JCMatchAllWMVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B453BA025A2A9AF009B00D6 /* JCMatchAllWMVC.m */; };
@@ -1669,6 +1672,12 @@
 		7B44A6D426679F9400AF56B0 /* JCActivityKindDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityKindDetailCell.m; sourceTree = "<group>"; };
 		7B44A6D82667A86C00AF56B0 /* JCActivityKindUserView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityKindUserView.h; sourceTree = "<group>"; };
 		7B44A6D92667A86C00AF56B0 /* JCActivityKindUserView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityKindUserView.m; sourceTree = "<group>"; };
+		7B44A6FF2668EEB100AF56B0 /* JCActivityKindUserShowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityKindUserShowView.h; sourceTree = "<group>"; };
+		7B44A7002668EEB100AF56B0 /* JCActivityKindUserShowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityKindUserShowView.m; sourceTree = "<group>"; };
+		7B44A7032668F8FD00AF56B0 /* JCActivityKindScoreShowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityKindScoreShowView.h; sourceTree = "<group>"; };
+		7B44A7042668F8FE00AF56B0 /* JCActivityKindScoreShowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityKindScoreShowView.m; sourceTree = "<group>"; };
+		7B44A70D2669B2A800AF56B0 /* JCActivityKindMyPrizeShowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityKindMyPrizeShowView.h; sourceTree = "<group>"; };
+		7B44A70E2669B2A800AF56B0 /* JCActivityKindMyPrizeShowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityKindMyPrizeShowView.m; sourceTree = "<group>"; };
 		7B44C39623BD8A00008B8E6C /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
 		7B44C39723BD8A00008B8E6C /* UITextView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Placeholder.h"; sourceTree = "<group>"; };
 		7B44C3A523C47120008B8E6C /* JNMatchDetailView_New.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JNMatchDetailView_New.h; sourceTree = "<group>"; };
@@ -4319,7 +4328,7 @@
 			isa = PBXGroup;
 			children = (
 				7BB585BC260046D60060AD04 /* 特别关注 */,
-				7B45F41B25F084540099D108 /* 活动 */,
+				7B45F41B25F084540099D108 /* 欧洲杯活动 */,
 				7B2DAD2624810A4E000E2282 /* ViewController */,
 				7B2DAD0A24810A4E000E2282 /* Model */,
 				7B2DAD0B24810A4E000E2282 /* View */,
@@ -4690,7 +4699,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		7B45F41B25F084540099D108 /* 活动 */ = {
+		7B45F41B25F084540099D108 /* 欧洲杯活动 */ = {
 			isa = PBXGroup;
 			children = (
 				7B31AE2325F7508C003FD686 /* 活动 */,
@@ -4700,7 +4709,7 @@
 				7B45F42225F086330099D108 /* View */,
 				7B45F41C25F084860099D108 /* ViewController */,
 			);
-			path = "活动";
+			path = "欧洲杯活动";
 			sourceTree = "<group>";
 		};
 		7B45F41C25F084860099D108 /* ViewController */ = {
@@ -5172,6 +5181,12 @@
 				7B44A6972664D95200AF56B0 /* JCKindCompleteUserHeadView.m */,
 				7B44A69A2664DB6700AF56B0 /* JCKindMoreFootView.h */,
 				7B44A69B2664DB6700AF56B0 /* JCKindMoreFootView.m */,
+				7B44A6FF2668EEB100AF56B0 /* JCActivityKindUserShowView.h */,
+				7B44A7002668EEB100AF56B0 /* JCActivityKindUserShowView.m */,
+				7B44A7032668F8FD00AF56B0 /* JCActivityKindScoreShowView.h */,
+				7B44A7042668F8FE00AF56B0 /* JCActivityKindScoreShowView.m */,
+				7B44A70D2669B2A800AF56B0 /* JCActivityKindMyPrizeShowView.h */,
+				7B44A70E2669B2A800AF56B0 /* JCActivityKindMyPrizeShowView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -10653,6 +10668,7 @@
 				7B8AE2C425A4057C00B805EA /* JCBasketMatchDetailTeamScoreCell.m in Sources */,
 				C30C8E31224C6373001ECA18 /* JCChargeWayCell.m in Sources */,
 				7B8AE2E625A449C900B805EA /* JCBasketBallMatchTongJiDataHeadView.m in Sources */,
+				7B44A7012668EEB200AF56B0 /* JCActivityKindUserShowView.m in Sources */,
 				C3F023CE216F71A800A1B98F /* JCWPhotoTool.m in Sources */,
 				7B80CB0E24C97D6B00C14117 /* JCTeamDetailInfoHonorModel.m in Sources */,
 				C314E70F222F9AA200365D26 /* JCTabCategoryTitleView.m in Sources */,
@@ -10688,6 +10704,7 @@
 				C3E0DF7D219E95BC00D5D888 /* WXApiManager.m in Sources */,
 				7B0FB037233CA37300FC850F /* JCMyHongbaoCell.m in Sources */,
 				7BF167EF2351C24600DFDB00 /* UIView+LYExtension.m in Sources */,
+				7B44A70F2669B2A800AF56B0 /* JCActivityKindMyPrizeShowView.m in Sources */,
 				7B80CAB724C1AB0100C14117 /* JNMatchSJZhanjiCell.m in Sources */,
 				7BB827F124B326A20012EDA8 /* JCTeamMatchInfoTeamCell.m in Sources */,
 				7B1351CA233DE9FD00559D86 /* NSDate+Extensions.m in Sources */,
@@ -11144,6 +11161,7 @@
 				7B18853F24FCD21C002E770B /* JCMineIncomeTopView.m in Sources */,
 				7B99E6F12316678300AA5AB6 /* JNMatchZJBall.m in Sources */,
 				C3C8E33E21AE61DF0087E34D /* JCWNetworkTool.m in Sources */,
+				7B44A7052668F8FE00AF56B0 /* JCActivityKindScoreShowView.m in Sources */,
 				7BD893DE24F4BB140058B951 /* JCFootBallBuyPlaneFootView.m in Sources */,
 				7B2DAD5824810A4F000E2282 /* JCHongbangBuylWMstckyVC.m in Sources */,
 				7B8A28E325B6AE2A0031D671 /* JCHongBangBall.m in Sources */,

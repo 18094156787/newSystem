@@ -21,7 +21,7 @@
         make.height.mas_equalTo(AUTO(300));
     }];
     
-    UILabel *titleLab = [UILabel initWithTitle:@"选择红包" andFont:AUTO(16) andWeight:1 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:0];
+    UILabel *titleLab = [UILabel initWithTitle:@"选择优惠券" andFont:AUTO(16) andWeight:1 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:0];
     [self.bgView addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(AUTO(10));

@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString  *status_cn;
 
-
+@property (strong, nonatomic) NSString  *group_num_new;//A组
 
 @end
 NS_ASSUME_NONNULL_END

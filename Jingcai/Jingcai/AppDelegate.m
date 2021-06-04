@@ -43,8 +43,8 @@
 #import "IAPManager.h"
 #import "JCBaseTitleAlertView.h"
 #import "KSGuaidViewManager.h"
-
-@interface AppDelegate () <JPUSHRegisterDelegate>
+#import "OpenInstallSDK.h"
+@interface AppDelegate () <JPUSHRegisterDelegate,OpenInstallDelegate>
 
 @property (nonatomic,strong) NSDictionary *launchOptions;
 
@@ -81,6 +81,7 @@
         if (isEnabled) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self configUM];
+                [self configOpeninstall];
                 //刷新UI的代码放到主线程执行
                 //极光推送--初始化APNs
                 JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -219,6 +220,20 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [self configUSharePlatforms];
     [self confitUShareSettings];
 }
+- (void)configOpeninstall {
+    [OpenInstallSDK initWithDelegate:self];
+    [[OpenInstallSDK defaultManager] getInstallParmsCompleted:^(OpeninstallData*_Nullable appData) {
+        //在主线程中回调
+        if (appData.data) {//(动态安装参数)
+           //e.g.如免填邀请码建立邀请关系、自动加好友、自动进入某个群组或房间等
+        }
+        if (appData.channelCode) {//(通过渠道链接或二维码安装会返回渠道编号)
+            //e.g.可自己统计渠道相关数据等
+        }
+//        [JCWToastTool showHint:[NSString stringWithFormat:@"安装OpenInstallSDK:\n动态参数：%@;\n渠道编号：%@",appData.data,appData.channelCode]];
+        NSLog(@"OpenInstallSDK:\n动态参数：%@;\n渠道编号：%@",appData.data,appData.channelCode);
+    }];
+}
 - (void)confitUShareSettings
 {
     /*
@@ -259,23 +274,13 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         UNUserNotificationCenter * center = [UNUserNotificationCenter currentNotificationCenter];
     //    center.delegate = self;
         [center requestAuthorizationWithOptions:UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound completionHandler:^(BOOL granted, NSError * _Nullable error) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JpushResult"];
+            
             if (granted) {
-
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [self configUM];
-                    //刷新UI的代码放到主线程执行
-                    //极光推送--初始化APNs
-                    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
-                    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
-                    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-                    //初始化JPush
-                    [JPUSHService setupWithOption:launchOptions appKey:JPushAppKey
-                                          channel:@"App Store"
-                                 apsForProduction:YES
-                            advertisingIdentifier:nil];
-                });
+                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JpushResult"];//同意推送
+                if ([[NSUserDefaults standardUserDefaults] objectForKey:@"firstApp"]) {
+                    [self agreeConfigWithLaunchOptions];
+                }
+                
             }else{
                 //不允许
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -291,7 +296,9 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
             [JCWAppTool isUserNotificationEnable:^(BOOL isEnabled) {
                 if (isEnabled) {
                     dispatch_async(dispatch_get_main_queue(), ^{
+                        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JpushResult"];
                         [self configUM];
+                        [self configOpeninstall];
                         //刷新UI的代码放到主线程执行
                         //极光推送--初始化APNs
                         JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -341,6 +348,25 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
 
     
+
+}
+
+- (void)agreeConfigWithLaunchOptions {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self configUM];
+        [self configOpeninstall];
+        //刷新UI的代码放到主线程执行
+        //极光推送--初始化APNs
+        JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+        entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+        [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+        //初始化JPush
+        [JPUSHService setupWithOption:self.launchOptions appKey:JPushAppKey
+                              channel:@"App Store"
+                     apsForProduction:YES
+                advertisingIdentifier:nil];
+    });
 
 }
 
@@ -620,5 +646,12 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 - (nullable UIViewController *)childViewControllerForStatusBarHidden {
     return self.topViewController;
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler{
+    //处理通过openinstall一键唤起App时传递的数据
+    [OpenInstallSDK continueUserActivity:userActivity];
+    //其他第三方回调；
+     return YES;
 }
 @end

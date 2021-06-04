@@ -10,6 +10,7 @@
 #import "JCActivityHdCell.h"
 #import "JCActivityDetailCommomVC.h"
 #import "JCActivityGuessVC.h"
+#import "JCActivityKindVC.h"
 @interface JcActivityHistoryVC ()
 
 @end
@@ -171,6 +172,14 @@
         JCActivityGuessVC *vc = [JCActivityGuessVC new];
         vc.actID = model.id;
         [self.navigationController pushViewController:vc animated:YES];
+    }
+    if ([model.type integerValue]==5) {
+        
+        JCActivityKindVC *vc = [JCActivityKindVC new];
+        vc.actID = model.id;
+//        vc.actID = @"122";
+        [self.navigationController pushViewController:vc animated:YES];
+
     }
 
 }

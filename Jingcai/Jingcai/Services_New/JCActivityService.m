@@ -104,7 +104,7 @@
 - (void)getActivityPresentWithPosition:(NSString *)position actIDs:(NSString *)actIDs success:(successBlock)successBlock failure:(failureBlock)failureBlock {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSDictionary * param = @{
-                            @"position":position,
+                            @"show_position":position,
                             @"ids":NonNil(actIDs)
     };
     NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"popup_event_pictures" paramDic:param ignoreArray:@[]];
@@ -225,13 +225,13 @@
 
 //签到活动内部详情
 //type 1活动完成用户 2用户积分明细 3我的奖励 4返回全部列表 默认为4
-- (void)getKindActivityDetailContentWithActID:(NSString *)ID  type:(NSString *)type Page:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+- (void)getKindActivityDetailContentWithActID:(NSString *)ID  type:(NSString *)type Page:(NSInteger)page page_size:(NSString *)pageSize success:(successBlock)successBlock failure:(failureBlock)failureBlock {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSDictionary * param = @{
                             @"activity_id":ID,
                             @"type":type,
                             @"page":Integet_ToString(page),
-                            @"page_size":@"5"
+                            @"page_size":pageSize
     };
     NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"charity_play_info" paramDic:param ignoreArray:@[]];
 

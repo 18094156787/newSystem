@@ -122,9 +122,9 @@
         [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
             self.detailModel = (JCActivityDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCActivityDetailModel class]];
-            if (!self.detailModel.type) {
-                self.detailModel.type = @"5";
-            }
+//            if (!self.detailModel.type) {
+//                self.detailModel.type = @"5";
+//            }
 //            self.detailModel.user_info.is_finish = @"1";
             self.headView.detailModel = self.detailModel;
             self.title = self.detailModel.title;
@@ -163,34 +163,13 @@
                 self.shareLab.text = @"今日已分享";
             }
             
-            
-            //展示底部按钮
-            if ([self.detailModel.active_state integerValue]==1||[self.detailModel.active_state integerValue]==3||[self.detailModel.active_state integerValue]==4) {
-                //活动未开始或者活动已结束
+            if ([self.detailModel.active_state integerValue]==3) {
                 self.signBtn.hidden = YES;
                 self.shareBtn.hidden = YES;
                 self.inviteBtn.hidden = YES;
-                if ([self.detailModel.active_state integerValue]==1) {
-                    //未开始
-                   
-                    [self.bottomView addSubview:self.endBtn];
-                    self.endLab.text = @"活动未开始";
-                }
-                if ([self.detailModel.active_state integerValue]==3) {
-                    //已结束
-                    
-                    [self.bottomView addSubview:self.endBtn];
-                    self.endLab.text = @"本期活动已结束";
-                }
-                if ([self.detailModel.active_state integerValue]==4) {
-                    //已结束
-                   
-                    [self.bottomView addSubview:self.endBtn];
-                    self.endLab.text = @"活动太火爆，奖励已经发完了。";
-                }
-                
+                [self.bottomView addSubview:self.endBtn];
+                self.endLab.text = @"本期活动已结束";
             }else{
-                
                 //进行中
                 if ([self.detailModel.user_info.is_finish integerValue]==1) {
                     self.signBtn.hidden = YES;
@@ -199,19 +178,37 @@
 
                     [self.bottomView addSubview:self.completeBtn];
                     [self.bottomView addSubview:self.shareImageBtn];
+                }else{
+
+
+                    if ([self.detailModel.active_state integerValue]==4) {
+                        //已结束
+                        self.signBtn.hidden = YES;
+                        self.shareBtn.hidden = YES;
+                        self.inviteBtn.hidden = YES;
+                        [self.bottomView addSubview:self.endBtn];
+                        self.endLab.text = @"活动太火爆，奖励已经发完了。";
+                    }
+                    if ([self.detailModel.active_state integerValue]==1) {
+                        //未开始
+                        self.signBtn.hidden = YES;
+                        self.shareBtn.hidden = YES;
+                        self.inviteBtn.hidden = YES;
+                        [self.bottomView addSubview:self.endBtn];
+                        self.endLab.text = @"活动未开始";
+                    }
+                    
                 }
-                
-                
 
             }
 
-            
-            //展示活动海报
+            //阶段奖励
             if ([self.detailModel.is_stage integerValue]==1) {
-                self.scoreTipView.detailModel = self.detailModel;
-                self.scoreTipView.dataSource = self.detailModel.stage_info;
+
                 
                 if (![self.popImageArray containsObject:self.scoreTipView]) {
+                    self.scoreTipView.detailModel = self.detailModel;
+                    self.scoreTipView.dataSource = self.detailModel.stage_info;
                     [self.popImageArray addObject:self.scoreTipView];
                 }
 
@@ -221,19 +218,15 @@
                 self.inviteView.imgUrl = self.detailModel.popup_image;
                 
                 if (![self.popImageArray containsObject:self.inviteView]) {
+                    self.inviteView.shareBtn.hidden = NO;
+                    self.inviteView.shareBottomView.hidden = YES;
                     [self.popImageArray addObject:self.inviteView];
                 }
 
             }
             [self showPopTipView];
 
-            
 
-            
-//            self.scoreTipView.detailModel = self.detailModel;
-//            self.scoreTipView.dataSource = self.detailModel.goods_info;
-//            [self.jcWindow addSubview:self.scoreTipView];
-            
         }else{
             [JCWToastTool showHint:object[@"msg"]];
         }
@@ -389,6 +382,7 @@
         weakSelf.shareBottomView.frame = CGRectMake(0, SCREEN_HEIGHT-100-kBottomTabSafeAreaHeight, SCREEN_WIDTH, 100+kBottomTabSafeAreaHeight);
         weakSelf.shareBottomView.shareImage = image;
         [weakSelf.inviteView addSubview:weakSelf.shareBottomView];
+        weakSelf.inviteView.shareBottomView.hidden = YES;
         [weakSelf.shareBottomView show];
     };
     self.inviteView.JCCloseBlock = ^{
@@ -593,6 +587,8 @@
                 self.inviteView.imgUrl = user_info.popup_image;
                 
                 if (![self.popImageArray containsObject:self.inviteView]) {
+                    self.inviteView.shareBtn.hidden = NO;
+                    self.inviteView.shareBottomView.hidden = YES;
                     [self.popImageArray addObject:self.inviteView];
                 }
 
@@ -669,6 +665,8 @@
 - (void)sharePosterClick {
 //    self.inviteView.imgUrl = @"http://imagetest.yixinzuqiu.com/upload/image/1109/47b87ab5cad3451bf3484dc385e408aa.jpg";
     self.inviteView.imgUrl = self.detailModel.popup_image;
+    self.inviteView.shareBottomView.hidden = NO;
+    self.inviteView.shareBtn.hidden = YES;
     [self.jcWindow addSubview:self.inviteView];
 
 }

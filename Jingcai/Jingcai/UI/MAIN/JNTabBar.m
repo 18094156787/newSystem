@@ -149,12 +149,12 @@
     if (self.btnClickBlock) {
         NSInteger index = [self.btnArr indexOfObject:button];
         self.btnClickBlock(index);
-
+//        self.selectedIndex = index;
         if (index==4) {
             UIButton * mineitem = self.btnArr[4];
             [mineitem removeBadgeLabel];
         }else{
-            
+        
             if ([[JCWUserBall currentUser].info integerValue]>0) {
                 UIButton * mineitem = self.btnArr[4];
                 mineitem.badgeStr = [JCWUserBall currentUser].info;

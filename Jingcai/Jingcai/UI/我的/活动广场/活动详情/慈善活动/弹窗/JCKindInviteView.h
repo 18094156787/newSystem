@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseView.h"
-
+#import "JCKindShareView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCKindInviteView : JCBaseView
@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,copy) void(^JCBlock)(UIImage *image);
 
 @property (nonatomic,copy) void(^JCCloseBlock)(void);
+
+@property (nonatomic,strong) JCKindShareView *shareBottomView;
 
 
 

@@ -31,7 +31,7 @@
 }
 
 - (void)showNoMore {
-    self.contentLab.text = @" - 没有更多内容了 -";
+    self.contentLab.text = @"";
     self.contentLab.userInteractionEnabled = NO;
 }
 

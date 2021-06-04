@@ -32,13 +32,17 @@
         make.top.equalTo(self.bgView.mas_bottom).offset(16);
         make.size.mas_equalTo(CGSizeMake(AUTO(320), AUTO(44)));
     }];
-    
+
     UILabel *inviteLab = [UILabel initWithTitle:@"分享给朋友，邀请朋友一起助力中国足球" andFont:16 andWeight:1 andTextColor:JCWhiteColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     inviteLab.userInteractionEnabled = YES;
     [self.shareBtn addSubview:inviteLab];
     [inviteLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.insets(UIEdgeInsetsZero);
     }];
+    
+    self.shareBottomView.frame = CGRectMake(0, SCREEN_HEIGHT-100-kBottomTabSafeAreaHeight, SCREEN_WIDTH, 100+kBottomTabSafeAreaHeight);
+//    self.shareBottomView.shareImage = image;
+    [self addSubview:self.shareBottomView];
     
     WeakSelf;
     [self.closeBtn bk_whenTapped:^{
@@ -55,7 +59,7 @@
         if (weakSelf.JCBlock) {
             weakSelf.shareBtn.hidden = YES;
             weakSelf.JCBlock(self.shareImage);
-            
+
         }
     }];
 }
@@ -68,6 +72,7 @@
         if (!error) {
             self.isFinish = YES;
             self.shareImage = image;
+            self.shareBottomView.shareImage = self.shareImage;
         }
     }];
 }
@@ -104,5 +109,11 @@
     }
     return _shareBtn;
 }
-
+- (JCKindShareView *)shareBottomView {
+    if (!_shareBottomView) {
+        _shareBottomView = [JCKindShareView new];
+        _shareBottomView.hidden = YES;
+    }
+    return _shareBottomView;;
+}
 @end

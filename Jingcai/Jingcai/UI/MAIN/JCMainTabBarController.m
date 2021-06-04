@@ -548,6 +548,32 @@
     }];
 }
 
+//是否处于当前控制器 index表示对应的控制器下标
+- (BOOL)isCurrentBaseVCWtihIndex:(NSInteger)index {
+    UINavigationController *nav = self.viewControllers.firstObject;
+    //        _showVCArray = @[self.expertNav,
+    //                         self.matchNav,
+    //                         self.communityNav,
+    //                         self.commentNav,
+    //                         self.mineNav];
+    if (index==0&&nav==self.expertNav) {
+        return YES;
+    }
+    if (index==1&&nav==self.matchNav) {
+        return YES;
+    }
+    if (index==2&&nav==self.communityNav) {
+        return YES;
+    }
+    if (index==3&&nav==self.commentNav) {
+        return YES;
+    }
+    if (index==4&&nav==self.mineNav) {
+        return YES;
+    }
+    return NO;
+}
+
 - (JCMathEnterGaolTipView *)goalTipView {
     if (!_goalTipView) {
         _goalTipView = [JCMathEnterGaolTipView new];
@@ -576,6 +602,9 @@
     }
     return _debugButton;
 }
+
+
+
 - (void)debugShowStatusBarHeight {
     CGFloat hhh = StatusBar_HEIGHT;
     NSLog(@"StatusBarHeight == %lf", hhh);

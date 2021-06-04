@@ -41,6 +41,7 @@ PODS:
     - LBXScan/Types (~> 2.2)
     - ZBarSDK (~> 1.3.1)
   - LBXScan/Types (2.3)
+  - libOpenInstallSDK (2.5.2)
   - Masonry (1.1.0)
   - MJRefresh (3.4.1)
   - Reachability (3.2)
@@ -143,6 +144,7 @@ DEPENDENCIES:
   - JPush
   - JXCategoryView
   - LBXScan (~> 2.3)
+  - libOpenInstallSDK
   - Masonry
   - MJRefresh
   - ReactiveObjC
@@ -172,6 +174,7 @@ SPEC REPOS:
     - JPush
     - JXCategoryView
     - LBXScan
+    - libOpenInstallSDK
     - Masonry
     - MJRefresh
     - Reachability
@@ -202,6 +205,7 @@ SPEC CHECKSUMS:
   JPush: 9468c84a3809dc3ac2fc1c89c6d1d6c858a91bf5
   JXCategoryView: 0293fcb356f10a5c2e679dac0a1a5f1899ee0c87
   LBXScan: e51449f0832d1fe17da632af0d22adeb3cfa3543
+  libOpenInstallSDK: c0f724fcfabcbfe933774230b5738ca2744d9fba
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: 3153c59a363159092c08b2177ec3a7d09f90bfaf
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
@@ -223,6 +227,6 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZBarSDK: 4c1b5daeb7d6cc67dc9355e690af0230a661f6ec
 
-PODFILE CHECKSUM: 8ebb4f094ab73a5f7abb6a46de1fbd21780eaed8
+PODFILE CHECKSUM: 9cd9a4f25f9ff8ad4ab4e5133a313000d3f38116
 
 COCOAPODS: 1.10.0.beta.2

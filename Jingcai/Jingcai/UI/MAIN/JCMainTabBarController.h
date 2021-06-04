@@ -19,5 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 //- (void)showJingCaiVC;//展鲸猜
 - (void)showMessageVC;
 - (void)showMyRedPacketListVC;//我的红包卡券
+
+//是否处于当前控制器 index表示对应的控制器下标
+- (BOOL)isCurrentBaseVCWtihIndex:(NSInteger)index;
 @end
 NS_ASSUME_NONNULL_END
