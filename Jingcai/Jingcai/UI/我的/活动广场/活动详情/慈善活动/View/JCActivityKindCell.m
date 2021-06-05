@@ -65,6 +65,13 @@
 //    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(aaaa)];
 //    pan.delegate = self;
 //    [self.listContainerView addGestureRecognizer:pan];
+    
+    WeakSelf;
+    self.countDown = [[CountDown alloc] init];
+    [self.countDown countDownWithNumer:1 SECBlock:^{
+        [weakSelf showAnimation];
+
+    }];
 
 }
 
@@ -165,6 +172,27 @@ NSLog(@"%@", NSStringFromSelector(_cmd));
 //    self.listContainerView.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH-50, 500);
 }
 
+- (void)showAnimation {
+
+//    self.getScoreImgView.transform = CGAffineTransformMakeScale(1, 1);
+        [UIView animateWithDuration:0.5
+                         animations:^{
+            self.getScoreImgView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+                         }completion:^(BOOL finish){
+                             
+                         [UIView animateWithDuration:0.5
+                                          animations:^{
+                             self.getScoreImgView.transform = CGAffineTransformMakeScale(0.9, 0.9);
+                                          }completion:^(BOOL finish){
+
+                                          }];
+                             
+                         }];
+
+}
+- (void)destoryTimer {
+    [self.countDown destoryTimer];
+}
 - (UIImageView *)getScoreImgView {
     if (!_getScoreImgView) {
         _getScoreImgView = [UIImageView new];

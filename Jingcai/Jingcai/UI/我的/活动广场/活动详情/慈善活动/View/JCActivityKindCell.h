@@ -12,6 +12,7 @@
 #import "JCActivityKindScoreVC.h"
 #import "JCActivityKindMyPrizeVC.h"
 #import "JCActivityDetailModel.h"
+#import "CountDown.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCActivityKindCell : JCBaseTableViewCell_New<JXCategoryViewDelegate, JXCategoryListContainerViewDelegate>
@@ -28,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *actID;
 
+@property (strong, nonatomic) CountDown *countDown;
+
 @property (nonatomic,strong) JCActivityDetailModel *detailModel;
 
 @property (nonatomic, strong) JCActivityKindUserVC *userVC;
@@ -35,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) JCActivityKindScoreVC *scoreVC;
 
 @property (nonatomic, strong) JCActivityKindMyPrizeVC *prizeVC;
+
+- (void)destoryTimer;
 
 
 @end

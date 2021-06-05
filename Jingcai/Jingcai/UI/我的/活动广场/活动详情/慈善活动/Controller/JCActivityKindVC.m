@@ -101,6 +101,12 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    [self destortTimer];
+}
+
+- (void)destortTimer {
+    JCActivityKindCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
+    [cell destoryTimer];
 }
 
 - (void)backItemClick {
