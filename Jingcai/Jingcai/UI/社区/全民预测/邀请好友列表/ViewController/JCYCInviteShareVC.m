@@ -10,6 +10,7 @@
 #import <UMShare/UMShare.h>
 #import <ZXingWrapper.h>
 #import <Photos/Photos.h>
+#import "QiCodeManager.h"
 #ifndef czh_dispatch_queue_async_safe
 #define czh_dispatch_queue_async_safe(queue, block)\
 if (strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(queue)) == 0) {\
@@ -285,7 +286,8 @@ dispatch_async(queue, block);\
     NSString * jsonString = ifno;
    jsonString = [jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];  //去除掉首尾的空白字符和换行字符
    [jsonString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    UIImage *image = [ZXingWrapper createCodeWithString:jsonString size:CGSizeMake(75, 75) CodeFomart:kBarcodeFormatQRCode];
+    UIImage *image = [QiCodeManager generateQRCode:jsonString size:CGSizeMake(75, 75)];
+//    UIImage *image = [ZXingWrapper createCodeWithString:jsonString size:CGSizeMake(75, 75) CodeFomart:kBarcodeFormatQRCode];
     return image;
 }
 

@@ -149,10 +149,7 @@
     //分享消息对象设置分享内容对象
     messageObject.shareObject = shareObject;
     
-//    UMShareImageObject  *imageObj = [UMShareImageObject new];
-//    imageObj.shareImage = @"http://imagetest.yixinzuqiu.com/upload/image/1109/47b87ab5cad3451bf3484dc385e408aa.jpg";
-//    messageObject.shareObject = imageObj;
-    
+
     
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
         if (error) {
@@ -170,7 +167,7 @@
         }
     }
     if (cell.shareType == JCShareTypeEnumWeChatTimeLine||cell.shareType == JCShareTypeEnumWeChatSession) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshKindActivityDetail" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"shareActivityToRefresh" object:nil];
     }
     
 }

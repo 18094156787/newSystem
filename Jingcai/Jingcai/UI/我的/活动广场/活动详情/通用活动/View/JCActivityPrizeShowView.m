@@ -84,7 +84,7 @@
     JCActivityGoodsTitleModel *titleModel = self.dataSource[section];
     if ([titleModel.grade integerValue]>0&&[self.detailModel.type integerValue]==3&&[self.detailModel.pay_type integerValue]==2&&self.showHeader) {
         return 30;
-    }else if([titleModel.grade integerValue]>0&&self.showHeader){
+    }else if([titleModel.grade integerValue]>0&&[self.detailModel.type integerValue]==5&&self.showHeader){
         
         return 30;
     }

@@ -73,14 +73,17 @@
 //                [self.footView showMore];
 //            }
             if (self.dataArray.count>=5) {
-                self.footView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
-                self.tableView.tableFooterView = self.footView;
-                self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
-                self.tableView.tableHeaderView = self.headView;
+
 
                 [self.footView showMore];
             }else{
                 [self.footView showNoMore];
+            }
+            if ((self.dataArray.count>0)) {
+                self.footView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
+                self.tableView.tableFooterView = self.footView;
+                self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
+                self.tableView.tableHeaderView = self.headView;
             }
             
 

@@ -50,6 +50,10 @@ NSString * const PageIDAbout            = @"PageIDAbout";
 NSString * const PageIDContact          = @"PageIDContact";
 
 
+
+
+NSString * const NotificationNameApplicationWillEnterForeground = @"applicationWillEnterForeground";
+
 NSString * const NotificationNameUserChange = @"userChange";
 NSString * const NotificationUserLogin = @"userLogin";
 NSString * const NotificationUserLogout = @"userLogout";

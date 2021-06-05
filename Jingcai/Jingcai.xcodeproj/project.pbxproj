@@ -149,6 +149,7 @@
 		7B23D19D2550F22400987BCC /* JCHongbangOrderWMstckyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B23D19C2550F22400987BCC /* JCHongbangOrderWMstckyVC.m */; };
 		7B23D1A0255142F500987BCC /* JCPostCheckUserInfo_Horizontal_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B23D19F255142F500987BCC /* JCPostCheckUserInfo_Horizontal_Cell.m */; };
 		7B2C737A237BD1F90041604B /* JCCoinRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2C7379237BD1F90041604B /* JCCoinRecordsViewController.m */; };
+		7B2D3C56266B64460085CE18 /* QiCodeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D3C54266B64450085CE18 /* QiCodeManager.m */; };
 		7B2DAD2924810A4E000E2282 /* JCSearchPlanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2DAC9924810A4E000E2282 /* JCSearchPlanCell.m */; };
 		7B2DAD2A24810A4E000E2282 /* JCSearchTitleSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2DAC9A24810A4E000E2282 /* JCSearchTitleSectionView.m */; };
 		7B2DAD2B24810A4E000E2282 /* JCSearchExpertCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2DAC9B24810A4E000E2282 /* JCSearchExpertCell.m */; };
@@ -1564,6 +1565,8 @@
 		7B23D19F255142F500987BCC /* JCPostCheckUserInfo_Horizontal_Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCPostCheckUserInfo_Horizontal_Cell.m; sourceTree = "<group>"; };
 		7B2C7378237BD1F90041604B /* JCCoinRecordsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCCoinRecordsViewController.h; sourceTree = "<group>"; };
 		7B2C7379237BD1F90041604B /* JCCoinRecordsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCCoinRecordsViewController.m; sourceTree = "<group>"; };
+		7B2D3C54266B64450085CE18 /* QiCodeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiCodeManager.m; sourceTree = "<group>"; };
+		7B2D3C55266B64450085CE18 /* QiCodeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiCodeManager.h; sourceTree = "<group>"; };
 		7B2DAC9924810A4E000E2282 /* JCSearchPlanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCSearchPlanCell.m; sourceTree = "<group>"; };
 		7B2DAC9A24810A4E000E2282 /* JCSearchTitleSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCSearchTitleSectionView.m; sourceTree = "<group>"; };
 		7B2DAC9B24810A4E000E2282 /* JCSearchExpertCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCSearchExpertCell.m; sourceTree = "<group>"; };
@@ -4322,6 +4325,15 @@
 				7B23D196254FE6D000987BCC /* JCHongbangDetailTopView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7B2D3C53266B64450085CE18 /* 生成二维码 */ = {
+			isa = PBXGroup;
+			children = (
+				7B2D3C54266B64450085CE18 /* QiCodeManager.m */,
+				7B2D3C55266B64450085CE18 /* QiCodeManager.h */,
+			);
+			path = "生成二维码";
 			sourceTree = "<group>";
 		};
 		7B2DAC9624810A4E000E2282 /* 首页 */ = {
@@ -9455,6 +9467,7 @@
 		C3DAFCA6216A78BA00293222 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				7B2D3C53266B64450085CE18 /* 生成二维码 */,
 				7B6A0104256E4861009B296F /* View */,
 				7B206576256B9353006149BB /* 苹果内购 */,
 				C37133C421A28DF200D43F6C /* JCWAppTool.h */,
@@ -10999,6 +11012,7 @@
 				7BF4D4752644CE9400403BDF /* JCPlaneDetailQRcodeCell.m in Sources */,
 				C390D23A2192CCAD004370CF /* JCWTjInfoOddsBall.m in Sources */,
 				7BCA281F25218069008787FF /* JCJingCaiAINoticeModel.m in Sources */,
+				7B2D3C56266B64460085CE18 /* QiCodeManager.m in Sources */,
 				7B0AF02B24F7A4A500E338D5 /* JCTuiJianManager.m in Sources */,
 				7BC9F17625C2AB16000E47EC /* JCYCTenRedRankVC.m in Sources */,
 				7B11DB51261EEC2800C1F7D6 /* JCFamousExpertHeadView.m in Sources */,
@@ -11331,6 +11345,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MFKWUW9XYJ;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Jingcai",
@@ -11348,7 +11363,7 @@
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/UPPayPlugin",
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/WeChatSDK1.8.6.1",
 				);
-				MARKETING_VERSION = 3.31;
+				MARKETING_VERSION = 3.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -11414,6 +11429,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MFKWUW9XYJ;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Jingcai",
@@ -11431,7 +11447,7 @@
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/UPPayPlugin",
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/WeChatSDK1.8.6.1",
 				);
-				MARKETING_VERSION = 3.31;
+				MARKETING_VERSION = 3.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

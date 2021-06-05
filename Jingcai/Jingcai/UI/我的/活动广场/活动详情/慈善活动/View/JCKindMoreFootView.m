@@ -15,6 +15,7 @@
     [self.contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
         make.top.offset(5);
+        make.height.mas_equalTo(40);
     }];
     
     WeakSelf;

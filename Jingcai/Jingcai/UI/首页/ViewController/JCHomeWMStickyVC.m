@@ -464,7 +464,6 @@ static CGFloat const kWMMenuViewHeight = 44;
         if ([JCWJsonTool isSuccessResponse:object]) {
             if ([object[@"data"] isKindOfClass:[NSDictionary class]]) {
                 NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"hb"] class:[JCActivityRedPacketModel class]];
-        //            weakSelf.headView.bannerArray = self.bannerArray;
                 JCMainTabBarController *tabbar =  (JCMainTabBarController *)[UIApplication sharedApplication].delegate.window.rootViewController;
                tabbar.tabSelIndex = 0;
                 

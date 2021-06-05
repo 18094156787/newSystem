@@ -78,20 +78,11 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     [JCWAppTool isUserNotificationEnable:^(BOOL isEnabled) {
         if (isEnabled) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self configUM];
-                //刷新UI的代码放到主线程执行
-                //极光推送--初始化APNs
-                JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
-                entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
-                [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-                
-                //初始化JPush
-                [JPUSHService setupWithOption:self.launchOptions appKey:JPushAppKey
-                                      channel:@"App Store"
-                             apsForProduction:YES
-                        advertisingIdentifier:nil];
-            });
+//            [self agreeConfigWithLaunchOptions];
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"firstApp"]) {
+                //同意推送,并且同意服务协议,才去初始化设置
+                [self agreeConfigWithLaunchOptions];
+            }
         }
 
     }];
@@ -112,7 +103,7 @@
         JCChargeVC * chargeVC = (JCChargeVC *)vc;
         [chargeVC getChargeList];
     }
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameApplicationWillEnterForeground object:nil];
     //清除角标通知
     [application setApplicationIconBadgeNumber:0];
     UNUserNotificationCenter * center = [UNUserNotificationCenter currentNotificationCenter];
@@ -253,16 +244,17 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
 - (void)configJPushWithLaunchOptions:(NSDictionary *)launchOptions {
     
-    //确保权限只询问一次
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"JpushResult"]) {
+    //确保权限只询问一次,首次是询问,以后都是获取
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"JpushAgree"]) {
         //先访问用户的推送权限,当用户允许推送时,再初始化极光推送
         UNUserNotificationCenter * center = [UNUserNotificationCenter currentNotificationCenter];
     //    center.delegate = self;
         [center requestAuthorizationWithOptions:UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound completionHandler:^(BOOL granted, NSError * _Nullable error) {
             
             if (granted) {
-                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JpushResult"];//同意推送
+                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JpushAgree"];//同意推送
                 if ([[NSUserDefaults standardUserDefaults] objectForKey:@"firstApp"]) {
+                    //首次安装,要同意推送,并且同意服务协议,才去初始化设置
                     [self agreeConfigWithLaunchOptions];
                 }
                 
@@ -281,19 +273,13 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
             [JCWAppTool isUserNotificationEnable:^(BOOL isEnabled) {
                 if (isEnabled) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JpushResult"];
-                        [self configUM];
-                        //刷新UI的代码放到主线程执行
-                        //极光推送--初始化APNs
-                        JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
-                        entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
-                        [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+                        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JpushAgree"];
                         
-                        //初始化JPush
-                        [JPUSHService setupWithOption:launchOptions appKey:JPushAppKey
-                                              channel:@"App Store"
-                                     apsForProduction:YES
-                                advertisingIdentifier:nil];
+//                        [self agreeConfigWithLaunchOptions];
+                        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"firstApp"]) {
+                            //同意推送,并且同意服务协议,才去初始化设置
+                            [self agreeConfigWithLaunchOptions];
+                        }
                     });
                 }else {
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -337,7 +323,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 - (void)agreeConfigWithLaunchOptions {
     dispatch_async(dispatch_get_main_queue(), ^{
-        
+        NSLog(@"开始初始化极光,友盟等三方");
         [self configUM];
         //刷新UI的代码放到主线程执行
         //极光推送--初始化APNs

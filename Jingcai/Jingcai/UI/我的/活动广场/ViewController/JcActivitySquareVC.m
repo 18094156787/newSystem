@@ -30,6 +30,7 @@
     self.title = @"活动广场";
     [self initViews];
     [self refreshData];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"refreshKindActivityDetail" object:nil];
 //    [self getHomeData];
 }
 

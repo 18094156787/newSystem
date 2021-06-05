@@ -52,6 +52,9 @@ UIKIT_EXTERN NSString * const UserRechargeSuccess;//充值成功
 UIKIT_EXTERN NSString * const JingcaiSuccess;//预测成功
 UIKIT_EXTERN NSString * const AppDidLoad;//app首次安装
 
+
+UIKIT_EXTERN NSString * const NotificationNameApplicationWillEnterForeground;//app进入前台
+
 //全名预测相关
 UIKIT_EXTERN NSString * const JingcaiBeginDragging;
 UIKIT_EXTERN NSString * const JingcaiDidEndDecelerating;

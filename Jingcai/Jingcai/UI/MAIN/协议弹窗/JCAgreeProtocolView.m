@@ -77,7 +77,7 @@
     [self.sureBtn bk_whenTapped:^{
 //        confirmActionHandler();
         AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"JpushResult"]) {
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"JpushAgree"]) {
             [app agreeConfigWithLaunchOptions];//同意推送的情况下,点击同意协议再初始化三方配置
         }
         

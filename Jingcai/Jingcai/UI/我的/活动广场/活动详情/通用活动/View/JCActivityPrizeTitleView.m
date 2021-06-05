@@ -32,7 +32,7 @@
     if ([titleModel.grade integerValue]>0&&[self.detailModel.type integerValue]==3&&[self.detailModel.pay_type integerValue]==2&&self.showHeader) {
         self.titleLab.text = [NSString stringWithFormat:@"累计充值%@元",NonNil(titleModel.grade)];
         self.statusLab.hidden = [titleModel.is_own integerValue]==1?NO:YES;
-    }else if([titleModel.grade integerValue]>0&&self.showHeader){
+    }else if([titleModel.grade integerValue]>0&&[self.detailModel.type integerValue]==5&&self.showHeader){
         self.titleLab.text = [NSString stringWithFormat:@"累计积分:%@",NonNil(titleModel.grade)];
         self.statusLab.hidden = [titleModel.is_own integerValue]==1?NO:YES;
     }else{

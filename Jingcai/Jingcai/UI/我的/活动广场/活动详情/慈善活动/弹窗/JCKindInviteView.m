@@ -14,7 +14,13 @@
     self.backgroundColor = [JCBlackColor colorWithAlphaComponent:0.5];
     [self addSubview:self.bgView];
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(kNavigationBarHeight+AUTO(50));
+        NSLog(@"%.0f",SCREEN_HEIGHT);
+        if (SCREEN_HEIGHT<=736) {
+            make.top.offset(AUTO(30));
+        }else {
+            make.top.offset(kNavigationBarHeight+AUTO(50));
+        }
+        
         make.centerX.equalTo(self);
         make.size.mas_equalTo(CGSizeMake(AUTO(280), AUTO(508)));
     }];

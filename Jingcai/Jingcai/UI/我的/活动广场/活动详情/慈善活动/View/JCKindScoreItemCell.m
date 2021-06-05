@@ -34,17 +34,22 @@
 - (void)setModel:(JCKindGetScoreModel *)model {
     _model = model;
     
-    NSString *type = @"";
+    NSString *title = @"";
     if (model.type==1) {
-        type = @"活动签到";
+        title = @"活动签到";
     }
     if (model.type==2) {
-        type = @"分享转发";
+        title = @"分享转发";
     }
     if (model.type==3) {
-        type = [NSString stringWithFormat:@"好友注册(%@)",model.user_name];
+        title = @"好友注册";
+        if (model.user_name.length>0) {
+            title = [NSString stringWithFormat:@"好友注册(%@)",model.user_name];
+        }
+        
+
     }
-    self.titleLab.text = type;
+    self.titleLab.text = title;
     self.contentLab.text = [NSString stringWithFormat:@"+%@",model.score];
 }
 

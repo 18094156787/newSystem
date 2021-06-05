@@ -85,6 +85,8 @@
 
 @property (nonatomic,strong) JCKindSignTipView *signTipView;
 
+@property (nonatomic,assign) BOOL isShare;
+
 @end
 
 @implementation JCActivityKindVC
@@ -92,6 +94,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationBarStyle = JCNavigationBarStyleDefault;
+    if (self.isShare) {
+        [self refreshData];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -112,7 +117,20 @@
     [self refreshData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:NotificationUserLogin object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"refreshKindActivityDetail" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userShareActivity) name:@"shareActivityToRefresh" object:nil];//记录用户点击了分享按钮
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shareActivityToRefresh) name:NotificationNameApplicationWillEnterForeground object:nil];
     
+    
+}
+- (void)userShareActivity {
+    self.isShare = YES;
+}
+
+- (void)shareActivityToRefresh {
+    if (self.isShare) {
+//        [self refreshData];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshKindActivityDetail" object:nil];//调用这个通知,会刷新详情页面,并且刷新三个tab页面
+    }
 
 }
 
@@ -121,12 +139,14 @@
 //    [self.view showLoading];
     JCActivityService *service = [JCActivityService service];
     [service getKindActivityDetailWithActID:NonNil(self.actID) success:^(id  _Nullable object) {
+        NSLog(@"想要的%@",object);
         [self.view endLoading];
+        self.isShare = NO;
         if ([JCWJsonTool isSuccessResponse:object]) {
             self.detailModel = (JCActivityDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCActivityDetailModel class]];
-//            if (!self.detailModel.type) {
-//                self.detailModel.type = @"5";
-//            }
+            if (!self.detailModel.type) {
+                self.detailModel.type = @"5";
+            }
 //            self.detailModel.user_info.is_finish = @"1";
             self.headView.detailModel = self.detailModel;
             self.title = self.detailModel.title;
@@ -272,7 +292,7 @@
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(0);
         make.left.right.equalTo(self.view);
-        make.bottom.offset(-kBottomTabSafeAreaHeight-AUTO(100));
+        make.bottom.offset(-kBottomTabSafeAreaHeight-AUTO(64));
     }];
     
     UIView *bottomView = [UIView new];
@@ -280,7 +300,7 @@
     [self.view addSubview:bottomView];
     self.bottomView = bottomView;
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(AUTO(100));
+        make.height.mas_equalTo(AUTO(64));
         make.left.right.equalTo(self.view);
         make.bottom.offset(-kBottomTabSafeAreaHeight);
         
@@ -560,7 +580,7 @@
     [service getKindActivitySignWithActID:self.actID type:@"1" success:^(id  _Nullable object) {
         [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshKindActivityDetail" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshKindActivityDetail" object:nil];//调用这个通知,会刷新详情页面,并且刷新三个tab页面
             JCKindSignReturnModel *user_info = (JCKindSignReturnModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKindSignReturnModel class]];
             [self.tableView reloadData];
             
@@ -666,7 +686,7 @@
 }
 //分享海报
 - (void)sharePosterClick {
-//    self.inviteView.imgUrl = @"http://imagetest.yixinzuqiu.com/upload/image/1109/47b87ab5cad3451bf3484dc385e408aa.jpg";
+
     self.inviteView.imgUrl = self.detailModel.popup_image;
     self.inviteView.shareBottomView.hidden = NO;
     self.inviteView.shareBtn.hidden = YES;

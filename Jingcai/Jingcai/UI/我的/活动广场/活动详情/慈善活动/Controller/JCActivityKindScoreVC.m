@@ -49,30 +49,22 @@
             }
             NSArray *dataArray = [JCWJsonTool arrayWithJson:object[@"data"] class:[JCKindGetScoreModel class]];
             [self.dataArray addObjectsFromArray:dataArray];
-
-
             self.pageNo++;
             [self.tableView reloadData];
             
-            
-            
             [self chageImageStr:@"ic_empty_integral" Title:@"暂无积分信息！" BtnTitle:@""];
             self.tableView.ly_emptyView.titleLabTextColor = UIColorFromRGB(0x9DAAB8);
-//            if (dataArray.count<5) {
-//                [self.footView showNoMore];
-//            }else {
-//                [self.footView showMore];
-//            }
-            
+
             if (self.dataArray.count>=8) {
+                [self.footView showMore];
+            }else{
+                [self.footView showNoMore];
+            }
+            if (self.dataArray.count>0) {
                 self.footView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
                 self.tableView.tableFooterView = self.footView;
                 self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
                 self.tableView.tableHeaderView = self.headView;
-
-                [self.footView showMore];
-            }else{
-                [self.footView showNoMore];
             }
             
 
