@@ -188,12 +188,9 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     if ([model.type integerValue]==5) {
-        
         JCActivityKindVC *vc = [JCActivityKindVC new];
         vc.actID = model.id;
-//        vc.actID = @"122";
         [self.navigationController pushViewController:vc animated:YES];
-
     }
 
 }

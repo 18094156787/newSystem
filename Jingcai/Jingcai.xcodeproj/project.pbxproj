@@ -11363,7 +11363,7 @@
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/UPPayPlugin",
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/WeChatSDK1.8.6.1",
 				);
-				MARKETING_VERSION = 3.3;
+				MARKETING_VERSION = 3.41;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -11447,7 +11447,7 @@
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/UPPayPlugin",
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/WeChatSDK1.8.6.1",
 				);
-				MARKETING_VERSION = 3.3;
+				MARKETING_VERSION = 3.41;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

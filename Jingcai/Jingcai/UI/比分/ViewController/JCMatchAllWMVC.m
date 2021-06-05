@@ -102,7 +102,8 @@
 - (void)isInCurrentVC {
     
     JCMainTabBarController *tabBarController = (JCMainTabBarController *)[UIApplication sharedApplication].delegate.window.rootViewController;
-    BOOL value =  [tabBarController isCurrentBaseVCWtihIndex:1];
+    BOOL value =  [tabBarController isCurrentBaseVCWtihIndex:1]&&self.navigationController.topViewController==self;
+
     self.needNextGetData = !value;//是否需要下次页面出现的时候请求数据
     if (value) {
         [self showActivityTipView];

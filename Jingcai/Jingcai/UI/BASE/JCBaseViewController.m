@@ -15,7 +15,7 @@
 #import "JCActivityTipView.h"
 #import "JCActivityGuessVC.h"
 #import "JCActivityDetailCommomVC.h"
-
+#import "JCActivityKindVC.h"
 @interface JCBaseViewController ()
 @property (nonatomic, strong) NSDictionary * originNavTitleAttributes;
 //@property (nonatomic, strong) UILabel * navTitleLabel;
@@ -351,7 +351,7 @@
             if (!old_array) {
                 old_array = @[];
             }
-            NSMutableArray *actID_Array = [NSMutableArray array];
+            NSMutableArray *actID_Array = [NSMutableArray arrayWithArray:old_array];
             [array enumerateObjectsUsingBlock:^(JCWSlideBall *obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if (![old_array containsObject:obj.id]) {
                     [actID_Array addObject:obj.id];
@@ -360,6 +360,12 @@
             }];
             if (actID_Array.count>0) {
                 [[NSUserDefaults standardUserDefaults] setValue:actID_Array forKey:JCActivity_data];
+//                if ([[NSUserDefaults standardUserDefaults] objectForKey:JCActivity_data]) {
+//                    [[NSUserDefaults standardUserDefaults] setValue:actID_Array forKey:JCActivity_data];
+//                }else{
+//                    [[NSUserDefaults standardUserDefaults] setValue:actID_Array forKey:JCActivity_data];
+//                }
+
             }
 
         }
@@ -414,6 +420,15 @@
             }
             if ([actModel.type integerValue]==4) {
                 JCActivityGuessVC *vc = [JCActivityGuessVC new];
+                vc.actID = actModel.id;
+                [viewController.navigationController pushViewController:vc animated:YES];
+
+                vc.JCCancelBlock = ^{
+                    [weakSelf showActivityViewWithVC:weakSelf];
+                };
+            }
+            if ([actModel.type integerValue]==5) {
+                JCActivityKindVC *vc = [JCActivityKindVC new];
                 vc.actID = actModel.id;
                 [viewController.navigationController pushViewController:vc animated:YES];
 

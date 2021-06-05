@@ -173,6 +173,8 @@ NSLog(@"%@", NSStringFromSelector(_cmd));
     return _getScoreImgView;
 }
 
+
+
 - (JCActivityKindUserVC *)userVC {
     if (!_userVC) {
         _userVC = [JCActivityKindUserVC new];

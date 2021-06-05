@@ -340,7 +340,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 - (void)isInCurrentVC {
     
     JCMainTabBarController *tabBarController = (JCMainTabBarController *)[UIApplication sharedApplication].delegate.window.rootViewController;
-    BOOL value =  [tabBarController isCurrentBaseVCWtihIndex:4];
+    BOOL value =  [tabBarController isCurrentBaseVCWtihIndex:4]&&self.navigationController.topViewController==self;
     if (value) {
         [self showJingCaiActivityResultView];
     }
