@@ -171,7 +171,7 @@
             [self.navigationController popViewControllerAnimated:YES];
             NSLog(@"user_id == %@",[JCWUserBall currentUser].user_id);
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationUserLogin object:nil];
-//            [MobClick profileSignInWithPUID:[JCWUserBall currentUser].user_id];
+            [MobClick profileSignInWithPUID:[JCWUserBall currentUser].user_id];
             return ;
         }
         [JCWToastTool showHint:object[@"msg"]];

@@ -31,6 +31,8 @@
     [self initViews];
     [self refreshData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"refreshKindActivityDetail" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"refreshKindActivityDetail_After" object:nil];
+    
 //    [self getHomeData];
 }
 

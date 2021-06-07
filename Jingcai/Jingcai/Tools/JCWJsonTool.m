@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, ResponseCode) {
 
 @implementation JCWJsonTool
 + (BOOL)isSuccessResponse:(id)json {
-    NSLog(@"返回的数据:%@",json);
+//    NSLog(@"返回的数据:%@",json);
     NSInteger code = [json[@"code"] integerValue];
     return code == ResponseCodeSuccess;
 }

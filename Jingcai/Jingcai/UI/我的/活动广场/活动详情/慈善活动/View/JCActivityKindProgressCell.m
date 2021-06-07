@@ -116,6 +116,9 @@
     }];
 }
 - (void)setDetailModel:(JCActivityDetailModel *)detailModel {
+    if (!detailModel) {
+        return;
+    }
     _detailModel = detailModel;
     self.countLab.text = [NSString stringWithFormat:@"%@/%@",detailModel.user_info.my_score,detailModel.score];
     NSString *title = [NSString stringWithFormat:@"还差%ld分",[detailModel.score integerValue]-[detailModel.user_info.my_score integerValue]];
@@ -197,6 +200,7 @@
     if (!_numImgView) {
         _numImgView = [UIImageView new];
         _numImgView.image = JCIMAGE(@"ic_kind_bubble");
+        _numImgView.hidden = YES;
     }
     return _numImgView;
 }

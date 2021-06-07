@@ -14,7 +14,7 @@
     [self addSubview:self.imgView];
     [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self);
-        make.bottom.offset(AUTO(-35));
+        make.bottom.offset(-45);
     }];
     
     [self addSubview:self.timeBgView];
@@ -70,7 +70,7 @@
             }];
             if (self.JCHeightBlock) {
                 
-                self.JCHeightBlock(height+35);
+                self.JCHeightBlock(height+45);
             }
         }
  

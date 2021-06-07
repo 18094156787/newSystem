@@ -37,6 +37,8 @@
     [self initViews];
     [self refreshData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"refreshKindActivityDetail" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"refreshKindActivityDetail_After" object:nil];
+    
 //    self.tableView.panGestureRecognizer.delegate = self;
 
 }
@@ -59,7 +61,7 @@
             [self.dataArray addObjectsFromArray:dataArray];
 //            [self.dataArray addObject:dataArray.firstObject];
 //            [self.dataArray addObjectsFromArray:dataArray];
-            self.pageNo++;
+//            self.pageNo++;
             [self.tableView reloadData];
             
             

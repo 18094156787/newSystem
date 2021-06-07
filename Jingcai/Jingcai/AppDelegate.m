@@ -111,7 +111,7 @@
 }
 - (void)applicationDidBecomeActive:(UIApplication *)application {}
 - (void)applicationWillTerminate:(UIApplication *)application {
-//    [MobClick profileSignOff];
+    [MobClick profileSignOff];
 }
 
 

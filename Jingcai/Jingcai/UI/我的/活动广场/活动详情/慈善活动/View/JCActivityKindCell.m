@@ -70,9 +70,35 @@
     self.countDown = [[CountDown alloc] init];
     [self.countDown countDownWithNumer:1 SECBlock:^{
         [weakSelf showAnimation];
-
     }];
+    
 
+    
+
+}
+
+- (void)setActID:(NSString *)actID {
+    if (!actID) {
+        return;
+    }
+    if (self.listVCArray.count>0) {
+        return;
+    }
+    _actID = actID;
+    self.listVCArray = [NSMutableArray array];
+    self.userVC = [[JCActivityKindUserVC alloc] init];
+    
+    self.userVC.actID = actID;
+    [self.userVC loadViewIfNeeded];
+    [self.listVCArray addObject:self.userVC];
+    self.scoreVC = [[JCActivityKindScoreVC alloc] init];
+    self.scoreVC.actID = actID;
+    [self.scoreVC loadViewIfNeeded];
+    [self.listVCArray addObject:self.scoreVC];
+    self.prizeVC = [[JCActivityKindMyPrizeVC alloc] init];
+    self.prizeVC.actID = actID;
+    [self.prizeVC loadViewIfNeeded];
+    [self.listVCArray addObject:self.prizeVC];
 }
 
 //4、代理JXCategoryViewDelegate
@@ -84,19 +110,11 @@ NSLog(@"%@", NSStringFromSelector(_cmd));
 }
 //点击选中
 - (void)categoryView:(JXCategoryBaseView *)categoryView didClickSelectedItemAtIndex:(NSInteger)index {
-//    if (index==0) {
-//        if (self.JCHeightBlock) {
-//            self.JCHeightBlock(self.userVC.contentHeight);
-//        }
-//    }
+
     if (index==1) {
         self.getScoreImgView.hidden = YES;
     }
-//    if (index==2) {
-//        if (self.JCHeightBlock) {
-//            self.JCHeightBlock(self.prizeVC.contentHeight);
-//        }
-//    }
+
 }
 //滚动
 -(void)categoryView:(JXCategoryBaseView *)categoryView didScrollSelectedItemAtIndex:(NSInteger)index {
@@ -119,51 +137,43 @@ NSLog(@"%@", NSStringFromSelector(_cmd));
 
 //5、代理JXCategoryListContainerViewDelegate
 
--(id)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
+-(id<JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
     WeakSelf;
-    if (index == 0) {
-
-        self.userVC.actID = self.actID;
-//        self.userVC.JCHeightBlock = ^(float heihgt) {
-//            weakSelf.listContainerView.frame = CGRectMake(0, 44, SCREEN_WIDTH, heihgt);
-//            if (weakSelf.JCHeightBlock) {
-//                weakSelf.JCHeightBlock(heihgt);
-//            }
-//        };
-        return self.userVC;
-    }
-    if (index == 1) {
-
-        self.scoreVC.actID = self.actID;
-//        self.scoreVC.JCHeightBlock = ^(float heihgt) {
-//            weakSelf.listContainerView.frame = CGRectMake(0, 44, SCREEN_WIDTH, heihgt);
-//            if (weakSelf.JCHeightBlock) {
-//                weakSelf.JCHeightBlock(heihgt);
-//            }
-//        };
-        return self.scoreVC;
-
-    }
-    self.prizeVC.actID = self.actID;
-//    self.prizeVC.JCHeightBlock = ^(float heihgt) {
-//        weakSelf.listContainerView.frame = CGRectMake(0, 44, SCREEN_WIDTH, heihgt);
-//        if (weakSelf.JCHeightBlock) {
-//            weakSelf.JCHeightBlock(heihgt);
-//        }
-//    };
-    return self.prizeVC;
+//    if (index == 0) {
+//
+//        self.userVC.actID = self.actID;
+//        self.scoreVC.actID = self.actID;
+//        self.prizeVC.actID = self.actID;
+//        return self.userVC;
+//    }
+//    if (index == 1) {
+//
+//        self.scoreVC.actID = self.actID;
+//
+//        return self.scoreVC;
+//
+//    }
+//    self.prizeVC.actID = self.actID;
+//
+//    return self.prizeVC;
+    return  self.listVCArray[index];
 
 }
+
+
 
 -(NSInteger)numberOfListsInlistContainerView:(JXCategoryListContainerView *)listContainerView {
     return self.titleArr.count;
 }
 
+
+
 - (void)setDetailModel:(JCActivityDetailModel *)detailModel {
-    _detailModel = detailModel;
     if (!detailModel) {
         return;
     }
+    _detailModel = detailModel;
+
     self.userVC.detailModel = detailModel;
     self.scoreVC.detailModel = detailModel;
     self.prizeVC.detailModel = detailModel;
@@ -197,31 +207,32 @@ NSLog(@"%@", NSStringFromSelector(_cmd));
     if (!_getScoreImgView) {
         _getScoreImgView = [UIImageView new];
         _getScoreImgView.image = JCIMAGE(@"ic_kind_new");
+        _getScoreImgView.hidden = YES;
     }
     return _getScoreImgView;
 }
 
 
 
-- (JCActivityKindUserVC *)userVC {
-    if (!_userVC) {
-        _userVC = [JCActivityKindUserVC new];
-    }
-    return _userVC;
-}
-
-- (JCActivityKindScoreVC *)scoreVC {
-    if (!_scoreVC) {
-        _scoreVC = [JCActivityKindScoreVC new];
-    }
-    return _scoreVC;
-}
-
-- (JCActivityKindMyPrizeVC *)prizeVC {
-    if (!_prizeVC) {
-        _prizeVC = [JCActivityKindMyPrizeVC new];
-    }
-    return _prizeVC;
-}
+//- (JCActivityKindUserVC *)userVC {
+//    if (!_userVC) {
+//        _userVC = [JCActivityKindUserVC new];
+//    }
+//    return _userVC;
+//}
+//
+//- (JCActivityKindScoreVC *)scoreVC {
+//    if (!_scoreVC) {
+//        _scoreVC = [[JCActivityKindScoreVC alloc] init];
+//    }
+//    return _scoreVC;
+//}
+//
+//- (JCActivityKindMyPrizeVC *)prizeVC {
+//    if (!_prizeVC) {
+//        _prizeVC = [[JCActivityKindMyPrizeVC alloc] init];
+//    }
+//    return _prizeVC;
+//}
 
 @end

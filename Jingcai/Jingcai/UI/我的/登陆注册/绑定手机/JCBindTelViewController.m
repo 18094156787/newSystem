@@ -240,7 +240,7 @@
             NSLog(@"user_id == %@",[JCWUserBall currentUser].user_id);
             NSLog(@"user_token == %@",[JCWUserBall currentUser].token);
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationUserLogin object:nil];
-//            [MobClick profileSignInWithPUID:[JCWUserBall currentUser].user_id];
+            [MobClick profileSignInWithPUID:[JCWUserBall currentUser].user_id];
             return ;
         }
         [JCWToastTool showHint:object[@"msg"]];

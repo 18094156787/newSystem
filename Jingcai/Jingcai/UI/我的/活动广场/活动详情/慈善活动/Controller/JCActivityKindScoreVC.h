@@ -11,7 +11,7 @@
 #import "JCActivityDetailModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JCActivityKindScoreVC : JCBaseTableViewController
+@interface JCActivityKindScoreVC : JCBaseTableViewController<JXCategoryListContentViewDelegate>
 
 @property (nonatomic,strong) NSString *actID;
 

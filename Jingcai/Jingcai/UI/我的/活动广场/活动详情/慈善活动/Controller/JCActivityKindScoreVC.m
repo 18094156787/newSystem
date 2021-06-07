@@ -36,6 +36,7 @@
     [self initViews];
     [self refreshData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"refreshKindActivityDetail" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"refreshKindActivityDetail_After" object:nil];
 }
 
 - (void)getDataList {
@@ -49,7 +50,7 @@
             }
             NSArray *dataArray = [JCWJsonTool arrayWithJson:object[@"data"] class:[JCKindGetScoreModel class]];
             [self.dataArray addObjectsFromArray:dataArray];
-            self.pageNo++;
+//            self.pageNo++;
             [self.tableView reloadData];
             
             [self chageImageStr:@"ic_empty_integral" Title:@"暂无积分信息！" BtnTitle:@""];

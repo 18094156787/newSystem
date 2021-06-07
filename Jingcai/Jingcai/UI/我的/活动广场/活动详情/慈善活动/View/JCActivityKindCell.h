@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) JCActivityKindMyPrizeVC *prizeVC;
 
+@property (nonatomic, strong) NSMutableArray  *listVCArray;
+
 - (void)destoryTimer;
 
 

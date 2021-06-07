@@ -35,6 +35,7 @@
     [self initViews];
     [self refreshData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"refreshKindActivityDetail" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"refreshKindActivityDetail_After" object:nil];
 
 }
 
@@ -54,7 +55,7 @@
             }
             NSArray *dataArray = [JCWJsonTool arrayWithJson:object[@"data"] class:[JCActivityGoodsModel class]];
             [self.dataArray addObjectsFromArray:dataArray];
-            self.pageNo++;
+//            self.pageNo++;
             [self.tableView reloadData];
             
             

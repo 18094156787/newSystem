@@ -124,7 +124,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:NotificationUserLogin object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"refreshKindActivityDetail" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userShareActivity) name:@"shareActivityToRefresh" object:nil];//记录用户点击了分享按钮
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shareActivityToRefresh) name:NotificationNameApplicationWillEnterForeground object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shareActivityToRefreshWhenFromForce) name:NotificationNameApplicationWillEnterForeground object:nil];
     
     
 }
@@ -132,10 +132,10 @@
     self.isShare = YES;
 }
 
-- (void)shareActivityToRefresh {
+- (void)shareActivityToRefreshWhenFromForce {
     if (self.isShare) {
-//        [self refreshData];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshKindActivityDetail" object:nil];//调用这个通知,会刷新详情页面,并且刷新三个tab页面
+        [self refreshData];
+
     }
 
 }
@@ -147,8 +147,13 @@
     [service getKindActivityDetailWithActID:NonNil(self.actID) success:^(id  _Nullable object) {
         NSLog(@"想要的%@",object);
         [self.view endLoading];
-        self.isShare = NO;
+        if (self.isShare) {
+            self.isShare = NO;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshKindActivityDetail_After" object:nil];//调用这个通知,会刷新详情页面,并且刷新三个tab页面,在分享成功后调用
+        }
+        
         if ([JCWJsonTool isSuccessResponse:object]) {
+//            [JCWUserBall currentUser].user_id
             self.detailModel = (JCActivityDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCActivityDetailModel class]];
             if (!self.detailModel.type) {
                 self.detailModel.type = @"5";
@@ -437,8 +442,6 @@
     if (indexPath.section==0) {
         if (self.detailModel.banner.count>0) {
             JCActivityKindGetPrizeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityKindGetPrizeCell"];
-    //        JCWSlideBall *slide = [JCWSlideBall new];
-    //        slide.desc = @"地方代购复古风格快递费";
             cell.tipArray = self.detailModel.banner;
             return cell;
         }
@@ -453,11 +456,6 @@
     
     if (indexPath.section==2) {
         JCActivityKindCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityKindCell"];
-//        WeakSelf;
-//        cell.JCHeightBlock = ^(float heihgt) {
-//            weakSelf.kindHeight = heihgt+20;
-//            [weakSelf.tableView reloadData];
-//        };
         cell.actID = self.actID;
         cell.detailModel = self.detailModel;
         return cell;

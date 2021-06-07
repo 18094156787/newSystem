@@ -15,6 +15,7 @@
 #import "JCWConst.h"
 #import <Masonry.h>
 #import <MJRefresh.h>
+#import <UMCommon/MobClick.h>
 #import "JCBaseTableViewController.h"
 #import "UILabel+JCAlignment.h"
 #import "UIButton+Effect.h"
