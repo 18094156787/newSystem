@@ -235,7 +235,10 @@
             }
 
             
-            self.haveLoad = YES;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                self.haveLoad = YES;
+            });
+            
 
 
         }else{
@@ -367,13 +370,13 @@
 - (void)showPickerView
 {
 
-    [ZJPickerView clear];
+//    [ZJPickerView clear];
 //    self.timeArray = @[@"4-12",@"5-17",@"5-7"];
     // 1.Custom propery（自定义属性，根据需要添加想要的属性。PS：如果在多个地方使用到自定义弹框，建议把propertyDict定义为一个宏或全局变量）
     NSDictionary *propertyDict = @{
 //                                   ZJPickerViewPropertyCanceBtnTitleKey : @"取消",
 //                                   ZJPickerViewPropertySureBtnTitleKey  : @"确定",
-                                   ZJPickerViewPropertyTipLabelTextKey  : @"选择比赛", // @"提示内容"，多列时推荐使用英文逗号隔开，参考注释
+//                                   ZJPickerViewPropertyTipLabelTextKey  : @"选择比赛", // @"提示内容"，多列时推荐使用英文逗号隔开，参考注释
 //                                   ZJPickerViewPropertyDividedSymbolKey : @"#", // 选中内容的分隔符，默认英文逗号
 
                                    ZJPickerViewPropertyCanceBtnTitleColorKey : JCBlackColor,
