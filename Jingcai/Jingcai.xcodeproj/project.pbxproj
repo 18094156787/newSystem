@@ -7239,6 +7239,7 @@
 				7B99E60E2316644B00AA5AB6 /* DETAIL_QB ( 情报 ) */,
 				7B99E6152316644C00AA5AB6 /* DETAIL_ZR ( 阵容 ) */,
 				7B99E6272316644C00AA5AB6 /* SEGMENT_CONTROL */,
+				7B99E62C2316644C00AA5AB6 /* DETAIL_SJ ( 数据 ) */,
 				7B99E6462316644C00AA5AB6 /* DETAIL_ZS ( 指数 ) */,
 			);
 			path = "详情";
@@ -7330,14 +7331,14 @@
 				7B80CAAD24C1A9E900C14117 /* View */,
 				7B80CAA924C19DE500C14117 /* ViewController */,
 			);
-			path = "DETAIL_SJ ( 数据 )";
+			name = "DETAIL_SJ ( 数据 )";
+			path = "DETAIL_ZS ( 指数 )/DETAIL_SJ ( 数据 )";
 			sourceTree = "<group>";
 		};
 		7B99E6462316644C00AA5AB6 /* DETAIL_ZS ( 指数 ) */ = {
 			isa = PBXGroup;
 			children = (
 				7BE891A024B596C700AE2E79 /* 竞彩 */,
-				7B99E62C2316644C00AA5AB6 /* DETAIL_SJ ( 数据 ) */,
 				7BE891EC24B6008100AE2E79 /* 北单 */,
 				7B6C19E724B85D8500072C62 /* 欧赔 */,
 				7B6C19F324B8691A00072C62 /* 亚盘 */,
