@@ -9,6 +9,7 @@
 #import "JCCommunityWMHeadView.h"
 #import "JCActivityDetailCommomVC.h"
 #import "JCActivityGuessVC.h"
+#import "JCActivityKindVC.h"
 @implementation JCCommunityWMHeadView
 
 - (void)initViews {
@@ -67,6 +68,11 @@
                 }
                 if ([type integerValue]==4) {
                     JCActivityGuessVC *vc = [JCActivityGuessVC new];
+                    vc.actID = act_id;
+                    [[self getViewController].navigationController pushViewController:vc animated:YES];
+                }
+                if ([type integerValue]==5) {
+                    JCActivityKindVC *vc = [JCActivityKindVC new];
                     vc.actID = act_id;
                     [[self getViewController].navigationController pushViewController:vc animated:YES];
                 }

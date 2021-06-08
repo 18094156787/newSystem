@@ -121,23 +121,7 @@
     if (dataArray.count==0) {
         return;
     }
-    if (dataArray.count<5) {
-        JCActivityGoodsModel *obj = dataArray.firstObject;
-        [self.bgView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self);
-            make.left.offset(AUTO(30));
-            make.right.offset(AUTO(-30));
-            if ([obj.grade integerValue]>0&&[self.detailModel.type integerValue]==3&&[self.detailModel.pay_type integerValue]==2&&self.showHeader) {
-                make.height.mas_equalTo(AUTO(180)+AUTO(92)*dataArray.count);
-            }else if([obj.grade integerValue]>0&&self.showHeader){
-                
-                make.height.mas_equalTo(AUTO(180)+AUTO(92)*dataArray.count);
-            }else{
-                
-                make.height.mas_equalTo(AUTO(160)+AUTO(92)*dataArray.count);
-            }
-        }];
-    }
+
     self.dataSource = [NSMutableArray array];
     for (int i=0; i<dataArray.count; i++) {
         JCActivityGoodsModel *obj = dataArray[i];
@@ -154,14 +138,40 @@
 
         }
     }
-//    [dataArray enumerateObjectsUsingBlock:^(JCActivityGoodsModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        if (<#condition#>) {
-//            <#statements#>
-//        }
-//
-//    }];
+    if (dataArray.count<5) {
+        JCActivityGoodsModel *obj = dataArray.firstObject;
+        [self.bgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self);
+            make.left.offset(AUTO(30));
+            make.right.offset(AUTO(-30));
+            if ([obj.grade integerValue]>0&&[self.detailModel.type integerValue]==3&&[self.detailModel.pay_type integerValue]==2&&self.showHeader) {
+                float contentHeight = self.dataSource.count*40+AUTO(160)+AUTO(92)*dataArray.count;
+                if (contentHeight>AUTO(550)) {
+                    contentHeight = AUTO(550);
+                }
+                make.height.mas_equalTo(contentHeight);
+                
+            }else if([obj.grade integerValue]>0&&[self.detailModel.type integerValue]==5&&self.showHeader){
+                float contentHeight = self.dataSource.count*40+AUTO(160)+AUTO(92)*dataArray.count;
+                if (contentHeight>AUTO(550)) {
+                    contentHeight = AUTO(550);
+                }
+                make.height.mas_equalTo(contentHeight);
 
-   
+            }else{
+                
+                make.height.mas_equalTo(AUTO(160)+AUTO(92)*dataArray.count);
+            }
+        }];
+    }else{
+        [self.bgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self);
+            make.left.offset(AUTO(30));
+            make.right.offset(AUTO(-30));
+            make.height.mas_equalTo(AUTO(550));
+        }];
+    }
+ 
     [self.tableView reloadData];
 }
 

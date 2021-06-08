@@ -17,6 +17,7 @@
 #import "JCActivityDetailCommomVC.h"
 #import "JCActivityGuessVC.h"
 #import "WebViewController.h"
+#import "JCActivityKindVC.h"
 @implementation JCHomeWM_HeadView
 
 - (void)initViews {
@@ -270,6 +271,11 @@
                 }
                 if ([type integerValue]==4) {
                     JCActivityGuessVC *vc = [JCActivityGuessVC new];
+                    vc.actID = act_id;
+                    [[self getViewController].navigationController pushViewController:vc animated:YES];
+                }
+                if ([type integerValue]==5) {
+                    JCActivityKindVC *vc = [JCActivityKindVC new];
                     vc.actID = act_id;
                     [[self getViewController].navigationController pushViewController:vc animated:YES];
                 }

@@ -64,8 +64,6 @@
             if (self.dataArray.count>0) {
                 self.footView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
                 self.tableView.tableFooterView = self.footView;
-                self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
-                self.tableView.tableHeaderView = self.headView;
             }
             
 
@@ -215,7 +213,12 @@
 
 - (void)setDetailModel:(JCActivityDetailModel *)detailModel {
     _detailModel = detailModel;
-    self.headView.score = detailModel.user_info.my_score;
+    if ([detailModel.user_info.my_score integerValue]>0) {
+        self.headView.score = detailModel.user_info.my_score;
+        self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
+        self.tableView.tableHeaderView = self.headView;
+    }
+
 }
 
 - (UIView *)listView {

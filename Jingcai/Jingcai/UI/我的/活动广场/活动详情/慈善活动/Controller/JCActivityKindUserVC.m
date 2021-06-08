@@ -84,8 +84,6 @@
             if ((self.dataArray.count>0)) {
                 self.footView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
                 self.tableView.tableFooterView = self.footView;
-                self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
-                self.tableView.tableHeaderView = self.headView;
             }
             
 
@@ -261,7 +259,11 @@
 //}
 - (void)setDetailModel:(JCActivityDetailModel *)detailModel {
     _detailModel = detailModel;
-    self.headView.content = detailModel.finish_num;
+    if ([detailModel.finish_num integerValue]>0) {
+        self.headView.content = detailModel.finish_num;
+        self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 48);
+        self.tableView.tableHeaderView = self.headView;
+    }
 }
 
 - (JCKindCompleteUserHeadView *)headView {

@@ -95,6 +95,7 @@
     [super viewWillAppear:animated];
     self.navigationBarStyle = JCNavigationBarStyleDefault;
     if (self.isShare) {
+        //如果之前有点击分享好友,
         [self refreshData];
     }
 }
@@ -131,9 +132,10 @@
 - (void)userShareActivity {
     self.isShare = YES;
 }
-
+//分享回到APP后,要先刷新详情,之后再刷新三个tab页面的接口
 - (void)shareActivityToRefreshWhenFromForce {
     if (self.isShare) {
+        //如果之前有点击分享好友,app回到前台后调用接口
         [self refreshData];
 
     }
