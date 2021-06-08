@@ -43,10 +43,36 @@
     self.pageNo = 1;
     [self initViews];
     [self getDataList];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openScoreBallAnimation) name:@"openScoreBallAnimation" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeScoreBallAnimation) name:@"closeScoreBallAnimation" object:nil];
 
 }
-
+- (void)openScoreBallAnimation{
+    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(0);
+        make.left.right.equalTo(self.view);
+        //        make.bottom.equalTo(self.view).offset(-kTabBarHeight);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(AUTO(-120));
+        } else {
+            make.bottom.equalTo(self.view).offset(AUTO(-120));
+            // Fallback on earlier versions
+        }
+    }];
+}
+- (void)closeScoreBallAnimation{
+    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(0);
+        make.left.right.equalTo(self.view);
+        //        make.bottom.equalTo(self.view).offset(-kTabBarHeight);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.equalTo(self.view);
+            // Fallback on earlier versions
+        }
+    }];
+}
 - (void)getDataList {
     [self loadDataWithMatchNum:self.matchNum type:@"3"];
 }
@@ -64,9 +90,9 @@
         [self getDataList];
     }];
 
-    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [self getDataList];
-    }];
+//    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+//        [self getDataList];
+//    }];
 }
 
 - (void)loadDataWithMatchNum:(NSString *)matchNum type:(NSString *)type {

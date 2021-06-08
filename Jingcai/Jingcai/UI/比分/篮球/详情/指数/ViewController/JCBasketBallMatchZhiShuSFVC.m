@@ -11,7 +11,6 @@
 #import "JNMatchZS_SF_HeadView.h"
 #import "JCWMatchPLBall.h"
 #import "JNBasketBallMatchZS_DetailVC.h"
-#import "JNMatchDetailZSVC.h"
 #import "JNMatchZS_PLInfoModel.h"
 #import "JCDiXianFootView.h"
 @interface JCBasketBallMatchZhiShuSFVC ()

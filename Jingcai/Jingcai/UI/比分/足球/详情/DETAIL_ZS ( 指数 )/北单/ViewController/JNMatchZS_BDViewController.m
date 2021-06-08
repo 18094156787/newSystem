@@ -58,6 +58,36 @@
     [super viewDidLoad];
     self.view.backgroundColor= COLOR_F4F6F9;
     [self initViews];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openScoreBallAnimation) name:@"openScoreBallAnimation" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeScoreBallAnimation) name:@"closeScoreBallAnimation" object:nil];
+}
+
+- (void)openScoreBallAnimation{
+    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(0);
+        make.left.right.equalTo(self.view);
+        //        make.bottom.equalTo(self.view).offset(-kTabBarHeight);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(AUTO(-120)-34);
+        } else {
+            make.bottom.equalTo(self.view).offset(AUTO(-120)-34);
+            // Fallback on earlier versions
+        }
+    }];
+}
+- (void)closeScoreBallAnimation{
+    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(0);
+        make.left.right.equalTo(self.view);
+        //        make.bottom.equalTo(self.view).offset(-kTabBarHeight);
+        if (@available(iOS 11.0, *)) {
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+        } else {
+            make.bottom.equalTo(self.view);
+            // Fallback on earlier versions
+        }
+    }];
 }
 
 - (void)initViews {
@@ -73,6 +103,8 @@
     self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
         [self loadDataWithMatchNum:self.matchNum type:self.type];
     }];
+    
+
 }
 
 - (void)loadDataWithMatchNum:(NSString *)matchNum type:(NSInteger)type {

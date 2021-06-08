@@ -48,6 +48,8 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 @property (nonatomic, assign) BOOL hideNavBar;
 
+@property (nonatomic, assign) BOOL showAnimation;
+
 @end
 
 @implementation JCMatchDetailWMStickVC
@@ -148,6 +150,7 @@ static CGFloat const kWMMenuViewHeight = 44;
     WeakSelf;
     self.topHeadView.addAniBlock = ^(float height) {
         weakSelf.hideNavBar = YES;
+        weakSelf.showAnimation = YES;
         weakSelf.navigationController.navigationBar.hidden = YES;
         weakSelf.height = height;
         weakSelf.viewTop = weakSelf.height;
@@ -155,11 +158,15 @@ static CGFloat const kWMMenuViewHeight = 44;
         [weakSelf.contentView scrollToTop];
         weakSelf.topHeadView.frame = CGRectMake(0, 0, CGRectGetWidth(weakSelf.view.bounds), weakSelf.height);
         
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"openScoreBallAnimation" object:nil];
+
+        
     };
     
 
     self.topHeadView.JCBackBlock = ^{
         weakSelf.hideNavBar = NO;
+        weakSelf.showAnimation = NO;
         if ([weakSelf.topHeadView.topView.subviews containsObject:weakSelf.topHeadView.wkWebView]) {
             weakSelf.navigationController.navigationBar.hidden = NO;
             [weakSelf.topHeadView.wkWebView removeFromSuperview];
@@ -168,6 +175,8 @@ static CGFloat const kWMMenuViewHeight = 44;
             weakSelf.maximumHeaderViewHeight = kWMMatchDetailHeaderViewHeight-kNavigationBarHeight;
             [weakSelf.contentView scrollToTop];
             weakSelf.topHeadView.frame = CGRectMake(0, 0, CGRectGetWidth(weakSelf.view.bounds), weakSelf.height);
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"closeScoreBallAnimation" object:nil];
+            
             return;
         }
         [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -323,7 +332,17 @@ static CGFloat const kWMMenuViewHeight = 44;
     }
       
 }
-
+- (void)pageController:(WMPageController *)pageController didEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info {
+    if (self.selectIndex==3) {
+        if (self.showAnimation) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"openScoreBallAnimation" object:nil];
+        }else{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"closeScoreBallAnimation" object:nil];
+            
+        }
+    }
+    
+}
 - (void)dealloc {
     
 }
