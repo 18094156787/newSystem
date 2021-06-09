@@ -210,6 +210,13 @@
                                 self.headView.timeLab.text = [NSString stringWithFormat:@"%@组",value];
                             }else {
                                 self.headView.timeLab.text = [NSString stringWithFormat:@"第%ld轮",round_count];
+                                
+                                
+                                
+                                if (round_count==0&&[cur_stageModel.round_count integerValue]==1) {
+//                                    JCTeamMatchInfoModel *infoModel = self.dataArray.firstObject;
+                                    self.headView.timeLab.text = @"第1轮";
+                                }
 
                             }
 
