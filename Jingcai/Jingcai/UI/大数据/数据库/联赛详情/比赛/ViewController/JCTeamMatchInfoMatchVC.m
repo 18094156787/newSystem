@@ -199,6 +199,19 @@
                 if ([obj.id isEqualToString:self.cur_stage_id]) {
                     self.headView.titleLab.text = obj.name_zh;
                     if (!self.haveLoad) {
+                        for (NSDictionary *dic in self.timeArray) {
+                            if (dic[obj.name_zh]) {
+                                NSArray *array = dic[obj.name_zh];
+//                                self.selectRightIndex = [array indexOfObject:obj.name_zh];
+                                self.timeRightArray = array;
+                            }
+                            
+
+                        }
+                        
+                        
+                        
+                        
                             //第一次加载,如果不是第一次加载,则用上次选中的
                             if ([obj.group_count integerValue]==0&&[obj.round_count integerValue]==0) {
                                 self.headView.timeLab.text = @"";
@@ -349,7 +362,7 @@
             NSString *time = self.timeRightArray[section];
             if (self.userSelect) {
                 time = self.timeRightArray[self.selectRightIndex];
-//                self.userSelect = NO;
+                self.userSelect = NO;
             }
             self.headView.timeLab.text = time;
         }
@@ -434,6 +447,7 @@
                         if (dic[left]) {
                             NSArray *array = dic[left];
                             self.selectRightIndex = [array indexOfObject:right];
+                            self.timeRightArray = array;
                             break;
                             
                         }
@@ -453,7 +467,6 @@
 
                             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:self.selectRightIndex];
                             [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
-//                                [self tableViewScrollow];
 
 
                         }
@@ -507,22 +520,6 @@
     }
 }
 
-- (void)tableViewScrollow {
-//    float height = 0;
-//    for (int i=0; i<self.selectRightIndex; i++) {
-//        JCTeamMatchInfoModel *model = self.dataArray[i];
-//        height = height +model.match.count*AUTO(75);
-//    }
-//    height = height+AUTO(42)*self.selectRightIndex;
-//
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-////                        [self.tableView scrollToRow:0 inSection:0 atScrollPosition:UITableViewScrollPositionTop animated:NO];
-////        [self.tableView scrollRectToVisible:CGRectMake(0,0,1,1) animated:YES];
-////        [self.tableView scrollRectToVisible:CGRectMake(0,0,SCREEN_WIDTH,height) animated:NO];
-//        [self.tableView setContentOffset:CGPointMake(0, height) animated:NO];
-//    });
-
-}
 
 - (JCTeamMatchInfoTimeChooseView *)headView {
     if (!_headView) {

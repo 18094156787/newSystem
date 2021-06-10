@@ -57,7 +57,7 @@
     [self.statusLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.bgView);
         make.centerY.equalTo(self.planCountLab);
-        make.width.mas_equalTo(AUTO(40));
+        make.width.mas_equalTo(AUTO(60));
     }];
     
     [self.bgView addSubview:self.resultImgView];

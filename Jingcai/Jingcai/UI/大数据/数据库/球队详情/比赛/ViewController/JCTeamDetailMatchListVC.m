@@ -24,9 +24,9 @@
 
 @property (nonatomic,strong) NSString *match_id;//当前的联赛id
 
-@property (nonatomic,assign) JCTeamMatchInfoModel *firstMatchModel;
+@property (nonatomic,strong) JCTeamMatchInfoModel *firstMatchModel;
 
-@property (nonatomic,assign) JCTeamMatchInfoModel *selMatchModel;
+@property (nonatomic,strong) JCTeamMatchInfoModel *selMatchModel;
 
 @property (nonatomic,strong) JCTeamMatchInfoModel *moreFirsrtMatchModel;
 
@@ -81,7 +81,7 @@
                         infoModel.match_list = [NSMutableArray arrayWithArray:array];
 //                        self.selMatchModel = infoModel;
 //                        [self.dataArray removeObject:infoModel];
-                        self.selMatchModel = infoModel;
+//                        self.selMatchModel = infoModel;
                         
                     }else{
                         self.selMatchModel = infoModel;
@@ -90,49 +90,7 @@
                    
                 }
             }];
-            
-//            [self.dataArray addObjectsFromArray:dataArray];
 
-            
-//            [JCWJsonTool arrayWithJson:object[@"data"][@"match"] class:[JCTeamMatchModel class]];//JCTeamMatchInfoModel
-//            [array enumerateObjectsUsingBlock:^(JCTeamMatchModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-////                obj.match_status = obj.status_desc;
-//                if (idx==0&&!self.selMatchModel) {
-//
-//                    JCTeamMatchInfoModel *infoModel = [JCTeamMatchInfoModel new];
-//                    NSMutableArray *matchArray = [NSMutableArray array];
-//                    [matchArray addObject:obj];
-//                    infoModel.title = obj.event_name;
-//                    infoModel.event_id = obj.event_id;
-//                    infoModel.event_logo = obj.event_logo;
-//                    infoModel.match = matchArray;
-//                    [dataArray addObject:infoModel];
-//                    self.selMatchModel = infoModel;
-//                    self.firstMatchModel = infoModel;
-////
-//                }else{
-//
-//                    if ([self.selMatchModel.title isEqualToString:obj.event_name]) {
-//                        [self.selMatchModel.match addObject:obj];
-//                    }else{
-//                        JCTeamMatchInfoModel *infoModel = [JCTeamMatchInfoModel new];
-//                        NSMutableArray *matchArray = [NSMutableArray array];
-//                        [matchArray addObject:obj];
-//                        infoModel.title = obj.event_name;
-//                        infoModel.event_id = obj.event_id;
-//                        infoModel.event_logo = obj.event_logo;
-//                        infoModel.match = matchArray;
-//                        [dataArray addObject:infoModel];
-//                        self.selMatchModel = infoModel;
-//                    }
-//
-//                }
-//            }];
-            
-//            [self.dataArray addObjectsFromArray:dataArray];
-//            [self.dataSource addObjectsFromArray:dataArray];
-            
-//            return;
             [self.tableView reloadData];
             self.pageNo++;
             if (dataArray.count <=0) {
