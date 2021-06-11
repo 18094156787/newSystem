@@ -24,11 +24,7 @@
 
 @property (nonatomic,strong) NSString *match_id;//当前的联赛id
 
-@property (nonatomic,strong) JCTeamMatchInfoModel *firstMatchModel;
-
 @property (nonatomic,strong) JCTeamMatchInfoModel *selMatchModel;
-
-@property (nonatomic,strong) JCTeamMatchInfoModel *moreFirsrtMatchModel;
 
 @end
 
@@ -79,8 +75,6 @@
                         NSMutableArray *array = self.selMatchModel.match_list;
                         [array addObjectsFromArray:infoModel.match_list];
                         infoModel.match_list = [NSMutableArray arrayWithArray:array];
-//                        self.selMatchModel = infoModel;
-//                        [self.dataArray removeObject:infoModel];
 //                        self.selMatchModel = infoModel;
                         
                     }else{
