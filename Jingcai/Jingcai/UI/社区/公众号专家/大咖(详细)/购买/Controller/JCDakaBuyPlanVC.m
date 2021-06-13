@@ -206,6 +206,8 @@
             }else{
                 cell.selHongbaoLab.text = @"";
             }
+        }else{
+            cell.selHongbaoLab.text = @"";
         }
         return cell;
     }

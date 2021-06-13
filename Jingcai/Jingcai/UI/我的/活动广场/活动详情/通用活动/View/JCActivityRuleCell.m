@@ -66,7 +66,7 @@
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-    
+    self.isLoad = NO;
     [webView evaluateJavaScript:@"document.body.scrollHeight" completionHandler:^(id _Nullable result,NSError *_Nullable error) {
         //获取页面高度
         CGFloat scrollHeight = [result doubleValue];
@@ -85,9 +85,7 @@
         if (self.height==0) {
 
             if (self.JCRefreshBlock) {
-//                CGSize titleSize =   [self returnTextWidth:self.planDetailModel.subtitle size:CGSizeMake(SCREEN_WIDTH-AUTO(30), 1000) font:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)]];
                 self.height = scrollHeight;
-//                self.loadSuccess = YES;
                 self.JCRefreshBlock(self.height+40);
                 [self.webView setNeedsLayout];
 

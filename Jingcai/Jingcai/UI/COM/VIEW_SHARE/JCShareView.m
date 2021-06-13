@@ -116,8 +116,6 @@
     }
     if (cell.shareType == JCShareTypeEnumWeChatSession) {
 
-        
-
         platformType = UMSocialPlatformType_WechatSession;
     }
     if (cell.shareType == JCShareTypeEnumCopy) {
@@ -156,6 +154,8 @@
             NSLog(@"************Share fail with error %@*********",error);
         } else {
             NSLog(@"response data is %@",data);
+    
+            
         }
     }];
     

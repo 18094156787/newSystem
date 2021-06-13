@@ -230,33 +230,6 @@
     return self.view;
 }
 
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//
-//    CGFloat height = scrollView.frame.size.height;
-//        CGFloat contentOffsetY = scrollView.contentOffset.y;
-//        CGFloat bottomOffset = scrollView.contentSize.height - contentOffsetY;
-//
-//    
-//        NSLog(@"整体高度%.5f--偏移量%.5f",bottomOffset,height);
-//        if (bottomOffset-1 <= height)
-//        {
-//            //在最底部
-////            self.currentIsInBottom = YES;
-//            scrollView.scrollEnabled = NO;
-//        }
-//        else
-//        {
-//            if (scrollView.contentOffset.y==0) {
-//                scrollView.scrollEnabled = NO;
-//            }else {
-//                scrollView.scrollEnabled = YES;
-//            }
-//            
-////            self.currentIsInBottom = NO;
-//        }
-//
-//
-//}
 - (void)setDetailModel:(JCActivityDetailModel *)detailModel {
     _detailModel = detailModel;
     if ([detailModel.finish_num integerValue]>0) {

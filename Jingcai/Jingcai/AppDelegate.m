@@ -235,6 +235,12 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     //注册微信的APPID
 //    [WXApi registerApp:WXAppID];
      [WXApi registerApp:WXAppID universalLink:@"https://m.jingcai.com"];
+//    [WXApi checkUniversalLinkReady:^(WXULCheckStep step, WXCheckULStepResult* result) {
+//
+//            NSLog(@"wechatSdkre %@, %u, %@, %@", @(step), result.success, result.errorInfo, result.suggestion);
+//
+//        }];
+
     NSLog(@"111");
 }
 - (void)configProgressHUD {

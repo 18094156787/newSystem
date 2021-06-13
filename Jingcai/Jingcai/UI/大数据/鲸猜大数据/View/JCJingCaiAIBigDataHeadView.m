@@ -131,7 +131,7 @@
     self.noticeCycleScrollView.scrollDirection = UICollectionViewScrollDirectionVertical;
     [self.bottomView addSubview:self.noticeCycleScrollView];
     
-    self.titleLab.text = @"根据对阵双方的实力、状态、交战、战役、指数等数据进行分析，给出各种玩法的预测概率。可包月，也可单场订阅（单场订阅可在比分-对应比赛的数据模块中进行购买）";
+    self.titleLab.text = @"根据对阵双方的实力、状态、交战、战绩、指数等数据进行分析，给出各种玩法的预测概率。可包月，也可单场订阅（单场订阅可在比分-对应比赛的数据模块中进行购买）";
 
     
     WeakSelf;

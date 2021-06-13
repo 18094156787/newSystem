@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UIImage *kindImageView;
 
+@property (nonatomic,assign) BOOL isLoad;
+
 @end
 
 NS_ASSUME_NONNULL_END
