@@ -57,6 +57,7 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 @property (strong, nonatomic) UIButton *rechargeBtn;
 @property (weak, nonatomic) IBOutlet UILabel *infoLab;
 @property (strong, nonatomic) JCRechareHeadView *headView;
+@property (strong, nonatomic) UIButton *sureProtocolBtn;
 @property (strong, nonatomic) NSArray *bannnerArray;
 @property (strong, nonatomic) NSArray *actTipArray;
 @property (assign, nonatomic) float bannerHeight;
@@ -113,6 +114,15 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 - (void)initSubViews {
 //    self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 136);
 //    self.tableView.tableHeaderView = self.headView;
+    
+    [self.scrollow addSubview:self.sureProtocolBtn];
+    [self.sureProtocolBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.agreeLabel).offset(-3);
+        make.right.equalTo(self.agreeLabel.mas_left);
+        make.width.height.mas_equalTo(30);
+    }];
+    
+    
     self.tableHeightConstraint.constant = JCChargeAccountH + JCChargeInputH + JCChargeWayH*self.chargeWayArray.count + JCChargeHeaderH+AUTO(16)+self.bannerHeight;
     
     self.rechargeBgView.backgroundColor = JCWhiteColor;
@@ -131,7 +141,7 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
     [self.tableView registerClass:[JCRechareBannerCell class] forCellReuseIdentifier:@"JCRechareBannerCell"];
     
-    //self.agreeLabel.textAlignment = NSTextAlignmentCenter;
+    self.agreeLabel.textAlignment = NSTextAlignmentCenter;
     self.agreeLabel.delegate = self;
     NSAttributedString * attString = [[NSAttributedString alloc] initWithString:@"支付即表示同意《鲸猜足球用户购买协议》"
                                                                     attributes:@{
@@ -342,6 +352,12 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
     }
 }
 - (IBAction)payBtnClick:(UIButton *)sender {
+    if (!self.sureProtocolBtn.selected) {
+        [JCWToastTool showHint:@"请先勾选同意《鲸猜足球用户购买协议》"];
+        [self.scrollow scrollToBottomAnimated:YES];
+        return;
+    }
+    
 
     dispatch_async(dispatch_get_main_queue(), ^{
         JCWUserBall * userBall = [JCWUserBall currentUser];
@@ -384,40 +400,21 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
         } failure:^(NSError * _Nonnull error) {
             [SVProgressHUD dismiss];
         }];
-//        [service userClickPayMoneyWithMoney:[NSString stringWithFormat:@"%ld",caiyunBall.prize] success:^(id  _Nullable object) {
-//            if ([JCWJsonTool isSuccessResponse:object]) {
-//
-//            }
-//
-//        } failure:^(NSError * _Nonnull error) {
-//
-//
-//
-//        }];
-        
-        
 
     });
 
 
-//    if (caiyunBall.prize==6) {
-//         [[IAPManager shared] requestProductWithId:productId001];
-//    }
-//    if (caiyunBall.prize==30) {
-//         [[IAPManager shared] requestProductWithId:productId002];
-//    }
-//    if (caiyunBall.prize==60) {
-//         [[IAPManager shared] requestProductWithId:productId003];
-//    }
-//    if (caiyunBall.prize==88) {
-//         [[IAPManager shared] requestProductWithId:productId004];
-//    }
-//    if (caiyunBall.prize==188) {
-//         [[IAPManager shared] requestProductWithId:productId006];
-//    }
-//    if (caiyunBall.prize==388) {
-//         [[IAPManager shared] requestProductWithId:productId007];
-//    }
+}
+- (void)sureProtocolBtnClick:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if(sender.selected){
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JCAgreeRecharge"];
+    }else{
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"JCAgreeRecharge"]) {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"JCAgreeRecharge"];
+        }
+        
+    }
 }
 #pragma mark IApRequestResultsDelegate
 - (void)filedWithErrorCode:(NSInteger)errorCode andError:(NSString *)error {
@@ -473,4 +470,16 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
     return _headView;
 }
 
+- (UIButton *)sureProtocolBtn {
+    if (!_sureProtocolBtn) {
+        _sureProtocolBtn = [UIButton new];
+        [_sureProtocolBtn setImage:JCIMAGE(@"protocol_select") forState:UIControlStateSelected];
+        [_sureProtocolBtn setImage:JCIMAGE(@"yuce_select_normal") forState:0];
+        [_sureProtocolBtn addTarget:self action:@selector(sureProtocolBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"JCAgreeRecharge"]) {
+            _sureProtocolBtn.selected = YES;
+        }
+    }
+    return _sureProtocolBtn;
+}
 @end

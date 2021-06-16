@@ -78,17 +78,17 @@ dispatch_async(queue, block);\
         make.height.mas_equalTo(kBottomTabSafeAreaHeight+100);
     }];
     
-    UILabel *label = [UILabel initWithTitle:@"预测比赛送红包" andFont:AUTO(16) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+    UILabel *label = [UILabel initWithTitle:@"还有更多奖励等您来领取" andFont:AUTO(14) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     [whiteView addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(AUTO(15));
+        make.left.offset(AUTO(10));
         make.top.offset(AUTO(15));
     }];
     
     UILabel *label1 = [UILabel initWithTitle:@"长按识别二维码  立即下载" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:0];
     [whiteView addSubview:label1];
     [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(AUTO(15));
+        make.left.offset(AUTO(10));
         make.top.equalTo(label.mas_bottom).offset(AUTO(10));
     }];
     

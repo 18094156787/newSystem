@@ -36,9 +36,6 @@
 #import "JCHongbangOrderWMstckyVC.h"
 @interface JCHongbangOrderVC ()
 
-
-@property (nonatomic, strong) JCHongbangPriceInfoView *priceInfoView;
-
 @property (nonatomic,strong) NSMutableArray *payWayArray;
 
 @property (nonatomic, strong) JCWExpertBall * tjUserBall;//专家详情
@@ -46,8 +43,6 @@
 @property (nonatomic, strong) NSArray *matchDataArray;
 
 @property (nonatomic, strong) NSArray *tuiJianArray;
-
-@property (nonatomic,strong) JCWMyHongbaoBall *useHbModel;//当前选中的红包
 
 @property (nonatomic, strong) JCHHongbaoModel *hongbaoModel;
 
@@ -81,10 +76,15 @@
     self.style = 1;
     [super viewDidLoad];
     [self initViews];
+//    self.tjInfoDetailBall.sf = @"2800";
+  
     [self getUserInfo];
     [self loadDataInfo];
     [self getHongbaoList];
     [self getMyFreeCoupon];
+    
+    
+    
 //    [self loadTjDetailData];
 }
 
@@ -103,7 +103,10 @@
                 [hongbao_Array insertObject:hbModel atIndex:0];
                 self.hongbaoArray = [NSArray arrayWithArray:hongbao_Array];
                 if (object[@"data"][@"recommend"]) {
-                    self.useHbModel = (JCWMyHongbaoBall *)[JCWJsonTool entityWithJson:object[@"data"][@"recommend"] class:[JCWMyHongbaoBall class]];
+                    if ([self.tjInfoDetailBall.is_end integerValue]==0) {
+                        self.useHbModel = (JCWMyHongbaoBall *)[JCWJsonTool entityWithJson:object[@"data"][@"recommend"] class:[JCWMyHongbaoBall class]];
+                    }
+
                     [self caculatePrice];
                     for (JCWMyHongbaoBall *hmModel in self.hongbaoArray) {
                         if ([self.useHbModel.id integerValue]==[hmModel.id integerValue]) {
@@ -180,7 +183,7 @@
     
 
     self.tableView.separatorInset = UIEdgeInsetsZero;
-    self.tableView.separatorStyle = 1;
+    self.tableView.separatorStyle = 0;
     self.tableView.separatorColor = COLOR_DDDDDD;
     self.tableView.estimatedRowHeight = 100;
     [self.tableView registerClass:[JCHongbangOrderInfoCell class] forCellReuseIdentifier:@"JCHongbangOrderInfoCell"];
@@ -192,21 +195,7 @@
 
     
 
-    [self.view addSubview:self.priceInfoView];
-    self.priceInfoView.frame = CGRectMake(0, SCREEN_HEIGHT-55-kBottomTabSafeAreaHeight-kNavigationBarHeight, SCREEN_WIDTH, 55+kBottomTabSafeAreaHeight);
- 
-//    [self.view addSubview:self.protocolView];
-//    [self.protocolView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.equalTo(self.view);
-//        make.bottom.equalTo(self.priceInfoView.mas_top);
-//        make.height.mas_equalTo(AUTO(32));
-//    }];
-    
-//    [self.protocolView addSubview:self.protocolLab];
-//    [self.protocolLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.centerX.equalTo(self.protocolView);
-//    }];
-    
+
     [self.protocolView addSubview:self.sureProtocolBtn];
     [self.sureProtocolBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.protocolView);
@@ -239,13 +228,7 @@
 
     self.protocolLab.attributedText=atext;
     
-    
-    
-    self.priceInfoView.JCSureBtnClickBlock = ^{
-        [weakSelf sureBtnClick];
-    };
-    
-//    [self caculatePrice];
+ 
     
     self.hbPickerView.dataArray = self.hongbaoArray;
 //    WeakSelf;
@@ -277,7 +260,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section==0) {
-        return 1;
+        return 0;
     }
     return self.payWayArray.count;
 }
@@ -294,6 +277,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     if (indexPath.section==0&&self.tjInfoDetailBall) {
+        //JCHongbangOrderInfoCell目前不用,6.14号
         JCHongbangOrderInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCHongbangOrderInfoCell"];
         cell.infoModel = self.tjInfoDetailBall;
         cell.matchDataArray= self.matchDataArray;
@@ -311,20 +295,26 @@
 
                         cell.infoLab.text = [NSString stringWithFormat:@"最高可以抵扣%@元",self.highest];
                     }
-                    if (self.hongbaoArray.count<0) {
-                        cell.infoLab.text = @"暂无红包";
+                    if (self.hongbaoArray.count<2) {
+                        cell.infoLab.text = @"暂无优惠券";
+                        cell.selHongbaoLab.textColor = COLOR_9F9F9F;
+                        cell.selHongbaoLab.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)];
                     }
                    
 
                 }else{
 
-                    cell.infoLab.text = @"选择红包";
+//                    cell.infoLab.text = @"选择红包";
                     if (self.hongbaoArray.count<2) {
-                        cell.infoLab.text = @"暂无红包";
+                        cell.infoLab.text = @"暂无优惠券";
+                        cell.selHongbaoLab.textColor = COLOR_9F9F9F;
+                        cell.selHongbaoLab.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)];
                     }
                 }
                 if ([self.tjInfoDetailBall.is_use integerValue]==0) {
-                    cell.infoLab.text = @"该方案不支持红包";
+                    cell.infoLab.text = @"该方案不支持优惠券";
+                    cell.selHongbaoLab.textColor = COLOR_9F9F9F;
+                    cell.selHongbaoLab.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)];
                 }
 
 //                }
@@ -333,11 +323,18 @@
                     cell.infoLab.text = @"";
                     if ([self.useHbModel.id integerValue]>0) {
                         cell.selHongbaoLab.text = [NSString stringWithFormat:@"已抵扣%@红币",@(self.useHbModel.total/100)];
+                        cell.selHongbaoLab.textColor = COLOR_2F2F2F;
+                        cell.selHongbaoLab.font =  [UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(12)];
                     }else{
-                        cell.selHongbaoLab.text = @"不使用红包";
+                        cell.selHongbaoLab.text = @"不使用优惠券";
+                        cell.selHongbaoLab.textColor = COLOR_9F9F9F;
+                        cell.selHongbaoLab.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)];
                     }
                 }else{
+                    
                     cell.selHongbaoLab.text = @"";
+                    cell.selHongbaoLab.textColor = COLOR_9F9F9F;
+                    cell.selHongbaoLab.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)];
                 }
             }
         JCWUserBall *user =[JCWUserBall currentUser];
@@ -373,19 +370,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row==0) {
-        if (self.hongbaoArray.count<=1) {
+        if (self.hongbaoArray.count<2) {
             //没有红包不可点击
             return;
         }
-        if ([self.tjInfoDetailBall.is_use intValue]==0) {
-            [JCWToastTool showHint:@"该方案不支持使用红包"];
-            return;
-        }else{
-            if (self.hongbaoArray.count==0) {
-                [JCWToastTool showHint:@"您目前没有可使用红包"];
-                return;
-            }
-        }
+//        if ([self.tjInfoDetailBall.is_use intValue]==0) {
+//            [JCWToastTool showHint:@"该方案不支持使用红包"];
+//            return;
+//        }
+//        else{
+//            if (self.hongbaoArray.count==0) {
+//                [JCWToastTool showHint:@"您目前没有可使用红包"];
+//                return;
+//            }
+//        }
         [[UIApplication sharedApplication].keyWindow addSubview:self.hbPickerView];
         [self.hbPickerView show];
         
@@ -431,7 +429,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section==0) {
-        return AUTO(8);
+        return 0.001f;
     }
     return 0.001f;
     
@@ -466,18 +464,24 @@
         price = needPayNum-discountNum;
 
     }
+    
     NSNumber *number = [[NSNumber alloc] initWithFloat:price];
     NSString *money = [NSString stringWithFormat:@"%@",number];
+    
+
+    
     if (self.JCPriceBlock) {
         self.JCPriceBlock(money);
     }
+    
+
 
 }
 
 - (void)sureBtnClick {
     
     if (!_sureProtocolBtn.selected) {
-        [JCWToastTool showHint:@"请阅读“用户服务条款”并点击同意"];
+        [JCWToastTool showHint:@"请阅读《鲸猜足球用户购买协议》并点击同意"];
         return ;
     }
     
@@ -629,17 +633,12 @@
 }
 
 - (void)loadDataInfo {
-//    _object = object;
+
     if (!self.tjInfoDetailBall) {
         return;
     }
     self.protocolView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(30));
     self.tableView.tableFooterView = self.protocolView;
-
-
-        
-//        self.object = object;
-     self.priceInfoView.hidden = NO;
      self.protocolView.hidden = NO;
      [self getPayWayArray];//构建支付方式
     [self.tableView reloadData];
@@ -648,6 +647,14 @@
 
 - (void)sureProtocolBtnClick {
     self.sureProtocolBtn.selected = !self.sureProtocolBtn.selected;
+    if(self.sureProtocolBtn.selected){
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JCFanganAgree"];
+    }else{
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"JCFanganAgree"]) {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"JCFanganAgree"];
+        }
+        
+    }
 }
 
 
@@ -696,7 +703,9 @@
         [_sureProtocolBtn setImage:JCIMAGE(@"protocol_select") forState:UIControlStateSelected];
         [_sureProtocolBtn setImage:JCIMAGE(@"yuce_select_normal") forState:0];
         [_sureProtocolBtn addTarget:self action:@selector(sureProtocolBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        _sureProtocolBtn.selected = YES;
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"JCFanganAgree"]) {
+            _sureProtocolBtn.selected = YES;
+        }
     }
     return _sureProtocolBtn;
 }
@@ -718,13 +727,6 @@
 
     }
     return _protocolLab;
-}
-- (JCHongbangPriceInfoView *)priceInfoView{
-    if (!_priceInfoView) {
-        _priceInfoView = [JCHongbangPriceInfoView new];
-        _priceInfoView.hidden = YES;
-    }
-    return _priceInfoView;
 }
 
 @end

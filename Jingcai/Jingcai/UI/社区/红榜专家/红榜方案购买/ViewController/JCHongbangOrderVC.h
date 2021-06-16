@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseTableViewController.h"
-
+#import "JCWMyHongbaoBall.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCHongbangOrderVC : JCBaseTableViewController
@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSDictionary *object;
 
 @property (nonatomic, strong) JCWTjInfoDetailBall *tjInfoDetailBall;//方案详情
+
+@property (nonatomic,strong) JCWMyHongbaoBall *useHbModel;//当前选中的红包
 
 @property (nonatomic,copy) void(^JCPriceBlock)(NSString *price);
 

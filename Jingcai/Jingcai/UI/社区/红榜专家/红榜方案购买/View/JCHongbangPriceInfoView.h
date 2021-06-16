@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UILabel *oriPriceLab;//原价
 
+@property (nonatomic, strong) UILabel *hbPriceLab;//使用红包的价格
+
 @property (nonatomic, strong) UIImageView *thIconImgView;//特价标签
 
 @property (nonatomic, strong) UIButton *sureBtn;
@@ -26,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString *price;
 
+@property (nonatomic, strong) NSString *hbPrice;//没有使用红包的原价
 @end
 
 NS_ASSUME_NONNULL_END

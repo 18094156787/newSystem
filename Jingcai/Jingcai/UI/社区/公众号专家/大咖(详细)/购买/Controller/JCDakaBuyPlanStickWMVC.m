@@ -27,6 +27,8 @@ static CGFloat const kWMMenuViewHeight = 0;
 
 @property (nonatomic, strong) UILabel *priceLab;
 
+@property (nonatomic, strong) UILabel *hbPriceLab;//没有使用红包的原价
+
 @property (nonatomic, strong) UIButton *sureBtn;
 
 @property (nonatomic, assign) BOOL isLoad;
@@ -154,10 +156,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 
     
     NSString *price = [NSString stringWithFormat:@"%@",@([self.payInfoModel.sf floatValue]/100.0f)];
-//    NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:price];
-//    NSRange range = [price rangeOfString:@"红币"];
-//    [attributedStr setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(14)],NSForegroundColorAttributeName:COLOR_2F2F2F} range:range];
-//
+
     self.priceLab.text = price;
     [self.bottomView addSubview:self.priceLab];
     [self.priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -165,11 +164,19 @@ static CGFloat const kWMMenuViewHeight = 0;
         make.centerY.equalTo(sureBtn);
     }];
     
+
+    
     UILabel *priceLab = [UILabel initWithTitle:@"红币" andFont:AUTO(14) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     [self.bottomView addSubview:priceLab];
     [priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.priceLab.mas_right).offset(3);
         make.centerY.equalTo(self.priceLab);
+    }];
+    
+    [self.bottomView addSubview:self.hbPriceLab];
+    [self.hbPriceLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(priceLab.mas_right).offset(15);
+        make.centerY.equalTo(sureBtn).offset(3);
     }];
 
     
@@ -241,6 +248,7 @@ static CGFloat const kWMMenuViewHeight = 0;
         WeakSelf;
         self.homeVC.JCPirceBlock = ^(NSString * _Nonnull price) {
             weakSelf.priceLab.text = price;
+            [weakSelf showOldPrice];
             
         };
         self.homeVC.JCEndBlock = ^(bool isEnd) {
@@ -248,6 +256,7 @@ static CGFloat const kWMMenuViewHeight = 0;
                 weakSelf.sureBtn.userInteractionEnabled = NO;
                 weakSelf.sureBtn.backgroundColor = COLOR_9F9F9F;
                 [weakSelf.sureBtn setTitle:@"无法购买" forState:0];
+                weakSelf.hbPriceLab.text = @"";
             }
         };
         return self.homeVC;
@@ -291,7 +300,31 @@ static CGFloat const kWMMenuViewHeight = 0;
     CGSize textSize = [text boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : font} context:nil].size;
     return textSize;
 }
+- (void)showOldPrice {
+    if (self.homeVC.useHbModel) {
+        NSString *hBprice = [NSString stringWithFormat:@"%@红币",@([self.payInfoModel.sf floatValue]/100.0f)];
 
+        NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:hBprice];
+
+        [attribtStr addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSBaselineOffsetAttributeName:@(NSUnderlineStyleSingle)} range:attribtStr.rangeOfAll];
+
+//                        self.priceInfoView.hbPriceLab.attributedText = attribtStr;
+        if ([self.homeVC.useHbModel.id integerValue]==0) {
+            self.hbPriceLab.text = @"";
+        }else{
+            self.hbPriceLab.attributedText = attribtStr;
+ 
+            
+        }
+
+    }else{
+        self.hbPriceLab.text = @"";
+    }
+    if (self.payInfoModel.is_end==1) {
+        self.hbPriceLab.text = @"";//已截止不显示
+    }
+
+}
 #pragma mark --
 
 - (void)back {
@@ -312,5 +345,10 @@ static CGFloat const kWMMenuViewHeight = 0;
     }
     return _priceLab;
 }
-
+- (UILabel *)hbPriceLab {
+    if (!_hbPriceLab) {
+        _hbPriceLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
+    }
+    return _hbPriceLab;
+}
 @end

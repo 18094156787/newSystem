@@ -42,11 +42,19 @@
 
 
 
+
     [self addSubview:self.sureBtn];
     [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(AUTO(-15));
         make.top.offset(AUTO(15));
         make.size.mas_equalTo(CGSizeMake(AUTO(125), AUTO(44)));
+    }];
+    
+    [self addSubview:self.hbPriceLab];
+    [self.hbPriceLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.priceLab.mas_right).offset(AUTO(15));
+        make.centerY.equalTo(self.priceLab).offset(5);
+
     }];
 
 
@@ -103,6 +111,25 @@
         [attributedStr setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(14)],NSForegroundColorAttributeName:COLOR_2F2F2F} range:range1];
     self.priceLab.attributedText = attributedStr;
     
+    
+    
+//    self.hbPriceLab.text = @"4454";
+    
+}
+
+- (void)setHbPrice:(NSString *)hbPrice {
+    _hbPrice = hbPrice;
+    if (hbPrice.length>0) {
+        NSString *hBprice = [NSString stringWithFormat:@"%@红币",hbPrice];
+        NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:hBprice];
+
+        [attribtStr addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSBaselineOffsetAttributeName:@(NSUnderlineStyleSingle)} range:attribtStr.rangeOfAll];
+
+            self.hbPriceLab.attributedText = attribtStr;
+    }else{
+        self.hbPriceLab.text = @"";
+    }
+    
 }
 
 - (UILabel *)priceLab {
@@ -125,6 +152,13 @@
         _oriPriceLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _oriPriceLab;
+}
+
+- (UILabel *)hbPriceLab {
+    if (!_hbPriceLab) {
+        _hbPriceLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
+    }
+    return _hbPriceLab;
 }
 
 - (UIImageView *)thIconImgView {

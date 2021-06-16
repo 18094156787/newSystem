@@ -46,6 +46,14 @@
 
 - (void)sureProtocolBtnClick {
     self.sureProtocolBtn.selected = !self.sureProtocolBtn.selected;
+    if(self.sureProtocolBtn.selected){
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JCFanganAgree"];
+    }else{
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"JCFanganAgree"]) {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"JCFanganAgree"];
+        }
+        
+    }
 }
 
 - (UIButton *)sureProtocolBtn {
@@ -54,7 +62,10 @@
         [_sureProtocolBtn setImage:JCIMAGE(@"protocol_select") forState:UIControlStateSelected];
         [_sureProtocolBtn setImage:JCIMAGE(@"yuce_select_normal") forState:0];
         [_sureProtocolBtn addTarget:self action:@selector(sureProtocolBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        _sureProtocolBtn.selected = YES;
+
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"JCFanganAgree"]) {
+            _sureProtocolBtn.selected = YES;
+        }
     }
     return _sureProtocolBtn;
 }

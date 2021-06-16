@@ -80,12 +80,12 @@
     if (self.planDetailModel.type==0||!self.planDetailModel) {
         return;
     }
-    @weakify(self);
-    [self.view showLoading];
+//    @weakify(self);
+    [self.jcWindow showLoading];
     JCHomeService_New *service = [JCHomeService_New service];
     [service getPlanLookWithTuijian_id:self.planDetailModel.id Page:self.pageNo success:^(id  _Nullable object) {
-        @strongify(self);
-        [self.view endLoading];
+//        @strongify(self);
+        [self endRefresh];
         if ([JCWJsonTool isSuccessResponse:object]) {
             NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"brown_info"] class:[JCPlanBuyPersonModel class]];
             [self.dataArray addObjectsFromArray:array];
@@ -128,7 +128,7 @@
             
         }
     } failure:^(NSError * _Nonnull error) {
-        [self.view endLoading];
+        [self endRefresh];
     }];
 
     

@@ -242,6 +242,12 @@ static CGFloat const kWMMenuViewUserHeight = 60;
     WeakSelf;
     self.homeVC.JCPriceBlock = ^(NSString * _Nonnull price) {
         weakSelf.priceInfoView.price = price;
+//        weakSelf.priceInfoView.hbPrice = @"红币";
+        [weakSelf showOldPrice];
+        
+        
+        
+        
     };
      
 //    self.homeVC.JCMatchStatusBlock = ^(BOOL end) {
@@ -299,6 +305,33 @@ static CGFloat const kWMMenuViewUserHeight = 60;
     maskLayer.frame = aView.bounds;
     maskLayer.path = maskPath.CGPath;
     aView.layer.mask = maskLayer;
+}
+
+- (void)showOldPrice {
+    if (self.homeVC.useHbModel) {
+        if (([self.tjInfoDetailBall.sf floatValue]>=[self.tjInfoDetailBall.old_sf floatValue])) {
+            NSString *price = [NSString stringWithFormat:@"%@",@([self.tjInfoDetailBall.sf floatValue]/100.0f)];
+            NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:price];
+
+            [attribtStr addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSBaselineOffsetAttributeName:@(NSUnderlineStyleSingle)} range:attribtStr.rangeOfAll];
+
+//                        self.priceInfoView.hbPriceLab.attributedText = attribtStr;
+            if ([self.homeVC.useHbModel.id integerValue]==0) {
+                self.priceInfoView.hbPrice = @"";
+            }else{
+                self.priceInfoView.hbPrice = price;
+                
+            }
+                
+        }else{
+//                        self.priceInfoView.hbPriceLab.text = @"";
+            self.priceInfoView.hbPrice = @"";
+        }
+
+    }else{
+        self.priceInfoView.hbPrice = @"";
+    }
+
 }
 
 #pragma mark --

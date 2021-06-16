@@ -8,6 +8,7 @@
 
 #import "JCBaseTableViewController.h"
 #import "JCHongbaoShowView.h"
+#import "JCWMyHongbaoBall.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCDakaBuyPlanVC : JCBaseTableViewController
@@ -21,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray *tuijianArray;
 
 @property (nonatomic,strong) JCHongbaoShowView*hbPickerView;
+
+@property (nonatomic,strong) JCWMyHongbaoBall *useHbModel;//当前选中的红包
 
 @property (nonatomic,copy) void(^JCPirceBlock)(NSString *price);
 

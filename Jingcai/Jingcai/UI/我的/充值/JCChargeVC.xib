@@ -71,7 +71,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7J-9q-gs9" customClass="TTTAttributedLabel">
-                                    <rect key="frame" x="16" y="377" width="382" height="25"/>
+                                    <rect key="frame" x="186" y="377" width="42" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="mHq-G0-sT6"/>
                                     </constraints>
@@ -84,12 +84,11 @@
                             <constraints>
                                 <constraint firstItem="KL1-uv-0xn" firstAttribute="leading" secondItem="xZw-ir-a50" secondAttribute="leading" id="65r-yg-9mf"/>
                                 <constraint firstAttribute="trailing" secondItem="KL1-uv-0xn" secondAttribute="trailing" id="7b0-tg-EQa"/>
-                                <constraint firstAttribute="trailing" secondItem="j7J-9q-gs9" secondAttribute="trailing" constant="16" id="LG7-gW-8z8"/>
+                                <constraint firstItem="j7J-9q-gs9" firstAttribute="centerX" secondItem="xZw-ir-a50" secondAttribute="centerX" id="NAJ-CV-hsM"/>
                                 <constraint firstAttribute="bottom" secondItem="j7J-9q-gs9" secondAttribute="bottom" constant="30" id="OdE-kx-ZiP"/>
                                 <constraint firstItem="99e-NU-Ge7" firstAttribute="top" secondItem="KL1-uv-0xn" secondAttribute="bottom" constant="9" id="XIQ-Eo-t2g"/>
                                 <constraint firstAttribute="trailing" secondItem="99e-NU-Ge7" secondAttribute="trailing" constant="15" id="Y52-TR-8O1"/>
                                 <constraint firstItem="j7J-9q-gs9" firstAttribute="top" secondItem="99e-NU-Ge7" secondAttribute="bottom" constant="28" id="dd4-8N-esI"/>
-                                <constraint firstItem="j7J-9q-gs9" firstAttribute="leading" secondItem="xZw-ir-a50" secondAttribute="leading" constant="16" id="ib4-Kv-Qun"/>
                                 <constraint firstItem="99e-NU-Ge7" firstAttribute="leading" secondItem="xZw-ir-a50" secondAttribute="leading" constant="15" id="sZE-F4-qnL"/>
                                 <constraint firstItem="KL1-uv-0xn" firstAttribute="top" secondItem="xZw-ir-a50" secondAttribute="top" id="ss0-ef-dSa"/>
                             </constraints>

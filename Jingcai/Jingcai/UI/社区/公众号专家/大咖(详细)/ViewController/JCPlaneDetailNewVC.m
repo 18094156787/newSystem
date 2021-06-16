@@ -83,21 +83,16 @@
 }
 
 - (void)getPeoPleList {
-//    if (self.planDetailModel.sf_type==2) {
-//         //免费
-//         self.smView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(60));
-//         self.tableView.tableFooterView = self.smView;
-//     }
- 
+
     if (!self.planDetailModel) {
         return;
     }
-    @weakify(self);
-    [self.view showLoading];
+//    @weakify(self);
+    [self.jcWindow showLoading];
     JCHomeService_New *service = [JCHomeService_New service];
     [service getPlanLookWithTuijian_id:self.planDetailModel.id Page:self.pageNo success:^(id  _Nullable object) {
-        @strongify(self);
-        [self.view endLoading];
+//        @strongify(self);
+        [self endRefresh];
         if ([JCWJsonTool isSuccessResponse:object]) {
             NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"brown_info"] class:[JCPlanBuyPersonModel class]];
             NSString *number = [NSString stringWithFormat:@"%@",object[@"data"][@"brown_num"]];
@@ -136,7 +131,7 @@
             
         }
     } failure:^(NSError * _Nonnull error) {
-        [self.view endLoading];
+        [self endRefresh];
     }];
 
 

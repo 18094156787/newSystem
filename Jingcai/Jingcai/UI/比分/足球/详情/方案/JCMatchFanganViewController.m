@@ -27,6 +27,16 @@
     self.tableView.estimatedRowHeight = 100;
     self.tableView.backgroundColor = COLOR_F6F6F6;
     [self loadFanganDataWithMatchNum:self.matchNum];
+    
+    WeakSelf;
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [weakSelf loadFanganDataWithMatchNum:weakSelf.matchNum];
+    }];
+    self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
+        weakSelf.pageNo = 1;
+        
+        [weakSelf loadFanganDataWithMatchNum:weakSelf.matchNum];
+    }];
 
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -45,10 +55,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.faDataArr.count;
+    return self.dataArray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    JCHongBangBall *model = self.faDataArr[indexPath.row];
+    JCHongBangBall *model = self.dataArray[indexPath.row];
     JCHongbangCommomCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCHongbangCommomCell"];
     cell.hideImage = YES;
     cell.dianPingBall = model;
@@ -73,7 +83,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    JCHongBangBall * dianPingBall = self.faDataArr[indexPath.row];
+    JCHongBangBall * dianPingBall = self.dataArray[indexPath.row];
     [JCTuiJianManager getTuiJianDetailWithTuiJianID:dianPingBall.base_info.tuijian_id orderID:@"" type:@"" WithViewController:self is_push:YES success:^{
         
     }];
@@ -82,31 +92,23 @@
 
 
 
-#pragma mark -
-- (void)setFaDataArr:(NSArray *)faDataArr {
-    _faDataArr = faDataArr;
-    [self.tableView reloadData];
-}
 
-- (void)setMatchBall:(JCWMatchBall *)matchBall {
-    if (!matchBall) {
-        return;
-    }
-    _matchBall = matchBall;
-//    [self loadFanganDataWithMatchNum:matchBall.matchNum];
-    
-}
 
 - (void)loadFanganDataWithMatchNum:(NSString *)matchNum {
-    WeakSelf;
+
 //    [self.view showLoading];
     JCMatchService_New * service = [JCMatchService_New service];
     [service getFootBallMatchPlanListWithMatch_id:matchNum Page:self.pageNo Success:^(id  _Nullable object) {
         [self.view endLoading];
+        [self endRefresh];
         if ([JCWJsonTool isSuccessResponse:object]) {
-            weakSelf.faDataArr = [JCWJsonTool arrayWithJson:object[@"data"] class:[JCHongBangBall class]];
-             [weakSelf.tableView reloadData];
-            if (weakSelf.faDataArr.count==0) {
+            if (self.pageNo==1) {
+                [self.dataArray removeAllObjects];
+            }
+            NSArray *dataArray = [JCWJsonTool arrayWithJson:object[@"data"] class:[JCHongBangBall class]];
+            [self.dataArray addObjectsFromArray:dataArray];
+//             [weakSelf.tableView reloadData];
+            if (self.dataArray.count==0) {
                 UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
                 [headView showNoDataClearViewWithTitle:@"暂时无方案" isTop:YES];
                 self.tableView.tableHeaderView = headView;
@@ -114,12 +116,19 @@
                 [self.tableView hideNoData];
                 self.tableView.tableHeaderView = [UIView new];
             }
+            if (dataArray.count < PAGE_LIMIT) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
 
+            }
+            self.pageNo++;
+            [self.tableView reloadData];
             
         }
     } failure:^(NSError * _Nonnull error) {
-        
+        [self endRefresh];
     }];
 
 }
+
+
 @end

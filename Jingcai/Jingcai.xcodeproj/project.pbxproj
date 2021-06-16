@@ -178,6 +178,9 @@
 		7B3F9D1325C8FA8800C1A559 /* JCWTjInfoDetailBall.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F9D1225C8FA8700C1A559 /* JCWTjInfoDetailBall.m */; };
 		7B3F9D1725C8FB3300C1A559 /* JCShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F9D1625C8FB3300C1A559 /* JCShareModel.m */; };
 		7B3F9D1B25C8FD7B00C1A559 /* JCHongbangDetail_MatchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3F9D1A25C8FD7B00C1A559 /* JCHongbangDetail_MatchModel.m */; };
+		7B4081662676135B00FC86C7 /* jc_lauch_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B4081632676135A00FC86C7 /* jc_lauch_3@2x.png */; };
+		7B4081672676135B00FC86C7 /* jc_lauch_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B4081642676135A00FC86C7 /* jc_lauch_1@2x.png */; };
+		7B4081682676135B00FC86C7 /* jc_lauch_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B4081652676135A00FC86C7 /* jc_lauch_2@2x.png */; };
 		7B40DA1625E5F243007AB695 /* JCMatchGoalDistributionTrendHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B40DA1525E5F243007AB695 /* JCMatchGoalDistributionTrendHeadView.m */; };
 		7B428B5625DF57B600DC6A15 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B428B5425DF57B500DC6A15 /* RSA.m */; };
 		7B43325524EA122E002974EF /* JCHongbangTopInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B43325424EA122E002974EF /* JCHongbangTopInfoView.m */; };
@@ -1623,6 +1626,9 @@
 		7B3F9D1625C8FB3300C1A559 /* JCShareModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCShareModel.m; sourceTree = "<group>"; };
 		7B3F9D1925C8FD7B00C1A559 /* JCHongbangDetail_MatchModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCHongbangDetail_MatchModel.h; sourceTree = "<group>"; };
 		7B3F9D1A25C8FD7B00C1A559 /* JCHongbangDetail_MatchModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCHongbangDetail_MatchModel.m; sourceTree = "<group>"; };
+		7B4081632676135A00FC86C7 /* jc_lauch_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jc_lauch_3@2x.png"; sourceTree = "<group>"; };
+		7B4081642676135A00FC86C7 /* jc_lauch_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jc_lauch_1@2x.png"; sourceTree = "<group>"; };
+		7B4081652676135A00FC86C7 /* jc_lauch_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jc_lauch_2@2x.png"; sourceTree = "<group>"; };
 		7B40DA1425E5F243007AB695 /* JCMatchGoalDistributionTrendHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCMatchGoalDistributionTrendHeadView.h; sourceTree = "<group>"; };
 		7B40DA1525E5F243007AB695 /* JCMatchGoalDistributionTrendHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCMatchGoalDistributionTrendHeadView.m; sourceTree = "<group>"; };
 		7B428B5425DF57B500DC6A15 /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
@@ -4576,6 +4582,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		7B4081622676135A00FC86C7 /* 欧洲杯 */ = {
+			isa = PBXGroup;
+			children = (
+				7B4081632676135A00FC86C7 /* jc_lauch_3@2x.png */,
+				7B4081642676135A00FC86C7 /* jc_lauch_1@2x.png */,
+				7B4081652676135A00FC86C7 /* jc_lauch_2@2x.png */,
+			);
+			path = "欧洲杯";
+			sourceTree = "<group>";
+		};
 		7B428B5325DF57B500DC6A15 /* RSA */ = {
 			isa = PBXGroup;
 			children = (
@@ -5591,6 +5607,7 @@
 		7B5FC83A256FCBBE0006D6F0 /* ios启动图 */ = {
 			isa = PBXGroup;
 			children = (
+				7B4081622676135A00FC86C7 /* 欧洲杯 */,
 				7B5FC83B256FCBBE0006D6F0 /* ic_launch_1@2x.png */,
 				7B5FC83E256FCBBE0006D6F0 /* ic_launch_1@3x.png */,
 				7B5FC83C256FCBBE0006D6F0 /* ic_launch_3@3x.png */,
@@ -9907,6 +9924,7 @@
 				C30C8E38224C6373001ECA18 /* JCChargeAccountCell.xib in Resources */,
 				7B53C4DC2486376100BE1262 /* JCNoSubscribeView.xib in Resources */,
 				C3C2787C216EDF890004AEFC /* JCSubscribeAlertView.xib in Resources */,
+				7B4081662676135B00FC86C7 /* jc_lauch_3@2x.png in Resources */,
 				7BE61B3B23CF11C20079A86C /* xryd_8.png in Resources */,
 				7BC4CAB5235FEDF7002226C1 /* Final_Animation_00013@2x.png in Resources */,
 				7B45F42C25F08B890099D108 /* euro_img_banner@2x.png in Resources */,
@@ -9991,6 +10009,7 @@
 				7B99E6942316644C00AA5AB6 /* JNMatchTitleView.xib in Resources */,
 				7B99E6DD2316644C00AA5AB6 /* JNMatchDetailZSVC.xib in Resources */,
 				C349963B21C7930A00C3E282 /* MagicAlertCell.xib in Resources */,
+				7B4081672676135B00FC86C7 /* jc_lauch_1@2x.png in Resources */,
 				7B5D03E3265F7D2800C65F51 /* course_min_2@2x.png in Resources */,
 				C3A29F9F219C0BF8009CF405 /* JCSettingBindTelVC.xib in Resources */,
 				C30C8E34224C6373001ECA18 /* JCChargeItemCell.xib in Resources */,
@@ -10000,6 +10019,7 @@
 				C30C8E32224C6373001ECA18 /* JCChargeWayCell.xib in Resources */,
 				C3C80D282203DFAD0092E0FD /* JCPushSettingVC.xib in Resources */,
 				7B61BF0824ED4DF00068F148 /* YBImageBrowser.bundle in Resources */,
+				7B4081682676135B00FC86C7 /* jc_lauch_2@2x.png in Resources */,
 				C3C80D39220437E10092E0FD /* JCShareView.xib in Resources */,
 				7B5D03E4265F7D2800C65F51 /* course_2@2x.png in Resources */,
 				7B5D038C265E20E200C65F51 /* rightNow@2x.png in Resources */,
@@ -11343,7 +11363,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jingcai/Jingcai.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MFKWUW9XYJ;
 				ENABLE_BITCODE = NO;
@@ -11364,7 +11384,7 @@
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/UPPayPlugin",
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/WeChatSDK1.8.6.1",
 				);
-				MARKETING_VERSION = 3.41;
+				MARKETING_VERSION = 3.42;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -11427,7 +11447,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MFKWUW9XYJ;
 				ENABLE_BITCODE = NO;
@@ -11448,7 +11468,7 @@
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/UPPayPlugin",
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/WeChatSDK1.8.6.1",
 				);
-				MARKETING_VERSION = 3.41;
+				MARKETING_VERSION = 3.42;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
