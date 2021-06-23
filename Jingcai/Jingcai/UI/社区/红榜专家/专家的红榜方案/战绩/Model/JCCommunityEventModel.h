@@ -30,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) NSString *competition_name;
 
+@property (nonatomic,copy) NSString *type;//类别 1盈利率 0命中率
+
 @end
 
 NS_ASSUME_NONNULL_END

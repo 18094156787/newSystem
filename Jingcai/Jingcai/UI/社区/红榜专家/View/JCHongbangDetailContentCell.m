@@ -289,7 +289,8 @@
         self.payPriceLab.text = @"已退款";
         
     }else{
-        if (tjInfoDetailBall.pay_price.length == 0) {
+        if (tjInfoDetailBall.pay_price.length == 0&&[tjInfoDetailBall.is_pay_show integerValue]==1) {
+            //tjInfoDetailBall.pay_price.length==0有可能是支付0红币,但是后台给了空字段,所以这边判断如果是已经支付就给0
             tjInfoDetailBall.pay_price = @"0";
         }
         

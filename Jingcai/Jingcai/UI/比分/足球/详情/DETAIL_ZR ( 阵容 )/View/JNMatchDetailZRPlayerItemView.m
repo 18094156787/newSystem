@@ -77,19 +77,19 @@
     self.numberLab.text = [NSString stringWithFormat:@"%ld",[lineupBall.shirt_number integerValue]];
     [self.headImgView sd_setImageWithURL:[NSURL URLWithString:lineupBall.logo] placeholderImage:JCIMAGE(@"userImg_default")];
 
-    if (lineupBall.incidents==1||lineupBall.incidents==3||lineupBall.incidents==4||lineupBall.incidents==9) {
+    if (lineupBall.type==1||lineupBall.type==3||lineupBall.type==4||lineupBall.type==9) {
         self.iconImgView.hidden = NO;
-        if (lineupBall.incidents==1) {
+        if (lineupBall.type==1) {
             self.iconImgView.image = JCIMAGE(@"MatchZR_tl_icon_jq");
         }
 
-        if (lineupBall.incidents==3) {
+        if (lineupBall.type==3) {
             self.iconImgView.image = JCIMAGE(@"MatchZR_tl_icon_yp");
         }
-        if (lineupBall.incidents==4) {
+        if (lineupBall.type==4) {
             self.iconImgView.image = JCIMAGE(@"MatchZR_tl_icon_rc_s");
         }
-        if (lineupBall.incidents==9) {
+        if (lineupBall.type==9) {
             self.iconImgView.image = JCIMAGE(@"MatchZR_tl_icon_hr");
         }
 

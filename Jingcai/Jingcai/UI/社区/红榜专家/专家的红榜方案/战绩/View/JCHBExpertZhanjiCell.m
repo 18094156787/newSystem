@@ -55,11 +55,12 @@
         [zsAttr addAttribute:NSForegroundColorAttributeName value:COLOR_505050 range:hei_range];
     }
     self.titleLab.attributedText = zsAttr;
-    if (model.profit.length>0) {
+    if ([model.type integerValue]==1) {
         self.infoLab.text = [NSString stringWithFormat:@"%@%%",model.profit];
     }else{
         self.infoLab.text = [NSString stringWithFormat:@"%@%%",model.target];
     }
+
     
 }
 

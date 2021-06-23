@@ -108,6 +108,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString *is_pay;//0未购买 1已购买
 
+@property (strong, nonatomic) NSString *is_pay_show;//跟is_pay一样,用来区分显示购买价格
+
 @property (strong, nonatomic) NSString *is_end;//0未截止购买 1截止购买
 
 @property (strong, nonatomic) NSString *is_login;//0未登录 1已登录

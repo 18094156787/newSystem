@@ -25,6 +25,7 @@
            
             JCHongbangDetailModel *detailModel = (JCHongbangDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCHongbangDetailModel class]];
             detailModel.talent_plan.user = detailModel.tuijian_pay;
+            detailModel.talent_plan.is_pay_show = detailModel.talent_plan.is_pay;
             if ([detailModel.talent_plan.all_wl integerValue]>0) {
                 detailModel.talent_plan.is_pay = @"1";//如果是已开奖,是可以查看的,所以这边归置为已购买
             }

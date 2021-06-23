@@ -106,9 +106,11 @@
             WeakSelf;
             self.zhanjiHeadView.JCHeadBlock = ^(NSString * _Nonnull type) {
                 if ([type integerValue]==1) {
+                    //1是盈利率
                     weakSelf.dataArray = [NSMutableArray arrayWithArray:weakSelf.hbArray];
                 }
-                if ([type integerValue]==2) {
+                if ([type integerValue]==0) {
+                    //0是命中率
                     weakSelf.dataArray = [NSMutableArray arrayWithArray:weakSelf.hotArray];
                 }
                 [weakSelf.tableView reloadData];

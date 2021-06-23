@@ -57,7 +57,7 @@
         weakSelf.huibaoLab.textColor = COLOR_999999;
         weakSelf.reduLab.textColor = JCBaseColor;
         if (weakSelf.JCHeadBlock) {
-            weakSelf.JCHeadBlock(@"2");
+            weakSelf.JCHeadBlock(@"0");
         }
     }];
     

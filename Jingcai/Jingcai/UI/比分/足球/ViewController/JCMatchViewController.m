@@ -52,7 +52,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.eventArray = @"";
-    self.screening = @"1";
+    self.screening = @"1";//赛程和已完场默认重要
+    if ([self.type integerValue]==1) {
+        self.screening = @"3";//进行中默认全部
+    }
     self.view.backgroundColor = COLOR_F0F0F0;
     [self initViews];
     [self getTimeList];

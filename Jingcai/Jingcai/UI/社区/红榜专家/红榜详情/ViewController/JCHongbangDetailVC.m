@@ -63,13 +63,7 @@
 
     self.matchDataArray = self.detailModel.match_info;
     self.tjInfoDetailBall = self.detailModel.talent_plan;
-#pragma mark 需要处理
-//   self.tjInfoDetailBall.deal_total = dataDic[@"deal_total"];
-//   self.tjInfoDetailBall.refund_desc = dataDic[@"refund_desc"];
 
-   
-//    self.tuiJianArray = [JCWJsonTool arrayWithJson:dataDic[@"topTuijian"] class:[JCDianPingBall class]];
-    
     [self.tableView reloadData];
      self.tableView.hidden = NO;
 }
