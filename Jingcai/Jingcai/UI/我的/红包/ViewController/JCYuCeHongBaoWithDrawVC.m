@@ -183,7 +183,7 @@
     NSString *type = @"1";
     NSString *hongbao_id = self.model.id;
     JCUserService_New * service = [[JCUserService_New alloc] init];
-    [service getHongbaoSubmitWithType:type hongbao_id:hongbao_id Email:@"" success:^(id  _Nullable object) {
+    [service getHongbaoSubmitWithType:type hongbao_id:hongbao_id Email:@"" name:@"" success:^(id  _Nullable object) {
         if ([JCWJsonTool isSuccessResponse:object]) {
             NSString *total = object[@"data"][@"total"];
             NSString *money = [NSString stringWithFormat:@"¥%@",@([total floatValue]/100.0f)];

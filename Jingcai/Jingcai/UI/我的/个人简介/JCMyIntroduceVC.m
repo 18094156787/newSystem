@@ -77,7 +77,7 @@
         make.height.mas_equalTo(16);
     }];
     
-    UILabel *infoLab = [UILabel initWithTitle:@"1、签约用户才可编辑个人简介并对外显示\n2、简介中不可含有明显的导流到微信、公众号等明显信息，否则将不予通过\n3、简介信息应该遵循国家法律法规，严禁带有诋毁国家政治体制、违背公序良俗等违法信息内容。违者将追究法律责任，\n4、个人简介每月最多修改一次。" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+    UILabel *infoLab = [UILabel initWithTitle:@"1、签约用户才可编辑个人简介并对外显示\n2、简介中不可含有明显的导流到微信、公众号等明显信息，否则将不予通过\n3、简介信息应该遵循国家法律法规，严禁带有诋毁国家政治体制、违背公序良俗等违法信息内容。违者将追究法律责任" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     infoLab.numberOfLines = 0;
     [bottomView addSubview:infoLab];
     [infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -170,7 +170,14 @@
             if ([JCWJsonTool isSuccessResponse:object]) {
 
                 [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUserChange object:nil];
-                [self.navigationController popViewControllerAnimated:YES];
+                if ([[JCWUserBall currentUser].fabu integerValue]==1) {
+                    [self getCheckInfo];
+                    [JCWToastTool showHint:@"提交修改个人简介申请成功，等待客服审核……"];
+                }else{
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+
+//                [self.navigationController popViewControllerAnimated:YES];
                 
             }else{
                  [JCWToastTool showHint:object[@"msg"]];

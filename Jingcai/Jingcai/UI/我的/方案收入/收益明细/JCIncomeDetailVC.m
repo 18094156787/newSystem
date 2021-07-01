@@ -123,7 +123,7 @@
 - (void)refreshData {
 
     if (self.dataArray.count==0) {
-        [self.jcWindow showLoading];
+//        [self.jcWindow showLoading];
     }
     JCUserService_New *service = [JCUserService_New service];
     [service getMyIncomeDetailLsitWithPage:self.pageNo success:^(id  _Nullable object) {

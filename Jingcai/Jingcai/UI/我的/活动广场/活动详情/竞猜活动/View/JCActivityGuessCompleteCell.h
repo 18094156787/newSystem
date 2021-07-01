@@ -18,11 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) JCActivityDetailModel *detailModel;
 
-@property (nonatomic,assign) NSInteger selCount;;
-
 @property (nonatomic,strong) NSArray *dataSource;
 
-@property (nonatomic,copy) void(^JCSelectBlock)(NSInteger selCount);
 
 @end
 

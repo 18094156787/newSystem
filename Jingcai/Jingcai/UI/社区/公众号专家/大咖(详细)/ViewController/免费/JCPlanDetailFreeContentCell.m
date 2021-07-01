@@ -71,6 +71,16 @@
     }];
 }
 
+//开始加载
+-(void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
+
+
+    if ([webView.URL.absoluteString containsString:@"app_jump"]) {
+        [JCPageRedirectManager jumpVCWithRoute:webView.URL.absoluteString vc:[self getViewController]];
+    }
+      
+}
+
 - (void)addImgClickJS {
     
     //获取所以的图片标签
@@ -116,6 +126,8 @@
     }];
     
 }
+
+
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     // 类似 UIWebView 的 -webView: shouldStartLoadWithRequest: navigationType:

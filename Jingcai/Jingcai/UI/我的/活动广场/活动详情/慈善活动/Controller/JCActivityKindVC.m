@@ -426,6 +426,13 @@
             [weakSelf showPopTipView];
         }
     };
+    
+    self.shareView.JCAllShareBlock = ^(NSInteger type) {
+        if (type==1||type==2||type==3) {
+            [weakSelf activityShareAnalysis];
+
+        }
+    };
 }
 
 
@@ -486,7 +493,10 @@
     if (indexPath.section==5) {
         JCActivityRuleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityRuleCell"];
         WeakSelf;
-        cell.detailModel = self.detailModel;
+        if (!cell.detailModel) {
+            cell.detailModel = self.detailModel;
+        }
+        
         cell.kindImageView = JCIMAGE(@"ic_kind_title");
         cell.JCRefreshBlock = ^(float height) {
             weakSelf.cellHeight = height+20;
@@ -726,6 +736,30 @@
     cell.scoreVC.tableView.scrollEnabled = YES;
     cell.prizeVC.tableView.scrollEnabled = YES;
 }
+#pragma mark 网络请求
+
+//活动分享统计
+- (void)activityShareAnalysis {
+
+    if (self.actID.length==0) {
+        return;
+    }
+    JCActivityService *service = [JCActivityService service];
+    [service getAddActivityShareInfoWithActID:self.actID success:^(id  _Nullable object) {
+        if ([JCWJsonTool isSuccessResponse:object]) {
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+
+
+}
+
+
 - (JCKindActivityHeadView *)headView {
     if (!_headView) {
         _headView = [JCKindActivityHeadView new];
@@ -753,6 +787,7 @@
     if (!_shareView) {
         _shareView = [JCShareView viewFromXib];
         _shareView.image = JCIMAGE(@"icon_app");
+        _shareView.allow_AllPlaformAnalyse = YES;
     }
     return _shareView;
 }

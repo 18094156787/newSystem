@@ -74,7 +74,7 @@
     self.iconImageView.layer.masksToBounds = YES;
     
     if ([[JCWUserBall currentUser].tuijian integerValue] ==1) {
-            self.infoLab.text = @"①成为达人后，修改头像需客服审核！\n②头像上请勿带有二维码微信号、电话号码等非法信息，否则将不予通过！\n③每月最多修改1次！";
+            self.infoLab.text = @"①成为达人后，修改头像需客服审核！\n②头像上请勿带有二维码微信号、电话号码等非法信息，否则将不予通过！";
         }
 }
 
@@ -183,7 +183,15 @@
         if ([JCWJsonTool isSuccessResponse:object]) {
             //更新user
             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUserChange object:nil];
-            [self.navigationController popViewControllerAnimated:YES];
+            if ([[JCWUserBall currentUser].fabu integerValue]==1) {
+                [JCWToastTool showHint:@"提交修改头像申请成功，等待客服审核……"];
+                [self getCheckInfo];
+            }else{
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            
+
+//            [self.navigationController popViewControllerAnimated:YES];
             
         }else{
              [JCWToastTool showHint:object[@"msg"]];

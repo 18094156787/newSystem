@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UIImage *kindImageView;
 
+@property (nonatomic,assign) BOOL haveTime;//包含活动时间的样式
+
 @property (nonatomic,assign) BOOL isLoad;
 
 @end

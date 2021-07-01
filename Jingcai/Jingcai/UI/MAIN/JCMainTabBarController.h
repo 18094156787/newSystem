@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @interface JCMainTabBarController : JCBaseTabBarController
 @property (assign, nonatomic) NSInteger tabSelIndex;
+@property (assign, nonatomic) NSInteger currentIndex;
 @property (assign, nonatomic) BOOL isLogout;//记录token过期,防止重复push登陆页
 
 - (void)showYCVC;//展示全民鲸猜

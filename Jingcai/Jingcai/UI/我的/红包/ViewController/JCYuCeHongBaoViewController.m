@@ -17,6 +17,9 @@
 #import "JCYuCeHongBaoCrashHeadView.h"
 #import "JCYuCeHongBaoHeadView.h"
 #import "JCYHQHongBaoViewCell.h"
+#import "JCSmallPriceWithDrawSuccessVC.h"
+#import "JCSmallPriceWithDrawFailVC.h"
+#import "JCSmallPriceWithDrawWaittingVC.h"
 @interface JCYuCeHongBaoViewController ()
 
 @property (nonatomic,strong) JCYuCeHongBaoCrashHeadView *crashHeadView;
@@ -36,10 +39,16 @@
     self.view.backgroundColor = JCWhiteColor;
     [self initViews];
     [self refreshData];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"JCSmallPriceWithDrawSubmit" object:nil];//申请提现
+}
+
+- (void)refreshData {
+    self.pageNo = 1;
+    [self getDataList];
 }
 
 
-- (void)refreshData {
+- (void)getDataList {
 
     if (self.dataArray.count==0) {
         [self.view showLoading];
@@ -58,12 +67,15 @@
                 }
                 if ([self.type intValue]==1) {
                     NSString *money = object[@"data"][@"notWithdraw"];
+                    NSString *tips = [NSString stringWithFormat:@"%@",object[@"data"][@"tips"]];
                     NSNumber *money_number = @([money floatValue]);
                     self.crashHeadView.moneyLab.text = [NSString stringWithFormat:@"%@",money_number];
                     NSString *total = object[@"data"][@"withdraw"];
                     NSNumber *total_number = @([total floatValue]);
                     self.crashHeadView.totalyLab.text = [NSString stringWithFormat:@"%@",total_number];
-                    self.crashHeadView.submitBtn.hidden = [money floatValue]==0?YES:NO;
+                    self.crashHeadView.submitBtn.hidden = [tips integerValue] ==3?YES:NO;
+                    self.crashHeadView.tips = NonNil(tips);
+//                    self.crashHeadView.tips = @"2"
                 }
             }
             
@@ -122,13 +134,12 @@
 
     
     self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
-        weakSelf.pageNo = 1;
         
         [weakSelf refreshData];
     }];
     
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [weakSelf refreshData];
+        [weakSelf getDataList];
     }];
     
 }
@@ -155,23 +166,69 @@
         cell.model = model;
         WeakSelf;
         cell.JCWithDrawBlock = ^{
-            if (model.type==1) {
-                //大额
-                JCYuCeHongBaoWithDrawVC *vc = [JCYuCeHongBaoWithDrawVC new];
+            
+            if (model.use==1) {
+                
+                if (model.withdraw==0) {
+                    //未提现,去提现
+                    if (model.type==1) {
+                        //大额提现
+                        JCYuCeHongBaoWithDrawVC *vc = [JCYuCeHongBaoWithDrawVC new];
+                        vc.model = model;
+                        [weakSelf.navigationController pushViewController:vc animated:YES];
+                        
+                    }
+                    if (model.type==2) {
+                        //小额提现
+                        JCYuCeHongBaoSmallPriceWithDrawVC *vc = [JCYuCeHongBaoSmallPriceWithDrawVC new];
+                        vc.model =  weakSelf.dataArray[indexPath.row];
+                        WeakSelf;
+                        vc.JCBlock = ^{
+                            [weakSelf refreshData];
+                        };
+                        [weakSelf.navigationController pushViewController:vc animated:YES];
+                    }
+                }
+                if (model.withdraw==1) {
+                    //提现中
+                    JCSmallPriceWithDrawWaittingVC *vc = [JCSmallPriceWithDrawWaittingVC new];
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                }
+                if (model.withdraw==2) {
+                    //提现失败
+                    JCSmallPriceWithDrawFailVC *vc = [JCSmallPriceWithDrawFailVC new];
+                    vc.model = model;
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                }
+               
+
+
+            }
+            if (model.use==2) {
+                //提现成功
+                JCSmallPriceWithDrawSuccessVC *vc = [JCSmallPriceWithDrawSuccessVC new];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }
+            if (model.use==3) {
+                //提现中
+                JCSmallPriceWithDrawWaittingVC *vc = [JCSmallPriceWithDrawWaittingVC new];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }
+            if (model.use==4) {
+                //提现失败
+                JCSmallPriceWithDrawFailVC *vc = [JCSmallPriceWithDrawFailVC new];
                 vc.model = model;
                 [weakSelf.navigationController pushViewController:vc animated:YES];
-                
             }
+            
+            
+            
+
             if (model.type==2) {
                 //小额
-                JCYuCeHongBaoSmallPriceWithDrawVC *vc = [JCYuCeHongBaoSmallPriceWithDrawVC new];
-                vc.model =  weakSelf.dataArray[indexPath.row];
-                WeakSelf;
-                vc.JCBlock = ^{
-                    weakSelf.pageNo = 1;
-                    [weakSelf refreshData];
-                };
-                [weakSelf.navigationController pushViewController:vc animated:YES];
+
             }
 
         };

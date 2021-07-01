@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) void(^JCRefresh)(void);
 
+@property (nonatomic,strong) NSString *tips;// 1只有大额红包2有大额和小额红包 3.隐藏全部提现按钮
+
 @end
 
 NS_ASSUME_NONNULL_END

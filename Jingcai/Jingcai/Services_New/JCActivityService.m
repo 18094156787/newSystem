@@ -203,6 +203,23 @@
     }];
     
 }
+//慈善活动分享统计
+- (void)getAddActivityShareInfoWithActID:(NSString *)ID success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+                            @"activity_id":ID
+    };
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"activity_share" paramDic:param ignoreArray:@[]];
+
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self deathWithSuccessInfo:responseObject];
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+        [self dealWithError:error];
+    }];
+    
+}
 //活动签到
 //type 1签到 2分享转发
 - (void)getKindActivitySignWithActID:(NSString *)ID type:(NSString *)type success:(successBlock)successBlock failure:(failureBlock)failureBlock {
@@ -245,7 +262,7 @@
     
 }
 
-//活动分享统计
+//活动邀请好友分享统计
 - (void)getActivityAnalysisWithActID:(NSString *)ID success:(successBlock)successBlock failure:(failureBlock)failureBlock {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSDictionary * param = @{

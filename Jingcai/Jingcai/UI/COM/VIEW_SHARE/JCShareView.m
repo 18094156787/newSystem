@@ -122,6 +122,14 @@
         UIPasteboard * pasteBoard = [UIPasteboard generalPasteboard];
         pasteBoard.string = self.webPageUrl;
         [JCWToastTool showHint:@"已复制"];
+        if (self.allow_AllPlaformAnalyse==YES) {
+            if (cell.shareType == JCShareTypeEnumCopy) {
+                if (self.JCAllShareBlock) {
+                    self.JCAllShareBlock(3);
+                }
+            }
+
+        }
 
         return ;
     }
@@ -165,6 +173,20 @@
         if (self.JCShareBlock) {
             self.JCShareBlock();
         }
+    }
+    if (self.allow_AllPlaformAnalyse==YES) {
+        if (cell.shareType == JCShareTypeEnumWeChatSession) {
+            if (self.JCAllShareBlock) {
+                self.JCAllShareBlock(1);
+            }
+        }
+        if (cell.shareType == JCShareTypeEnumWeChatTimeLine) {
+            if (self.JCAllShareBlock) {
+                self.JCAllShareBlock(2);
+            }
+        }
+
+
     }
     if (cell.shareType == JCShareTypeEnumWeChatTimeLine||cell.shareType == JCShareTypeEnumWeChatSession) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"shareActivityToRefresh" object:nil];

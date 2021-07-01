@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UILabel *infoLab;//
 
+@property (nonatomic,strong) UILabel *buyTipLab;//
+
 @property (nonatomic,strong) UILabel *tipLab;//
 
 @property (nonatomic,strong) UIImageView *iconImageView;

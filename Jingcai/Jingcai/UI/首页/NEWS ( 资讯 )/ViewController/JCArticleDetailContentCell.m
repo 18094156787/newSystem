@@ -51,6 +51,16 @@
     [self.webView loadHTMLString:str baseURL:nil];
 }
 
+//开始加载
+-(void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
+
+
+    if ([webView.URL.absoluteString containsString:@"app_jump"]) {
+        [JCPageRedirectManager jumpVCWithRoute:webView.URL.absoluteString vc:[self getViewController]];
+    }
+      
+}
+
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     
     [webView evaluateJavaScript:@"document.body.scrollHeight" completionHandler:^(id _Nullable result,NSError *_Nullable error) {
@@ -66,7 +76,7 @@
         if (self.height==0) {
             self.infoLab.text = @"免责声明：鲸猜足球仅为信息发布平台，并不对第三方发布的信息真实性及准确性负责，且不提供彩票售卖服务，请您注意投资风险，理性购买！";
             if (self.JCRefreshBlock) {
-//                CGSize titleSize =   [self returnTextWidth:self.planDetailModel.subtitle size:CGSizeMake(SCREEN_WIDTH-AUTO(30), 1000) font:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)]];
+
                 self.height = scrollHeight;
                 self.loadSuccess = YES;
                 self.JCRefreshBlock(self.height);
@@ -78,6 +88,8 @@
 
     }];
 }
+
+
 
 - (void)addImgClickJS {
     

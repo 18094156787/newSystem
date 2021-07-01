@@ -16,6 +16,7 @@
 #import "JCActivityGuessVC.h"
 #import "JCActivityDetailCommomVC.h"
 #import "JCActivityKindVC.h"
+#import "JCActivityGuess_SPF_VC.h"
 @interface JCBaseViewController ()
 @property (nonatomic, strong) NSDictionary * originNavTitleAttributes;
 //@property (nonatomic, strong) UILabel * navTitleLabel;
@@ -337,6 +338,7 @@
     }
     
 
+
     JCActivityService *service = [JCActivityService new];
     [service getActivityPresentWithPosition:position actIDs:actIDs success:^(id  _Nullable object) {
         if ([JCWJsonTool isSuccessResponse:object]) {
@@ -429,6 +431,15 @@
             }
             if ([actModel.type integerValue]==5) {
                 JCActivityKindVC *vc = [JCActivityKindVC new];
+                vc.actID = actModel.id;
+                [viewController.navigationController pushViewController:vc animated:YES];
+
+                vc.JCCancelBlock = ^{
+                    [weakSelf showActivityViewWithVC:weakSelf];
+                };
+            }
+            if ([actModel.type integerValue]==6) {
+                JCActivityGuess_SPF_VC *vc = [JCActivityGuess_SPF_VC new];
                 vc.actID = actModel.id;
                 [viewController.navigationController pushViewController:vc animated:YES];
 

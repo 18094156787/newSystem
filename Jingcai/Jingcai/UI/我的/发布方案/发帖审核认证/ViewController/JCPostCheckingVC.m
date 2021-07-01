@@ -44,12 +44,12 @@
     
     
     UIImageView *imgView = [UIImageView new];
-    imgView.image = JCIMAGE(@"post_img-zzsh");
+    imgView.image = JCIMAGE(@"jc_contract_examine");
     [self.view addSubview:imgView];
     [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(AUTO(80));
         make.centerX.equalTo(self.view);
-        make.size.mas_equalTo(CGSizeMake(AUTO(66), AUTO(66)));
+        make.size.mas_equalTo(CGSizeMake(AUTO(180), AUTO(180)));
     }];
     
     UILabel *titleLab = [UILabel initWithTitle:@"您的申请正在审核中" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];

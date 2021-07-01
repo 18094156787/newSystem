@@ -60,7 +60,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 5;
 
 }
 
@@ -90,13 +90,16 @@
      if (indexPath.row==0) {
          cell.titleLab.text = @"隐私协议";
      }
-     if (indexPath.row==1) {
+    if (indexPath.row==1) {
+        cell.titleLab.text = @"用户服务条款";
+    }
+     if (indexPath.row==2) {
          cell.titleLab.text = @"推送设置";
      }
-     if (indexPath.row==2) {
+     if (indexPath.row==3) {
         cell.titleLab.text = @"进球提醒设置";
     }
-    if (indexPath.row==3) {
+    if (indexPath.row==4) {
        cell.titleLab.text = @"个人信息保护设置";
    }
     return cell;
@@ -110,12 +113,15 @@
         [self pushPrivacy];
     }
     if (indexPath.row==1) {
-        [self pushPushSetting];
+        [self pushServiceProtocol];
     }
     if (indexPath.row==2) {
-        [self pushEnterBallTip];
+        [self pushPushSetting];
     }
     if (indexPath.row==3) {
+        [self pushEnterBallTip];
+    }
+    if (indexPath.row==4) {
         [self.navigationController pushViewController:[JCAccountProtectVC new] animated:YES];
     }
 }
@@ -154,5 +160,13 @@
 }
 - (void)pushPrivacy {
     [self.navigationController pushViewController:[JCPrivacyVC new] animated:YES];
+}
+//服务协议
+- (void)pushServiceProtocol {
+    WebViewController *vc = [WebViewController new];
+    vc.titleStr = @"用户服务条款";
+    NSString *urlStr = [NSString  stringWithFormat:@"%@?dev=1",[JCConfigModel currentConfigModel].get_service];
+    vc.urlStr = NonNil(urlStr);
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

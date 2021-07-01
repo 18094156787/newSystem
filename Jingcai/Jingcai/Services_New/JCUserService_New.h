@@ -64,8 +64,9 @@ NS_ASSUME_NONNULL_BEGIN
  type 操作类型,1获取单个红包提现信息,2获取全部红包提现信息(红包id不必传),3提现单个现金红包,4提现全部现金红包(红包id不必传)
  id 提现的红包id
  ali_account 支付宝账号
+ name 支付宝姓名
  **/
-- (void)getHongbaoSubmitWithType:(NSString *)type hongbao_id:(NSString *)hongbao_id Email:(NSString *)email success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+- (void)getHongbaoSubmitWithType:(NSString *)type hongbao_id:(NSString *)hongbao_id Email:(NSString *)email name:(NSString *)name success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //购买记录
 //type 1是公众号方案,2是达人方案,3是ai方案,4是数据订阅
 - (void)getMyBuyPlanListWithType:(NSString *)type WithPage:(NSInteger)page DataSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;

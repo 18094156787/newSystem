@@ -10,6 +10,8 @@
 #import "JCRechargeBannerTextCell.h"
 #import "JCActivityDetailCommomVC.h"
 #import "JCActivityGuessVC.h"
+#import "JCActivityKindVC.h"
+#import "JCActivityGuess_SPF_VC.h"
 //#import <SDCycleScrollView.h>
 @implementation JCRechareBannerCell
 
@@ -62,6 +64,17 @@
     }
     if ([slide.type integerValue]==4) {
         JCActivityGuessVC *vc = [JCActivityGuessVC new];
+        vc.actID = slide.id;
+        [[self getViewController].navigationController pushViewController:vc animated:YES];
+    }
+
+    if ([slide.type integerValue]==5) {
+        JCActivityKindVC *vc = [JCActivityKindVC new];
+        vc.actID = slide.id;
+        [[self getViewController].navigationController pushViewController:vc animated:YES];
+    }
+    if ([slide.type integerValue]==6) {
+        JCActivityGuess_SPF_VC *vc = [JCActivityGuess_SPF_VC new];
         vc.actID = slide.id;
         [[self getViewController].navigationController pushViewController:vc animated:YES];
     }

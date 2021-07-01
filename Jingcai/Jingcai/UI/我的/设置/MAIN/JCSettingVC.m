@@ -7,8 +7,8 @@
 //
 
 #import "JCSettingVC.h"
-#import "JCSettingIconCell.h"
-#import "JCSettingTextCell.h"
+#import "JCAccountSettingIconCell.h"
+#import "JCAccountSettingTextCell.h"
 #import "JCSettingAvatarVC.h"
 #import "JCSettingNameVC.h"
 #import "JCSettingChangePwdVC.h"
@@ -36,7 +36,8 @@
     [super viewWillAppear:animated];
     self.navigationBarStyle = JCNavigationBarStyleDefault;
     [self hideNavShadow];
-    [_tableView reloadData];
+//    [_tableView reloadData];
+    [self getUserInfo];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -51,7 +52,31 @@
     [self initViews];
 
 }
+- (void)getUserInfo {
 
+    JCUserService_New *service = [JCUserService_New service];
+    [service getMyUserInfoWithSuccess:^(id  _Nullable object) {
+
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSString *token = [JCWUserBall currentUser].token;
+            NSLog(@"token=%@",token);
+            //缓存userBall对象
+            JCWUserBall *userBall = (JCWUserBall *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCWUserBall class]];
+//            userBall.fabu = @"1";
+            userBall.token = token;
+ 
+            [JCWUserBall save:userBall];
+            [self.tableView reloadData];
+
+        }else {
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+        
+    } failure:^(NSError * _Nonnull error) {
+
+    }];
+
+}
 
 - (void)initViews {
 
@@ -60,8 +85,8 @@
     headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(8));
     self.tableView.tableHeaderView = headView;
     _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0.0f,0.0f,_tableView.bounds.size.width,0.01f)];
-    [_tableView registerNib:[UINib nibWithNibName:@"JCSettingIconCell" bundle:nil] forCellReuseIdentifier:@"JCSettingIconCell"];
-    [_tableView registerNib:[UINib nibWithNibName:@"JCSettingTextCell" bundle:nil] forCellReuseIdentifier:@"JCSettingTextCell"];
+    [_tableView registerClass:[JCAccountSettingIconCell class] forCellReuseIdentifier:@"JCAccountSettingIconCell"];
+    [_tableView registerClass:[JCAccountSettingTextCell class] forCellReuseIdentifier:@"JCAccountSettingTextCell"];
 
     UIView *footView = [UIView new];
     footView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(56));
@@ -97,57 +122,9 @@
     } failure:^(NSError * _Nonnull error) {
         
     }];
-//    [service logoutSuccess:^(id  _Nullable object) {
-//
-//        [JCWToastTool showHint:@"账号已退出"];
-//        [JCWUserBall logOut];
-//        [weakSelf.navigationController popViewControllerAnimated:YES];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationUserLogout object:nil];
-//        return ;
-//    } failure:^(NSError * _Nonnull error) {
-//        [JCWToastTool showHint:@"账号已退出"];
-//        [JCWUserBall logOut];
-//        [weakSelf.navigationController popViewControllerAnimated:YES];
-//        return ;
-//    }];
+
 }
-//- (void)loginBtnClick {
-//    if (![JCWStringTool isValidateMobile:self.phoneTF.text]) {
-//         [JCWToastTool showHint:@"手机号码有误，请重填"];
-//         return ;
-//     }
-//     if ([JCWStringTool isEmptyStr:self.psdTF.text]) {
-//         [JCWToastTool showHint:@"请填写密码"];
-//         return ;
-//     }
-//    if (!self.agreeBtn.selected) {
-//         [JCWToastTool showHint:@"请阅读“服务协议”并点击同意"];
-//         return ;
-//     }
-//    [self.jcWindow showLoading];
-//    JCUserService_New *service = [JCUserService_New service];
-//     [service loginWithTel:self.phoneTF.text pass:self.psdTF.text success:^(id  _Nullable object) {
-//         [self.jcWindow endLoading];
-//         if ([JCWJsonTool isSuccessResponse:object]) {
-//             [JCWToastTool showHint:@"登录成功"];
-//             //缓存userBall对象
-//             JCWUserBall *userBall = (JCWUserBall *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCWUserBall class]];
-//             [JCWUserBall save:userBall];
-////             [self.navigationController popViewControllerAnimated:YES];
-////             NSLog(@"user_id == %@",[JCWUserBall currentUser].user_id);
-////             [[NSNotificationCenter defaultCenter] postNotificationName:NotificationUserLogin object:nil];
-////             [MobClick profileSignInWithPUID:[JCWUserBall currentUser].user_id];
-//             if (userBall.token.length>0) {
-//                 [self getUserInfo];
-//             }
-//             return ;
-//         }
-//         [JCWToastTool showHint:object[@"msg"]];
-//     } failure:^(NSError * _Nonnull error) {
-//         [self.jcWindow endLoading];
-////         [JCWToastTool showHint:@"登录失败"];
-//     }];
-//}
+
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -182,15 +159,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JCWUserBall * user = [JCWUserBall currentUser];
     if (indexPath.section == 0 && indexPath.row == 0) {
-        JCSettingIconCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCSettingIconCell"];
+        JCAccountSettingIconCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCAccountSettingIconCell"];
         cell.leftTitle = @"头像";
-        cell.iconImageUrl = user.user_img;
+        cell.iconImageUrl = [user.can_change_avatar integerValue]==2?user.audit_user_img:user.user_img;
+        cell.isCheck = [user.can_change_avatar integerValue]==2?YES:NO;
         return cell;
     }
-    JCSettingTextCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCSettingTextCell"];
+    JCAccountSettingTextCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCAccountSettingTextCell"];
+    cell.isCheck = NO;
     if (indexPath.section == 0 && indexPath.row == 1) {
+        cell.isCheck = [user.can_change_nickname integerValue]==2?YES:NO;
         cell.leftTitle = @"昵称";
-        cell.rightTitle = user.user_name;
+        cell.rightTitle = [user.can_change_nickname integerValue]==2?user.audit_user_name:user.user_name;
+        
     }
     if (indexPath.section == 0 && indexPath.row == 2) {
         cell.leftTitle = @"手机";
@@ -219,7 +200,10 @@
     }
     if (indexPath.section == 0 && indexPath.row == 5) {
         cell.leftTitle = @"个人简介";
-        cell.rightTitle = [JCWUserBall currentUser].desc;
+       
+        cell.rightTitle = @"";
+        cell.isCheck = [user.can_change_introduction integerValue]==2?YES:NO;
+
         if ([[JCWUserBall currentUser].tuijian intValue]!=1) {
             cell.leftTitle = @"";
             cell.rightTitle = @"";

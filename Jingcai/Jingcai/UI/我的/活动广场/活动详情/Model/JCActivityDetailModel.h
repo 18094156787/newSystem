@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *text_can_click;//获取文字是否可以点击 1是 2否
 
-@property (nonatomic,assign) NSInteger is_guess;//是否猜中 1是 2否
+@property (nonatomic,assign) NSInteger is_guess;//是否猜中 1是 2否 3未开奖  4取消 默认3
 
 @property (nonatomic,strong) NSString *recharge_information;//文本
 
@@ -96,11 +96,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) JCShareModel *wechat_share;
 
+@property (nonatomic,strong) NSString *participation;//活动参与人数
+
 @property (strong, nonatomic)  NSArray <JCActivityGoodsModel *> *goods_info;
 
 @property (strong, nonatomic)  NSArray <JCActivityOptionModel *> *activity_option;//竞猜活动选项
 
 @property (strong, nonatomic)  NSArray <JCActivityGoodsModel *> *goods_popover_info;//充值活动奖品弹窗
+
+#pragma mark 竞猜胜平负活动专属
+
+@property (strong, nonatomic) JCMatchBall *get_match_info;
+
+
 
 #pragma mark 慈善活动专属
 
@@ -122,8 +130,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSString *stage_grade;//满足条件弹层的积分值
 
 @property (strong, nonatomic)  NSArray <JCActivityGoodsModel *> *stage_info;//阶段奖励
-
-
 
 @property (nonatomic,strong) NSString *is_popup;//海报是否弹出 1不弹 2弹出
 

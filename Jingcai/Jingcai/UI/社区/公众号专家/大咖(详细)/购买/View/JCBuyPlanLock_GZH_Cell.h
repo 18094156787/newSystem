@@ -38,7 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UILabel *countLab;//购买人数
 
-@property (nonatomic,strong) UILabel *infoLab;
+@property (nonatomic,strong) UILabel *buyTipLab;//购买提示
+
+@property (nonatomic,strong) UILabel *yushouLab;//预售
+
+@property (nonatomic,strong) UILabel *infoLab;//不中返还或者不中补单
 
 @property (nonatomic,strong) UIImageView *iconImageView;
 

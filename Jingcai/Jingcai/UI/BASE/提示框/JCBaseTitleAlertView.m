@@ -39,9 +39,16 @@
     
         [self.bgView addSubview:self.titleLab];
         [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.offset(AUTO(25));
+            make.top.offset(AUTO(15));
             make.left.offset(AUTO(30));
             make.right.offset(AUTO(-30));
+        }];
+    
+        [self.bgView addSubview:self.lineView];
+        [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self.bgView);
+            make.height.mas_equalTo(0.5);
+            make.top.equalTo(self.titleLab.mas_bottom).offset(AUTO(15));
         }];
 
         
@@ -129,8 +136,8 @@
             }else{
                 make.top.offset(AUTO(35));
             }
-            make.left.offset(AUTO(30));
-            make.right.offset(AUTO(-30));
+            make.left.offset(AUTO(20));
+            make.right.offset(AUTO(-20));
             make.height.mas_greaterThanOrEqualTo(AUTO(60));
         }];
     

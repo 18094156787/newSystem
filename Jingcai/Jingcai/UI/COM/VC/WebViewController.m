@@ -168,21 +168,21 @@
 -(void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     //开始加载的时候，让加载进度条显示
     self.progressView.hidden = NO;
-    if ([webView.URL.absoluteString isEqualToString:@"https://m.jingcai.com/predict/index?app=mine_guess"]) {
-            for (UIViewController *vc in self.navigationController.viewControllers) {
-            if ([vc isKindOfClass:[JCYCHomeWMStickVC class]]) {
-                [self.navigationController popToViewController:vc animated:YES];
-                return ;
-            }
-        }
-         JCMainTabBarController *tabbar =  (JCMainTabBarController *)[UIApplication sharedApplication].delegate.window.rootViewController;
-        tabbar.tabSelIndex = 2;
-    }
-
-    if ([webView.URL.absoluteString containsString:@"wap.jingcai.com"]) {
+    NSLog(@"%@",webView.URL.absoluteString);
+    
+    if ([webView.URL.absoluteString hasPrefix:@"https://wap.jingcai.com"]||[webView.URL.absoluteString hasPrefix:@"http://wap.jingcai.com"]||[webView.URL.absoluteString hasPrefix:@"https://www.jingcai.com"]||[webView.URL.absoluteString hasPrefix:@"http://www.jingcai.com"]) {
         [self.navigationController popViewControllerAnimated:YES];
     }
-      NSLog(@"%@",webView.URL.absoluteString);
+
+//    if ([webView.URL.absoluteString containsString:@"app_jump"]) {
+//        [JCPageRedirectManager jumpVCWithRoute:webView.URL.absoluteString vc:self];
+//    }else{
+//        if ([webView.URL.absoluteString containsString:@"wap.jingcai.com"]) {
+//            [self.navigationController popViewControllerAnimated:YES];
+//        }
+//
+//    }
+      
 }
 
 //内容返回时调用
@@ -198,13 +198,18 @@
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     // 如果不添加这个，那么wkwebview跳转不了AppStore
     NSLog(@"%@",webView.URL.absoluteString);
-    if ([webView.URL.absoluteString hasPrefix:@"https://itunes.apple.com"]) {
-        [[UIApplication sharedApplication] openURL:navigationAction.request.URL options:@{} completionHandler:nil];
+    
+
+    if ([webView.URL.absoluteString containsString:@"app_jump"]) {
         decisionHandler(WKNavigationActionPolicyCancel);
+        [self.progressView setProgress:0 animated:NO];
+        [JCPageRedirectManager jumpVCWithRoute:webView.URL.absoluteString vc:self];
+       
     }
     else  {
         decisionHandler(WKNavigationActionPolicyAllow);
     }
+
 }
 
 // 内容加载失败时候调用

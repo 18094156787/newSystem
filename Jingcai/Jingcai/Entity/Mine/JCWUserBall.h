@@ -78,7 +78,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString  *bankcard_number;//银行卡
 
-@property (strong, nonatomic) NSString  *fabu;//是否可以发布方案 0 不能发布 1 可以发布 2被禁 3审核中 4审核被拒
+@property (strong, nonatomic) NSString  *fabu;//是否可以发布方案 0 不能发布,需要申请 1 可以发布 2被禁 3审核中 4审核被拒 5审核被退回
+
+@property (strong, nonatomic) NSString  *remaining_times;//剩余可修改次数 fabu 等于5 时 用到
+
+@property (strong, nonatomic) NSString  *fail_desc;//退回或拒绝理由
 
 @property (strong, nonatomic) NSString  *remaining_double;//本月发布单场双选付费 剩余 次数
 
@@ -90,9 +94,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString  *can_change_introduction;//是否可以修改简介 1是 2审核中 3本月已修改 4禁止修改
 
+@property (strong, nonatomic) NSString  *audit_user_img;//审核中的头像
+
+@property (strong, nonatomic) NSString  *audit_user_name;//审核中的姓名
+
+@property (strong, nonatomic) NSString  *audit_desc;//审核中的简介
+
 @property (strong, nonatomic) NSString  *guess_activity_id;//竞猜活动弹窗id
 
 @property (strong, nonatomic) NSString  *guess_activity_text;//竞猜活动弹窗文本
+
+@property (strong, nonatomic) NSString  *guess_activity_type;//竞猜活动类型 4是通用 6是胜平负类型的竞猜
 
 
 

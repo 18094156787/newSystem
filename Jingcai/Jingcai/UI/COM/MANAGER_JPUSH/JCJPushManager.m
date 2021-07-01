@@ -34,16 +34,21 @@
 //        //如果开发设置没有打开,就不要设置别名
 //        return;
 //    }
-    [JPUSHService setAlias:self.aliasName completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
-        if (show) {
-            [SVProgressHUD dismiss];
-        }
-        if (iResCode == 0 && completion) {
-            completion(YES);
-            return ;
-        }
-        completion(NO);
-    } seq:1];
+    if (self.aliasName.length>0) {
+        [JPUSHService setAlias:self.aliasName completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            if (show) {
+                [SVProgressHUD dismiss];
+            }
+            if (iResCode == 0 && completion) {
+                completion(YES);
+                return ;
+            }
+            completion(NO);
+        } seq:1];
+    }
+
+    
+
 }
 - (void)deleteAliasShowHUD:(BOOL)show completion:(void (^)(BOOL))completion {
     if (show) {

@@ -65,22 +65,7 @@
     cell.swichBlock = ^(BOOL isOn, JCPushSettingCell *pushSettingCell) {
 //        //加载动画
         [pushSettingCell showLoading];
-//        JCWSettingBall * settingBall = [JCWSettingBall currentSetting];
-//        if (isOn) { //打开了推送
-//            [[JCJPushManager sharedManager] setAliasShowHUD:NO completion:^(BOOL succeed) {
-//                [pushSettingCell hideLoading];
-//                settingBall.isCustomPushOn = succeed;
-//                [JCWSettingBall save:settingBall];
-//                [weakSelf.tableView reloadData];
-//            }];
-//        } else { //关闭了推送
-//            [[JCJPushManager sharedManager] deleteAliasShowHUD:NO completion:^(BOOL succeed) {
-//                [pushSettingCell hideLoading];
-//                settingBall.isCustomPushOn = !succeed;
-//                [JCWSettingBall save:settingBall];
-//                [weakSelf.tableView reloadData];
-//            }];
-//        }
+
         JCUserService_New *service = [JCUserService_New new];
         [service openPushWithSuccess:^(id  _Nullable object) {
             [pushSettingCell hideLoading];

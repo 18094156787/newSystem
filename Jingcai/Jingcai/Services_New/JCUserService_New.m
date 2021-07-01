@@ -371,7 +371,7 @@
  id 提现的红包id
  ali_account 支付宝账号
  **/
-- (void)getHongbaoSubmitWithType:(NSString *)type hongbao_id:(NSString *)hongbao_id Email:(NSString *)email success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+- (void)getHongbaoSubmitWithType:(NSString *)type hongbao_id:(NSString *)hongbao_id Email:(NSString *)email name:(NSString *)name success:(successBlock)successBlock failure:(failureBlock)failureBlock {
 //    NSDictionary *param = @{
 //        @"type":type,
 //        @"id":hongbao_id,
@@ -382,6 +382,9 @@
     }
     if (email.length>0) {
         [param setValue:email forKey:@"ali_account"];
+    }
+    if (name.length>0) {
+        [param setValue:name forKey:@"name"];
     }
     NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"cash_withdraw" paramDic:param ignoreArray:@[]];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];

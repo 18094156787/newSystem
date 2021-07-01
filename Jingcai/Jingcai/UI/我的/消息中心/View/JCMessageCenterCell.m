@@ -75,11 +75,14 @@
     
     if (model.error.length>0) {
         self.reasonLab.text = model.error;
-        if ([model.type integerValue]==1||[model.type integerValue]==2||[model.type integerValue]==10) {
+        if ([model.type integerValue]==2||[model.type integerValue]==10) {
             self.reasonLab.text = [NSString stringWithFormat:@"拒绝理由: %@",model.error];
         }
         if ([model.type_class integerValue]==2) {
             self.reasonLab.text = [NSString stringWithFormat:@"禁用理由: %@",model.error];
+        }
+        if ([model.type integerValue]==1) {
+            self.reasonLab.text = @"";
         }
         
     }else {
@@ -100,7 +103,8 @@
         [self.sureLab mas_updateConstraints:^(MASConstraintMaker *make) {
             make.bottom.offset(AUTO(-10));
         }];
-    }else if (([model.type_class integerValue]==9)) {
+    }
+    else if (([model.type_class integerValue]==9)) {
         self.sureLab.text= @"去查看";
         [self.sureLab mas_updateConstraints:^(MASConstraintMaker *make) {
             make.bottom.offset(AUTO(-10));
@@ -109,6 +113,9 @@
     else{
         if (model.error.length>0&&[model.status integerValue]!=3) {
              self.sureLab.text= @"前往修改";
+            if ([model.type integerValue]==1) {
+                self.sureLab.text= @"前往查看";
+            }
             [self.sureLab mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.bottom.offset(AUTO(-10));
             }];
@@ -118,10 +125,22 @@
             }];
         }
     }
+    if (([model.type_class integerValue]==8&&[model.status integerValue]!=3)) {
+       self.sureLab.text= @"前往查看";
+       [self.sureLab mas_updateConstraints:^(MASConstraintMaker *make) {
+           make.bottom.offset(AUTO(-10));
+       }];
+   }
     
     
     if (([model.type integerValue]>=12&&[model.type integerValue]<=15&&[model.status integerValue]!=3)) {
        self.sureLab.text= @"前往活动";
+       [self.sureLab mas_updateConstraints:^(MASConstraintMaker *make) {
+           make.bottom.offset(AUTO(-10));
+       }];
+   }
+    if (([model.type_class integerValue]==17&&[model.status integerValue]!=3)) {
+       self.sureLab.text= @"前往查看";
        [self.sureLab mas_updateConstraints:^(MASConstraintMaker *make) {
            make.bottom.offset(AUTO(-10));
        }];

@@ -18,6 +18,9 @@
 #import "JCActivityDetailCommomVC.h"
 #import "JCActivityGuessVC.h"
 #import "JCActivityKindVC.h"
+#import "JCActivityGuess_SPF_VC.h"
+#import "JCYCHongBaoWMVC.h"
+#import "JCPostCheckFailVC.h"
 @interface JCMessageCenterVC ()
 
 @end
@@ -114,11 +117,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     JCMeaasgeModel *model = self.dataArray[indexPath.row];
+
     if ([model.type intValue]==1) {
         //type=1是申请专家认证
         if (model.error.length>0&&[model.status integerValue]!=3) {
-            JCPostCheckUserInfoVC *vc = [JCPostCheckUserInfoVC new];
-            vc.applyID = model.other_id;
+            JCPostCheckFailVC *vc = [JCPostCheckFailVC new];
+            vc.fabu = [JCWUserBall currentUser].fabu;
             [self.navigationController pushViewController:vc animated:YES];
         }
 
@@ -161,14 +165,28 @@
         vc.actID = model.other_id;
         [self.navigationController pushViewController:vc animated:YES];
     }
+    if ([model.type intValue]==18&&[model.status integerValue]!=3) {
+        JCActivityGuess_SPF_VC *vc = [JCActivityGuess_SPF_VC new];
+        vc.actID = model.other_id;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 
-    if ([model.type integerValue]==4) {
+    if ([model.type integerValue]==14) {
         JCActivityGuessVC *vc = [JCActivityGuessVC new];
         vc.actID = model.id;
         [self.navigationController pushViewController:vc animated:YES];
     }
     if ([model.type_class intValue]==4){
         [self.navigationController pushViewController:[JCMineIncomeWMStickyVC new] animated:YES];
+    }
+    if ([model.type_class intValue]==8&&[model.status integerValue]!=3) {
+        [self.navigationController pushViewController:[JCMineIncomeWMStickyVC new] animated:YES];
+    }
+
+    if ([model.type_class intValue]==17&&[model.status integerValue]!=3){
+        JCYCHongBaoWMVC *vc = [JCYCHongBaoWMVC new];
+        vc.selectIndex = 1;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
 }

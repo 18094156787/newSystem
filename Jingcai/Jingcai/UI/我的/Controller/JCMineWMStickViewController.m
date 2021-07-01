@@ -17,6 +17,8 @@
 #import "JCActivityGuessVC.h"
 #import "JCAppGuideView.h"
 #import "JCMainTabBarController.h"
+#import "JCActivityGuess_SPF_VC.h"
+
 static CGFloat const kWMMenuViewHeight = 0;
 @interface JCMineWMStickViewController ()
 
@@ -125,6 +127,7 @@ static CGFloat const kWMMenuViewHeight = 0;
             JCWUserBall *userBall = (JCWUserBall *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCWUserBall class]];
 //            userBall.fabu = @"1";
             userBall.token = token;
+ 
             [JCWUserBall save:userBall];
             self.topHeadView.userBall = userBall;
 
@@ -256,14 +259,16 @@ static CGFloat const kWMMenuViewHeight = 0;
         return;
     }
    JCWUserBall *user =  [JCWUserBall currentUser];
-    
+//    user.fabu = @"3";
+    [JCWUserBall save:user];
 //fabu 0 不能发布 1 可以发布  2被禁  3审核中 4审核被拒
+
 //
-    if ([[JCWUserBall currentUser].fabu intValue]==4) {
-            JCPostCheckFailVC *vc = [JCPostCheckFailVC new];
-    //        vc.isJingcai = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-             return;
+    if ([[JCWUserBall currentUser].fabu intValue]==4||[[JCWUserBall currentUser].fabu intValue]==5) {
+        JCPostCheckFailVC *vc = [JCPostCheckFailVC new];
+        vc.fabu = [JCWUserBall currentUser].fabu;
+        [self.navigationController pushViewController:vc animated:YES];
+         return;
         }
     if ([[JCWUserBall currentUser].fabu intValue]==3) {
         [self.navigationController pushViewController:[JCPostCheckingVC new] animated:YES];
@@ -281,7 +286,6 @@ static CGFloat const kWMMenuViewHeight = 0;
         if ([[JCWUserBall currentUser].fabu intValue]==0) {
 
             JCPostCheckRuleVC *vc = [JCPostCheckRuleVC new];
-
             [self.navigationController pushViewController:vc animated:YES];
             return;
         }
@@ -324,9 +328,21 @@ static CGFloat const kWMMenuViewHeight = 0;
 
         JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
         alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(16)];
-        [alertView alertTitle:@"" TitleColor:COLOR_2F2F2F Mesasge:[JCWUserBall currentUser].guess_activity_text MessageColor:COLOR_666666 SureTitle:@"前往查看" SureColor:JCWhiteColor SureHandler:^{        JCActivityGuessVC *vc = [JCActivityGuessVC new];
-            vc.actID = [JCWUserBall currentUser].guess_activity_id;
-            [self.navigationController pushViewController:vc animated:YES];
+        [alertView alertTitle:@"" TitleColor:COLOR_2F2F2F Mesasge:[JCWUserBall currentUser].guess_activity_text MessageColor:COLOR_666666 SureTitle:@"前往查看" SureColor:JCWhiteColor SureHandler:^{
+
+#pragma mark--这边
+//
+            NSLog(@"%@",[JCWUserBall currentUser].guess_activity_id);
+            if ([[JCWUserBall currentUser].guess_activity_type integerValue]==6) {
+                JCActivityGuess_SPF_VC *vc = [JCActivityGuess_SPF_VC new];
+                vc.actID = [JCWUserBall currentUser].guess_activity_id;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else{
+                JCActivityGuessVC *vc = [JCActivityGuessVC new];
+                vc.actID = [JCWUserBall currentUser].guess_activity_id;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+
             [alertView removeFromSuperview];
         } CancleTitle:@"我知道了" CancleColor:JCBaseColor CancelHandler:^{
            [alertView removeFromSuperview];

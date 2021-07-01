@@ -49,6 +49,16 @@
     }];
 }
 
+- (void)setHaveTime:(BOOL)haveTime {
+    _haveTime = haveTime;
+    self.titleLab.text = @"活动时间&规则";
+    [self.timeBgView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(151, 16));
+    }];
+
+    
+}
+
 - (void)setDetailModel:(JCActivityDetailModel *)detailModel {
     _detailModel = detailModel;
 //    [self.webView loadHTMLString:detailModel.rule baseURL:nil];
@@ -95,6 +105,33 @@
 
     }];
 }
+
+//开始加载
+-(void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
+
+
+    if ([webView.URL.absoluteString containsString:@"app_jump"]) {
+        [JCPageRedirectManager jumpVCWithRoute:webView.URL.absoluteString vc:[self getViewController]];
+    }
+      
+}
+
+//服务器开始请求的时候调用
+//- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+//    // 如果不添加这个，那么wkwebview跳转不了AppStore
+//
+//    if ([webView.URL.absoluteString containsString:@"app_jump"]) {
+//        [JCPageRedirectManager jumpVCWithRoute:webView.URL.absoluteString vc:[self getViewController]];
+//
+//
+//        
+//
+//        decisionHandler(WKNavigationActionPolicyCancel);
+//    }
+//    else  {
+//        decisionHandler(WKNavigationActionPolicyAllow);
+//    }
+//}
 
 - (void)setKindImageView:(UIImage *)kindImageView {
     _kindImageView = kindImageView;

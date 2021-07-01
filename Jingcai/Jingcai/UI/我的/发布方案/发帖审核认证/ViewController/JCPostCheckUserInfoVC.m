@@ -97,7 +97,7 @@
 
 - (void)getMyApplyDetail {
     
-    if (self.applyID.length==0) {
+    if ([[JCWUserBall currentUser].fabu integerValue]!=5) {
         return;
     }
     [SVProgressHUD show];
@@ -133,37 +133,6 @@
     } failure:^(NSError * _Nonnull error) {
         [SVProgressHUD dismiss];
     }];
-    
-//    [service getExpertAuthorizationInfoWithID:self.applyID Success:^(id  _Nullable object) {
-//        [SVProgressHUD dismiss];
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            self.checkDetailModel = (JCMyPostCheckDetailModel *)[JCWJsonTool entityWithJson:object[@"data"][@"user_contract"] class:[JCMyPostCheckDetailModel class]];
-//            self.name = self.checkDetailModel.name;
-//            self.name_isRight =([self isChineseCharacter:self.name]&&self.name.length>1&&self.name.length<=8);
-//            self.phone = self.checkDetailModel.phone;
-//            self.phone_isRight = ([self isDigitWithStr:self.phone]&&self.phone.length==11);
-//            self.idcard = self.checkDetailModel.idcard;
-//            self.idcard_isRight =([self judgeIdentityStringValid:self.idcard]&&self.idcard.length==18);
-//            self.account = self.checkDetailModel.account;
-//            self.account_isRight = self.account.length>=30;
-//
-//            [self.headImgView sd_setImageWithURL:[NSURL URLWithString:self.checkDetailModel.idcard_image_url] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-//                self.iDCarCell.errorInfoView.hidden = YES;
-//                self.headImg = image;
-//                self.deleteBtn.hidden = NO;
-//                [self.tableView reloadData];
-//            }];
-//
-//
-//            [self configData];
-//            [self.tableView reloadData];
-//
-//        }else{
-//             [JCWToastTool showHint:object[@"msg"]];
-//        }
-//    } failure:^(NSError * _Nonnull error) {
-//        [SVProgressHUD dismiss];
-//    }];
 
 }
 
@@ -414,11 +383,8 @@
 
 //判断是否纯中文
 - (BOOL)isChineseCharacter:(NSString*)source {
-
     NSString *regex = @"^[\\u4E00-\\u9FEA]+$";
-
     return ([source rangeOfString:regex options:NSRegularExpressionSearch].length>0);
-
 }
 //判断纯数字
 - (BOOL)isDigitWithStr:(NSString *)str {

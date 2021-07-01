@@ -95,14 +95,19 @@
     [attr addAttributes:@{NSForegroundColorAttributeName: JCBaseColor} range:range];
     tipLab.attributedText = attr;
 
-
+    [self.topBgView addSubview:self.buyTipLab];
+    [self.buyTipLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(15));
+        make.right.offset(AUTO(-15));
+        make.top.equalTo(tipLab.mas_bottom).offset(AUTO(5));
+    }];
 
     
     [self.topBgView addSubview:self.tipLab];
     [self.tipLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
-        make.top.equalTo(tipLab.mas_bottom).offset(AUTO(10));
+        make.top.equalTo(self.buyTipLab.mas_bottom).offset(AUTO(5));
     }];
     
     UILabel *infoLab = [UILabel initWithTitle:@"免责声明：鲸猜足球仅为信息发布平台，并不对第三方发布的信息真实性及准确性负责，且不提供彩票售卖服务，请您注意投资风险，理性购买！" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];//友情提示：文章内容不代表平台观点！关于文章有疑问请联系我们。务必谨防诈骗，避免财产损失。
@@ -111,7 +116,7 @@
     [infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
-        make.top.equalTo(self.tipLab.mas_bottom).offset(AUTO(15));
+        make.top.equalTo(self.tipLab.mas_bottom).offset(AUTO(56));
         make.bottom.offset(0);
     }];
     self.infoLab = infoLab;
@@ -241,7 +246,8 @@
     self.priceLab.text = tjInfoDetailBall.sf;
     
     if (tjInfoDetailBall.refund.length>0) {
-        self.tipLab.text = @"购买须知：\n不中返还：在比赛分析结果预测不正确的情况下将全额退款购买预测方案的费用。退款的路径一般是在24小时内原路径返还（如遇节假日则顺延）";
+        self.buyTipLab.text = @"购买须知：";
+        self.tipLab.text = @"不中返还：在比赛分析结果预测不正确的情况下将全额退款购买预测方案的费用。退款的路径一般是在24小时内原路径返还（如遇节假日则顺延）";
     }else{
 //        [self.tipLab mas_updateConstraints:^(MASConstraintMaker *make) {
 //            make.top.equalTo(self.infoLab.mas_bottom).offset(0);
@@ -327,6 +333,13 @@
         _bzfhImageView.hidden = YES;
     }
     return _bzfhImageView;
+}
+
+- (UILabel *)buyTipLab {
+    if (!_buyTipLab) {
+        _buyTipLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
+    }
+    return _buyTipLab;
 }
 
 - (UILabel *)tipLab {

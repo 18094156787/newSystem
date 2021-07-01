@@ -58,6 +58,7 @@ static CGFloat const kWMMenuViewHeight = 44;
     [super viewWillAppear:animated];
      self.navigationBarStyle = JCNavigationBarStyleTransparent;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    [self getUserInfo];
     
     
 //    [self hideNavShadow];
@@ -410,11 +411,11 @@ static CGFloat const kWMMenuViewHeight = 44;
     
 //fabu 0 不能发布 1 可以发布  2被禁  3审核中 4审核被拒
 //
-        if ([[JCWUserBall currentUser].fabu intValue]==4) {
-            JCPostCheckFailVC *vc = [JCPostCheckFailVC new];
-    //        vc.isJingcai = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-             return;
+    if ([[JCWUserBall currentUser].fabu intValue]==4||[[JCWUserBall currentUser].fabu intValue]==5) {
+        JCPostCheckFailVC *vc = [JCPostCheckFailVC new];
+        vc.fabu = [JCWUserBall currentUser].fabu;
+        [self.navigationController pushViewController:vc animated:YES];
+         return;
         }
     if ([[JCWUserBall currentUser].fabu intValue]==3) {
         [self.navigationController pushViewController:[JCPostCheckingVC new] animated:YES];
@@ -471,6 +472,36 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 }
 
+#pragma mark 网络请求
+- (void)getUserInfo {
+    if ( [JCWUserBall currentUser].token.length==0) {
+        return;
+    }
+
+    JCUserService_New *service = [JCUserService_New service];
+    [service getMyUserInfoWithSuccess:^(id  _Nullable object) {
+
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSString *token = [JCWUserBall currentUser].token;
+            NSLog(@"token=%@",token);
+            //缓存userBall对象
+            JCWUserBall *userBall = (JCWUserBall *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCWUserBall class]];
+//            userBall.fabu = @"1";
+            userBall.token = token;
+            [JCWUserBall save:userBall];
+            NSLog(@"user_id == %@",[JCWUserBall currentUser].user_id);
+            NSLog(@"user_token == %@",[JCWUserBall currentUser].token);
+
+        }else {
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+        
+    } failure:^(NSError * _Nonnull error) {
+        [JCWToastTool showHint:@"获取用户信息失败"];
+    }];
+
+}
+
 - (void)addCornerWithView:(UIView *)aView type:(UIRectCorner)aCorners size:(CGSize)aSize
 {
     // 根据矩形画带圆角的曲线
@@ -505,8 +536,6 @@ static CGFloat const kWMMenuViewHeight = 44;
     }else{
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     }
-
-
     NSLog(@"%.2f",percent);
 }
 

@@ -285,8 +285,10 @@
     tabbar.selectedIndex = 0;
     WeakSelf;
     tabbar.btnClickBlock = ^(NSInteger index) {
-        if (index < self.showVCArray.count) {
-            weakSelf.viewControllers = @[self.showVCArray[index]];
+
+        weakSelf.currentIndex = index;
+        if (index < weakSelf.showVCArray.count) {
+            weakSelf.viewControllers = @[weakSelf.showVCArray[index]];
 
         }
     };
@@ -501,7 +503,7 @@
     }
 //    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationUserLogout object:nil];
     //跳转登录页
-    JCBaseNavigationController * nav = self.showVCArray[self.tabSelIndex];;
+    JCBaseNavigationController * nav = self.showVCArray[self.currentIndex];
 //    (JCBaseNavigationController *)self.selectedViewController;
     JCBaseViewController * vc = [nav.viewControllers lastObject];
     NSLog(@"所有=%@",nav.viewControllers);

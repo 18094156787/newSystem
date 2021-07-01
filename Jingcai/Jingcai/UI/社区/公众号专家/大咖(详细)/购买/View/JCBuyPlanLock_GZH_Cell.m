@@ -84,20 +84,39 @@
     tipLab.numberOfLines = 0;
     [self.topBgView addSubview:tipLab];
     
+    
     [tipLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView);
         make.top.equalTo(self.endTimeLab.mas_bottom).offset(AUTO(10));
     }];
+    NSString *tipStr = @"*本文章为比赛分析，仅作参考使用，请理性购买\n非购彩、非合买、非跟单！";
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:tipStr];
+    NSRange range = [tipStr rangeOfString:@"非购彩、非合买、非跟单！"];
+    [attr addAttributes:@{NSForegroundColorAttributeName: JCBaseColor} range:range];
+    tipLab.attributedText = attr;
     
+    [self.topBgView addSubview:self.buyTipLab];
+    [self.buyTipLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(15));
+        make.right.offset(AUTO(-15));
+        make.top.equalTo(tipLab.mas_bottom).offset(AUTO(10));
+    }];
+    
+    [self.topBgView addSubview:self.yushouLab];
+    [self.yushouLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(15));
+        make.right.offset(AUTO(-15));
+        make.top.equalTo(self.buyTipLab.mas_bottom).offset(AUTO(5));
+//        make.bottom.offset(AUTO(0));
+    }];
     
     [self.topBgView addSubview:self.infoLab];
     [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
-        make.top.equalTo(tipLab.mas_bottom).offset(AUTO(10));
+        make.top.equalTo(self.yushouLab.mas_bottom).offset(AUTO(5));
         make.bottom.offset(AUTO(0));
     }];
-    
 
 
 
@@ -194,25 +213,39 @@
     }
         self.endTimeLab.text = [NSString stringWithFormat:@"%@ 截止购买",[NSDate wholeTimeStringToMinuteWithInterval:[payInfoModel.end_time longLongValue]]];
     self.infoLab.text = @"";
+    self.buyTipLab.text = @"";
     if ([payInfoModel.pre_sale integerValue]==1) {
         //预售
-        self.infoLab.text = @"购买须知：\n预售方案：方案当前暂无具体的比赛分析内容，但是会在某个时间进行更新，购买后请注意即时查看方案内容以及提示。";
+        self.buyTipLab.text = @"购买须知：";
+        self.yushouLab.text = @"预售方案：方案当前暂无具体的比赛分析内容，但是会在某个时间进行更新，购买后请注意即时查看方案内容以及提示。";
     }
     if ([payInfoModel.refund integerValue]==1) {
         //不中返还
-        self.infoLab.text = @"购买须知：\n不中返还：在比赛分析结果预测不正确的情况下将全额退款购买预测方案的费用。退款的路径一般是在24小时内原路径返还（如遇节假日则顺延）";
+        self.buyTipLab.text = @"购买须知：";
+        self.yushouLab.text = @"不中返还：在比赛分析结果预测不正确的情况下将全额退款购买预测方案的费用。退款的路径一般是在24小时内原路径返还（如遇节假日则顺延）";
     }
     if ([payInfoModel.refund integerValue]==2) {
         //不中补单
-        self.infoLab.text = @"不中补单：在比赛分析结果预测不正确的情况下将会有新的方案免费补单给购买的用户。可以在购买记录中进行查看。查看具有【补】字的方案，即为补单的方案。";
+        self.buyTipLab.text = @"购买须知：";
+        self.yushouLab.text = @"不中补单：在比赛分析结果预测不正确的情况下将会有新的方案免费补单给购买的用户。可以在购买记录中进行查看。查看具有【补】字的方案，即为补单的方案。";
     }
     if ([payInfoModel.pre_sale integerValue]==1&&[payInfoModel.refund integerValue]==1) {
-        self.infoLab.text = @"购买须知：\n预售方案：方案当前暂无具体的比赛分析内容，但是会在某个时间进行更新，购买后请注意即时查看方案内容以及提示。\n不中返还：在比赛分析结果预测不正确的情况下将全额退款购买预测方案的费用。退款的路径一般是在24小时内原路径返还（如遇节假日则顺延）";
+        self.buyTipLab.text = @"购买须知：";
+        self.yushouLab.text = @"预售方案：方案当前暂无具体的比赛分析内容，但是会在某个时间进行更新，购买后请注意即时查看方案内容以及提示。";
+        self.infoLab.text = @"不中返还：在比赛分析结果预测不正确的情况下将全额退款购买预测方案的费用。退款的路径一般是在24小时内原路径返还（如遇节假日则顺延）";
     }
     if ([payInfoModel.pre_sale integerValue]==1&&[payInfoModel.refund integerValue]==2) {
-        self.infoLab.text = @"购买须知：\n预售方案：方案当前暂无具体的比赛分析内容，但是会在某个时间进行更新，购买后请注意即时查看方案内容以及提示。\n不中补单：在比赛分析结果预测不正确的情况下将会有新的方案免费补单给购买的用户。可以在购买记录中进行查看。查看具有【补】字的方案，即为补单的方案。";
+        self.buyTipLab.text = @"购买须知：";
+        self.yushouLab.text = @"预售方案：方案当前暂无具体的比赛分析内容，但是会在某个时间进行更新，购买后请注意即时查看方案内容以及提示。";
+        self.infoLab.text = @"不中补单：在比赛分析结果预测不正确的情况下将会有新的方案免费补单给购买的用户。可以在购买记录中进行查看。查看具有【补】字的方案，即为补单的方案。";
     }
+    
 
+    if ([payInfoModel.pre_sale integerValue]==0&&[payInfoModel.refund integerValue]==0) {
+        [self.infoLab mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.offset(AUTO(10));
+        }];
+    }
  
 }
 
@@ -306,6 +339,21 @@
     self.secondsLab.text = seconds;
 }
 
+- (UILabel *)buyTipLab {
+    if(!_buyTipLab){
+        _buyTipLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
+    }
+    return _buyTipLab;
+}
+
+- (UILabel *)yushouLab {
+    if(!_yushouLab){
+        _yushouLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
+        _yushouLab.numberOfLines = 0;
+    }
+    return _yushouLab;
+}
+
 - (UILabel *)infoLab {
     if(!_infoLab){
         _infoLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
@@ -313,6 +361,8 @@
     }
     return _infoLab;
 }
+
+
 
 - (UILabel *)introduceLab {
     if (!_introduceLab) {

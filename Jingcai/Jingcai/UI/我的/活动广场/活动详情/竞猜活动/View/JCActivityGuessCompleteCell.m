@@ -15,10 +15,10 @@
     
     UIView *bgView = [UIView new];
     [self.contentView addSubview:bgView];
-    [bgView hg_setAllCornerWithCornerRadius:16];
+//    [bgView hg_setAllCornerWithCornerRadius:16];
     bgView.backgroundColor = JCWhiteColor;
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.insets(UIEdgeInsetsMake(0, 16, 0, 16));
+        make.edges.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
     
     self.timeBgView = [UIImageView new];
@@ -172,12 +172,12 @@
   
 }
 
-- (void)setDetailModel:(JCActivityDetailModel *)detailModel {
-    _detailModel = detailModel;
-    self.selCount = 0;
-
-    
-}
+//- (void)setDetailModel:(JCActivityDetailModel *)detailModel {
+//    _detailModel = detailModel;
+//    self.selCount = 0;
+//
+//    
+//}
 
 
 - (UICollectionView *)collectionView {

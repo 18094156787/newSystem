@@ -8,12 +8,14 @@
 
 #import "JCYuCeHongBaoSmallPriceWithDrawVC.h"
 #import "JCYuCeHongBaoWithDrawErrorView.h"
-#import "JCSmallPriceWithDrawSuccessVC.h"
+#import "JCSmallPriceWithDrawWaittingVC.h"
 @interface JCYuCeHongBaoSmallPriceWithDrawVC ()
 
 @property(nonatomic,strong) UILabel *moneyLab;
 
 @property(nonatomic,strong) UITextField *accountTF;
+
+@property(nonatomic,strong) UITextField *nameTF;
 
 @end
 
@@ -108,10 +110,19 @@
 
     }];
     
-    [bottomView addSubview:self.accountTF];
-    [self.accountTF mas_makeConstraints:^(MASConstraintMaker *make) {
+    UILabel *titleLab = [UILabel initWithTitle:@"支付宝账户:" andFont:AUTO(16) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+    [bottomView addSubview:titleLab];
+    [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(codeImgView);
         make.top.equalTo(codeImgView.mas_bottom).offset(AUTO(25));
+        make.height.mas_equalTo(AUTO(25));
+
+    }];
+
+    [bottomView addSubview:self.accountTF];
+    [self.accountTF mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(titleLab.mas_right);
+        make.centerY.equalTo(titleLab);
         make.right.offset(AUTO(-15));
         make.height.mas_equalTo(AUTO(25));
     }];
@@ -123,7 +134,35 @@
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
-        make.top.equalTo(self.accountTF.mas_bottom).offset(AUTO(10));
+        make.top.equalTo(self.accountTF.mas_bottom).offset(AUTO(15));
+        make.height.mas_equalTo(1);
+    }];
+    
+    UILabel *nameLab = [UILabel initWithTitle:@"支付宝账号姓名:" andFont:AUTO(16) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+    [bottomView addSubview:nameLab];
+    [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(codeImgView);
+        make.top.equalTo(lineView.mas_bottom).offset(AUTO(15));
+        make.height.mas_equalTo(AUTO(25));
+
+    }];
+
+    [bottomView addSubview:self.nameTF];
+    [self.nameTF mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(nameLab.mas_right);
+        make.centerY.equalTo(nameLab);
+        make.right.offset(AUTO(-15));
+        make.height.mas_equalTo(AUTO(25));
+    }];
+    
+    
+    UIView *lineView1 = [UIView new];
+    lineView1.backgroundColor = COLOR_F0F0F0;
+    [bottomView addSubview:lineView1];
+    [lineView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(15));
+        make.right.offset(AUTO(-15));
+        make.top.equalTo(self.nameTF.mas_bottom).offset(AUTO(15));
         make.height.mas_equalTo(1);
     }];
     
@@ -131,7 +170,7 @@
     attenImgView.image = JCIMAGE(@"jc_atten_gray");
     [bottomView addSubview:attenImgView];
     [attenImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(lineView.mas_bottom).offset(AUTO(15));
+        make.top.equalTo(lineView1.mas_bottom).offset(AUTO(15));
         make.left.offset(AUTO(15));
         make.width.height.mas_equalTo(AUTO(12));
     }];
@@ -168,24 +207,61 @@
          [weakSelf withDrawAction];
 
      }];
-//
-//    if (self.model.total) {
-//            NSString *money = [NSString stringWithFormat:@"¥%@",@([self.model.total floatValue])];
-//        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:money];
-//        NSRange range = [money rangeOfString:@"¥"];
-//        if (range.location!=NSNotFound) {
-//            [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(18)]} range:range];
-//        }
-//        self.moneyLab.attributedText = attr;
-//        self.accountTF.text = self.model.name;
-//    }
-    
 
 }
 
+//获取信息
+- (void)getMyAllSmallPrice {
+//    if (!self.tx_all) {
+//        return;
+//    }
+    NSString *type = @"1";
+    NSString *hongbao_id = self.model.id;
+    if (self.tx_all) {
+        type = @"2";
+        hongbao_id = @"";
+    }
+    
+    
+    JCUserService_New * service = [[JCUserService_New alloc] init];
+    [service getHongbaoSubmitWithType:type hongbao_id:hongbao_id Email:@"" name:@"" success:^(id  _Nullable object) {
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSString *total = object[@"data"][@"total"];
+            NSString *email = object[@"data"][@"account"];
+            NSString *name = object[@"data"][@"ali_name"];
+            NSString *money = [NSString stringWithFormat:@"¥%@",@([total floatValue]/100.0f)];
+            NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:money];
+            NSRange range = [money rangeOfString:@"¥"];
+            if (range.location!=NSNotFound) {
+                [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(18)]} range:range];
+            }
+            self.moneyLab.attributedText = attr;
+            self.accountTF.text = email;
+            self.nameTF.text = name;
+        }else {
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+
+}
+
+
+//提现单个小额
 - (void)withDrawAction {
     if (self.accountTF.text.length==0) {
         [JCWToastTool showHint:@"请输入账号"];
+        return;
+    }
+    if (self.nameTF.text.length==0) {
+        [JCWToastTool showHint:@"请填写您的真实姓名"];
+        return;
+    }
+    BOOL name_isRight =([self isChineseCharacter:self.nameTF.text]);
+    if (!name_isRight) {
+        [JCWToastTool showHint:@"账号姓名仅支持汉字，请重新填写！"];
         return;
     }
     if (self.tx_all) {
@@ -193,15 +269,13 @@
         return;
     }
     
-    
+    //小额红包提现
     JCUserService_New * service = [[JCUserService_New alloc] init];
-    [service getHongbaoSubmitWithType:@"3" hongbao_id:self.model.id Email:self.accountTF.text success:^(id  _Nullable object) {
+    [service getHongbaoSubmitWithType:@"3" hongbao_id:self.model.id Email:self.accountTF.text name:self.nameTF.text success:^(id  _Nullable object) {
         if ([JCWJsonTool isSuccessResponse:object]) {
 //            [JCWToastTool showHint:@"提现成功"];
-            if (self.JCBlock) {
-                self.JCBlock();
-            }
-                [self.navigationController pushViewController:[JCSmallPriceWithDrawSuccessVC new] animated:YES];;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"JCSmallPriceWithDrawSubmit" object:nil];
+                [self.navigationController pushViewController:[JCSmallPriceWithDrawWaittingVC new] animated:YES];;
             
         }else{
 //           [JCWToastTool showHint:object[@"msg"]];
@@ -220,60 +294,21 @@
     } failure:^(NSError * _Nonnull error) {
         
     }];
-//    [service jcSubmitWithId:self.model.id Email:self.accountTF.text success:^(id  _Nullable object) {
-////        @strongify(hongbaobView);
-//
-//    } failure:^(NSError * _Nonnull error) {
-//
-//    }];
-}
 
-- (void)getMyAllSmallPrice {
-//    if (!self.tx_all) {
-//        return;
-//    }
-    NSString *type = @"1";
-    NSString *hongbao_id = self.model.id;
-    if (self.tx_all) {
-        type = @"2";
-        hongbao_id = @"";
-    }
-    
-    
-    JCUserService_New * service = [[JCUserService_New alloc] init];
-    [service getHongbaoSubmitWithType:type hongbao_id:hongbao_id Email:@"" success:^(id  _Nullable object) {
-        if ([JCWJsonTool isSuccessResponse:object]) {
-            NSString *total = object[@"data"][@"total"];
-            NSString *email = object[@"data"][@"account"];
-            NSString *money = [NSString stringWithFormat:@"¥%@",@([total floatValue]/100.0f)];
-            NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:money];
-            NSRange range = [money rangeOfString:@"¥"];
-            if (range.location!=NSNotFound) {
-                [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(18)]} range:range];
-            }
-            self.moneyLab.attributedText = attr;
-            self.accountTF.text = email;
-        }else {
-            [JCWToastTool showHint:object[@"msg"]];
-        }
-
-    } failure:^(NSError * _Nonnull error) {
-        
-    }];
 
 }
 
+
+//提现所有小额
 - (void)txAllSmallPrice {
     [self.view showLoading];
     JCUserService_New * service = [[JCUserService_New alloc] init];
-    [service getHongbaoSubmitWithType:@"4" hongbao_id:@"" Email:self.accountTF.text success:^(id  _Nullable object) {
+    [service getHongbaoSubmitWithType:@"4" hongbao_id:@"" Email:self.accountTF.text name:self.nameTF.text success:^(id  _Nullable object) {
         [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
     //            [JCWToastTool showHint:@"提现成功"];
-            if (self.JCBlock) {
-                self.JCBlock();
-            }
-                [self.navigationController pushViewController:[JCSmallPriceWithDrawSuccessVC new] animated:YES];;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"JCSmallPriceWithDrawSubmit" object:nil];
+                [self.navigationController pushViewController:[JCSmallPriceWithDrawWaittingVC new] animated:YES];;
             
         }else{
                [JCWToastTool showHint:object[@"msg"]];
@@ -285,7 +320,10 @@
     }];
 
 }
-
+- (BOOL)isChineseCharacter:(NSString*)source {
+    NSString *regex = @"^[\\u4E00-\\u9FEA]+$";
+    return ([source rangeOfString:regex options:NSRegularExpressionSearch].length>0);
+}
 - (UILabel *)moneyLab {
     if (!_moneyLab) {
         _moneyLab = [UILabel initWithTitle:@"" andFont:AUTO(48) andWeight:2 andTextColor:JCWhiteColor andBackgroundColor:JCClearColor andTextAlignment:0];
@@ -296,11 +334,21 @@
 - (UITextField *)accountTF {
     if (!_accountTF) {
         _accountTF = [UITextField new];
-        _accountTF.textAlignment = 0;
-        _accountTF.font = [UIFont systemFontOfSize:AUTO(18)];
-        _accountTF.placeholder = @"请输入您的支付宝账号";
+        _accountTF.textAlignment = NSTextAlignmentRight;
+        _accountTF.font = [UIFont systemFontOfSize:AUTO(16)];
+        _accountTF.placeholder = @"请填写您的支付宝账号";
     }
     return _accountTF;
+}
+
+- (UITextField *)nameTF {
+    if (!_nameTF) {
+        _nameTF = [UITextField new];
+        _nameTF.textAlignment = NSTextAlignmentRight;
+        _nameTF.font = [UIFont systemFontOfSize:AUTO(16)];
+        _nameTF.placeholder = @"请填写您的真实姓名";
+    }
+    return _nameTF;
 }
 
 @end

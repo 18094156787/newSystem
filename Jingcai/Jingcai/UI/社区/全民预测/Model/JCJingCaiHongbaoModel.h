@@ -46,7 +46,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *tx_time;//提现时间
 
-@property (nonatomic,assign) NSInteger use;// 1 未使用 2 使用  3提现中 4 提现失败
+// use // 1 未使用 2 使用  3提现中 4 提现失败
+//在现金红包中 1 未提现 2 提现成功  3已过期 4 提现失败
+@property (nonatomic,assign) NSInteger use;
+
+//提现状态, use=1的情况使用 withdraw 0未提现,1提现中,2提现失败，
+
+@property (nonatomic,assign) NSInteger withdraw;
 
 @property (nonatomic,strong) NSString *use_type;
 

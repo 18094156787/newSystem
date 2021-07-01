@@ -11,6 +11,7 @@
 @implementation JCActivityGuessCompleteHeadView
 
 - (void)initViews {
+    self.backgroundColor = JCWhiteColor;
     UIImageView *iconImgView = [UIImageView new];
     iconImgView.image = JCIMAGE(@"ic_success");
     [self addSubview:iconImgView];

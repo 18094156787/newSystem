@@ -13,7 +13,6 @@
 #import "JCMatchTipSettingVC.h"
 #import "JCMathEnterGaolTipView.h"
 #import "JCActivityTipView.h"
-#import "JCActivityGuessVC.h"
 #import "JCActivityDetailCommomVC.h"
 @interface JCMatchHomeWMVC ()
 

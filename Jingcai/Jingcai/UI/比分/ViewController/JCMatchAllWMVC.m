@@ -13,7 +13,8 @@
 #import "JCMatchFootBallSearchVC.h"
 #import "JCMatchBasketBallSearchVC.h"
 #import "JCMainTabBarController.h"
-
+#import "JPUSHService.h"
+//#import "JCJPushManager.h"
 @interface JCMatchAllWMVC ()<LMJTabDelegate>
 
 @property (nonatomic,strong) UIBarButtonItem *fileterItem;
@@ -52,7 +53,25 @@
     if (self.needNextGetData) {
         [self showActivityTipView];
     }
-//    [self setNavBackImg];
+    
+//    [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+////        if (show) {
+////            [SVProgressHUD dismiss];
+////        }
+////        if (iResCode == 0 && completion) {
+////            completion(YES);
+////            return ;
+////        }
+////        completion(NO);
+//    } seq:1];
+
+    [JPUSHService getAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+        NSLog(@"当前别名%@",iAlias);
+        
+    } seq:1];
+    
+    
+    
 }
 
 
@@ -91,6 +110,8 @@
     [self showActivityTipView];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isInCurrentVC) name:NotificationUserLogin object:nil];
+    
+
 }
 
 - (void)showActivityTipView {

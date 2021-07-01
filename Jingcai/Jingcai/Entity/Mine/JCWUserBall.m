@@ -79,9 +79,13 @@
         self.can_change_introduction = [aDecoder decodeObjectForKey:@"can_change_introduction"];
         self.guess_activity_id = [aDecoder decodeObjectForKey:@"guess_activity_id"];
         self.guess_activity_text = [aDecoder decodeObjectForKey:@"guess_activity_text"];
+        self.remaining_times = [aDecoder decodeObjectForKey:@"remaining_times"];
+        self.audit_user_img = [aDecoder decodeObjectForKey:@"audit_user_img"];
+        self.audit_user_name = [aDecoder decodeObjectForKey:@"audit_user_name"];
+        self.audit_desc = [aDecoder decodeObjectForKey:@"audit_desc"];
+        self.fail_desc = [aDecoder decodeObjectForKey:@"fail_desc"];
+        self.guess_activity_type = [aDecoder decodeObjectForKey:@"guess_activity_type"];
         
-        
-
     }
     return self;
 }
@@ -123,6 +127,15 @@
     [aCoder encodeObject:self.can_change_introduction forKey:@"can_change_introduction"];
     [aCoder encodeObject:self.guess_activity_id forKey:@"guess_activity_id"];
     [aCoder encodeObject:self.guess_activity_text forKey:@"guess_activity_text"];
+    [aCoder encodeObject:self.remaining_times forKey:@"remaining_times"];
+    [aCoder encodeObject:self.audit_user_img forKey:@"audit_user_img"];
+    [aCoder encodeObject:self.audit_user_name forKey:@"audit_user_name"];
+    [aCoder encodeObject:self.audit_desc forKey:@"audit_desc"];
+    [aCoder encodeObject:self.fail_desc forKey:@"fail_desc"];
+    [aCoder encodeObject:self.guess_activity_type forKey:@"guess_activity_type"];
+    
+    
+    
 }
 
 #pragma mark - 扩展

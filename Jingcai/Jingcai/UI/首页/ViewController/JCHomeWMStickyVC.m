@@ -23,7 +23,6 @@
 #import "JCActivityModuleWMVC.h"
 #import "JCActivityTipView.h"
 #import "JCActivityDetailCommomVC.h"
-#import "JCActivityGuessVC.h"
 #import "JCAppGuideView.h"
 static CGFloat const kWMMenuViewHeight = 44;
 @interface JCHomeWMStickyVC ()<UISearchBarDelegate>

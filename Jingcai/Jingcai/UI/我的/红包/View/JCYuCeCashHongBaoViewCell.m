@@ -81,8 +81,28 @@
         make.size.mas_equalTo(CGSizeMake(AUTO(60), AUTO(24)));
     }];
     
+    [self.bgView addSubview:self.withDrawView];
+    [self.withDrawView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.offset(AUTO(-12));
+        make.bottom.offset(AUTO(-8));
+        make.size.mas_equalTo(CGSizeMake(AUTO(100), AUTO(24)));
+    }];
+    
+    [self.bgView addSubview:self.detailBtn];
+    [self.detailBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(8));
+        make.bottom.offset(AUTO(-8));
+        make.size.mas_equalTo(CGSizeMake(AUTO(60), AUTO(24)));
+    }];
+    
     WeakSelf;
     [self.withDrawBtn bk_whenTapped:^{
+        if (weakSelf.JCWithDrawBlock) {
+            weakSelf.JCWithDrawBlock();
+        }
+    }];
+    
+    [self.withDrawView bk_whenTapped:^{
         if (weakSelf.JCWithDrawBlock) {
             weakSelf.JCWithDrawBlock();
         }
@@ -108,50 +128,58 @@
         self.contentLab2.text = model.desc;
         self.contentLab3.text = @"";
     }
-    
-//    if ([model.use_type integerValue]==1) {
-//        self.contentLab1.text = [NSString stringWithFormat:@"%@",model.scope];
-//        self.contentLab2.text = @"限本账户用户使用";
-//        self.contentLab3.text = @"每张仅提现 1 次";
-//    }
-//    if ([model.use_type integerValue]==2) {
-//
-//        self.contentLab1.text = [NSString stringWithFormat:@"%@",model.scope];
-//        self.contentLab2.text = @"限本账户用户使用";
-//        self.contentLab3.text = @"每张仅提现 1 次";
-//    }
-//    [self.withDrawBtn setTitle:model.content.use_type forState:0];
-    if ([model.status intValue]==1) {
-        if (model.use==1) {
-            self.bgView.alpha = 1;
-            self.bgView.image = JCIMAGE(@"hb_ticket_nor_new");
-            self.withDrawBtn.userInteractionEnabled = YES;
-            [self.withDrawBtn setTitle:@"去提现" forState:0];
-            [self.withDrawBtn setTitleColor:COLOR_EF2F2F forState:0];
-             self.withDrawBtn.layer.borderColor = JCBaseColor.CGColor;
-        }else{
-            if (model.use==2) {
-                [self.withDrawBtn setTitle:@"已提现" forState:0];
-                self.withDrawBtn.userInteractionEnabled = NO;
-            }
-            if (model.use==3) {
-                [self.withDrawBtn setTitle:@"提现中" forState:0];
-                self.withDrawBtn.userInteractionEnabled = NO;
-            }
-            if (model.use==4) {
-                [self.withDrawBtn setTitle:@"提现失败" forState:0];
-                self.withDrawBtn.userInteractionEnabled = YES;
-                [self.withDrawBtn setTitleColor:COLOR_EF2F2F forState:0];
-                 self.withDrawBtn.layer.borderColor = JCBaseColor.CGColor;
-            }
-            self.bgView.alpha = 0.6;
-            self.bgView.image = JCIMAGE(@"hb_ticket_dis_new");
-            self.withDrawBtn.userInteractionEnabled = NO;
-            [self.withDrawBtn setTitleColor:COLOR_C3B5AB forState:0];
-            self.withDrawBtn.layer.borderColor = COLOR_C3B5AB.CGColor;
-        }
 
+    if ([model.status intValue]==1) {
+        self.bgView.alpha = 1;
+        self.bgView.image = JCIMAGE(@"hb_ticket_nor_new");
+        self.withDrawBtn.userInteractionEnabled = YES;
+        [self.withDrawBtn setTitleColor:COLOR_EF2F2F forState:0];
+         self.withDrawBtn.layer.borderColor = JCBaseColor.CGColor;
+        self.detailBtn.hidden = YES;
+        if (model.use==1) {
+            if (model.withdraw==0) {
+                self.withDrawBtn.hidden = NO;
+                [self.withDrawBtn setTitle:@"去提现" forState:0];
+                self.withDrawView.hidden = YES;
+            }else if (model.withdraw==1) {
+                self.withDrawBtn.hidden = YES;
+                self.withDrawView.infoLab.text = @"提现中";
+                self.withDrawView.hidden = NO;
+            }else if (model.withdraw==2) {
+                self.detailBtn.hidden = NO;
+                self.withDrawBtn.hidden = YES;
+                self.withDrawView.infoLab.text = @"查看详情";
+                self.withDrawView.hidden = NO;
+            }else{
+                self.withDrawBtn.hidden = NO;
+                self.withDrawView.hidden = YES;
+            }
+            
+        }
+        if (model.use==2) {
+            self.withDrawBtn.hidden = YES;
+            self.withDrawView.infoLab.text = @"已提现";
+            self.withDrawView.hidden = NO;
+            
+
+        }
+        if (model.use==3) {
+            [self.withDrawBtn setTitle:@"已过期" forState:0];
+            self.withDrawBtn.userInteractionEnabled = NO;
+            self.withDrawView.hidden = YES;
+
+        }
+        if (model.use==4) {
+            self.withDrawBtn.hidden = YES;
+            self.detailBtn.hidden = NO;
+            self.withDrawView.infoLab.text = @"查看详情";
+            self.withDrawView.hidden = NO;
+        }
+        
     }else{
+        self.withDrawView.hidden = YES;
+        self.detailBtn.hidden = YES;
+        self.withDrawBtn.hidden = NO;
         [self.withDrawBtn setTitle:@"已过期" forState:0];
         self.bgView.alpha = 0.6;
         self.bgView.image = JCIMAGE(@"hb_ticket_dis_new");
@@ -159,33 +187,7 @@
         [self.withDrawBtn setTitleColor:COLOR_C3B5AB forState:0];
         self.withDrawBtn.layer.borderColor = COLOR_C3B5AB.CGColor;
     }
-//    if (model.draw==1) {
-//
-//        
-//        if ([model.use_type intValue]==2) {
-//            [self.withDrawBtn setTitle:@"去提现" forState:0];
-//        }
-//        self.bgView.alpha = 1;
-//        self.bgView.image = JCIMAGE(@"hb_ticket_nor");
-//        self.withDrawBtn.userInteractionEnabled = YES;
-//        [self.withDrawBtn setTitleColor:COLOR_EF2F2F forState:0];
-//         self.withDrawBtn.layer.borderColor = JCBaseColor.CGColor;
-//
-//    }else {
-//        if ([model.use_type intValue]==2) {
-//            [self.withDrawBtn setTitle:@"已提现" forState:0];
-//        }
-//
-//        self.bgView.alpha = 0.6;
-//        self.bgView.image = JCIMAGE(@"hb_ticket_dis");
-//        self.withDrawBtn.userInteractionEnabled = NO;
-//        [self.withDrawBtn setTitleColor:COLOR_C3B5AB forState:0];
-//        self.withDrawBtn.layer.borderColor = COLOR_C3B5AB.CGColor;
-//
-//        
-//    }
-    
-    
+ 
     
 }
 
@@ -244,11 +246,61 @@
     return _withDrawBtn;;
 }
 
+- (UIButton *)detailBtn {
+    if (!_detailBtn) {
+        _detailBtn = [UIButton initWithText:@"提现失败" FontSize:0 BackGroundColor:JCClearColor TextColor:COLOR_EF2F2F];
+        _detailBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)];
+    }
+    return _detailBtn;;
+}
+
 - (UIImageView *)bgView {
     if (!_bgView) {
         _bgView = [UIImageView new];
         _bgView.userInteractionEnabled = YES;
     }
     return _bgView;
+}
+
+- (JCYuCeCashHongBaoStatusView *)withDrawView {
+    if (!_withDrawView) {
+        _withDrawView = [JCYuCeCashHongBaoStatusView new];
+    }
+    return _withDrawView;
+}
+
+@end
+
+
+@implementation JCYuCeCashHongBaoStatusView
+
+- (void)initViews {
+    [self addSubview:self.indicateImgView];
+    [self.indicateImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.offset(0);
+        make.centerY.equalTo(self);
+        make.size.mas_equalTo(CGSizeMake(AUTO(14), AUTO(14)));
+    }];
+    
+    [self addSubview:self.infoLab];
+    [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.indicateImgView.mas_left).offset(-3);
+        make.centerY.equalTo(self);
+    }];
+}
+- (UILabel *)infoLab {
+    if (!_infoLab) {
+        _infoLab = [UILabel initWithTitle:@"提现中" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_F2A15E andBackgroundColor:JCClearColor andTextAlignment:0];
+    }
+    return _infoLab;
+}
+
+- (UIImageView *)indicateImgView {
+    if (!_indicateImgView) {
+        _indicateImgView = [UIImageView new];
+        _indicateImgView.image = JCIMAGE(@"ic_hb_detail");
+        _indicateImgView.userInteractionEnabled = YES;
+    }
+    return _indicateImgView;
 }
 @end

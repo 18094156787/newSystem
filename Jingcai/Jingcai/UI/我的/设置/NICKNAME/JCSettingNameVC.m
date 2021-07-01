@@ -49,7 +49,7 @@
         make.top.equalTo(self.commitButton.mas_bottom).offset(AUTO(10));
     }];
     if ([[JCWUserBall currentUser].tuijian integerValue] ==1) {
-        self.infoLab.text = @"①成为达人后，修改昵称需客服审核！\n②昵称中请勿带有二维码微信号、电话号码等非法信息，否则将不予通过！\n③每月最多修改1次！";
+        self.infoLab.text = @"①成为达人后，修改昵称需客服审核！\n②昵称中请勿带有二维码微信号、电话号码等非法信息，否则将不予通过！";
     }
 }
 
@@ -133,7 +133,14 @@
                 }
 
                 [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUserChange object:nil];
-                [weakSelf.navigationController popViewControllerAnimated:YES];
+                if ([[JCWUserBall currentUser].fabu integerValue]==1) {
+                    [self getCheckInfo];
+                    [JCWToastTool showHint:@"提交修改昵称申请成功，等待客服审核……"];
+                }else{
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+
+//                [weakSelf.navigationController popViewControllerAnimated:YES];
                 
             }else{
                  [JCWToastTool showHint:object[@"msg"]];

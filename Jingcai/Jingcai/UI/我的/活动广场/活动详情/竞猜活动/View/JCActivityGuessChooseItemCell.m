@@ -76,10 +76,6 @@
     }
     self.infoLab.attributedText = attributedStr;
     
-//    self.bgView.layer.borderColor = [model.user_choice integerValue]==1?JCBaseColor.CGColor:JCClearColor.CGColor;
-//    if ([self.detailModel.active_state integerValue]==3) {
-//        self.bgView.layer.borderColor = [model.user_choice integerValue]==1?COLOR_9F9F9F.CGColor:JCClearColor.CGColor;
-//    }
     self.bgView.layer.borderColor = [model.local_choice integerValue]==1?JCBaseColor.CGColor:JCClearColor.CGColor;
     
     self.selImgView.hidden = [model.user_choice integerValue]==1?NO:YES;

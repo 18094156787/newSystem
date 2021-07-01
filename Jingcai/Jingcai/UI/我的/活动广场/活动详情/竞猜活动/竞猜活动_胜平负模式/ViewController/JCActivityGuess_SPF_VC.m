@@ -1,29 +1,33 @@
 //
-//  JCActivityGuessVC.m
+//  JCActivityGuess_SPF_VC.m
 //  Jingcai
 //
-//  Created by 陈继伟 on 2021/3/24.
+//  Created by 陈继伟 on 2021/6/25.
 //  Copyright © 2021 blockstar. All rights reserved.
 //
 
-#import "JCActivityGuessVC.h"
-#import "JCActivityHeadView.h"
+#import "JCActivityGuess_SPF_VC.h"
+#import "JCActivityGuess_SPF_HeadView.h"
 #import "JCActivityPrizeCell.h"
 #import "JCActivityRuleCell.h"
 #import "JCActivityPrizeShowView.h"
 #import "JCActivitytTimeCell.h"
-#import "JCActivityGuessChooseCell.h"
+#import "JCActivityGuess_SPF_MatchCell.h"
 #import "JCShareView.h"
 #import "JCActivityGuessCompleteVC.h"
 #import "JCActivityGuessFailureTipView.h"
 #import "JCActivityGuessSuccessTipView.h"
-@interface JCActivityGuessVC ()
+#import "JCActivityGuess_SPF_CheckView.h"
+#import "JCActivityGuessCompleteVC.h"
+@interface JCActivityGuess_SPF_VC ()
 
-@property (nonatomic,strong) JCActivityHeadView *headView;
+@property (nonatomic,strong) JCActivityGuess_SPF_HeadView *headView;
 
 @property (nonatomic,strong) UILabel *infoLab;
 
 @property (nonatomic,strong) UIButton *sureBtn;
+
+@property (nonatomic,strong)JCActivityGuess_SPF_CheckView *checkView;
 
 @property (nonatomic,strong) JCActivityPrizeShowView *prizeView;
 
@@ -33,11 +37,13 @@
 
 @property (nonatomic,strong) JCActivityDetailModel *detailModel;
 
+@property (nonatomic,strong) JCActivityOptionModel *selectOptionModel;
+
 @property (nonatomic,strong) JCShareView *shareView;
 
 @end
 
-@implementation JCActivityGuessVC
+@implementation JCActivityGuess_SPF_VC
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -46,13 +52,11 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    [self.headView.countDown destoryTimer];
+//    [self.headView.countDown destoryTimer];
 }
 
 - (void)backItemClick {
-    if (self.JCCancelBlock) {
-        self.JCCancelBlock();
-    }
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -61,6 +65,8 @@
     // Do any additional setup after loading the view.
     [self refreshData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:NotificationUserLogin object:nil];
+
+
 }
 
 - (void)refreshData {
@@ -78,16 +84,36 @@
             self.sureBtn.backgroundColor = [self.detailModel.text_can_click integerValue]==1?JCBaseColor:COLOR_9F9F9F;
             self.sureBtn.userInteractionEnabled = [self.detailModel.text_can_click integerValue]==1?YES: NO;
             
-            if ([self.detailModel.prize integerValue]>1&&[self.detailModel.is_participate integerValue]==1) {
-                    self.resultImgView.hidden = NO;
+
+            if (self.detailModel.is_guess==4) {
+                //赛事取消
+                self.resultImgView.image = JCIMAGE(@"ic_spf_cancel");
+                self.resultImgView.hidden = NO;
+                
+                JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
+                alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(14)];
+            //    WeakSelf;
+                [alertView alertTitle:@"活动取消" TitleColor:COLOR_2F2F2F Mesasge:@"由于比赛未能正常进行，活动无法开奖。本次活动取消，十分抱歉！" MessageColor:COLOR_2F2F2F ComfirmTitle:@"关闭" ComfirmColor:JCWhiteColor confirmHandler:^{
+                    [alertView removeFromSuperview];
+                }];
+                alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+            }else{
+                if ([self.detailModel.participation integerValue]==1) {
+                    if (self.detailModel.is_guess==1) {
+                        self.resultImgView.image = JCIMAGE(@"ic_spf_isRight");
+                        self.resultImgView.hidden = NO;
+                    }else if (self.detailModel.is_guess==2) {
+                        self.resultImgView.image = JCIMAGE(@"ic_spf_isWrong");
+                        self.resultImgView.hidden = NO;
+                    }else{
+                        self.resultImgView.hidden = YES;
+                    }
+                }else{
+                    self.resultImgView.hidden = YES;
                 }
-            //    self.resultImgView.hidden = [detailModel.is_participate integerValue]==1?NO:YES;
-                if (self.detailModel.is_guess==1) {
-                    self.resultImgView.image = JCIMAGE(@"active_ic_right");
-                }
-                if (self.detailModel.is_guess==2) {
-                    self.resultImgView.image = JCIMAGE(@"active_ic_wrong");
-                }
+                
+            }
             
             self.shareView.title = self.detailModel.wechat_share.share_title;
             self.shareView.content = self.detailModel.wechat_share.share_desc;
@@ -104,7 +130,7 @@
                     [dataArray addObject:model];
                 }
             }
-            self.headView.dataSource = dataArray;
+//            self.headView.dataSource = dataArray;
             
             if ([self.detailModel.is_guessing_reminder integerValue]==1) {
                 if (self.detailModel.is_guess==1) {
@@ -164,7 +190,7 @@
     self.tableView.tableHeaderView = self.headView;
     
     
-    [self.tableView registerClass:[JCActivityGuessChooseCell class] forCellReuseIdentifier:@"JCActivityGuessChooseCell"];
+    [self.tableView registerClass:[JCActivityGuess_SPF_MatchCell class] forCellReuseIdentifier:@"JCActivityGuess_SPF_MatchCell"];
     [self.tableView registerClass:[JCActivitytTimeCell class] forCellReuseIdentifier:@"JCActivitytTimeCell"];
     
     [self.tableView registerClass:[JCActivityPrizeCell class] forCellReuseIdentifier:@"JCActivityPrizeCell"];
@@ -174,37 +200,33 @@
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(0);
         make.left.right.equalTo(self.view);
-        make.bottom.offset(-kBottomTabSafeAreaHeight-AUTO(100));
+        make.bottom.offset(-kBottomTabSafeAreaHeight-AUTO(76));
     }];
     
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = JCWhiteColor;
     [self.view addSubview:bottomView];
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(AUTO(100));
+        make.height.mas_equalTo(AUTO(76));
         make.left.right.equalTo(self.view);
         make.bottom.offset(-kBottomTabSafeAreaHeight);
         
     }];
     
-    [bottomView addSubview:self.infoLab];
-    [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(AUTO(15));
-        make.centerX.equalTo(bottomView);
-        make.left.right.offset(0);
-    }];
+
     
     [bottomView addSubview:self.sureBtn];
     [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.infoLab.mas_bottom).offset(AUTO(15));
+        make.top.offset(AUTO(16));
         make.centerX.equalTo(bottomView);
         make.size.mas_equalTo(CGSizeMake(AUTO(275), AUTO(44)));
     }];
     
     [bottomView addSubview:self.resultImgView];
     [self.resultImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.offset(0);
-        make.size.mas_equalTo(CGSizeMake(AUTO(80), AUTO(68)));
+        make.top.offset(0);
+        make.left.offset(AUTO(16));
+        make.size.mas_equalTo(CGSizeMake(AUTO(76), AUTO(76)));
     }];
 
     WeakSelf;
@@ -213,11 +235,20 @@
         weakSelf.tableView.tableHeaderView = weakSelf.headView;
         
     };
+    
+    self.checkView.JCSureBlock = ^{
+        [weakSelf.checkView removeFromSuperview];
+        [weakSelf finalSubmit];
+
+        
+    };
+    
+
 }
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -229,13 +260,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
-        JCActivityGuessChooseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityGuessChooseCell"];
+        JCActivityGuess_SPF_MatchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityGuess_SPF_MatchCell"];
         cell.detailModel = self.detailModel;
-        cell.dataSource = self.detailModel.activity_option;
+//        cell.dataSource = self.detailModel.activity_option;
         WeakSelf;
-        cell.JCSelectBlock = ^(NSInteger selCount) {
-            [weakSelf.sureBtn setTitle:[NSString stringWithFormat:@"提交竞猜 (%ld/%@)",selCount,weakSelf.detailModel.option] forState:0];
+        cell.JCSelectBlock = ^(JCActivityOptionModel * _Nonnull selectOptionModel) {
+            weakSelf.selectOptionModel = selectOptionModel;
         };
+
         return cell;
     }
     if (indexPath.section==1) {
@@ -249,13 +281,10 @@
         };
         return cell;
     }
+
     if (indexPath.section==2) {
-        JCActivitytTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivitytTimeCell"];
-        cell.detailModel = self.detailModel;
-        return cell;
-    }
-    if (indexPath.section==3) {
         JCActivityRuleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityRuleCell"];
+        cell.haveTime = YES;
         WeakSelf;
         cell.detailModel = self.detailModel;
         cell.JCRefreshBlock = ^(float height) {
@@ -275,12 +304,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
-        if (self.detailModel.activity_option.count<=10) {
-            NSInteger count = ceil(self.detailModel.activity_option.count/2.0f);
-            return 62*count+65;
-        }
-//        return 378;
-        return 410;
+
+        return 200;
     }
     if (indexPath.section==1) {
         if (self.detailModel.goods_info.count>0) {
@@ -289,10 +314,7 @@
         return 0.01f;
         
     }
-    if (indexPath.section==2) {
-        return 92;
-    }
-    
+
     return self.cellHeight;
 }
 
@@ -332,74 +354,37 @@
         [self presentLogin];
         return;
     }
-    //type 活动类型 1跳转已有的活动 2福利活动 3充值活动 4竞猜活动
-    NSMutableArray *dataArray = [NSMutableArray array];
-    NSArray *array = [NSArray arrayWithArray:self.detailModel.activity_option];
-    for (JCActivityOptionModel *model in array) {
-        if ([model.local_choice integerValue]==1) {
-            [dataArray addObject:model];
-        }
-    }
-    if (dataArray.count==0) {
+    if (!self.selectOptionModel) {
         [JCWToastTool showHint:@"您还未选择任何选项，请选择后再提交！"];
         return;
     }
-    if (dataArray.count<[self.detailModel.option integerValue]) {
-        JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
-        alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(16)];
-        WeakSelf;
-        [alertView alertTitle:@"" TitleColor:COLOR_2F2F2F Mesasge:@"" MessageColor:COLOR_666666 SureTitle:@"确认提交" SureColor:JCWhiteColor SureHandler:^{
-            [alertView removeFromSuperview];
-            [weakSelf finalSubmitWithDataArray:dataArray];
-        } CancleTitle:@"取消" CancleColor:JCBaseColor CancelHandler:^{
-           [alertView removeFromSuperview];
-        }];
-        NSString *title = [NSString stringWithFormat:@"当前可提交%@个选项，您只选择了%ld个，是否确认提交？",self.detailModel.option,dataArray.count];
-        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
-        NSRange count_range = [title rangeOfString:self.detailModel.option];
-        if (count_range.location!=NSNotFound) {
-            [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:count_range];
-        }
-        NSRange sel_range = [title rangeOfString:[NSString stringWithFormat:@"%ld",dataArray.count]];
-        if (sel_range.location!=NSNotFound) {
-            [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:sel_range];
-        }
-        alertView.contentLab.attributedText = attr;
-        alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-        [[UIApplication sharedApplication].keyWindow addSubview:alertView];
-        return;
-    }
     
     
-    [self finalSubmitWithDataArray:dataArray];
+    self.checkView.selectOptionModel = self.selectOptionModel;
+    self.checkView.detailModel = self.detailModel;
+    [self.jcWindow addSubview:self.checkView];
+
     
 
 
-
- 
 }
 
-- (void)finalSubmitWithDataArray:(NSArray *)dataArray {
-    NSString *options = @"";
-    for (int i=0; i<dataArray.count; i++) {
-        JCActivityOptionModel *model = dataArray[i];
-        if (i==0) {
-            options = model.id;
-        }else{
-            options = [NSString stringWithFormat:@"%@,%@",options,model.id];
-        }
-    }
-    
-    
+- (void)finalSubmit {
+
     JCActivityService *service = [JCActivityService service];
-    [service getSubmitJingCaiUserWithActID:self.detailModel.id options:options success:^(id  _Nullable object) {
+    [service getSubmitJingCaiUserWithActID:self.detailModel.id options:self.selectOptionModel.id success:^(id  _Nullable object) {
         [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
             JCActivityGuessCompleteVC *vc = [JCActivityGuessCompleteVC new];
             vc.actID = self.actID;
+            vc.is_spf = YES;
+//            vc.selectOptionModel = self.selectOptionModel;
+//            vc.detailModel = self.detailModel;
             [self.navigationController pushViewController:vc animated:YES];
             [self refreshData];
 //            [JCWToastTool showHint:@"提交成功"];
+            
+            
         }else{
             [JCWToastTool showHint:object[@"msg"]];
         }
@@ -441,9 +426,9 @@
 
 }
 
-- (JCActivityHeadView *)headView {
+- (JCActivityGuess_SPF_HeadView *)headView {
     if (!_headView) {
-        _headView = [JCActivityHeadView new];
+        _headView = [JCActivityGuess_SPF_HeadView new];
     }
     return _headView;
 }
@@ -486,4 +471,13 @@
     }
     return _resultImgView;
 }
+
+- (JCActivityGuess_SPF_CheckView *)checkView {
+    if (!_checkView) {
+        _checkView = [JCActivityGuess_SPF_CheckView new];
+        _checkView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    }
+    return _checkView;
+}
+
 @end

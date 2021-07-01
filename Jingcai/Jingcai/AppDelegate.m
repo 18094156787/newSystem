@@ -339,7 +339,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         //初始化JPush
         [JPUSHService setupWithOption:self.launchOptions appKey:JPushAppKey
                               channel:@"App Store"
-                     apsForProduction:YES
+                     apsForProduction:NO
                 advertisingIdentifier:nil];
     });
 
@@ -460,11 +460,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         //红榜用户列表
                 JCHongbangWMstckyVC *vc = [JCHongbangWMstckyVC new];
                 vc.autherID = userID;
-//                if (userID.length==0) {
-//                    vc.autherID = articleID;
-//                }
-                
-//                [currentVC.navigationController pushViewController:vc animated:YES];
                 [nav pushViewController:vc animated:YES];
             });
 

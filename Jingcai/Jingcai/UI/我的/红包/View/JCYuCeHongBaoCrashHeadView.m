@@ -56,15 +56,50 @@
     
     WeakSelf;
     [self.submitBtn bk_whenTapped:^{
-        JCYuCeHongBaoSmallPriceWithDrawVC *vc = [JCYuCeHongBaoSmallPriceWithDrawVC new];
-        vc.tx_all = YES;
-        vc.JCBlock = ^{
-            if (weakSelf.JCRefresh) {
-                weakSelf.JCRefresh();
-            }
-        };
-        [[weakSelf getViewController].navigationController pushViewController:vc animated:YES];
+        [weakSelf userHaveBigAndSmallHB];
     }];
+}
+
+- (void)userHaveBigAndSmallHB {
+   // tips表示是否要弹窗，1表示只有大额红包时提示，2表示同时有小额和大额红包时提示
+
+    if ([self.tips integerValue]==1) {
+        JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
+        [alertView alertTitle:@"确认提现" TitleColor:COLOR_2F2F2F Mesasge:@"您的红包金额较大，这需要单独提现\n请点击单个红包提现" MessageColor:COLOR_666666 ComfirmTitle:@"确定" ComfirmColor:JCBaseColor confirmHandler:^{
+            [alertView removeFromSuperview];
+        }];
+        alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+    }else if([self.tips integerValue]==2){
+        JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
+//        alertView.lineView.hidden = YES;
+        [alertView alertTitle:@"确认提现" TitleColor:COLOR_2F2F2F Mesasge:@"您拥有多个较大金额红包，需要单独提现，本次批量提现只包含其他金额较小红包，您还要继续提现吗？" MessageColor:COLOR_666666 SureTitle:@"继续提现" SureColor:JCWhiteColor SureHandler:^{
+            [alertView removeFromSuperview];
+            [self txAction];
+            
+        } CancleTitle:@"取消" CancleColor:JCBaseColor CancelHandler:^{
+           [alertView removeFromSuperview];
+        }];
+        alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+        
+    }else{
+        //只有小额红包
+        [self txAction];
+    }
+
+
+}
+
+- (void)txAction {
+    JCYuCeHongBaoSmallPriceWithDrawVC *vc = [JCYuCeHongBaoSmallPriceWithDrawVC new];
+    vc.tx_all = YES;
+    vc.JCBlock = ^{
+        if (self.JCRefresh) {
+            self.JCRefresh();
+        }
+    };
+    [[self getViewController].navigationController pushViewController:vc animated:YES];
 }
 
 - (UILabel *)moneyLab {

@@ -18,6 +18,12 @@
 #import "JCHongbangWMstckyVC.h"
 #import "JCYCHongBaoWMVC.h"
 #import "JcActivitySquareVC.h"
+#import "JCHongbangWMstckyVC.h"
+#import "JCFootBallAuthorDetailWMViewController.h"
+#import "JCActivityDetailCommomVC.h"
+#import "JCActivityGuessVC.h"
+#import "JCActivityKindVC.h"
+#import "JCActivityGuess_SPF_VC.h"
 @interface JCPageRedirectManager ()
 @property (nonatomic, strong) JCMainTabBarController * tabBarController;
 @end
@@ -58,25 +64,6 @@
         return ;
     }
     
-    
-    
-//    JCMainTabBarController * tabbar = (JCMainTabBarController *)[UIApplication sharedApplication].delegate.window.rootViewController;
-//    if (route.length == 1) {
-//        tabbar.tabSelIndex = [route integerValue]-1;
-//    }
-//    // 我的
-//    if (route.length > 1) {
-//        NSInteger index = [[route substringToIndex:1] integerValue]-1;
-//        if (index > vc.tabBarController.viewControllers.count-1) {
-//            return ;
-//        }
-//        vc.tabBarController.selectedIndex = index;
-//        JCBaseNavigationController * nav = vc.tabBarController.viewControllers[index];
-//        JCMineVC * mineVC = [nav.viewControllers firstObject];
-//
-//        NSInteger section = [[route substringFromIndex:1] integerValue];
-//        [mineVC pushWithSection:section];
-//    }
 }
 
 - (void)redirectToCharge {
@@ -135,5 +122,150 @@
     JCHongbangWMstckyVC * tjUserVC = [JCHongbangWMstckyVC new];
     tjUserVC.autherID = tjUserId;
     [currentVC.navigationController pushViewController:tjUserVC animated:YES];
+}
+
+#pragma mark--//网页超链接跳转
+
++ (void)jumpVCWithRoute:(NSString *)route vc:(UIViewController *)viewController {
+    NSString *app_url =  [self getParamByName:@"app_url" URLString:route];
+    NSString *app_weburl =  [self getParamByName:@"app_weburl" URLString:route];
+    NSString *type =  [self getParamByName:@"type" URLString:route];
+    NSString *ID =  [self getParamByName:@"id" URLString:route];
+    if ([app_url isEqualToString:@"huodong"]) {
+        if (ID.length>0) {
+            if ([type integerValue]==2||[type integerValue]==3) {
+                JCActivityDetailCommomVC *vc = [JCActivityDetailCommomVC new];
+                vc.actID = ID;
+                [viewController.navigationController pushViewController:vc animated:YES];
+            }
+            if ([type integerValue]==4) {
+
+                JCActivityGuessVC *vc = [JCActivityGuessVC new];
+                vc.actID = ID;
+                [viewController.navigationController pushViewController:vc animated:YES];
+            }
+            if ([type integerValue]==5) {
+                JCActivityKindVC *vc = [JCActivityKindVC new];
+                vc.actID = ID;
+                [viewController.navigationController pushViewController:vc animated:YES];
+            }
+            if ([type integerValue]==6) {
+                JCActivityGuess_SPF_VC *vc = [JCActivityGuess_SPF_VC new];
+                vc.actID = ID;
+                [viewController.navigationController pushViewController:vc animated:YES];
+            }
+        }
+
+
+        
+    }
+    if ([app_url isEqualToString:@"mine_expert"]) {
+        //公众号专家
+        if (ID.length==0) {
+            return;
+        }
+        JCFootBallAuthorDetailWMViewController *vc = [JCFootBallAuthorDetailWMViewController new];
+        vc.autherID = ID;
+        [viewController.navigationController pushViewController:vc animated:YES];
+        
+        
+        
+    }
+    if ([app_url isEqualToString:@"mine_talent"]) {
+        //红榜达人
+        if (ID.length==0) {
+            return;
+        }
+        JCHongbangWMstckyVC *vc = [JCHongbangWMstckyVC new];
+        vc.autherID = ID;
+        [viewController.navigationController pushViewController:vc animated:YES];
+        
+    }
+    if ([app_url isEqualToString:@"mine_expert_article"]) {
+        //公众号方案
+        if (ID.length==0) {
+            return;
+        }
+        [JCTuiJianManager loadGZH_ArticleDetailWithArticleID:ID orderID:@"" type:@"" WithViewController:viewController is_push:YES];
+        return;
+
+        
+    }
+    if ([app_url isEqualToString:@"mine_talent_article"]) {
+        //红榜达人方案
+        if (ID.length==0) {
+            return;
+        }
+        [JCTuiJianManager getTuiJianDetailWithTuiJianID:ID orderID:@"" type:@"" WithViewController:viewController is_push:YES success:^{
+            
+        }];
+        
+    }
+    //充值页
+    if ([app_url isEqualToString:@"mine_charge"]) {
+        [[JCPageRedirectManager sharedManager] redirectToCharge];
+        return ;
+    }
+//    我的红包
+    if ([app_url isEqualToString:@"mine_hongbao"]) {
+        [[JCPageRedirectManager sharedManager] redirectToHongbao];
+        return ;
+    }
+    //邀请新人
+    if ([app_url isEqualToString:@"mine_88"]) {
+        [[JCPageRedirectManager sharedManager] redirectToInviteFriend];
+        return ;
+    }
+    //全民预测
+    if ([app_url isEqualToString:@"mine_guess"]) {
+        [[JCPageRedirectManager sharedManager] redirectToMyGuess];
+        return ;
+    }
+    //活动广场
+    if ([app_url isEqualToString:@"mine_huodong"]) {
+        [[JCPageRedirectManager sharedManager] redirectToActivity];
+        return ;
+    }
+    //手机浏览器打开
+    if ([app_url isEqualToString:@"mine_sys_web"]) {
+        if (app_weburl.length>0) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:app_weburl] options:@{} completionHandler:nil];
+        }
+
+    }
+    if (app_url.length==0&&app_weburl.length>0) {
+        WebViewController *vc = [WebViewController new];
+        vc.urlStr = app_weburl;
+        [viewController.navigationController pushViewController:vc animated:YES];
+    }
+//    else{
+//        if (app_weburl.length>0) {
+//            WebViewController *vc = [WebViewController new];
+//            vc.urlStr = app_weburl;
+//            [viewController.navigationController pushViewController:vc animated:YES];
+//        }
+//
+//    }
+    
+    
+
+}
++ (NSString *)getParamByName:(NSString *)name URLString:(NSString *)url {
+
+    NSError *error;
+    NSString *regTags=[[NSString alloc] initWithFormat:@"(^|&|\\?)+%@=+([^&]*)(&|$)", name];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regTags
+                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                             error:&error];
+     
+    // 执行匹配的过程
+    NSArray *matches = [regex matchesInString:url
+                                      options:0
+                                        range:NSMakeRange(0, [url length])];
+    for (NSTextCheckingResult *match in matches) {
+        NSString *tagValue = [url substringWithRange:[match rangeAtIndex:2]];  // 分组2所对应的串
+        return tagValue;
+    }
+    return @"";
 }
 @end

@@ -10,6 +10,7 @@
 #import "JCActivityGuessCompleteCell.h"
 #import "JCActivityDetailModel.h"
 #import "JCActivityGuessCompleteHeadView.h"
+#import "JCActivityGuess_SPF_CompleteCell.h"
 @interface JCActivityGuessCompleteVC ()
 
 @property (nonatomic,strong) JCActivityDetailModel *detailModel;
@@ -25,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = COLOR_F0F0F0;
     [self initSubViews];
     [self refreshData];
 }
@@ -42,6 +44,7 @@
             for (JCActivityOptionModel *model in self.detailModel.activity_option) {
                 if ([model.user_choice integerValue]==1) {
                     [array addObject:model];
+                    self.selectOptionModel = model;
                 }
             }
             self.dataSource = [NSArray arrayWithArray:array];
@@ -56,10 +59,14 @@
 }
 
 - (void)initSubViews {
+    self.tableView.estimatedRowHeight = 100;
     self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(300));
     self.tableView.tableHeaderView = self.headView;
     
     [self.tableView registerClass:[JCActivityGuessCompleteCell class] forCellReuseIdentifier:@"JCActivityGuessCompleteCell"];
+    [self.tableView registerClass:[JCActivityGuess_SPF_CompleteCell class] forCellReuseIdentifier:@"JCActivityGuess_SPF_CompleteCell"];
+    
+    
 }
 
 
@@ -77,9 +84,15 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.is_spf) {
+        JCActivityGuess_SPF_CompleteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityGuess_SPF_CompleteCell"];
+        cell.selectOptionModel = self.selectOptionModel;
+        cell.detailModel = self.detailModel;
+        return cell;
+    }
     
     JCActivityGuessCompleteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityGuessCompleteCell"];
-    cell.detailModel = self.detailModel;
+//    cell.detailModel = self.detailModel;
     cell.dataSource = self.dataSource;
     return cell;
 }
@@ -87,9 +100,12 @@
 #pragma mark <UITableViewDelegate>
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.is_spf) {
+        return UITableViewAutomaticDimension;
+    }
     
-    if (self.detailModel.activity_option.count<=10) {
-        NSInteger count = ceil(self.detailModel.activity_option.count/2.0f);
+    if (self.dataSource.count<=10) {
+        NSInteger count = ceil(self.dataSource.count/2.0f);
         return 62*count+65;
     }
 //        return 378;

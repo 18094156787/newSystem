@@ -74,34 +74,6 @@
     
 }
 
-//- (void)pushWithSlide:(JCWSlideBall *)slide {
-//    if ([slide.type integerValue]==1) {
-//
-//        if (![JCWStringTool isEmptyStr:slide.app_url]) {
-//            [JCPageRedirectManager redirectWithRoute:slide.app_url vc:[self getViewController]];
-//            return ;
-//        }
-//        //网址无效不跳转
-//        if (![JCWStringTool isUrlAddress:slide.url]) {
-//            return ;
-//        }
-//        WebViewController *webVC = [WebViewController new];
-//        webVC.urlStr = slide.url;
-//        [[self getViewController].navigationController pushViewController:webVC animated:YES];
-//    }
-//
-//    if ([slide.type integerValue]==2||[slide.type integerValue]==3) {
-////            [[self getViewController].navigationController pushViewController:[JcActivitySquareVC new] animated:NO];
-//        JCActivityDetailCommomVC *vc = [JCActivityDetailCommomVC new];
-//        vc.actID = slide.activity_id;
-//        [[self getViewController].navigationController pushViewController:vc animated:YES];
-//    }
-//    if ([slide.type integerValue]==4) {
-//        JCActivityGuessVC *vc = [JCActivityGuessVC new];
-//        vc.actID = slide.activity_id;
-//        [[self getViewController].navigationController pushViewController:vc animated:YES];
-//    }
-//}
 
 
 - (void)setTipArray:(NSArray *)tipArray {

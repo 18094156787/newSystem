@@ -1169,6 +1169,8 @@
 
 }
 
+#pragma mark//最终提交
+
 - (void)submitSuggestionUploadWithImages:(NSArray *)imageArray {
     NSMutableArray *matchArray = [NSMutableArray array];
     if ([self.type integerValue]==1) {
@@ -1178,11 +1180,24 @@
                 NSString *value = @"";
                 for (int i=0; i<mathModel.btnArray.count; i++) {
                     JCPostButton *btn = mathModel.btnArray[i];
+                    NSString *btn_spf = btn.spf;
+//                    if ([btn.spf integerValue]==1) {
+//                        btn_spf = @"3";
+//                    }
+//                    if ([btn.spf integerValue]==3) {
+//                        btn_spf = @"1";
+//                    }
+//                    if ([btn.spf integerValue]==4) {
+//                        btn_spf = @"6";
+//                    }
+//                    if ([btn.spf integerValue]==6) {
+//                        btn_spf = @"4";
+//                    }
                     
                     if (i==0) {
-                        value = btn.spf;
+                        value = btn_spf;
                     }else{
-                        value = [NSString stringWithFormat:@"%@,%@",value,btn.spf];
+                        value = [NSString stringWithFormat:@"%@,%@",value,btn_spf];
                     }
                 }
                 
