@@ -85,6 +85,9 @@
         self.audit_desc = [aDecoder decodeObjectForKey:@"audit_desc"];
         self.fail_desc = [aDecoder decodeObjectForKey:@"fail_desc"];
         self.guess_activity_type = [aDecoder decodeObjectForKey:@"guess_activity_type"];
+        self.is_be_invited = [aDecoder decodeObjectForKey:@"is_be_invited"];
+        self.inviter_id = [aDecoder decodeObjectForKey:@"inviter_id"];
+        self.config_id = [aDecoder decodeObjectForKey:@"config_id"];
         
     }
     return self;
@@ -133,7 +136,9 @@
     [aCoder encodeObject:self.audit_desc forKey:@"audit_desc"];
     [aCoder encodeObject:self.fail_desc forKey:@"fail_desc"];
     [aCoder encodeObject:self.guess_activity_type forKey:@"guess_activity_type"];
-    
+    [aCoder encodeObject:self.is_be_invited forKey:@"is_be_invited"];
+    [aCoder encodeObject:self.inviter_id forKey:@"inviter_id"];
+    [aCoder encodeObject:self.config_id forKey:@"config_id"];
     
     
 }

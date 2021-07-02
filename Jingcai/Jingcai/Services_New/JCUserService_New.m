@@ -942,6 +942,24 @@
 
     
 }
+
+//h5邀请签约-稿酬详情
+/*
+ inviter_id 邀请人id
+ config_id 达人稿酬配置ID
+ **/
+- (void)getInviteExpertWithGaoChouDetaillWithInviter_id:(NSString *)inviter_id Config_id:(NSString *)config_id success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+    NSDictionary *param = @{@"inviter_id":NonNil(inviter_id),@"config_id":NonNil(config_id)};
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"get_remuneration" paramDic:param ignoreArray:@[]];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self deathWithSuccessInfo:responseObject];
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+        [self dealWithError:error];
+    }];
+}
 #pragma mark//发布方案相关
 //发布方案价格
 - (void)getPostPlanPriceWithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock {

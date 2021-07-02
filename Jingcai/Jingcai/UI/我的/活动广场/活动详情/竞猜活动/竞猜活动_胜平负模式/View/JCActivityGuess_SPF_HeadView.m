@@ -32,6 +32,7 @@
     }
     _detailModel = detailModel;
     self.countLab.text = [NSString stringWithFormat:@"已有%@人参与",self.detailModel.participation];
+    self.countLab.hidden = [self.detailModel.participation integerValue]>0?NO:YES;
     [self.bgImgView sd_setImageWithURL:[NSURL URLWithString:detailModel.top_image_url] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         float rate = image.size.width/SCREEN_WIDTH;
         float height = image.size.height;

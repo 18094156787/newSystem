@@ -85,35 +85,30 @@
             self.sureBtn.userInteractionEnabled = [self.detailModel.text_can_click integerValue]==1?YES: NO;
             
 
-            if (self.detailModel.is_guess==4) {
-                //赛事取消
-                self.resultImgView.image = JCIMAGE(@"ic_spf_cancel");
-                self.resultImgView.hidden = NO;
-                
-                JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
-                alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(14)];
-            //    WeakSelf;
-                [alertView alertTitle:@"活动取消" TitleColor:COLOR_2F2F2F Mesasge:@"由于比赛未能正常进行，活动无法开奖。本次活动取消，十分抱歉！" MessageColor:COLOR_2F2F2F ComfirmTitle:@"关闭" ComfirmColor:JCWhiteColor confirmHandler:^{
-                    [alertView removeFromSuperview];
-                }];
-                alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-                [[UIApplication sharedApplication].keyWindow addSubview:alertView];
-            }else{
-                if ([self.detailModel.participation integerValue]==1) {
-                    if (self.detailModel.is_guess==1) {
-                        self.resultImgView.image = JCIMAGE(@"ic_spf_isRight");
-                        self.resultImgView.hidden = NO;
-                    }else if (self.detailModel.is_guess==2) {
-                        self.resultImgView.image = JCIMAGE(@"ic_spf_isWrong");
-                        self.resultImgView.hidden = NO;
+            if (self.detailModel.is_guess!=4) {
+                {
+                    if ([self.detailModel.is_participate integerValue]==1) {
+                        if (self.detailModel.is_guess==1) {
+                            self.resultImgView.image = JCIMAGE(@"ic_spf_isRight");
+                            self.resultImgView.hidden = NO;
+                        }else if (self.detailModel.is_guess==2) {
+                            self.resultImgView.image = JCIMAGE(@"ic_spf_isWrong");
+                            self.resultImgView.hidden = NO;
+                        }else{
+                            self.resultImgView.hidden = YES;
+                        }
                     }else{
                         self.resultImgView.hidden = YES;
                     }
-                }else{
-                    self.resultImgView.hidden = YES;
+                    
+                    if ([self.detailModel.is_participate integerValue]==2&&[self.detailModel.active_state integerValue]==3) {
+                            self.resultImgView.image = JCIMAGE(@"jc_activity_no_cy");
+                            self.resultImgView.hidden = NO;
+                        }
+                    
                 }
-                
             }
+
             
             self.shareView.title = self.detailModel.wechat_share.share_title;
             self.shareView.content = self.detailModel.wechat_share.share_desc;
@@ -152,6 +147,22 @@
                     JCActivityGuessFailureTipView *guess_failureView = [JCActivityGuessFailureTipView new];
                     guess_failureView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
                     [self.jcWindow addSubview:guess_failureView];
+                }
+                if (self.detailModel.is_guess==4) {
+                    //赛事取消
+                    if ([self.detailModel.is_participate integerValue]==1) {
+                        self.resultImgView.image = JCIMAGE(@"ic_spf_cancel");
+                        self.resultImgView.hidden = NO;
+                        
+                        JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
+                        alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(14)];
+                    //    WeakSelf;
+                        [alertView alertTitle:@"活动取消" TitleColor:COLOR_2F2F2F Mesasge:@"由于比赛未能正常进行，活动无法开奖。本次活动取消，十分抱歉！" MessageColor:COLOR_2F2F2F ComfirmTitle:@"关闭" ComfirmColor:JCWhiteColor confirmHandler:^{
+                            [alertView removeFromSuperview];
+                        }];
+                        alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                        [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+                    }
                 }
             }
             
@@ -319,6 +330,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section==0) {
+
+        return 0.01f;
+    }
     if (section==1) {
         if (self.detailModel.goods_info.count>0) {
             return 12;

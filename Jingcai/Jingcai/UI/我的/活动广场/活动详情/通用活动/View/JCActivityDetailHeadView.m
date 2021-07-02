@@ -7,53 +7,155 @@
 //
 
 #import "JCActivityDetailHeadView.h"
-
+#import "JCActivityPrizeItemCell.h"
 @implementation JCActivityDetailHeadView
 
 - (void)initViews {
+    self.backgroundColor = JCClearColor;
+    
     [self addSubview:self.imgView];
     [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self);
-        make.bottom.offset(-45);
+        make.height.mas_equalTo(0);
     }];
     
-    [self addSubview:self.timeBgView];
+    UIView *bgView = [UIView new];
+    [self addSubview:bgView];
+    [bgView hg_setAllCornerWithCornerRadius:16];
+    bgView.backgroundColor = JCWhiteColor;
+//    bgView.backgroundColor = JCBaseColor;
+    [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.insets(UIEdgeInsetsMake(0, AUTO(15), 0, AUTO(15)));
+        make.left.offset(AUTO(15));
+        make.right.offset(AUTO(-15));
+        make.top.equalTo(self.imgView.mas_bottom).offset(AUTO(-25));
+        make.height.mas_equalTo(170);
+    }];
+    self.bgView = bgView;
+    
+    self.timeBgView = [UIImageView new];
+    self.timeBgView.image = JCIMAGE(@"jc_activity_titleBg");
+    [bgView addSubview:self.timeBgView];
     [self.timeBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(16);
-        make.right.offset(-16);
-        make.bottom.offset(0);
-        make.height.mas_equalTo(92);
-    }];
-    
-    UIImageView *timeBgView = [UIImageView new];
-    timeBgView.image = JCIMAGE(@"jc_activity_titleBg");
-    [self.timeBgView addSubview:timeBgView];
-    [timeBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(15);
-        make.centerX.equalTo(self.timeBgView);
+        make.top.offset(20);
+        make.centerX.equalTo(bgView);
         make.size.mas_equalTo(CGSizeMake(98, 16));
     }];
     
-    [timeBgView addSubview:self.titleLab];
-    [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+    UILabel *titleLab = [UILabel initWithTitle:@"活动奖励" andFont:16 andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+    [self.timeBgView addSubview:titleLab];
+    [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.insets(UIEdgeInsetsZero);
     }];
+    self.titleLab = titleLab;
     
-    [self.timeBgView addSubview:self.timeLab];
-    [self.timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(timeBgView.mas_bottom).offset(16);
-        make.centerX.equalTo(self.timeBgView);
+    [bgView addSubview:self.infoLab];
+    [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.timeBgView.mas_bottom).offset(AUTO(15));
+        make.centerX.equalTo(bgView);
     }];
     
+    
+//
+    [bgView addSubview:self.collectionView];
+    self.collectionView.backgroundColor = JCWhiteColor;
+
+}
+
+#pragma mark -- UICollectionViewDataSource
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+//定义展示的UICollectionViewCell的个数
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+
+    return self.dataSource.count;
+    
+}
+
+#pragma mark --UICollectionViewDelegateFlowLayout
+//定义每个Item 的大小
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    return CGSizeMake(AUTO(64), AUTO(64));
+    
+}
+
+
+//行间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+
+    return 8;
+}
+//列间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+
+    return 8;
+}
+
+
+//每个UICollectionView展示的内容
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    JCActivityPrizeItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"JCActivityPrizeItemCell" forIndexPath:indexPath];
+    cell.model = self.dataSource[indexPath.row];
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (self.JCClickBlock) {
+        self.JCClickBlock();
+    }
+}
+
+- (void)setDataSource:(NSArray *)dataSource {
+    _dataSource = dataSource;
+    if (dataSource.count==0) {
+        return;
+    }
+    if (dataSource.count<=4) {
+        float width = (SCREEN_WIDTH-AUTO(30)-AUTO(72)*dataSource.count)/2.0f;
+        [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            
+            if ([self.detailModel.count integerValue]>0) {
+                make.top.equalTo(self.infoLab.mas_bottom).offset(15);
+            }else{
+                make.top.equalTo(self.infoLab.mas_bottom).offset(0);
+            }
+//            make.centerX.equalTo(self.contentView);
+            make.left.offset(width);
+            make.height.mas_equalTo(64);
+            make.width.mas_equalTo(80*dataSource.count);
+        }];
+    }else{
+        [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            if ([self.detailModel.count integerValue]>0) {
+                make.top.equalTo(self.infoLab.mas_bottom).offset(15);
+            }else{
+                make.top.equalTo(self.infoLab.mas_bottom).offset(0);
+            }
+            make.height.mas_equalTo(64);
+            make.left.offset(AUTO(15));
+            make.right.offset(AUTO(-15));
+        }];
+    }
+    [self.collectionView reloadData];
     
     
 }
+
 
 - (void)setDetailModel:(JCActivityDetailModel *)detailModel {
     if (!detailModel) {
         return;
     }
     _detailModel = detailModel;
+    
     [self.imgView sd_setImageWithURL:[NSURL URLWithString:detailModel.top_image_url] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         if (!error) {
             float rate = image.size.width/SCREEN_WIDTH;
@@ -70,44 +172,74 @@
             }];
             if (self.JCHeightBlock) {
                 
-                self.JCHeightBlock(height+45);
+               
+                if ([self.detailModel.count integerValue]>0) {
+                    self.JCHeightBlock(height+144);
+                }else{
+                    self.JCHeightBlock(height+110);
+                }
             }
         }
  
     }];
-    self.timeLab.text = [NSString stringWithFormat:@"%@-%@",detailModel.start_time,detailModel.end_time];
+    
+    if ([self.detailModel.count integerValue]==0) {
+        [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+
+            make.height.mas_equalTo(136);
+        }];
+    }
+    
+    
+    if ([self.detailModel.count integerValue]>0) {
+        self.infoLab.text = [NSString stringWithFormat:@"奖励剩余：%@ | 奖励总量：%@",self.detailModel.remaining_quantity,self.detailModel.count];
+    }
+    
+//    self.timeLab.text = [NSString stringWithFormat:@"%@-%@",detailModel.start_time,detailModel.end_time];
 }
 
+//- (void)setKindImageView:(UIImage *)kindImageView {
+//    _kindImageView = kindImageView;
+//    self.titleLab.textColor = COLOR_FB5835;
+//    self.timeBgView.backgroundColor = UIColorFromRGB(0xFFFDFA);
+//    self.timeBgView.image = kindImageView;
+//    [self.timeBgView mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(119, 22));
+//    }];
+//}
 
 - (UIImageView *)imgView {
     if (!_imgView) {
         _imgView = [UIImageView new];
-//        [_imgView hg_setAllCornerWithCornerRadius:20];
     }
     return _imgView;
 }
 
-- (UIView *)timeBgView {
-    if (!_timeBgView) {
-        _timeBgView = [UIView new];
-        _timeBgView.backgroundColor = JCWhiteColor;
-        [_timeBgView hg_setAllCornerWithCornerRadius:16];
-    }
-    return _timeBgView;
-}
+- (UICollectionView *)collectionView {
+    if (!_collectionView) {
+        //确定是水平滚动，还是垂直滚动
+        UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc] init];
+//        flowLayout.sectionInset = UIEdgeInsetsMake(0,AUTO(20),0, AUTO(20));
+        [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+        _collectionView.dataSource=self;
+        _collectionView.delegate=self;
+        [_collectionView setBackgroundColor:JCClearColor];
+//        _collectionView.scrollEnabled = NO;
+        _collectionView.showsHorizontalScrollIndicator = NO;
+//        _collectionView.userInteractionEnabled = NO;
+        [_collectionView registerClass:[JCActivityPrizeItemCell class]
+            forCellWithReuseIdentifier:@"JCActivityPrizeItemCell"];
 
-- (UILabel *)titleLab {
-    if (!_titleLab) {
-        _titleLab = [UILabel initWithTitle:@"活动时间" andFont:16 andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        
     }
-    return _titleLab;
+    return _collectionView;
 }
-
-- (UILabel *)timeLab {
-    if (!_timeLab) {
-        _timeLab = [UILabel initWithTitle:@"" andFont:16 andWeight:1 andTextColor:[COLOR_2F2F2F colorWithAlphaComponent:0.8] andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+- (UILabel *)infoLab {
+    if (!_infoLab) {
+        _infoLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     }
-    return _timeLab;
+    return _infoLab;
 }
 
 @end

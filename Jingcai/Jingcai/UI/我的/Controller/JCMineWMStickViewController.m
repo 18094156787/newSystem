@@ -18,6 +18,8 @@
 #import "JCAppGuideView.h"
 #import "JCMainTabBarController.h"
 #import "JCActivityGuess_SPF_VC.h"
+#import "JCPostCheckUserInfo_Invite_VC.h"
+#import "JCPostCheckUserInfo_Invite_VC.h"
 
 static CGFloat const kWMMenuViewHeight = 0;
 @interface JCMineWMStickViewController ()
@@ -258,10 +260,17 @@ static CGFloat const kWMMenuViewHeight = 0;
         [self presentLogin];
         return;
     }
+
+    
    JCWUserBall *user =  [JCWUserBall currentUser];
 //    user.fabu = @"3";
     [JCWUserBall save:user];
 //fabu 0 不能发布 1 可以发布  2被禁  3审核中 4审核被拒
+    if ([[JCWUserBall currentUser].fabu intValue]==5&&[[JCWUserBall currentUser].is_be_invited intValue]==1) {
+        JCPostCheckUserInfo_Invite_VC *vc = [JCPostCheckUserInfo_Invite_VC new];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
 
 //
     if ([[JCWUserBall currentUser].fabu intValue]==4||[[JCWUserBall currentUser].fabu intValue]==5) {

@@ -150,8 +150,8 @@
     
     
 
-    self.chooseImgView.frame = CGRectMake(0, 0, 44, 36);
-    [self.selectBtn addSubview:self.chooseImgView];
+//    self.chooseImgView.frame = CGRectMake(0, 0, 44, 36);
+//    [self.selectBtn addSubview:self.chooseImgView];
     
 }
 
@@ -163,8 +163,9 @@
         float width = (SCREEN_WIDTH-60-8*(detailModel.activity_option.count-1))/detailModel.activity_option.count;
         for (int i=0; i<detailModel.activity_option.count; i++) {
             JCActivityOptionModel *model = detailModel.activity_option[i];
-            UIButton *button = [UIButton initWithText:model.name FontSize:16 Weight:2 BackGroundColor:JCClearColor TextColors:COLOR_9F9F9F];
+            UIButton *button = [UIButton initWithText:model.name FontSize:16 Weight:1 BackGroundColor:JCClearColor TextColors:COLOR_2F2F2F];
             button.layer.borderColor = COLOR_9F9F9F.CGColor;
+            
             [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
             button.layer.borderWidth = 1;
             button.layer.cornerRadius = 4;
@@ -174,20 +175,28 @@
             [self.itemView addSubview:button];
             button.frame = CGRectMake((width+8)*i, 0, width, 36);
             
+            if ([model.correct integerValue]==1) {
+//                button.selected = YES;
+                self.rightImgView.frame = CGRectMake(width-16, 20, 16, 16);
+                [button addSubview:self.rightImgView];
+
+            }else{
+                
+            }
+            
             if ([model.user_choice integerValue]==1) {
                 self.selectBtn.selected = NO;
                 button.selected = YES;
                 self.chooseImgView.frame = CGRectMake(0, 0, 44, 36);
                 [button addSubview:self.chooseImgView];
                 self.selectBtn = button;
+                button.layer.borderColor = JCBaseColor.CGColor;
+            }else{
+                button.layer.borderColor = COLOR_9F9F9F.CGColor;
             }
 
-            if ([model.correct integerValue]==1) {
-                button.selected = YES;
-                self.rightImgView.frame = CGRectMake(width-16, 20, 16, 16);
-                [button addSubview:self.rightImgView];
 
-            }
+            [self.btnArray addObject:button];
 
         }
         
@@ -208,15 +217,30 @@
 
 
 
+    }else{
+        if (self.btnArray.count==self.detailModel.activity_option.count) {
+            for (int i=0; i<self.detailModel.activity_option.count; i++) {
+                JCActivityOptionModel *model = self.detailModel.activity_option[i];
+                UIButton *btn = self.btnArray[i];
+                if ([model.user_choice integerValue]) {
+                    self.chooseImgView.frame = CGRectMake(0, 0, 44, 36);
+                    [btn addSubview:self.chooseImgView];
+                }
+//                btn.selected = [model.user_choice integerValue]==1?YES:NO;
+
+            }
+        }
+        
     }
 
     NSString *title = [NSString stringWithFormat:@"%@",detailModel.get_match_info.competition.short_name_zh];
-    if (detailModel.get_match_info.round_num_two.length>0) {
-        title = [title stringByAppendingFormat:@" | %@",detailModel.get_match_info.round_num_two];
-    }
     if (detailModel.get_match_info.group_num_new.length>0) {
         title = [title stringByAppendingFormat:@" | %@",detailModel.get_match_info.group_num_new];
     }
+    if (detailModel.get_match_info.round_num_two.length>0) {
+        title = [title stringByAppendingFormat:@" | %@",detailModel.get_match_info.round_num_two];
+    }
+
     if (detailModel.get_match_info.match_time.length>0) {
         title = [title stringByAppendingFormat:@" | %@",[NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd HH:mm" time:[detailModel.get_match_info.match_time doubleValue]]];
     }
@@ -273,14 +297,14 @@
 }
 - (UILabel *)homeLab {
     if (!_homeLab) {
-        _homeLab = [UILabel initWithTitle:@"" andFont:12 andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _homeLab = [UILabel initWithTitle:@"" andFont:12 andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
         _homeLab.numberOfLines = 2;
     }
     return _homeLab;
 }
 - (UILabel *)awayLab {
     if (!_awayLab) {
-        _awayLab = [UILabel initWithTitle:@"" andFont:12 andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _awayLab = [UILabel initWithTitle:@"" andFont:12 andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
         _awayLab.numberOfLines = 2;
     }
     return _awayLab;
@@ -328,5 +352,12 @@
         _itemView = [UIView new];
     }
     return _itemView;
+}
+
+- (NSMutableArray *)btnArray {
+    if (!_btnArray) {
+        _btnArray = [NSMutableArray array];
+    }
+    return _btnArray;
 }
 @end

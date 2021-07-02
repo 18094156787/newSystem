@@ -35,8 +35,9 @@
         self.contentLabel.textColor = COLOR_2F2F2F;
     }
     
-
 }
+
+
 
 
 

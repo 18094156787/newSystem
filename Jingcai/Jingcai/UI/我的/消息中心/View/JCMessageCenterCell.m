@@ -90,9 +90,6 @@
     }
     
 
-
-    
-
     self.sureLab.text = @"";
     
     
@@ -141,6 +138,12 @@
    }
     if (([model.type_class integerValue]==17&&[model.status integerValue]!=3)) {
        self.sureLab.text= @"前往查看";
+       [self.sureLab mas_updateConstraints:^(MASConstraintMaker *make) {
+           make.bottom.offset(AUTO(-10));
+       }];
+   }
+    if (([model.type integerValue]==18&&[model.status integerValue]!=3)) {
+       self.sureLab.text= @"前往活动";
        [self.sureLab mas_updateConstraints:^(MASConstraintMaker *make) {
            make.bottom.offset(AUTO(-10));
        }];

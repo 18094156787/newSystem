@@ -1,12 +1,12 @@
 //
-//  JCPostCheckArticleVC.m
+//  JCPostCheckArticle_Invite_VC.m
 //  Jingcai
 //
-//  Created by 陈继伟 on 2020/8/23.
-//  Copyright © 2020 blockstar. All rights reserved.
+//  Created by 陈继伟 on 2021/7/1.
+//  Copyright © 2021 blockstar. All rights reserved.
 //
 
-#import "JCPostCheckArticleVC.h"
+#import "JCPostCheckArticle_Invite_VC.h"
 #import "JCPostCheckArticleHeadImgCell.h"
 #import "JCPostCheckUserInfoCell.h"
 #import "JCPostCheckArticleIntroduceCell.h"
@@ -23,7 +23,9 @@
 #import "JCCommomSelectView.h"
 #import "TZImagePickerController.h"
 #import "JCMyPostCheckTuiJianModel.h"
-@interface JCPostCheckArticleVC ()<TZImagePickerControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+
+#import "JCPostCheckArticle_Invite_Gaochou_VC.h"
+@interface JCPostCheckArticle_Invite_VC ()<TZImagePickerControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIImagePickerController *imagePickerVc;
 
@@ -32,10 +34,6 @@
 @property (nonatomic,strong) UIButton *submitBtn;
 
 @property (nonatomic,strong) UIImageView *headImgView;
-
-@property (nonatomic,strong) JCPostCheckPlanVC *articleVC1;
-
-@property (nonatomic,strong) JCPostCheckPlanVC *articleVC2;
 
 @property (nonatomic,strong) NSString *nickName;
 
@@ -53,14 +51,6 @@
 
 @property (nonatomic,assign) BOOL introduce_isRight;//简介
 
-@property (nonatomic,assign) BOOL postInfo1_isRight;
-
-@property (nonatomic,assign) BOOL postInfo2_isRight;
-
-@property (nonatomic,strong) NSMutableDictionary *postData1;
-
-@property (nonatomic,strong) NSMutableDictionary *postData2;
-
 @property (nonatomic,strong) NSString *headUrl;
 
 @property (nonatomic,strong) NSString *idCardUrl;
@@ -69,21 +59,9 @@
 
 @property (nonatomic,assign) BOOL uploadIdCardImg;
 
-@property (nonatomic,strong) NSMutableArray *postImgArray1;
-
-@property (nonatomic,strong) NSMutableArray *postImgArray2;
-
-@property (nonatomic,assign) NSInteger fang_an_1;
-
-@property (nonatomic,assign) NSInteger fang_an_2;
-
-@property (nonatomic,strong) JCMyPostCheckTuiJianModel *fang_an_1_model;
-
-@property (nonatomic,strong) JCMyPostCheckTuiJianModel *fang_an_2_model;
-
 @end
 
-@implementation JCPostCheckArticleVC
+@implementation JCPostCheckArticle_Invite_VC
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -126,10 +104,7 @@
     self.nickName_isRight =(self.nickName.length>1&&self.nickName.length<=8);
     self.introduce = self.checkDetailModel.user_desc;
     self.introduce_isRight = self.introduce.length>=15;
-    self.fang_an_1_model = self.checkDetailModel.fang_an_1;
-    self.fang_an_1_model.tuijian_id = self.fang_an_1_model.id;
-    self.fang_an_2_model = self.checkDetailModel.fang_an_2;
-    self.fang_an_2_model.tuijian_id = self.fang_an_2_model.id;
+
 
     if (!self.checkDetailModel.fang_an_1&&!self.checkDetailModel.fang_an_2) {
         self.isJingcai = YES;
@@ -187,18 +162,7 @@
     [self.tableView registerClass:[JCPostCheckCountInfoCell class] forCellReuseIdentifier:@"JCPostCheckCountInfoCell"];
     
     
-    
-    WeakSelf;
-    self.articleVC1.JCDataBlock = ^(JCMyPostCheckTuiJianModel * _Nonnull model) {
-        weakSelf.fang_an_1_model = model;
-        [weakSelf.tableView reloadData];
-    };
-    
-    self.articleVC2.JCDataBlock = ^(JCMyPostCheckTuiJianModel * _Nonnull model) {
-        weakSelf.fang_an_2_model = model;
-        [weakSelf.tableView reloadData];
-    };
-    
+
 
 
 }
@@ -206,10 +170,8 @@
 #pragma mark <UITableViewDataSource>
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.isJingcai) {
-        return 2;
-    }
-    return 5;
+
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -278,19 +240,8 @@
         }];
         return cell;
     }
-    if (indexPath.section==4) {
-        JCPostCheckCountInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPostCheckCountInfoCell"];
-        return cell;
-    }
-    
-    JCPostCheckArticleInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPostCheckArticleInfoCell"];
-    if (indexPath.section==2) {
-        cell.model = self.fang_an_1_model;
-    }
-    if (indexPath.section==3) {
-        cell.model = self.fang_an_2_model;
-    }
-    cell.selectionStyle = 0;
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
 
     return cell;
 }
@@ -307,9 +258,7 @@
     if (indexPath.section==1) {
         return AUTO(170);
     }
-    if (indexPath.section==4) {
-        return AUTO(25);
-    }
+
     return UITableViewAutomaticDimension;
 }
 
@@ -317,37 +266,6 @@
     if (section>1&&section<4) {
         JCPostCheckArticleTitleView *headView = [JCPostCheckArticleTitleView new];
 
-        WeakSelf;
-        if (section==2) {
-            headView.titleLab.text = @"原创达人方案帖1";
-            headView.editView.hidden = self.fang_an_1_model?NO:YES;
-            
-            [headView.editView bk_whenTapped:^{
-                if (weakSelf.fang_an_1_model) {
-                    weakSelf.articleVC1.checkVC = weakSelf;
-                    weakSelf.articleVC1.type = weakSelf.fang_an_1_model.classfly;
-                    weakSelf.articleVC1.model = weakSelf.fang_an_1_model;
-                    weakSelf.articleVC1.tuijian_id = weakSelf.fang_an_1_model.tuijian_id;
- 
-                }
-                [weakSelf.navigationController pushViewController:weakSelf.articleVC1 animated:YES];
-            }];
-        }
-        if (section==3) {
-            headView.titleLab.text = @"原创达人方案帖2";
-            headView.editView.hidden = self.fang_an_2_model?NO:YES;
-
-            [headView.editView bk_whenTapped:^{
-                if (weakSelf.fang_an_2_model) {
-                    weakSelf.articleVC2.checkVC = weakSelf;
-                    weakSelf.articleVC2.type = weakSelf.fang_an_2_model.classfly;
-                    weakSelf.articleVC2.model = weakSelf.fang_an_2_model;
-                    weakSelf.articleVC2.tuijian_id = weakSelf.fang_an_2_model.tuijian_id;
-
-                }
-                [weakSelf.navigationController pushViewController:weakSelf.articleVC2 animated:YES];
-            }];
-        }
         return headView;
     }
     return [UIView new];
@@ -364,73 +282,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
 
-    if (section<2) {
-        if (self.isJingcai&&section==1) {
-            return 0.001f;
-        }
-        return AUTO(8);
-
-    }
-    if (section==2) {
-        if (self.fang_an_1_model) {
-            return 0.001f;;
-        }
-        return AUTO(60);
-    }
-    if (section==3) {
-        if (self.fang_an_2_model) {
-            return 0.001f;;
-        }
-        return AUTO(60);
-    }
     
     return 0.001f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (section>1&&section<4) {
-        if (section==2&&self.fang_an_1_model) {
-            return [UIView new];
-        }
-        if (section==3&&self.fang_an_2_model) {
-            return [UIView new];
-        }
-        
-        
-        JCPostCheckArticleaAddFootView *footView = [JCPostCheckArticleaAddFootView new];
-        [footView.postBtn setTitle:@"+添加原创达人方案" forState:0];
-        if (section==2) {
-            footView.backgroundColor = COLOR_F4F6F9;
-        }
-        if (section==3) {
-            footView.backgroundColor = JCWhiteColor;
-        }
-        WeakSelf;
-        [footView.postBtn bk_whenTapped:^{
 
-            
-            JCPostPlanMatchTypeSelecView *view = [JCPostPlanMatchTypeSelecView new];
-            view.isAddArticle = YES;
-            view.fbCountLab.hidden = YES;
-            view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            
-            view.JCPushVCBlick = ^(NSString * _Nonnull type) {
-                if (section==2) {
-                    weakSelf.articleVC1.checkVC = weakSelf;
-                    weakSelf.articleVC1.type= type;
-                    [weakSelf.navigationController pushViewController:weakSelf.articleVC1 animated:YES];
-                }
-                if (section==3) {
-    //                    @strongify(self);
-                    weakSelf.articleVC2.checkVC = weakSelf;
-                    weakSelf.articleVC2.type= type;
-                    [weakSelf.navigationController pushViewController:weakSelf.articleVC2 animated:YES];
-                }
-            };
-            [[UIApplication sharedApplication].keyWindow addSubview:view];
-        }];
-        return footView;
-    }
     UIView *backView= [UIView new];
     backView.backgroundColor = COLOR_F4F6F9;
     return backView;
@@ -480,13 +337,16 @@
         return;
     }
     
-    
-    if (!self.headImg&&!self.idcard_image) {
-        [self postFinal];
-        return;
-    }
-    [self uploadHeadImage];
-    [self uploadIdcardImage];
+    JCPostCheckArticle_Invite_Gaochou_VC *vc = [JCPostCheckArticle_Invite_Gaochou_VC new];
+    vc.name = self.name;
+    vc.phone = self.phone;
+    vc.idcard = self.idcard;
+    vc.idcard_image = self.idcard_image;
+    vc.headImg = self.headImg;
+    vc.nickName = self.nickName;
+    vc.introduce = self.introduce;
+    vc.checkDetailModel = self.checkDetailModel;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -496,190 +356,17 @@
         BOOL nickName_isRight = (self.nickName.length>1);
         BOOL introduce_isRight = (self.introduce.length>=20);
     
-//    self.submitBtn.backgroundColor = JCBaseColor;
-//    self.submitBtn.userInteractionEnabled = YES;
-//    return;
-    
-    if (self.isJingcai) {
-        if (nickName_isRight&&introduce_isRight) {
-            self.submitBtn.backgroundColor = JCBaseColor;
-            self.submitBtn.userInteractionEnabled = YES;
-        }else{
-            self.submitBtn.backgroundColor = COLOR_9F9F9F;
-            self.submitBtn.userInteractionEnabled = NO;
-        }
-
-    }else {
-        if (nickName_isRight&&introduce_isRight&&self.fang_an_1_model&&self.fang_an_2_model) {
-            self.submitBtn.backgroundColor = JCBaseColor;
-            self.submitBtn.userInteractionEnabled = YES;
-        }else{
-            self.submitBtn.backgroundColor = COLOR_9F9F9F;
-            self.submitBtn.userInteractionEnabled = NO;
-        }
-    }
-    
-
-}
-
-- (void)uploadHeadImage {
-    if (!self.headImg) {
-         self.uploadHeadImg = YES;
-//        [self configUploadImageStatus];
-        return;
-    }
-    
-    if (self.checkDetailModel&&!self.checkDetailModel.isNewHeadImg) {
-        self.uploadHeadImg = YES;
-        self.headUrl = self.checkDetailModel.user_avater;
-        [self configUploadImageStatus];
-        return;
-    }
-//     [self.view showLoading];
-//    [SVProgressHUD show];
-    
-    JCUserService_New * service = [JCUserService_New service];
-    [service uploadAvatarWithImage:self.headImg type:@"2" success:^(id  _Nullable object) {
-        [self endRefresh];
-        [SVProgressHUD dismiss];
-       if ([JCWJsonTool isSuccessResponse:object]) {
-           if (object[@"data"]) {
-//               NSString *file_path = object[@"data"][@"file_path"];
-               NSString *image_id = [NSString stringWithFormat:@"%@",object[@"data"][@"image_id"]];
-               
-               self.headUrl = image_id;
-               NSLog(@"用户头像:%@",self.headUrl);
-               self.uploadHeadImg = YES;
-               [self configUploadImageStatus];
-               
-           }
-       }else{
- 
-            [JCWToastTool showHint:@"图片上传失败"];
-       }
-
-    } failure:^(NSError * _Nonnull error) {
-        [SVProgressHUD dismiss];
-        [self endRefresh];
-    }];
-    
-
-
-
-}
-
-- (void)uploadIdcardImage {
-    if (!self.idcard_image) {
-        self.uploadIdCardImg = YES;
-//        [self configUploadImageStatus];
-        return;
-    }
-    if (self.checkDetailModel&&!self.checkDetailModel.isNewIDCard) {
-        self.uploadIdCardImg = YES;
-        self.idCardUrl = self.checkDetailModel.idcard_image;
-        [self configUploadImageStatus];
-        return;
-    }
-
-    
-//     [self.view showLoading];
-//    [SVProgressHUD show];
-    JCUserService_New * service = [JCUserService_New service];
-    [service uploadAvatarWithImage:self.idcard_image type:@"2" success:^(id  _Nullable object) {
-        [self endRefresh];
-//        [SVProgressHUD dismiss];
-       if ([JCWJsonTool isSuccessResponse:object]) {
-           if (object[@"data"]) {
-               NSString *image_id = [NSString stringWithFormat:@"%@",object[@"data"][@"image_id"]];
-               
-               self.idCardUrl = image_id;
-               NSLog(@"用户头像:%@",self.headUrl);
-               self.uploadIdCardImg = YES;
-               [self configUploadImageStatus];
-
-               
-           }
-       }else{
- 
-            [JCWToastTool showHint:@"图片上传失败"];
-       }
-
-    } failure:^(NSError * _Nonnull error) {
-        [SVProgressHUD dismiss];
-        [self endRefresh];
-    }];
-
-
-
-}
-
-
-
-- (void)postFinal {
-//    [self.view showLoading];
-    [SVProgressHUD show];
- 
-    if (!self.headImg&&self.checkDetailModel.user_avater.length==0) {
-        //没有修改头像
-        self.headUrl = @"0";
-    }
-
-
-
-//    self.fang_an_1 = 179;
-    if (self.fang_an_1_model) {
-        self.fang_an_1 = [self.fang_an_1_model.tuijian_id integerValue];
-    }
-    if (self.fang_an_2_model) {
-        self.fang_an_2 = [self.fang_an_2_model.tuijian_id integerValue];
-        
-    }
-    NSString *idcard = [JCWAppTool getRSA_String:NonNil(self.idcard)];
-    NSString *phone = [JCWAppTool getRSA_String:NonNil(self.phone)];
-    NSDictionary *dataDic = @{@"name":NonNil(self.name),@"phone":NonNil(phone),@"idcard":NonNil(idcard),@"idcard_image":NonNil(self.idCardUrl),@"account":NonNil(self.account),@"user_name":NonNil(self.nickName),@"user_avater":NonNil(self.headUrl),@"user_desc":NonNil(self.introduce),@"tuijian_one":@(self.fang_an_1),@"tuijian_two":@(self.fang_an_2)};
-    NSLog(@"签约参数%@",dataDic);
-    [SVProgressHUD show];
-    JCUserService_New * service = [JCUserService_New service];
-    [service getApplyQy_PostFinalWithParamDic:dataDic success:^(id  _Nullable object) {
-        [SVProgressHUD dismiss];
-        if ([JCWJsonTool isSuccessResponse:object]) {
-          JCWUserBall *user =  [JCWUserBall currentUser];
-            user.top = @"3";
-            [JCWUserBall save:user];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationApplyExpertSuccess object:nil];
-            [JCWToastTool showHint:@"提交成功"];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }else{
-            [self resetStatus];
-            
-             [JCWToastTool showHint:object[@"msg"]];
-        }
-
-    } failure:^(NSError * _Nonnull error) {
-        [SVProgressHUD dismiss];
-        [self resetStatus];
-        [self endRefresh];
-         [JCWToastTool showHint:@"网络异常"];
-    }];
-
-    
-}
- 
-
-- (void)configUploadImageStatus{
-    if (self.isJingcai) {
-        //如果是全民竞猜签约资格的,则不需要帖子,只要头像和身份证
-        if (self.uploadHeadImg&&self.uploadIdCardImg) {
-            [self postFinal];
-        }
+    if (nickName_isRight&&introduce_isRight) {
+        self.submitBtn.backgroundColor = JCBaseColor;
+        self.submitBtn.userInteractionEnabled = YES;
     }else{
-        if (self.uploadHeadImg&&self.uploadIdCardImg) {
-            [self postFinal];
-        }
+        self.submitBtn.backgroundColor = COLOR_9F9F9F;
+        self.submitBtn.userInteractionEnabled = NO;
     }
     
 
 }
+
 
 - (void)resetStatus {
     self.uploadHeadImg = NO;
@@ -970,7 +657,7 @@
 
 - (UIButton *)submitBtn {
     if (!_submitBtn) {
-        _submitBtn = [UIButton initWithText:@"提交审核" FontSize:AUTO(16) Weight:2 BackGroundColor:JCBaseColor TextColors:JCWhiteColor];
+        _submitBtn = [UIButton initWithText:@"下一步(3/4)" FontSize:AUTO(16) Weight:2 BackGroundColor:JCBaseColor TextColors:JCWhiteColor];
         [_submitBtn hg_setAllCornerWithCornerRadius:AUTO(22)];
         [_submitBtn addTarget:self action:@selector(submitBtnClick) forControlEvents:UIControlEventTouchUpInside];
         _submitBtn.userInteractionEnabled = NO;
@@ -985,21 +672,4 @@
     return _titleArray;
 }
 
-- (JCPostCheckPlanVC *)articleVC1 {
-    if (!_articleVC1) {
-        _articleVC1 = [JCPostCheckPlanVC new];
-        _articleVC1.isAddArticle = YES;
-    }
-    return _articleVC1;
-}
-
-- (JCPostCheckPlanVC *)articleVC2 {
-    if (!_articleVC2) {
-        _articleVC2 = [JCPostCheckPlanVC new];
-        _articleVC1.isAddArticle = YES;
-    }
-    return _articleVC2;
-}
-
-//dispatch_group_leave(thegroup);
 @end

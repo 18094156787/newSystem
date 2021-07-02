@@ -93,12 +93,13 @@
     self.teamLab.text = [NSString stringWithFormat:@"%@ VS %@",detailModel.get_match_info.home_team.name_zh,detailModel.get_match_info.away_team.name_zh];
 
     NSString *title = [NSString stringWithFormat:@"%@",detailModel.get_match_info.competition.short_name_zh];
-    if (detailModel.get_match_info.round_num_two.length>0) {
-        title = [title stringByAppendingFormat:@" | %@",detailModel.get_match_info.round_num_two];
-    }
     if (detailModel.get_match_info.group_num_new.length>0) {
         title = [title stringByAppendingFormat:@" | %@",detailModel.get_match_info.group_num_new];
     }
+    if (detailModel.get_match_info.round_num_two.length>0) {
+        title = [title stringByAppendingFormat:@" | %@",detailModel.get_match_info.round_num_two];
+    }
+
     if (detailModel.get_match_info.match_time.length>0) {
         title = [title stringByAppendingFormat:@" | %@",[NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd HH:mm" time:[detailModel.get_match_info.match_time doubleValue]]];
     }
@@ -123,7 +124,7 @@
 
 - (UILabel *)teamLab {
     if (!_teamLab) {
-        _teamLab = [UILabel labelTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+        _teamLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _teamLab;
 }

@@ -154,6 +154,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getPostPlan_postInfoDetailWithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //审核被拒-重置签约状态
 - (void)changeMyCheckStatusWithsuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//h5邀请签约-稿酬详情
+/*
+ inviter_id 邀请人id
+ config_id 达人稿酬配置ID
+ **/
+- (void)getInviteExpertWithGaoChouDetaillWithInviter_id:(NSString *)inviter_id Config_id:(NSString *)config_id success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 #pragma mark//发布方案相关
 //发布方案价格
 - (void)getPostPlanPriceWithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;

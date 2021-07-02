@@ -13,6 +13,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JCActivityRuleCell : JCBaseTableViewCell_New<WKNavigationDelegate>
 
+@property (nonatomic,strong) UIView *timeView;
+
+@property (nonatomic,strong) UILabel *timeLab;
+
+@property (nonatomic,strong) UILabel *timeInfoLab;
+
+@property (nonatomic,strong) UILabel *ruleInfoLab;
+
 @property (nonatomic,strong) WKWebView *webView;
 
 @property (nonatomic,strong) UIImageView *timeBgView;

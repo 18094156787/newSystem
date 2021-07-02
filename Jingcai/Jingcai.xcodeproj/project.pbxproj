@@ -13,6 +13,11 @@
 		594548932685A96C00C1AF38 /* JCSmallPriceWithDrawSuccessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 594548922685A96C00C1AF38 /* JCSmallPriceWithDrawSuccessVC.m */; };
 		594548962685A98100C1AF38 /* JCSmallPriceWithDrawFailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 594548952685A98100C1AF38 /* JCSmallPriceWithDrawFailVC.m */; };
 		594548992685B7B900C1AF38 /* JCActivityGuess_SPF_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 594548982685B7B900C1AF38 /* JCActivityGuess_SPF_VC.m */; };
+		59532A09268DB83C00437A19 /* JCPostCheckUserInfo_Invite_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59532A08268DB83C00437A19 /* JCPostCheckUserInfo_Invite_VC.m */; };
+		59532A0C268DB8D500437A19 /* JCPostCheckArticle_Invite_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59532A0B268DB8D500437A19 /* JCPostCheckArticle_Invite_VC.m */; };
+		59532A0F268DC79C00437A19 /* JCPostCheckArticle_Invite_Gaochou_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59532A0E268DC79C00437A19 /* JCPostCheckArticle_Invite_Gaochou_VC.m */; };
+		59532A12268DC85700437A19 /* JCPostCheckArticle_Invite_Gaochou_HeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59532A11268DC85700437A19 /* JCPostCheckArticle_Invite_Gaochou_HeadView.m */; };
+		59532A16268EBEE800437A19 /* JCInviteConfigGaoChouModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59532A15268EBEE800437A19 /* JCInviteConfigGaoChouModel.m */; };
 		595884B2268971AE0085206B /* JCActivityGuess_SPF_HeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 595884B1268971AE0085206B /* JCActivityGuess_SPF_HeadView.m */; };
 		595884B52689B7CF0085206B /* JCActivityGuess_SPF_MatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 595884B42689B7CF0085206B /* JCActivityGuess_SPF_MatchCell.m */; };
 		595884B82689C3FF0085206B /* JCActivityGuess_SPF_CheckView.m in Sources */ = {isa = PBXBuildFile; fileRef = 595884B72689C3FF0085206B /* JCActivityGuess_SPF_CheckView.m */; };
@@ -1304,6 +1309,16 @@
 		594548952685A98100C1AF38 /* JCSmallPriceWithDrawFailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCSmallPriceWithDrawFailVC.m; sourceTree = "<group>"; };
 		594548972685B7B900C1AF38 /* JCActivityGuess_SPF_VC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityGuess_SPF_VC.h; sourceTree = "<group>"; };
 		594548982685B7B900C1AF38 /* JCActivityGuess_SPF_VC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityGuess_SPF_VC.m; sourceTree = "<group>"; };
+		59532A07268DB83C00437A19 /* JCPostCheckUserInfo_Invite_VC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCPostCheckUserInfo_Invite_VC.h; sourceTree = "<group>"; };
+		59532A08268DB83C00437A19 /* JCPostCheckUserInfo_Invite_VC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCPostCheckUserInfo_Invite_VC.m; sourceTree = "<group>"; };
+		59532A0A268DB8D500437A19 /* JCPostCheckArticle_Invite_VC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCPostCheckArticle_Invite_VC.h; sourceTree = "<group>"; };
+		59532A0B268DB8D500437A19 /* JCPostCheckArticle_Invite_VC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCPostCheckArticle_Invite_VC.m; sourceTree = "<group>"; };
+		59532A0D268DC79C00437A19 /* JCPostCheckArticle_Invite_Gaochou_VC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCPostCheckArticle_Invite_Gaochou_VC.h; sourceTree = "<group>"; };
+		59532A0E268DC79C00437A19 /* JCPostCheckArticle_Invite_Gaochou_VC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCPostCheckArticle_Invite_Gaochou_VC.m; sourceTree = "<group>"; };
+		59532A10268DC85700437A19 /* JCPostCheckArticle_Invite_Gaochou_HeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCPostCheckArticle_Invite_Gaochou_HeadView.h; sourceTree = "<group>"; };
+		59532A11268DC85700437A19 /* JCPostCheckArticle_Invite_Gaochou_HeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCPostCheckArticle_Invite_Gaochou_HeadView.m; sourceTree = "<group>"; };
+		59532A14268EBEE800437A19 /* JCInviteConfigGaoChouModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCInviteConfigGaoChouModel.h; sourceTree = "<group>"; };
+		59532A15268EBEE800437A19 /* JCInviteConfigGaoChouModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCInviteConfigGaoChouModel.m; sourceTree = "<group>"; };
 		595884B0268971AE0085206B /* JCActivityGuess_SPF_HeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityGuess_SPF_HeadView.h; sourceTree = "<group>"; };
 		595884B1268971AE0085206B /* JCActivityGuess_SPF_HeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityGuess_SPF_HeadView.m; sourceTree = "<group>"; };
 		595884B32689B7CF0085206B /* JCActivityGuess_SPF_MatchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityGuess_SPF_MatchCell.h; sourceTree = "<group>"; };
@@ -3736,6 +3751,47 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		59532A04268DB75800437A19 /* 邀请好友签约 */ = {
+			isa = PBXGroup;
+			children = (
+				59532A13268EBEC300437A19 /* Model */,
+				59532A06268DB80300437A19 /* View */,
+				59532A05268DB7CE00437A19 /* ViewController */,
+			);
+			path = "邀请好友签约";
+			sourceTree = "<group>";
+		};
+		59532A05268DB7CE00437A19 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				59532A07268DB83C00437A19 /* JCPostCheckUserInfo_Invite_VC.h */,
+				59532A08268DB83C00437A19 /* JCPostCheckUserInfo_Invite_VC.m */,
+				59532A0A268DB8D500437A19 /* JCPostCheckArticle_Invite_VC.h */,
+				59532A0B268DB8D500437A19 /* JCPostCheckArticle_Invite_VC.m */,
+				59532A0D268DC79C00437A19 /* JCPostCheckArticle_Invite_Gaochou_VC.h */,
+				59532A0E268DC79C00437A19 /* JCPostCheckArticle_Invite_Gaochou_VC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		59532A06268DB80300437A19 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				59532A10268DC85700437A19 /* JCPostCheckArticle_Invite_Gaochou_HeadView.h */,
+				59532A11268DC85700437A19 /* JCPostCheckArticle_Invite_Gaochou_HeadView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		59532A13268EBEC300437A19 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				59532A14268EBEE800437A19 /* JCInviteConfigGaoChouModel.h */,
+				59532A15268EBEE800437A19 /* JCInviteConfigGaoChouModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		595884AD2689703F0085206B /* 竞猜活动_胜平负模式 */ = {
 			isa = PBXGroup;
 			children = (
@@ -5823,6 +5879,7 @@
 		7B6298872456D21B00AC576C /* 发布方案 */ = {
 			isa = PBXGroup;
 			children = (
+				59532A04268DB75800437A19 /* 邀请好友签约 */,
 				7B0B375B25C15C5A00CC2FD8 /* New_Model */,
 				7BD8937524F10CBD0058B951 /* 发帖审核认证 */,
 				7B6298882456D21B00AC576C /* Model */,
@@ -10357,6 +10414,7 @@
 				7B80CA7724BE9B1300C14117 /* JNMatchZS_BD_SPF_TableViewCell.m in Sources */,
 				C36CB8D5225F416D003325C2 /* JCFreeView.m in Sources */,
 				7BB827F424B32A590012EDA8 /* JCTeamMatchInfoZhenRongCell.m in Sources */,
+				59532A0F268DC79C00437A19 /* JCPostCheckArticle_Invite_Gaochou_VC.m in Sources */,
 				7BF193E524D155C500FD57E3 /* JCPostPlanHeadView.m in Sources */,
 				7B80CA9C24C0223200C14117 /* JCTeamDetailMatchHeadView.m in Sources */,
 				7BDA571F24EFCB9100A0E1C8 /* TZPhotoPickerController.m in Sources */,
@@ -10416,6 +10474,7 @@
 				C3DA2C072212C41100B4AD98 /* NSDictionary+HYBUnicodeReadable.m in Sources */,
 				C3DAFCB1216A796600293222 /* JCBaseTabBarController.m in Sources */,
 				7B206581256B9353006149BB /* NSDate+category.m in Sources */,
+				59532A09268DB83C00437A19 /* JCPostCheckUserInfo_Invite_VC.m in Sources */,
 				7B72D1A825FF39CE00607520 /* JCJingCaiAIBigDataMatchListVC.m in Sources */,
 				7B7D8D022566038E00431C77 /* JNMatchDetailZRTeamHeadView.m in Sources */,
 				7B11DB78261EEDBF00C1F7D6 /* JCCommunity_GZHVC.m in Sources */,
@@ -10940,6 +10999,7 @@
 				7B8BCE4926083F590032EDA2 /* UIViewController+WMPageController.m in Sources */,
 				7B72D19225FF0B6600607520 /* JNMatchSJAgainstMZ_Cell.m in Sources */,
 				7B72D1B125FF41E100607520 /* JCJingCaiAIBigDataMatchCell.m in Sources */,
+				59532A16268EBEE800437A19 /* JCInviteConfigGaoChouModel.m in Sources */,
 				7B5E26A9247F66F6008CAEE4 /* JCYCRankModel.m in Sources */,
 				7BE891BC24B5ADE600AE2E79 /* JNMatchZS_JC_RqSPFInfoCell.m in Sources */,
 				7BD893BC24F3556C0058B951 /* JCMyPostPlanModel.m in Sources */,
@@ -11142,6 +11202,7 @@
 				7BB0759825553262004FB701 /* JCMyIntroduceVC.m in Sources */,
 				7B5C2E3625A70F5700777964 /* JCBasketMatchDetailTrendModel.m in Sources */,
 				7B44A6AA2665C6C000AF56B0 /* JCKindSignTipView.m in Sources */,
+				59532A12268DC85700437A19 /* JCPostCheckArticle_Invite_Gaochou_HeadView.m in Sources */,
 				7BCA285B25353E23008787FF /* JCBigDataZhishuTrendModel.m in Sources */,
 				7B1082232655F44500D07377 /* JCLabel.m in Sources */,
 				7B5C593D25427EB100E6A3B7 /* JCMatchDetailZBCell.m in Sources */,
@@ -11203,6 +11264,7 @@
 				7BD893CE24F3C0020058B951 /* JCCommunityRankModel.m in Sources */,
 				7B0B376625C1643800CC2FD8 /* JCPostPlanMathModel_New.m in Sources */,
 				C38C996E21BA577B00BFE16D /* JCWNewsBall.m in Sources */,
+				59532A0C268DB8D500437A19 /* JCPostCheckArticle_Invite_VC.m in Sources */,
 				7BBB2014248E0A7700EED4FD /* JCYCHomeHeadView.m in Sources */,
 				7BF4D4792644D02600403BDF /* JCPlaneDetailQRModel.m in Sources */,
 				7B5E26C2247F66F6008CAEE4 /* JCYCExpertTopView.m in Sources */,

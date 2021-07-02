@@ -117,17 +117,17 @@
 
 - (void)withDrawBtnClick {
     
-//    {
-//        WeakSelf;
-//         JCWithDrawRecordDetailVC *vc = [JCWithDrawRecordDetailVC new];
-//         vc.JCRefreshBlock = ^{
-//             if (weakSelf.JCRefreshBlock) {
-//                 weakSelf.JCRefreshBlock();
-//             }
-//         };
-//         [[self getViewController].navigationController pushViewController:vc animated:YES];
-//        return;
-//    }
+    {
+        WeakSelf;
+         JCWithDrawRecordDetailVC *vc = [JCWithDrawRecordDetailVC new];
+         vc.JCRefreshBlock = ^{
+             if (weakSelf.JCRefreshBlock) {
+                 weakSelf.JCRefreshBlock();
+             }
+         };
+         [[self getViewController].navigationController pushViewController:vc animated:YES];
+        return;
+    }
     if ([self.model.surplus_profit integerValue]==0) {
         return;
     }

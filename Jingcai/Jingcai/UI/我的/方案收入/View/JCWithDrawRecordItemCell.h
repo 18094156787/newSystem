@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *content;
 
+//@property (nonatomic,strong) NSString *config_content;//配置稿酬
+
 
 
 @end

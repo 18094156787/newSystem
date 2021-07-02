@@ -82,6 +82,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString  *remaining_times;//剩余可修改次数 fabu 等于5 时 用到
 
+@property (strong, nonatomic) NSString  *is_be_invited;//是不是后台邀请成为达人 1是 2否
+
+@property (strong, nonatomic) NSString  *inviter_id;//获取达人稿酬配置需要 is_be_invited 等于1才有
+
+@property (strong, nonatomic) NSString  *config_id;//获取达人稿酬配置需要 is_be_invited 等于1才有
+
+
 @property (strong, nonatomic) NSString  *fail_desc;//退回或拒绝理由
 
 @property (strong, nonatomic) NSString  *remaining_double;//本月发布单场双选付费 剩余 次数

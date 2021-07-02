@@ -82,6 +82,7 @@
             if ([self.detailModel.prize integerValue]>1&&[self.detailModel.is_participate integerValue]==1) {
                     self.resultImgView.hidden = NO;
                 }
+            
             //    self.resultImgView.hidden = [detailModel.is_participate integerValue]==1?NO:YES;
                 if (self.detailModel.is_guess==1) {
                     self.resultImgView.image = JCIMAGE(@"active_ic_right");
@@ -89,6 +90,10 @@
                 if (self.detailModel.is_guess==2) {
                     self.resultImgView.image = JCIMAGE(@"active_ic_wrong");
                 }
+            if ([self.detailModel.is_participate integerValue]==0&&[self.detailModel.active_state integerValue]==3) {
+                self.resultImgView.image = JCIMAGE(@"jc_activity_no_cy");
+                self.resultImgView.hidden = NO;
+            }
             
             self.shareView.title = self.detailModel.wechat_share.share_title;
             self.shareView.content = self.detailModel.wechat_share.share_desc;
@@ -224,7 +229,7 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -256,12 +261,8 @@
         };
         return cell;
     }
+
     if (indexPath.section==2) {
-        JCActivitytTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivitytTimeCell"];
-        cell.detailModel = self.detailModel;
-        return cell;
-    }
-    if (indexPath.section==3) {
         JCActivityRuleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityRuleCell"];
         WeakSelf;
         cell.detailModel = self.detailModel;
@@ -296,9 +297,7 @@
         return 0.01f;
         
     }
-    if (indexPath.section==2) {
-        return 92;
-    }
+
     
     return self.cellHeight;
 }

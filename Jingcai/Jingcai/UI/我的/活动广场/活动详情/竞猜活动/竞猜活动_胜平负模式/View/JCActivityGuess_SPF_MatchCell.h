@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) JCActivityDetailModel *detailModel;
 
-
+@property (nonatomic,strong) NSMutableArray *btnArray;
 
 @property (nonatomic,copy) void(^JCSelectBlock)(JCActivityOptionModel *selectOptionModel);
 

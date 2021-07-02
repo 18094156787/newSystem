@@ -62,7 +62,12 @@
     [_wkWebView addObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress)) options:0 context:nil];
     [self.view addSubview:_wkWebView];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.urlStr]];
+
+    NSString *link_url = self.urlStr;
+    if ([self.urlStr containsString:@"announcement"]) {
+        link_url = [NSString stringWithFormat:@"%@?dev=1",self.urlStr];
+    }
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:link_url]];
     [_wkWebView loadRequest:request];
     
     //progressView

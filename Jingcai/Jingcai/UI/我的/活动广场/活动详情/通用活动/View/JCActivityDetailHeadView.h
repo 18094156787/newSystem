@@ -10,17 +10,27 @@
 #import "JCActivityDetailModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JCActivityDetailHeadView : JCBaseView
+@interface JCActivityDetailHeadView : JCBaseView<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic,strong) UIImageView *imgView;
 
-@property (nonatomic,strong) UIView *timeBgView;
+@property (nonatomic, strong) UIImageView *timeBgView;
 
-@property (nonatomic,strong) UILabel *titleLab;
+@property (nonatomic, strong) UIView *bgView;
 
-@property (nonatomic,strong) UILabel *timeLab;
+@property (nonatomic, strong) UILabel *titleLab;
+
+@property (nonatomic, strong) UILabel *infoLab;
+
+@property (nonatomic, strong) UICollectionView *collectionView;
+
+@property (nonatomic,strong) UIImage *kindImageView;
+
+@property (nonatomic,strong) NSArray *dataSource;
 
 @property (nonatomic,strong) JCActivityDetailModel *detailModel;
+
+@property (nonatomic,copy) void(^JCClickBlock)(void);
 
 @property (nonatomic,copy) void(^JCHeightBlock)(float height);
 

@@ -437,7 +437,7 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 6;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -469,13 +469,8 @@
         cell.detailModel = self.detailModel;
         return cell;
     }
+
     if (indexPath.section==3) {
-        JCActivitytTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivitytTimeCell"];
-        cell.detailModel = self.detailModel;
-        cell.kindImageView = JCIMAGE(@"ic_kind_title");
-        return cell;
-    }
-    if (indexPath.section==4) {
         JCActivityPrizeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityPrizeCell"];
         cell.detailModel = self.detailModel;
         cell.dataSource = self.detailModel.goods_info;
@@ -490,7 +485,7 @@
         return cell;
     }
 
-    if (indexPath.section==5) {
+    if (indexPath.section==4) {
         JCActivityRuleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityRuleCell"];
         WeakSelf;
         if (!cell.detailModel) {
@@ -530,11 +525,8 @@
         return self.kindHeight;
     }
 
+
     if (indexPath.section==3) {
-        return 100;
-    }
-    
-    if (indexPath.section==4) {
         if (self.detailModel.goods_info.count>0) {
             if ([self.detailModel.count integerValue]>0) {
                 return 170;

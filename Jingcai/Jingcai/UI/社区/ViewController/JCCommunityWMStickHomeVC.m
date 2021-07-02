@@ -22,6 +22,7 @@
 #import "JCPostCheckPlanVC.h"
 #import "JCPostCheckUserInfoVC.h"
 #import "JCMainTabBarController.h"
+#import "JCPostCheckUserInfo_Invite_VC.h"
 static CGFloat const kWMMenuViewHeight = 44;
 @interface JCCommunityWMStickHomeVC ()<UISearchBarDelegate>
 
@@ -405,6 +406,11 @@ static CGFloat const kWMMenuViewHeight = 44;
 
     if (![JCWUserBall currentUser]) {
         [self presentLogin];
+        return;
+    }
+    if ([[JCWUserBall currentUser].fabu intValue]==5&&[[JCWUserBall currentUser].is_be_invited intValue]==1) {
+        JCPostCheckUserInfo_Invite_VC *vc = [JCPostCheckUserInfo_Invite_VC new];
+        [self.navigationController pushViewController:vc animated:YES];
         return;
     }
  

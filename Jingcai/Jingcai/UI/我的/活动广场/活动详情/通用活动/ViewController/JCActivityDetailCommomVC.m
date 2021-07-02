@@ -71,6 +71,7 @@
         if ([JCWJsonTool isSuccessResponse:object]) {
             self.detailModel = (JCActivityDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCActivityDetailModel class]];
             self.headView.detailModel = self.detailModel;
+            self.headView.dataSource = self.detailModel.goods_info;
 
             
             self.title = self.detailModel.title;
@@ -170,11 +171,19 @@
         weakSelf.tableView.tableHeaderView = weakSelf.headView;
         
     };
+    
+    self.headView.JCClickBlock = ^{
+        weakSelf.prizeView.showHeader = YES;
+        weakSelf.prizeView.detailModel = weakSelf.detailModel;
+        weakSelf.prizeView.dataArray = weakSelf.detailModel.goods_info;
+        [weakSelf.jcWindow addSubview:weakSelf.prizeView];
+    };
+
 }
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -185,22 +194,22 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section==0&&self.detailModel.goods_info.count>0) {
-        JCActivityPrizeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityPrizeCell"];
-        cell.detailModel = self.detailModel;
-        cell.dataSource = self.detailModel.goods_info;
-        
-        WeakSelf;
-        cell.JCClickBlock = ^{
-            weakSelf.prizeView.showHeader = YES;
-            weakSelf.prizeView.detailModel = weakSelf.detailModel;
-            weakSelf.prizeView.dataArray = weakSelf.detailModel.goods_info;
-            [weakSelf.jcWindow addSubview:weakSelf.prizeView];
-        };
-        return cell;
-    }
+//    if (indexPath.section==0&&self.detailModel.goods_info.count>0) {
+//        JCActivityPrizeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityPrizeCell"];
+//        cell.detailModel = self.detailModel;
+//        cell.dataSource = self.detailModel.goods_info;
+//
+//        WeakSelf;
+//        cell.JCClickBlock = ^{
+//            weakSelf.prizeView.showHeader = YES;
+//            weakSelf.prizeView.detailModel = weakSelf.detailModel;
+//            weakSelf.prizeView.dataArray = weakSelf.detailModel.goods_info;
+//            [weakSelf.jcWindow addSubview:weakSelf.prizeView];
+//        };
+//        return cell;
+//    }
     
-    if (indexPath.section==1) {
+    if (indexPath.section==0) {
         JCActivityRuleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityRuleCell"];
         WeakSelf;
         cell.detailModel = self.detailModel;
@@ -220,25 +229,26 @@
 #pragma mark <UITableViewDelegate>
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section==0&&self.detailModel.goods_info.count>0) {
-        if ([self.detailModel.count integerValue]>0) {
-            return 170;
-        }
-        return 136;
-    }
-    if (indexPath.section==1) {
-        return self.cellHeight;
-    }
-    return 0.01f;
+//    if (indexPath.section==0&&self.detailModel.goods_info.count>0) {
+//        if ([self.detailModel.count integerValue]>0) {
+//            return 170;
+//        }
+//        return 136;
+//    }
+//    if (indexPath.section==1) {
+//        return self.cellHeight;
+//    }
+//    return 0.01f;
+    return self.cellHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section==0) {
-        if (self.detailModel.goods_info.count>0) {
-            return 12;
-        }
-        return 0.01f;
-    }
+//    if (section==0) {
+//        if (self.detailModel.goods_info.count>0) {
+//            return 12;
+//        }
+//        return 0.01f;
+//    }
     return 12;
 }
 
