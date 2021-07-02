@@ -147,6 +147,7 @@
 
 - (void)setModel:(JCJingCaiMatchModel *)model {
     _model = model;
+//    model.is_reverse = 1;
     /*重置按钮的选中状态，避免复用问题*/
     self.masterWin_normalBtn.selected = NO;
     self.equal_normalBtn.selected = NO;
@@ -172,13 +173,6 @@
     self.masterWin_anotherBtn.userInteractionEnabled = YES;
     self.equal_anotherBtn.userInteractionEnabled = YES;
     self.customerWin_anotherBtn.userInteractionEnabled = YES;
-    
-//    [self.masterWin_normalBtn setImage:JCIMAGE(@"yuce_select_normal") forState:0];
-//    [self.equal_normalBtn setImage:JCIMAGE(@"yuce_select_normal") forState:0];
-//    [self.customerWin_normalBtn setImage:JCIMAGE(@"yuce_select_normal") forState:0];
-//    [self.masterWin_anotherBtn setImage:JCIMAGE(@"yuce_select_normal") forState:0];
-//    [self.equal_anotherBtn setImage:JCIMAGE(@"yuce_select_normal") forState:0];
-//    [self.customerWin_anotherBtn setImage:JCIMAGE(@"yuce_select_normal") forState:0];
 
     self.masterWin_normalBtn.layer.borderColor = COLOR_E4E4E4.CGColor;
     self.equal_normalBtn.layer.borderColor = COLOR_E4E4E4.CGColor;
@@ -318,6 +312,18 @@
         for (NSString *str in resultArray) {
             NSInteger value = [str intValue];
             if (value==1) {
+                value=3;
+            }
+            if (value==3) {
+                value=1;
+            }
+            if (value==4) {
+                value=6;
+            }
+            if (value==6) {
+                value=4;
+            }
+            if (value==1) {
                   self.masterWin_normalBtn.layer.borderColor = COLOR_9F9F9F.CGColor;
               }
               if (value==2) {
@@ -336,6 +342,7 @@
                   self.customerWin_anotherBtn.layer.borderColor = COLOR_9F9F9F.CGColor;
               }
             
+
         }
     }
     
@@ -356,17 +363,17 @@
     [self.customerImgView sd_setImageWithURL:[NSURL URLWithString:self.model.away_team_logo]];
     
     
+    self.normalInfoLab.text = self.model.noRq.rq;
     if ([self.model.noRq.rq intValue]>0) {
         self.normalInfoLab.textColor = JCBaseColor;
-        self.normalInfoLab.text = [NSString stringWithFormat:@"%@",self.model.noRq.rq];
     }else{
-        self.normalInfoLab.text = self.model.noRq.rq;
         self.normalInfoLab.textColor = COLOR_666666;
     }
     
     [self.masterWin_normalBtn setTitle:[NSString stringWithFormat:@"主胜 %@",self.model.noRq.win] forState:0];
     [self.equal_normalBtn setTitle:[NSString stringWithFormat:@"平 %@",self.model.noRq.equal] forState:0];
     [self.customerWin_normalBtn setTitle:[NSString stringWithFormat:@"客胜 %@",self.model.noRq.lose] forState:0];
+
     
      
     if ([self.model.Rq.rq intValue]>0) {
@@ -387,28 +394,58 @@
     self.masterWin_anotherBtn.value = self.model.Rq.win;
     self.equal_anotherBtn.value = self.model.Rq.equal;
     self.customerWin_anotherBtn.value = self.model.Rq.lose;
-    
-    //每个按钮是属于单关还是多串。type=1是单关 type=2是多串
-//    self.masterWin_normalBtn.type = model.single.is_norq==1 ? 1:2;
-//    self.equal_normalBtn.type = model.single.is_norq==1 ? 1:2;
-//    self.customerWin_normalBtn.type = model.single.is_norq==1 ? 1:2;
-//
-//    self.masterWin_anotherBtn.type = model.single.is_rq==1 ? 1:2;
-//    self.equal_anotherBtn.type = model.single.is_rq==1 ? 1:2;
-//    self.customerWin_anotherBtn.type = model.single.is_rq==1 ? 1:2;
-//
-//    self.danImgView.hidden = self.model.single.is_norq==1?NO:YES;
-//    self.dan_anotherImgView.hidden = self.model.single.is_rq==1?NO:YES;
 
-    
-    /**/
     self.model.requestModel.match_id = self.model.match_id;
-//    self.model.requestModel.op_id = self.model.noRq.id;
-//    self.model.requestModel.rop_id = self.model.Rq.id;
-//    self.model.requestModel.match_time = self.model.match_time;
-  
- 
     
+#pragma mark//相反
+    if (model.is_reverse==1) {
+        self.masterNameLab.text = self.model.away_team_name;
+        self.customerNameLab.text = self.model.home_team_name;
+        
+        
+        [self.masterWin_normalBtn setTitle:[NSString stringWithFormat:@"主胜 %@",self.model.noRq.lose] forState:0];
+        [self.customerWin_normalBtn setTitle:[NSString stringWithFormat:@"客胜 %@",self.model.noRq.win] forState:0];
+        
+        [self.masterWin_anotherBtn setTitle:[NSString stringWithFormat:@"主胜 %@",self.model.Rq.lose] forState:0];
+        [self.customerWin_anotherBtn setTitle:[NSString stringWithFormat:@"客胜 %@",self.model.Rq.win] forState:0];
+        
+        self.masterWin_normalBtn.value = self.model.noRq.lose;
+        self.customerWin_normalBtn.value = self.model.noRq.win;
+        
+        self.masterWin_anotherBtn.value = self.model.Rq.lose;
+        self.customerWin_anotherBtn.value = self.model.Rq.win;
+        
+        NSString *noRq_rq = self.model.noRq.rq;
+        if ([noRq_rq integerValue]!=0) {
+            noRq_rq = [NSString stringWithFormat:@"%ld",[noRq_rq integerValue]*-1];
+            if ([noRq_rq integerValue]>0) {
+                noRq_rq = [NSString stringWithFormat:@"+%@",noRq_rq];
+            }
+            self.normalInfoLab.text = noRq_rq;
+        }
+       
+        if ([noRq_rq integerValue]>0) {
+            self.normalInfoLab.textColor = JCBaseColor;
+        }else{
+            self.normalInfoLab.textColor = COLOR_666666;
+        }
+        
+        NSString *rq_rq = self.model.Rq.rq;
+        if ([rq_rq integerValue]!=0) {
+            rq_rq = [NSString stringWithFormat:@"%ld",[rq_rq integerValue]*-1];
+            if ([rq_rq integerValue]>0) {
+                rq_rq = [NSString stringWithFormat:@"+%@",rq_rq];
+            }
+            self.anotherInfoLab.text = rq_rq;
+        }
+        
+        if ([rq_rq integerValue]>0) {
+            self.anotherInfoLab.textColor = JCBaseColor;
+        }else{
+            self.anotherInfoLab.textColor = COLOR_666666;
+        }
+    }
+
     
     if (!self.model.noRq.win) {
         [self.masterWin_normalBtn setTitle:@"-" forState:0];

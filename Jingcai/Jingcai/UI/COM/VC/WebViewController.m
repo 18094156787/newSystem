@@ -204,7 +204,6 @@
     // 如果不添加这个，那么wkwebview跳转不了AppStore
     NSLog(@"%@",webView.URL.absoluteString);
     
-
     if ([webView.URL.absoluteString containsString:@"app_jump"]) {
         decisionHandler(WKNavigationActionPolicyCancel);
         [self.progressView setProgress:0 animated:NO];

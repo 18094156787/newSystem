@@ -85,12 +85,12 @@
             
             //    self.resultImgView.hidden = [detailModel.is_participate integerValue]==1?NO:YES;
                 if (self.detailModel.is_guess==1) {
-                    self.resultImgView.image = JCIMAGE(@"active_ic_right");
+                    self.resultImgView.image = JCIMAGE(@"ic_spf_isRight");
                 }
                 if (self.detailModel.is_guess==2) {
-                    self.resultImgView.image = JCIMAGE(@"active_ic_wrong");
+                    self.resultImgView.image = JCIMAGE(@"ic_spf_isWrong");
                 }
-            if ([self.detailModel.is_participate integerValue]==0&&[self.detailModel.active_state integerValue]==3) {
+            if ([self.detailModel.is_participate integerValue]==2&&[self.detailModel.active_state integerValue]==3) {
                 self.resultImgView.image = JCIMAGE(@"jc_activity_no_cy");
                 self.resultImgView.hidden = NO;
             }
@@ -210,7 +210,7 @@
     [bottomView addSubview:self.resultImgView];
     [self.resultImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.offset(0);
-        make.size.mas_equalTo(CGSizeMake(AUTO(80), AUTO(68)));
+        make.size.mas_equalTo(CGSizeMake(AUTO(76), AUTO(76)));
     }];
 
     WeakSelf;

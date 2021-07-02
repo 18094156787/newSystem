@@ -161,6 +161,7 @@
 
 - (void)setModel:(JCJingCaiResultMatchModel *)model {
     _model = model;
+//    model.match_info.is_reverse = 1;
 //        JCJingCaiResultInfoMatchModel *resultModel = model.match_info;
         JCJingCaiResultInfoMatchModel *matchInfoModel = model.match_info;
         
@@ -286,7 +287,7 @@
             }else{
                 [self.customerWin_anotherBtn setTitle:[NSString stringWithFormat:@"客胜 %@",rq_lose] forState:0];
             }
-        
+
 
         
         self.resultImgView.hidden = YES;
@@ -361,6 +362,24 @@
             NSString *obj = spf_result.firstObject;
             
             NSInteger value = [obj integerValue];
+            
+#pragma mark//选中赔率相反
+            if (model.match_info.is_reverse==1) {
+                if (value==1) {
+                    value=3;
+                }
+                if (value==3) {
+                    value=1;
+                }
+                if (value==4) {
+                    value=6;
+                }
+                if (value==6) {
+                    value=1;
+                }
+            }
+            
+            
              if (value==1) {
                  self.masterWin_normalBtn.selected = YES;
              }
@@ -386,6 +405,29 @@
             NSString *obj2 = spf_result.lastObject;
             NSInteger value1 = [obj1 integerValue];
             NSInteger value2 = [obj2 integerValue];
+            
+            if (model.match_info.is_reverse==1) {
+                if (value1==1) {
+                    value1=3;
+                }else if (value1==3) {
+                    value1=1;
+                }else if (value1==4) {
+                    value1=6;
+                }else if (value1==6) {
+                    value1=4;
+                }
+                
+                if (value2==1) {
+                    value2=3;
+                }else if (value2==3) {
+                    value2=1;
+                }else if (value2==4) {
+                    value2=6;
+                }else if (value2==6) {
+                    value2=4;
+                }
+            }
+            
              if (value1==1||value2==1) {
                 self.masterWin_normalBtn.selected = YES;
              }
@@ -445,6 +487,111 @@
             }];
         }
     
+    
+#pragma mark//相反
+    if (model.match_info.is_reverse==1) {
+        //队名相反
+        self.masterNameLab.text = matchInfoModel.home_team_name;
+        self.customerNameLab.text = matchInfoModel.away_team_name;
+        //比分相反
+        if (model.wl>0&&model.wl<5) {
+            if (matchInfoModel.home_scores.count>0&&matchInfoModel.away_scores.count>0) {
+                NSString *home = [NSString stringWithFormat:@"%@",matchInfoModel.home_scores.firstObject];
+                NSString *away = [NSString stringWithFormat:@"%@",matchInfoModel.away_scores.firstObject];
+                self.infoLab.text = [NSString stringWithFormat:@"%@ : %@",away,home];
+                self.infoLab.textColor = JCBaseColor;
+            }else {
+                self.infoLab.text = @"VS";
+                self.infoLab.textColor = COLOR_333333;
+            }
+           
+        }else{
+            self.infoLab.text = @"VS";
+            self.infoLab.textColor = COLOR_333333;
+        }
+        //盘口相反
+  
+        if ([noRq_rq integerValue]!=0) {
+            noRq_rq = [NSString stringWithFormat:@"%ld",[noRq_rq integerValue]*-1];
+            if ([noRq_rq integerValue]>0) {
+                noRq_rq = [NSString stringWithFormat:@"+%@",noRq_rq];
+            }
+            self.normalInfoLab.text = noRq_rq;
+        }
+       
+        if ([noRq_rq integerValue]>0) {
+            self.normalInfoLab.textColor = JCBaseColor;
+        }else{
+            self.normalInfoLab.textColor = COLOR_666666;
+        }
+        
+
+        if ([rq_rq integerValue]!=0) {
+            rq_rq = [NSString stringWithFormat:@"%ld",[rq_rq integerValue]*-1];
+            if ([rq_rq integerValue]>0) {
+                rq_rq = [NSString stringWithFormat:@"+%@",rq_rq];
+            }
+            self.anotherInfoLab.text = rq_rq;
+        }
+        
+        if ([rq_rq integerValue]>0) {
+            self.anotherInfoLab.textColor = JCBaseColor;
+        }else{
+            self.anotherInfoLab.textColor = COLOR_666666;
+        }
+        
+        //赔率相反
+        
+        if (noRq_win.length==0) {
+            [self.masterWin_normalBtn setTitle:@"-" forState:0];
+        }else{
+            [self.masterWin_normalBtn setTitle:[NSString stringWithFormat:@"主胜 %@",noRq_lose] forState:0];
+        }
+
+        if (noRq_lose.length==0) {
+            [self.customerWin_normalBtn setTitle:@"-" forState:0];
+        }else{
+            [self.customerWin_normalBtn setTitle:[NSString stringWithFormat:@"客胜 %@",noRq_win] forState:0];
+        }
+        if (rq_win.length==0) {
+            [self.masterWin_anotherBtn setTitle:@"-" forState:0];
+        }else{
+            [self.masterWin_anotherBtn setTitle:[NSString stringWithFormat:@"主胜 %@",rq_lose] forState:0];
+        }
+ 
+        if (rq_lose.length==0) {
+            [self.customerWin_anotherBtn setTitle:@"-" forState:0];
+        }else{
+            [self.customerWin_anotherBtn setTitle:[NSString stringWithFormat:@"客胜 %@",rq_win] forState:0];//
+        }
+    }
+    self.customerWin_normalBtn.layer.borderColor = COLOR_E4E4E4.CGColor;
+    self.masterWin_normalBtn.layer.borderColor = COLOR_E4E4E4.CGColor;
+    self.customerWin_anotherBtn.layer.borderColor = COLOR_E4E4E4.CGColor;
+    self.masterWin_anotherBtn.layer.borderColor = COLOR_E4E4E4.CGColor;
+
+        //选中相反
+    [userSelectArray enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSInteger value = [obj integerValue];
+        if (value==1) {
+           self.customerWin_normalBtn.layer.borderColor = JCBaseColor.CGColor;
+        }
+        if (value==3) {
+           self.masterWin_normalBtn.layer.borderColor = JCBaseColor.CGColor;
+        }
+
+
+        if (value==4) {
+           self.customerWin_anotherBtn.layer.borderColor = JCBaseColor.CGColor;
+        }
+        if (value==6) {
+           self.masterWin_anotherBtn.layer.borderColor = JCBaseColor.CGColor;
+        }
+
+
+    }];
+
+    
 }
 
 
@@ -466,22 +613,7 @@
     }
     
     self.infoLab.text = @"VS";
-//    if (tipModel.wl>0&&tipModel.wl<5) {
-//        if (tipModel.match_info.home_scores.count>0&&tipModel.match_info.away_scores.count>0) {
-//            NSString *home = [NSString stringWithFormat:@"%@",tipModel.match_info.home_scores.firstObject];
-//            NSString *away = [NSString stringWithFormat:@"%@",tipModel.match_info.away_scores.firstObject];
-//            self.infoLab.text = [NSString stringWithFormat:@"%@ : %@",home,away];
-//            self.infoLab.textColor = JCBaseColor;
-//        }else {
-//            self.infoLab.text = @"VS";
-//            self.infoLab.textColor = COLOR_333333;
-//        }
-//       
-//    }else{
-//        self.infoLab.text = @"VS";
-//        self.infoLab.textColor = COLOR_333333;
-//    }
-    
+
     
     self.masterNameLab.text = tipModel.home_team_name;
     self.customerNameLab.text = tipModel.away_team_name;
@@ -650,6 +782,18 @@
         NSString *obj = spf_result_array.firstObject;
         
         NSInteger value = [obj integerValue];
+        if (tipModel.match_info.is_reverse==1) {
+            if (value==1) {
+                value=3;
+            }else if (value==3) {
+                value=1;
+            }else if (value==4) {
+                value=6;
+            }else if (value==6) {
+                value=4;
+            }
+
+        }
          if (value==1) {
              self.masterWin_normalBtn.selected = YES;
          }
@@ -675,6 +819,27 @@
         NSString *obj2 = spf_result_array.lastObject;
         NSInteger value1 = [obj1 integerValue];
         NSInteger value2 = [obj2 integerValue];
+        if (tipModel.match_info.is_reverse==1) {
+            if (value1==1) {
+                value1=3;
+            }else if (value1==3) {
+                value1=1;
+            }else if (value1==4) {
+                value1=6;
+            }else if (value1==6) {
+                value1=4;
+            }
+            
+            if (value2==1) {
+                value2=3;
+            }else if (value2==3) {
+                value2=1;
+            }else if (value2==4) {
+                value2=6;
+            }else if (value2==6) {
+                value2=4;
+            }
+        }
          if (value1==1||value2==1) {
             self.masterWin_normalBtn.selected = YES;
          }
@@ -734,6 +899,111 @@
             
         }];
     }
+    
+#pragma mark//相反
+    if (tipModel.match_info.is_reverse==1) {
+        //队名相反
+        self.masterNameLab.text = tipModel.home_team_name;
+        self.customerNameLab.text = tipModel.away_team_name;
+        //比分相反
+   
+        if (tipModel.wl>0&&tipModel.wl<5) {
+            if (tipModel.match_info.home_scores.count>0&&tipModel.match_info.away_scores.count>0) {
+                NSString *home = [NSString stringWithFormat:@"%@",tipModel.match_info.home_scores.firstObject];
+                NSString *away = [NSString stringWithFormat:@"%@",tipModel.match_info.away_scores.firstObject];
+                self.infoLab.text = [NSString stringWithFormat:@"%@ : %@",away,home];
+                self.infoLab.textColor = JCBaseColor;
+            }else {
+                self.infoLab.text = @"VS";
+                self.infoLab.textColor = COLOR_333333;
+            }
+           
+        }else{
+            self.infoLab.text = @"VS";
+            self.infoLab.textColor = COLOR_333333;
+        }
+        //盘口相反
+  
+        if ([noRq_rq integerValue]!=0) {
+            noRq_rq = [NSString stringWithFormat:@"%ld",[noRq_rq integerValue]*-1];
+            if ([noRq_rq integerValue]>0) {
+                noRq_rq = [NSString stringWithFormat:@"+%@",noRq_rq];
+            }
+            self.normalInfoLab.text = noRq_rq;
+        }
+       
+        if ([noRq_rq integerValue]>0) {
+            self.normalInfoLab.textColor = JCBaseColor;
+        }else{
+            self.normalInfoLab.textColor = COLOR_666666;
+        }
+        
+
+        if ([rq_rq integerValue]!=0) {
+            rq_rq = [NSString stringWithFormat:@"%ld",[rq_rq integerValue]*-1];
+            if ([rq_rq integerValue]>0) {
+                rq_rq = [NSString stringWithFormat:@"+%@",rq_rq];
+            }
+            self.anotherInfoLab.text = rq_rq;
+        }
+        
+        if ([rq_rq integerValue]>0) {
+            self.anotherInfoLab.textColor = JCBaseColor;
+        }else{
+            self.anotherInfoLab.textColor = COLOR_666666;
+        }
+        
+        //赔率相反
+        
+        if (noRq_win.length==0) {
+            [self.masterWin_normalBtn setTitle:@"-" forState:0];
+        }else{
+            [self.masterWin_normalBtn setTitle:[NSString stringWithFormat:@"主胜 %@",noRq_lose] forState:0];
+        }
+
+        if (noRq_lose.length==0) {
+            [self.customerWin_normalBtn setTitle:@"-" forState:0];
+        }else{
+            [self.customerWin_normalBtn setTitle:[NSString stringWithFormat:@"客胜 %@",noRq_win] forState:0];
+        }
+        if (rq_win.length==0) {
+            [self.masterWin_anotherBtn setTitle:@"-" forState:0];
+        }else{
+            [self.masterWin_anotherBtn setTitle:[NSString stringWithFormat:@"主胜 %@",rq_lose] forState:0];
+        }
+ 
+        if (rq_lose.length==0) {
+            [self.customerWin_anotherBtn setTitle:@"-" forState:0];
+        }else{
+            [self.customerWin_anotherBtn setTitle:[NSString stringWithFormat:@"客胜 %@",rq_win] forState:0];//
+        }
+    }
+    self.customerWin_normalBtn.layer.borderColor = COLOR_E4E4E4.CGColor;
+    self.masterWin_normalBtn.layer.borderColor = COLOR_E4E4E4.CGColor;
+    self.customerWin_anotherBtn.layer.borderColor = COLOR_E4E4E4.CGColor;
+    self.masterWin_anotherBtn.layer.borderColor = COLOR_E4E4E4.CGColor;
+
+        //选中相反
+    [userSelectArray enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSInteger value = [obj integerValue];
+        if (value==1) {
+           self.customerWin_normalBtn.layer.borderColor = JCBaseColor.CGColor;
+        }
+        if (value==3) {
+           self.masterWin_normalBtn.layer.borderColor = JCBaseColor.CGColor;
+        }
+
+
+        if (value==4) {
+           self.customerWin_anotherBtn.layer.borderColor = JCBaseColor.CGColor;
+        }
+        if (value==6) {
+           self.masterWin_anotherBtn.layer.borderColor = JCBaseColor.CGColor;
+        }
+
+
+    }];
+
 }
 
 

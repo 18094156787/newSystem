@@ -71,27 +71,27 @@
     
     JCHongBangBall *model = self.dataArray[indexPath.section];
     //    JCCommentCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCCommentCell"];
-        JCHongbangCommomCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCHongbangCommomCell"];
-        cell.lineView.hidden = YES;
-        cell.isMine = YES;
+    JCHongbangCommomCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCHongbangCommomCell"];
+    cell.lineView.hidden = YES;
+    cell.isMine = YES;
     cell.is_zh = YES;
     cell.is_round_num = YES;
 //    cell.is_
-        cell.priceInfoView.hideSee = YES;
-        cell.dianPingBall = model;
-        WeakSelf;
-        cell.matchClickBlock = ^(NSString *matchNum) {
-            JCMatchDetailWMStickVC * detailVC = [JCMatchDetailWMStickVC new];
-            detailVC.matchNum = matchNum;
-            [weakSelf.navigationController pushViewController:detailVC animated:YES];
-        };
-        cell.userClickBlock = ^(NSString * _Nullable tjUserId) {
-            JCHongbangWMstckyVC * userVC = [JCHongbangWMstckyVC new];
-            userVC.autherID = tjUserId;
-            [weakSelf.navigationController pushViewController:userVC animated:YES];
-        };
-        cell.priceInfoView.hbIconImgView.hidden = YES;
-        cell.priceInfoView.priceLab.hidden = YES;
+    cell.priceInfoView.hideSee = YES;
+    cell.dianPingBall = model;
+    WeakSelf;
+    cell.matchClickBlock = ^(NSString *matchNum) {
+        JCMatchDetailWMStickVC * detailVC = [JCMatchDetailWMStickVC new];
+        detailVC.matchNum = matchNum;
+        [weakSelf.navigationController pushViewController:detailVC animated:YES];
+    };
+    cell.userClickBlock = ^(NSString * _Nullable tjUserId) {
+        JCHongbangWMstckyVC * userVC = [JCHongbangWMstckyVC new];
+        userVC.autherID = tjUserId;
+        [weakSelf.navigationController pushViewController:userVC animated:YES];
+    };
+    cell.priceInfoView.hbIconImgView.hidden = YES;
+    cell.priceInfoView.priceLab.hidden = YES;
         
     
     return cell;

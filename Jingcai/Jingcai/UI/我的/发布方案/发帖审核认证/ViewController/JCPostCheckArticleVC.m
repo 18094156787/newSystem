@@ -623,6 +623,10 @@
         //没有修改头像
         self.headUrl = @"0";
     }
+    if (!self.headImg&&[self.checkDetailModel.user_avater integerValue]==0) {
+        //没有修改头像
+        self.headUrl = @"0";
+    }
 
 
 

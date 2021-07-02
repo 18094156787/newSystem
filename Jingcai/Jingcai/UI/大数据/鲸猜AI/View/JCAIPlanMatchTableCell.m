@@ -92,11 +92,18 @@
         model.issue_num = model.round_num;
     }
     
+    NSString *home_team_name = model.home_team_name;
+    NSString *away_team_name = model.away_team_name;
+    if (model.is_reverse==1) {
+        home_team_name = model.away_team_name;
+        away_team_name = model.home_team_name;
+    }
+    
   
     if (model.issue_num.length==0) {
-        self.titleLab.text = [NSString stringWithFormat:@"%@ %@  %@ vs %@", model.match_time, model.competition_name, model.home_team_name, model.away_team_name];
+        self.titleLab.text = [NSString stringWithFormat:@"%@ %@  %@ vs %@", model.match_time, model.competition_name, home_team_name, away_team_name];
     }else{
-        self.titleLab.text = [NSString stringWithFormat:@"%@ [%@] %@  %@ vs %@", model.match_time,model.issue_num, model.competition_name, model.home_team_name, model.away_team_name];
+        self.titleLab.text = [NSString stringWithFormat:@"%@ [%@] %@  %@ vs %@", model.match_time,model.issue_num, model.competition_name, home_team_name, away_team_name];
     }
 }
 

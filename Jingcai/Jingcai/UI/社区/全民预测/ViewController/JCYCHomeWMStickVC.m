@@ -424,12 +424,18 @@ static CGFloat const kWMMenuViewHeight = 0;
 
     WeakSelf;
     NSMutableArray *array = [NSMutableArray array];
-    [self.dataArray enumerateObjectsUsingBlock:^(JCJingCaiMatchModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
+//    [self.dataArray enumerateObjectsUsingBlock:^(JCJingCaiMatchModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
+//        if (model.isSelect) {
+//            weakSelf.currentJingModel = model;
+//            [array addObject:model.requestModel];
+//        }
+//    }];
+    for (JCJingCaiMatchModel *model in self.dataArray) {
         if (model.isSelect) {
             weakSelf.currentJingModel = model;
             [array addObject:model.requestModel];
         }
-    }];
+    }
 
     if (array.count==1) {
         JCJingCaiMatchRequstInfoModel *model = array[0];
@@ -499,10 +505,28 @@ static CGFloat const kWMMenuViewHeight = 0;
 //            self.jingcaiMoney = [NSString stringWithFormat:@"%.2f",[jingcaiBtn.value floatValue]*2];
             //如果是单关，但是小于
             if ([jingcaiBtn.value floatValue]>[self.sing_value floatValue]) {
-                
+
+                NSString * jingcaiBtn_spf = jingcaiBtn.spf;
+                if (self.currentJingModel.is_reverse==1) {
+                    if ([jingcaiBtn_spf integerValue]==1) {
+                        jingcaiBtn_spf = @"3";
+                    }
+                    if ([jingcaiBtn_spf integerValue]==3) {
+                        jingcaiBtn_spf = @"1";
+                    }
+                    if ([jingcaiBtn_spf integerValue]==4) {
+                        jingcaiBtn_spf = @"6";
+                    }
+                    if ([jingcaiBtn_spf integerValue]==6) {
+                        jingcaiBtn_spf = @"4";
+                    }
+                }
                 
                 JCJingCaiMatchRequstInfoModel *infoModel = array[0];
-                infoModel.spf = jingcaiBtn.spf;
+                
+                infoModel.spf = jingcaiBtn_spf;
+                
+                
                   [infoModel.btnArray removeAllObjects];
                 [self creatJingCaiWithModel:infoModel];
 //                [self creatJingCaiWithMatchInfo:array matchType:@"2" matchTime:matchTime Yj_hb:self.jingcaiMoney Status:@"2"];
@@ -517,7 +541,32 @@ static CGFloat const kWMMenuViewHeight = 0;
             JCJingCaiMatchRequstInfoModel *infoModel = array[0];
             JCJingCaiBtn *jingcaiBtn0 = btnArray[0];
             JCJingCaiBtn *jingcaiBtn1 = btnArray[1];
-            infoModel.spf = [NSString stringWithFormat:@"%@,%@",jingcaiBtn0.spf,jingcaiBtn1.spf];
+            NSString * jingcaiBtn0_spf = jingcaiBtn0.spf;
+            NSString *jingcaiBtn1_spf = jingcaiBtn1.spf;
+            if (self.currentJingModel.is_reverse==1) {
+                if ([jingcaiBtn0_spf integerValue]==1) {
+                    jingcaiBtn0_spf = @"3";
+                }else if([jingcaiBtn0_spf integerValue]==3){
+                    jingcaiBtn0_spf = @"1";
+                }else if([jingcaiBtn0_spf integerValue]==4){
+                    jingcaiBtn0_spf = @"6";
+                }else if([jingcaiBtn0_spf integerValue]==6){
+                    jingcaiBtn0_spf = @"4";
+                }
+
+                if ([jingcaiBtn1_spf integerValue]==1) {
+                    jingcaiBtn1_spf = @"3";
+                }else if([jingcaiBtn1_spf integerValue]==3){
+                    jingcaiBtn1_spf = @"1";
+                }else if([jingcaiBtn1_spf integerValue]==4){
+                    jingcaiBtn1_spf = @"6";
+                }else if([jingcaiBtn1_spf integerValue]==6){
+                    jingcaiBtn1_spf = @"4";
+                }
+            }
+            
+            
+            infoModel.spf = [NSString stringWithFormat:@"%@,%@",jingcaiBtn0_spf,jingcaiBtn1_spf];
             float total = [jingcaiBtn0.value floatValue]+[jingcaiBtn1.value floatValue];
 //            self.jingcaiMoney = [NSString stringWithFormat:@"%.2f",total];
             //如果是单关，但是小于
@@ -639,6 +688,9 @@ static CGFloat const kWMMenuViewHeight = 0;
         self.bottomView.submitBtn.userInteractionEnabled = YES;
         JCJingCaiMatchModel *model = array.firstObject;
         NSString *team = [NSString stringWithFormat:@"%@ VS %@",model.home_team_name,model.away_team_name];
+        if (model.is_reverse==1) {
+            team = [NSString stringWithFormat:@"%@ VS %@",model.away_team_name,model.home_team_name];
+        }
         self.bottomView.teamLab.text = team;
         resultModel.team = team;
         resultModel.title = [NSString stringWithFormat:@"%@ | %@ | %@",model.competition_name,NonNil(model.issue_num),model.match_time];
@@ -664,7 +716,7 @@ static CGFloat const kWMMenuViewHeight = 0;
                 result = [NSString stringWithFormat:@"让平 %@",jcBtn.value];
             }
             if ([jcBtn.spf integerValue]==6) {
-                result = [NSString stringWithFormat:@"让胜 %@",jcBtn.value];
+                result = [NSString stringWithFormat:@"让负 %@",jcBtn.value];
             }
             resultModel.result = result;
              self.bottomView.infoLab.text = result;
@@ -693,7 +745,7 @@ static CGFloat const kWMMenuViewHeight = 0;
                 result1 = [NSString stringWithFormat:@"让平 %@",firstBtn.value];
             }
             if ([firstBtn.spf integerValue]==6) {
-                result1 = [NSString stringWithFormat:@"让胜 %@",firstBtn.value];
+                result1 = [NSString stringWithFormat:@"让负 %@",firstBtn.value];
             }
 
             if ([lastBtn.spf integerValue]==1) {

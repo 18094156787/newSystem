@@ -39,7 +39,7 @@
     [self.homeTeamLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.homeImgView);
         make.top.equalTo(self.homeImgView.mas_bottom).offset(AUTO(5));
-        make.width.mas_lessThanOrEqualTo(AUTO(80));
+        make.width.mas_lessThanOrEqualTo(AUTO(110));
     }];
     
     
@@ -54,12 +54,12 @@
     [self.awayTeamLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.awayImgView);
         make.top.equalTo(self.awayImgView.mas_bottom).offset(AUTO(5));
-        make.width.mas_lessThanOrEqualTo(AUTO(80));
+        make.width.mas_lessThanOrEqualTo(AUTO(110));
     }];
     
     [self addSubview:self.scoreLab];
     [self.scoreLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.homeImgView).offset(AUTO(20));
+        make.top.equalTo(self.homeImgView).offset(AUTO(10));
         make.centerX.equalTo(self);
     }];
 }

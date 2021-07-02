@@ -83,31 +83,36 @@
             [self.sureBtn setTitle:NonNil(self.detailModel.text_prompt) forState:0];
             self.sureBtn.backgroundColor = [self.detailModel.text_can_click integerValue]==1?JCBaseColor:COLOR_9F9F9F;
             self.sureBtn.userInteractionEnabled = [self.detailModel.text_can_click integerValue]==1?YES: NO;
-            
 
-            if (self.detailModel.is_guess!=4) {
-                {
-                    if ([self.detailModel.is_participate integerValue]==1) {
-                        if (self.detailModel.is_guess==1) {
-                            self.resultImgView.image = JCIMAGE(@"ic_spf_isRight");
-                            self.resultImgView.hidden = NO;
-                        }else if (self.detailModel.is_guess==2) {
-                            self.resultImgView.image = JCIMAGE(@"ic_spf_isWrong");
-                            self.resultImgView.hidden = NO;
-                        }else{
-                            self.resultImgView.hidden = YES;
-                        }
-                    }else{
-                        self.resultImgView.hidden = YES;
-                    }
-                    
-                    if ([self.detailModel.is_participate integerValue]==2&&[self.detailModel.active_state integerValue]==3) {
-                            self.resultImgView.image = JCIMAGE(@"jc_activity_no_cy");
-                            self.resultImgView.hidden = NO;
-                        }
-                    
+
+            if ([self.detailModel.is_participate integerValue]==1) {
+                if (self.detailModel.is_guess==1) {
+                    self.resultImgView.image = JCIMAGE(@"ic_spf_isRight");
+                    self.resultImgView.hidden = NO;
+                }else if (self.detailModel.is_guess==2) {
+                    self.resultImgView.image = JCIMAGE(@"ic_spf_isWrong");
+                    self.resultImgView.hidden = NO;
+                }else if (self.detailModel.is_guess==4) {
+                    self.resultImgView.image = JCIMAGE(@"ic_spf_cancel");
+                    self.resultImgView.hidden = NO;
+                }else{
+                    self.resultImgView.hidden = YES;
                 }
+            }else{
+                if (self.detailModel.is_guess==4) {
+                    //未参与,并且活动取消,优先展示活动取消
+                   self.resultImgView.image = JCIMAGE(@"ic_spf_cancel");
+                   self.resultImgView.hidden = NO;
+                }else if ([self.detailModel.active_state integerValue]==3) {
+                    self.resultImgView.image = JCIMAGE(@"jc_activity_no_cy");
+                    self.resultImgView.hidden = NO;
+                }
+                
+
             }
+
+            
+//            if (self.detailModel.is_guess!=4)
 
             
             self.shareView.title = self.detailModel.wechat_share.share_title;
@@ -149,10 +154,12 @@
                     [self.jcWindow addSubview:guess_failureView];
                 }
                 if (self.detailModel.is_guess==4) {
+                    //活动取消
+//                    self.resultImgView.image = JCIMAGE(@"ic_spf_cancel");
+//                    self.resultImgView.hidden = NO;
                     //赛事取消
                     if ([self.detailModel.is_participate integerValue]==1) {
-                        self.resultImgView.image = JCIMAGE(@"ic_spf_cancel");
-                        self.resultImgView.hidden = NO;
+
                         
                         JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
                         alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(14)];

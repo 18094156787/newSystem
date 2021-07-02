@@ -62,6 +62,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) NSString *round_num_two;//空字符串 或者 第几轮
 
+@property (nonatomic,assign) NSInteger is_reverse;//字段，表示比赛是否主客相反，0否，1是
+
 
 @end
 

@@ -93,6 +93,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString *select_index;//用户的预测
 
+@property (nonatomic,assign) NSInteger is_reverse;//字段，表示比赛是否主客相反，0否，1是
+
 @end
 
 @interface JCJingCaiMatchInfoModel : JCWBaseBall
