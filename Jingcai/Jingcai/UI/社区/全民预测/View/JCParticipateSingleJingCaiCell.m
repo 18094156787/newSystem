@@ -311,18 +311,17 @@
         NSArray *resultArray  = [self.model.select_index componentsSeparatedByString:@","];
         for (NSString *str in resultArray) {
             NSInteger value = [str intValue];
-            if (value==1) {
-                value=3;
-            }
-            if (value==3) {
-                value=1;
-            }
-            if (value==4) {
-                value=6;
-            }
-            if (value==6) {
-                value=4;
-            }
+//            if (model.is_reverse==1) {
+//                if (value==1) {
+//                    value=3;
+//                }else if (value==3) {
+//                    value=1;
+//                }else if (value==4) {
+//                    value=6;
+//                }else if (value==6) {
+//                    value=4;
+//                }
+//            }
             if (value==1) {
                   self.masterWin_normalBtn.layer.borderColor = COLOR_9F9F9F.CGColor;
               }

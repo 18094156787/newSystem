@@ -70,6 +70,7 @@
         [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
             self.detailModel = (JCActivityDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCActivityDetailModel class]];
+            
             self.headView.detailModel = self.detailModel;
             self.headView.dataSource = self.detailModel.goods_info;
 
@@ -124,7 +125,7 @@
     shareItem.tintColor = JCBlackColor;
     self.navigationItem.rightBarButtonItem = shareItem;
     
-    self.cellHeight = 50;
+    self.cellHeight = 0;
     
     
     self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 265);//240+25

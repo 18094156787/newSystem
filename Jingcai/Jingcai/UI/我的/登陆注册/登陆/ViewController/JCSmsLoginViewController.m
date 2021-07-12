@@ -22,6 +22,8 @@
 
 @property (nonatomic,strong) UIButton *loginBtn;
 
+@property (nonatomic,strong) YYLabel *agreeLab;
+
 @end
 
 @implementation JCSmsLoginViewController
@@ -77,24 +79,23 @@
 
 
 
-    UILabel *agreeLab = [UILabel initWithTitle:@"我已阅读并同意“服务协议”" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:0];
-    [self.view addSubview:agreeLab];
-    [agreeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
+    [self.view addSubview:self.agreeLab];
+    [self.agreeLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view).offset(AUTO(10));
         make.top.equalTo(psdLine.mas_bottom).offset(AUTO(40));
     }];
 
     [self.view addSubview:self.agreeBtn];
     [self.agreeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(agreeLab);
-        make.right.equalTo(agreeLab.mas_left);
+        make.centerY.equalTo(self.agreeLab);
+        make.right.equalTo(self.agreeLab.mas_left);
         make.width.height.mas_equalTo(AUTO(30));
     }];
 
     [self.view addSubview:self.loginBtn];
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.top.equalTo(agreeLab.mas_bottom).offset(AUTO(20));
+        make.top.equalTo(self.agreeLab.mas_bottom).offset(AUTO(20));
         make.left.offset(AUTO(50));
         make.right.offset(AUTO(-50));
         make.height.mas_equalTo(AUTO(44));
@@ -108,7 +109,43 @@
         make.top.equalTo(self.loginBtn.mas_bottom).offset(AUTO(25));
         make.centerX.equalTo(self.view);
     }];
+    
+    
+    NSString *codeLoginString = @"我已阅读并同意《用户服务条款》和《隐私协议》";
+    NSMutableAttributedString* atext = [[NSMutableAttributedString alloc] initWithString:codeLoginString attributes:@{NSForegroundColorAttributeName:COLOR_9F9F9F,NSFontAttributeName:[UIFont systemFontOfSize:AUTO(14)]}];
+    NSRange serviceRange = [codeLoginString rangeOfString:@"《用户服务条款》"];
+NSRange privacyRange = [codeLoginString rangeOfString:@"《隐私协议》"];
+//    [atext yy_setFont:[UIFont systemFontOfSize:AUTO(12)] range:atext.yy_rangeOfAll];
+    [atext addAttributes:@{NSForegroundColorAttributeName:COLOR_002868} range:serviceRange];
+    [atext addAttributes:@{NSForegroundColorAttributeName:COLOR_002868} range:privacyRange];
+
+    YYTextHighlight *hi = [YYTextHighlight new];
+    [atext setTextHighlight:hi range:serviceRange];
+
+    YYTextHighlight *privacy_hi = [YYTextHighlight new];
+    [atext setTextHighlight:privacy_hi range:privacyRange];
+
     WeakSelf;
+    hi.tapAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {
+        WebViewController *vc = [WebViewController new];
+            vc.titleStr = @"用户服务条款";
+            NSString *urlStr = [NSString  stringWithFormat:@"%@?dev=1",[JCConfigModel currentConfigModel].get_service];
+            vc.urlStr = NonNil(urlStr);
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+    };
+
+    privacy_hi.tapAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {
+        WebViewController *vc = [WebViewController new];
+            vc.titleStr = @"隐私协议";
+            NSString *urlStr = [NSString  stringWithFormat:@"%@?dev=1",[JCConfigModel currentConfigModel].get_privacy];
+            vc.urlStr = NonNil(urlStr);
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+    };
+
+    self.agreeLab.attributedText=atext;
+    
+    
+//    WeakSelf;
     [registerLab bk_whenTapped:^{
         [weakSelf.navigationController pushViewController:[JCRegisterViewController new] animated:YES];
     }];
@@ -130,7 +167,7 @@
         return ;
     }
     if (!self.agreeBtn.selected) {
-        [JCWToastTool showHint:@"请阅读“服务协议”并点击同意"];
+        [JCWToastTool showHint:@"请阅读《用户服务条款》和《隐私协议》并点击同意"];
         return ;
     }
     
@@ -265,7 +302,15 @@
     }
     return _codeBtn;
 }
+- (YYLabel *)agreeLab {
+    if (!_agreeLab) {
+        _agreeLab = [YYLabel new];
+        _agreeLab.textColor = COLOR_9F9F9F;
+        _agreeLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)];
 
+    }
+    return _agreeLab;
+}
 /*
 #pragma mark - Navigation
 

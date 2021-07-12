@@ -169,7 +169,7 @@
         make.size.mas_equalTo(CGSizeMake(171, 22));
     }];
     
-    self.timeLab.textColor = COLOR_FB5835;
+//    self.timeLab.textColor = COLOR_FB5835;
     self.ruleInfoLab.textColor = COLOR_FB5835;
 }
 

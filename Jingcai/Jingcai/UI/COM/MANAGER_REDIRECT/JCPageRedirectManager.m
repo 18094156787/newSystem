@@ -26,6 +26,7 @@
 #import "JCActivityGuess_SPF_VC.h"
 @interface JCPageRedirectManager ()
 @property (nonatomic, strong) JCMainTabBarController * tabBarController;
+
 @end
 
 @implementation JCPageRedirectManager

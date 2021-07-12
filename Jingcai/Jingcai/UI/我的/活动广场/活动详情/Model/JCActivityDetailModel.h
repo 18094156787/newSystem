@@ -98,6 +98,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *participation;//活动参与人数
 
+@property (nonatomic,strong) NSString *number_of_correct;//猜对人数
+
 @property (strong, nonatomic)  NSArray <JCActivityGoodsModel *> *goods_info;
 
 @property (strong, nonatomic)  NSArray <JCActivityOptionModel *> *activity_option;//竞猜活动选项
@@ -107,6 +109,8 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark 竞猜胜平负活动专属
 
 @property (strong, nonatomic) JCMatchBall *get_match_info;
+
+@property (assign, nonatomic) NSInteger is_game_start;
 
 
 

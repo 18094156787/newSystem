@@ -371,6 +371,7 @@
             JCPostPlanCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPostPlanCell"];
             JCPostPlanMathInfoModel *model = self.dataArray[indexPath.row];
             cell.type = self.type;
+            cell.is_qy = YES;
             cell.model = model;
             
             WeakSelf;
@@ -427,6 +428,7 @@
         JCPostPlanOPCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPostPlanOPCell"];
         JCPostPlanMathInfoModel *model = self.dataArray[indexPath.row];
         cell.index = indexPath.row;
+        cell.is_qy = YES;
         cell.model = model;
         cell.dataArray = self.dataArray;
         WeakSelf;

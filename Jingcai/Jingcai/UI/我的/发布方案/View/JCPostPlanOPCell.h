@@ -61,6 +61,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSArray *dataArray;
 
+@property (nonatomic,assign) BOOL is_qy;//标记签约
+
 @end
 
 NS_ASSUME_NONNULL_END

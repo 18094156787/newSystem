@@ -33,6 +33,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:AppDidLoad];
     }
     self.title = NonNil(self.titleStr);
+    [self.wkWebView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,8 +96,14 @@
                 [self.progressView setProgress:0.0f animated:NO];
             }];
         }
-    }
-    else {
+    }else if ([keyPath isEqualToString:@"title"]) {
+        if (self.titleStr.length==0) {
+            NSLog(@"%@",self.wkWebView.title);
+            self.title = self.wkWebView.title;
+        }
+
+        
+    }else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
@@ -104,6 +111,7 @@
 //注意，观察的移除
 -(void)dealloc{
     [self.wkWebView removeObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
+    [self.wkWebView removeObserver:self forKeyPath:@"title"];
 }
 
 - (void)backItemClick:(UIButton *)sender {
@@ -157,9 +165,10 @@
 //这个是网页加载完成，导航的变化
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     // 获取加载网页的标题
-    if (self.titleStr.length==0) {
-        self.title = self.wkWebView.title;
-    }
+//    if (self.titleStr.length==0) {
+//        NSLog(@"%@",self.wkWebView.title);
+//        self.title = self.wkWebView.title;
+//    }
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 //    [self updateNavigationItems];
@@ -168,7 +177,7 @@
     }
 }
 
-//开始加载
+
 //开始加载
 -(void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     //开始加载的时候，让加载进度条显示

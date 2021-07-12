@@ -150,8 +150,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) JCPostPlanMathInfoSPFModel *odds_dxq_model;
 
-
-
+@property (nonatomic,assign) NSInteger is_reverse;
 
 
 @end

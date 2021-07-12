@@ -62,9 +62,9 @@
     lineView1.backgroundColor = COLOR_F0F0F0;
     [lineView1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
-        make.right.offset(AUTO(-15));
+        make.right.offset(0);
         make.bottom.offset(0);
-        make.height.mas_equalTo(0.5);
+        make.height.mas_equalTo(1);
     }];
     
 

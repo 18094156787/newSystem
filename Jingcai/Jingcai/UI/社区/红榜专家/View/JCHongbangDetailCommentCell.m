@@ -171,6 +171,7 @@
 
 - (void)setMatchModel:(JCHongbangDetail_MatchModel *)matchModel {
     _matchModel = matchModel;
+//    matchModel.matches.is_reverse = 1;
     NSString *title = NonNil(matchModel.matches.competition_name);
     if (matchModel.matches.group_num_new.length>0) {
         title = [title stringByAppendingFormat:@" %@",NonNil(matchModel.matches.group_num_new)];
@@ -349,6 +350,13 @@
     NSString *rq_eqal = @"-";
     NSString *rq_lose = @"-";
     
+    self.norq_WinLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+    self.norq_EqualLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+    self.norq_loseLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+    self.rq_WinLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+    self.rq_EqualLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+    self.rq_loseLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+    
     
     
     if (matchModel.home_rate.count>=3) {
@@ -423,6 +431,9 @@
                 self.rq_loseLab.layer.borderColor = JCBaseColor.CGColor;
 
             }
+                if (matchModel.matches.is_reverse==1) {
+        
+                }
 
             break;
 
@@ -661,14 +672,185 @@
                 break;
         }
     
-//    //注:当model.is_rq==2的时候,model.spf_result只会返回1,2.3 但这时候表示的是让球的1,2,3 .也就是说,1,2,3判断的是底部那排让球的数据
-//    if ([model.is_rq integerValue]==2) {
-//            //开奖结果
-//        switch ([model.spf_result integerValue]) {
+    if (matchModel.matches.is_reverse==1) {
+    #pragma mark //相反
+        if (matchModel.matches.match_status>1&&matchModel.matches.match_status<10) {
+            NSNumber *full_home_score = @(0);
+            NSNumber *full_away_score = @(0);
+            if (matchModel.matches.away_scores.count>0) {
+                full_home_score = matchModel.matches.away_scores.firstObject;
+            }
+            if (matchModel.matches.home_scores.count>0) {
+                full_away_score = matchModel.matches.home_scores.firstObject;
+            }
+
+            self.scoreLab.text = [NSString stringWithFormat:@"%@ : %@",full_home_score,full_away_score];
+        }else{
+
+            self.scoreLab.text = @"VS";
+        }
+        
+        
+        
+        self.homeNameLab.text = matchModel.matches.away_team_name;
+        self.awayNameLab.text = matchModel.matches.home_team_name;//
+        [self.homeImgView sd_setImageWithURL:[NSURL URLWithString:matchModel.matches.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
+        [self.awayImgView sd_setImageWithURL:[NSURL URLWithString:matchModel.matches.home_team_logo] placeholderImage:JCIMAGE(@"home_placeholder")];//
+        if (matchModel.matches.away_team_logo.length>matchModel.matches.home_team_logo.length) {
+            [self.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(self.bgView);
+                make.top.equalTo(self.homeNameLab.mas_bottom).offset(AUTO(8));
+                make.height.mas_equalTo(AUTO(40));
+            }];
+        }else{
+            [self.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(self.bgView);
+                make.top.equalTo(self.awayNameLab.mas_bottom).offset(AUTO(8));
+                make.height.mas_equalTo(AUTO(40));
+            }];
+        }
+        //赔率展示
+        self.norq_Lab.text = @"0";
+        
+        if ([rq_rq integerValue]!=0) {
+            rq_rq = [NSString stringWithFormat:@"%ld",[rq_rq integerValue]*-1];
+            if ([rq_rq integerValue]>0) {
+                rq_rq = [NSString stringWithFormat:@"+%@",rq_rq];
+            }
+            self.rq_Lab.text = rq_rq;
+        }
+
+        self.norq_WinLab.text = [NSString stringWithFormat:@"主胜 %@",no_rq_lose];
+
+        self.norq_loseLab.text = [NSString stringWithFormat:@"客胜 %@",no_rq_win];
+        self.rq_WinLab.text = [NSString stringWithFormat:@"主胜 %@",rq_lose];        self.rq_EqualLab.text = [NSString stringWithFormat:@"平 %@",rq_eqal];
+        self.rq_loseLab.text = [NSString stringWithFormat:@"客胜 %@",rq_win];
+        
+//        self.norq_WinLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+//        self.norq_loseLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+//        self.rq_WinLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+//        self.rq_loseLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+        
+        //用户选中
+//            switch (spf1) {
+//                case 1:
+//                {
+//                    self.norq_loseLab.layer.borderColor = JCBaseColor.CGColor;
+//                }
+//
+//                break;
+//                case 2:
+//                {
+//                    self.norq_EqualLab.layer.borderColor = JCBaseColor.CGColor;
+//                }
+//
+//                break;
+//                case 3:
+//                {
+//                    self.norq_WinLab.layer.borderColor = JCBaseColor.CGColor;//
+//                }
+//
+//                break;
+//                case 4:
+//                {
+//                    self.rq_loseLab.layer.borderColor = JCBaseColor.CGColor;
+//                }
+//
+//                break;
+//                case 5:
+//                {
+//                    self.rq_EqualLab.layer.borderColor = JCBaseColor.CGColor;
+//
+//                }
+//
+//                break;
+//                case 6:
+//                {
+//                    self.rq_WinLab.layer.borderColor = JCBaseColor.CGColor;
+//
+//                }
+//
+//
+//                break;
+//
+//                default:
+//                    break;
+//            }
+//        //    专家推荐
+//            switch (spf2) {
+//                case 1:
+//                {
+//                    self.norq_loseLab.layer.borderColor = JCBaseColor.CGColor;//
+//    //                self.norq_WinLab.textColor= JCWhiteColor;
+//                }
+//
+//                break;
+//                case 2:
+//                {
+//                    self.norq_EqualLab.layer.borderColor = JCBaseColor.CGColor;
+//                }
+//
+//                break;
+//                case 3:
+//                {
+//                    self.norq_WinLab.layer.borderColor = JCBaseColor.CGColor;
+//                }
+//
+//                break;
+//                case 4:
+//                {
+//                    self.rq_loseLab.layer.borderColor = JCBaseColor.CGColor;
+//                }
+//
+//                break;
+//                case 5:
+//                {
+//                    self.rq_EqualLab.layer.borderColor = JCBaseColor.CGColor;
+//
+//                }
+//
+//                break;
+//                case 6:
+//                {
+//                    self.rq_WinLab.layer.borderColor = JCBaseColor.CGColor;//
+//
+//                }
+//
+//                break;
+//
+//                default:
+//                    break;
+//            }
+//        //开奖结果 红勾
+//        //开奖结果  根据 is_rq来区分
+//        switch (result1) {
+//            case 3:
+//            {
+//                [self.topView addSubview:self.tuijianImgView];
+//                [self.tuijianImgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                    make.left.equalTo(self.norq_WinLab).offset(AUTO(5));
+//                    make.centerY.equalTo(self.norq_WinLab);
+//                    make.size.mas_equalTo(CGSizeMake(AUTO(12), AUTO(12)));
+//                }];
+//
+//            }
+//
+//            break;
 //
 //            case 1:
 //            {
 //
+//                [self.topView addSubview:self.tuijianImgView];
+//                [self.tuijianImgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                    make.left.equalTo(self.norq_loseLab).offset(AUTO(5));
+//                    make.centerY.equalTo(self.norq_loseLab);
+//                    make.size.mas_equalTo(CGSizeMake(AUTO(12), AUTO(12)));
+//                }];
+//            }
+//
+//            break;
+//            case 6:
+//            {
 //
 //                [self.bottomView addSubview:self.tuijianImgView];
 //                 [self.tuijianImgView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -679,26 +861,77 @@
 //            }
 //
 //            break;
-//            case 2:
+//            case 4:
 //            {
 //
 //
 //                [self.bottomView addSubview:self.tuijianImgView];
 //                 [self.tuijianImgView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//                     make.left.equalTo(self.rq_EqualLab).offset(AUTO(5));
-//                     make.centerY.equalTo(self.rq_EqualLab);
+//                     make.left.equalTo(self.rq_loseLab).offset(AUTO(5));
+//                     make.centerY.equalTo(self.rq_loseLab);
+//                     make.size.mas_equalTo(CGSizeMake(AUTO(12), AUTO(12)));
+//                 }];
+//
+//
+//
+//            }
+//
+//            break;
+//
+//            default:
+//                break;
+//        }
+////        开奖结果
+//        switch (result2) {
+//            case 3:
+//            {
+//
+//
+//                [self.topView addSubview:self.tuijianImgView2];
+//                 [self.tuijianImgView2 mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                     make.left.equalTo(self.norq_WinLab).offset(AUTO(5));
+//                     make.centerY.equalTo(self.norq_WinLab);
 //                     make.size.mas_equalTo(CGSizeMake(AUTO(12), AUTO(12)));
 //                 }];
 //
 //            }
 //
+//
+//
 //            break;
-//            case 3:
+//            case 1:
 //            {
 //
 //
-//                [self.bottomView addSubview:self.tuijianImgView];
-//                 [self.tuijianImgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                [self.topView addSubview:self.tuijianImgView2];
+//                 [self.tuijianImgView2 mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                     make.left.equalTo(self.norq_loseLab).offset(AUTO(5));
+//                     make.centerY.equalTo(self.norq_loseLab);
+//                     make.size.mas_equalTo(CGSizeMake(AUTO(12), AUTO(12)));
+//                 }];
+//            }
+//
+//            break;
+//            case 6:
+//            {
+//
+//
+//                [self.bottomView addSubview:self.tuijianImgView2];
+//                 [self.tuijianImgView2 mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                     make.left.equalTo(self.rq_WinLab).offset(AUTO(5));
+//                     make.centerY.equalTo(self.rq_WinLab);
+//                     make.size.mas_equalTo(CGSizeMake(AUTO(12), AUTO(12)));
+//                 }];
+//            }
+//
+//
+//            break;
+//            case 4:
+//            {
+//
+//
+//                [self.bottomView addSubview:self.tuijianImgView2];
+//                 [self.tuijianImgView2 mas_remakeConstraints:^(MASConstraintMaker *make) {
 //                     make.left.equalTo(self.rq_loseLab).offset(AUTO(5));
 //                     make.centerY.equalTo(self.rq_loseLab);
 //                     make.size.mas_equalTo(CGSizeMake(AUTO(12), AUTO(12)));
@@ -711,54 +944,9 @@
 //            default:
 //                break;
 //        }
-//
-//        switch ([model.spf_result2 integerValue]) {
-//
-//            case 1:
-//            {
-//
-//
-//                [self.bottomView addSubview:self.tuijianImgView2];
-//                 [self.tuijianImgView2 mas_remakeConstraints:^(MASConstraintMaker *make) {
-//                     make.left.equalTo(self.rq_WinLab).offset(AUTO(5));
-//                     make.centerY.equalTo(self.rq_WinLab);
-//                     make.size.mas_equalTo(CGSizeMake(AUTO(12), AUTO(12)));
-//                 }];
-//            }
-//
-//            break;
-//            case 2:
-//            {
-//
-//
-//                [self.bottomView addSubview:self.tuijianImgView2];
-//                 [self.tuijianImgView2 mas_remakeConstraints:^(MASConstraintMaker *make) {
-//                     make.left.equalTo(self.rq_EqualLab).offset(AUTO(5));
-//                     make.centerY.equalTo(self.rq_EqualLab);
-//                     make.size.mas_equalTo(CGSizeMake(AUTO(12), AUTO(12)));
-//                 }];
-//
-//            }
-//
-//            break;
-//            case 3:
-//            {
-//
-//                [self.bottomView addSubview:self.tuijianImgView2];
-//                 [self.tuijianImgView2 mas_remakeConstraints:^(MASConstraintMaker *make) {
-//                     make.left.equalTo(self.rq_loseLab).offset(AUTO(5));
-//                     make.centerY.equalTo(self.rq_loseLab);
-//                     make.size.mas_equalTo(CGSizeMake(AUTO(12), AUTO(12)));
-//                 }];
-//
-//            }
-//
-//            break;
-//
-//            default:
-//                break;
-//        }
-//    }
+    }
+    
+
 }
 
 - (void)setModel:(JCWVerTjInfoMatchBall *)model {
@@ -1257,6 +1445,8 @@
                 break;
         }
     }
+    
+
 }
 
 - (void)setTjInfoDetailBall:(JCWTjInfoDetailBall *)tjInfoDetailBall {

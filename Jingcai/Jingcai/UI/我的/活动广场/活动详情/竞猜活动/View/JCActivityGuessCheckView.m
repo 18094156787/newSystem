@@ -7,7 +7,7 @@
 //
 
 #import "JCActivityGuessCheckView.h"
-#import "JCActivityGuessChooseItemCell.h"
+#import "JCActivityGuessChooseItem_Check_Cell.h"
 @implementation JCActivityGuessCheckView
 
 - (void)initViews {
@@ -25,7 +25,7 @@
     }];
     self.bgView = bgView;
     
-    UILabel *titleLab = [UILabel initWithTitle:@"提交竞猜选项确认" andFont:16 andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+    UILabel *titleLab = [UILabel initWithTitle:@"竞猜选项确认" andFont:16 andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     [bgView addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(20);
@@ -34,13 +34,22 @@
     }];
     self.titleLab = titleLab;
     
+    UIView *lineView = [UIView new];
+    lineView.backgroundColor = [COLOR_000000 colorWithAlphaComponent:0.06];
+    [bgView addSubview:lineView];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.offset(0);
+        make.top.equalTo(titleLab.mas_bottom).offset(20);
+        make.height.mas_equalTo(1);
+    }];
+    self.lineView = lineView;
 //
     [bgView addSubview:self.collectionView];
     self.collectionView.backgroundColor = JCWhiteColor;
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleLab.mas_bottom).offset(15);
+        make.top.equalTo(lineView.mas_bottom).offset(20);
         make.centerX.equalTo(self);
-        make.height.mas_equalTo(378);
+        make.height.mas_equalTo(378+40);
         make.left.offset(0);
         make.right.offset(0);
 
@@ -117,7 +126,7 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    JCActivityGuessChooseItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"JCActivityGuessChooseItemCell" forIndexPath:indexPath];
+    JCActivityGuessChooseItem_Check_Cell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"JCActivityGuessChooseItem_Check_Cell" forIndexPath:indexPath];
     cell.detailModel = self.detailModel;
     cell.model = self.dataSource[indexPath.row];
     return cell;
@@ -132,7 +141,7 @@
     if (dataSource.count<=8) {
         NSInteger count = ceil(self.dataSource.count/2.0f);
         [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.titleLab.mas_bottom).offset(15);
+            make.top.equalTo(self.lineView.mas_bottom).offset(15);
             make.centerX.equalTo(self);
             make.height.mas_equalTo(62*count);
             make.left.offset(0);
@@ -141,20 +150,20 @@
         
         [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
 
-            make.height.mas_equalTo(62*count+140);
+            make.height.mas_equalTo(62*count+170);
         }];
     }else{
         [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.titleLab.mas_bottom).offset(15);
+            make.top.equalTo(self.lineView.mas_bottom).offset(15);
             make.centerX.equalTo(self);
-            make.height.mas_equalTo(248);
+            make.height.mas_equalTo(278);
             make.left.offset(0);
             make.right.offset(0);
 
         }];
         
         [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(400);
+            make.height.mas_equalTo(450);
         }];
     }
     [self.collectionView reloadData];
@@ -177,8 +186,8 @@
         _collectionView.bounces = NO;
         [_collectionView setBackgroundColor:JCClearColor];
         _collectionView.showsHorizontalScrollIndicator = NO;
-        [_collectionView registerClass:[JCActivityGuessChooseItemCell class]
-            forCellWithReuseIdentifier:@"JCActivityGuessChooseItemCell"];
+        [_collectionView registerClass:[JCActivityGuessChooseItem_Check_Cell class]
+            forCellWithReuseIdentifier:@"JCActivityGuessChooseItem_Check_Cell"];
 
         
     }

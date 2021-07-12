@@ -507,20 +507,20 @@ static CGFloat const kWMMenuViewHeight = 0;
             if ([jingcaiBtn.value floatValue]>[self.sing_value floatValue]) {
 
                 NSString * jingcaiBtn_spf = jingcaiBtn.spf;
-                if (self.currentJingModel.is_reverse==1) {
-                    if ([jingcaiBtn_spf integerValue]==1) {
-                        jingcaiBtn_spf = @"3";
-                    }
-                    if ([jingcaiBtn_spf integerValue]==3) {
-                        jingcaiBtn_spf = @"1";
-                    }
-                    if ([jingcaiBtn_spf integerValue]==4) {
-                        jingcaiBtn_spf = @"6";
-                    }
-                    if ([jingcaiBtn_spf integerValue]==6) {
-                        jingcaiBtn_spf = @"4";
-                    }
-                }
+//                if (self.currentJingModel.is_reverse==1) {
+//                    if ([jingcaiBtn_spf integerValue]==1) {
+//                        jingcaiBtn_spf = @"3";
+//                    }
+//                    if ([jingcaiBtn_spf integerValue]==3) {
+//                        jingcaiBtn_spf = @"1";
+//                    }
+//                    if ([jingcaiBtn_spf integerValue]==4) {
+//                        jingcaiBtn_spf = @"6";
+//                    }
+//                    if ([jingcaiBtn_spf integerValue]==6) {
+//                        jingcaiBtn_spf = @"4";
+//                    }
+//                }
                 
                 JCJingCaiMatchRequstInfoModel *infoModel = array[0];
                 
@@ -543,27 +543,27 @@ static CGFloat const kWMMenuViewHeight = 0;
             JCJingCaiBtn *jingcaiBtn1 = btnArray[1];
             NSString * jingcaiBtn0_spf = jingcaiBtn0.spf;
             NSString *jingcaiBtn1_spf = jingcaiBtn1.spf;
-            if (self.currentJingModel.is_reverse==1) {
-                if ([jingcaiBtn0_spf integerValue]==1) {
-                    jingcaiBtn0_spf = @"3";
-                }else if([jingcaiBtn0_spf integerValue]==3){
-                    jingcaiBtn0_spf = @"1";
-                }else if([jingcaiBtn0_spf integerValue]==4){
-                    jingcaiBtn0_spf = @"6";
-                }else if([jingcaiBtn0_spf integerValue]==6){
-                    jingcaiBtn0_spf = @"4";
-                }
-
-                if ([jingcaiBtn1_spf integerValue]==1) {
-                    jingcaiBtn1_spf = @"3";
-                }else if([jingcaiBtn1_spf integerValue]==3){
-                    jingcaiBtn1_spf = @"1";
-                }else if([jingcaiBtn1_spf integerValue]==4){
-                    jingcaiBtn1_spf = @"6";
-                }else if([jingcaiBtn1_spf integerValue]==6){
-                    jingcaiBtn1_spf = @"4";
-                }
-            }
+//            if (self.currentJingModel.is_reverse==1) {
+//                if ([jingcaiBtn0_spf integerValue]==1) {
+//                    jingcaiBtn0_spf = @"3";
+//                }else if([jingcaiBtn0_spf integerValue]==3){
+//                    jingcaiBtn0_spf = @"1";
+//                }else if([jingcaiBtn0_spf integerValue]==4){
+//                    jingcaiBtn0_spf = @"6";
+//                }else if([jingcaiBtn0_spf integerValue]==6){
+//                    jingcaiBtn0_spf = @"4";
+//                }
+//
+//                if ([jingcaiBtn1_spf integerValue]==1) {
+//                    jingcaiBtn1_spf = @"3";
+//                }else if([jingcaiBtn1_spf integerValue]==3){
+//                    jingcaiBtn1_spf = @"1";
+//                }else if([jingcaiBtn1_spf integerValue]==4){
+//                    jingcaiBtn1_spf = @"6";
+//                }else if([jingcaiBtn1_spf integerValue]==6){
+//                    jingcaiBtn1_spf = @"4";
+//                }
+//            }
             
             
             infoModel.spf = [NSString stringWithFormat:@"%@,%@",jingcaiBtn0_spf,jingcaiBtn1_spf];

@@ -14,9 +14,12 @@
 #import "JCPostCheckArticle_Invite_Gaochou_HeadView.h"
 #import "JCBaseTitleAlertView.h"
 #import "JCInviteConfigGaoChouModel.h"
+#import "JCPostCheckArticle_Invite_Gaochou_FootView.h"
 @interface JCPostCheckArticle_Invite_Gaochou_VC ()
 
 @property (nonatomic,strong) JCPostCheckArticle_Invite_Gaochou_HeadView *headView;
+
+@property (nonatomic,strong) JCPostCheckArticle_Invite_Gaochou_FootView *footView;
 
 @property (nonatomic,strong) NSArray *titleArray;
 
@@ -25,6 +28,8 @@
 @property (nonatomic,strong) UIButton *cancelBtn;
 
 @property (nonatomic,strong) UIButton *surelBtn;
+
+@property (nonatomic,strong) UIButton *agreeBtn;
 
 @property (nonatomic,strong) JCInviteConfigGaoChouModel *model;
 
@@ -73,10 +78,14 @@
 
 - (void)initView {
     self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(105));
+    self.tableView.tableHeaderView = self.headView;
+    
+    self.footView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(120));
+    self.tableView.tableFooterView = self.footView;
+    self.agreeBtn = self.footView.agreeBtn;
     
     self.tableView.backgroundColor = COLOR_F0F0F0;
-    self.tableView.tableHeaderView = self.headView;
-    self.tableView.separatorStyle = 0;
+//    self.tableView.separatorStyle = 0;
     self.tableView.estimatedRowHeight = 100;
     [self.tableView registerClass:[JCWithDrawRecordItemCell class] forCellReuseIdentifier:@"JCWithDrawRecordItemCell"];
 
@@ -93,18 +102,21 @@
         make.height.mas_equalTo(AUTO(80));
     }];
     
-    [self.bottomView addSubview:self.cancelBtn];
-    [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bottomView.mas_centerX).offset(AUTO(-15));
-        make.centerY.equalTo(self.bottomView);
-        make.size.mas_equalTo(CGSizeMake(AUTO(128), AUTO(44)));
-    }];
+//    [self.bottomView addSubview:self.cancelBtn];
+//    [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(self.bottomView.mas_centerX).offset(AUTO(-15));
+//        make.centerY.equalTo(self.bottomView);
+//        make.size.mas_equalTo(CGSizeMake(AUTO(128), AUTO(44)));
+//    }];
     
     [self.bottomView addSubview:self.surelBtn];
     [self.surelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.bottomView.mas_centerX).offset(AUTO(15));
-        make.centerY.equalTo(self.bottomView);
-        make.size.mas_equalTo(CGSizeMake(AUTO(128), AUTO(44)));
+
+        
+        make.bottom.offset(-kBottomTabSafeAreaHeight-AUTO(10));
+        make.left.offset(AUTO(50));
+        make.right.offset(AUTO(-50));
+        make.height.mas_equalTo(AUTO(44));
     }];
 
 }
@@ -224,6 +236,10 @@
 }
 
 - (void)submitBtnClick {
+    if (!self.agreeBtn.selected) {
+        [JCWToastTool showHint:@"请勾选同意稿酬配置信息"];
+        return;
+    }
 
     
     if (!self.headImg&&!self.idcard_image) {
@@ -237,6 +253,8 @@
 - (void)uploadHeadImage {
     if (!self.headImg) {
          self.uploadHeadImg = YES;
+        self.headUrl = self.checkDetailModel.user_avater;
+//        self.headUrl = self.checkDetailModel.user_avater;
 //        [self configUploadImageStatus];
         return;
     }
@@ -427,5 +445,10 @@
     }
     return _surelBtn;
 }
-
+- (JCPostCheckArticle_Invite_Gaochou_FootView *)footView {
+    if (!_footView) {
+        _footView = [JCPostCheckArticle_Invite_Gaochou_FootView new];
+    }
+    return _footView;
+}
 @end

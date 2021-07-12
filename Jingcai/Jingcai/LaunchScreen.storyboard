@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,37 +16,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jc_lauch_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="UIt-Me-FRE">
-                                <rect key="frame" x="51.666666666666657" y="90" width="311" height="230"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_launch_2.png" translatesAutoresizingMaskIntoConstraints="NO" id="UIt-Me-FRE">
+                                <rect key="frame" x="253" y="-1" width="161" height="176"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="230" id="3U4-T8-YJG"/>
-                                    <constraint firstAttribute="width" constant="311" id="zap-5q-N2f"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="176" id="7I0-qn-om1"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="161" id="Q1Y-by-vOR"/>
+                                    <constraint firstAttribute="height" constant="176" id="smE-wT-9cu"/>
+                                    <constraint firstAttribute="width" constant="161" id="vrT-hd-XvS"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="jc_lauch_2.png" translatesAutoresizingMaskIntoConstraints="NO" id="B2r-EB-i78">
-                                <rect key="frame" x="102" y="330" width="210" height="48"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" image="ic_launch_4.png" translatesAutoresizingMaskIntoConstraints="NO" id="wlI-2d-SLo">
+                                <rect key="frame" x="0.0" y="110" width="35" height="154"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_launch_3.png" translatesAutoresizingMaskIntoConstraints="NO" id="ltW-m0-wVp">
+                                <rect key="frame" x="294" y="800" width="94" height="38"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="xrY-j7-J8I"/>
-                                    <constraint firstAttribute="width" constant="210" id="yb0-FK-I22"/>
+                                    <constraint firstAttribute="width" constant="94" id="Hck-hq-QZ0"/>
+                                    <constraint firstAttribute="height" constant="38" id="KaJ-0f-DZZ"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" image="jc_lauch_3.png" translatesAutoresizingMaskIntoConstraints="NO" id="wlI-2d-SLo">
-                                <rect key="frame" x="118" y="713" width="178" height="85"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_launch_5.png" translatesAutoresizingMaskIntoConstraints="NO" id="j5q-ZG-UnK">
+                                <rect key="frame" x="0.0" y="729" width="120" height="167"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="85" id="bZ2-Ap-bx5"/>
-                                    <constraint firstAttribute="width" constant="178" id="qcj-aV-goT"/>
+                                    <constraint firstAttribute="height" constant="167" id="eBU-rH-7pj"/>
+                                    <constraint firstAttribute="width" constant="120" id="fw1-SE-PX3"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="ic_launch_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="B2r-EB-i78">
+                                <rect key="frame" x="122" y="367.66666666666669" width="170" height="161.00000000000006"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="170" id="ldX-Cd-GBX"/>
+                                    <constraint firstAttribute="height" constant="161" id="lob-gr-Zoq"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QsT-ja-UJT"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="QsT-ja-UJT" firstAttribute="bottom" secondItem="wlI-2d-SLo" secondAttribute="bottom" constant="64" id="2oE-oA-zhZ"/>
-                            <constraint firstItem="UIt-Me-FRE" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6ai-jg-hj2"/>
-                            <constraint firstItem="wlI-2d-SLo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="IN5-LA-02a"/>
-                            <constraint firstItem="B2r-EB-i78" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="WZ7-9c-lm2"/>
-                            <constraint firstItem="B2r-EB-i78" firstAttribute="top" secondItem="UIt-Me-FRE" secondAttribute="bottom" constant="10" id="d8G-c2-IHW"/>
-                            <constraint firstItem="UIt-Me-FRE" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="90" id="xXC-kp-oPq"/>
+                            <constraint firstItem="j5q-ZG-UnK" firstAttribute="leading" secondItem="QsT-ja-UJT" secondAttribute="leading" id="3Ak-pI-fw9"/>
+                            <constraint firstItem="B2r-EB-i78" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="BR7-GS-p64"/>
+                            <constraint firstItem="QsT-ja-UJT" firstAttribute="trailing" secondItem="ltW-m0-wVp" secondAttribute="trailing" constant="26" id="Cab-nq-Wjy"/>
+                            <constraint firstItem="UIt-Me-FRE" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="-1" id="FO1-xu-Yc6"/>
+                            <constraint firstItem="QsT-ja-UJT" firstAttribute="bottom" secondItem="ltW-m0-wVp" secondAttribute="bottom" constant="24" id="JJq-oV-feC"/>
+                            <constraint firstItem="UIt-Me-FRE" firstAttribute="trailing" secondItem="QsT-ja-UJT" secondAttribute="trailing" id="PVo-Yj-7eH"/>
+                            <constraint firstItem="UIt-Me-FRE" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="-1" id="Pu4-4S-Gee"/>
+                            <constraint firstItem="UIt-Me-FRE" firstAttribute="trailing" secondItem="QsT-ja-UJT" secondAttribute="trailing" id="TdS-kU-fIs"/>
+                            <constraint firstItem="B2r-EB-i78" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="VaW-ui-lp4"/>
+                            <constraint firstAttribute="bottom" secondItem="j5q-ZG-UnK" secondAttribute="bottom" id="WYw-t9-3Ls"/>
+                            <constraint firstItem="QsT-ja-UJT" firstAttribute="bottom" secondItem="ltW-m0-wVp" secondAttribute="bottom" constant="24" id="yOQ-CI-j6I"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -56,8 +74,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="jc_lauch_1.png" width="311" height="230"/>
-        <image name="jc_lauch_2.png" width="210" height="48"/>
-        <image name="jc_lauch_3.png" width="178" height="85"/>
+        <image name="ic_launch_1.png" width="170.33332824707031" height="161"/>
+        <image name="ic_launch_2.png" width="161.33332824707031" height="175"/>
+        <image name="ic_launch_3.png" width="93.666664123535156" height="38"/>
+        <image name="ic_launch_4.png" width="35.333332061767578" height="154"/>
+        <image name="ic_launch_5.png" width="120" height="167"/>
     </resources>
 </document>

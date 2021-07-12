@@ -46,7 +46,7 @@
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
-        make.top.equalTo(self.contentLab.mas_bottom).offset(AUTO(10));
+        make.top.equalTo(self.contentLab.mas_bottom).offset(AUTO(20));
         make.height.mas_equalTo(0);
     }];
     

@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *future_msg;
 
-@property (nonatomic,strong) NSArray <JCYCUserInfoModel *>*future_info;
+@property (nonatomic,strong) NSArray <JCJingCaiResultMatchModel *>*future_info;
 
 @end
 

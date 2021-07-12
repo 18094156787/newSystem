@@ -155,7 +155,7 @@
         return;
     }
     _detailModel = detailModel;
-    
+    self.bgView.hidden = self.detailModel.goods_info.count==0?YES:NO;
     [self.imgView sd_setImageWithURL:[NSURL URLWithString:detailModel.top_image_url] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         if (!error) {
             float rate = image.size.width/SCREEN_WIDTH;
@@ -172,12 +172,23 @@
             }];
             if (self.JCHeightBlock) {
                 
-               
+                float realHeight = height;
                 if ([self.detailModel.count integerValue]>0) {
-                    self.JCHeightBlock(height+144);
-                }else{
-                    self.JCHeightBlock(height+110);
+                    realHeight = height+144;
+                }else {
+                    realHeight = height+110;
+                    
                 }
+                if (self.detailModel.goods_info.count==0) {
+                    realHeight = height;
+                }
+               
+//                if ([self.detailModel.count integerValue]>0) {
+//                    self.JCHeightBlock(height+144);
+//                }else{
+//                    self.JCHeightBlock(height+110);
+//                }
+                self.JCHeightBlock(realHeight);
             }
         }
  

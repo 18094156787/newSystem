@@ -77,7 +77,7 @@
 - (void)viewDidLoad {
     self.style = 1;
     [super viewDidLoad];
-    self.title = @"填写个人信息";
+    self.title = @"填写账号信息";
     self.view.backgroundColor = COLOR_F0F0F0;
     [self initView];
     [self myCheckDetail];//重新编辑
@@ -281,7 +281,9 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-
+    if (section==0) {
+        return 8;
+    }
     
     return 0.001f;
 }

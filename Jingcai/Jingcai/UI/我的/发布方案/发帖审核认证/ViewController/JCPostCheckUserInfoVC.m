@@ -120,6 +120,7 @@
                 self.headImg = image;
                 self.deleteBtn.hidden = NO;
                 [self.tableView reloadData];
+                [self configData];
             }];
             
             

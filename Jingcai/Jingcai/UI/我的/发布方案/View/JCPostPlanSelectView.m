@@ -107,9 +107,16 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     JCPostPlanMatchModel *model = self.dataArray[indexPath.row];
 //    cell.textLabel.text = @"英超 周四013 热刺 vs 布莱顿";
-    NSString *title = [NSString stringWithFormat:@"%@ %@ VS %@",model.leagueName,model.homeName,model.awayName];
+    NSString *homeName = model.homeName;
+    NSString *awayName = model.awayName;
+    if (model.is_reverse==1) {
+        homeName = model.awayName;
+        awayName = model.homeName;
+    }
+    NSString *title = [NSString stringWithFormat:@"%@ %@ VS %@",model.leagueName,homeName,awayName];
+    
     if (model.matchName.length>0) {
-        title = [NSString stringWithFormat:@"%@ %@ %@ VS %@",model.leagueName,model.matchName,model.homeName,model.awayName];
+        title = [NSString stringWithFormat:@"%@ %@ %@ VS %@",model.leagueName,model.matchName,homeName,awayName];
     }
     cell.textLabel.text = title;
     cell.textLabel.textColor = COLOR_2F2F2F;

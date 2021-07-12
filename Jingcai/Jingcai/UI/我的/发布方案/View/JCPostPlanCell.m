@@ -120,7 +120,7 @@
 
 - (void)setModel:(JCPostPlanMathInfoModel *)model {
     _model = model;
-
+    model.is_reverse = 1;
     self.titleLab.text = [NSString stringWithFormat:@"%@ %@",model.competition_name,model.match_long_time];
     if (model.issue_num.length>0) {
         self.titleLab.text = [NSString stringWithFormat:@"%@ %@ %@",model.competition_name,model.issue_num,model.match_long_time];
@@ -193,6 +193,75 @@
         self.customerWin_normalBtn.selected = YES;
         self.customerWin_normalBtn.layer.borderColor = JCBaseColor.CGColor;
         self.selectBtn = self.customerWin_normalBtn;
+    }
+    
+#pragma mark//相反
+    if (model.is_reverse==1&&!self.is_qy) {
+        [self.homeImgView sd_setImageWithURL:[NSURL URLWithString:model.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
+        [self.awayImgView sd_setImageWithURL:[NSURL URLWithString:model.home_team_logo] placeholderImage:JCIMAGE(@"home_placeholder")];
+        self.homeNameLab.text = model.away_team_name;
+        self.awayNameLab.text = model.home_team_name;
+        
+        if ([self.type integerValue]==2) {
+            sfpModel = model.odds_yp_model;
+        }
+        
+        if (!sfpModel.win) {
+            [self.masterWin_normalBtn setTitle:@"-" forState:0];
+            self.masterWin_normalBtn.userInteractionEnabled = NO;
+        }else{
+            NSString *title = @"主胜";
+            if ([self.type integerValue]==3) {
+                title = @"大球";
+            }
+            [self.masterWin_normalBtn setTitle:[NSString stringWithFormat:@"%@%@",title,sfpModel.lost] forState:0];
+            self.masterWin_normalBtn.userInteractionEnabled = YES;
+        }
+        
+        if (!sfpModel.draw) {
+            [self.equal_normalBtn setTitle:@"-" forState:0];
+            self.equal_normalBtn.userInteractionEnabled = NO;
+            self.equal_normalBtn.backgroundColor = JCWhiteColor;
+            [self.equal_normalBtn setTitleColor:COLOR_333333 forState:0];
+        }else{
+            self.equal_normalBtn.backgroundColor = COLOR_DDDDDD;
+            [self.equal_normalBtn setTitleColor:COLOR_999999 forState:0];
+            [self.equal_normalBtn setTitle:sfpModel.draw forState:0];
+            self.equal_normalBtn.userInteractionEnabled = YES;
+        }
+        if (!sfpModel.win) {
+            [self.customerWin_normalBtn setTitle:@"-" forState:0];
+            self.customerWin_normalBtn.userInteractionEnabled = NO;
+        }else{
+            NSString *title = @"客胜";
+            if ([self.type integerValue]==3) {
+                title = @"小球";
+            }
+            [self.customerWin_normalBtn setTitle:[NSString stringWithFormat:@"%@%@",title,sfpModel.win] forState:0];
+            self.customerWin_normalBtn.userInteractionEnabled = YES;
+        }
+
+        
+        self.masterWin_normalBtn.selected = NO;
+        self.equal_normalBtn.selected = NO;
+        self.customerWin_normalBtn.selected = NO;
+
+
+        self.masterWin_normalBtn.layer.borderColor = COLOR_DDDDDD.CGColor;
+        self.equal_normalBtn.layer.borderColor = COLOR_DDDDDD.CGColor;
+        self.customerWin_normalBtn.layer.borderColor = COLOR_DDDDDD.CGColor;
+
+        
+        if ([self.model.selectBtn.spf integerValue]==[self.masterWin_normalBtn.spf integerValue]) {
+            self.masterWin_normalBtn.selected = YES;
+            self.masterWin_normalBtn.layer.borderColor = JCBaseColor.CGColor;
+            self.selectBtn = self.masterWin_normalBtn;
+        }
+        if ([self.model.selectBtn.spf integerValue]==[self.customerWin_normalBtn.spf integerValue]) {
+            self.customerWin_normalBtn.selected = YES;
+            self.customerWin_normalBtn.layer.borderColor = JCBaseColor.CGColor;
+            self.selectBtn = self.customerWin_normalBtn;
+        }
     }
 
 }

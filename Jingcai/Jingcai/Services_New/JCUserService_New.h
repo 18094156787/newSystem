@@ -11,11 +11,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCUserService_New : BaseService
+//获取图形验证码
+- (void)getImageCodeWithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;
+- (void)getCheckImageCodeWithID:(NSString *)ID img_code:(NSString *)img_code Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //发送短信验证码
 //0注册，1登录，2绑定手机，3忘记密码 默认为0
 - (void)getSmsCodeWithTelNum:(NSString *)telNum type:(NSInteger)type success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //注册
-- (void)registerWithTel:(NSString *)tel pass:(NSString *)pass code:(NSString *)code success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//img_id 图形验证码id  img_code 4位图形验证
+- (void)registerWithTel:(NSString *)tel pass:(NSString *)pass code:(NSString *)code  img_id:(NSString *)img_id img_code:(NSString *)img_code success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //密码登陆
 - (void)loginWithTel:(NSString *)tel pass:(NSString *)pass success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //短信登陆
@@ -23,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 //微信登录
 - (void)wxLoginWithParam:(NSDictionary *)param success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //微信绑定手机
-- (void)bindTel:(NSString *)tel code:(NSString *)code pass:(NSString *)pass oauth_id:(NSString *)oauth_id success:(successBlock)successBlock failure:(failureBlock)failureBlock;;
+- (void)bindTel:(NSString *)tel code:(NSString *)code pass:(NSString *)pass oauth_id:(NSString *)oauth_id  img_id:(NSString *)img_id img_code:(NSString *)img_code success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //换绑手机-校验旧手机号
 - (void)VerifyPhone:(NSString *)phone code:(NSString *)code success:(successBlock)successBlock failure:(failureBlock)failureBlock ;
 //获取用户信息

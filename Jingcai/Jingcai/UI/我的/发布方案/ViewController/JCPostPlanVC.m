@@ -1181,18 +1181,18 @@
                 for (int i=0; i<mathModel.btnArray.count; i++) {
                     JCPostButton *btn = mathModel.btnArray[i];
                     NSString *btn_spf = btn.spf;
-//                    if ([btn.spf integerValue]==1) {
-//                        btn_spf = @"3";
+//                    if (mathModel.is_reverse==1) {
+//                        if ([btn.spf integerValue]==1) {
+//                            btn_spf = @"3";
+//                        }else  if ([btn.spf integerValue]==3) {
+//                            btn_spf = @"1";
+//                        }else if ([btn.spf integerValue]==4) {
+//                            btn_spf = @"6";
+//                        }else if ([btn.spf integerValue]==6) {
+//                            btn_spf = @"4";
+//                        }
 //                    }
-//                    if ([btn.spf integerValue]==3) {
-//                        btn_spf = @"1";
-//                    }
-//                    if ([btn.spf integerValue]==4) {
-//                        btn_spf = @"6";
-//                    }
-//                    if ([btn.spf integerValue]==6) {
-//                        btn_spf = @"4";
-//                    }
+
                     
                     if (i==0) {
                         value = btn_spf;
@@ -1226,6 +1226,19 @@
             if (mathModel.selectBtn.spf.length>0) {
                 JCPostPlanRequest_integerModel *model = [JCPostPlanRequest_integerModel new];
                 model.spf = mathModel.selectBtn.spf;
+                
+                NSString *btn_spf = model.spf;
+//                if (mathModel.is_reverse==1) {
+//                    if ([btn_spf integerValue]==1) {
+//                        btn_spf = @"3";
+//                    }else if ([btn_spf integerValue]==3) {
+//                        btn_spf = @"1";
+//                    }
+//
+//                }
+                model.spf = btn_spf;
+                
+                
                 model.match_num = [mathModel.match_id intValue];
                 model.match_id = [mathModel.match_id intValue];
 //                JCPostPlanRequestModel *model = [JCPostPlanRequestModel new];

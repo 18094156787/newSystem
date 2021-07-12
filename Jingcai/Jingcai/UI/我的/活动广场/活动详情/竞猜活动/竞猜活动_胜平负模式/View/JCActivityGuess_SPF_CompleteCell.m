@@ -30,7 +30,7 @@
         make.size.mas_equalTo(CGSizeMake(180, 16));
     }];
     
-    UILabel *titleLab = [UILabel initWithTitle:@"我提交的竞猜结果" andFont:16 andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+    UILabel *titleLab = [UILabel initWithTitle:@"我提交的选项" andFont:16 andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     [self.timeBgView addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.insets(UIEdgeInsetsZero);
@@ -68,14 +68,14 @@
 
     NSString *title = [NSString stringWithFormat:@"%@",detailModel.get_match_info.competition.short_name_zh];
     if (detailModel.get_match_info.group_num_new.length>0) {
-        title = [title stringByAppendingFormat:@" | %@",detailModel.get_match_info.group_num_new];
+        title = [title stringByAppendingFormat:@" %@",detailModel.get_match_info.group_num_new];
     }
     if (detailModel.get_match_info.round_num_two.length>0) {
-        title = [title stringByAppendingFormat:@" | %@",detailModel.get_match_info.round_num_two];
+        title = [title stringByAppendingFormat:@" %@",detailModel.get_match_info.round_num_two];
     }
 
     if (detailModel.get_match_info.match_time.length>0) {
-        title = [title stringByAppendingFormat:@" | %@",[NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd HH:mm" time:[detailModel.get_match_info.match_time doubleValue]]];
+        title = [title stringByAppendingFormat:@" %@",[NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd HH:mm" time:[detailModel.get_match_info.match_time doubleValue]]];
     }
     self.infoLab.text = title;
 

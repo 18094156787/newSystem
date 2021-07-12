@@ -124,6 +124,12 @@
         [JCWToastTool showHint:@"活动还未开始哦~"];
         return;
     }
+    if (self.detailModel.get_match_info.status_id!=1) {
+        [JCWToastTool showHint:@"比赛已过期，无法提交！"];
+        return;
+    }
+    
+//    [JCWToastTool showHint:@"比赛已开始,无法提交!"];
 
     if ([self.detailModel.text_can_click integerValue]!=1) {
         return;
@@ -235,14 +241,14 @@
 
     NSString *title = [NSString stringWithFormat:@"%@",detailModel.get_match_info.competition.short_name_zh];
     if (detailModel.get_match_info.group_num_new.length>0) {
-        title = [title stringByAppendingFormat:@" | %@",detailModel.get_match_info.group_num_new];
+        title = [title stringByAppendingFormat:@" %@",detailModel.get_match_info.group_num_new];
     }
     if (detailModel.get_match_info.round_num_two.length>0) {
-        title = [title stringByAppendingFormat:@" | %@",detailModel.get_match_info.round_num_two];
+        title = [title stringByAppendingFormat:@" %@",detailModel.get_match_info.round_num_two];
     }
 
     if (detailModel.get_match_info.match_time.length>0) {
-        title = [title stringByAppendingFormat:@" | %@",[NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd HH:mm" time:[detailModel.get_match_info.match_time doubleValue]]];
+        title = [title stringByAppendingFormat:@" %@",[NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd HH:mm" time:[detailModel.get_match_info.match_time doubleValue]]];
     }
 //    if (detailModel.get_match_info.group_num_new.length==0&&detailModel.get_match_info.round_num_two.length==0&&detailModel.get_match_info.round_num_one.length==0) {
 //        title = [NSString stringWithFormat:@"%@",detailModel.get_match_info.competition.short_name_zh];
@@ -256,19 +262,45 @@
     self.awayLab.text = detailModel.get_match_info.away_team.name_zh;
     self.statusLab.text = detailModel.get_match_info.status_cn;
     self.scoreLab.text = @"VS";
-    if (detailModel.get_match_info.status_id>1&&detailModel.get_match_info.status_id<9) {
+    if (detailModel.get_match_info.status_id>1&&detailModel.get_match_info.status_id<8) {
         self.scoreLab.text = [NSString stringWithFormat:@"%@:%@",detailModel.get_match_info.home_all_score,detailModel.get_match_info.away_all_score];
+        
+        if ([detailModel.get_match_info.second_half_time floatValue]>0) {
+            //计算时间差
+            double currentTime = [[NSDate date] timeIntervalSince1970];
+            double distance = currentTime-[detailModel.get_match_info.second_half_time floatValue];
 
+            self.statusLab.text = [NSString stringWithFormat:@"%.0f'",distance/60+45];
+//            [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)]
         }else{
-        self.scoreLab.text = @"VS";
+            //计算时间差
+            double currentTime = [[NSDate date] timeIntervalSince1970];
+            double distance = currentTime-[detailModel.get_match_info.first_half_time floatValue];
+            if (distance<0) {
+                distance = 0;
+            }
+            self.statusLab.text = [NSString stringWithFormat:@"%.0f'",distance/60];
+            
+        }
+        
+
+        } else{
+            if (detailModel.get_match_info.status_id==8) {
+                self.scoreLab.text = [NSString stringWithFormat:@"%@:%@",detailModel.get_match_info.home_all_score,detailModel.get_match_info.away_all_score];
+            }
+            
+       
 
     }
+    
+
+    
 
 }
 
 - (UILabel *)titleLab {
     if (!_titleLab) {
-        _titleLab = [UILabel initWithTitle:@"" andFont:14 andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+        _titleLab = [UILabel initWithTitle:@"" andFont:12 andWeight:2 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _titleLab;
 }
@@ -283,6 +315,7 @@
 - (UIImageView *)homeImgView {
     if (!_homeImgView) {
         _homeImgView = [UIImageView new];
+        _homeImgView.contentMode = UIViewContentModeScaleAspectFill;
         [_homeImgView hg_setAllCornerWithCornerRadius:20];
     }
     return _homeImgView;
@@ -291,6 +324,7 @@
 - (UIImageView *)awayImgView {
     if (!_awayImgView) {
         _awayImgView = [UIImageView new];
+        _awayImgView.contentMode = UIViewContentModeScaleAspectFill;
         [_awayImgView hg_setAllCornerWithCornerRadius:20];
     }
     return _awayImgView;

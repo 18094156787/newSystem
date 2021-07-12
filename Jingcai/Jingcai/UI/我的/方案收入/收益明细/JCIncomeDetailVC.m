@@ -127,6 +127,7 @@
     }
     JCUserService_New *service = [JCUserService_New service];
     [service getMyIncomeDetailLsitWithPage:self.pageNo success:^(id  _Nullable object) {
+
         [self endRefresh];
      if ([JCWJsonTool isSuccessResponse:object]) {
          if (self.pageNo==1) {

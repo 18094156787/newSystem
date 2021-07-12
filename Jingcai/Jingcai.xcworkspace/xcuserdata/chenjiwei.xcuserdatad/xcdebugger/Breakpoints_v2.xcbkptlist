@@ -3,22 +3,4 @@
    uuid = "26447FE1-64B4-4153-9E47-5606331C1ED7"
    type = "0"
    version = "2.0">
-   <Breakpoints>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "39FCF223-CCB4-47D0-9B89-C57EA5DA4CD5"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x7ea2;&#x699c;&#x4e13;&#x5bb6;/&#x7ea2;&#x699c;&#x8be6;&#x60c5;/ViewController/JCHongbangDetailVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "-refreshData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-   </Breakpoints>
 </Bucket>

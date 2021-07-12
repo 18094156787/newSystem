@@ -9,6 +9,7 @@
 #import "JCPostCheckFailVC.h"
 #import "JCPostCheckRuleVC.h"
 #import "JCPostCheckUserInfoVC.h"
+#import "JCPostCheckUserInfo_Invite_VC.h"
 @interface JCPostCheckFailVC ()
 
 @end
@@ -125,6 +126,12 @@
         }
         if ([[JCWUserBall currentUser].fabu integerValue]==5) {
             //被拒,重新编辑
+            if ([[JCWUserBall currentUser].is_be_invited intValue]==1) {
+                JCPostCheckUserInfo_Invite_VC *vc = [JCPostCheckUserInfo_Invite_VC new];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+                 return;
+
+            }
             JCPostCheckUserInfoVC *vc = [JCPostCheckUserInfoVC new];
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }

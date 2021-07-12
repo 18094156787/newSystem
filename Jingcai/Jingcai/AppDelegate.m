@@ -339,7 +339,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         //初始化JPush
         [JPUSHService setupWithOption:self.launchOptions appKey:JPushAppKey
                               channel:@"App Store"
-                     apsForProduction:NO
+                     apsForProduction:YES
                 advertisingIdentifier:nil];
     });
 

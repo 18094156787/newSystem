@@ -36,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) NSString *leagueName;//联赛名称
 
+@property (nonatomic,assign) NSInteger is_reverse;//字段，表示比赛是否主客相反，0否，1是;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -380,6 +380,7 @@
         [JCWToastTool showHint:@"您还未选择任何选项，请选择后再提交！"];
         return;
     }
+
     
     
     self.checkView.selectOptionModel = self.selectOptionModel;

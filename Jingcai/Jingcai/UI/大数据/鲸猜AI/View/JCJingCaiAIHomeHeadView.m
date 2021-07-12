@@ -74,12 +74,13 @@
     [self addSubview:self.bottomView];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self);
-        make.bottom.offset(AUTO(-6));
-        make.height.mas_equalTo(36);
+//        make.bottom.offset(AUTO(-7));
+        make.top.equalTo(bgView.mas_bottom).offset(AUTO(7.5));
+        make.height.mas_equalTo(AUTO(36));
     }];
 
 //    self.noticeCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(AUTO(15), 0, SCREEN_WIDTH-AUTO(15), AUTO(34)) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    self.noticeCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(AUTO(15), 0, SCREEN_WIDTH-AUTO(15), 36) imageNamesGroup:nil];
+    self.noticeCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(AUTO(15), 0, SCREEN_WIDTH-AUTO(15), AUTO(36)) imageNamesGroup:nil];
     self.noticeCycleScrollView.delegate = self;
 //    self.noticeCycleScrollView.clipsToBounds = YES;
     self.noticeCycleScrollView.showPageControl = NO;

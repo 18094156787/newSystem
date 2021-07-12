@@ -21,7 +21,7 @@
         make.width.height.mas_equalTo(AUTO(72));
     }];
     
-    UILabel *titleLab = [UILabel initWithTitle:@"竞猜结果提交成功" andFont:AUTO(18) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+    UILabel *titleLab = [UILabel initWithTitle:@"选项提交成功" andFont:AUTO(18) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     [self addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(iconImgView.mas_bottom).offset(AUTO(15));

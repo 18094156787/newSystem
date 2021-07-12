@@ -209,7 +209,7 @@
         }
         
         //未登录的用户,查看付费的已开奖的,需要显示游客模式
-        NSLog(@"token=%ld",[JCWUserBall currentUser].token.length);
+//        NSLog(@"token=%ld",[JCWUserBall currentUser].token.length);
         NSLog(@"sf=%@",self.tjInfoDetailBall.sf);
         NSLog(@"all_wl=%@",self.tjInfoDetailBall.sf);
         if ([JCWUserBall currentUser].token.length==0&&[self.tjInfoDetailBall.sf floatValue]>0&&[self.tjInfoDetailBall.all_wl integerValue]>0&&!self.tjInfoDetailBall.is_ai) {
@@ -420,7 +420,8 @@
 }
 
 - (BOOL)hideMatchRate {
-    if (![JCWUserBall currentUser]&&self.tjInfoDetailBall.sf>0) {
+//    self.tjInfoDetailBall.sf = @"";
+    if (![JCWUserBall currentUser]&&[self.tjInfoDetailBall.sf integerValue]>0) {
         return YES;
     }
     return NO;

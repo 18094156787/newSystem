@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UIView *titleLab;
 
+@property (nonatomic, strong) UIView *lineView;
+
 @property (nonatomic, strong) UICollectionView *collectionView;
 
 @property (nonatomic,strong) UIButton *cancelBtn;

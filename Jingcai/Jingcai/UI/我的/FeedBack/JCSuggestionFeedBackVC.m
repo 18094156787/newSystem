@@ -185,7 +185,7 @@
             cell.gifLable.hidden = YES;
         }else {
 
-            cell.imageView.image = _selectedPhotos[indexPath.row];
+//            cell.imageView.image = _selectedPhotos[indexPath.row];
             cell.asset = _selectedAssets[indexPath.row];
             cell.deleteBtn.hidden = NO;
         }

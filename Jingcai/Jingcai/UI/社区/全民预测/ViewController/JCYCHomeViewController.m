@@ -227,8 +227,6 @@
 
     cell.model = model;
     cell.dataArray = self.dataArray;
-
-
     return cell;
 
 }

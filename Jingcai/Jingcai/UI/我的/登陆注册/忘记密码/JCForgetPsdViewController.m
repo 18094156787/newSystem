@@ -159,24 +159,24 @@
 
 
 
-    UILabel *agreeLab = [UILabel initWithTitle:@"我已阅读并同意“服务协议”" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:0];
-    [self.view addSubview:agreeLab];
-    [agreeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.top.equalTo(repasswordLine.mas_bottom).offset(AUTO(40));
-    }];
-
-    [self.view addSubview:self.agreeBtn];
-    [self.agreeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(agreeLab);
-        make.right.equalTo(agreeLab.mas_left);
-        make.width.height.mas_equalTo(AUTO(30));
-    }];
+//    UILabel *agreeLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:0];
+//    [self.view addSubview:agreeLab];
+//    [agreeLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.equalTo(self.view);
+//        make.top.equalTo(repasswordLine.mas_bottom).offset(AUTO(40));
+//    }];
+//
+//    [self.view addSubview:self.agreeBtn];
+//    [self.agreeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(agreeLab);
+//        make.right.equalTo(agreeLab.mas_left);
+//        make.width.height.mas_equalTo(AUTO(30));
+//    }];
 
     [self.view addSubview:self.loginBtn];
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.top.equalTo(agreeLab.mas_bottom).offset(AUTO(20));
+        make.top.equalTo(repasswordLine.mas_bottom).offset(AUTO(40));
         make.left.offset(AUTO(50));
         make.right.offset(AUTO(-50));
         make.height.mas_equalTo(AUTO(44));
@@ -211,10 +211,10 @@
         [JCWToastTool showHint:@"两次密码输入不一致"];
         return ;
     }
-    if (!self.agreeBtn.selected) {
-        [JCWToastTool showHint:@"请阅读“服务协议”并点击同意"];
-        return ;
-    }
+//    if (!self.agreeBtn.selected) {
+//        [JCWToastTool showHint:@"请阅读“服务协议”并点击同意"];
+//        return ;
+//    }
     NSString *phone = [JCWAppTool getRSA_String:self.phoneTF.text];
     NSString *password = [JCWAppTool getRSA_String:self.passwordTF.text];
     WeakSelf;

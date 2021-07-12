@@ -9,6 +9,39 @@
 #import "JCUserService_New.h"
 
 @implementation JCUserService_New
+
+
+//获取图形验证码
+- (void)getImageCodeWithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock {
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSDictionary *param = @{};
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"getCaptcha" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self deathWithSuccessInfo:responseObject];
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+        [self dealWithError:error];
+    }];
+
+}
+//校验图形验证码
+- (void)getCheckImageCodeWithID:(NSString *)ID img_code:(NSString *)img_code Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSDictionary *param = @{@"id":ID,@"img_code":img_code};
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"check_captcha" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self deathWithSuccessInfo:responseObject];
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+        [self dealWithError:error];
+    }];
+
+}
+
 //发送短信验证码
 - (void)getSmsCodeWithTelNum:(NSString *)telNum type:(NSInteger)type success:(successBlock)successBlock failure:(failureBlock)failureBlock {
 //0注册，1登录，2绑定手机，3忘记密码 默认为0
@@ -33,12 +66,15 @@
 
 }
 
-- (void)registerWithTel:(NSString *)tel pass:(NSString *)pass code:(NSString *)code success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+//img_id 图形验证码id  img_code 4位图形验证
+- (void)registerWithTel:(NSString *)tel pass:(NSString *)pass code:(NSString *)code  img_id:(NSString *)img_id img_code:(NSString *)img_code success:(successBlock)successBlock failure:(failureBlock)failureBlock {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSDictionary *param = @{
                             @"mobile":tel,
                             @"password":pass,
                             @"code":code,
+                            @"img_id":img_id,
+                            @"img_code":img_code
     };
     NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"register" paramDic:param ignoreArray:@[]];
     [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -82,12 +118,18 @@
 }
 
 //微信绑定手机
-- (void)bindTel:(NSString *)tel code:(NSString *)code pass:(NSString *)pass oauth_id:(NSString *)oauth_id success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+/*
+ img_id 图形验证码id
+ img_code 4位数图形验证码
+ **/
+- (void)bindTel:(NSString *)tel code:(NSString *)code pass:(NSString *)pass oauth_id:(NSString *)oauth_id  img_id:(NSString *)img_id img_code:(NSString *)img_code success:(successBlock)successBlock failure:(failureBlock)failureBlock {
     NSDictionary *param = @{
         @"mobile":tel,
         @"code":code,
         @"password":pass,
-        @"oauth_id":oauth_id
+        @"oauth_id":oauth_id,
+        @"img_id":img_id,
+        @"img_code":img_code
     };
 //    if (pass.length>0) {
 //        param = @{

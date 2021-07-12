@@ -28,6 +28,7 @@
     [self.checkLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.indicateImgView.mas_left).offset(-8);
         make.height.mas_equalTo(AUTO(24));
+        make.width.mas_equalTo(AUTO(60));
         make.centerY.equalTo(self.contentView);
     }];
     
