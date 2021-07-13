@@ -38,7 +38,7 @@
     [self.contentView addSubview:self.contentLab];
     [self.contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
-        make.top.equalTo(self.bgView.mas_bottom).offset(AUTO(15));
+        make.top.equalTo(self.bgView.mas_bottom).offset(AUTO(12));
         make.right.offset(AUTO(-15));
     }];
     
@@ -46,7 +46,7 @@
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
-        make.top.equalTo(self.contentLab.mas_bottom).offset(AUTO(20));
+        make.top.equalTo(self.contentLab.mas_bottom).offset(AUTO(10));
         make.height.mas_equalTo(0);
     }];
     
@@ -195,6 +195,8 @@
     if (!_tjInfoDetailBall) {
         return;
     }
+
+
     if (tjInfoDetailBall.content.length>0) {
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle.lineSpacing = 5; // 设置行间距
@@ -202,7 +204,8 @@
         self.contentLab.attributedText = attributedStr;
     }else{
         [self.contentLab mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.offset(-15);
+//            make.top.offset(-15);
+            make.top.equalTo(self.bgView.mas_bottom).offset(AUTO(-15));
         }];
     }
 
@@ -219,15 +222,14 @@
     }
         [self.collectionView reloadData];
     if (tjInfoDetailBall.content.length==0) {
-        [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.offset(AUTO(15));
-            make.right.offset(AUTO(-15));
-            make.top.equalTo(self.bgView.mas_bottom).offset(AUTO(15));
-            make.height.mas_equalTo(AUTO(50));
-        }];
+//        [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.offset(AUTO(15));
+//            make.right.offset(AUTO(-15));
+//            make.top.equalTo(self.bgView.mas_bottom).offset(AUTO(15));
+//            make.height.mas_equalTo(AUTO(50));
+//        }];
         self.bgView.hidden = YES;
-        [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.offset(0);
+        [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.offset(0);
             make.height.mas_equalTo(0);
         }];
@@ -248,9 +250,10 @@
         }];
     }else{
         [self.bugUserView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.collectionView.mas_bottom).offset(AUTO(10));
-//            make.top.equalTo(self.infoLab.mas_bottom).offset(AUTO(10));
-            make.height.mas_equalTo(AUTO(60));
+//            make.top.equalTo(self.collectionView.mas_bottom).offset(AUTO(10));
+//            make.height.mas_equalTo(AUTO(60));
+            
+            make.height.mas_equalTo(0);
         }];
         self.countLab.text = @"";
         
