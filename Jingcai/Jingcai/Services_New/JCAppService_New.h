@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JCAppService_New : BaseService
 
+//获取客户端唯一标识
+- (void)getAppSignXWithsuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;
+
 - (void)getKefuWXWithsuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;
 
 @end

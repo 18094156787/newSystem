@@ -281,6 +281,10 @@
     [service getMyInviteFriendChaiHongbaoWithsuccess:^(id  _Nullable object) {
         [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
+            if ([object[@"data"] isKindOfClass:[NSNull class]]) {
+                return;
+            }
+            NSLog(@"拆红包数据%@",object);
             JCJingCaiHongbaoModel *model = (JCJingCaiHongbaoModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCJingCaiHongbaoModel class]];
             NSString *cjCount = object[@"data"][@"remaining_times"];
             self.shareInfoModel.cjCount = [NSString stringWithFormat:@"%@",cjCount];//同步剩余抽奖次数

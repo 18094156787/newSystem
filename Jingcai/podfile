@@ -17,26 +17,16 @@ target 'Jingcai' do
     pod 'WechatOpenSDK'# 微信SDK
     pod 'JPush' # 极光推送
     pod 'UMCCommon'
-#    pod 'UMCSecurityPlugins'
     pod 'UMCCommonLog'
-#    pod 'UMCAnalytics' # 统计SDK
     pod 'UMCShare/Social/ReducedWeChat'
     pod 'UMCShare/Social/ReducedQQ'
     pod 'UMCShare/Social/ReducedSina'
-    
-    
-#    pod 'AlipaySDK-iOS', '~> 15.6.8'
-#    pod 'WMPageController'
-#    pod 'AlipaySDK_No_UTDID'
     pod 'BlocksKit'
     pod 'ReactiveObjC'
-#    pod 'YYKit'
     pod 'LBXScan', '~> 2.3'
     pod 'SJVideoPlayer'
-#    pod 'YBImageBrowser'
     pod 'YYKit'
     pod 'SocketRocket'
     pod 'JXCategoryView'
-#    pod 'libOpenInstallSDK'
 end
 

@@ -184,7 +184,7 @@
     self.progressView.hidden = NO;
     NSLog(@"%@",webView.URL.absoluteString);
     
-    if ([webView.URL.absoluteString hasPrefix:@"https://wap.jingcai.com"]||[webView.URL.absoluteString hasPrefix:@"http://wap.jingcai.com"]||[webView.URL.absoluteString hasPrefix:@"https://www.jingcai.com"]||[webView.URL.absoluteString hasPrefix:@"http://www.jingcai.com"]) {
+    if ([webView.URL.absoluteString isEqualToString:@"https://wap.jingcai.com/"]||[webView.URL.absoluteString isEqualToString:@"http://wap.jingcai.com/"]||[webView.URL.absoluteString isEqualToString:@"https://www.jingcai.com/"]||[webView.URL.absoluteString isEqualToString:@"http://www.jingcai.com/"]) {
         [self.navigationController popViewControllerAnimated:YES];
     }
 
