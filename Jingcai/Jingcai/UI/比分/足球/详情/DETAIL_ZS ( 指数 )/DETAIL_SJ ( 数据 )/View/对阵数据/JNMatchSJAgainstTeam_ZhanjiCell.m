@@ -11,16 +11,16 @@
 @implementation JNMatchSJAgainstTeam_ZhanjiCell
 
 - (void)initViews {
-    NSArray *items = @[[SCPieChartDataItem dataItemWithValue:0 color:JCBaseColor description:@""],
-                       [SCPieChartDataItem dataItemWithValue:0 color:COLOR_1B1B1B description:@""],
-                       [SCPieChartDataItem dataItemWithValue:0 color:COLOR_002868 description:@""],
+    //负 -胜 -平
+    NSArray *items = @[[SCPieChartDataItem dataItemWithValue:0 color:COLOR_002868 description:@""],[SCPieChartDataItem dataItemWithValue:0 color:JCBaseColor description:@""],
+                       [SCPieChartDataItem dataItemWithValue:0 color:COLOR_30B27A description:@""]
                        ];
 
-    self.chartView = [[SCPieChart alloc] initWithFrame:CGRectMake(AUTO(20), 0, AUTO(110), AUTO(110)) items:items];
+    self.chartView = [[SCPieChart alloc] initWithFrame:CGRectMake(AUTO(20), 0, AUTO(80), AUTO(80)) items:items];
     self.chartView.descriptionTextColor = [UIColor whiteColor];
     self.chartView.hideDescription = YES;
     //    chartView.outerCircleRadius = 100;
-    self.chartView.innerCircleRadius = 40;
+    self.chartView.innerCircleRadius = 30;
     self.chartView.descriptionTextFont  = [UIFont fontWithName:@"Avenir-Medium" size:12.0];
 
     [self.chartView strokeChartWithAnimation:NO];
@@ -28,28 +28,61 @@
 
     
     
-    [self.chartView addSubview:self.eqalLab];
-    [self.eqalLab mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView *equlIconView = [UIView new];
+    equlIconView.backgroundColor = COLOR_30B27A;
+    [equlIconView hg_setAllCornerWithCornerRadius:4];;
+    [self addSubview:equlIconView];
+    [equlIconView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
         make.centerY.equalTo(self.chartView);
-        make.centerX.equalTo(self.chartView);
-        make.height.mas_equalTo(AUTO(17));
+        make.left.equalTo(self.chartView.mas_right).offset(10);
+        make.width.height.mas_equalTo(8);
     }];
     
 
+    [self addSubview:self.eqalLab];
+    [self.eqalLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.chartView);
+        make.left.equalTo(equlIconView.mas_right).offset(5);
+        make.height.mas_equalTo(AUTO(17));
+    }];
     
+    UIView *winIconView = [UIView new];
+    winIconView.backgroundColor = JCBaseColor;
+    [winIconView hg_setAllCornerWithCornerRadius:4];;
+    [self addSubview:winIconView];
+    [winIconView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(equlIconView);
+        make.bottom.equalTo(self.eqalLab.mas_top).offset(-15);
+        make.width.height.mas_equalTo(8);
+    }];
     
     [self addSubview:self.windLab];
     [self.windLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.chartView);
-        make.bottom.equalTo(self.eqalLab.mas_top);
+        make.centerY.equalTo(winIconView);
+        make.left.equalTo(winIconView.mas_right).offset(5);
         make.height.mas_equalTo(AUTO(17));
     }];
+    
+    
+    UIView *loseIconView = [UIView new];
+    loseIconView.backgroundColor = COLOR_002868;
+    [loseIconView hg_setAllCornerWithCornerRadius:4];;
+    [self addSubview:loseIconView];
+    [loseIconView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(equlIconView);
+        make.top.equalTo(self.eqalLab.mas_bottom).offset(15);
+        make.width.height.mas_equalTo(8);
+    }];
+
 
 
     [self addSubview:self.loseLab];
      [self.loseLab mas_makeConstraints:^(MASConstraintMaker *make) {
-         make.centerX.equalTo(self.chartView);
-         make.top.equalTo(self.eqalLab.mas_bottom);
+         make.centerY.equalTo(loseIconView);
+         make.left.equalTo(loseIconView.mas_right).offset(5);
          make.height.mas_equalTo(AUTO(17));
      }];
     
@@ -63,7 +96,7 @@
         make.bottom.offset(AUTO(-15));
     }];
     
-    UILabel *teamNameLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+    UILabel *teamNameLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     self.teamNameLab = teamNameLab;
     [self addSubview:teamNameLab];
     [teamNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -75,8 +108,8 @@
     UILabel *hongInfoLab = [UILabel initWithTitle:@"胜" andFont:AUTO(12) andWeight:1 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     [self.circleBgView addSubview:hongInfoLab];
     [hongInfoLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.chartView.mas_right).offset(AUTO(30));
-        make.top.offset(AUTO(10));
+        make.left.equalTo(self.chartView.mas_right).offset(AUTO(69));
+        make.top.offset(AUTO(3));
         make.width.height.mas_equalTo(AUTO(20));
     }];
     
@@ -84,16 +117,16 @@
     hongLine.backgroundColor =  COLOR_DBDBDB;
     [self.circleBgView addSubview:hongLine];
     [hongLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.chartView.mas_right).offset(AUTO(67));
+        make.left.equalTo(self.chartView.mas_right).offset(AUTO(95));
         make.centerY.equalTo(hongInfoLab);
         make.size.mas_equalTo(CGSizeMake(AUTO(170), 1));
     }];
 
-    UILabel *zouInfoLab = [UILabel initWithTitle:@"平" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_002868 andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+    UILabel *zouInfoLab = [UILabel initWithTitle:@"平" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_30B27A andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     [self.circleBgView addSubview:zouInfoLab];
     [zouInfoLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(hongInfoLab);
-        make.top.offset(AUTO(45));
+        make.top.offset(AUTO(30));
         make.width.height.mas_equalTo(AUTO(20));
     }];
 
@@ -101,16 +134,16 @@
     zouLine.backgroundColor =  COLOR_DBDBDB;
     [self.circleBgView addSubview:zouLine];
     [zouLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.chartView.mas_right).offset(AUTO(67));
+        make.left.equalTo(self.chartView.mas_right).offset(AUTO(95));
         make.centerY.equalTo(zouInfoLab);
         make.size.mas_equalTo(CGSizeMake(AUTO(170), 1));
     }];
 
-    UILabel *heiInfoLab = [UILabel initWithTitle:@"负" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_1B1B1B andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+    UILabel *heiInfoLab = [UILabel initWithTitle:@"负" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_002868 andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     [self.circleBgView addSubview:heiInfoLab];
     [heiInfoLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(hongInfoLab);
-        make.top.offset(AUTO(75));
+        make.top.offset(AUTO(57));
         make.width.height.mas_equalTo(AUTO(20));
     }];
     
@@ -118,12 +151,12 @@
     heiLine.backgroundColor =  COLOR_DBDBDB;
     [self.circleBgView addSubview:heiLine];
     [heiLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.chartView.mas_right).offset(AUTO(67));
+        make.left.equalTo(self.chartView.mas_right).offset(AUTO(95));
         make.centerY.equalTo(heiInfoLab);
         make.size.mas_equalTo(CGSizeMake(AUTO(170), 1));
     }];
 
-    UILabel *zsLab = [UILabel initWithTitle:@"近0场走势" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+    UILabel *zsLab = [UILabel initWithTitle:@"近0场走势" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     self.zsCountLab = zsLab;
     [self.circleBgView addSubview:zsLab];
     [zsLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -169,10 +202,10 @@
     }
     
     
-    [self.chartView updateChartByNumbers:@[@(hong),@(zou),@(hei)] animation:NO];
-    self.windLab.text = [NSString stringWithFormat:@"胜 %.0f%%",100*(float)hong/rateArray.count];
-    self.eqalLab.text = [NSString stringWithFormat:@"平 %.0f%%",100*(float)hei/rateArray.count];
-    self.loseLab.text = [NSString stringWithFormat:@"负 %.0f%%",100*(float)zou/rateArray.count];
+    [self.chartView updateChartByNumbers:@[@(hei),@(hong),@(zou)] animation:NO];
+    self.windLab.text = [NSString stringWithFormat:@"%.0f%%",100*(float)hong/rateArray.count];
+    self.eqalLab.text = [NSString stringWithFormat:@"%.0f%%",100*(float)hei/rateArray.count];
+    self.loseLab.text = [NSString stringWithFormat:@"%.0f%%",100*(float)zou/rateArray.count];
     
     
     NSString *hongString = [NSString stringWithFormat:@"%ld胜",hong];
@@ -189,17 +222,17 @@
     }
     NSRange zou_range = [zsString rangeOfString:zouString];
     if (zou_range.location!=NSNotFound) {
-    [zsAttr addAttribute:NSForegroundColorAttributeName value:COLOR_1B1B1B range:zou_range];
+    [zsAttr addAttribute:NSForegroundColorAttributeName value:COLOR_002868 range:zou_range];//
     }
     NSRange hei_range = [zsString rangeOfString:heiString];
     if (hei_range.location!=NSNotFound) {
-    [zsAttr addAttribute:NSForegroundColorAttributeName value:COLOR_002868 range:hei_range];
+    [zsAttr addAttribute:NSForegroundColorAttributeName value:COLOR_30B27A range:hei_range];
     }
     self.zs_infoLab.attributedText = zsAttr;
 
     NSMutableArray *pointArray = [NSMutableArray array];
-    NSInteger startX = AUTO(30);
-    NSInteger startY = 30;
+    NSInteger startX = AUTO(60);
+    NSInteger startY = 27;
 
     UIBezierPath* path = [UIBezierPath bezierPath];
     path.lineWidth = 1;
@@ -210,13 +243,13 @@
     NSString *value = rateArray[i];
     startX = startX+AUTO(17);
     if ([value integerValue]==1) {
-    startY = AUTO(20);
+    startY = AUTO(14);
     }
     if ([value integerValue]==2) {
-    startY = AUTO(55);
+    startY = AUTO(41);
     }
     if ([value integerValue]==3) {
-    startY = AUTO(85);
+    startY = AUTO(68);
     }
 
     CGPoint point = CGPointMake(startX, startY);
@@ -237,10 +270,10 @@
     ponitView.backgroundColor = JCBaseColor;
     }
     if ([value intValue]==2) {
-    ponitView.backgroundColor = COLOR_002868;
+        ponitView.backgroundColor = COLOR_30B27A;
     }
     if ([value intValue]==3) {
-    ponitView.backgroundColor = COLOR_1B1B1B;
+    ponitView.backgroundColor = COLOR_002868;
     }
 
     [self.circleBgView addSubview:ponitView];
@@ -275,7 +308,7 @@
 
 - (UILabel *)eqalLab {
     if (!_eqalLab) {
-        _eqalLab = [UILabel initWithTitle:@"" andFont:AUTO(10) andWeight:1 andTextColor:COLOR_002868 andBackgroundColor:JCClearColor andTextAlignment:0];
+        _eqalLab = [UILabel initWithTitle:@"" andFont:AUTO(10) andWeight:1 andTextColor:COLOR_30B27A andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _eqalLab;
 }

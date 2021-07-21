@@ -49,6 +49,16 @@ static CGFloat const kWMMenuViewHeight = 0;
  
 //    [[IAPManager shared] checkMyBuyGoods];
     
+//    UIImageView *imgView = [UIImageView new];
+//    imgView.frame = CGRectMake(100, 100, 200, 200);
+//    [self.view addSubview:imgView];
+//
+//    NSString *url = @"https://yixianfeng.oss-cn-beijing.aliyuncs.com/temp/图片4_1622446112748.png";
+//    url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    [imgView sd_setImageWithURL:[NSURL URLWithString:@"https://yixianfeng.oss-cn-beijing.aliyuncs.com/temp/图片4_1622446112748.png"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+//
+//    }];
+    
 
 }
 
@@ -179,6 +189,8 @@ static CGFloat const kWMMenuViewHeight = 0;
         
         [weakSelf.contentView.mj_header endRefreshing];
     }];
+    
+
 
 }
 

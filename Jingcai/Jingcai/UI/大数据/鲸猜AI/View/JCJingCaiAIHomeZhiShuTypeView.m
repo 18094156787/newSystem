@@ -15,11 +15,11 @@
     [self.iconImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.centerY.equalTo(self);
-        make.width.height.mas_equalTo(AUTO(65));
+        make.width.height.mas_equalTo(AUTO(72));
     }];
     
     UIView *lineView = [UIView new];
-    lineView.backgroundColor = COLOR_F0F0F0;
+    lineView.backgroundColor = JCClearColor;
     [self addSubview:lineView];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.iconImgView.mas_right).offset(AUTO(15));
@@ -29,7 +29,7 @@
     
     [self addSubview:self.bgView];
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(lineView.mas_right).offset(AUTO(15));
+        make.left.equalTo(lineView.mas_right).offset(0);
         make.centerY.equalTo(self.iconImgView);
         make.right.offset(AUTO(-15));
         make.height.mas_equalTo(AUTO(85));
@@ -37,7 +37,7 @@
     
     [self.bgView addSubview:self.weekLab];
     [self.weekLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(AUTO(5));
+        make.top.offset(AUTO(2));
         make.left.right.offset(0);
         make.height.mas_equalTo(0);
     }];
@@ -87,20 +87,20 @@
         if (i==0) {
             self.weekLab.attributedText = attr;
             [self.weekLab mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(AUTO(20));
+                make.height.mas_equalTo(AUTO(18));
             }];
         }
         if (i==1) {
             self.monthLab.attributedText = attr;
             [self.monthLab mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(AUTO(20));
+                make.height.mas_equalTo(AUTO(18));
             }];
         }
         if (i==2) {
             self.threeMonthLab.attributedText = attr;
             self.threeMonthLab.hidden = [model.yl_desc floatValue]<=0?YES:NO;
             [self.threeMonthLab mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(AUTO(20));
+                make.height.mas_equalTo(AUTO(18));
             }];
             if ([model.yl_desc floatValue]<=0) {
                 count--;
@@ -114,7 +114,7 @@
             self.historyLab.attributedText = attr;
             self.historyLab.hidden = [model.yl_desc floatValue]<=0?YES:NO;
             [self.historyLab mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(AUTO(20));
+                make.height.mas_equalTo(AUTO(18));
             }];
             if ([model.yl_desc floatValue]<=0) {
                 count--;
@@ -130,7 +130,7 @@
         make.left.equalTo(self.iconImgView.mas_right).offset(AUTO(30));
         make.centerY.equalTo(self.iconImgView);
         make.right.offset(AUTO(-15));
-        make.height.mas_equalTo(AUTO(20)*count+AUTO(5));
+        make.height.mas_equalTo(AUTO(18)*count+AUTO(5));
     }];
     
     
@@ -163,27 +163,27 @@
 
 - (UILabel *)weekLab {
     if (!_weekLab) {
-        _weekLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+        _weekLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _weekLab;
 }
 
 - (UILabel *)monthLab {
     if (!_monthLab) {
-        _monthLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+        _monthLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _monthLab;
 }
 
 - (UILabel *)threeMonthLab {
     if (!_threeMonthLab) {
-        _threeMonthLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+        _threeMonthLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _threeMonthLab;
 }
 - (UILabel *)historyLab {
     if (!_historyLab) {
-        _historyLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+        _historyLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _historyLab;
 }

@@ -161,7 +161,6 @@
 
 - (void)setMatchModel:(JCHongbangDetail_MatchModel *)matchModel {
     _matchModel = matchModel;
-//    matchModel.matches.is_reverse = 1;
 
     NSString *title = NonNil(matchModel.matches.competition_name);
     if (matchModel.matches.group_num_new.length>0) {

@@ -14,39 +14,13 @@
     [self.contentView addSubview:self.matchNameLab];
     [self.matchNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
-        make.top.offset(AUTO(20));
+        make.top.offset(AUTO(3));
     }];
-    
-    [self.contentView addSubview:self.matchTimeLab];
-    [self.matchTimeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.matchNameLab.mas_right).offset(4);
-        make.centerY.equalTo(self.matchNameLab);
-    }];
-    
-
-    
-    [self.contentView addSubview:self.matchWeekLab];
-    [self.matchWeekLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.contentView);
-        make.top.offset(AUTO(12));
-        make.height.mas_equalTo(AUTO(16));
-    }];
-    
-
-    
-    [self.contentView addSubview:self.planCountLab];
-    [self.planCountLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(AUTO(-15));
-//        make.bottom.offset(AUTO(-8));
-        make.size.mas_equalTo(CGSizeMake(AUTO(60), AUTO(20)));
-        make.centerY.equalTo(self.matchNameLab);
-    }];
-
     
     [self.contentView addSubview:self.scoreLab];
     [self.scoreLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView);
-        make.top.offset(AUTO(42));
+        make.top.offset(AUTO(28));
         make.size.mas_equalTo(CGSizeMake(AUTO(70), AUTO(18)));
     }];
     
@@ -56,14 +30,15 @@
     [self.homeTeamImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.scoreLab);
         make.right.equalTo(self.scoreLab.mas_left);
-        make.width.height.mas_equalTo(AUTO(26));
+        make.width.height.mas_equalTo(AUTO(20));
+        make.bottom.offset(AUTO(-8));
     }];
     
     [self.contentView addSubview:self.awayTeamImgView];
     [self.awayTeamImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.scoreLab);
         make.left.equalTo(self.scoreLab.mas_right);
-        make.width.height.mas_equalTo(AUTO(26));
+        make.width.height.mas_equalTo(AUTO(20));
     }];
     
 
@@ -83,19 +58,35 @@
         make.right.offset(AUTO(-15));
     }];
     
-
-        [self.contentView addSubview:self.matchStatusLab];
-        [self.matchStatusLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.homeTeamLab.mas_bottom).offset(AUTO(10));
-            make.height.mas_equalTo(AUTO(15));
-            make.centerX.equalTo(self.contentView);
-            make.bottom.offset(0);
-        }];
-
+    [self.contentView addSubview:self.matchTimeLab];
+    [self.matchTimeLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.homeTeamImgView.mas_right).offset(-4);
+        make.centerY.equalTo(self.matchNameLab);
+    }];
+    
+    [self.contentView addSubview:self.matchStatusLab];
+    [self.matchStatusLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.matchNameLab);
+        make.height.mas_equalTo(AUTO(15));
+        make.centerX.equalTo(self.contentView);
+    }];
+    
+    [self.contentView addSubview:self.planCountLab];
+    [self.planCountLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.offset(AUTO(-15));
+        make.size.mas_equalTo(CGSizeMake(AUTO(44), AUTO(16)));
+        make.centerY.equalTo(self.matchNameLab);
+    }];
+    
+    [self.contentView addSubview:self.matchWeekLab];
+    [self.matchWeekLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.planCountLab);
+        make.right.offset(AUTO(-68));
+    }];
     
 
     
-    
+
 
 }
 
@@ -111,14 +102,23 @@
     [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
     if ([model.plan_num integerValue]>0) {
         self.planCountLab.hidden = NO;
-        self.planCountLab.text = [NSString stringWithFormat:@"%@个方案",model.plan_num];
+        self.planCountLab.text = [NSString stringWithFormat:@"%@方案",model.plan_num];
+        
+        [self.matchWeekLab mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.offset(AUTO(-68));
+        }];
     }else{
         self.planCountLab.text = @"";
         self.planCountLab.hidden = YES;
+        
+        [self.matchWeekLab mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.offset(AUTO(-15));
+        }];
     }
 
     if ([model.status_id intValue]>1&&[model.status_id intValue]<9) {
         self.scoreLab.text = model.score;
+
     }else
     {
         self.scoreLab.text = @"VS";
@@ -127,9 +127,12 @@
     self.matchStatusLab.text = [NSString stringWithFormat:@"  %@  ",model.status_cn];
     
     //进行中的比赛显示分钟数
-    if ([model.status_id intValue]>1&&[model.status_id intValue]<8) {
-        self.matchStatusLab.textColor = JCWhiteColor;
-        self.matchStatusLab.backgroundColor = JCBaseColor;
+    if ([model.status_id intValue]==1) {
+        self.matchStatusLab.textColor = COLOR_9F9F9F;
+        self.scoreLab.textColor = COLOR_9F9F9F;
+    }else if ([model.status_id intValue]>1&&[model.status_id intValue]<8) {
+        self.matchStatusLab.textColor = COLOR_30B27A;
+        self.scoreLab.textColor = COLOR_30B27A;
         if ([model.second_half_time floatValue]>0) {
             //计算时间差
             double currentTime = [[NSDate date] timeIntervalSince1970];
@@ -150,13 +153,15 @@
         if ([model.status_id intValue]==3) {
             self.matchStatusLab.text = @"  中场  ";
         }
-    }else {
-        self.matchStatusLab.textColor = [COLOR_2F2F2F colorWithAlphaComponent:0.6];
-        self.matchStatusLab.backgroundColor = COLOR_DBDBDB;
+    }else if ([model.status_id intValue]==8) {
+        self.matchStatusLab.textColor = JCBaseColor;
+        self.scoreLab.textColor = JCBaseColor;
+    }else{
+        self.matchStatusLab.textColor = COLOR_9F9F9F;
+        self.scoreLab.textColor = COLOR_9F9F9F;
     }
     
 
-    self.collectionBtn.selected = [model.is_subscribe integerValue]==1?YES:NO;
     self.zbImgView.hidden = [model.is_live integerValue]==1?NO:YES;
 
     
@@ -166,7 +171,7 @@
 
 - (UILabel *)matchNameLab {
     if (!_matchNameLab) {
-        _matchNameLab =[UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+        _matchNameLab =[UILabel initWithTitle:@"" andFont:AUTO(10) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _matchNameLab;
 }
@@ -180,24 +185,16 @@
 
 - (UILabel *)matchStatusLab {
     if (!_matchStatusLab) {
-        _matchStatusLab =[UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:[COLOR_000000 colorWithAlphaComponent:0.6] andBackgroundColor:JCClearColor andTextAlignment:0];
+        _matchStatusLab =[UILabel initWithTitle:@"" andFont:AUTO(10) andWeight:1 andTextColor:[COLOR_000000 colorWithAlphaComponent:0.6] andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _matchStatusLab;
 }
 
-- (UIButton *)collectionBtn {
-    if (!_collectionBtn) {
-        _collectionBtn = [UIButton new];
-        [_collectionBtn setImage:JCIMAGE(@"match_icon_collection_un") forState:0];
-        [_collectionBtn setImage:JCIMAGE(@"match_icon_collection") forState:UIControlStateSelected];
-        [_collectionBtn addTarget:self action:@selector(collectionBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _collectionBtn;
-}
+
 
 - (UILabel *)scoreLab {
     if (!_scoreLab) {
-        _scoreLab =[UILabel initWithTitle:@"" andFont:AUTO(16) andWeight:2 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _scoreLab =[UILabel initWithTitle:@"" andFont:AUTO(16) andWeight:3 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
 
     }
     return _scoreLab;
@@ -236,7 +233,7 @@
 
 - (UILabel *)matchWeekLab {
     if (!_matchWeekLab) {
-        _matchWeekLab =[UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:[COLOR_000000 colorWithAlphaComponent:0.6] andBackgroundColor:JCClearColor andTextAlignment:0];
+        _matchWeekLab =[UILabel initWithTitle:@"" andFont:AUTO(10) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _matchWeekLab;
 }
@@ -244,10 +241,10 @@
 
 - (UILabel *)planCountLab {
     if (!_planCountLab) {
-        _planCountLab =[UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _planCountLab =[UILabel initWithTitle:@"" andFont:AUTO(10) andWeight:1 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
         _planCountLab.layer.borderColor = JCBaseColor.CGColor;
         _planCountLab.layer.borderWidth = 1;
-        _planCountLab.layer.cornerRadius = AUTO(10);
+        _planCountLab.layer.cornerRadius = AUTO(8);
         _planCountLab.layer.masksToBounds = YES;
     }
     return _planCountLab;

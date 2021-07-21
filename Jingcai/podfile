@@ -14,11 +14,11 @@ target 'Jingcai' do
     pod 'SDCycleScrollView'
     pod 'TTTAttributedLabel'
     pod 'ATNavigationController'
-    pod 'WechatOpenSDK'# 微信SDK
+#    pod 'WechatOpenSDK'# 微信SDK
     pod 'JPush' # 极光推送
     pod 'UMCCommon'
     pod 'UMCCommonLog'
-    pod 'UMCShare/Social/ReducedWeChat'
+    pod 'UMCShare/Social/WeChat'
     pod 'UMCShare/Social/ReducedQQ'
     pod 'UMCShare/Social/ReducedSina'
     pod 'BlocksKit'

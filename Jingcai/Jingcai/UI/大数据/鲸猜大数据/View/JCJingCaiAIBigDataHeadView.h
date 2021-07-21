@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) JCJingCaiAIBigDataBuyInfoView *buyInfoView;
 
+@property (nonatomic, strong) UIView *sureBgView;
+
 @property (nonatomic, strong) UIButton *sureBtn;
 
 //@property (nonatomic,strong) UILabel *infoLab;

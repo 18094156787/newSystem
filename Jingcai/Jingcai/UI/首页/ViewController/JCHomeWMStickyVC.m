@@ -250,7 +250,7 @@ static CGFloat const kWMMenuViewHeight = 44;
         if (@available(iOS 13.0, *)) {
 
             UITextField *searchField = searchBar.searchTextField;
-            searchField.backgroundColor = COLOR_F0F0F0;
+            searchField.backgroundColor = [COLOR_F0F0F0 colorWithAlphaComponent:0.8];
 //            searchField.textColor = COLOR_B2BACD;
             NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:@"搜索方案，专家，达人" attributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:13]}];//NSForegroundColorAttributeName:COLOR_B2BACD
             searchField.attributedPlaceholder = string;
@@ -260,7 +260,7 @@ static CGFloat const kWMMenuViewHeight = 44;
         }else{
                 for (UIView *subView in [[searchBar.subviews lastObject] subviews]) {
                      if([subView isKindOfClass:NSClassFromString(@"UISearchBarSearchFieldBackgroundView")]) {
-                         subView.backgroundColor = COLOR_F0F0F0;
+                         subView.backgroundColor = [COLOR_F0F0F0 colorWithAlphaComponent:0.8];
                      }
                     float systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
             
@@ -275,7 +275,7 @@ static CGFloat const kWMMenuViewHeight = 44;
                          UITextField *textField = (UITextField *)subView;
                          textField.borderStyle = UITextBorderStyleNone;
                          textField.font = [UIFont systemFontOfSize:13];
-                         textField.backgroundColor = COLOR_F4F6F9;
+                         textField.backgroundColor = [COLOR_F0F0F0 colorWithAlphaComponent:0.8];
                          textField.layer.cornerRadius= 16;
                          textField.layer.masksToBounds = YES;
                          NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:@"搜索方案，专家，达人" attributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:13]}];//NSForegroundColorAttributeName:COLOR_B2BACD

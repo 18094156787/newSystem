@@ -15,7 +15,8 @@
     [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(0);
         make.left.offset(AUTO(15));
-        make.height.mas_equalTo(AUTO(20));
+        make.right.offset(AUTO(-15));
+        make.height.mas_equalTo(AUTO(28));
     }];
     
 
@@ -31,8 +32,8 @@
     [self addSubview:self.homeImgView];
     [self.homeImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.timeLab.mas_bottom).offset(AUTO(10));
-        make.right.equalTo(self.mas_centerX).offset(AUTO(-50));
-        make.width.height.mas_equalTo(AUTO(40));
+        make.right.equalTo(self.mas_centerX).offset(AUTO(-30)-SCREEN_WIDTH/8);
+        make.width.height.mas_equalTo(AUTO(48));
     }];
     
     [self addSubview:self.homeTeamLab];
@@ -46,8 +47,8 @@
     [self addSubview:self.awayImgView];
     [self.awayImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.homeImgView);
-        make.left.equalTo(self.mas_centerX).offset(AUTO(50));
-        make.width.height.mas_equalTo(AUTO(40));
+        make.left.equalTo(self.mas_centerX).offset(AUTO(30)+SCREEN_WIDTH/8);
+        make.width.height.mas_equalTo(AUTO(48));
     }];
     
     [self addSubview:self.awayTeamLab];
@@ -59,14 +60,14 @@
     
     [self addSubview:self.scoreLab];
     [self.scoreLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.homeImgView).offset(AUTO(10));
+        make.bottom.equalTo(self.homeImgView).offset(5);
         make.centerX.equalTo(self);
     }];
 }
 
 - (void)setModel:(JCBigDataMonthProduceModel *)model {
     _model = model;
-    self.titleLab.text = @"比分预测";
+    self.titleLab.text = @"  比分预测";
     self.timeLab.text = model.match_time;
     self.scoreLab.text = [NSString stringWithFormat:@"%@ : %@",model.home_score,model.away_score];
     [self.homeImgView sd_setImageWithURL:[NSURL URLWithString:model.home_team_logo] placeholderImage:JCIMAGE(@"home_placeholder")];
@@ -77,7 +78,7 @@
 
 - (UILabel *)titleLab {
     if (!_titleLab) {
-        _titleLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_333333 andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _titleLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:[COLOR_002868 colorWithAlphaComponent:0.06] andTextAlignment:0];
     }
     return _titleLab;
 }
@@ -91,7 +92,7 @@
 
 - (UILabel *)scoreLab {
     if (!_scoreLab) {
-        _scoreLab = [UILabel initWithTitle:@"" andFont:AUTO(24) andWeight:3 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _scoreLab = [UILabel initWithTitle:@"" andFont:AUTO(28) andWeight:3 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     }
     return _scoreLab;
 }
@@ -118,29 +119,16 @@
 
 - (UILabel *)homeTeamLab {
     if (!_homeTeamLab) {
-        _homeTeamLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _homeTeamLab = [UILabel initWithTitle:@"" andFont:AUTO(16) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     }
     return _homeTeamLab;
 }
 
 - (UILabel *)awayTeamLab {
     if (!_awayTeamLab) {
-        _awayTeamLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _awayTeamLab = [UILabel initWithTitle:@"" andFont:AUTO(16) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     }
     return _awayTeamLab;
 }
-- (UIImageView *)leftLineImgView {
-    if (!_leftLineImgView) {
-        _leftLineImgView = [UIImageView new];
-        _leftLineImgView.image = JCIMAGE(@"match_dec_left");
-    }
-    return _leftLineImgView;
-}
-- (UIImageView *)rightLineImgView {
-    if (!_rightLineImgView) {
-        _rightLineImgView = [UIImageView new];
-        _rightLineImgView.image = JCIMAGE(@"match_dec_right");
-    }
-    return _rightLineImgView;
-}
+
 @end

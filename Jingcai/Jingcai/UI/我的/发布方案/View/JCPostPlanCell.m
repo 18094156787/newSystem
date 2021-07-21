@@ -53,13 +53,11 @@
         make.size.mas_equalTo(CGSizeMake(AUTO(80), AUTO(30)));
     }];
 
-
-    
     [self.contentView addSubview:self.homeNameLab];
     [self.homeNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.homeImgView.mas_bottom).offset(AUTO(3));
         make.centerX.equalTo(self.homeImgView);
-        make.width.mas_equalTo(AUTO(110));
+        make.width.mas_equalTo(AUTO(150));
         make.height.mas_equalTo(AUTO(21));
     }];
     
@@ -67,7 +65,7 @@
     [self.awayNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.homeImgView.mas_bottom).offset(AUTO(3));
         make.centerX.equalTo(self.awayImgView);
-        make.width.mas_equalTo(AUTO(110));
+        make.width.mas_equalTo(AUTO(150));
         make.height.mas_equalTo(AUTO(21));
     }];
     
@@ -120,7 +118,7 @@
 
 - (void)setModel:(JCPostPlanMathInfoModel *)model {
     _model = model;
-    model.is_reverse = 1;
+//    model.is_reverse = 1;
     self.titleLab.text = [NSString stringWithFormat:@"%@ %@",model.competition_name,model.match_long_time];
     if (model.issue_num.length>0) {
         self.titleLab.text = [NSString stringWithFormat:@"%@ %@ %@",model.competition_name,model.issue_num,model.match_long_time];
@@ -226,7 +224,13 @@
         }else{
             self.equal_normalBtn.backgroundColor = COLOR_DDDDDD;
             [self.equal_normalBtn setTitleColor:COLOR_999999 forState:0];
-            [self.equal_normalBtn setTitle:sfpModel.draw forState:0];
+            
+//            NSString *draw = sfpModel.draw
+            NSString *draw = sfpModel.draw;
+            
+            
+
+            [self.equal_normalBtn setTitle:draw forState:0];
             self.equal_normalBtn.userInteractionEnabled = YES;
         }
         if (!sfpModel.win) {

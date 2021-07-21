@@ -132,10 +132,9 @@ static CGFloat const kWMMenuViewHeight = 44;
         if ([JCWJsonTool isSuccessResponse:object]) {
             NSArray *rqArray = [JCWJsonTool arrayWithJson:object[@"data"][@"rq"] class:[JCJingCaiAIYLModel class]];
             NSArray *jqsArray = [JCWJsonTool arrayWithJson:object[@"data"][@"jqs"] class:[JCJingCaiAIYLModel class]];
-//            NSArray *noticeArray = [JCWJsonTool arrayWithJson:object[@"data"][@"ten"] class:[JCJingCaiAINoticeModel class]];
+
             self.rqArray = rqArray;
             self.jqsArray = jqsArray;
-//            self.noticeArray = noticeArray;
             self.topHeadView.rqArray = self.rqArray;
             self.topHeadView.jqsArray = self.jqsArray;
             self.topHeadView.titleArray = self.noticeArray;
@@ -193,15 +192,19 @@ static CGFloat const kWMMenuViewHeight = 44;
 //        return;
 ////                [self reloadData];
 //    }
-    self.height = AUTO(370);
+    self.height = AUTO(415);
     if (self.rqArray.count==0) {
-        self.height = self.height-AUTO(85);
+        self.height = self.height-AUTO(90);
     }
     if (self.jqsArray.count==0) {
-        self.height = self.height-AUTO(85);
+        self.height = self.height-AUTO(90);
     }
+    if (self.rqArray.count==0&&self.jqsArray.count==0) {
+        self.height = AUTO(185);
+    }
+    
     if (self.noticeArray.count==0) {
-        self.height = self.height-AUTO(42);
+        self.height = self.height-AUTO(44);
     }
     
     self.viewTop = self.height;

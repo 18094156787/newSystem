@@ -114,12 +114,12 @@ static CGFloat const kWMMenuViewHeight = 44.0;
             self.headView.dataArray = mzArray;
 //            self.height = kWJingCaiBigDataHeaderViewHeight;
             
-            self.height = AUTO(200);
+            self.height = AUTO(245);
             if (noticeArray.count>0) {
-                self.height = AUTO(240);
+                self.height = AUTO(285);
             }
             if (mzArray.count>0) {
-                self.height =self.height+ AUTO(20)*mzArray.count+AUTO(70);
+                self.height =self.height+ AUTO(28)*mzArray.count+AUTO(80);
             }
             self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.height);
         

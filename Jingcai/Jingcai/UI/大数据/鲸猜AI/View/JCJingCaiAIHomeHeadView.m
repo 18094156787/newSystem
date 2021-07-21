@@ -13,47 +13,88 @@
 
 - (void)initViews {
     self.backgroundColor = COLOR_F4F6F9;
-    UIView *bgView = [UIView new];
-    bgView.backgroundColor = JCWhiteColor;
+
     
     UIView *topBgView = [UIView new];
     [topBgView hg_setAllCornerWithCornerRadius:5];
     topBgView.backgroundColor = JCWhiteColor;
     [self addSubview:topBgView];
     [topBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.offset(AUTO(8));
-        make.right.offset(AUTO(-8));
-        make.height.mas_equalTo(AUTO(88));
+        make.left.top.offset(0);
+        make.right.offset(0);
+        make.height.mas_equalTo(AUTO(133));
     }];
+    
+    UILabel *top_titleLab = [UILabel initWithTitle:@"鲸猜AI" andFont:18 andWeight:1 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:0];
+    [topBgView addSubview:top_titleLab];
+    [top_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(15);
+        make.top.offset(0);
+    }];
+
     
     UIImageView *iconImgView = [UIImageView new];
     iconImgView.image = JCIMAGE(@"ic_img_ai");
     [topBgView addSubview:iconImgView];
     [iconImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(AUTO(10));
-        make.centerY.equalTo(topBgView);
-        make.size.mas_equalTo(CGSizeMake(AUTO(122), AUTO(68)));
+        make.right.offset(-15);
+        make.top.offset(8);
+        make.size.mas_equalTo(CGSizeMake(AUTO(184), AUTO(109)));
     }];
     
     UILabel *titleLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     [topBgView addSubview:titleLab];
     titleLab.numberOfLines = 0;
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(iconImgView);
-        make.left.equalTo(iconImgView.mas_right).offset(AUTO(10));
-        make.right.offset(AUTO(-10));
+        make.left.offset(15);
+       make.top.equalTo(top_titleLab.mas_bottom).offset(4);
+       make.right.equalTo(iconImgView.mas_left).offset(25);
     }];
     titleLab.text = @"鲸猜AI运用大数据算法，通过对比赛球队的各项数据、关键指标进行多维度、智能分析，预测得出各种玩法的结果！";
+    
+    
+    [self addSubview:self.bottomView];
+    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self);
+//        make.bottom.offset(AUTO(-7));
+        make.top.equalTo(topBgView.mas_bottom).offset(0);
+        make.height.mas_equalTo(AUTO(44));
+    }];
+    
+    self.noticeCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(AUTO(15), 0, SCREEN_WIDTH-AUTO(15), AUTO(36)) imageNamesGroup:nil];
+    self.noticeCycleScrollView.delegate = self;
+//    self.noticeCycleScrollView.clipsToBounds = YES;
+    self.noticeCycleScrollView.showPageControl = NO;
+    self.noticeCycleScrollView.autoScrollTimeInterval = 3;
+    self.noticeCycleScrollView.backgroundColor = JCClearColor;
+    self.noticeCycleScrollView.scrollDirection = UICollectionViewScrollDirectionVertical;
+    [self.bottomView addSubview:self.noticeCycleScrollView];
 
+    
+    UIView *bgView = [UIView new];
+    bgView.backgroundColor = JCWhiteColor;
     [self addSubview:bgView];
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.insets(UIEdgeInsetsMake(AUTO(105), 0, AUTO(50), 0));
+        make.edges.insets(UIEdgeInsetsMake(AUTO(185), 0, AUTO(8), 0));
     }];
+    
+    
+    
     self.bgView = bgView;
+    
+    UIView *lineView = [UIView new];
+    lineView.backgroundColor = JCBaseColor;
+    [bgView addSubview:lineView];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(15));
+        make.top.offset(AUTO(12));
+        make.size.mas_equalTo(CGSizeMake(2, 16));
+    }];
     
     [bgView addSubview:self.titleLab];
     [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.offset(AUTO(15));
+        make.left.equalTo(lineView.mas_right).offset(4);
+        make.centerY.equalTo(lineView);
         make.height.mas_equalTo(AUTO(25));
     }];
     
@@ -64,30 +105,27 @@
         make.height.mas_equalTo(AUTO(85));
     }];
     
+    UIView *line = [UIView new];
+    line.backgroundColor = [COLOR_000000 colorWithAlphaComponent:0.06];
+    [bgView addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.offset(0);
+        make.top.equalTo(self.rqView.mas_bottom).offset(AUTO(5));
+        make.height.mas_equalTo(1);
+    }];
+    self.line = line;
+    
     [bgView addSubview:self.jqsView];
     [self.jqsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(bgView);
-        make.top.equalTo(self.rqView.mas_bottom);
+        make.top.equalTo(line.mas_bottom).offset(AUTO(5));
         make.height.mas_equalTo(AUTO(85));
     }];
     
-    [self addSubview:self.bottomView];
-    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self);
-//        make.bottom.offset(AUTO(-7));
-        make.top.equalTo(bgView.mas_bottom).offset(AUTO(7.5));
-        make.height.mas_equalTo(AUTO(36));
-    }];
 
-//    self.noticeCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(AUTO(15), 0, SCREEN_WIDTH-AUTO(15), AUTO(34)) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    self.noticeCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(AUTO(15), 0, SCREEN_WIDTH-AUTO(15), AUTO(36)) imageNamesGroup:nil];
-    self.noticeCycleScrollView.delegate = self;
-//    self.noticeCycleScrollView.clipsToBounds = YES;
-    self.noticeCycleScrollView.showPageControl = NO;
-    self.noticeCycleScrollView.autoScrollTimeInterval = 3;
-    self.noticeCycleScrollView.backgroundColor = JCClearColor;
-    self.noticeCycleScrollView.scrollDirection = UICollectionViewScrollDirectionVertical;
-    [self.bottomView addSubview:self.noticeCycleScrollView];
+
+
+
     WeakSelf;
     [self.rqView bk_whenTapped:^{
         JCAIProfitWMPageVC *vc = [JCAIProfitWMPageVC new];
@@ -141,11 +179,13 @@
     if (array.count==0) {
     
         [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.edges.insets(UIEdgeInsetsMake(AUTO(8), 0, 8, 0));
+            make.edges.insets(UIEdgeInsetsMake(AUTO(141), 0, 8, 0));
         }];
 
     }
     self.bottomView.hidden = titleArray.count==0?YES:NO;
+    
+    
 }
 
 - (void)data {
@@ -159,6 +199,7 @@
     _rqArray = rqArray;
     self.rqView.dataArray = rqArray;
     self.rqView.hidden = rqArray.count==0?YES:NO;
+    self.line.hidden = rqArray.count==0?YES:NO;
     if (rqArray.count==0) {
         [self.rqView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(0);
@@ -169,12 +210,19 @@
             make.height.mas_equalTo(AUTO(85));
         }];
     }
+    
 }
 
 - (void)setJqsArray:(NSArray *)jqsArray{
     _jqsArray = jqsArray;
     self.jqsView.hidden = jqsArray.count>0?NO:YES;
     self.jqsView.dataArray = jqsArray;
+    if (self.rqArray.count==0&&self.jqsArray.count==0) {
+        self.bgView.hidden = YES;
+    }else{
+        self.bgView.hidden = NO;
+    }
+    self.line.hidden = jqsArray.count==0?YES:NO;
 }
 
 - (UILabel *)titleLab {

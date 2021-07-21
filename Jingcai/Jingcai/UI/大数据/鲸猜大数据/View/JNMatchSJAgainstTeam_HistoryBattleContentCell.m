@@ -22,8 +22,10 @@
     [bgView addSubview:self.labelTwo];
     [bgView addSubview:self.labelThree];
     [bgView addSubview:self.labelFour];
-    [bgView addSubview:self.labelFive];
-    [bgView addSubview:self.labelSix];
+
+    [bgView addSubview:self.lineOne];
+    [bgView addSubview:self.lineTwo];
+    [bgView addSubview:self.lineThree];
     
     [self.labelOne mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.bottom.offset(0);
@@ -48,38 +50,74 @@
         make.right.offset(0);
     }];
 
+    [self.lineOne mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.offset(0);
+        make.left.equalTo(self.labelOne.mas_right);
+        make.width.mas_equalTo(1);
+    }];
+    
+    [self.lineTwo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.offset(0);
+        make.left.equalTo(self.labelTwo.mas_right);
+        make.width.mas_equalTo(1);
+    }];
+    
+    [self.lineThree mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.offset(0);
+        make.left.equalTo(self.labelThree.mas_right);
+        make.width.mas_equalTo(1);
+    }];
 
 }
 
 - (void)setRow:(NSInteger)row {
     _row = row;
-//    if (row==0) {
-//        self.labelOne.backgroundColor = COLOR_F4F6F9;
-//        self.labelTwo.backgroundColor = COLOR_F4F6F9;
-//        self.labelThree.backgroundColor = COLOR_F4F6F9;
-//        self.labelFour.backgroundColor = COLOR_F4F6F9;
-//        self.labelFive.backgroundColor = COLOR_F4F6F9;
-//        self.labelSix.backgroundColor = COLOR_F4F6F9;
-//        self.labelOne.textColor = COLOR_999999;
-//        self.labelTwo.textColor = COLOR_999999;
-//        self.labelThree.textColor = COLOR_999999;
-//        self.labelFour.textColor = COLOR_999999;
-//        self.labelFive.textColor = COLOR_999999;
-////        self.labelSix.textColor = COLOR_999999;
-//    }else{
-//        self.labelOne.backgroundColor = COLOR_F3F3F3;
-//        self.labelTwo.backgroundColor = COLOR_F3F3F3;
-//        self.labelThree.backgroundColor = COLOR_F3F3F3;
-//        self.labelFour.backgroundColor = COLOR_F3F3F3;
-//        self.labelFive.backgroundColor = COLOR_F3F3F3;
-//        self.labelSix.backgroundColor = COLOR_F3F3F3;
-//        self.labelOne.textColor = COLOR_333333;
-//        self.labelTwo.textColor = COLOR_333333;
-//        self.labelThree.textColor = COLOR_333333;
-//        self.labelFour.textColor = COLOR_333333;
-//        self.labelFive.textColor = COLOR_333333;
-////        self.labelSix.textColor = COLOR_333333;
-//    }
+    if (row==0) {
+        
+        
+        self.labelOne.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)];
+        self.labelTwo.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)];
+        self.labelThree.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)];
+        self.labelFour.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)];
+        self.labelFive.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)];
+        self.labelSix.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)];
+        
+        self.labelOne.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
+        self.labelTwo.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
+        self.labelThree.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
+        self.labelFour.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
+        self.labelFive.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
+        self.labelSix.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
+        
+        self.lineOne.backgroundColor = JCWhiteColor;
+        self.lineTwo.backgroundColor = JCWhiteColor;
+        self.lineThree.backgroundColor = JCWhiteColor;
+
+    }else{
+        self.labelOne.font = [UIFont fontWithName:@"PingFangSC-Light" size:AUTO(12)];
+        self.labelTwo.font = [UIFont fontWithName:@"PingFangSC-Light" size:AUTO(12)];
+        self.labelThree.font = [UIFont fontWithName:@"PingFangSC-Light" size:AUTO(12)];
+        self.labelFour.font = [UIFont fontWithName:@"PingFangSC-Light" size:AUTO(12)];
+        self.labelFive.font = [UIFont fontWithName:@"PingFangSC-Light" size:AUTO(12)];
+        self.labelSix.font = [UIFont fontWithName:@"PingFangSC-Light" size:AUTO(12)];
+        
+        UIColor *color = row%2==0?[JCBaseColor colorWithAlphaComponent:0.05]:JCWhiteColor;
+        self.labelOne.backgroundColor = color;
+        self.labelTwo.backgroundColor = color;
+        self.labelThree.backgroundColor = color;
+        self.labelFour.backgroundColor = color;
+        self.labelFive.backgroundColor = color;
+        self.labelSix.backgroundColor = color;
+        
+
+        
+        self.lineOne.backgroundColor = COLOR_F0F0F0;
+        self.lineTwo.backgroundColor = COLOR_F0F0F0;
+        self.lineThree.backgroundColor = COLOR_F0F0F0;
+
+    }
+
+
 }
 - (void)setModel:(JCBigDataAnalysisMatchModel *)model {
     _model = model;
@@ -147,6 +185,25 @@
     }
     return _labelSix;
 }
+- (UIView *)lineOne {
+    if (!_lineOne) {
+        _lineOne = [UIView new];
+    }
+    return _lineOne;
+}
 
+- (UIView *)lineTwo {
+    if (!_lineTwo) {
+        _lineTwo = [UIView new];
+    }
+    return _lineTwo;
+}
+
+- (UIView *)lineThree {
+    if (!_lineThree) {
+        _lineThree = [UIView new];
+    }
+    return _lineThree;
+}
 
 @end

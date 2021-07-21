@@ -185,7 +185,7 @@
 //    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.offset(0);
 //        make.left.right.equalTo(self.view);
-//        make.bottom.offset(0);
+//        make.bottom.offset(-34);
 //    }];
 
     
@@ -211,6 +211,8 @@
     [self.tableView registerClass:[JNMatchSJAgainstTeam_SeasonRankCell class] forCellReuseIdentifier:@"JNMatchSJAgainstTeam_SeasonRankCell"];
     [self.tableView registerClass:[JNMatchSJAgainstMZ_Cell class] forCellReuseIdentifier:@"JNMatchSJAgainstMZ_Cell"];
     
+    
+//    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 34)];
     
 //    self.headView.titleArray = @[@"",@"",@"",@""];
 }
@@ -405,16 +407,16 @@
 //         return AUTO(140);
 
         if (indexPath.row==0) {
-            return AUTO(140);
+            return AUTO(170);
         }
         if (indexPath.row==1) {
             return AUTO(110);
         }
         if (indexPath.row==2) {
-            return AUTO(70);
+            return AUTO(100);
         }
         if (indexPath.row==3) {
-            return AUTO(70);
+            return AUTO(60);
         }
     }
     if (indexPath.section==2) {
@@ -444,26 +446,26 @@
         }
         if (indexPath.row==1) {
             if (self.home_analysisModel.trend.length>0) {
-                return AUTO(150);
+                return AUTO(130);
             }
             return 0.01f;
         }
         if (indexPath.row==2) {
             if (self.away_analysisModel.trend.length>0) {
-                return AUTO(150);
+                return AUTO(130);
             }
             return 0.01f;
         }
         
         if (indexPath.row==3) {
             if (self.home_analysisModel.trend.length>0) {
-                return AUTO(70);
+                return AUTO(100);
             }
             return 0.01f;
         }
         if (indexPath.row==4) {
             if (self.away_analysisModel.trend.length>0) {
-                return AUTO(70);
+                return AUTO(60);
             }
             return 0.01f;
         }
@@ -503,21 +505,14 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     JNMatchSJAgainstSectionTitleView *titleView = [JNMatchSJAgainstSectionTitleView new];
-    if (section==0&&self.mzArray.count>0) {
-        titleView.titleLab.text = self.mzArray.count>0?@"大数据预测命中统计":@"";
-        titleView.iconView.hidden = YES;
-        return titleView;
+    if (section==0) {
+        return [UIView new];
     }
     
     if (section==1) {
         titleView.titleLab.text = @"大数据预测";
         titleView.iconView.hidden = NO;
         return titleView;
-//        JCJingCaiAIBigDataStyleHeadTitleView *headView = [JCJingCaiAIBigDataStyleHeadTitleView new];
-//        headView.titleLab.text = @"大数据实例";
-//        headView.contentLab.text = @"大数据预测";
-//        titleView.iconView.hidden = NO;
-//        return headView;
     }
 
     if (section==3) {
@@ -541,7 +536,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section==1) {
-        return AUTO(50);
+        return AUTO(48);
+    }
+    if (section==3) {
+        return AUTO(8);
     }
     return 0.0001;
 }

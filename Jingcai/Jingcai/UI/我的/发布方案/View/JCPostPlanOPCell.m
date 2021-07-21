@@ -162,8 +162,6 @@
 
 - (void)setModel:(JCPostPlanMathInfoModel *)model {
     _model = model;
-
-    
     self.titleLab.text = [NSString stringWithFormat:@"%@ %@",model.competition_name,model.match_long_time];
     if (model.issue_num.length>0) {
         self.titleLab.text = [NSString stringWithFormat:@"%@ %@ %@",model.competition_name,model.issue_num,model.match_long_time];

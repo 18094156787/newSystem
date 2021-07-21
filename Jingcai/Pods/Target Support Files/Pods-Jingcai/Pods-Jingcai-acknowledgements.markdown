@@ -415,12 +415,12 @@ Copyright 2011 - 2020 umeng.com. All rights reserved.
 
 ## UMCCommon
 
-Copyright 2011 - 2020 umeng.com. All rights reserved.
+Copyright 2011 - 2021 umeng.com. All rights reserved.
 
 
 ## UMCCommonLog
 
-Copyright 2011 - 2018 umeng.com. All rights reserved.
+Copyright 2011 - 2021 umeng.com. All rights reserved.
 
 
 ## UMCShare
@@ -430,12 +430,7 @@ Copyright 2011 - 2021 umeng.com. All rights reserved.
 
 ## UMDevice
 
-Copyright 2011 - 2020 umeng.com. All rights reserved.
-
-
-## WechatOpenSDK
-
-Copyright 2020 tencent.com. All rights reserved.
+Copyright 2011 - 2021 umeng.com. All rights reserved.
 
 
 ## YYKit

@@ -156,7 +156,7 @@
         self.singleHeadView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(140));
         self.tableView.tableHeaderView = self.singleHeadView;
     }else{
-        self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(265));
+        self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(210));
       self.tableView.tableHeaderView = self.headView;
     }
     
@@ -169,7 +169,7 @@
     self.tableView.separatorColor = COLOR_DDDDDD;
     self.tableView.estimatedRowHeight = 100;
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(AUTO(8));
+        make.top.offset(0);
     }];
     
     [self.tableView registerClass:[JCBuyPlanPayWayCell class] forCellReuseIdentifier:@"JCBuyPlanPayWayCell"];

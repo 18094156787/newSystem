@@ -15,7 +15,8 @@
     [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(0);
         make.left.offset(AUTO(15));
-        make.height.mas_equalTo(AUTO(20));
+        make.right.offset(AUTO(-15));
+        make.height.mas_equalTo(AUTO(28));
     }];
 
     
@@ -89,7 +90,7 @@
 
 - (void)setModel:(JCBigDataMonthProduceModel *)model {
     _model = model;
-    self.titleLab.text = @"胜平负预测";
+    self.titleLab.text = @"  胜平负预测";
     self.winLab.text = [NSString stringWithFormat:@"%.0f%%",[model.ai_op_win floatValue]*100];
     self.eqalLab.text = [NSString stringWithFormat:@"%.0f%%",[model.ai_op_draw floatValue]*100];
     self.loseLab.text = [NSString stringWithFormat:@"%.0f%%",[model.ai_op_lose floatValue]*100];
@@ -97,49 +98,49 @@
 
 - (UILabel *)titleLab {
     if (!_titleLab) {
-        _titleLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _titleLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:[COLOR_002868 colorWithAlphaComponent:0.06] andTextAlignment:0];
     }
     return _titleLab;
 }
 
 - (UILabel *)winLab {
     if (!_winLab) {
-        _winLab = [UILabel initWithTitle:@"" andFont:AUTO(24) andWeight:2 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _winLab = [UILabel initWithTitle:@"" andFont:AUTO(28) andWeight:3 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     }
     return _winLab;
 }
 
 - (UILabel *)eqalLab {
     if (!_eqalLab) {
-        _eqalLab = [UILabel initWithTitle:@"" andFont:AUTO(24) andWeight:2 andTextColor:COLOR_30B27A andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _eqalLab = [UILabel initWithTitle:@"" andFont:AUTO(28) andWeight:3 andTextColor:COLOR_30B27A andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     }
     return _eqalLab;
 }
 
 - (UILabel *)loseLab {
     if (!_loseLab) {
-        _loseLab = [UILabel initWithTitle:@"" andFont:AUTO(24) andWeight:2 andTextColor:COLOR_002868 andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _loseLab = [UILabel initWithTitle:@"" andFont:AUTO(28) andWeight:3 andTextColor:COLOR_002868 andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     }
     return _loseLab;
 }
 
 - (UILabel *)winInfoLab {
     if (!_winInfoLab) {
-        _winInfoLab = [UILabel initWithTitle:@"主胜" andFont:AUTO(14) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _winInfoLab = [UILabel initWithTitle:@"主胜" andFont:AUTO(16) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     }
     return _winInfoLab;
 }
 
 - (UILabel *)eqalInfoLab {
     if (!_eqalInfoLab) {
-        _eqalInfoLab = [UILabel initWithTitle:@"平" andFont:AUTO(14) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _eqalInfoLab = [UILabel initWithTitle:@"平" andFont:AUTO(16) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     }
     return _eqalInfoLab;
 }
 
 - (UILabel *)loseInfoLab {
     if (!_loseInfoLab) {
-        _loseInfoLab = [UILabel initWithTitle:@"客胜" andFont:AUTO(14) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _loseInfoLab = [UILabel initWithTitle:@"客胜" andFont:AUTO(16) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     }
     return _loseInfoLab;
 }

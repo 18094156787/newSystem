@@ -19,9 +19,10 @@
 - (void)initViews {
     [self addSubview:self.titleLab];
     [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(0);
+        make.top.offset(5);
         make.left.offset(AUTO(15));
-        make.height.mas_equalTo(AUTO(20));
+        make.right.offset(AUTO(-15));
+        make.height.mas_equalTo(AUTO(28));
     }];
 
     
@@ -58,7 +59,7 @@
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
         make.top.equalTo(self.awayLab.mas_bottom).offset(AUTO(10));
-        make.height.mas_equalTo(AUTO(45)*6+AUTO(35));
+        make.height.mas_equalTo(AUTO(45)*6+AUTO(40));
         make.bottom.offset(AUTO(-20));
     }];
     
@@ -72,7 +73,7 @@
     if (count>10) {
         count=10;
     }
-    NSString *title = [NSString stringWithFormat:@"历史交锋(%ld场)",count];
+    NSString *title = [NSString stringWithFormat:@"  历史交锋(%ld场)",count];
 //    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
 //    NSRange range = [title rangeOfString:[NSString stringWithFormat:@"%ld场",count]];
 //    if (range.location!=NSNotFound) {
@@ -82,7 +83,7 @@
     self.homeLab.text = [NSString stringWithFormat:@"%@：%@胜%@平%@负，进%@球，失%@球",model.home_name,model.win,model.draw,model.lose,model.win_score,model.lose_score];
     self.awayLab.text = [NSString stringWithFormat:@"%@：%@胜%@平%@负，进%@球，失%@球",model.away_name,model.lose,model.draw,model.win,model.lose_score,model.win_score];
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(AUTO(45)*count+AUTO(35));
+        make.height.mas_equalTo(AUTO(40)*count+AUTO(40));
 
     }];
     [self.tableView reloadData];
@@ -113,10 +114,10 @@
         cell.labelTwo.text = @"主队";
         cell.labelThree.text = @"比分";
         cell.labelFour.text = @"客队";
-        cell.labelOne.backgroundColor = COLOR_F0F0F0;
-        cell.labelTwo.backgroundColor = COLOR_F0F0F0;
-        cell.labelThree.backgroundColor = COLOR_F0F0F0;
-        cell.labelFour.backgroundColor = COLOR_F0F0F0;
+//        cell.labelOne.backgroundColor = COLOR_F0F0F0;
+//        cell.labelTwo.backgroundColor = COLOR_F0F0F0;
+//        cell.labelThree.backgroundColor = COLOR_F0F0F0;
+//        cell.labelFour.backgroundColor = COLOR_F0F0F0;
 
 
 
@@ -124,10 +125,10 @@
     }else{
         JCBigDataAnalysisMatchModel *model = self.model.match[indexPath.row-1];
         cell.model = model;
-        cell.labelOne.backgroundColor = JCWhiteColor;
-        cell.labelTwo.backgroundColor = JCWhiteColor;
-        cell.labelThree.backgroundColor = JCWhiteColor;
-        cell.labelFour.backgroundColor = JCWhiteColor;
+//        cell.labelOne.backgroundColor = JCWhiteColor;
+//        cell.labelTwo.backgroundColor = JCWhiteColor;
+//        cell.labelThree.backgroundColor = JCWhiteColor;
+//        cell.labelFour.backgroundColor = JCWhiteColor;
 
     }
 
@@ -139,9 +140,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row==0) {
-            return AUTO(35);
+            return AUTO(40);
         }
-        return AUTO(45);
+        return AUTO(40);
 }
 
 
@@ -173,7 +174,7 @@
 
 - (UILabel *)titleLab {
     if (!_titleLab) {
-        _titleLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_333333 andBackgroundColor:JCClearColor andTextAlignment:0];
+        _titleLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:[COLOR_002868 colorWithAlphaComponent:0.06] andTextAlignment:0];
     }
     return _titleLab;
 }
@@ -213,7 +214,7 @@
 
 - (UILabel *)homeLab {
     if (!_homeLab) {
-        _homeLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:[COLOR_2F2F2F colorWithAlphaComponent:0.6] andBackgroundColor:JCClearColor andTextAlignment:0];
+        _homeLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
         _homeLab.numberOfLines = 0;
     }
     return _homeLab ;
@@ -221,7 +222,7 @@
 
 - (UILabel *)awayLab {
     if (!_awayLab) {
-        _awayLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:[COLOR_2F2F2F colorWithAlphaComponent:0.6] andBackgroundColor:JCClearColor andTextAlignment:0];
+        _awayLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
         _awayLab.numberOfLines = 0;
     }
     return _awayLab ;

@@ -28,7 +28,7 @@
     [self addSubview:self.oriPriceLab];
     [self.oriPriceLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.priceLab.mas_right).offset(5);
-        make.centerY.equalTo(self.priceLab);
+        make.bottom.equalTo(self.priceLab).offset(AUTO(-2));
     }];
     
 //    [self addSubview:self.infoLab];
@@ -65,10 +65,15 @@
 - (void)setProductModel:(JCBigDataMonthProduceModel *)productModel {
     _productModel = productModel;
     NSInteger total = [productModel.total integerValue]/100;
-    NSString *title = [NSString stringWithFormat:@"%ld",total];
+    NSString *title = [NSString stringWithFormat:@"%ld红币/月",total];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+    NSRange range0 = [title rangeOfString:@"红币/月"];
+    [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:12]} range:range0];
 
     self.priceLab.attributedText = attr;
+    
+    
+    
     NSInteger oriPirce_inter = [productModel.old_total integerValue]/100;
     NSString *oriPrice = [NSString stringWithFormat:@"%ld红币/月",oriPirce_inter];
 
@@ -81,11 +86,11 @@
         NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:oriPrice];
        [attribtStr addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:range];
    //    [attribtStr addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle] range:range];
-       [attribtStr setAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSBaselineOffsetAttributeName:@(NSUnderlineStyleSingle)} range:range];
+       [attribtStr setAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSBaselineOffsetAttributeName:@(NSUnderlineStyleSingle)} range:oriPrice.rangeOfAll];
 
        self.oriPriceLab.attributedText = attribtStr;
     }else{
-        self.oriPriceLab.text = @"红币/月";
+        self.oriPriceLab.text = @"";
     }
 
 
@@ -109,7 +114,7 @@
 
 - (UILabel *)oriPriceLab {
     if (!_oriPriceLab) {
-        _oriPriceLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:2 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:0];
+        _oriPriceLab = [UILabel initWithTitle:@"" andFont:AUTO(10) andWeight:2 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _oriPriceLab;
 }

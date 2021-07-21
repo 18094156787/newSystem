@@ -16,72 +16,95 @@
     self.bgView = [[UIView alloc] init];
     self.bgView.backgroundColor = JCWhiteColor;
     [self.bgView hg_setAllCornerWithCornerRadius:AUTO(5)];
-    self.bgView.frame = CGRectMake(AUTO(8),AUTO(8),SCREEN_WIDTH-AUTO(16),AUTO(180));
-
-
-
+    self.bgView.frame = CGRectMake(0,0,SCREEN_WIDTH,AUTO(235));
     [self addSubview:self.bgView];
+    UILabel *titleLab = [UILabel initWithTitle:@"鲸猜大数据服务" andFont:18 andWeight:1 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:0];
+    [self.bgView addSubview:titleLab];
+    [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(15);
+        make.top.offset(0);
+    }];
+
+    
+    
+    
     UIImageView *imgView = [UIImageView new];
     imgView.image = JCIMAGE(@"ic_bigdata_homeTop");
     [self.bgView addSubview:imgView];
     [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(8);
-        make.top.offset(5);
-        make.size.mas_equalTo(CGSizeMake(AUTO(130), AUTO(85)));
+        make.right.offset(-15);
+        make.top.offset(8);
+        make.size.mas_equalTo(CGSizeMake(AUTO(163), AUTO(118)));
     }];
     
     [self.bgView addSubview:self.titleLab];
     [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(imgView.mas_right).offset(AUTO(8));
-        make.top.offset(AUTO(5));
-        make.right.offset(AUTO(-8));
+        make.left.offset(15);
+        make.top.equalTo(titleLab.mas_bottom).offset(4);
+        make.right.equalTo(imgView.mas_left).offset(15);
     }];
     
-    [self addSubview:self.buyInfoView];
-    [self.buyInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(AUTO(15));
-        make.top.equalTo(self.titleLab.mas_bottom).offset(0);
-        make.height.mas_equalTo(AUTO(20));
+    [self.bgView addSubview:self.infoLab];
+    [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(15);
+        make.top.equalTo(self.titleLab.mas_bottom).offset(8);
     }];
+    
+
 
     
 
     
     [self.bgView addSubview:self.countLab];
     [self.countLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(AUTO(15));
-        make.top.equalTo(self.buyInfoView.mas_bottom).offset(AUTO(10));
+        make.right.offset(-15);
+        make.top.equalTo(self.infoLab.mas_bottom).offset(12);
         make.height.mas_equalTo(AUTO(20));
     }];
 
     [self.bgView addSubview:self.buyBgView];
     [self.buyBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(AUTO(-15));
+        make.right.equalTo(self.countLab.mas_left).offset(0);
+        make.width.mas_equalTo(120);
         make.centerY.equalTo(self.countLab);
-        make.left.equalTo(self.countLab.mas_left);
         make.height.mas_equalTo(AUTO(30));
     }];
     
-    [self.bgView addSubview:self.sureBtn];
-    [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(AUTO(-15));
-        make.centerY.equalTo(self.countLab);
-        make.size.mas_equalTo(CGSizeMake(AUTO(92), AUTO(32)));
+    [self.bgView addSubview:self.buyInfoView];
+    [self.buyInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(0);
+        make.centerY.equalTo(self.buyBgView).offset(-5);
+        make.height.mas_equalTo(AUTO(20));
     }];
     
+    [self.bgView addSubview:self.sureBgView];
+    [self.sureBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.buyInfoView.mas_bottom).offset(25);
+        make.left.offset(15);
+        make.right.offset(-15);
+        make.height.mas_equalTo(32);
+    }];
     
-    [self.bgView addSubview:self.timeLab];
+    [self.sureBgView addSubview:self.timeLab];
     [self.timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.sureBtn);
-        make.bottom.equalTo(self.sureBtn.mas_top).offset(-5);
+        make.left.offset(0);
+        make.top.bottom.offset(0);
+        make.width.mas_equalTo(0);
+    }];
+    
+    [self.sureBgView addSubview:self.sureBtn];
+    [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.equalTo(self.sureBgView);
+        make.left.equalTo(self.timeLab.mas_right);
+        make.right.offset(0);
+        make.height.mas_equalTo(32);
     }];
     
     
-    [self addSubview:self.infoLab];
-    [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.countLab);
-        make.top.equalTo(self.countLab.mas_bottom).offset(AUTO(10));
-    }];
+
+    
+    
+
     
     
     
@@ -90,7 +113,7 @@
     [self addSubview:self.bottomView];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.offset(0);
-        make.top.equalTo(self.bgView.mas_bottom).offset(AUTO(8));
+        make.top.equalTo(self.bgView.mas_bottom).offset(0);
         make.height.mas_equalTo(36);
     }];
     
@@ -105,20 +128,21 @@
 
     
     
-    UILabel *ycLab = [UILabel initWithTitle:@"预测\n已出" andFont:AUTO(11) andWeight:3 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
-    ycLab.numberOfLines= 0;
-    [self.bottomView addSubview:ycLab];
-    [ycLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(AUTO(15));
+    UIImageView *ycImgView = [UIImageView new];
+    ycImgView.image = JCIMAGE(@"jc_bigdata_yc");
+    [self.bottomView addSubview:ycImgView];
+    [ycImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(15);
         make.centerY.equalTo(self.bottomView);
-        make.width.height.mas_equalTo(AUTO(35));
+        make.size.mas_equalTo(CGSizeMake(27, 29));
     }];
+
     
     UIView *lineView = [UIView new];
     lineView.backgroundColor = COLOR_DBDBDB;
     [self.bottomView addSubview:lineView];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(ycLab.mas_right).offset(2);
+        make.left.equalTo(ycImgView.mas_right).offset(10);
         make.centerY.equalTo(self.bottomView);
         make.size.mas_equalTo(CGSizeMake(0.5, 28));
     }];
@@ -165,17 +189,25 @@
         NSRange range = [endDay rangeOfString:productModel.distance_day];
         if (range.location!=NSNotFound) {
             [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
+            [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:16]} range:range];
         }
         self.timeLab.attributedText = attr;
         
+        [self.timeLab mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(164);
+        }];
+        
     }else{
         self.timeLab.text = @"";
+        [self.timeLab mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(0);
+        }];
     }
     
     if ([productModel.is_buy intValue]==1) {
         [self.sureBtn setTitle:@"立即续费" forState:0];
     }else{
-        [self.sureBtn setTitle:@"立即购买" forState:0];
+        [self.sureBtn setTitle:@"立即开通" forState:0];
     }
     
     
@@ -186,7 +218,7 @@
              NSString *user_img = userArray[i];
               UIImageView *imgView = [UIImageView new];
               [imgView hg_setAllCornerWithCornerRadius:AUTO(11)];
-            imgView.frame = CGRectMake(self.countLab.right+AUTO(15)*i, AUTO(4), AUTO(22), AUTO(22));
+            imgView.frame = CGRectMake(90-AUTO(15)*i, AUTO(4), AUTO(22), AUTO(22));
             imgView.image = JCIMAGE(@"userImg_default");
              [imgView sd_setImageWithURL:[NSURL URLWithString:user_img] placeholderImage:JCIMAGE(@"userImg_default")];
 //              [self.buyBgView addSubview:imgView];
@@ -249,7 +281,7 @@
 
 - (UILabel *)titleLab {
     if (!_titleLab) {
-        _titleLab = [UILabel initWithTitle:@"" andFont:AUTO(12.5) andWeight:1 andTextColor:COLOR_333333 andBackgroundColor:JCClearColor andTextAlignment:0];
+        _titleLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
         _titleLab.numberOfLines = 0;
     }
     return _titleLab;
@@ -264,7 +296,7 @@
 
 - (UILabel *)countLab {
     if (!_countLab) {
-        _countLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+        _countLab = [UILabel initWithTitle:@"" andFont:AUTO(10) andWeight:2 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _countLab;
 }
@@ -302,16 +334,25 @@
 
 - (UILabel *)timeLab {
     if (!_timeLab) {
-        _timeLab = [UILabel initWithTitle:@"" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_666666 andBackgroundColor:JCClearColor andTextAlignment:0];
+        _timeLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     }
     return _timeLab;
+}
+
+- (UIView *)sureBgView {
+    if (!_sureBgView) {
+        _sureBgView = [UIView new];
+        _sureBgView.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
+        [_sureBgView hg_setAllCornerWithCornerRadius:16];
+    }
+    return _sureBgView;
 }
 
 - (UIButton *)sureBtn {
     if (!_sureBtn) {
         _sureBtn = [UIButton initWithText:@"立即购买" FontSize:AUTO(14) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
         _sureBtn.backgroundColor = JCBaseColor;
-        [_sureBtn hg_setAllCornerWithCornerRadius:AUTO(16)];
+        [_sureBtn hg_setAllCornerWithCornerRadius:16];
     }
     return _sureBtn;
 }

@@ -110,11 +110,11 @@ PODS:
   - SocketRocket (0.5.1)
   - SVProgressHUD (2.2.5)
   - TTTAttributedLabel (2.0.0)
-  - UMAPM (1.2.1)
-  - UMCCommon (7.2.9):
+  - UMAPM (1.3.1)
+  - UMCCommon (7.3.0):
     - UMAPM
     - UMDevice
-  - UMCCommonLog (2.0.0)
+  - UMCCommonLog (2.0.2)
   - UMCShare/Core (6.10.2):
     - UMCCommon
   - UMCShare/Social/ReducedQQ (6.10.2):
@@ -126,8 +126,11 @@ PODS:
   - UMCShare/Social/ReducedWeChat (6.10.2):
     - UMCCommon
     - UMCShare/Core
-  - UMDevice (1.2.0)
-  - WechatOpenSDK (1.8.7.1)
+  - UMCShare/Social/WeChat (6.10.2):
+    - UMCCommon
+    - UMCShare/Core
+    - UMCShare/Social/ReducedWeChat
+  - UMDevice (2.0.1)
   - YYKit (1.0.9):
     - YYKit/no-arc (= 1.0.9)
   - YYKit/no-arc (1.0.9)
@@ -154,8 +157,7 @@ DEPENDENCIES:
   - UMCCommonLog
   - UMCShare/Social/ReducedQQ
   - UMCShare/Social/ReducedSina
-  - UMCShare/Social/ReducedWeChat
-  - WechatOpenSDK
+  - UMCShare/Social/WeChat
   - YYKit
   - YYModel
 
@@ -185,7 +187,6 @@ SPEC REPOS:
     - UMCCommonLog
     - UMCShare
     - UMDevice
-    - WechatOpenSDK
     - YYKit
     - YYModel
 
@@ -209,15 +210,14 @@ SPEC CHECKSUMS:
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
-  UMAPM: 58a98390bbb593b9d008f16a403ecd6c550229fd
-  UMCCommon: fcb46c918758f47dbb568421642e195db0d7b641
-  UMCCommonLog: 9b7ddde5d14a52fc1986ba5ac3121b8b2f433638
+  UMAPM: 7c2cb69fa45756915aa59799163ae145a65f58ee
+  UMCCommon: 28938e3dbdcfecdd9fba87c75698c7d604c75372
+  UMCCommonLog: bea707e50c85cef4b0eb47cc5c7226bb843245ca
   UMCShare: e14e1399673fa361cddbde3a05b3743e10f673f7
-  UMDevice: da050ba77e5075b1ec08303065722d25f599e483
-  WechatOpenSDK: 6a4d1436c15b3b5fe2a0bd383f3046010186da44
+  UMDevice: f9ed639486a73620bc7c800d1657f110df50c3e1
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 0c3910321ac7067e3b32a1821e92d4c5c61de570
+PODFILE CHECKSUM: 1476bddcb1229fc343940989b4958256c3339e4a
 
-COCOAPODS: 1.10.0.beta.2
+COCOAPODS: 1.10.1

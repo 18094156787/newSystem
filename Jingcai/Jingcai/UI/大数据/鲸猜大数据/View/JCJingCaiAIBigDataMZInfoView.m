@@ -8,16 +8,25 @@
 
 #import "JCJingCaiAIBigDataMZInfoView.h"
 #import "JCBigDataMingZhongModel.h"
-#import "JNMatchSJAgainstZhiShu_RQChartContentCell.h"
+#import "JNMatchSJAgainstZhiShu_TopMzChartCell.h"
 @implementation JCJingCaiAIBigDataMZInfoView
 
 - (void)initViews {
     
+    UIView *topLineView = [UIView new];
+    topLineView.backgroundColor = JCBaseColor;
+    [self addSubview:topLineView];
+    [topLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(AUTO(14));
+        make.left.offset(AUTO(15));
+        make.size.mas_equalTo(CGSizeMake(2, 16));
+    }];
+    
     UILabel *titleLab = [UILabel initWithTitle:@"大数据命中统计" andFont:AUTO(14) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     [self addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(AUTO(8));
-        make.left.offset(AUTO(15));
+        make.centerY.equalTo(topLineView);
+        make.left.equalTo(topLineView.mas_right).offset(AUTO(4));
         make.height.mas_equalTo(AUTO(14));
     }];
 
@@ -25,11 +34,11 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
-        make.top.offset(AUTO(30));
+        make.top.offset(AUTO(40));
         make.height.mas_equalTo(AUTO(20*6));
         make.bottom.offset(AUTO(-10));
     }];
-    [self.tableView registerClass:[JNMatchSJAgainstZhiShu_RQChartContentCell class] forCellReuseIdentifier:@"JNMatchSJAgainstZhiShu_RQChartContentCell"];
+    [self.tableView registerClass:[JNMatchSJAgainstZhiShu_TopMzChartCell class] forCellReuseIdentifier:@"JNMatchSJAgainstZhiShu_TopMzChartCell"];
 }
 
 #pragma mark <UITableViewDataSource>
@@ -45,7 +54,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    JNMatchSJAgainstZhiShu_RQChartContentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JNMatchSJAgainstZhiShu_RQChartContentCell"];
+    JNMatchSJAgainstZhiShu_TopMzChartCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JNMatchSJAgainstZhiShu_TopMzChartCell"];
     cell.row = indexPath.row;
     if (indexPath.row==0) {
         cell.labelOne.text = @"周期";
@@ -53,18 +62,30 @@
         cell.labelThree.text = @"带红";
         cell.labelFour.text = @"进球数";
         cell.labelFive.text = @"让球";
-        cell.labelOne.backgroundColor = COLOR_F0F0F0;
-        cell.labelTwo.backgroundColor = COLOR_F0F0F0;
-        cell.labelThree.backgroundColor = COLOR_F0F0F0;
-        cell.labelFour.backgroundColor = COLOR_F0F0F0;
-        cell.labelFive.backgroundColor = COLOR_F0F0F0;
+
+        cell.labelOne.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
+        cell.labelTwo.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
+        cell.labelThree.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
+        cell.labelFour.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
+        cell.labelFive.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
+        
+        cell.lineOne.backgroundColor = JCWhiteColor;
+        cell.lineTwo.backgroundColor = JCWhiteColor;
+        cell.lineThree.backgroundColor = JCWhiteColor;
+        cell.lineFour.backgroundColor = JCWhiteColor;
     }else{
         cell.mzModel = self.dataArray[indexPath.row-1];
-        cell.labelOne.backgroundColor = JCClearColor;
-        cell.labelTwo.backgroundColor = JCClearColor;
-        cell.labelThree.backgroundColor = JCClearColor;
-        cell.labelFour.backgroundColor = JCClearColor;
-        cell.labelFive.backgroundColor = JCClearColor;
+        UIColor *color = indexPath.row%2==0?[JCBaseColor colorWithAlphaComponent:0.05]:JCWhiteColor;
+        cell.labelOne.backgroundColor = color;
+        cell.labelTwo.backgroundColor = color;
+        cell.labelThree.backgroundColor = color;
+        cell.labelFour.backgroundColor = color;
+        cell.labelFive.backgroundColor = color;
+        
+        cell.lineOne.backgroundColor = COLOR_F0F0F0;
+        cell.lineTwo.backgroundColor = COLOR_F0F0F0;
+        cell.lineThree.backgroundColor = COLOR_F0F0F0;
+        cell.lineFour.backgroundColor = COLOR_F0F0F0;
     }
 
     return cell;
@@ -74,7 +95,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return AUTO(20);
+    return AUTO(28);
 }
 
 

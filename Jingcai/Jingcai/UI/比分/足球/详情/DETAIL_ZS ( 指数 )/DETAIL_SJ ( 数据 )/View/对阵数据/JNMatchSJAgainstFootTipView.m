@@ -23,11 +23,19 @@
         make.top.offset(0);
     }];
     
-    [self addSubview:self.lineView];
-    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView *lineView = [UIView new];
+    [self addSubview:lineView];
+    lineView.backgroundColor = COLOR_F0F0F0;
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self);
-        make.height.mas_equalTo(0.5);
+        make.height.mas_equalTo(8);
     }];
+    
+//    [self addSubview:self.lineView];
+//    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.bottom.equalTo(self);
+//        make.height.mas_equalTo(0.5);
+//    }];
 }
 
 - (UILabel *)tipLab {

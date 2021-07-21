@@ -24,6 +24,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UILabel *labelSix;
 
+@property (nonatomic,strong) UIView *lineOne;
+
+@property (nonatomic,strong) UIView *lineTwo;
+
+@property (nonatomic,strong) UIView *lineThree;
+
+@property (nonatomic,strong) UIView *lineFour;
+
+@property (nonatomic,strong) UIView *lineFive;
+
+@property (nonatomic,strong) UIImageView *upImgView;
+
+@property (nonatomic,strong) UIImageView *equalImgView;
+
+@property (nonatomic,strong) UIImageView *downImgView;
+
+@property (nonatomic,strong) UILabel *upLabel;
+
+@property (nonatomic,strong) UILabel *equalLabel;
+
+@property (nonatomic,strong) UILabel *downLabel;
+
 @property (nonatomic,assign) NSInteger row;
 
 @property (nonatomic,strong) JCBigDataZhishuModel *model;

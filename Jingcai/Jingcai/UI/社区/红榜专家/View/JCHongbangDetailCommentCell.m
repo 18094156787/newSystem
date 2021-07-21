@@ -171,7 +171,6 @@
 
 - (void)setMatchModel:(JCHongbangDetail_MatchModel *)matchModel {
     _matchModel = matchModel;
-//    matchModel.matches.is_reverse = 1;
     NSString *title = NonNil(matchModel.matches.competition_name);
     if (matchModel.matches.group_num_new.length>0) {
         title = [title stringByAppendingFormat:@" %@",NonNil(matchModel.matches.group_num_new)];
@@ -431,9 +430,7 @@
                 self.rq_loseLab.layer.borderColor = JCBaseColor.CGColor;
 
             }
-                if (matchModel.matches.is_reverse==1) {
-        
-                }
+
 
             break;
 

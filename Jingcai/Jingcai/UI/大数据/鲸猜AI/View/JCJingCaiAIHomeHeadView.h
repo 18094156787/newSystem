@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) SDCycleScrollView *noticeCycleScrollView;//中奖轮播
 
+@property (nonatomic,strong) UIView *line;
+
 @property (nonatomic,strong) NSArray *titleArray;
 
 @property (nonatomic,strong) NSArray *rqArray;

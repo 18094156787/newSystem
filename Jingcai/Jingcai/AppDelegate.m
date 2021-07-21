@@ -201,6 +201,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     //开发者需要显式的调用此函数，日志系统才能工作
     [UMCommonLogManager setUpUMCommonLogManager];
     [UMConfigure setLogEnabled:NO];
+    [UMSocialGlobal shareInstance].universalLinkDic = @{@(UMSocialPlatformType_WechatSession):@"https://www.jingcai.com/app/link/"};
     // 配置友盟AppKey
     [UMConfigure initWithAppkey:UMShareAppKey channel:@"App Store"];
     [UMConfigure setEncryptEnabled:YES];
@@ -234,7 +235,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 - (void)configWXApp {
     //注册微信的APPID
 //    [WXApi registerApp:WXAppID];
-     [WXApi registerApp:WXAppID universalLink:@"https://m.jingcai.com"];
+    [WXApi registerApp:WXAppID universalLink:@"https://www.jingcai.com/app/link/"];
 //    [WXApi checkUniversalLinkReady:^(WXULCheckStep step, WXCheckULStepResult* result) {
 //
 //            NSLog(@"wechatSdkre %@, %u, %@, %@", @(step), result.success, result.errorInfo, result.suggestion);
@@ -562,7 +563,16 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
     return UIInterfaceOrientationMaskAll;
 }
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void(^)(NSArray<id<UIUserActivityRestoring>> * __nullable restorableObjects))restorationHandler
+{
+    if(![[UMSocialManager defaultManager] handleUniversalLink:userActivity options:nil]){
+    // 其他SDK的回调
+    }
+    return YES;
+//    return [[UMSocialManager defaultManager] handleUniversalLink:userActivity options:nil];
+//    return [WXApi handleOpenUniversalLink:userActivity delegate:[WXApiManager sharedManager]];
 
+}
 @end
 
 @implementation UIViewController (RotationControl)

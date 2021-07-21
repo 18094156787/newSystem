@@ -38,32 +38,32 @@
     // 本地也可签名，但最好还是放在后台做
     //NSString * resign = [self createMD5SingForPayWithAppID:wxPayBall.appid partnerid:wxPayBall.mch_id prepayid:wxPayBall.prepay_id package:@"Sign=WXPay" noncestr:wxPayBall.nonce_str timestamp:(UInt32)wxPayBall.timestamp.intValue];
     
-    PayReq *req = [[PayReq alloc] init];
+//    PayReq *req = [[PayReq alloc] init];
     // 实际项目中这些参数都是通过网络请求后台得到的，详情见以下注释，测试的时候可以让后台将价格改为1分钱
-    req.openID = wxPaymentBall.appid; // 微信开放平台审核通过的AppID
-    req.partnerId = wxPaymentBall.partnerid; // 微信支付分配的商户ID
-    req.prepayId = wxPaymentBall.prepayid; // 预支付交易会话ID
-    req.nonceStr = wxPaymentBall.noncestr; // 随机字符串
-    req.timeStamp = (UInt32)[wxPaymentBall.timestamp intValue];
-    //req.timeStamp = (UInt32)intTimeStamp; // 当前时间
-    //req.timeStamp = (UInt32)[self getNowTimeTimestamp];
-    req.package = @"Sign=WXPay"; // 固定值
-    //req.sign = resign; // 签名，除了sign，剩下6个组合的再次签名字符串
-    req.sign = wxPaymentBall.sign;
-    if ([WXApi isWXAppInstalled] == YES) {
-        // 此处会调用微信支付界面
-        [WXApi sendReq:req completion:^(BOOL success) {
-            
-        }];
-//        BOOL sss = [WXApi sendReq:req];
-//        if (!sss) {
-//            // ...
-//            // [MBManager showMessage:@"微信sdk错误" inView:weakself.view afterDelayTime:2];
-//        } else {
-//            //微信未安装
-//            // [MBManager showMessage:@"您没有安装微信" inView:weakself.view afterDelayTime:2];
-//        }
-    }
+//    req.openID = wxPaymentBall.appid; // 微信开放平台审核通过的AppID
+//    req.partnerId = wxPaymentBall.partnerid; // 微信支付分配的商户ID
+//    req.prepayId = wxPaymentBall.prepayid; // 预支付交易会话ID
+//    req.nonceStr = wxPaymentBall.noncestr; // 随机字符串
+//    req.timeStamp = (UInt32)[wxPaymentBall.timestamp intValue];
+//    //req.timeStamp = (UInt32)intTimeStamp; // 当前时间
+//    //req.timeStamp = (UInt32)[self getNowTimeTimestamp];
+//    req.package = @"Sign=WXPay"; // 固定值
+//    //req.sign = resign; // 签名，除了sign，剩下6个组合的再次签名字符串
+//    req.sign = wxPaymentBall.sign;
+//    if ([WXApi isWXAppInstalled] == YES) {
+//        // 此处会调用微信支付界面
+//        [WXApi sendReq:req completion:^(BOOL success) {
+//
+//        }];
+////        BOOL sss = [WXApi sendReq:req];
+////        if (!sss) {
+////            // ...
+////            // [MBManager showMessage:@"微信sdk错误" inView:weakself.view afterDelayTime:2];
+////        } else {
+////            //微信未安装
+////            // [MBManager showMessage:@"您没有安装微信" inView:weakself.view afterDelayTime:2];
+////        }
+//    }
 }
 - (void)jumpWXSubscribeWithUrl:(NSString *)url {
 //    JumpToBizProfileReq *req = [JumpToBizProfileReq new];
@@ -144,24 +144,24 @@
     }
     
     // 微信支付
-    if ([resp isKindOfClass:[PayResp class]]){
-        PayResp * response = (PayResp *)resp;
-        switch(response.errCode) {
-            case WXSuccess:
-                //服务器端查询支付通知或查询API返回的结果再提示成功
-                NSLog(@"支付成功");
-                if (weakSelf.wxPaySuccessBlock) {
-                    weakSelf.wxPaySuccessBlock();
-                }
-                break;
-            default:
-                NSLog(@"支付失败，retcode=%d",resp.errCode);
-                if (weakSelf.wxPayFailureBlock) {
-                    weakSelf.wxPayFailureBlock();
-                }
-                break;
-        }
-    }
+//    if ([resp isKindOfClass:[PayResp class]]){
+//        PayResp * response = (PayResp *)resp;
+//        switch(response.errCode) {
+//            case WXSuccess:
+//                //服务器端查询支付通知或查询API返回的结果再提示成功
+//                NSLog(@"支付成功");
+//                if (weakSelf.wxPaySuccessBlock) {
+//                    weakSelf.wxPaySuccessBlock();
+//                }
+//                break;
+//            default:
+//                NSLog(@"支付失败，retcode=%d",resp.errCode);
+//                if (weakSelf.wxPayFailureBlock) {
+//                    weakSelf.wxPayFailureBlock();
+//                }
+//                break;
+//        }
+//    }
     
 }
 

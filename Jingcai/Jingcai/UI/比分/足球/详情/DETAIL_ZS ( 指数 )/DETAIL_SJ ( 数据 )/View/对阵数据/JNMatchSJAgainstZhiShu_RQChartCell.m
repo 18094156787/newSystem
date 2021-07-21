@@ -21,12 +21,12 @@
 - (void)initViews {
     UIView *titleBgView = [UIView new];
     [self addSubview:titleBgView];
-    titleBgView.backgroundColor = COLOR_F0F0F0;
+    titleBgView.backgroundColor = [COLOR_002868 colorWithAlphaComponent:0.06];
     [titleBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(0);
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
-        make.height.mas_equalTo(AUTO(20));
+        make.height.mas_equalTo(AUTO(28));
     }];
     
     [titleBgView addSubview:self.titleLab];
@@ -44,12 +44,12 @@
     
     UIView *awayWinView =[UIView new];
     awayWinView.backgroundColor = COLOR_002868;
-    [awayWinView hg_setAllCornerWithCornerRadius:AUTO(2)];
+    [awayWinView hg_setAllCornerWithCornerRadius:AUTO(4)];
     [self addSubview:awayWinView];
     [awayWinView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleBgView);
         make.right.equalTo(awayWinLab.mas_left).offset(-4);
-        make.width.height.mas_equalTo(AUTO(12));
+        make.width.height.mas_equalTo(AUTO(8));
     }];
     
     UILabel *eqalWinLab = [UILabel initWithTitle:@"指数" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
@@ -62,12 +62,12 @@
     
     UIView *eqalView =[UIView new];
     eqalView.backgroundColor = COLOR_30B27A;
-    [eqalView hg_setAllCornerWithCornerRadius:AUTO(2)];
+    [eqalView hg_setAllCornerWithCornerRadius:AUTO(4)];
     [self addSubview:eqalView];
     [eqalView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleBgView);
         make.right.equalTo(eqalWinLab.mas_left).offset(-4);
-        make.width.height.mas_equalTo(AUTO(12));
+        make.width.height.mas_equalTo(AUTO(8));
     }];
     
     UILabel *homeWinLab = [UILabel initWithTitle:@"主队" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
@@ -80,21 +80,43 @@
     
     UIView *homeWindView =[UIView new];
     homeWindView.backgroundColor = JCBaseColor;
-    [homeWindView hg_setAllCornerWithCornerRadius:AUTO(2)];
+    [homeWindView hg_setAllCornerWithCornerRadius:AUTO(4)];
     [self addSubview:homeWindView];
     [homeWindView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleBgView);
         make.right.equalTo(homeWinLab.mas_left).offset(-4);
-        make.width.height.mas_equalTo(AUTO(12));
+        make.width.height.mas_equalTo(AUTO(8));
     }];
     
+    UIView *bottomView = [UIView new];
+    [self addSubview:bottomView];
+    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(titleBgView.mas_bottom).offset(AUTO(10));
+        make.left.offset(AUTO(15));
+        make.right.offset(AUTO(-15));
+        make.height.mas_equalTo(AUTO(20));
+    }];
+    
+    [bottomView addSubview:self.chupanLab];
+    [self.chupanLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(5));
+        make.centerY.equalTo(bottomView);
+        make.height.mas_equalTo(AUTO(20));
+    }];
+    
+    [bottomView addSubview:self.jipanLab];
+    [self.jipanLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.offset(AUTO(-5));
+        make.centerY.equalTo(bottomView);
+        make.height.mas_equalTo(AUTO(20));
+    }];
     
     
     
     [self addSubview:self.bgView];
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.offset(0);
-        make.top.equalTo(titleBgView.mas_bottom).offset(AUTO(20));
+        make.top.equalTo(bottomView.mas_bottom).offset(AUTO(20));
         make.height.mas_equalTo(AUTO(110));
     }];
     
@@ -114,37 +136,15 @@
         make.height.mas_equalTo(AUTO(17));
     }];
     
-    UIView *bottomView = [UIView new];
-    bottomView.backgroundColor = COLOR_F0F0F0;
-    [self addSubview:bottomView];
-    [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.lastTimeLab.mas_bottom).offset(AUTO(10));
-        make.left.offset(AUTO(15));
-        make.right.offset(AUTO(-15));
-        make.height.mas_equalTo(AUTO(20));
-    }];
-    
-    [bottomView addSubview:self.chupanLab];
-    [self.chupanLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(AUTO(5));
-        make.centerY.equalTo(bottomView);
-        make.height.mas_equalTo(AUTO(20));
-    }];
-    
-    [bottomView addSubview:self.jipanLab];
-    [self.jipanLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(AUTO(-5));
-        make.centerY.equalTo(bottomView);
-        make.height.mas_equalTo(AUTO(20));
-    }];
+
 
     
     [self addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
-        make.top.equalTo(bottomView.mas_bottom).offset(AUTO(10));
-        make.height.mas_equalTo(AUTO(155));
+        make.top.equalTo(self.lastTimeLab.mas_bottom).offset(AUTO(10));
+        make.height.mas_equalTo(AUTO(106));
         make.bottom.offset(AUTO(-10));
     }];
     [self.tableView registerClass:[JNMatchSJAgainstZhiShu_RQChartContentCell class] forCellReuseIdentifier:@"JNMatchSJAgainstZhiShu_RQChartContentCell"];
@@ -195,7 +195,7 @@
             CAShapeLayer *shapeLayer = [CAShapeLayer layer];
             //    shapeLayer.lineDashPattern = @[@(distance),@(distance1),@0,@0,@0];
             shapeLayer.path = path.CGPath;
-            shapeLayer.lineWidth = 1;
+            shapeLayer.lineWidth = 2;
             shapeLayer.strokeColor = lineColor.CGColor;
             shapeLayer.fillColor = nil;
   
@@ -240,23 +240,12 @@
         cell.labelTwo.text = @"最高";
         cell.labelThree.text = @"最低";
         cell.labelFour.text = @"平均";
-        cell.labelFive.text = @"趋势\n（相比初始）";
-        cell.labelOne.backgroundColor = COLOR_F0F0F0;
-        cell.labelTwo.backgroundColor = COLOR_F0F0F0;
-        cell.labelThree.backgroundColor = COLOR_F0F0F0;
-        cell.labelFour.backgroundColor = COLOR_F0F0F0;
-        cell.labelFive.backgroundColor = COLOR_F0F0F0;
-        cell.labelSix.backgroundColor = COLOR_F0F0F0;
+        cell.labelFive.text = @"趋势\n相比初始";
 
         
     }else{
         cell.model = self.dataArray[indexPath.row-1];
-        cell.labelOne.backgroundColor = JCWhiteColor;
-        cell.labelTwo.backgroundColor = JCWhiteColor;
-        cell.labelThree.backgroundColor = JCWhiteColor;
-        cell.labelFour.backgroundColor = JCWhiteColor;
-        cell.labelFive.backgroundColor = JCWhiteColor;
-        cell.labelSix.backgroundColor = JCWhiteColor;
+
     }
 
     return cell;
@@ -267,9 +256,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row==0) {
-            return AUTO(35);
+            return AUTO(40);
         }
-        return AUTO(60);
+        return AUTO(28);
 }
 
 
@@ -348,12 +337,12 @@
    NSArray * titleArray = [NSArray arrayWithArray:numberTitlteArray];
      titleArray = [[[titleArray copy] reverseObjectEnumerator] allObjects];
     for (int i=0; i<titleArray.count; i++) {
-        UIView *lineView = [UIView new];
-        lineView.backgroundColor = COLOR_DDDDDD;
-        lineView.frame = CGRectMake(50, i*AUTO(25), SCREEN_WIDTH-65, 0.5);
+        UIImageView *lineView = [UIImageView new];
+        lineView.image = JCIMAGE(@"jc_bigdata_divider");
+        lineView.frame = CGRectMake(55, i*AUTO(25), SCREEN_WIDTH-65, 1);
         [self.bgView addSubview:lineView];
 
-        UILabel *numberLab = [UILabel initWithTitle:titleArray[i] andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        UILabel *numberLab = [UILabel initWithTitle:titleArray[i] andFont:AUTO(16) andWeight:1 andTextColor:[COLOR_000000 colorWithAlphaComponent:0.64] andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
         numberLab.frame = CGRectMake(15, 0, 35, 25);
         numberLab.centerY = lineView.centerY;
         [self.bgView addSubview:numberLab];
@@ -407,28 +396,28 @@
 
 - (UILabel *)lastTimeLab {
     if (!_lastTimeLab) {
-        _lastTimeLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
+        _lastTimeLab = [UILabel initWithTitle:@"" andFont:AUTO(10) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _lastTimeLab;
 }
 
 - (UILabel *)nowTimeLab {
     if (!_nowTimeLab) {
-        _nowTimeLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
+        _nowTimeLab = [UILabel initWithTitle:@"" andFont:AUTO(10) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _nowTimeLab;
 }
 
 - (UILabel *)chupanLab {
     if (!_chupanLab) {
-        _chupanLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_666666 andBackgroundColor:JCClearColor andTextAlignment:0];
+        _chupanLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _chupanLab;
 }
 
 - (UILabel *)jipanLab {
     if (!_jipanLab) {
-        _jipanLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_666666 andBackgroundColor:JCClearColor andTextAlignment:0];
+        _jipanLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _jipanLab;
 }

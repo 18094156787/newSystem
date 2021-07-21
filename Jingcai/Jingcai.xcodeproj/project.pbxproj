@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		154C524026B94C1A4C8A28B5 /* Pods_Jingcai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFB0F93A837C323AD7834CA /* Pods_Jingcai.framework */; };
+		590A3E7E26A191E30012EDE6 /* jc_ayh_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 590A3E7C26A191E30012EDE6 /* jc_ayh_1@2x.png */; };
+		590A3E7F26A191E30012EDE6 /* jc_ayh_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 590A3E7D26A191E30012EDE6 /* jc_ayh_2@2x.png */; };
+		590A3E8426A6BBC80012EDE6 /* JNMatchSJAgainstZhiShu_TopMzChartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 590A3E8326A6BBC80012EDE6 /* JNMatchSJAgainstZhiShu_TopMzChartCell.m */; };
 		5945488D268578CF00C1AF38 /* JCAccountSettingTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5945488C268578CF00C1AF38 /* JCAccountSettingTextCell.m */; };
 		594548902685809700C1AF38 /* JCAccountSettingIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5945488F2685809700C1AF38 /* JCAccountSettingIconCell.m */; };
 		594548932685A96C00C1AF38 /* JCSmallPriceWithDrawSuccessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 594548922685A96C00C1AF38 /* JCSmallPriceWithDrawSuccessVC.m */; };
@@ -1299,6 +1302,12 @@
 
 /* Begin PBXFileReference section */
 		2CFB0F93A837C323AD7834CA /* Pods_Jingcai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jingcai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		590A3E7C26A191E30012EDE6 /* jc_ayh_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jc_ayh_1@2x.png"; sourceTree = "<group>"; };
+		590A3E7D26A191E30012EDE6 /* jc_ayh_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jc_ayh_2@2x.png"; sourceTree = "<group>"; };
+		590A3E8026A196180012EDE6 /* Jingcai.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Jingcai.entitlements; sourceTree = "<group>"; };
+		590A3E8126A5125B0012EDE6 /* 鲸猜足球Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "鲸猜足球Debug.entitlements"; sourceTree = "<group>"; };
+		590A3E8226A6BBC80012EDE6 /* JNMatchSJAgainstZhiShu_TopMzChartCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JNMatchSJAgainstZhiShu_TopMzChartCell.h; sourceTree = "<group>"; };
+		590A3E8326A6BBC80012EDE6 /* JNMatchSJAgainstZhiShu_TopMzChartCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JNMatchSJAgainstZhiShu_TopMzChartCell.m; sourceTree = "<group>"; };
 		5945488B268578CF00C1AF38 /* JCAccountSettingTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCAccountSettingTextCell.h; sourceTree = "<group>"; };
 		5945488C268578CF00C1AF38 /* JCAccountSettingTextCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCAccountSettingTextCell.m; sourceTree = "<group>"; };
 		5945488E2685809700C1AF38 /* JCAccountSettingIconCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCAccountSettingIconCell.h; sourceTree = "<group>"; };
@@ -3375,7 +3384,6 @@
 		C30C8E46224C63CD001ECA18 /* JCCaiyunBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCCaiyunBall.m; sourceTree = "<group>"; };
 		C30C8E48224C644B001ECA18 /* JCPayWayBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPayWayBall.h; sourceTree = "<group>"; };
 		C30C8E49224C644C001ECA18 /* JCPayWayBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPayWayBall.m; sourceTree = "<group>"; };
-		C30F105921A3B7770031A9ED /* Jingcai.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jingcai.entitlements; sourceTree = "<group>"; };
 		C30FD3AE2238F18900FD2CA9 /* JCWVerTjInfoMatchBall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCWVerTjInfoMatchBall.h; sourceTree = "<group>"; };
 		C30FD3AF2238F18900FD2CA9 /* JCWVerTjInfoMatchBall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCWVerTjInfoMatchBall.m; sourceTree = "<group>"; };
 		C30FD3B12238F20200FD2CA9 /* JCWVerTjInfoPlBall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCWVerTjInfoPlBall.h; sourceTree = "<group>"; };
@@ -3743,6 +3751,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		590A3E7B26A191E30012EDE6 /* 奥运会 */ = {
+			isa = PBXGroup;
+			children = (
+				590A3E7C26A191E30012EDE6 /* jc_ayh_1@2x.png */,
+				590A3E7D26A191E30012EDE6 /* jc_ayh_2@2x.png */,
+			);
+			path = "奥运会";
+			sourceTree = "<group>";
+		};
 		5945488A2685789300C1AF38 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -6368,6 +6385,8 @@
 				7B6D3436253FDADC0038FD5D /* JNMatchSJAgainstHistortPay_RQCell.h */,
 				7B6D3437253FDADC0038FD5D /* JNMatchSJAgainstZhiShu_SPFChartCell.h */,
 				7B6D3438253FDADC0038FD5D /* JNMatchSJAgainstTeam_SeasonRankCell.h */,
+				590A3E8226A6BBC80012EDE6 /* JNMatchSJAgainstZhiShu_TopMzChartCell.h */,
+				590A3E8326A6BBC80012EDE6 /* JNMatchSJAgainstZhiShu_TopMzChartCell.m */,
 			);
 			path = "对阵数据";
 			sourceTree = "<group>";
@@ -8953,6 +8972,7 @@
 		C32E5032226EE2CB00EE2B18 /* 图片 */ = {
 			isa = PBXGroup;
 			children = (
+				590A3E7B26A191E30012EDE6 /* 奥运会 */,
 				7B5D035B265E1EEC00C65F51 /* 引导页 */,
 				7B45F42825F08B890099D108 /* 活动-欧洲杯 */,
 				7B4FCBA225EF957D00281492 /* 活动 */,
@@ -8995,9 +9015,10 @@
 		C33DCFC021694740002B6173 /* Jingcai */ = {
 			isa = PBXGroup;
 			children = (
+				590A3E8126A5125B0012EDE6 /* 鲸猜足球Debug.entitlements */,
+				590A3E8026A196180012EDE6 /* Jingcai.entitlements */,
 				7B0CFB3B2303B54F00AF8A6A /* Assets.xcassets */,
 				C3B8CA3422602930001E04DF /* DEBUG */,
-				C30F105921A3B7770031A9ED /* Jingcai.entitlements */,
 				C33DCFC121694740002B6173 /* AppDelegate.h */,
 				C33DCFC221694740002B6173 /* AppDelegate.m */,
 				7B1BE5D325B52F020075887B /* Services_New */,
@@ -9976,7 +9997,7 @@
 				C33DCFBC21694740002B6173 /* Resources */,
 				7804D8F786964D8213B2E5E0 /* [CP] Embed Pods Frameworks */,
 				C3CA5EBA22648221007A9478 /* Embed App Extensions */,
-				1610C396C5FDB27C946A8D62 /* [CP] Copy Pods Resources */,
+				5A9F69E954FF1072C145E3BB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -10069,6 +10090,7 @@
 				7BE61B3D23CF11C20079A86C /* xryd_15.png in Resources */,
 				7BC4CAAB235FEDF7002226C1 /* Final_Animation_00008@2x.png in Resources */,
 				7BE61B2F23CF11C20079A86C /* xryd_3.png in Resources */,
+				590A3E7F26A191E30012EDE6 /* jc_ayh_2@2x.png in Resources */,
 				C3236E4722238A99003A2455 /* JCNoTuijianView.xib in Resources */,
 				7BC4CAB8235FEDF7002226C1 /* Final_Animation_00010@2x.png in Resources */,
 				7B5D0382265E1F7F00C65F51 /* guide_2@3x.png in Resources */,
@@ -10126,6 +10148,7 @@
 				7BE61B3123CF11C20079A86C /* xryd_0.png in Resources */,
 				7B5D0384265E1F7F00C65F51 /* guide_4@3x.png in Resources */,
 				7B0CFB3C2303B54F00AF8A6A /* Assets.xcassets in Resources */,
+				590A3E7E26A191E30012EDE6 /* jc_ayh_1@2x.png in Resources */,
 				7B99E6942316644C00AA5AB6 /* JNMatchTitleView.xib in Resources */,
 				7B99E6DD2316644C00AA5AB6 /* JNMatchDetailZSVC.xib in Resources */,
 				C349963B21C7930A00C3E282 /* MagicAlertCell.xib in Resources */,
@@ -10193,23 +10216,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1610C396C5FDB27C946A8D62 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Jingcai/Pods-Jingcai-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Jingcai/Pods-Jingcai-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jingcai/Pods-Jingcai-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		34C419A502D9BCB9DD4F243E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -10230,6 +10236,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5A9F69E954FF1072C145E3BB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jingcai/Pods-Jingcai-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jingcai/Pods-Jingcai-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jingcai/Pods-Jingcai-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7804D8F786964D8213B2E5E0 /* [CP] Embed Pods Frameworks */ = {
@@ -11093,6 +11116,7 @@
 				7BDA571724EFCB9100A0E1C8 /* TZVideoPlayerController.m in Sources */,
 				C30FD3B32238F20200FD2CA9 /* JCWVerTjInfoPlBall.m in Sources */,
 				7BA96C3626202D4A00E2DFC1 /* JCFootBallAuthorDetailWMViewController.m in Sources */,
+				590A3E8426A6BBC80012EDE6 /* JNMatchSJAgainstZhiShu_TopMzChartCell.m in Sources */,
 				C3DC7DC02216565700D300FF /* JCNavButton.m in Sources */,
 				7BE891E224B5F5A700AE2E79 /* JNMatchZS_JC_BF_InfoStyleTwoCell.m in Sources */,
 				7BB827FB24B405530012EDA8 /* JCTeamMatchInfoZhenRongItemView.m in Sources */,
@@ -11492,10 +11516,10 @@
 			baseConfigurationReference = EC66ECF50C011BFE16687A4F /* Pods-Jingcai.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Jingcai/Jingcai.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Jingcai/鲸猜足球Debug.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MFKWUW9XYJ;
 				ENABLE_BITCODE = NO;
@@ -11517,7 +11541,7 @@
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/UPPayPlugin",
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/WeChatSDK1.8.6.1",
 				);
-				MARKETING_VERSION = 3.5;
+				MARKETING_VERSION = 3.6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -11580,7 +11604,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MFKWUW9XYJ;
 				ENABLE_BITCODE = NO;
@@ -11602,7 +11626,7 @@
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/UPPayPlugin",
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/WeChatSDK1.8.6.1",
 				);
-				MARKETING_VERSION = 3.5;
+				MARKETING_VERSION = 3.6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

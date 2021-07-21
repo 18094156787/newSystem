@@ -24,6 +24,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UILabel *labelSix;
 
+@property (nonatomic,strong) UIView *lineOne;
+
+@property (nonatomic,strong) UIView *lineTwo;
+
+@property (nonatomic,strong) UIView *lineThree;
+
 @property (nonatomic,assign) NSInteger row;
 
 @property (nonatomic,strong) JCBigDataAnalysisMatchModel *model;

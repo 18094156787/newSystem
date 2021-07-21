@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JNMatchSJAgainstBall_Cell : JCBaseTableViewCell_New
 
+@property (nonatomic,strong) UILabel *titleInfoLab;
+
 @property (nonatomic,strong) UILabel *titleLab;
 
 @property (nonatomic,strong) UIView *homeProgressView;

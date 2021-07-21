@@ -26,10 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UILabel *awayTeamLab;
 
-@property (nonatomic,strong) UIImageView *leftLineImgView;
-
-@property (nonatomic,strong) UIImageView *rightLineImgView;
-
 @property (nonatomic,strong) JCBigDataMonthProduceModel *model;
 
 @end

@@ -422,16 +422,16 @@
             return AUTO(140);
         }
         if (indexPath.row==0) {
-            return AUTO(140);
+            return AUTO(170);
         }
         if (indexPath.row==1) {
-            return AUTO(100);
+            return AUTO(110);
         }
         if (indexPath.row==2) {
-            return AUTO(70);
+            return AUTO(100);
         }
         if (indexPath.row==3) {
-            return AUTO(70);
+            return AUTO(60);
         }
     }
     if (indexPath.section==1) {
@@ -461,26 +461,26 @@
         }
         if (indexPath.row==1) {
             if (self.home_analysisModel.trend.length>0) {
-                return AUTO(150);
+                return AUTO(130);
             }
             return 0.01f;
         }
         if (indexPath.row==2) {
             if (self.away_analysisModel.trend.length>0) {
-                return AUTO(150);
+                return AUTO(130);
             }
             return 0.01f;
         }
         
         if (indexPath.row==3) {
             if (self.home_analysisModel.trend.length>0) {
-                return AUTO(70);
+                return AUTO(100);
             }
             return 0.01f;
         }
         if (indexPath.row==4) {
             if (self.away_analysisModel.trend.length>0) {
-                return AUTO(70);
+                return AUTO(60);
             }
             return 0.01f;
         }
@@ -562,7 +562,10 @@
         if (self.isLock) {
             return AUTO(8);
         }
-        return AUTO(50);
+        return AUTO(48);
+    }
+    if (section==2) {
+        return AUTO(8);
     }
     return 0.0001;
 }
