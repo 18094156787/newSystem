@@ -554,13 +554,8 @@
 
 }
 
-
 //获取app信息
 - (void)getAppInfo {
-    
-    
-    
-    
     JCAppService_New *service = [JCAppService_New new];
     [service getKefuWXWithsuccess:^(id  _Nullable object) {
         if ([JCWJsonTool isSuccessResponse:object]) {
