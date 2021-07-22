@@ -24,6 +24,7 @@
 #import "JCActivityGuessVC.h"
 #import "JCActivityKindVC.h"
 #import "JCActivityGuess_SPF_VC.h"
+#import "JCArticleDetailVC.h"
 @interface JCPageRedirectManager ()
 @property (nonatomic, strong) JCMainTabBarController * tabBarController;
 
@@ -64,8 +65,104 @@
         [[JCPageRedirectManager sharedManager] redirectToActivity];
         return ;
     }
+    //跳转公众号专家
+    if ([route hasPrefix:@"expert_"]) {
+        NSArray *array = [route componentsSeparatedByString:@"_"];
+        if (array.count==2) {
+            NSString *userID = array[1];
+            [[JCPageRedirectManager sharedManager] redirectToGZH_ExpertWithUserID:userID ViewController:vc];
+            
+        }
+        return ;
+    }
+    //跳转公众号文章详情
+    if ([route hasPrefix:@"expertArticle_"]) {
+        NSArray *array = [route componentsSeparatedByString:@"_"];
+        if (array.count==2) {
+            NSString *articleID = array[1];
+            [[JCPageRedirectManager sharedManager] redirectToGZH_ArticleWithArticleID:articleID ViewController:vc];
+            
+        }
+
+        return ;
+    }
+    //跳转红榜专家
+    if ([route hasPrefix:@"talent_"]) {
+        NSArray *array = [route componentsSeparatedByString:@"_"];
+        if (array.count==2) {
+            NSString *userID = array[1];
+            [[JCPageRedirectManager sharedManager] redirectToHB_ExpertWithUserID:userID ViewController:vc];
+        }
+        return ;
+    }
+    //跳转红榜文章详情
+    if ([route hasPrefix:@"talentArticle_"]) {
+        NSArray *array = [route componentsSeparatedByString:@"_"];
+        if (array.count==2) {
+            NSString *articleID = array[1];
+            [[JCPageRedirectManager sharedManager] redirectToHB_ArticleWithArticleID:articleID ViewController:vc];
+        }
+        return;
+
+    }
+    //跳转资讯文章详情
+    if ([route hasPrefix:@"article_"]) {
+        NSArray *array = [route componentsSeparatedByString:@"_"];
+        if (array.count==2) {
+            NSString *articleID = array[1];
+            [[JCPageRedirectManager sharedManager] redirectToNews_ArticleWithArticalId:articleID ViewController:vc];
+        }
+
+        return ;
+    }
+    
     
 }
+
+//跳转公众号专家
+- (void)redirectToGZH_ExpertWithUserID:(NSString *)userID ViewController:(UIViewController *)viewController {
+    JCFootBallAuthorDetailWMViewController *vc = [JCFootBallAuthorDetailWMViewController new];
+    vc.autherID = userID;
+    [viewController.navigationController pushViewController:vc animated:YES];
+ 
+}
+
+//跳转公众号文章详情
+- (void)redirectToGZH_ArticleWithArticleID:(NSString *)articleID ViewController:(UIViewController *)viewController {
+    [JCTuiJianManager loadGZH_ArticleDetailWithArticleID:articleID orderID:@"" type:@"" WithViewController:viewController is_push:YES];
+
+}
+
+//红榜专家
+- (void)redirectToHB_ExpertWithUserID:(NSString *)userID ViewController:(UIViewController *)viewController {
+    
+    JCHongbangWMstckyVC *vc = [JCHongbangWMstckyVC new];
+    vc.autherID = userID;
+    [viewController.navigationController pushViewController:vc animated:YES];
+
+}
+
+
+
+//跳转红榜文章详情
+- (void)redirectToHB_ArticleWithArticleID:(NSString *)articleID ViewController:(UIViewController *)viewController {
+    [JCTuiJianManager getTuiJianDetailWithTuiJianID:articleID orderID:@"" type:@"" WithViewController:viewController is_push:YES success:^{
+    //
+    }];
+    
+}
+
+//跳转资讯文章详情
+- (void)redirectToNews_ArticleWithArticalId:(NSString *)articalId ViewController:(UIViewController *)viewController {
+    JCArticleDetailVC *vc = [JCArticleDetailVC new];
+    vc.articalId = articalId;
+    [viewController.navigationController pushViewController:vc animated:YES];
+
+}
+
+
+
+
 
 - (void)redirectToCharge {
     JCBaseViewController * currentVC = (JCBaseViewController *)[self.tabBarController.view getCurrentVC];
