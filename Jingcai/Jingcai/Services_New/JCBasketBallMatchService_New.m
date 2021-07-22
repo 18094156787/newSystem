@@ -27,14 +27,16 @@
                                    @"competition_id":eventID,
                                    @"screening":screening,
                                    @"page":Integet_ToString(page),
-                                   @"page_size":@"10",
+                                   @"page_size":@"20",
                                    @"date":time,
          };
     }
     NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"match_basketball_list" paramDic:param ignoreArray:@[]];
+    NSLog(@"%@",param);
     [manager GET:urlString parameters:param headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        NSLog(@"%@",responseObject);
         [self deathWithSuccessInfo:responseObject];
         successBlock(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

@@ -18,6 +18,7 @@
 #import "JCDakaPlanDetailStickWMVC.h"
 #import "JCWMyHongbaoBall.h"
 #import "JCTuiJianManager.h"
+#import "JCJingCaiAIBigDataHomeVC.h"
 @interface JCHomeHongBangVC ()
 
 @property (nonatomic,strong) JCFamousExpertHeadView *headView;
@@ -192,6 +193,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+//    JCJingCaiAIBigDataHomeVC *vc = [JCJingCaiAIBigDataHomeVC new];
+//    [self.navigationController pushViewController:vc animated:YES];
+//    return;
+    
+    
     id model = self.dataArray[indexPath.section];
     if ([model isKindOfClass:[JCHongBangBall class]]) {
 

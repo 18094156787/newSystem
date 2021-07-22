@@ -101,11 +101,12 @@
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
     if (index==0) {
-        return self.scVC;
-    }
-    if (index==1) {
         return self.goingVC;
     }
+    if (index==1) {
+        return self.scVC;
+    }
+
     if (index==2) {
         return self.endVC;
         
@@ -135,17 +136,27 @@
 }
 
 - (NSArray<NSString *> *)titles {
-    return @[@"赛程",@"进行中",@"已完场",@"关注"];
+    return @[@"即时",@"赛程",@"已完场",@"关注"];
 }
 
 - (void)filterItemClick {
     WeakSelf;
+    //    type;//0赛程 1进行中 2完场 不传默认0
     NSString *type = [NSString stringWithFormat:@"%d",self.selectIndex];
     self.filterVC.selectIndex = 0;
+
+    if (self.selectIndex==0) {
+        type = @"1";
+    }
+    if (self.selectIndex==1) {
+        type = @"0";
+    }
     self.filterVC.type = type;
     if (self.selectIndex==0) {
+        self.filterVC.time = self.goingVC.time;
+    } else if (self.selectIndex==1) {
         self.filterVC.time = self.scVC.time;
-    } else   if (self.selectIndex==2) {
+    } else if (self.selectIndex==2) {
         self.filterVC.time = self.endVC.time;
     }else{
         self.filterVC.time = @"";
@@ -163,13 +174,16 @@
             }
         }
 //        screening;//筛选类别 1首页重要 等于 重要+筛选+北单 并集 2筛选-重要 3筛选-全部 4筛选-竟足 5筛选-北单 默认3
-        if (self.selectIndex==0) {
+        if (self.selectIndex==1) {
+//            self.selectIndex==1 是赛程
+
             weakSelf.scVC.eventArray = jsonStr;
             weakSelf.scVC.screening = screening;
             [weakSelf.scVC filtertAll];
             [weakSelf.scVC filterData];
         }
-        if (self.selectIndex==1) {
+        if (self.selectIndex==0) {
+//            self.selectIndex==0 是即时
             weakSelf.goingVC.eventArray = jsonStr;
             weakSelf.goingVC.screening = screening;
             [weakSelf.goingVC filtertAll];

@@ -82,6 +82,8 @@
 
 @property (nonatomic,strong) JCBigDataZhishuLargeSmallModel *jqsLargeModel;
 
+@property (nonatomic,assign) BOOL isLoad;
+
 @end
 
 @implementation JCJingCaiAIBigDataHomeVC
@@ -115,6 +117,7 @@
 
 - (void)getTopInfoData {
 //    [self.view showLoading];
+    self.isLoad = NO;
     JCDataBaseService_New *service = [JCDataBaseService_New service];
     [service getBigDataTopInfoWithsuccess:^(id  _Nullable object) {
         self.tableView.hidden= NO;
@@ -161,6 +164,7 @@
             self.trend_spfArray = [JCWJsonTool arrayWithJson:object[@"data"][@"zhishu"][@"op_trend_data"] class:[JCBigDataZhishuTrendModel class]];
             self.trend_rqArray = [JCWJsonTool arrayWithJson:object[@"data"][@"zhishu"][@"yp_trend_data"] class:[JCBigDataZhishuTrendModel class]];
             self.trend_jqsArray = [JCWJsonTool arrayWithJson:object[@"data"][@"zhishu"][@"dx_trend_data"] class:[JCBigDataZhishuTrendModel class]];
+            self.isLoad = YES;
             [self.tableView reloadData];
 
         }else{
@@ -282,6 +286,7 @@
         
         
     }
+
     if (indexPath.section==2) {
         if (indexPath.row==0) {
             JNMatchSJAgainstHistortPay_SPFCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JNMatchSJAgainstHistortPay_SPFCell"];
@@ -306,7 +311,10 @@
             cell.dataArray = self.zhishu_spfArray;
             cell.panModel = self.sfpPanModel;
             cell.largeModel = self.sfpLargeModel;
-            cell.trendArray = self.trend_spfArray;
+//            if (self.isLoad) {
+                cell.trendArray = self.trend_spfArray;
+//            }
+            
             
             return cell;
         }

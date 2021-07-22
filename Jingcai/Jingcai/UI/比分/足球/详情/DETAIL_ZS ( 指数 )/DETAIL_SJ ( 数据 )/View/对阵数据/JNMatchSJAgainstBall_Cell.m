@@ -94,7 +94,7 @@
             make.height.mas_equalTo(0);
         }];
         
-        self.titleLab.text = @"让球";
+        self.titleLab.text = [NSString stringWithFormat:@"让球(%@)",model.rq];
         self.homeInfoLab.text = @"主胜";
         self.awayInfoLab.text = @"客胜";
         [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:0 endPoint:[model.ai_yp_win floatValue]];
@@ -119,7 +119,7 @@
         }];
         
         
-        self.titleLab.text = @"进球数";
+        self.titleLab.text = [NSString stringWithFormat:@"进球数(%@)",model.jqs];
         self.homeInfoLab.text = @"大球";
         self.awayInfoLab.text = @"小球";
         [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:0 endPoint:[model.ai_dx_win floatValue]];

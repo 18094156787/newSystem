@@ -343,7 +343,7 @@
     NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday) fromDate:date];
     NSInteger week = components.weekday - 1;
 //    NSDictionary *weekDic = @{@"0":@"星期四",@"1":@"星期五",@"2":@"星期六",@"3":@"星期日",@"4":@"星期一",@"5":@"星期二",@"6":@"星期三"};
-    NSDictionary *weekDic = @{@"0":@"星期六",@"1":@"星期日",@"2":@"星期一",@"3":@"星期二",@"4":@"星期三",@"5":@"星期四",@"6":@"星期五"};
+    NSDictionary *weekDic = @{@"0":@"周六",@"1":@"周日",@"2":@"周一",@"3":@"周二",@"4":@"周三",@"5":@"周四",@"6":@"周五"};
     NSString *key = [NSString stringWithFormat:@"%ld",(long)week];
     NSString *weekStrng = weekDic[key];
     NSString *total = [NSString stringWithFormat:@"%@ %@",dateString,weekStrng];

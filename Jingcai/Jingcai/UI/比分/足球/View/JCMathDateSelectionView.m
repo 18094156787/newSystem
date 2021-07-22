@@ -13,21 +13,21 @@
 @implementation JCMathDateSelectionView
 
 - (void)initViews {
-    self.backgroundColor = COLOR_F0F0F0;
+    self.backgroundColor = JCWhiteColor;
     UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, AUTO(135)) collectionViewLayout:flowLayout];
 //    self.collectionView.contentInset = UIEdgeInsetsMake(0, AUTO(15), 0, AUTO(15));
     self.collectionView.dataSource=self;
     self.collectionView.delegate=self;
-    self.collectionView.backgroundColor = COLOR_F0F0F0;
+    self.collectionView.backgroundColor = JCWhiteColor;
     self.collectionView.scrollEnabled = YES;
     self.collectionView.showsHorizontalScrollIndicator = NO;
     //    注册Cell，必须要有
     [self.collectionView registerClass:[JCMatchDateCell class] forCellWithReuseIdentifier:@"JCMatchDateCell"];
     [self addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.insets(UIEdgeInsetsMake(0, 0, 0, AUTO(56)));
+        make.edges.insets(UIEdgeInsetsMake(0, AUTO(16), 0, AUTO(56)));
     }];
     
 
@@ -73,7 +73,7 @@
 //定义每个Item 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(AUTO(65), AUTO(42));
+    return CGSizeMake(AUTO(65), AUTO(32));
 
 }
 
@@ -267,7 +267,6 @@
 - (UIButton *)datePickBtn {
     if (!_datePickBtn) {
         _datePickBtn = [UIButton new];
-        _datePickBtn.backgroundColor = COLOR_F0F0F0;
         [_datePickBtn setImage:JCIMAGE(@"icon_match_date") forState:0];
         [_datePickBtn setImage:JCIMAGE(@"icon_match_date") forState:UIControlStateHighlighted];
     }

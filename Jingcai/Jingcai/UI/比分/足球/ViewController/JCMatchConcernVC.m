@@ -154,16 +154,15 @@
 //    JCMatchInfoTitleModel *model = self.dataArray[section];
 //    view.titleLab.text= model.daytime;
 //    return view;
-    return [UIView new];
+    UIView * headView= [UIView new];
+    headView.backgroundColor = COLOR_F0F0F0;
+    return headView;
 
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
-//    return AUTO(36);
-    if (section==0) {
-        return 0.001f;
-    }
+
     return AUTO(8);
 }
 

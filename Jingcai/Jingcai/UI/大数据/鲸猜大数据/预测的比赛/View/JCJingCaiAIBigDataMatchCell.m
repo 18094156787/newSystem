@@ -162,9 +162,6 @@
     }
     
 
-    self.zbImgView.hidden = [model.is_live integerValue]==1?NO:YES;
-
-    
 }
 
 
@@ -250,13 +247,6 @@
     return _planCountLab;
 }
 
-- (UIImageView *)zbImgView {
-    if (!_zbImgView) {
-        _zbImgView = [UIImageView new];
-        _zbImgView.image = JCIMAGE(@"ic_dhzb");
-    }
-    return _zbImgView;
-}
 
 -(UIImageView *)homeTeamImgView {
     if (!_homeTeamImgView) {

@@ -12,8 +12,8 @@
 
 - (void)initViews {
     //负 -胜 -平
-    NSArray *items = @[[SCPieChartDataItem dataItemWithValue:0 color:COLOR_002868 description:@""],[SCPieChartDataItem dataItemWithValue:0 color:JCBaseColor description:@""],
-                       [SCPieChartDataItem dataItemWithValue:0 color:COLOR_30B27A description:@""]
+    NSArray *items = @[[SCPieChartDataItem dataItemWithValue:0 color:JCBaseColor description:@""],
+                       [SCPieChartDataItem dataItemWithValue:0 color:COLOR_002868 description:@""],[SCPieChartDataItem dataItemWithValue:0 color:COLOR_30B27A description:@""]
                        ];
 
     self.chartView = [[SCPieChart alloc] initWithFrame:CGRectMake(AUTO(20), 0, AUTO(80), AUTO(80)) items:items];
@@ -113,8 +113,9 @@
         make.width.height.mas_equalTo(AUTO(20));
     }];
     
-    UIView *hongLine = [UIView new];
-    hongLine.backgroundColor =  COLOR_DBDBDB;
+    UIImageView *hongLine = [UIImageView new];
+    hongLine.image = JCIMAGE(@"jc_bigdata_divider");
+//    hongLine.backgroundColor =  COLOR_DBDBDB;
     [self.circleBgView addSubview:hongLine];
     [hongLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.chartView.mas_right).offset(AUTO(95));
@@ -130,8 +131,8 @@
         make.width.height.mas_equalTo(AUTO(20));
     }];
 
-    UIView *zouLine = [UIView new];
-    zouLine.backgroundColor =  COLOR_DBDBDB;
+    UIImageView *zouLine = [UIImageView new];
+    zouLine.image = JCIMAGE(@"jc_bigdata_divider");
     [self.circleBgView addSubview:zouLine];
     [zouLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.chartView.mas_right).offset(AUTO(95));
@@ -147,8 +148,8 @@
         make.width.height.mas_equalTo(AUTO(20));
     }];
     
-    UIView *heiLine = [UIView new];
-    heiLine.backgroundColor =  COLOR_DBDBDB;
+    UIImageView *heiLine = [UIImageView new];
+    heiLine.image = JCIMAGE(@"jc_bigdata_divider");
     [self.circleBgView addSubview:heiLine];
     [heiLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.chartView.mas_right).offset(AUTO(95));
@@ -177,9 +178,9 @@
     _model= model;
 
 
-    NSInteger hong = 0;
-    NSInteger hei = 0;
-    NSInteger zou = 0;
+    NSInteger sheng = 0;//胜
+    NSInteger ping = 0;//平
+    NSInteger fu = 0;//负
 
 
     NSArray *rateArray = [model.trend componentsSeparatedByString:@","];
@@ -191,47 +192,47 @@
     for (int i=0; i<rateArray.count; i++) {
     NSString *value = rateArray[i];
     if ([value integerValue]==1) {
-    hong++;
+        sheng++;
     }
     if ([value integerValue]==2) {
-    hei++;
+        ping++;
     }
     if ([value integerValue]==3) {
-    zou++;
+        fu++;
     }
     }
     
     
-    [self.chartView updateChartByNumbers:@[@(hei),@(hong),@(zou)] animation:NO];
-    self.windLab.text = [NSString stringWithFormat:@"%.0f%%",100*(float)hong/rateArray.count];
-    self.eqalLab.text = [NSString stringWithFormat:@"%.0f%%",100*(float)hei/rateArray.count];
-    self.loseLab.text = [NSString stringWithFormat:@"%.0f%%",100*(float)zou/rateArray.count];
+    [self.chartView updateChartByNumbers:@[@(sheng),@(fu),@(ping)] animation:NO];
+    self.windLab.text = [NSString stringWithFormat:@"%.0f%%",100*(float)sheng/rateArray.count];
+    self.eqalLab.text = [NSString stringWithFormat:@"%.0f%%",100*(float)ping/rateArray.count];
+    self.loseLab.text = [NSString stringWithFormat:@"%.0f%%",100*(float)fu/rateArray.count];
     
     
-    NSString *hongString = [NSString stringWithFormat:@"%ld胜",hong];
-    NSString *heiString = [NSString stringWithFormat:@"%ld平",hei];
-    NSString *zouString = [NSString stringWithFormat:@"%ld负",zou];
-    NSString *zsString = [NSString stringWithFormat:@"%@   %@   %@",hongString,heiString,zouString];
+    NSString *shengString = [NSString stringWithFormat:@"%ld胜",sheng];
+    NSString *pingString = [NSString stringWithFormat:@"%ld平",ping];
+    NSString *fuString = [NSString stringWithFormat:@"%ld负",fu];
+    NSString *zsString = [NSString stringWithFormat:@"%@   %@   %@",shengString,pingString,fuString];
 
 
 
     NSMutableAttributedString *zsAttr = [[NSMutableAttributedString alloc] initWithString:zsString];
-    NSRange hong_range = [zsString rangeOfString:hongString];
-    if (hong_range.location!=NSNotFound) {
-    [zsAttr addAttribute:NSForegroundColorAttributeName value:JCBaseColor range:hong_range];
+    NSRange sheng_range = [zsString rangeOfString:shengString];
+    if (sheng_range.location!=NSNotFound) {
+    [zsAttr addAttribute:NSForegroundColorAttributeName value:JCBaseColor range:sheng_range];
     }
-    NSRange zou_range = [zsString rangeOfString:zouString];
-    if (zou_range.location!=NSNotFound) {
-    [zsAttr addAttribute:NSForegroundColorAttributeName value:COLOR_002868 range:zou_range];//
+    NSRange fu_range = [zsString rangeOfString:fuString];
+    if (fu_range.location!=NSNotFound) {
+    [zsAttr addAttribute:NSForegroundColorAttributeName value:COLOR_002868 range:fu_range];//
     }
-    NSRange hei_range = [zsString rangeOfString:heiString];
-    if (hei_range.location!=NSNotFound) {
-    [zsAttr addAttribute:NSForegroundColorAttributeName value:COLOR_30B27A range:hei_range];
+    NSRange ping_range = [zsString rangeOfString:pingString];
+    if (ping_range.location!=NSNotFound) {
+    [zsAttr addAttribute:NSForegroundColorAttributeName value:COLOR_30B27A range:ping_range];
     }
     self.zs_infoLab.attributedText = zsAttr;
 
     NSMutableArray *pointArray = [NSMutableArray array];
-    NSInteger startX = AUTO(60);
+    NSInteger startX = AUTO(65);
     NSInteger startY = 27;
 
     UIBezierPath* path = [UIBezierPath bezierPath];

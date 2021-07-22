@@ -1,18 +1,18 @@
 //
-//  JCMatchFilterSegmentView.m
+//  JCMatchFilter_BasketBall_SegmentView.m
 //  Jingcai
 //
-//  Created by 陈继伟 on 2020/11/26.
-//  Copyright © 2020 blockstar. All rights reserved.
+//  Created by 陈继伟 on 2021/7/21.
+//  Copyright © 2021 blockstar. All rights reserved.
 //
 
-#import "JCMatchFilterSegmentView.h"
+#import "JCMatchFilter_BasketBall_SegmentView.h"
 
-@implementation JCMatchFilterSegmentView
+@implementation JCMatchFilter_BasketBall_SegmentView
 
 - (void)initViews {
     [self addSubview:self.backImgView];
-    self.backImgView.frame = CGRectMake(0, 0, 200, 32);
+    self.backImgView.frame = CGRectMake(0, 0, 148, 32);
     
     [self.backImgView addSubview:self.firBtn];
     self.firBtn.frame = CGRectMake(2, 0, 48, 28);
@@ -25,10 +25,7 @@
     [self.backImgView addSubview:self.thirdBtn];
     self.thirdBtn.frame = CGRectMake(2+48*2,0, 48, 28);
     self.thirdBtn.centerY = self.backImgView.centerY;
-    
-    [self.backImgView addSubview:self.fourBtn];
-    self.fourBtn.frame = CGRectMake(2+48*3,0, 48, 28);
-    self.fourBtn.centerY = self.backImgView.centerY;
+
     
 }
 
@@ -39,7 +36,6 @@
     self.firBtn.selected = YES;
     self.secBtn.selected = NO;
     self.thirdBtn.selected = NO;
-    self.fourBtn.selected = NO;
     self.selectBtn = self.firBtn;
     self.selectBtn.backgroundColor = JCBaseColor;
 }
@@ -51,12 +47,11 @@
     self.firBtn.selected = NO;
     self.secBtn.selected = YES;
     self.thirdBtn.selected = NO;
-    self.fourBtn.selected = NO;
     self.selectBtn = self.secBtn;
     self.selectBtn.backgroundColor = JCBaseColor;
 }
 
-- (void)showJingZu {
+- (void)showJingLan {
     self.selectBtn.selected = NO;
     self.selectBtn.backgroundColor = JCWhiteColor;
     self.selectIndex = 2;
@@ -64,38 +59,26 @@
     self.firBtn.selected = NO;
     self.secBtn.selected = NO;
     self.thirdBtn.selected = YES;
-    self.fourBtn.selected = NO;
     self.selectBtn = self.thirdBtn;
     self.selectBtn.backgroundColor = JCBaseColor;
 }
 
-- (void)showBeiDan {
-    self.selectBtn.selected = NO;
-    self.selectBtn.backgroundColor = JCWhiteColor;
-    self.selectIndex = 3;
-    self.firBtn.selected = NO;
-    self.secBtn.selected = NO;
-    self.thirdBtn.selected = NO;
-    self.fourBtn.selected = YES;
-    self.selectBtn = self.fourBtn;
-    self.selectBtn.backgroundColor = JCBaseColor;
-}
+
 
 - (void)btnClick:(UIButton *)sender {
-    
     //防止重复点击
     {
         self.firBtn.userInteractionEnabled = NO;
         self.secBtn.userInteractionEnabled = NO;
         self.thirdBtn.userInteractionEnabled = NO;
-        self.fourBtn.userInteractionEnabled = NO;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             self.firBtn.userInteractionEnabled = YES;
             self.secBtn.userInteractionEnabled = YES;
             self.thirdBtn.userInteractionEnabled = YES;
-            self.fourBtn.userInteractionEnabled = YES;
         });
     }
+    
+    
     self.selectIndex = sender.tag-100;
     if (self.JCBlock) {
         self.JCBlock(sender.tag-100);
@@ -151,7 +134,7 @@
 
 - (UIButton *)thirdBtn {
     if (!_thirdBtn) {
-        _thirdBtn = [UIButton initWithText:@"竞足" FontSize:AUTO(14) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
+        _thirdBtn = [UIButton initWithText:@"竞篮" FontSize:AUTO(14) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
         [_thirdBtn setTitleColor:JCWhiteColor forState:UIControlStateSelected];
         [_thirdBtn setTitleColor:COLOR_2F2F2F forState:0];
         [_thirdBtn hg_setAllCornerWithCornerRadius:14];
@@ -163,17 +146,5 @@
     return _thirdBtn;
 }
 
-- (UIButton *)fourBtn {
-    if (!_fourBtn) {
-        _fourBtn = [UIButton initWithText:@"北单" FontSize:AUTO(14) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
-        [_fourBtn setTitleColor:JCWhiteColor forState:UIControlStateSelected];
-        [_fourBtn setTitleColor:COLOR_2F2F2F forState:0];
-        [_fourBtn hg_setAllCornerWithCornerRadius:14];
-        _fourBtn.tag = 103;
-        
 
-        [_fourBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _fourBtn;
-}
 @end

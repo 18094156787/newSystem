@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)filterData;
 
+- (void)filtertAll;
+
 @end
 
 NS_ASSUME_NONNULL_END

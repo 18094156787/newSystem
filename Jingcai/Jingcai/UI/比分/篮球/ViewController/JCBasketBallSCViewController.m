@@ -19,6 +19,8 @@
 #import "JCMatchFilterSegmentCurrentView.h"
 #import "JCTeamMatchInfoMatchVC.h"
 #import "NSDate+BRPickerView.h"
+#import "JCMatchFilter_BasketBall_SegmentView.h"
+#import "JCMatchFilterSegment_BasketBall_CurrentView.h"
 @interface JCBasketBallSCViewController ()
 
 @property (nonatomic,strong) JCMathDateSelectionView *dateHeadView;
@@ -28,6 +30,10 @@
 @property (nonatomic,strong) NSMutableArray *dataSource;//已截止
 
 @property (nonatomic,assign) BOOL is_noMore;
+
+@property (nonatomic,strong) JCMatchFilter_BasketBall_SegmentView *filterView;
+
+@property (nonatomic,strong) JCMatchFilterSegment_BasketBall_CurrentView *currentFilterView;
 
 @end
 
@@ -42,7 +48,7 @@
     self.view.backgroundColor = COLOR_F0F0F0;
     [self initViews];
     [self getTimeList];
-    [self refreshData];
+//    [self refreshData];
 //    [self refreshData];
 //    if (self.dateHeadView.hidden) {
 //        [self getTimeData];
@@ -137,8 +143,8 @@
 
             NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCBasketBallMatchBall class]];
             [self.dataArray addObjectsFromArray:array];
-            [self.tableView reloadData];
-            self.pageNo++;
+            
+//            self.pageNo++;
 
             if ([self.type integerValue]==2) {
                 [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
@@ -161,6 +167,8 @@
                 self.tableView.tableFooterView = [UIView new];
                 self.tableView.mj_footer.hidden = NO;
             }
+            self.pageNo++;
+            [self.tableView reloadData];
             
         }else{
             [JCWToastTool showHint:object[@"msg"]];
@@ -212,6 +220,14 @@
 
     }
     
+    if ([self.type integerValue]<3) {
+        [self.view addSubview:self.filterView];
+        self.filterView.frame = CGRectMake(SCREEN_WIDTH/2.0f-75, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-150, 146, 32);
+        
+        [self.view addSubview:self.currentFilterView];
+        self.currentFilterView.frame = CGRectMake(SCREEN_WIDTH-64, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-150, 64, 32);
+    }
+    
     self.tableView.backgroundColor = COLOR_F4F6F9;
     self.tableView.separatorColor = COLOR_DDDDDD;
     self.tableView.separatorInset = UIEdgeInsetsZero;
@@ -245,17 +261,28 @@
     if ([self.type intValue]==2) {
         [mj_foot setTitle:@"" forState:MJRefreshStateNoMoreData];
     }
+    
+    self.filterView.JCBlock = ^(NSInteger index) {
+
+        [weakSelf filterBtnClick];
+        weakSelf.currentFilterView.index = weakSelf.filterView.selectIndex;
+    };
+    
+    
+    self.currentFilterView.JCBlock = ^{
+        [weakSelf showSegmentView];
+    };
 
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    return 1;
+    return self.dataArray.count;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    return 1;
 
 }
 
@@ -271,20 +298,20 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *footView = [UIView new];
-    footView.backgroundColor = COLOR_F0F0F0;
-    return footView;
+
+    return [UIView new];
 
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-
-    return [UIView new];
+    UIView *headView = [UIView new];
+    headView.backgroundColor = COLOR_F0F0F0;
+    return headView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
-    return 0.01f;
+    return AUTO(8);
 }
 
 
@@ -292,7 +319,7 @@
 
     JCBasketBallHomeMatchCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCBasketBallHomeMatchCell"];
     cell.showBottom = YES;
-    JCBasketBallMatchBall *model = self.dataArray[indexPath.row];
+    JCBasketBallMatchBall *model = self.dataArray[indexPath.section];
     cell.model = model;
    
     WeakSelf;
@@ -301,7 +328,7 @@
             [self presentLogin];
             return;
         }
-        JCBasketBallMatchBall *amodel = self.dataArray[indexPath.row];;
+        JCBasketBallMatchBall *amodel = self.dataArray[indexPath.section];;
         [weakSelf concernMatchWithModel:amodel];
     };
 
@@ -312,11 +339,13 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     JCBasketBallMatchDetailWMStickVC * detailVC = [JCBasketBallMatchDetailWMStickVC new];//JNMatchDetailVC
-    JCBasketBallMatchBall *model = self.dataArray[indexPath.row];
+    JCBasketBallMatchBall *model = self.dataArray[indexPath.section];
     detailVC.matchNum = model.match_id;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
-
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self hideSegmentView];
+}
 - (void)concernMatchWithModel:(JCBasketBallMatchBall *)infoModel {
     [self.view showLoading];
     JCMatchService_New *service = [JCMatchService_New new];
@@ -339,14 +368,83 @@
 
 }
 
+- (void)filtertAll {
+    if ([self.screening integerValue]==2) {
+        [self.filterView showImportmant];
+        self.currentFilterView.index = 1;
+    }
+    if ([self.screening integerValue]==3) {
+        [self.filterView showAll];
+        self.currentFilterView.index = 0;
+    }
+    if ([self.screening integerValue]==4) {
+        [self.filterView showJingLan];
+        self.currentFilterView.index = 2;
+    }
+
+    
+   
+}
+
+//- (void)filterBtnClick {
+//    self.eventArray = @"";
+//    self.screening = @"3";
+//    [self refreshData];
+//
+//}
+
 - (void)filterBtnClick {
     self.eventArray = @"";
-    self.screening = @"3";
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideSegmentView) object:nil];
+    if (self.filterView.selectIndex==0) {
+        [JCWToastTool showHint:@"已自动为您筛选【全部】比赛"];
+        self.screening = @"3";
+        [self autoHideSegmentView];
+    }else if (self.filterView.selectIndex==1) {
+        [JCWToastTool showHint:@"已自动为您筛选【热门】比赛"];
+        self.screening = @"2";
+        [self autoHideSegmentView];
+    }else if (self.filterView.selectIndex==2) {
+        [JCWToastTool showHint:@"已自动为您筛选【竞篮】比赛"];
+        self.screening = @"4";
+        [self autoHideSegmentView];
+    }
     [self refreshData];
     
 }
 
+- (void)autoHideSegmentView {
+    if (!self.filterView.hidden) {
 
+        [self performSelector:@selector(hideSegmentView) withObject:nil afterDelay:3];
+
+    }
+}
+
+- (void)hideSegmentView {
+    
+    
+    [UIView animateWithDuration:0.3 animations:^{
+       
+        self.filterView.frame = CGRectMake(SCREEN_WIDTH-50, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-150, 146, 32);
+    } completion:^(BOOL finished) {
+        self.filterView.hidden = YES;
+        self.currentFilterView.hidden = NO;
+    }];
+    
+}
+
+- (void)showSegmentView {
+    self.filterView.hidden = NO;
+    self.currentFilterView.hidden = YES;
+    [self.tableView setContentOffset:self.tableView.contentOffset animated:NO];    [UIView animateWithDuration:0.3 animations:^{
+        self.filterView.frame = CGRectMake(SCREEN_WIDTH/2.0f-75, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-150, 146, 32);
+    } completion:^(BOOL finished) {
+       
+    }];
+//    [self filterBtnClick];
+
+}
 
 - (JCMathDateSelectionView *)dateHeadView {
     if (!_dateHeadView) {
@@ -364,6 +462,22 @@
     return _dataSource;
 }
 
+- (JCMatchFilter_BasketBall_SegmentView *)filterView {
+    if (!_filterView) {
+        _filterView = [JCMatchFilter_BasketBall_SegmentView new];
+        [_filterView showImportmant];
+    }
+    return _filterView;
+}
+
+- (JCMatchFilterSegment_BasketBall_CurrentView *)currentFilterView {
+    if (!_currentFilterView) {
+        _currentFilterView = [JCMatchFilterSegment_BasketBall_CurrentView new];
+        _currentFilterView.index = 1;
+        _currentFilterView.hidden = YES;
+    }
+    return _currentFilterView;
+}
 
 
 @end

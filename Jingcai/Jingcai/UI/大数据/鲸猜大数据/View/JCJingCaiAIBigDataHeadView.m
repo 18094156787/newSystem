@@ -350,7 +350,7 @@
 
 - (UIButton *)sureBtn {
     if (!_sureBtn) {
-        _sureBtn = [UIButton initWithText:@"立即购买" FontSize:AUTO(14) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
+        _sureBtn = [UIButton initWithText:@"立即购买" FontSize:AUTO(16) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
         _sureBtn.backgroundColor = JCBaseColor;
         [_sureBtn hg_setAllCornerWithCornerRadius:16];
     }

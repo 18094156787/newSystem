@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) JCBasketBallMatchBall *model;
 
-@property (nonatomic, strong) JCBasketBallMatchBall *concernModel;
+//@property (nonatomic, strong) JCBasketBallMatchBall *concernModel;
 
 @end
 

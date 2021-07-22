@@ -24,6 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)filtertAll;
 
+- (void)filtertJingZu;
+
+- (void)filtertBeiDan;
+
 @end
 
 NS_ASSUME_NONNULL_END

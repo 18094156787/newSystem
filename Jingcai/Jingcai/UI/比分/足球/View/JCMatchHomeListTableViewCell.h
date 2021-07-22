@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UILabel *matchStatusLab;//比赛状态
 
-@property (nonatomic, strong) UILabel *ongoingTimeLab;//比赛进行时间
+//@property (nonatomic, strong) UILabel *ongoingTimeLab;//比赛进行时间
 
 @property (nonatomic, strong) UIButton *collectionBtn;//收藏
 
@@ -36,13 +36,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UILabel *awayTeamLab;
 
-@property (nonatomic, strong) UIImageView *homeTeamImgView;
-
-@property (nonatomic, strong) UIImageView *awayTeamImgView;
+//@property (nonatomic, strong) UIImageView *homeTeamImgView;
+//
+//@property (nonatomic, strong) UIImageView *awayTeamImgView;
 
 @property (nonatomic, strong) UILabel *halfScoreLab;//半场比分
 
 @property (nonatomic, strong) UILabel *planCountLab;//方案数量
+
+@property (nonatomic, strong) UILabel *neutralLab;//中立场
+
+@property (nonatomic, strong) UILabel *home_red_Lab;
+
+@property (nonatomic, strong) UILabel *home_yellow_Lab;
+
+@property (nonatomic, strong) UILabel *away_red_Lab;
+
+@property (nonatomic, strong) UILabel *away_yellow_Lab;
 
 @property (nonatomic, strong) JCMatchInfoModel *model;
 

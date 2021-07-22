@@ -64,6 +64,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:NotificationUserLogin object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:NotificationUserLogout object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshEntertBall) name:jcMatchEntetBallRefresh object:nil];
+    
+//    self.filterSegment.frame = CGRectMake(100, 100, 100, 50);
+//    [self.jcWindow addSubview:self.filterSegment];
 
 }
 
@@ -209,8 +212,39 @@
 }
 
 - (void)filtertAll {
-    [self.filterView showAll];
-    self.currentFilterView.index = 0;
+    if ([self.screening integerValue]==2) {
+        [self.filterView showImportmant];
+        self.currentFilterView.index = 1;
+    }
+    if ([self.screening integerValue]==3) {
+        [self.filterView showAll];
+        self.currentFilterView.index = 0;
+    }
+    if ([self.screening integerValue]==4) {
+        [self.filterView showJingZu];
+        self.currentFilterView.index = 2;
+    }
+    if ([self.screening integerValue]==5) {
+        [self.filterView showBeiDan];
+        self.currentFilterView.index = 3;
+    }
+    
+   
+}
+
+- (void)filtertHot {
+    [self.filterView showImportmant];
+    self.currentFilterView.index = 1;
+}
+
+- (void)filtertJingZu {
+    [self.filterView showJingZu];
+    self.currentFilterView.index = 2;
+}
+
+- (void)filtertBeiDan {
+    [self.filterView showBeiDan];
+    self.currentFilterView.index = 3;
 }
 
 - (void)updateInfo:(NSNotification *)notification {
@@ -241,21 +275,16 @@
             
         };
         self.tableView.tableHeaderView = self.dateHeadView;
-//        [self.view addSubview:self.dateHeadView];
-//
-//        [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.top.offset(AUTO(49));
-//        }];
-        
-        
-        [self.view addSubview:self.filterView];
-        self.filterView.frame = CGRectMake(SCREEN_WIDTH-120, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-120, 112, 46);
-        
-        [self.view addSubview:self.currentFilterView];
-        self.currentFilterView.frame = CGRectMake(SCREEN_WIDTH-54, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-120, 54, 46);
 
     }else {
         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.0001)];
+    }
+    if ([self.type integerValue]<3) {
+        [self.view addSubview:self.filterView];
+        self.filterView.frame = CGRectMake(SCREEN_WIDTH/2.0f-100, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-150, 200, 32);
+        
+        [self.view addSubview:self.currentFilterView];
+        self.currentFilterView.frame = CGRectMake(SCREEN_WIDTH-64, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-150, 64, 32);
     }
     
     self.tableView.backgroundColor = COLOR_F4F6F9;
@@ -329,10 +358,11 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section==self.dataArray.count-1) {
-        return 0.001f;
-    }
-    return AUTO(8);
+//    if (section==self.dataArray.count-1) {
+//        return 0.001f;
+//    }
+//    return AUTO(8);
+    return 0.001f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -343,12 +373,14 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return [UIView new];
+    UIView *headView = [UIView new];
+    headView.backgroundColor = COLOR_F0F0F0;
+    return headView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
-    return 0.001f;
+    return AUTO(8);
 }
 
 
@@ -356,6 +388,7 @@
 
     JCMatchHomeListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCMatchHomeListTableViewCell"];
     JCMatchInfoModel *model = self.dataArray[indexPath.section];
+
     cell.model = model;
     WeakSelf;
     cell.JCConcernBlock = ^{
@@ -414,13 +447,21 @@
 - (void)filterBtnClick {
     self.eventArray = @"";
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideSegmentView) object:nil];
-    if (self.filterView.selectIndex==1) {
-        [JCWToastTool showHint:@"已自动为您筛选【重要】比赛"];
-        self.screening = @"1";
-        [self autoHideSegmentView];
-    }else{
+    if (self.filterView.selectIndex==0) {
         [JCWToastTool showHint:@"已自动为您筛选【全部】比赛"];
         self.screening = @"3";
+        [self autoHideSegmentView];
+    }else if (self.filterView.selectIndex==1) {
+        [JCWToastTool showHint:@"已自动为您筛选【热门】比赛"];
+        self.screening = @"2";
+        [self autoHideSegmentView];
+    }else if (self.filterView.selectIndex==2) {
+        [JCWToastTool showHint:@"已自动为您筛选【竞足】比赛"];
+        self.screening = @"4";
+        [self autoHideSegmentView];
+    }else {
+        [JCWToastTool showHint:@"已自动为您筛选【北单】比赛"];
+        self.screening = @"5";
         [self autoHideSegmentView];
     }
     [self refreshData];
@@ -431,12 +472,12 @@
 
 - (void)filterSegmentClick {
     if (self.filterSegment.selectedSegmentIndex==0) {
-        [_filterSegment setImage:JCIMAGE(@"match_icon_collection") forSegmentAtIndex:0];
-        [_filterSegment setImage:nil forSegmentAtIndex:1];
+//        [_filterSegment setImage:JCIMAGE(@"match_icon_collection") forSegmentAtIndex:0];
+//        [_filterSegment setImage:nil forSegmentAtIndex:1];
     }
     if (self.filterSegment.selectedSegmentIndex==1) {
-        [_filterSegment setImage:JCIMAGE(@"match_icon_collection") forSegmentAtIndex:1];
-        [_filterSegment setImage:nil forSegmentAtIndex:0];
+//        [_filterSegment setImage:JCIMAGE(@"match_icon_collection") forSegmentAtIndex:1];
+//        [_filterSegment setImage:nil forSegmentAtIndex:0];
     }
 
 }
@@ -444,8 +485,9 @@
 - (void)showSegmentView {
     self.filterView.hidden = NO;
     self.currentFilterView.hidden = YES;
+    [self.tableView setContentOffset:self.tableView.contentOffset animated:NO];
     [UIView animateWithDuration:0.3 animations:^{
-        self.filterView.frame = CGRectMake(SCREEN_WIDTH-120, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-120, 112, 46);
+        self.filterView.frame = CGRectMake(SCREEN_WIDTH/2.0f-100, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-150, 200, 32);
     } completion:^(BOOL finished) {
        
     }];
@@ -468,7 +510,7 @@
     
     [UIView animateWithDuration:0.3 animations:^{
        
-        self.filterView.frame = CGRectMake(SCREEN_WIDTH-50, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-120, 112, 46);
+        self.filterView.frame = CGRectMake(SCREEN_WIDTH-50, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-150, 200, 32);
     } completion:^(BOOL finished) {
         self.filterView.hidden = YES;
         self.currentFilterView.hidden = NO;
@@ -518,7 +560,7 @@
         [_filterSegment setBackgroundImage:JCIMAGE(@"ic_match_filterSegment") forState:UIControlStateHighlighted barMetrics:0];
         _filterSegment.backgroundColor = JCWhiteColor;
 //        [_filterSegment seti];
-        [_filterSegment setImage:JCIMAGE(@"match_icon_collection") forSegmentAtIndex:0];
+//        [_filterSegment setImage:JCIMAGE(@"match_icon_collection") forSegmentAtIndex:0];
 //        [_filterSegment setDividerImage:JCIMAGE(@"whiteBg") forLeftSegmentState:0 rightSegmentState:0 barMetrics:0];
         
         _filterSegment.selectedSegmentIndex = 0;

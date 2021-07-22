@@ -125,14 +125,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    return 1;
+    return self.dataArray.count;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //    JCMatchInfoTitleModel *model = self.dataArray[section];
 //    return model.array.count;
-    return self.dataArray.count;
+    return 1;
 
 }
 
@@ -157,18 +157,15 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
-//    JCBasketballMathDataHeadView *view = [JCBasketballMathDataHeadView new];
-//    JCMatchInfoTitleModel *model = self.dataArray[section];
-//    view.titleLab.text= model.daytime;
-//    return view;
-    return [UIView new];
-
+    UIView *headView = [UIView new];
+    headView.backgroundColor = COLOR_F0F0F0;
+    return headView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
 //    return AUTO(36);
-    return 0.001f;
+    return AUTO(8);
 }
 
 
@@ -177,7 +174,7 @@
     JCBasketBallHomeMatchCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCBasketBallHomeMatchCell"];
 //    JCMatchInfoTitleModel *titleModel = self.dataArray[indexPath.section];
 //    JCBasketBallMatchBall *model = titleModel.array[indexPath.row];
-    JCBasketBallMatchBall *model = self.dataArray[indexPath.row];
+    JCBasketBallMatchBall *model = self.dataArray[indexPath.section];
     cell.model = model;
     cell.showBottom = YES;
 //    if (model==titleModel.array.lastObject) {
@@ -207,7 +204,7 @@
 //    detailVC.matchNum = model.id;//JCMatchDetailWMStickVC
 //    [self.navigationController pushViewController:detailVC animated:YES];
     JCBasketBallMatchDetailWMStickVC * detailVC = [JCBasketBallMatchDetailWMStickVC new];//JNMatchDetailVC
-    JCBasketBallMatchBall *model = self.dataArray[indexPath.row];
+    JCBasketBallMatchBall *model = self.dataArray[indexPath.section];
     detailVC.matchNum = model.match_id;
     [self.navigationController pushViewController:detailVC animated:YES];
 }

@@ -1,16 +1,16 @@
 //
-//  JCMatchFilterSegmentView.h
+//  JCMatchFilter_BasketBall_SegmentView.h
 //  Jingcai
 //
-//  Created by 陈继伟 on 2020/11/26.
-//  Copyright © 2020 blockstar. All rights reserved.
+//  Created by 陈继伟 on 2021/7/21.
+//  Copyright © 2021 blockstar. All rights reserved.
 //
 
 #import "JCBaseView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JCMatchFilterSegmentView : JCBaseView
+@interface JCMatchFilter_BasketBall_SegmentView : JCBaseView
 
 @property (nonatomic,strong) UIImageView *backImgView;
 
@@ -19,8 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UIButton *secBtn;
 
 @property (nonatomic,strong) UIButton *thirdBtn;
-
-@property (nonatomic,strong) UIButton *fourBtn;
 
 @property (nonatomic,strong) UIButton *selectBtn;
 
@@ -32,10 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showImportmant;
 
-- (void)showJingZu;
-
-- (void)showBeiDan;
-
+- (void)showJingLan;
 
 @end
 

@@ -19,7 +19,7 @@
 
 @property (nonatomic,strong) JCBasketBallSCViewController *scVC;//未开始
 
-@property (nonatomic,strong) JCBasketBallGoingViewController *beginVC;//进行中
+@property (nonatomic,strong) JCBasketBallSCViewController *goingVC;//进行中
 
 @property (nonatomic,strong) JCBasketBallSCViewController *endVC;//已完成
 
@@ -106,10 +106,10 @@
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
     if (index==0) {
-        return self.scVC;
+        return self.goingVC;
     }
     if (index==1) {
-        return self.beginVC;
+        return self.scVC;
     }
     if (index==2) {
         return self.endVC;
@@ -147,15 +147,23 @@
 }
 
 - (NSArray<NSString *> *)titles {
-    return @[@"赛程",@"进行中",@"已完场",@"关注"];
+    return @[@"即时",@"赛程",@"已完场",@"关注"];
 }
 
 - (void)filterItemClick {
     WeakSelf;
     NSString *type = [NSString stringWithFormat:@"%d",self.selectIndex];
     self.filterVC.selectIndex = 0;
+    if (self.selectIndex==0) {
+        type = @"1";
+    }
+    if (self.selectIndex==1) {
+        type = @"0";
+    }
     self.filterVC.type = type;
     if (self.selectIndex==0) {
+        self.filterVC.time = self.goingVC.time;
+    }else if (self.selectIndex==1) {
         self.filterVC.time = self.scVC.time;
     }else if (self.selectIndex==2) {
         self.filterVC.time = self.endVC.time;
@@ -179,18 +187,21 @@
             weakSelf.scVC.eventArray = jsonStr;
             weakSelf.scVC.screening = screening;
             weakSelf.scVC.type = type;
+            [weakSelf.scVC filtertAll];
             [weakSelf.scVC filterData];
         }
         if (self.selectIndex==1) {
-            weakSelf.beginVC.eventArray = jsonStr;
-            weakSelf.beginVC.screening = screening;
-            weakSelf.beginVC.type = type;
-            [weakSelf.beginVC filterData];
+            weakSelf.goingVC.eventArray = jsonStr;
+            weakSelf.goingVC.screening = screening;
+            weakSelf.goingVC.type = type;
+            [weakSelf.goingVC filtertAll];
+            [weakSelf.goingVC filterData];
         }
         if (self.selectIndex==2) {
             weakSelf.endVC.eventArray = jsonStr;
             weakSelf.endVC.screening = screening;
             weakSelf.endVC.type = type;
+            [weakSelf.endVC filtertAll];
             [weakSelf.endVC filterData];
         }
 
@@ -211,12 +222,12 @@
     return _scVC;
 }
 
-- (JCBasketBallGoingViewController *)beginVC {
-    if (!_beginVC) {
-        _beginVC = [JCBasketBallGoingViewController new];
-        _beginVC.type = @"1";
+- (JCBasketBallSCViewController *)goingVC {
+    if (!_goingVC) {
+        _goingVC = [JCBasketBallSCViewController new];
+        _goingVC.type = @"1";
     }
-    return _beginVC;
+    return _goingVC;
 }
 
 - (JCBasketBallSCViewController *)endVC {

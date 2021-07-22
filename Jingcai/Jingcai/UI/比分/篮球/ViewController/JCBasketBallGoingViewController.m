@@ -77,9 +77,7 @@
         if ([JCWJsonTool isSuccessResponse:object]) {
             if (self.pageNo==1) {
                 [self.dataArray removeAllObjects];
-
             }
-            
             
             NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCBasketBallMatchBall class]];
             [self.dataArray addObjectsFromArray:array];
@@ -173,13 +171,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    return 1;
+    return self.dataArray.count;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.dataArray.count;
+    return 1;
 
 }
 
@@ -195,20 +193,20 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *footView = [UIView new];
-    footView.backgroundColor = COLOR_F0F0F0;
-    return footView;
+    return [UIView new];
 
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
-    return [UIView new];
+    UIView *headView = [UIView new];
+    headView.backgroundColor = COLOR_F0F0F0;
+    return headView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
-    return 0.01f;
+    return AUTO(8);
 }
 
 
@@ -216,7 +214,7 @@
 
     JCBasketBallHomeMatchCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCBasketBallHomeMatchCell"];
     cell.showBottom = YES;
-    JCBasketBallMatchBall *model = self.dataArray[indexPath.row];
+    JCBasketBallMatchBall *model = self.dataArray[indexPath.section];
     cell.model = model;
    
     WeakSelf;
@@ -225,7 +223,7 @@
             [self presentLogin];
             return;
         }
-        JCBasketBallMatchBall *model = self.dataArray[indexPath.row];
+        JCBasketBallMatchBall *model = self.dataArray[indexPath.section];
         
         [weakSelf concernMatchWithModel:model];
     };
@@ -241,7 +239,7 @@
 //    JCMatchInfoTitleModel *titleModel = self.dataArray[indexPath.section];
 //    JCMatchInfoModel *model = self.dataArray[indexPath.section];
     JCBasketBallMatchDetailWMStickVC * detailVC = [JCBasketBallMatchDetailWMStickVC new];//JNMatchDetailVC
-    JCBasketBallMatchBall *model = self.dataArray[indexPath.row];
+    JCBasketBallMatchBall *model = self.dataArray[indexPath.section];
     detailVC.matchNum = model.match_id;
     [self.navigationController pushViewController:detailVC animated:YES];
 }

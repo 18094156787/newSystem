@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JCMatchDateCell : UICollectionViewCell
 
+@property (nonatomic, strong) UIView *bgVew;
+
 @property (nonatomic, strong) UILabel *dateLab;
 
 @property (nonatomic, strong) UILabel *weekLab;

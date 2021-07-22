@@ -194,7 +194,7 @@
             CAShapeLayer *shapeLayer = [CAShapeLayer layer];
             //    shapeLayer.lineDashPattern = @[@(distance),@(distance1),@0,@0,@0];
             shapeLayer.path = path.CGPath;
-            shapeLayer.lineWidth = 1;
+            shapeLayer.lineWidth = 2;
             shapeLayer.strokeColor = lineColor.CGColor;
             shapeLayer.fillColor = nil;
   
@@ -331,6 +331,7 @@
         return;
     }
     _trendArray = trendArray;
+    [self.bgView removeAllSubviews];
     float max = [self.largeModel.large floatValue] - [self.largeModel.small floatValue];
     float averag = max/4.0f;
 //    NSMutableArray *numberTitlteArray = @[@"4",@"3",@"2",@"1",@"0"];
@@ -346,13 +347,13 @@
    NSArray * titleArray = [NSArray arrayWithArray:numberTitlteArray];
      titleArray = [[[titleArray copy] reverseObjectEnumerator] allObjects];
     for (int i=0; i<titleArray.count; i++) {
-        UIView *lineView = [UIView new];
-        lineView.backgroundColor = COLOR_DDDDDD;
-        lineView.frame = CGRectMake(50, i*AUTO(25), SCREEN_WIDTH-65, 0.5);
+        UIImageView *lineView = [UIImageView new];
+        lineView.image = JCIMAGE(@"jc_bigdata_divider");
+        lineView.frame = CGRectMake(55, i*AUTO(25), SCREEN_WIDTH-65, 1);
         [self.bgView addSubview:lineView];
 
-        UILabel *numberLab = [UILabel initWithTitle:titleArray[i] andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
-        numberLab.frame = CGRectMake(15, 0, 35, 25);
+        UILabel *numberLab = [UILabel initWithTitle:titleArray[i] andFont:AUTO(16) andWeight:1 andTextColor:[COLOR_000000 colorWithAlphaComponent:0.64] andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentRight];
+        numberLab.frame = CGRectMake(5, 0, 45, 25);
         numberLab.centerY = lineView.centerY;
         [self.bgView addSubview:numberLab];
     }

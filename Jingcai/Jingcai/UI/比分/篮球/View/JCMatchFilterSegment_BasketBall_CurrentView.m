@@ -1,14 +1,14 @@
 //
-//  JCMatchFilterSegmentCurrentView.m
+//  JCMatchFilterSegment_BasketBall_CurrentView.m
 //  Jingcai
 //
-//  Created by 陈继伟 on 2020/11/26.
-//  Copyright © 2020 blockstar. All rights reserved.
+//  Created by 陈继伟 on 2021/7/21.
+//  Copyright © 2021 blockstar. All rights reserved.
 //
 
-#import "JCMatchFilterSegmentCurrentView.h"
+#import "JCMatchFilterSegment_BasketBall_CurrentView.h"
 
-@implementation JCMatchFilterSegmentCurrentView
+@implementation JCMatchFilterSegment_BasketBall_CurrentView
 
 - (void)initViews {
     [self addSubview:self.backImgView];
@@ -56,10 +56,7 @@
     }else if(index==1){
         [_currentBtn setTitle:@"热门" forState:0];
     }else if(index==2){
-        [_currentBtn setTitle:@"竞足" forState:0];
-    }else {
-        [_currentBtn setTitle:@"北单" forState:0];
+        [_currentBtn setTitle:@"竞篮" forState:0];
     }
 }
-
 @end
