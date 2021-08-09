@@ -11,7 +11,6 @@
 #import "JCWInterfaceTool.h"
 #import "JCWConvertTool.h"
 #import "JCWJsonTool.h"
-#import "JCWCacheTool.h"
 #import "JCWUserBall.h"
 #import "JCWConst.h"
 #import "JNTabBar.h"
@@ -80,8 +79,7 @@
     //[self debugShowStatusBarHeight];
     //[self debugShowNavHeight];
 //    [self debugModing];
-    [self getAppSign];//获取app标识,客户端用不到,提供给服务端用
-    [self getAppInfo];//getKefuWX
+
     
     [self addNotification];
     [self initControllers];
@@ -89,13 +87,16 @@
     [self getMyUserInfo];
     [self initProtocolView];
     
-    //清除列表缓存
-    [JCWCacheTool clearCacheIfNeed];
     //检查更新
     [[JCPopViewManager shareManager] autoCheckUpdate];//版本更新
 //    [self initEnterBallTipView];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self initEnterBallTipView];//延迟执行,太快获取不到keywindow
+        
+        
+//#pragma mark 测试
+//        self.goalTipView.hidden = NO;
+//        [[UIApplication sharedApplication].keyWindow addSubview:self.goalTipView];
     });
     [WebSocketManager shared].delegate = self;
     [self startConnect];
@@ -157,7 +158,7 @@
 //进球提示
 - (void)initEnterBallTipView {
     self.countDown = [[CountDown alloc] init];
-    self.goalTipView.frame = CGRectMake(0, SCREEN_HEIGHT-kTabBarHeight-AUTO(90), SCREEN_WIDTH, AUTO(65));
+    self.goalTipView.frame = CGRectMake(0, SCREEN_HEIGHT-kTabBarHeight-AUTO(90), SCREEN_WIDTH, AUTO(80));
 //    self.goalTipView.frame = CGRectMake(0, AUTO(30), SCREEN_WIDTH, AUTO(65));
 //    self.goalTipView.hidden = NO;
 //    [[UIApplication sharedApplication].keyWindow addSubview:self.goalTipView];
@@ -532,49 +533,7 @@
     
 }
 
-//获取客户端唯一标识
-- (void)getAppSign {
-    NSString *sign = [[NSUserDefaults standardUserDefaults] objectForKey:@"app_sign"];
-    if (sign.length==0) {
-        JCAppService_New *service = [JCAppService_New new];
-        [service getAppSignXWithsuccess:^(id  _Nullable object) {
-            if ([JCWJsonTool isSuccessResponse:object]) {
-                NSString *app_sign = object[@"data"];
-                if (app_sign.length>0) {
-                    [[NSUserDefaults standardUserDefaults] setObject:app_sign forKey:@"app_sign"];
-                    [self getAppInfo];
-                }
-            }
-            
-        } failure:^(NSError * _Nonnull error) {
-            
-        }];
 
-    }
-
-}
-
-//获取app信息
-- (void)getAppInfo {
-    JCAppService_New *service = [JCAppService_New new];
-    [service getKefuWXWithsuccess:^(id  _Nullable object) {
-        if ([JCWJsonTool isSuccessResponse:object]) {
-            JCConfigModel *configModel = (JCConfigModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCConfigModel class]];
-            if (configModel.customer.length==0) {
-                configModel.customer = @"jingcaigood2";
-            }
-            [JCConfigModel save:configModel];
-        }else{
-            JCConfigModel *configModel = [JCConfigModel new];
-            configModel.customer = @"jingcaigood2";
-            [JCConfigModel save:configModel];
-        }
-    } failure:^(NSError * _Nonnull error) {
-        JCConfigModel *configModel = [JCConfigModel new];
-        configModel.customer = @"jingcaigood2";
-        [JCConfigModel save:configModel];
-    }];
-}
 
 //是否处于当前控制器 index表示对应的控制器下标
 - (BOOL)isCurrentBaseVCWtihIndex:(NSInteger)index {

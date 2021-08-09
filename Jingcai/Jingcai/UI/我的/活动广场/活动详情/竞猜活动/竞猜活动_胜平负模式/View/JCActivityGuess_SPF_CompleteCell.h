@@ -9,6 +9,7 @@
 #import "JCBaseTableViewCell_New.h"
 #import "JCActivityOptionModel.h"
 #import "JCActivityDetailModel.h"
+#import "JCActivityGuess_SPF_More_MatchModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCActivityGuess_SPF_CompleteCell : JCBaseTableViewCell_New
@@ -24,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) JCActivityOptionModel *selectOptionModel;
 
 @property (nonatomic,strong) JCActivityDetailModel *detailModel;
+
+@property (nonatomic,strong) JCActivityGuess_SPF_More_MatchModel *matchModel;
 
 @end
 

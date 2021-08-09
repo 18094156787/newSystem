@@ -63,8 +63,6 @@
     self.selectBtn.backgroundColor = JCBaseColor;
 }
 
-
-
 - (void)btnClick:(UIButton *)sender {
     //防止重复点击
     {
@@ -111,7 +109,8 @@
         [_firBtn hg_setAllCornerWithCornerRadius:14];
         _firBtn.tag = 100;
         
-
+        _firBtn.selected = YES;
+        self.selectBtn = _firBtn;
         [_firBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _firBtn;
@@ -125,9 +124,8 @@
         [_secBtn hg_setAllCornerWithCornerRadius:14];
         _secBtn.tag = 101;
         [_secBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-        _secBtn.backgroundColor = JCBaseColor;
-        _secBtn.selected = YES;
-        self.selectBtn = _secBtn;
+        
+
     }
     return _secBtn;
 }

@@ -17,7 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,assign) BOOL is_spf;//胜平负类型的竞猜活动
 
+@property (nonatomic,assign) BOOL is_more_spf;//多场胜平负类型的竞猜活动
+
 @property (nonatomic,strong) JCActivityOptionModel *selectOptionModel;
+
+@property (nonatomic,strong) NSArray *matchArray;
 
 @end
 

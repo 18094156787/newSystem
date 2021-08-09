@@ -16,7 +16,6 @@
 #import "JCWUserBall.h"
 #import "JCWJsonTool.h"
 #import "JCWToastTool.h"
-#import "JCWCacheTool.h"
 #import "JCWConst.h"
 #import "JCWAppTool.h"
 #import "JCApplyBindingBankCardVC.h"

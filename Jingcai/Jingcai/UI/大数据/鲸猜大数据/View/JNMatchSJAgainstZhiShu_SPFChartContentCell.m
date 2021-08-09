@@ -197,9 +197,9 @@
     self.labelFive.text = model.kl;
 //    self.labelSix.text = model.trend;
     
-    self.upLabel.text = @"0";
-    self.equalLabel.text = @"0";
-    self.downLabel.text = @"0";
+    self.upLabel.text = model.trend_up;
+    self.equalLabel.text = model.trend_same;
+    self.downLabel.text = model.trend_down;
 
 }
 

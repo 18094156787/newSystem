@@ -53,6 +53,7 @@
     titleLab.text = @"鲸猜AI运用大数据算法，通过对比赛球队的各项数据、关键指标进行多维度、智能分析，预测得出各种玩法的结果！";
     
     
+
     [self addSubview:self.bottomView];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self);
@@ -61,7 +62,7 @@
         make.height.mas_equalTo(AUTO(44));
     }];
     
-    self.noticeCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(AUTO(15), 0, SCREEN_WIDTH-AUTO(15), AUTO(36)) imageNamesGroup:nil];
+    self.noticeCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(AUTO(15), 0, SCREEN_WIDTH-AUTO(15), 36) imageNamesGroup:nil];
     self.noticeCycleScrollView.delegate = self;
 //    self.noticeCycleScrollView.clipsToBounds = YES;
     self.noticeCycleScrollView.showPageControl = NO;

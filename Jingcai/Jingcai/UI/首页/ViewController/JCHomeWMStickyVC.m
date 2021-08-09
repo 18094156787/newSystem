@@ -86,6 +86,9 @@ static CGFloat const kWMMenuViewHeight = 44;
     [super viewWillAppear:animated];
     self.navigationBarStyle = JCNavigationBarStyleTransparent;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
+    [self getAppSign];//获取app标识,客户端用不到,提供给服务端用
+    [self getAppInfo];//getKefuWX
 //    [self hideNavShadow];
     if (!self.topColorView) {
         self.topColorView = [UIView new];
@@ -673,6 +676,53 @@ static CGFloat const kWMMenuViewHeight = 44;
         [self deathWithTopData:object];
     }
 }
+
+
+//获取客户端唯一标识
+- (void)getAppSign {
+    NSString *sign = [[NSUserDefaults standardUserDefaults] objectForKey:@"app_sign"];
+    if (sign.length==0) {
+        JCAppService_New *service = [JCAppService_New new];
+        [service getAppSignXWithsuccess:^(id  _Nullable object) {
+            if ([JCWJsonTool isSuccessResponse:object]) {
+                NSString *app_sign = object[@"data"];
+                if (app_sign.length>0) {
+                    [[NSUserDefaults standardUserDefaults] setObject:app_sign forKey:@"app_sign"];
+                    [self getAppInfo];
+                }
+            }
+            
+        } failure:^(NSError * _Nonnull error) {
+            
+        }];
+
+    }
+
+}
+
+//获取app信息
+- (void)getAppInfo {
+    JCAppService_New *service = [JCAppService_New new];
+    [service getKefuWXWithsuccess:^(id  _Nullable object) {
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            JCConfigModel *configModel = (JCConfigModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCConfigModel class]];
+            if (configModel.customer.length==0) {
+                configModel.customer = @"jingcaigood2";
+            }
+            [JCConfigModel save:configModel];
+        }else{
+            JCConfigModel *configModel = [JCConfigModel new];
+            configModel.customer = @"jingcaigood2";
+            [JCConfigModel save:configModel];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        JCConfigModel *configModel = [JCConfigModel new];
+        configModel.customer = @"jingcaigood2";
+        [JCConfigModel save:configModel];
+    }];
+}
+
+
 //当前页面处于JCMainTabBarController的选中页面
 - (void)isInCurrentVC {
     

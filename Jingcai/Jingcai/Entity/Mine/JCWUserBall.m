@@ -8,7 +8,6 @@
 
 #import "JCWUserBall.h"
 #import "JCWStringTool.h"
-#import "JCWCacheTool.h"
 #import "JCWConst.h"
 #import "JCJPushManager.h"
 #import "JCWAppTool.h"
@@ -169,11 +168,7 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"JCWUserBall"];
     //发送通知
     [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNameUserChange object:nil];
-    //清除列表缓存数据
-    [JCWCacheTool removeObjectForKey:CacheKeyMySubscribe];
-//    [JCWCacheTool removeObjectForKey:CacheKeyMyBuyTuijian];
-//    [JCWCacheTool removeObjectForKey:CacheKeyMyShow];
-//    [JCWCacheTool removeObjectForKey:CacheKeyMyHuodong];
+
     
     //删除推送别名
     [[JCJPushManager sharedManager] deleteAliasShowHUD:NO completion:^(BOOL succeed) {

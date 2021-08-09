@@ -41,6 +41,8 @@
 
 @property (nonatomic,strong) JCShareView *shareView;
 
+@property (nonatomic,strong) NSMutableArray *selMatchArray;
+
 @end
 
 @implementation JCActivityGuess_SPF_More_VC
@@ -56,7 +58,9 @@
 }
 
 - (void)backItemClick {
-
+    if (self.JCCancelBlock) {
+        self.JCCancelBlock();
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -272,7 +276,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (section==0) {
-        return 5;
+        return self.detailModel.get_match_info_array.count;
     }
     return 1;
     
@@ -282,12 +286,17 @@
     if (indexPath.section==0) {
         JCActivityGuess_SPF_More_MatchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityGuess_SPF_More_MatchCell"];
         cell.detailModel = self.detailModel;
+        cell.matchModel = self.detailModel.get_match_info_array[indexPath.row];
 //        cell.dataSource = self.detailModel.activity_option;
         WeakSelf;
-        cell.JCSelectBlock = ^(JCActivityOptionModel * _Nonnull selectOptionModel) {
-            weakSelf.selectOptionModel = selectOptionModel;
+        cell.JCSelectBlock = ^{
+            weakSelf.selMatchArray = [NSMutableArray array];
+            for (JCActivityGuess_SPF_More_MatchModel * matchModel in self.detailModel.get_match_info_array) {
+                if (matchModel.select_btn) {
+                    [weakSelf.selMatchArray addObject:matchModel];
+                }
+            }
         };
-
         return cell;
     }
     if (indexPath.section==1) {
@@ -374,43 +383,51 @@
 
 - (void)sureBtnClick {
     
-    JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
-    alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(16)];
-    WeakSelf;
-    [alertView alertTitle:@"" TitleColor:COLOR_2F2F2F Mesasge:@"" MessageColor:COLOR_2F2F2F SureTitle:@"仍要提交" SureColor:JCWhiteColor SureHandler:^{
-//
-//            [weakSelf finalSubmitWithDataArray:dataArray];
-        [alertView removeFromSuperview];
-        [weakSelf showCheckView];
-    } CancleTitle:@"知道了" CancleColor:JCBaseColor CancelHandler:^{
-       [alertView removeFromSuperview];
-    }];
-    NSString *title = [NSString stringWithFormat:@"当前活动共有%@场比赛，您只提交了%@场。是否确认提交？",@"3",@"5"];
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
-    NSRange count_range = [title rangeOfString:@"5"];
-    if (count_range.location!=NSNotFound) {
-        [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:count_range];
-    }
-    NSRange sel_range = [title rangeOfString:[NSString stringWithFormat:@"%@",@"3"]];
-    if (sel_range.location!=NSNotFound) {
-        [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:sel_range];
-    }
-    alertView.contentLab.attributedText = attr;
-    alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    [[UIApplication sharedApplication].keyWindow addSubview:alertView];
 
- 
-    return;
+    
+
+    
+    if (self.selMatchArray.count==0) {
+        [JCWToastTool showHint:@"您还未选择任何选项，请选择后再提交！"];
+        return;
+    }
     
     
     if (![JCWUserBall currentUser]) {
         [self presentLogin];
         return;
     }
-    if (!self.selectOptionModel) {
-        [JCWToastTool showHint:@"您还未选择任何选项，请选择后再提交！"];
+    if (self.selMatchArray.count<self.detailModel.get_match_info_array.count) {
+        JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
+        alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(16)];
+        WeakSelf;
+        [alertView alertTitle:@"" TitleColor:COLOR_2F2F2F Mesasge:@"" MessageColor:COLOR_2F2F2F SureTitle:@"仍要提交" SureColor:JCWhiteColor SureHandler:^{
+    //
+    //            [weakSelf finalSubmitWithDataArray:dataArray];
+            [alertView removeFromSuperview];
+            [weakSelf showCheckView];
+        } CancleTitle:@"知道了" CancleColor:JCBaseColor CancelHandler:^{
+           [alertView removeFromSuperview];
+        }];
+        NSString *title = [NSString stringWithFormat:@"当前活动共有%@场比赛，您只提交了%@场。是否确认提交？",[NSString stringWithFormat:@"%ld",self.detailModel.get_match_info_array.count],[NSString stringWithFormat:@"%ld",self.selMatchArray.count]];
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+        NSRange count_range = [title rangeOfString:[NSString stringWithFormat:@"%ld",self.selMatchArray.count]];
+        if (count_range.location!=NSNotFound) {
+            [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:count_range];
+        }
+        NSRange sel_range = [title rangeOfString:[NSString stringWithFormat:@"%ld",self.detailModel.get_match_info_array.count]];
+        if (sel_range.location!=NSNotFound) {
+            [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:sel_range];
+        }
+        alertView.contentLab.attributedText = attr;
+        alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+        
+        
+        
         return;
     }
+    [self showCheckView];
 
     
 
@@ -422,13 +439,23 @@
 
 - (void)finalSubmit {
 
+    NSString *optionID = @"";
+    for (int i=0; i<self.selMatchArray.count; i++) {
+        JCActivityGuess_SPF_More_MatchModel *model = self.selMatchArray[i];
+        if (i==0) {
+            optionID = [NSString stringWithFormat:@"%ld",model.select_btn.tag];
+        }else{
+            optionID = [NSString stringWithFormat:@"%@,%@",optionID,[NSString stringWithFormat:@"%ld",model.select_btn.tag]];
+        }
+    }
     JCActivityService *service = [JCActivityService service];
-    [service getSubmitJingCaiUserWithActID:self.detailModel.id options:self.selectOptionModel.id success:^(id  _Nullable object) {
+    [service getSubmitJingCaiUserWithActID:self.detailModel.id options:optionID success:^(id  _Nullable object) {
         [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
             JCActivityGuessCompleteVC *vc = [JCActivityGuessCompleteVC new];
             vc.actID = self.actID;
-            vc.is_spf = YES;
+            vc.is_more_spf = YES;
+            vc.matchArray = self.selMatchArray;
 //            vc.selectOptionModel = self.selectOptionModel;
 //            vc.detailModel = self.detailModel;
             [self.navigationController pushViewController:vc animated:YES];
@@ -443,6 +470,7 @@
         [self.view endLoading];
     }];
 }
+
 
 - (void)shareItemClick {
     WeakSelf;
@@ -486,7 +514,7 @@
 //        }
 //    }
 //    self.checkView.dataArray  = array;
-    self.checkView.dataArray = @[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""];
+    self.checkView.dataArray = self.selMatchArray;;
     [self.jcWindow addSubview:self.checkView];
 }
 
@@ -542,6 +570,12 @@
         _checkView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
     return _checkView;
+}
+- (NSMutableArray *)selMatchArray {
+    if (!_selMatchArray) {
+        _selMatchArray = [NSMutableArray array];
+    }
+    return _selMatchArray;
 }
 
 @end

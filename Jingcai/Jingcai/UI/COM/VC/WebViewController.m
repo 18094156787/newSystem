@@ -10,11 +10,15 @@
 #import "JCMainTabBarController.h"
 #import "JCYCHomeWMStickVC.h"
 #import <WebKit/WebKit.h>
-
+#import "JCShareView.h"
 @interface WebViewController () <WKNavigationDelegate, WKUIDelegate>
 //@property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) WKWebView *wkWebView; //webview
 @property (strong, nonatomic) UIProgressView *progressView; //进度条
+
+@property (nonatomic,strong) JCShareView *shareView;
+
+
 
 @end
 
@@ -78,6 +82,54 @@
     [_progressView setTrackTintColor:[UIColor colorWithRed:240.0/255 green:240.0/255 blue:240.0/255 alpha:1.0]];
     _progressView.progressTintColor = [UIColor greenColor];
     [self.view addSubview:_progressView];
+    
+    if (self.isHomeBanner) {
+        UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"ic_share_black") style:0 target:self action:@selector(shareItemClick)];
+        shareItem.tintColor = JCBlackColor;
+        self.navigationItem.rightBarButtonItem = shareItem;
+    }
+}
+
+- (void)shareItemClick {
+    WeakSelf;
+    [JCWAppTool isUserNotificationEnable:^(BOOL isEnabled) {
+        if (!isEnabled) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
+                [alertView alertTitle:@"" TitleColor:COLOR_2F2F2F Mesasge:@"您未开启通知权限，开启后才能使用分享功能，是否前往开启？" MessageColor:COLOR_666666 SureTitle:@"确认" SureColor:JCWhiteColor SureHandler:^{
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
+                    [alertView removeFromSuperview];
+                } CancleTitle:@"取消" CancleColor:JCBaseColor CancelHandler:^{
+                   [alertView removeFromSuperview];
+                }];
+                alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+
+            });
+
+
+
+        }else {
+
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.shareView show];
+
+            });
+
+        }
+    
+    }];
+
+}
+
+- (void)setSlide:(JCWSlideBall *)slide {
+    _slide = slide;
+    self.shareView.title = slide.wechat_share.share_title;
+    self.shareView.content = slide.wechat_share.share_desc;
+    self.shareView.desc = slide.wechat_share.share_desc;
+    self.shareView.webPageUrl = slide.wechat_share.share_url;
+    self.shareView.friend_url = slide.wechat_share.friend_url;
 }
 
 //KVO监听进度条
@@ -284,5 +336,12 @@
     [self presentViewController:alert animated:YES completion:NULL];
     
 }
-
+- (JCShareView *)shareView {
+    if (!_shareView) {
+        _shareView = [JCShareView viewFromXib];
+//        _shareView.titleString = @"分享方案";
+        _shareView.image = JCIMAGE(@"icon_app");
+    }
+    return _shareView;
+}
 @end

@@ -18,6 +18,7 @@
 #import "JCPlaneDetailInfo_MFCell.h"
 #import "JCHongBangOrderDetailVC.h"
 #import "JCPlaneDetailSM_View.h"
+
 @interface JCPlaneDetailVC ()
 
 @property (nonatomic,strong) JCFootBallBuyPlaneFootView *footView;
@@ -25,6 +26,8 @@
 @property (nonatomic,strong) JCPlaneDetailSM_View *smView;
 
 @property (nonatomic, assign) float cellHeight;
+
+
 
 
 @end
@@ -347,5 +350,6 @@
     }
     return _smView;
 }
+
 
 @end

@@ -139,6 +139,34 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,assign) NSInteger is_have_big_data;//是否有鲸猜大数据 1是 2否
 
+@property (nonatomic,copy) NSString *neutral;//是否中立场，1-是、0-否
+
+@property (nonatomic,copy) NSString *note;//中立场名称 可能为空字符串
+
+@property (nonatomic,copy) NSString *home_corner;//主队角球
+
+@property (nonatomic,copy) NSString *away_corner;//客队角球
+
+@property (nonatomic,copy) NSString *corner_score;//角球比分
+
+@property (nonatomic,copy) NSString *overtime_score;//加时比分
+
+@property (nonatomic,copy) NSString *penalty_score;//点球比分
+
+@property (nonatomic,copy) NSString *winning_team;//胜出队伍名称
+
+@property (nonatomic,copy) NSString *home_red_card;//主队红牌
+
+@property (nonatomic,copy) NSString *away_red_card;//客队红牌
+
+@property (nonatomic,copy) NSString *home_yellow_card;//主队黄牌
+
+@property (nonatomic,copy) NSString *away_yellow_card;//客队黄牌
+
+@property (nonatomic,copy) NSString *is_have_overtime;//是否有 加时赛   1 是 2否
+
+@property (nonatomic,copy) NSString *is_have_penalty;//是否有 点球    1 是 2否
+
 @end
 
 NS_ASSUME_NONNULL_END

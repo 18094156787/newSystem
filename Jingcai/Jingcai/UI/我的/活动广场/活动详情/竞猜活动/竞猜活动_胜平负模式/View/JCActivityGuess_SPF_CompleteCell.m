@@ -81,7 +81,25 @@
 
     self.chooseLab.text = self.selectOptionModel.name;
 }
+- (void)setMatchModel:(JCActivityGuess_SPF_More_MatchModel *)matchModel {
+    _matchModel = matchModel;
+    self.teamLab.text = [NSString stringWithFormat:@"%@ VS %@",matchModel.home_team_name,matchModel.away_team_name];
 
+    NSString *title = [NSString stringWithFormat:@"%@",matchModel.competition_name];
+    if (matchModel.group_num_new.length>0) {
+        title = [title stringByAppendingFormat:@" %@",matchModel.group_num_new];
+    }
+    if (matchModel.round_num_two.length>0) {
+        title = [title stringByAppendingFormat:@" %@",matchModel.round_num_two];
+    }
+
+    if (matchModel.match_time.length>0) {
+        title = [title stringByAppendingFormat:@" %@",[NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd HH:mm" time:[matchModel.match_time doubleValue]]];
+    }
+    self.infoLab.text = title;
+
+    self.chooseLab.text = matchModel.select_btn.titleLabel.text;
+}
 
 
 - (UILabel *)teamLab {

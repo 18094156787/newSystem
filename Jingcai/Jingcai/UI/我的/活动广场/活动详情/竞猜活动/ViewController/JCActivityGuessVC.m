@@ -53,6 +53,9 @@
 }
 
 - (void)backItemClick {
+    if (self.JCCancelBlock) {
+        self.JCCancelBlock();
+    }
 
     [self.navigationController popViewControllerAnimated:YES];
 }

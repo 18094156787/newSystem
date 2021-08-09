@@ -12,9 +12,7 @@
 
 @implementation JCWMatchBall
 
-- (NSString *)matchCountString {
-    return self.matchCount > 0 ? [NSString stringWithFormat:@"%ld个方案 >", self.matchCount] : @"";
-}
+
 - (NSString *)listIntroString {
     NSString * timeStr = [JCWDateTool dateStringWithString:self.kickoffTime inputFormat:@"yyyy-MM-dd HH:mm" outputFormat:@"HH:mm"];
     return [NSString stringWithFormat:@"%@ %@ | %@", self.matchName, timeStr, self.leagueName];
@@ -57,9 +55,7 @@
     return self.matchStatus == 2;
 }
 
-- (NSString *)numberOfFangAn {
-    return self.matchCount > 0 ? [NSString stringWithFormat:@"%ld个方案 >", self.matchCount] : @"";
-}
+
 - (NSString *)introOfList {
     NSString * timeStr = [JCWDateTool dateStringWithString:self.kickoffTime inputFormat:@"yyyy-MM-dd HH:mm" outputFormat:@"HH:mm"];
     return [NSString stringWithFormat:@"%@ %@ | %@", self.matchName, timeStr, self.leagueName];

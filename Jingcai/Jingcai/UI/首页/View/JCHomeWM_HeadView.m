@@ -19,6 +19,7 @@
 #import "WebViewController.h"
 #import "JCActivityKindVC.h"
 #import "JCActivityGuess_SPF_VC.h"
+#import "JCActivityGuess_SPF_More_VC.h"
 @implementation JCHomeWM_HeadView
 
 - (void)initViews {
@@ -285,6 +286,11 @@
                     vc.actID = act_id;
                     [[self getViewController].navigationController pushViewController:vc animated:YES];
                 }
+                if ([type integerValue]==7) {
+                    JCActivityGuess_SPF_More_VC *vc = [JCActivityGuess_SPF_More_VC new];
+                    vc.actID = act_id;
+                    [[self getViewController].navigationController pushViewController:vc animated:YES];
+                }
                 
                 
             }
@@ -298,7 +304,10 @@
                 return ;
             }
             WebViewController *webVC = [WebViewController new];
+            webVC.isHomeBanner = YES;
+            webVC.slide = slide;
             webVC.urlStr = slide.url;
+            webVC.titleStr = @"鲸猜足球";
             [[self getViewController].navigationController pushViewController:webVC animated:YES];
             
         }

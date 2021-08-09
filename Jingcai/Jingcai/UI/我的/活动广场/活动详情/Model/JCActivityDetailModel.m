@@ -13,7 +13,7 @@
 
 + (NSDictionary *)modelContainerPropertyGenericClass {
     // value使用[YYEatModel class]或YYEatModel.class或@"YYEatModel"没有区别
-    return @{@"goods_info" : [JCActivityGoodsModel class],@"goods_popover_info":[JCActivityGoodsModel class],@"activity_option" : [JCActivityOptionModel class],@"stage_info":[JCActivityGoodsModel class],@"banner":[JCSignBannerModel class]};
+    return @{@"goods_info" : [JCActivityGoodsModel class],@"goods_popover_info":[JCActivityGoodsModel class],@"activity_option" : [JCActivityOptionModel class],@"stage_info":[JCActivityGoodsModel class],@"banner":[JCSignBannerModel class],@"get_match_info_array" : [JCActivityGuess_SPF_More_MatchModel class]};
 }
 
 @end

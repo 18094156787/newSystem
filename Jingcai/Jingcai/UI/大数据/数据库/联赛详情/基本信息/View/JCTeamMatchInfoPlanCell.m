@@ -101,8 +101,8 @@
     
     self.infoLab.text = model.match_score.length>0?model.match_score:@"VS";
     if ([model.plan_num integerValue]>0) {
-//        self.countLab.attributedText = [JCCommomTool textEdgeWithText:[NSString stringWithFormat:@"%@个方案",model.fangan_count]];
-        self.countLab.text = [NSString stringWithFormat:@"%@个方案",model.plan_num];
+//        self.countLab.attributedText = [JCCommomTool textEdgeWithText:[NSString stringWithFormat:@"%@方案",model.fangan_count]];
+        self.countLab.text = [NSString stringWithFormat:@"%@方案",model.plan_num];
         self.countLab.hidden = NO;
     }else{
         self.countLab.text = @"";
@@ -128,8 +128,8 @@
     self.awayLab.text = teamModel.away_team_name;
     self.infoLab.text = teamModel.match_score.length>0?teamModel.match_score:@"VS";
     if ([teamModel.fangan_count integerValue]>0) {
-//        self.countLab.attributedText = [JCCommomTool textEdgeWithText:[NSString stringWithFormat:@"%@个方案",model.fangan_count]];
-        self.countLab.text = [NSString stringWithFormat:@"%@个方案",teamModel.fangan_count];
+//        self.countLab.attributedText = [JCCommomTool textEdgeWithText:[NSString stringWithFormat:@"%@方案",model.fangan_count]];
+        self.countLab.text = [NSString stringWithFormat:@"%@方案",teamModel.fangan_count];
         self.countLab.hidden = NO;
     }else{
         self.countLab.text = @"";

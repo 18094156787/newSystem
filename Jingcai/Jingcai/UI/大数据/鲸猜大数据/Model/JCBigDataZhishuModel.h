@@ -24,6 +24,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) NSString *trend;
 
+@property (nonatomic,copy) NSString *trend_up;
+
+@property (nonatomic,copy) NSString *trend_same;
+
+@property (nonatomic,copy) NSString *trend_down;
+
 @end
 
 NS_ASSUME_NONNULL_END

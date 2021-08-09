@@ -12,6 +12,7 @@
 #import "JCGZHMatchsInfoModel.h"
 #import "JCShareModel.h"
 #import "JCPlaneDetailQRModel.h"
+#import "JCPostImageModel.h"
 NS_ASSUME_NONNULL_BEGIN
 @interface JCWTjInfoBall : JCWBaseBall
 

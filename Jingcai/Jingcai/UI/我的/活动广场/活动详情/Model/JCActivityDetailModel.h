@@ -12,6 +12,8 @@
 #import "JCKindActivityInfoModel.h"
 #import "JCSignBannerModel.h"
 #import "JCKindShareResigerModel.h"
+#import "JCActivityGuess_SPF_More_MatchModel.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCActivityDetailModel : JCWBaseBall
@@ -106,11 +108,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic)  NSArray <JCActivityGoodsModel *> *goods_popover_info;//充值活动奖品弹窗
 
-#pragma mark 竞猜胜平负活动专属
+#pragma mark 竞猜胜平负活动单场专属
 
 @property (strong, nonatomic) JCMatchBall *get_match_info;
 
 @property (assign, nonatomic) NSInteger is_game_start;
+
+#pragma mark 竞猜胜平负活动多场专属
+
+@property (strong, nonatomic) NSArray *get_match_info_array;
 
 
 

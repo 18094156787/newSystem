@@ -43,7 +43,6 @@ NS_ASSUME_NONNULL_BEGIN
 //@property (strong, readonly, nonatomic) NSString * matchStatusString;
 //@property (strong, readonly, nonatomic) NSString * introString;
 //@property (strong, readonly, nonatomic) NSString * introFullString;
-@property (strong, readonly, nonatomic) NSString * matchCountString;
 @property (strong, readonly, nonatomic) NSString * listIntroString;
 @property (strong, readonly, nonatomic) NSString * detailIntroString;
 
@@ -56,7 +55,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) NSInteger is_ai;//is_ai 0没有数据 1有 2取消 3延迟 4过期
 - (BOOL)isInProgress;//是否进行中
 #pragma mark - 扩展
-- (NSString *)numberOfFangAn;   //方案个数
 - (NSString *)introOfList;      //列表简介
 - (NSString *)introOfDetail;    //详情简介
 - (NSString *)introOfService;   //服务简介

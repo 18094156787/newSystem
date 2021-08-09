@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseTableViewCell_New.h"
-
+#import "JCActivityGuess_SPF_More_MatchModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCActivityGuess_SPF_More_CheckCell : JCBaseTableViewCell_New
@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel *infoLab;
 
 @property (nonatomic,strong) UILabel *resultLab;
+
+@property (nonatomic,strong) JCActivityGuess_SPF_More_MatchModel *matchModel;
 
 @end
 

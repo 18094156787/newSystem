@@ -56,13 +56,16 @@
 }
 
 - (void)backItemClick {
-
+    if (self.JCCancelBlock) {
+        self.JCCancelBlock();
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
     [self refreshData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:NotificationUserLogin object:nil];
 
@@ -201,7 +204,7 @@
     self.navigationItem.rightBarButtonItem = shareItem;
     
     
-    self.cellHeight = 50;
+//    self.cellHeight = 50;
     self.tableView.separatorStyle = 0;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 265);//240+25
@@ -333,6 +336,9 @@
         
     }
 
+    if (self.cellHeight==0) {
+        return SCREEN_HEIGHT;
+    }
     return self.cellHeight;
 }
 

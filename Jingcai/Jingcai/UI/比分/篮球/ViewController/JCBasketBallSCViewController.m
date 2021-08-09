@@ -39,10 +39,16 @@
 
 @implementation JCBasketBallSCViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self autoHideSegmentView];
+}
+
 - (void)viewDidLoad {
     self.style = 1;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.index = 0;
     self.eventArray = @"";
     self.screening = @"3";
     self.view.backgroundColor = COLOR_F0F0F0;
@@ -122,7 +128,7 @@
 
     } failure:^(NSError * _Nonnull error) {
         [self endRefresh];
-        [self chageImageStr:@"nodata" Title:@"暂无正在进行的比赛，快去看看其他比赛吧！" BtnTitle:@""];
+        [self chageImageStr:@"nodata" Title:@"暂无相关的比赛，快去看看其他比赛吧！" BtnTitle:@""];
     }];
 
     
@@ -142,15 +148,13 @@
             }
 
             NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCBasketBallMatchBall class]];
+//            array = @[];
             [self.dataArray addObjectsFromArray:array];
             
 //            self.pageNo++;
 
-            if ([self.type integerValue]==2) {
-                [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-            }else{
-                [self chageImageStr:@"nodata" Title:@"暂无正在进行的比赛，快去看看其他比赛吧！" BtnTitle:@""];
-            }
+
+           
 
 
             if (array.count==0) {
@@ -169,6 +173,7 @@
             }
             self.pageNo++;
             [self.tableView reloadData];
+            [self chageImageStr:@"nodata" Title:@"暂无相关的比赛，快去看看其他比赛吧！" BtnTitle:@""];
             
         }else{
             [JCWToastTool showHint:object[@"msg"]];
@@ -176,11 +181,8 @@
 
     } failure:^(NSError * _Nonnull error) {
         [self endRefresh];
-        if ([self.type integerValue]==2) {
-            [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-        }else{
-            [self chageImageStr:@"nodata" Title:@"暂无正在进行的比赛，快去看看其他比赛吧！" BtnTitle:@""];
-        }
+
+        [self chageImageStr:@"nodata" Title:@"暂无相关的比赛，快去看看其他比赛吧！" BtnTitle:@""];
     }];
 
 }
@@ -266,6 +268,7 @@
 
         [weakSelf filterBtnClick];
         weakSelf.currentFilterView.index = weakSelf.filterView.selectIndex;
+        weakSelf.index = (int)index;
     };
     
     
@@ -372,14 +375,17 @@
     if ([self.screening integerValue]==2) {
         [self.filterView showImportmant];
         self.currentFilterView.index = 1;
+        self.index = 1;
     }
     if ([self.screening integerValue]==3) {
         [self.filterView showAll];
         self.currentFilterView.index = 0;
+        self.index = 0;
     }
     if ([self.screening integerValue]==4) {
         [self.filterView showJingLan];
         self.currentFilterView.index = 2;
+        self.index = 2;
     }
 
     
@@ -465,7 +471,7 @@
 - (JCMatchFilter_BasketBall_SegmentView *)filterView {
     if (!_filterView) {
         _filterView = [JCMatchFilter_BasketBall_SegmentView new];
-        [_filterView showImportmant];
+        [_filterView showAll];
     }
     return _filterView;
 }
@@ -473,7 +479,7 @@
 - (JCMatchFilterSegment_BasketBall_CurrentView *)currentFilterView {
     if (!_currentFilterView) {
         _currentFilterView = [JCMatchFilterSegment_BasketBall_CurrentView new];
-        _currentFilterView.index = 1;
+        _currentFilterView.index = 0;
         _currentFilterView.hidden = YES;
     }
     return _currentFilterView;

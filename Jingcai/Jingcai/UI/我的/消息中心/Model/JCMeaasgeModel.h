@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *error;//错误信息
 
-@property (nonatomic,strong) NSString *type;//类型 1审核资质 2红榜 3提现 5 我的红包页面 10达人资料修改审核 12活动通知--福利 13活动通知--充值 14活动通知--竞猜 15活动通知--慈善 16(小额)红包提现
+@property (nonatomic,strong) NSString *type;//类型 1审核资质 2红榜 3提现 5 我的红包页面 10达人资料修改审核 12活动通知--福利 13活动通知--充值 14活动通知--竞猜 15活动通知--慈善 16(小额)红包提现  17现金红包提现失败 18活动通知--竞猜胜平负
 
 @property (nonatomic,strong) NSString *type_class;//0 审核通知 1升级通知 2禁用通知 3 恢复通知 4 稿酬提现确认通知 5 核算通知 6 核算拒绝通知 7 稿酬提现通知 8 稿酬提现失败通知 9邀请成功通知 10达人资料修改审核通知 12活动通知--福利 13活动通知--充值 14活动通知--竞猜 15活动通知--慈善 16(小额)红包提现成功 17(小额)红包提现失败
 

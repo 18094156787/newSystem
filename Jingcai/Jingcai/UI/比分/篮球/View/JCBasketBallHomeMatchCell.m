@@ -271,7 +271,7 @@
     self.timeLab.text = [NSDate timeStringWithIntervalWithFormat:@"MM-dd HH:mm" time:[model.match_time doubleValue]];
 
 //    self.typeLab.text = model.kindType;
-    model.round_num = @"周四002";
+//    model.round_num = @"周四002";
 //    model.plan_num = @"55";
     self.weekLab.text = NonNil(model.round_num);
 
@@ -336,11 +336,11 @@
     
     if ([model.status_id integerValue]>1&&[model.status_id integerValue]<10) {
         //进行中的比赛
-        self.sectionTimeLab.textColor = JCBaseColor;
+//        self.sectionTimeLab.textColor = JCBaseColor;
         self.homeSectionTotalLab.text = model.away_scores_sum.length>0?model.away_scores_sum:@"0";
         self.awaySectionTotalLab.text = model.home_scores_sum.length>0?model.home_scores_sum:@"0";;
     }else{
-        self.sectionTimeLab.textColor = [COLOR_000000 colorWithAlphaComponent:0.6];
+//        self.sectionTimeLab.textColor = [COLOR_000000 colorWithAlphaComponent:0.6];
         self.homeSectionTotalLab.text = model.away_scores_sum;
         self.awaySectionTotalLab.text = model.home_scores_sum;
 
@@ -468,6 +468,16 @@
             self.awaySectionFourLab.text = @"";
 
         }
+
+    }
+    if ([model.status_id intValue]>11) {
+        //比赛异常
+        self.homeSectionOneLab.text = @"";
+        self.homeSectionTwoLab.text = @"";
+        self.homeSectionThreeLab.text = @"";
+        self.homeSectionFourLab.text = @"";
+        self.homeSectionOTLab.text = @"";
+        
 
     }
     

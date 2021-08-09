@@ -12,7 +12,7 @@
 
 - (void)initViews {
     UIView *bgView = [UIView new];
-    bgView.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.6];
+    bgView.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.04];
     [bgView hg_setAllCornerWithCornerRadius:6];
     [self.contentView addSubview:bgView];
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -43,11 +43,17 @@
     }];
 }
 
-- (void)data {
-    self.titleLab.text = @"主队名称 VS 客队名称";
-    self.resultLab.text = @"主胜";
-    
+- (void)setMatchModel:(JCActivityGuess_SPF_More_MatchModel *)matchModel {
+    _matchModel = matchModel;
+    self.titleLab.text = [NSString stringWithFormat:@"%@ VS %@",matchModel.home_team_name,matchModel.away_team_name];
+    self.resultLab.text = matchModel.select_btn.titleLabel.text;
 }
+
+//- (void)data {
+//    self.titleLab.text = @"主队名称 VS 客队名称";
+//    self.resultLab.text = @"主胜";
+//    
+//}
 
 - (UILabel *)titleLab {
     if (!_titleLab) {

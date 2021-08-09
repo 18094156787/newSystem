@@ -33,6 +33,10 @@
 
 
 - (void)refreshData {
+    if (self.is_more_spf) {
+        //竞猜胜平负 多场不需要该接口
+        return;
+    }
     [self.view showLoading];
     JCActivityService *service = [JCActivityService service];
     [service getActivityDetailWithActID:NonNil(self.actID) success:^(id  _Nullable object) {
@@ -78,6 +82,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    if (self.is_more_spf) {
+        return self.matchArray.count;
+    }
     
     return 1;
     
@@ -88,6 +95,12 @@
         JCActivityGuess_SPF_CompleteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityGuess_SPF_CompleteCell"];
         cell.selectOptionModel = self.selectOptionModel;
         cell.detailModel = self.detailModel;
+        return cell;
+    }
+    if (self.is_more_spf) {
+        JCActivityGuess_SPF_CompleteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityGuess_SPF_CompleteCell"];
+        cell.matchModel = self.matchArray[indexPath.row];
+//        cell.detailModel = self.detailModel;
         return cell;
     }
     
@@ -101,6 +114,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.is_spf) {
+        return UITableViewAutomaticDimension;
+    }
+    if (self.is_more_spf) {
         return UITableViewAutomaticDimension;
     }
     
@@ -133,6 +149,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+}
+
+- (void)setMatchArray:(NSArray *)matchArray {
+    _matchArray = matchArray;
+    [self.tableView reloadData];
+}
+
+- (void)setDataSource:(NSArray *)dataSource {
+    _dataSource = dataSource;
+    [self.tableView reloadData];
 }
 
 - (JCActivityGuessCompleteHeadView *)headView {

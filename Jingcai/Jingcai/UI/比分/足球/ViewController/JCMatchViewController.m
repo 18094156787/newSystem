@@ -51,11 +51,12 @@
     self.style = 1;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.index = 1;//默认是热门
     self.eventArray = @"";
-    self.screening = @"1";//赛程和已完场默认重要
-    if ([self.type integerValue]==1) {
-        self.screening = @"3";//进行中默认全部
-    }
+    self.screening = @"2";//赛程和已完场默认重要
+//    if ([self.type integerValue]==1) {
+//        self.screening = @"3";//进行中默认全部
+//    }
     self.view.backgroundColor = COLOR_F0F0F0;
     [self initViews];
     [self getTimeList];
@@ -135,7 +136,7 @@
 
     } failure:^(NSError * _Nonnull error) {
         [self endRefresh];
-        [self chageImageStr:@"nodata" Title:@"暂无正在进行的比赛，快去看看其他比赛吧！" BtnTitle:@""];
+        [self chageImageStr:@"nodata" Title:@"暂无相关的比赛，快去看看其他比赛吧！" BtnTitle:@""];
     }];
 
     
@@ -174,12 +175,7 @@
             self.pageNo++;
 
 
-            if ([self.type integerValue]==2) {
-                [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-            }else{
-                [self chageImageStr:@"nodata" Title:@"暂无正在进行的比赛，快去看看其他比赛吧！" BtnTitle:@""];
-            }
-            
+            [self chageImageStr:@"nodata" Title:@"暂无相关的比赛，快去看看其他比赛吧！" BtnTitle:@""];
             if (array.count < PAGE_LIMIT&&self.dataArray.count>0) {
                   self.tableView.tableFooterView = self.noMore_footView;
                   self.tableView.mj_footer.hidden = YES;
@@ -195,11 +191,7 @@
     } failure:^(NSError * _Nonnull error) {
         self.isEntetBall = NO;
         [self endRefresh];
-        if ([self.type integerValue]==2) {
-            [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-        }else{
-            [self chageImageStr:@"nodata" Title:@"暂无正在进行的比赛，快去看看其他比赛吧！" BtnTitle:@""];
-        }
+        [self chageImageStr:@"nodata" Title:@"暂无相关的比赛，快去看看其他比赛吧！" BtnTitle:@""];
     }];
 
 
@@ -215,18 +207,22 @@
     if ([self.screening integerValue]==2) {
         [self.filterView showImportmant];
         self.currentFilterView.index = 1;
+        self.index = 1;
     }
     if ([self.screening integerValue]==3) {
         [self.filterView showAll];
         self.currentFilterView.index = 0;
+        self.index = 0;
     }
     if ([self.screening integerValue]==4) {
         [self.filterView showJingZu];
         self.currentFilterView.index = 2;
+        self.index = 2;
     }
     if ([self.screening integerValue]==5) {
         [self.filterView showBeiDan];
         self.currentFilterView.index = 3;
+        self.index = 3;
     }
     
    
@@ -325,6 +321,7 @@
 
         [weakSelf filterBtnClick];
         weakSelf.currentFilterView.index = weakSelf.filterView.selectIndex;
+        weakSelf.index = (int)index;
     };
     
     
@@ -509,7 +506,6 @@
     
     
     [UIView animateWithDuration:0.3 animations:^{
-       
         self.filterView.frame = CGRectMake(SCREEN_WIDTH-50, SCREEN_HEIGHT-kNavigationBarHeight-kTabBarHeight-150, 200, 32);
     } completion:^(BOOL finished) {
         self.filterView.hidden = YES;

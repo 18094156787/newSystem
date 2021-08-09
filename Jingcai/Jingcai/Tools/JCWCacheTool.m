@@ -35,63 +35,19 @@
     NSLog(@"build 版本号对比：current == %lf, old == %lf", currentBuild, oldBuild);
     
     // 版本号有变, 那么清理缓存
-    if ((currentVersion != oldVersion) || (currentBuild != oldBuild)) {
-        NSLog(@"本地版本号有变动");
-        [JCWCacheTool removeObjectForKey:CacheKeyMySubscribe];
-//        [JCWCacheTool removeObjectForKey:CacheKeyMyBuyTuijian];
-//        [JCWCacheTool removeObjectForKey:CacheKeyMyHuodong];
-//        [JCWCacheTool removeObjectForKey:CacheKeyMyShow];
-        [JCWCacheTool removeObjectForKey:CacheKeyNews];
-        NSLog(@"本地缓存已清理");
-        
-        // 记录下此时版本号
-        [JCWCacheTool cacheObject:[NSString stringWithFormat:@"%lf", currentVersion] forKey:@"version"];
-        [JCWCacheTool cacheObject:[NSString stringWithFormat:@"%lf", currentBuild] forKey:@"build"];
-    }
+//    if ((currentVersion != oldVersion) || (currentBuild != oldBuild)) {
+//        NSLog(@"本地版本号有变动");
+//        [JCWCacheTool removeObjectForKey:CacheKeyMySubscribe];
+//        [JCWCacheTool removeObjectForKey:CacheKeyNews];
+//        NSLog(@"本地缓存已清理");
+//
+//        // 记录下此时版本号
+//        [JCWCacheTool cacheObject:[NSString stringWithFormat:@"%lf", currentVersion] forKey:@"version"];
+//        [JCWCacheTool cacheObject:[NSString stringWithFormat:@"%lf", currentBuild] forKey:@"build"];
+//    }
 }
 
-//+ (void)addSpotlightItemWithTitle:(NSString *)title desc:(NSString *)desc icon:(NSString *)icon {
-//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-//    dispatch_async(queue, ^{
-//        @try {
-//            NSArray * titleArr = @[@"足彩", @"方案", @"赛程"];
-//            NSArray * descArr = @[@"查看专家分析", @"查看最新方案", @"查看今日赛程"];
-//
-//            //创建SearchableItems的数组
-//            NSMutableArray * searchableItems = [NSMutableArray array];
-//
-//            for (int i = 0; i < titleArr.count; i ++) {
-//
-//                //1.创建条目的属性集合
-//                CSSearchableItemAttributeSet * attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:(NSString*) kUTTypeImage];
-//
-//                //2.给属性集合添加属性
-//                attributeSet.title = titleArr[i];
-//                attributeSet.contentDescription = descArr[i];
-//                attributeSet.thumbnailURL = [NSURL URLWithString:icon];
-//
-//                //3.属性集合与条目进行关联
-//                CSSearchableItem * searchableItem = [[CSSearchableItem alloc] initWithUniqueIdentifier:[NSString stringWithFormat:@"%d", i] domainIdentifier:@"com.jingcai.zc" attributeSet:attributeSet];
-//
-//                //把该条目进行暂存
-//                [searchableItems addObject:searchableItem];
-//            }
-//
-//            //4.吧条目数组与索引进行关联
-//            [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:searchableItems completionHandler:^(NSError * _Nullable error) {
-//                if (!error) {
-//                    NSLog(@"%s, %@", __FUNCTION__, [error localizedDescription]);
-//                }
-//            }];
-//        }
-//        @catch (NSException *exception) {
-//            NSLog(@"%s, %@", __FUNCTION__, exception);
-//        }
-//        @finally {
-//
-//        }
-//    });
-//}
+
 + (void)addSpotlightItemWithTjUserBall:(JCWTjUserBall *)tjUserBall {
     if (!tjUserBall) {
         return ;

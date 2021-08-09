@@ -16,6 +16,7 @@
         make.left.offset(5);
         make.centerY.equalTo(self.contentView);
         make.right.offset(AUTO(-45));
+//        make.height.mas_equalTo(AUTO(35));
     }];
     
     [self.contentView addSubview:self.statusLab];
@@ -48,6 +49,7 @@
         }
     }
     
+
 }
 
 - (void)setAModel:(JCJingCaiAINoticeModel *)aModel {

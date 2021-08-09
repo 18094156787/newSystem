@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) NSString *away_team_name;
 
+@property (nonatomic,copy) NSString *competition_name;//联赛名称
+
 @property (nonatomic,copy) NSString *type;//类型 1进球 （其他的以后在说）
 
 @property (nonatomic,copy) NSString *position;// 1 主队 2客队

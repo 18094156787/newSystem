@@ -14,10 +14,17 @@
 #import "JCMatchBasketBallSearchVC.h"
 #import "JCMainTabBarController.h"
 #import "JPUSHService.h"
+#import "JCMatchTipSettingVC.h"
 //#import "JCJPushManager.h"
 @interface JCMatchAllWMVC ()<LMJTabDelegate>
 
+@property (nonatomic,strong) UIBarButtonItem *spaceItem;
+
 @property (nonatomic,strong) UIBarButtonItem *fileterItem;
+
+@property (nonatomic,strong) UIBarButtonItem *settingItem;
+
+@property (nonatomic,strong) UIBarButtonItem *settingBtn;
 
 @property (nonatomic,strong) UIBarButtonItem *searchItem;
 
@@ -146,10 +153,15 @@
     tab.delegate = self;
     self.navigationItem.titleView = titleView;
     
-    self.fileterItem = [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"match_icon_sx") style:0 target:self action:@selector(filterItemClick)];
+//    self.fileterItem = [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"match_icon_sx") style:0 target:self action:@selector(filterItemClick)];
     self.fileterItem.tintColor = JCBaseColor;
-    self.navigationItem.rightBarButtonItem = self.fileterItem;
     
+    
+//    self.settingItem = [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"jc_jq_setting") style:0 target:self action:@selector(filterItemClick)];
+    self.settingItem.tintColor = JCBaseColor;
+    
+    self.navigationItem.rightBarButtonItems = @[self.fileterItem,self.settingItem];
+
     self.searchItem = [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"ic_ser") style:0 target:self action:@selector(searchItemClick)];
     self.searchItem.tintColor = JCBaseColor;
     self.navigationItem.leftBarButtonItem = self.searchItem;
@@ -210,6 +222,13 @@
 //    NSLog(@"已经%d",self.selectIndex);
 //    [self.segControl setSelectedSegmentIndex:(NSInteger)self.selectIndex];
     self.tabSegment.selectIndex = (NSInteger)self.selectIndex;
+    
+    if (self.selectIndex==0) {
+
+        self.navigationItem.rightBarButtonItems = @[self.spaceItem,self.fileterItem,self.settingItem];
+    }else{
+        self.navigationItem.rightBarButtonItems = @[self.fileterItem];
+    }
 
 }
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {
@@ -241,6 +260,12 @@
 
 }
 
+- (void)settingItemClick {
+    JCMatchTipSettingVC *vc = [JCMatchTipSettingVC new];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
 - (void)searchItemClick {
     if (self.selectIndex==0) {
         JCMatchFootBallSearchVC *searchVC = [JCMatchFootBallSearchVC new];
@@ -258,5 +283,44 @@
     }
     return _segControl;
 }
+- (UIBarButtonItem *)fileterItem {
+    if (!_fileterItem) {
+        UIButton *setBtn = [UIButton new];
+        setBtn.frame = CGRectMake(0, 0, 30, 44);
+        [setBtn setImage:JCIMAGE(@"match_icon_sx") forState:0];
+        [setBtn setImage:JCIMAGE(@"match_icon_sx") forState:UIControlStateHighlighted];
+        _fileterItem= [[UIBarButtonItem alloc] initWithCustomView:setBtn];
+        [setBtn addTarget:self action:@selector(filterItemClick) forControlEvents:UIControlEventTouchUpInside];
+        _fileterItem.tintColor = JCBaseColor;
+//        _fileterItem = [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"match_icon_sx") style:0 target:self action:@selector(filterItemClick)];
+//        _fileterItem.tintColor = JCBaseColor;
+    }
+    return _fileterItem;
+}
 
+- (UIBarButtonItem *)settingItem {
+    if (!_settingItem) {
+        UIButton *setBtn = [UIButton new];
+        setBtn.frame = CGRectMake(0, 0, 30, 44);
+        [setBtn setImage:JCIMAGE(@"jc_jq_setting") forState:0];
+        [setBtn setImage:JCIMAGE(@"jc_jq_setting") forState:UIControlStateHighlighted];
+        [setBtn addTarget:self action:@selector(settingItemClick) forControlEvents:UIControlEventTouchUpInside];
+        _settingItem= [[UIBarButtonItem alloc] initWithCustomView:setBtn];
+        _settingItem.tintColor = JCBaseColor;
+    }
+    return _settingItem;
+}
+
+
+
+- (UIBarButtonItem *)spaceItem {
+    if (!_spaceItem) {
+        _spaceItem =   [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        _spaceItem.width = -40;
+    }
+    return _spaceItem;
+}
+
+//UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+//spaceItem.width = 15;
 @end

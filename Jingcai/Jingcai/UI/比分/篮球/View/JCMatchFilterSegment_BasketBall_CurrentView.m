@@ -52,11 +52,11 @@
 - (void)setIndex:(NSInteger)index {
     _index = index;
     if (index==0) {
-        [_currentBtn setTitle:@"全部" forState:0];
+        [self.currentBtn setTitle:@"全部" forState:0];
     }else if(index==1){
-        [_currentBtn setTitle:@"热门" forState:0];
+        [self.currentBtn setTitle:@"热门" forState:0];
     }else if(index==2){
-        [_currentBtn setTitle:@"竞篮" forState:0];
+        [self.currentBtn setTitle:@"竞篮" forState:0];
     }
 }
 @end

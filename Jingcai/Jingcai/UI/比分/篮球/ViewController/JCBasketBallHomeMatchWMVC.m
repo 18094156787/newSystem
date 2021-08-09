@@ -170,7 +170,14 @@
     }else{
         self.filterVC.time = @"";
     }
-
+    JCBasketBallSCViewController *vc = (JCBasketBallSCViewController *)self.currentViewController;
+    if (vc.index==0) {
+        self.filterVC.selectIndex = 1;
+    }else if(vc.index==1){
+        self.filterVC.selectIndex = 0;
+    }else{
+        self.filterVC.selectIndex = vc.index;
+    }
     [self.navigationController pushViewController:self.filterVC animated:YES];
     self.filterVC.JCFilterBlock = ^(NSArray * _Nonnull eventIdArray, NSString * _Nonnull screening) {
         NSString *jsonStr = @"";
@@ -183,14 +190,14 @@
             }
         }
 
-        if (self.selectIndex==0) {
+        if (self.selectIndex==1) {
             weakSelf.scVC.eventArray = jsonStr;
             weakSelf.scVC.screening = screening;
             weakSelf.scVC.type = type;
             [weakSelf.scVC filtertAll];
             [weakSelf.scVC filterData];
         }
-        if (self.selectIndex==1) {
+        if (self.selectIndex==0) {
             weakSelf.goingVC.eventArray = jsonStr;
             weakSelf.goingVC.screening = screening;
             weakSelf.goingVC.type = type;

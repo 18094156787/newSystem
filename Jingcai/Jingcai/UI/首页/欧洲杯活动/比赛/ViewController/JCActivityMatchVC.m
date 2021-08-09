@@ -116,7 +116,7 @@
 
     } failure:^(NSError * _Nonnull error) {
         [self endRefresh];
-        [self chageImageStr:@"nodata" Title:@"暂无正在进行的比赛，快去看看其他比赛吧！" BtnTitle:@""];
+        [self chageImageStr:@"nodata" Title:@"暂无相关的比赛，快去看看其他比赛吧！" BtnTitle:@""];
     }];
 
     
@@ -165,12 +165,7 @@
             self.pageNo++;
 
 
-//            if ([self.type integerValue]==2) {
-//                [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-//            }else{
-//                [self chageImageStr:@"nodata" Title:@"暂无正在进行的比赛，快去看看其他比赛吧！" BtnTitle:@""];
-//            }
-            [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
+            [self chageImageStr:@"nodata" Title:@"暂无相关的比赛，快去看看其他比赛吧！" BtnTitle:@""];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
                 if (array.count < PAGE_LIMIT&&self.dataArray.count>0) {
@@ -189,7 +184,7 @@
 
     } failure:^(NSError * _Nonnull error) {
         [self endRefresh];
-        [self chageImageStr:@"nodata" Title:@"暂无正在进行的比赛，快去看看其他比赛吧！" BtnTitle:@""];
+        [self chageImageStr:@"nodata" Title:@"暂无相关的比赛，快去看看其他比赛吧！" BtnTitle:@""];
     }];
 
 

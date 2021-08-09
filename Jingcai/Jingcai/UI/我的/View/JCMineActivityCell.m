@@ -13,6 +13,7 @@
 #import "JCActivityGuessVC.h"
 #import "JCActivityKindVC.h"
 #import "JCActivityGuess_SPF_VC.h"
+#import "JCActivityGuess_SPF_More_VC.h"
 @implementation JCMineActivityCell
 
 - (void)initViews {
@@ -120,6 +121,11 @@
         }
         if ([slide.type integerValue]==6) {
             JCActivityGuess_SPF_VC *vc = [JCActivityGuess_SPF_VC new];
+            vc.actID = slide.id;
+            [[self getViewController].navigationController pushViewController:vc animated:YES];
+        }
+        if ([slide.type integerValue]==7) {
+            JCActivityGuess_SPF_More_VC *vc = [JCActivityGuess_SPF_More_VC new];
             vc.actID = slide.id;
             [[self getViewController].navigationController pushViewController:vc animated:YES];
         }

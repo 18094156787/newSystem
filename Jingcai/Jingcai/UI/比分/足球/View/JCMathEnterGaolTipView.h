@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UIImageView *bgImgView;
 
+@property (nonatomic,strong) UIImageView *gifImgView;
+
+@property (nonatomic,strong) UILabel *matchNameLab;
+
 @property (nonatomic,strong) UILabel *timeLab;
 
 @property (nonatomic,strong) UIImageView *ballImgView;
@@ -29,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel *infoLab;
 
 @property (nonatomic,strong) UILabel *settingScoreLab;
+
+@property (nonatomic,strong) NSMutableArray *imageArray;
 
 @property (nonatomic,copy) void(^JCGoalBall)(void);
 

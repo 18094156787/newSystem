@@ -17,6 +17,7 @@
 #import "JCActivityDetailCommomVC.h"
 #import "JCActivityKindVC.h"
 #import "JCActivityGuess_SPF_VC.h"
+#import "JCActivityGuess_SPF_More_VC.h"
 @interface JCBaseViewController ()
 @property (nonatomic, strong) NSDictionary * originNavTitleAttributes;
 //@property (nonatomic, strong) UILabel * navTitleLabel;
@@ -440,6 +441,15 @@
             }
             if ([actModel.type integerValue]==6) {
                 JCActivityGuess_SPF_VC *vc = [JCActivityGuess_SPF_VC new];
+                vc.actID = actModel.id;
+                [viewController.navigationController pushViewController:vc animated:YES];
+
+                vc.JCCancelBlock = ^{
+                    [weakSelf showActivityViewWithVC:weakSelf];
+                };
+            }
+            if ([actModel.type integerValue]==7) {
+                JCActivityGuess_SPF_More_VC *vc = [JCActivityGuess_SPF_More_VC new];
                 vc.actID = actModel.id;
                 [viewController.navigationController pushViewController:vc animated:YES];
 

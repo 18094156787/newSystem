@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *time;
 
+@property (nonatomic,assign) int index;//跟筛选的index对应
+
 - (void)filterData;
 
 - (void)filtertAll;

@@ -8,7 +8,6 @@
 
 #import "JCSettingVerifyTelVC.h"
 #import "TTTAttributedLabel.h"
-#import "JCWCacheTool.h"
 #import "JCWJsonTool.h"
 #import "JCWStringTool.h"
 #import "JCWUserBall.h"

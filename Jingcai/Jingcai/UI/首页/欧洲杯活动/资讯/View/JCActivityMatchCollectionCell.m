@@ -129,7 +129,7 @@
     self.awayLab.text = model.away_team_name;
 //    model.matchCount = 5;
     if (model.plan_num>0) {
-        self.countLab.text = [NSString stringWithFormat:@"%@个方案",model.plan_num];
+        self.countLab.text = [NSString stringWithFormat:@"%@方案",model.plan_num];
     }else {
         self.countLab.text = @"";
     }

@@ -12,11 +12,23 @@
 #import "JCFootBallAuthorCodeNodataView.h"
 #import "JCWMyHongbaoBall.h"
 #import "JCDakaPlanDetailStickWMVC.h"
+#import "JCGZHBannerModel.h"
+#import "JCGZMBannerHeadView.h"
+#import "JCGZMBannerDetailVC.h"
+#import "JCWExpertBall.h"
 @interface JCFootBallAuthorNewPlaneDetailVC ()
 
 @property (nonatomic,strong) JCFootBallAuthorCodeView *codeView;
 
 @property (nonatomic,strong) JCFootBallAuthorCodeNodataView *codeNoDataView;
+
+@property (nonatomic,strong) JCGZMBannerHeadView *headView;
+
+@property (nonatomic,strong) JCWExpertBall *expertDetailModel;
+
+@property (nonatomic,strong) JCGZHBannerModel *bannerModel;
+
+@property (nonatomic,strong) JNDIYemptyView *emptyView;
 
 @property (nonatomic,assign) BOOL isLoad;
 
@@ -49,6 +61,16 @@
             if (self.pageNo==1) {
                 [self.dataArray removeAllObjects];
             }
+            if (object[@"data"][@"record_introduction"]) {
+                self.bannerModel = (JCGZHBannerModel *)[JCWJsonTool entityWithJson:object[@"data"][@"record_introduction"] class:[JCGZHBannerModel class]];
+                self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 100);
+                self.headView.model = self.bannerModel;
+                self.tableView.tableHeaderView = self.headView;
+
+
+            }
+            self.expertDetailModel = (JCWExpertBall *)[JCWJsonTool entityWithJson:object[@"data"][@"base_info"] class:[JCWExpertBall class]];
+            
             NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"best_new_plans"] class:[JCWTjInfoBall class]];
             
             [self.dataArray addObjectsFromArray:array];
@@ -109,7 +131,53 @@
         [weakSelf refreshData];
     }];
     emptyView.contentViewOffset = -150;
+    self.emptyView =  emptyView;
     self.tableView.ly_emptyView = emptyView;
+    
+    
+//    WeakSelf;
+    self.headView.JCHeightBlock = ^(float height) {
+        weakSelf.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, height);
+        weakSelf.tableView.tableHeaderView = weakSelf.headView;
+        
+        if (weakSelf.bannerModel.img_info) {
+
+
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新UI的代码放到主线程执行
+                weakSelf.emptyView.contentViewOffset = height;
+                weakSelf.tableView.ly_emptyView = weakSelf.emptyView;
+            });
+
+
+        }
+    };
+    
+    [self.headView bk_whenTapped:^{
+        if (weakSelf.bannerModel.describe.length>0) {
+            JCGZMBannerDetailVC *vc = [JCGZMBannerDetailVC new];
+            vc.content = weakSelf.bannerModel.describe;
+            vc.title = weakSelf.expertDetailModel.user_name;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+            
+//            WebViewController *vc = [WebViewController new];
+////            vc.content = weakSelf.bannerModel.describe;
+////            vc.title = weakSelf.expertDetailModel.user_name;
+//            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }
+            
+    }];
+    
+//    self.headView.JCClickBlock = ^{
+//        if (weakSelf.bannerModel.describe.length>0) {
+//            JCGZMBannerDetailVC *vc = [JCGZMBannerDetailVC new];
+//            vc.content = weakSelf.bannerModel.describe;
+////            vc.title = weakSelf.expertDetailModel.user_name;
+//            [weakSelf.navigationController pushViewController:vc animated:YES];
+//        }
+//
+//    };
     
 }
 
@@ -196,6 +264,12 @@
          _codeNoDataView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(500));
     }
     return _codeNoDataView;
+}
+- (JCGZMBannerHeadView *)headView {
+    if (!_headView) {
+        _headView = [JCGZMBannerHeadView new];
+    }
+    return _headView;
 }
 
 /*

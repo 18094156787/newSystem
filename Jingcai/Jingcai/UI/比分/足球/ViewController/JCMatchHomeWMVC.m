@@ -161,6 +161,15 @@
     }else{
         self.filterVC.time = @"";
     }
+    JCMatchViewController *vc = (JCMatchViewController *)self.currentViewController;
+    if (vc.index==0) {
+        self.filterVC.selectIndex = 1;
+    }else if(vc.index==1){
+        self.filterVC.selectIndex = 0;
+    }else{
+        self.filterVC.selectIndex = vc.index;
+    }
+    
 
     [self.navigationController pushViewController:self.filterVC animated:YES];
     self.filterVC.JCFilterBlock = ^(NSArray * _Nonnull eventIdArray, NSString * _Nonnull screening) {

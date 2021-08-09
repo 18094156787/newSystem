@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JCActivityGuess_SPF_More_VC : JCBaseTableViewController
 
+@property (nonatomic,copy) void(^JCCancelBlock)(void);
+
 @property (nonatomic,strong) NSString *actID;
 
 @end

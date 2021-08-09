@@ -106,6 +106,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JCActivityGuess_SPF_More_CheckCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityGuess_SPF_More_CheckCell"];
     cell.selectionStyle = 0;
+    cell.matchModel = self.dataArray[indexPath.row];
 //    cell.pp_Model = self.dataArray[indexPath.row];
     return cell;
 }

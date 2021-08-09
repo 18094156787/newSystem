@@ -21,6 +21,7 @@
 #import "JCActivityGuess_SPF_VC.h"
 #import "JCYCHongBaoWMVC.h"
 #import "JCPostCheckFailVC.h"
+#import "JCActivityGuess_SPF_More_VC.h"
 @interface JCMessageCenterVC ()
 
 @end
@@ -167,6 +168,11 @@
     }
     if ([model.type intValue]==18&&[model.status integerValue]!=3) {
         JCActivityGuess_SPF_VC *vc = [JCActivityGuess_SPF_VC new];
+        vc.actID = model.other_id;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if ([model.type intValue]==19&&[model.status integerValue]!=3) {
+        JCActivityGuess_SPF_More_VC *vc = [JCActivityGuess_SPF_More_VC new];
         vc.actID = model.other_id;
         [self.navigationController pushViewController:vc animated:YES];
     }

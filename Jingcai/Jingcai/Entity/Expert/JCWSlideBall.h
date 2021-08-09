@@ -7,7 +7,7 @@
 //
 
 #import "JCWBaseBall.h"
-
+#import "JCShareModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCWSlideBall : JCWBaseBall
@@ -45,6 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *active_state;//活动状态 1未开始 2进行中 3已结束
 
 @property (strong, nonatomic) NSString *desc;
+
+@property (strong, nonatomic) JCShareModel *wechat_share;
 @end
 
 NS_ASSUME_NONNULL_END

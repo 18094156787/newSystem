@@ -20,6 +20,7 @@
 #import "JCActivityGuess_SPF_VC.h"
 #import "JCPostCheckUserInfo_Invite_VC.h"
 #import "JCPostCheckUserInfo_Invite_VC.h"
+#import "JCActivityGuess_SPF_More_VC.h"
 
 static CGFloat const kWMMenuViewHeight = 0;
 @interface JCMineWMStickViewController ()
@@ -46,21 +47,12 @@ static CGFloat const kWMMenuViewHeight = 0;
 
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [self getUserInfo];
- 
-//    [[IAPManager shared] checkMyBuyGoods];
-    
-//    UIImageView *imgView = [UIImageView new];
-//    imgView.frame = CGRectMake(100, 100, 200, 200);
-//    [self.view addSubview:imgView];
-//
-//    NSString *url = @"https://yixianfeng.oss-cn-beijing.aliyuncs.com/temp/图片4_1622446112748.png";
-//    url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    [imgView sd_setImageWithURL:[NSURL URLWithString:@"https://yixianfeng.oss-cn-beijing.aliyuncs.com/temp/图片4_1622446112748.png"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-//
-//    }];
-    
-
+    if ([JCConfigModel currentConfigModel].get_customer.length==0) {
+        [self getAppInfo];
+    }
 }
+
+
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -354,6 +346,10 @@ static CGFloat const kWMMenuViewHeight = 0;
                 JCActivityGuess_SPF_VC *vc = [JCActivityGuess_SPF_VC new];
                 vc.actID = [JCWUserBall currentUser].guess_activity_id;
                 [self.navigationController pushViewController:vc animated:YES];
+            } else if ([[JCWUserBall currentUser].guess_activity_type integerValue]==7) {
+                JCActivityGuess_SPF_More_VC *vc = [JCActivityGuess_SPF_More_VC new];
+                vc.actID = [JCWUserBall currentUser].guess_activity_id;
+                [self.navigationController pushViewController:vc animated:YES];
             }else{
                 JCActivityGuessVC *vc = [JCActivityGuessVC new];
                 vc.actID = [JCWUserBall currentUser].guess_activity_id;
@@ -377,6 +373,28 @@ static CGFloat const kWMMenuViewHeight = 0;
     if (value) {
         [self showJingCaiActivityResultView];
     }
+}
+
+//获取app信息
+- (void)getAppInfo {
+    JCAppService_New *service = [JCAppService_New new];
+    [service getKefuWXWithsuccess:^(id  _Nullable object) {
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            JCConfigModel *configModel = (JCConfigModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCConfigModel class]];
+            if (configModel.customer.length==0) {
+                configModel.customer = @"jingcaigood2";
+            }
+            [JCConfigModel save:configModel];
+        }else{
+            JCConfigModel *configModel = [JCConfigModel new];
+            configModel.customer = @"jingcaigood2";
+            [JCConfigModel save:configModel];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        JCConfigModel *configModel = [JCConfigModel new];
+        configModel.customer = @"jingcaigood2";
+        [JCConfigModel save:configModel];
+    }];
 }
 
 - (void)clearUser {
