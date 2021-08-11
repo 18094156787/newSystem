@@ -189,7 +189,7 @@
         [self.navigationController pushViewController:vc animated:YES];
 
     }
-    if ([model.type integerValue]==6) {
+    if ([model.type integerValue]==7) {
         
         JCActivityGuess_SPF_More_VC *vc = [JCActivityGuess_SPF_More_VC new];
         vc.actID = model.id;

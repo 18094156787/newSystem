@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSString *local_choice;//本地选择 1是 0否
 
 
+
+
 @end
 
 NS_ASSUME_NONNULL_END

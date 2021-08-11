@@ -93,6 +93,7 @@
 - (void)setModel:(JCMatchInfoModel *)model {
     _model = model;
     self.matchNameLab.text = model.competition_name.length>0?model.competition_name:model.short_name_zh;
+    self.matchNameLab.textColor = model.competition_color.length>0?[UIColor colorWithHexString:NonNil(model.competition_color)]:COLOR_2F2F2F;
     self.matchTimeLab.text = model.begin_time.length>0?model.begin_time:model.match_time;
     self.homeTeamLab.text = model.home_team_name;
     self.awayTeamLab.text = model.away_team_name;

@@ -115,6 +115,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) NSString *round_num;//轮次
 
+@property (nonatomic,copy) NSString *competition_color;//联赛颜色  可能为空
+
 @property (nonatomic,copy) NSString *competition_name;//联赛名称
 
 @property (nonatomic,copy) NSString *short_name_zh;//联赛名称(关注列表中用)
@@ -166,6 +168,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,copy) NSString *is_have_overtime;//是否有 加时赛   1 是 2否
 
 @property (nonatomic,copy) NSString *is_have_penalty;//是否有 点球    1 是 2否
+
+
 
 @end
 

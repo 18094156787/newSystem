@@ -117,8 +117,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,assign) NSInteger join_match;//是否有提交了这场比赛的竞猜 1是 2否
 
+@property (nonatomic,assign) BOOL local_choise;
 
+@property (nonatomic,strong) NSString *choose_id;
 
+@property (nonatomic,strong) NSString *is_choose_right;//是否猜中 1是 2否 3未开奖 4取消 5数据错误异常 默认3
 
 
  +(NSString *)getMatchStatus:(NSInteger)status_id;

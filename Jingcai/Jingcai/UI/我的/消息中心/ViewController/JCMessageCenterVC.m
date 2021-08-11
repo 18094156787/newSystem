@@ -177,11 +177,6 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
 
-    if ([model.type integerValue]==14) {
-        JCActivityGuessVC *vc = [JCActivityGuessVC new];
-        vc.actID = model.id;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
     if ([model.type_class intValue]==4){
         [self.navigationController pushViewController:[JCMineIncomeWMStickyVC new] animated:YES];
     }

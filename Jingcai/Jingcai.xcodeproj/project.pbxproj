@@ -70,6 +70,9 @@
 		590A3F5E26C0BB650012EDE6 /* JCGZHBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 590A3F5D26C0BB650012EDE6 /* JCGZHBannerModel.m */; };
 		590A3F6126C0BCA00012EDE6 /* JCGZMBannerHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 590A3F6026C0BCA00012EDE6 /* JCGZMBannerHeadView.m */; };
 		590A3F6426C0C07D0012EDE6 /* JCGZMBannerDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 590A3F6326C0C07D0012EDE6 /* JCGZMBannerDetailVC.m */; };
+		590A3F6726C24B420012EDE6 /* JCActivityGuessMore_CompleteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 590A3F6626C24B410012EDE6 /* JCActivityGuessMore_CompleteVC.m */; };
+		590A3F6A26C24C5F0012EDE6 /* JCActivityGuessMore_HeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 590A3F6926C24C5F0012EDE6 /* JCActivityGuessMore_HeadView.m */; };
+		590A3F7026C24E3D0012EDE6 /* JCActivityGuess_SPF_CompleteMore_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 590A3F6F26C24E3D0012EDE6 /* JCActivityGuess_SPF_CompleteMore_Cell.m */; };
 		5945488D268578CF00C1AF38 /* JCAccountSettingTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5945488C268578CF00C1AF38 /* JCAccountSettingTextCell.m */; };
 		594548902685809700C1AF38 /* JCAccountSettingIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5945488F2685809700C1AF38 /* JCAccountSettingIconCell.m */; };
 		594548932685A96C00C1AF38 /* JCSmallPriceWithDrawSuccessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 594548922685A96C00C1AF38 /* JCSmallPriceWithDrawSuccessVC.m */; };
@@ -1434,6 +1437,12 @@
 		590A3F6026C0BCA00012EDE6 /* JCGZMBannerHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCGZMBannerHeadView.m; sourceTree = "<group>"; };
 		590A3F6226C0C07D0012EDE6 /* JCGZMBannerDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCGZMBannerDetailVC.h; sourceTree = "<group>"; };
 		590A3F6326C0C07D0012EDE6 /* JCGZMBannerDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCGZMBannerDetailVC.m; sourceTree = "<group>"; };
+		590A3F6526C24B410012EDE6 /* JCActivityGuessMore_CompleteVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityGuessMore_CompleteVC.h; sourceTree = "<group>"; };
+		590A3F6626C24B410012EDE6 /* JCActivityGuessMore_CompleteVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityGuessMore_CompleteVC.m; sourceTree = "<group>"; };
+		590A3F6826C24C5F0012EDE6 /* JCActivityGuessMore_HeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityGuessMore_HeadView.h; sourceTree = "<group>"; };
+		590A3F6926C24C5F0012EDE6 /* JCActivityGuessMore_HeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityGuessMore_HeadView.m; sourceTree = "<group>"; };
+		590A3F6E26C24E3D0012EDE6 /* JCActivityGuess_SPF_CompleteMore_Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityGuess_SPF_CompleteMore_Cell.h; sourceTree = "<group>"; };
+		590A3F6F26C24E3D0012EDE6 /* JCActivityGuess_SPF_CompleteMore_Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityGuess_SPF_CompleteMore_Cell.m; sourceTree = "<group>"; };
 		5945488B268578CF00C1AF38 /* JCAccountSettingTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCAccountSettingTextCell.h; sourceTree = "<group>"; };
 		5945488C268578CF00C1AF38 /* JCAccountSettingTextCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCAccountSettingTextCell.m; sourceTree = "<group>"; };
 		5945488E2685809700C1AF38 /* JCAccountSettingIconCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCAccountSettingIconCell.h; sourceTree = "<group>"; };
@@ -3901,6 +3910,10 @@
 				590A3E9626A94C5B0012EDE6 /* JCActivityGuess_SPF_More_CheckView.m */,
 				590A3E9826A94CA60012EDE6 /* JCActivityGuess_SPF_More_CheckCell.h */,
 				590A3E9926A94CA60012EDE6 /* JCActivityGuess_SPF_More_CheckCell.m */,
+				590A3F6826C24C5F0012EDE6 /* JCActivityGuessMore_HeadView.h */,
+				590A3F6926C24C5F0012EDE6 /* JCActivityGuessMore_HeadView.m */,
+				590A3F6E26C24E3D0012EDE6 /* JCActivityGuess_SPF_CompleteMore_Cell.h */,
+				590A3F6F26C24E3D0012EDE6 /* JCActivityGuess_SPF_CompleteMore_Cell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3910,6 +3923,8 @@
 			children = (
 				590A3E8F26A905230012EDE6 /* JCActivityGuess_SPF_More_VC.h */,
 				590A3E9026A905230012EDE6 /* JCActivityGuess_SPF_More_VC.m */,
+				590A3F6526C24B410012EDE6 /* JCActivityGuessMore_CompleteVC.h */,
+				590A3F6626C24B410012EDE6 /* JCActivityGuessMore_CompleteVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -10745,6 +10760,7 @@
 				7BCA27AF251D962D008787FF /* JCZBIncidentModel.m in Sources */,
 				C3C568F821A7923700876A40 /* JCNoDataRetryView.m in Sources */,
 				7B0AF03A24F8E1F200E338D5 /* JCMyConcernExpertCell.m in Sources */,
+				590A3F7026C24E3D0012EDE6 /* JCActivityGuess_SPF_CompleteMore_Cell.m in Sources */,
 				7B888EB9255FDE430058B4BD /* JCForgetPsdViewController.m in Sources */,
 				7B80CA4524BC49A700C14117 /* JCTeamDetailBaseInfoCell.m in Sources */,
 				7BEEAD7326550195009FB1DF /* KSGuaidViewController.m in Sources */,
@@ -11035,6 +11051,7 @@
 				7BB8281D24B45B010012EDA8 /* JCTeamMatchInfoScoreRuleCell.m in Sources */,
 				C3744FFE2177365100688C53 /* JCContactUsVC.m in Sources */,
 				7B11DB5F261EEC2800C1F7D6 /* JCDakaPlanDetailAutherHeadView.m in Sources */,
+				590A3F6726C24B420012EDE6 /* JCActivityGuessMore_CompleteVC.m in Sources */,
 				C3C8B7D12193CEE0004F29B0 /* JCWMatchOddsBall.m in Sources */,
 				7B8BCE4D26083F590032EDA2 /* WMProgressView.m in Sources */,
 				7B2DAD2D24810A4E000E2282 /* JCHongbangInfoTopCell.m in Sources */,
@@ -11247,6 +11264,7 @@
 				7B888EB2255F7D460058B4BD /* JCRegisterViewController.m in Sources */,
 				7BE891D924B5BF6900AE2E79 /* JNMatchZS_JC_BCSPF_infoCell.m in Sources */,
 				7BDA571924EFCB9100A0E1C8 /* NSBundle+TZImagePicker.m in Sources */,
+				590A3F6A26C24C5F0012EDE6 /* JCActivityGuessMore_HeadView.m in Sources */,
 				7B87D6432602F40E00E0FEB4 /* JCMineFabuCell.m in Sources */,
 				7BB075822553D5E8004FB701 /* JCYuCeHongBaoCrashHeadView.m in Sources */,
 				C3EABE182227786C00A90B4E /* RBApplePayManager.m in Sources */,

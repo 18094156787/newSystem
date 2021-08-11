@@ -149,11 +149,15 @@
             sender.layer.borderColor = JCBaseColor.CGColor;
         }
         self.matchModel.select_btn = sender;
+//        self.matchModel.local_choise = YES;
+        self.matchModel.choose_id = [NSString stringWithFormat:@"%ld",sender.tag];
         
     }else{
         self.selectBtn.selected = NO;
         self.selectBtn.layer.borderColor = COLOR_9F9F9F.CGColor;
         self.matchModel.select_btn = nil;
+//        self.matchModel.local_choise = NO;
+        self.matchModel.choose_id = @"";
     }
     
 
@@ -176,7 +180,8 @@
 
 - (void)setMatchModel:(JCActivityGuess_SPF_More_MatchModel *)matchModel {
     _matchModel = matchModel;
-    if (self.itemView.subviews.count==0&&matchModel.activity_option_info.count>0) {
+    [self.itemView removeAllSubviews];
+    if (matchModel.activity_option_info.count>0) {
         float width = (SCREEN_WIDTH-60-8*(matchModel.activity_option_info.count-1))/matchModel.activity_option_info.count;
         for (int i=0; i<matchModel.activity_option_info.count; i++) {
             JCActivityOptionModel *model = matchModel.activity_option_info[i];
@@ -195,11 +200,12 @@
             
             if ([model.correct integerValue]==1) {
 //                button.selected = YES;
+                self.rightImgView.hidden = NO;
                 self.rightImgView.frame = CGRectMake(width-16, 20, 16, 16);
                 [button addSubview:self.rightImgView];
 
             }else{
-                
+//                self.rightImgView.hidden = YES;
             }
             
             if ([model.user_choice integerValue]==1) {
@@ -207,6 +213,11 @@
                 button.selected = YES;
                 self.chooseImgView.frame = CGRectMake(0, 0, 44, 36);
                 [button addSubview:self.chooseImgView];
+                self.selectBtn = button;
+                button.layer.borderColor = JCBaseColor.CGColor;
+            }else if([model.id isEqualToString:self.matchModel.choose_id]){
+                self.selectBtn.selected = NO;
+                button.selected = YES;
                 self.selectBtn = button;
                 button.layer.borderColor = JCBaseColor.CGColor;
             }else{
@@ -218,38 +229,62 @@
 
         }
         
-        if ([self.detailModel.is_participate integerValue]==1) {
-//                self.resultImgView.hidden = NO;
-            if (self.detailModel.is_guess==1) {
-                self.resultImgView.image = JCIMAGE(@"ic_spf_hong");
-                self.resultImgView.hidden = NO;
-            }else if (self.detailModel.is_guess==2) {
-                self.resultImgView.image = JCIMAGE(@"ic_spf_hei");
-                self.resultImgView.hidden = NO;
-            }else{
-                self.resultImgView.hidden = YES;
-            }
+        if ([self.matchModel.is_choose_right integerValue]==1) {
+            self.resultImgView.image = JCIMAGE(@"ic_spf_hong");
+            self.resultImgView.hidden = NO;
+        }else if ([self.matchModel.is_choose_right integerValue]==2) {
+            self.resultImgView.image = JCIMAGE(@"ic_spf_hei");
+            self.resultImgView.hidden = NO;
+        }else if ([self.matchModel.is_choose_right integerValue]==4) {
+            self.resultImgView.image = JCIMAGE(@"ic_spf_qc");
+            self.resultImgView.hidden = NO;
         }else{
             self.resultImgView.hidden = YES;
         }
-
-
-
-    }else{
-        if (self.btnArray.count==matchModel.activity_option_info.count) {
-            for (int i=0; i<matchModel.activity_option_info.count; i++) {
-                JCActivityOptionModel *model = matchModel.activity_option_info[i];
-                UIButton *btn = self.btnArray[i];
-                if ([model.user_choice integerValue]) {
-                    self.chooseImgView.frame = CGRectMake(0, 0, 44, 36);
-                    [btn addSubview:self.chooseImgView];
-                }
-//                btn.selected = [model.user_choice integerValue]==1?YES:NO;
-
-            }
-        }
         
+//        if (self.matchModel.join_match==1) {
+////                self.resultImgView.hidden = NO;
+//            if (self.detailModel.is_guess==1) {
+//                self.resultImgView.image = JCIMAGE(@"ic_spf_hong");
+//                self.resultImgView.hidden = NO;
+//            }else if (self.detailModel.is_guess==2) {
+//                self.resultImgView.image = JCIMAGE(@"ic_spf_hei");
+//                self.resultImgView.hidden = NO;
+//            }else if (self.detailModel.is_guess==4) {
+//                self.resultImgView.image = JCIMAGE(@"ic_spf_qc");
+//                self.resultImgView.hidden = NO;
+//            }else{
+//                self.resultImgView.hidden = YES;
+//            }
+//        }else{
+//            self.resultImgView.hidden = YES;
+//        }
+
+
+
     }
+//    else{
+//        if (self.btnArray.count==matchModel.activity_option_info.count) {
+//            for (int i=0; i<matchModel.activity_option_info.count; i++) {
+//                JCActivityOptionModel *model = matchModel.activity_option_info[i];
+//                UIButton *btn = self.btnArray[i];
+//                if ([model.user_choice integerValue]==1) {
+//                    self.chooseImgView.frame = CGRectMake(0, 0, 44, 36);
+//                    [btn addSubview:self.chooseImgView];
+//                }
+//                btn.selected = NO;
+//                btn.layer.borderColor = COLOR_9F9F9F.CGColor;
+//                [btn setTitleColor:COLOR_2F2F2F forState:0];
+//                if (self.matchModel.select_btn&&self.matchModel.select_btn==btn) {
+//                    btn.selected = YES;
+//                    btn.layer.borderColor = JCBaseColor.CGColor;
+//                }
+////                btn.selected = [model.user_choice integerValue]==1?YES:NO;
+//
+//            }
+//        }
+//
+//    }
 
     NSString *title = [NSString stringWithFormat:@"%@",matchModel.competition_name];
     if (matchModel.group_num_new.length>0) {

@@ -14,11 +14,11 @@
 #import "JCActivitytTimeCell.h"
 #import "JCActivityGuess_SPF_More_MatchCell.h"
 #import "JCShareView.h"
-#import "JCActivityGuessCompleteVC.h"
+#import "JCActivityGuessMore_CompleteVC.h"
 #import "JCActivityGuessFailureTipView.h"
 #import "JCActivityGuessSuccessTipView.h"
 #import "JCActivityGuess_SPF_More_CheckView.h"
-#import "JCActivityGuessCompleteVC.h"
+#import "JCActivityGuessMore_CompleteVC.h"
 @interface JCActivityGuess_SPF_More_VC ()
 
 @property (nonatomic,strong) JCActivityGuess_SPF_HeadView *headView;
@@ -42,6 +42,8 @@
 @property (nonatomic,strong) JCShareView *shareView;
 
 @property (nonatomic,strong) NSMutableArray *selMatchArray;
+
+@property (nonatomic,assign) NSInteger match_count;
 
 @end
 
@@ -87,6 +89,14 @@
             [self.sureBtn setTitle:NonNil(self.detailModel.text_prompt) forState:0];
             self.sureBtn.backgroundColor = [self.detailModel.text_can_click integerValue]==1?JCBaseColor:COLOR_9F9F9F;
             self.sureBtn.userInteractionEnabled = [self.detailModel.text_can_click integerValue]==1?YES: NO;
+            
+            self.match_count =0;
+            for (JCActivityGuess_SPF_More_MatchModel *matchModel in self.detailModel.get_match_info_array) {
+                if (matchModel.status_id==1) {
+                    self.match_count++;
+                }
+                
+            }
 
 
             if ([self.detailModel.is_participate integerValue]==1) {
@@ -296,6 +306,7 @@
                     [weakSelf.selMatchArray addObject:matchModel];
                 }
             }
+            [self.sureBtn setTitle:[NSString stringWithFormat:@"提交选项  (%ld/%ld)",weakSelf.selMatchArray.count,weakSelf.match_count] forState:0];
         };
         return cell;
     }
@@ -383,10 +394,6 @@
 
 - (void)sureBtnClick {
     
-
-    
-
-    
     if (self.selMatchArray.count==0) {
         [JCWToastTool showHint:@"您还未选择任何选项，请选择后再提交！"];
         return;
@@ -397,7 +404,7 @@
         [self presentLogin];
         return;
     }
-    if (self.selMatchArray.count<self.detailModel.get_match_info_array.count) {
+    if (self.selMatchArray.count<self.match_count) {
         JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
         alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(16)];
         WeakSelf;
@@ -409,13 +416,13 @@
         } CancleTitle:@"知道了" CancleColor:JCBaseColor CancelHandler:^{
            [alertView removeFromSuperview];
         }];
-        NSString *title = [NSString stringWithFormat:@"当前活动共有%@场比赛，您只提交了%@场。是否确认提交？",[NSString stringWithFormat:@"%ld",self.detailModel.get_match_info_array.count],[NSString stringWithFormat:@"%ld",self.selMatchArray.count]];
+        NSString *title = [NSString stringWithFormat:@"当前活动共有%@场比赛，您只提交了%@场。是否确认提交？",[NSString stringWithFormat:@"%ld",self.match_count],[NSString stringWithFormat:@"%ld",self.selMatchArray.count]];
         NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
         NSRange count_range = [title rangeOfString:[NSString stringWithFormat:@"%ld",self.selMatchArray.count]];
         if (count_range.location!=NSNotFound) {
             [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:count_range];
         }
-        NSRange sel_range = [title rangeOfString:[NSString stringWithFormat:@"%ld",self.detailModel.get_match_info_array.count]];
+        NSRange sel_range = [title rangeOfString:[NSString stringWithFormat:@"%ld",self.match_count]];
         if (sel_range.location!=NSNotFound) {
             [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:sel_range];
         }
@@ -452,10 +459,10 @@
     [service getSubmitJingCaiUserWithActID:self.detailModel.id options:optionID success:^(id  _Nullable object) {
         [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
-            JCActivityGuessCompleteVC *vc = [JCActivityGuessCompleteVC new];
+            JCActivityGuessMore_CompleteVC *vc = [JCActivityGuessMore_CompleteVC new];
             vc.actID = self.actID;
-            vc.is_more_spf = YES;
-            vc.matchArray = self.selMatchArray;
+//            vc.is_more_spf = YES;
+//            vc.matchArray = self.selMatchArray;
 //            vc.selectOptionModel = self.selectOptionModel;
 //            vc.detailModel = self.detailModel;
             [self.navigationController pushViewController:vc animated:YES];

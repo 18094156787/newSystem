@@ -1,27 +1,26 @@
 //
-//  JCActivityGuessCompleteVC.m
+//  JCActivityGuessMore_CompleteVC.m
 //  Jingcai
 //
-//  Created by 陈继伟 on 2021/5/26.
+//  Created by 陈继伟 on 2021/8/10.
 //  Copyright © 2021 blockstar. All rights reserved.
 //
 
-#import "JCActivityGuessCompleteVC.h"
+#import "JCActivityGuessMore_CompleteVC.h"
 #import "JCActivityGuessCompleteCell.h"
 #import "JCActivityDetailModel.h"
 #import "JCActivityGuessCompleteHeadView.h"
-#import "JCActivityGuess_SPF_CompleteCell.h"
-@interface JCActivityGuessCompleteVC ()
+#import "JCActivityGuess_SPF_CompleteMore_Cell.h"
+#import "JCActivityGuessMore_HeadView.h"
+@interface JCActivityGuessMore_CompleteVC ()
 
 @property (nonatomic,strong) JCActivityDetailModel *detailModel;
 
 @property (nonatomic,strong) JCActivityGuessCompleteHeadView *headView;
 
-@property (nonatomic,strong) NSArray *dataSource;
-
 @end
 
-@implementation JCActivityGuessCompleteVC
+@implementation JCActivityGuessMore_CompleteVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,23 +32,22 @@
 
 
 - (void)refreshData {
-
     [self.view showLoading];
     JCActivityService *service = [JCActivityService service];
     [service getActivityDetailWithActID:NonNil(self.actID) success:^(id  _Nullable object) {
         [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
             self.detailModel = (JCActivityDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCActivityDetailModel class]];
-            self.title = self.detailModel.title;
-            NSMutableArray *array = [NSMutableArray array];
-            for (JCActivityOptionModel *model in self.detailModel.activity_option) {
-                if ([model.user_choice integerValue]==1) {
-                    [array addObject:model];
-                    self.selectOptionModel = model;
+            for (int i=0; i<self.detailModel.get_match_info_array.count; i++){
+                JCActivityGuess_SPF_More_MatchModel *model = self.detailModel.get_match_info_array[i];
+                if (model.join_match==1) {
+                    [self.dataArray addObject:model];
                 }
             }
-            self.dataSource = [NSArray arrayWithArray:array];
+            self.title = self.detailModel.title;
+            
             [self.tableView reloadData];
+            
         }else{
             [JCWToastTool showHint:object[@"msg"]];
         }
@@ -65,7 +63,7 @@
     self.tableView.tableHeaderView = self.headView;
     
     [self.tableView registerClass:[JCActivityGuessCompleteCell class] forCellReuseIdentifier:@"JCActivityGuessCompleteCell"];
-    [self.tableView registerClass:[JCActivityGuess_SPF_CompleteCell class] forCellReuseIdentifier:@"JCActivityGuess_SPF_CompleteCell"];
+    [self.tableView registerClass:[JCActivityGuess_SPF_CompleteMore_Cell class] forCellReuseIdentifier:@"JCActivityGuess_SPF_CompleteMore_Cell"];
     
     
 }
@@ -79,47 +77,30 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 1;
+    return self.dataArray.count;
     
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.is_spf) {
-        JCActivityGuess_SPF_CompleteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityGuess_SPF_CompleteCell"];
-        cell.selectOptionModel = self.selectOptionModel;
-        cell.detailModel = self.detailModel;
-        return cell;
-    }
-
-    
-    JCActivityGuessCompleteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityGuessCompleteCell"];
-//    cell.detailModel = self.detailModel;
-    cell.dataSource = self.dataSource;
+    JCActivityGuess_SPF_CompleteMore_Cell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityGuess_SPF_CompleteMore_Cell"];
+    cell.matchModel = self.dataArray[indexPath.row];
+//        cell.detailModel = self.detailModel;
     return cell;
 }
 
 #pragma mark <UITableViewDelegate>
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.is_spf) {
-        return UITableViewAutomaticDimension;
-    }
 
-    if (self.dataSource.count<=10) {
-        NSInteger count = ceil(self.dataSource.count/2.0f);
-        return 62*count+65;
-    }
-//        return 378;
-    return 410;
+    return UITableViewAutomaticDimension;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 8;
+    return 50;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *headView = [UIView new];
-    headView.backgroundColor = COLOR_F0F0F0;
+    JCActivityGuessMore_HeadView *headView = [JCActivityGuessMore_HeadView new];
     return headView;
 }
 
@@ -141,10 +122,6 @@
     [self.tableView reloadData];
 }
 
-- (void)setDataSource:(NSArray *)dataSource {
-    _dataSource = dataSource;
-    [self.tableView reloadData];
-}
 
 - (JCActivityGuessCompleteHeadView *)headView {
     if (!_headView) {

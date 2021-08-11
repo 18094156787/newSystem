@@ -407,8 +407,7 @@
             JCActivityGuessCompleteVC *vc = [JCActivityGuessCompleteVC new];
             vc.actID = self.actID;
             vc.is_spf = YES;
-//            vc.selectOptionModel = self.selectOptionModel;
-//            vc.detailModel = self.detailModel;
+            vc.title =self.detailModel.title;
             [self.navigationController pushViewController:vc animated:YES];
             [self refreshData];
 //            [JCWToastTool showHint:@"提交成功"];

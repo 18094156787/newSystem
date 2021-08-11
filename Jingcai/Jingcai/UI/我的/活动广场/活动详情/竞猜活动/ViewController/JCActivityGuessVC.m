@@ -138,12 +138,6 @@
                 }
             }
             
-
-            
-
-            
-            
-            
         }else{
             [JCWToastTool showHint:object[@"msg"]];
         }

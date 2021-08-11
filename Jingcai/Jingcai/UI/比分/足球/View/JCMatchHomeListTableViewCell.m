@@ -154,34 +154,9 @@
 
 - (void)setModel:(JCMatchInfoModel *)model {
     _model = model;
-//    if (!model) {
-//        return;
-//    }
-//    self.matchNameLab.text = model.competition_name.length>0?model.competition_name:model.short_name_zh;
-//    NSString *title = @"";
-//    if (model.competition_name.length>0) {
-//        title = model.competition_name;
-//    }
-//    if (model.group_num_new.length>0) {
-//        title = [title stringByAppendingFormat:@" %@",model.group_num_new];
-//    }
-//    if (model.round_num_two.length>0) {
-//        title = [title stringByAppendingFormat:@" %@",model.round_num_two];
-//    }
-//    if (model.begin_time.length>0) {
-//        title = [title stringByAppendingFormat:@" %@",model.begin_time];
-//    }
-//    NSMutableAttributedString *titleAttr = [[NSMutableAttributedString alloc] initWithString:title];
-//    if (model.competition_name.length>0) {
-//        NSRange range = [title rangeOfString:model.competition_name];
-//        if (range.location!=NSNotFound) {
-//            [titleAttr addAttributes:@{NSForegroundColorAttributeName:COLOR_2F2F2F} range:range];
-//            self.matchNameLab.attributedText = titleAttr;
-//        }
-//    }else {
-//        self.matchNameLab.text = title;
-//    }
+
     self.matchNameLab.text = model.competition_name;
+    self.matchNameLab.textColor = model.competition_color.length>0?[UIColor colorWithHexString:NonNil(model.competition_color)]:COLOR_2F2F2F;
     self.matchTimeLab.text = model.begin_time;
 
     self.homeTeamLab.text = model.home_team_name;
@@ -283,7 +258,7 @@
     }
     
     if ([model.neutral integerValue]==1&&model.note.length>0) {
-        self.neutralLab.text = [NSString stringWithFormat:@"中立场: %@",model.note];
+        self.neutralLab.text = model.note;
         [self.neutralLab mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(AUTO(18));
         }];

@@ -148,6 +148,12 @@
            make.bottom.offset(AUTO(-10));
        }];
    }
+    if (([model.type integerValue]==19&&[model.status integerValue]!=3)) {
+       self.sureLab.text= @"前往活动";
+       [self.sureLab mas_updateConstraints:^(MASConstraintMaker *make) {
+           make.bottom.offset(AUTO(-10));
+       }];
+   }
 
 }
 

@@ -7,16 +7,96 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0B59AD43-B9C9-4018-871F-8B19A7B5D52C"
+            uuid = "58D52E83-5A32-4A19-855C-3789016CF544"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x6bd4;&#x5206;/&#x7bee;&#x7403;/View/JCBasketBallHomeMatchCell.m"
+            filePath = "Jingcai/UI/&#x6211;&#x7684;/&#x6d3b;&#x52a8;&#x5e7f;&#x573a;/&#x6d3b;&#x52a8;&#x8be6;&#x60c5;/&#x7ade;&#x731c;&#x6d3b;&#x52a8;/&#x7ade;&#x731c;&#x6d3b;&#x52a8;_&#x80dc;&#x5e73;&#x8d1f;&#x6a21;&#x5f0f;_&#x591a;&#x573a;/View/JCActivityGuess_SPF_More_MatchCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "428"
-            endingLineNumber = "428"
-            landmarkName = "-setModel:"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "-setMatchModel:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B22187F5-0641-449D-AE26-6FDA9086F533"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/&#x6211;&#x7684;/&#x6d3b;&#x52a8;&#x5e7f;&#x573a;/&#x6d3b;&#x52a8;&#x8be6;&#x60c5;/&#x7ade;&#x731c;&#x6d3b;&#x52a8;/&#x7ade;&#x731c;&#x6d3b;&#x52a8;_&#x80dc;&#x5e73;&#x8d1f;&#x6a21;&#x5f0f;_&#x591a;&#x573a;/View/JCActivityGuess_SPF_More_MatchCell.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
+            landmarkName = "-setMatchModel:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F7AB6873-19EE-41B6-A088-A599732845D4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/&#x6211;&#x7684;/&#x6d3b;&#x52a8;&#x5e7f;&#x573a;/&#x6d3b;&#x52a8;&#x8be6;&#x60c5;/&#x7ade;&#x731c;&#x6d3b;&#x52a8;/&#x7ade;&#x731c;&#x6d3b;&#x52a8;_&#x80dc;&#x5e73;&#x8d1f;&#x6a21;&#x5f0f;_&#x591a;&#x573a;/View/JCActivityGuess_SPF_More_MatchCell.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
+            landmarkName = "-setMatchModel:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "91BD8E19-9017-477D-813D-ABA4E4CF61A5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/&#x6211;&#x7684;/&#x6d3b;&#x52a8;&#x5e7f;&#x573a;/&#x6d3b;&#x52a8;&#x8be6;&#x60c5;/&#x7ade;&#x731c;&#x6d3b;&#x52a8;/&#x7ade;&#x731c;&#x6d3b;&#x52a8;_&#x80dc;&#x5e73;&#x8d1f;&#x6a21;&#x5f0f;_&#x591a;&#x573a;/ViewController/JCActivityGuess_SPF_More_VC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-refreshData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A9FA2A50-DED3-4AA8-A0ED-41BFE929FD9E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/&#x6211;&#x7684;/&#x6d88;&#x606f;&#x4e2d;&#x5fc3;/ViewController/JCMessageCenterVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
+            landmarkName = "-refreshData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "17E080F2-7EC8-4811-A34E-F5B2F060D4C4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/MAIN/JCMainTabBarController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
+            landmarkName = "-webSocketDidReceiveMessage:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
