@@ -100,8 +100,10 @@
             }
             
             if (trendView==self.awayView) {
+                [self.homeActionView removeAllSubviews];
+                [self.awayActionView removeAllSubviews];
 
-                
+
         for (JCZBIncidentModel *model in self.incidentArray) {
 //                        if ([model.time intValue]==1) {
             if (model==self.incidentArray.lastObject) {
@@ -383,7 +385,7 @@
     if (!_bgScrollow) {
         _bgScrollow = [UIScrollView new];
         _bgScrollow.backgroundColor = COLOR_F4F6F9;
-
+        _bgScrollow.scrollEnabled = NO;
     }
     return _bgScrollow;
 }

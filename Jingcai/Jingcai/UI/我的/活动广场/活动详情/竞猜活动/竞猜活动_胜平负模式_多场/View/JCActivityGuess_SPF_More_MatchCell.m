@@ -229,62 +229,33 @@
 
         }
         
-        if ([self.matchModel.is_choose_right integerValue]==1) {
-            self.resultImgView.image = JCIMAGE(@"ic_spf_hong");
-            self.resultImgView.hidden = NO;
-        }else if ([self.matchModel.is_choose_right integerValue]==2) {
-            self.resultImgView.image = JCIMAGE(@"ic_spf_hei");
-            self.resultImgView.hidden = NO;
-        }else if ([self.matchModel.is_choose_right integerValue]==4) {
-            self.resultImgView.image = JCIMAGE(@"ic_spf_qc");
-            self.resultImgView.hidden = NO;
+        if (self.matchModel.join_match==1) {
+            if ([self.matchModel.is_choose_right integerValue]==1) {
+                self.resultImgView.image = JCIMAGE(@"ic_spf_hong");
+                self.resultImgView.hidden = NO;
+            }else if ([self.matchModel.is_choose_right integerValue]==2) {
+                self.resultImgView.image = JCIMAGE(@"ic_spf_hei");
+                self.resultImgView.hidden = NO;
+            }else if ([self.matchModel.is_choose_right integerValue]==4) {
+                self.resultImgView.image = JCIMAGE(@"ic_spf_qc");
+                self.resultImgView.hidden = NO;
+            }else{
+                self.resultImgView.hidden = YES;
+            }
         }else{
-            self.resultImgView.hidden = YES;
+            if ([self.matchModel.is_choose_right integerValue]==4) {
+                self.resultImgView.image = JCIMAGE(@"ic_spf_qc");
+                self.resultImgView.hidden = NO;
+            }else{
+                self.resultImgView.hidden = YES;
+            }
+            
         }
-        
-//        if (self.matchModel.join_match==1) {
-////                self.resultImgView.hidden = NO;
-//            if (self.detailModel.is_guess==1) {
-//                self.resultImgView.image = JCIMAGE(@"ic_spf_hong");
-//                self.resultImgView.hidden = NO;
-//            }else if (self.detailModel.is_guess==2) {
-//                self.resultImgView.image = JCIMAGE(@"ic_spf_hei");
-//                self.resultImgView.hidden = NO;
-//            }else if (self.detailModel.is_guess==4) {
-//                self.resultImgView.image = JCIMAGE(@"ic_spf_qc");
-//                self.resultImgView.hidden = NO;
-//            }else{
-//                self.resultImgView.hidden = YES;
-//            }
-//        }else{
-//            self.resultImgView.hidden = YES;
-//        }
 
 
 
     }
-//    else{
-//        if (self.btnArray.count==matchModel.activity_option_info.count) {
-//            for (int i=0; i<matchModel.activity_option_info.count; i++) {
-//                JCActivityOptionModel *model = matchModel.activity_option_info[i];
-//                UIButton *btn = self.btnArray[i];
-//                if ([model.user_choice integerValue]==1) {
-//                    self.chooseImgView.frame = CGRectMake(0, 0, 44, 36);
-//                    [btn addSubview:self.chooseImgView];
-//                }
-//                btn.selected = NO;
-//                btn.layer.borderColor = COLOR_9F9F9F.CGColor;
-//                [btn setTitleColor:COLOR_2F2F2F forState:0];
-//                if (self.matchModel.select_btn&&self.matchModel.select_btn==btn) {
-//                    btn.selected = YES;
-//                    btn.layer.borderColor = JCBaseColor.CGColor;
-//                }
-////                btn.selected = [model.user_choice integerValue]==1?YES:NO;
-//
-//            }
-//        }
-//
-//    }
+
 
     NSString *title = [NSString stringWithFormat:@"%@",matchModel.competition_name];
     if (matchModel.group_num_new.length>0) {

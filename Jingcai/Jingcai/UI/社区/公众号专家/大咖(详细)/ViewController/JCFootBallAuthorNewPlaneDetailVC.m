@@ -63,9 +63,12 @@
             }
             if (object[@"data"][@"record_introduction"]) {
                 self.bannerModel = (JCGZHBannerModel *)[JCWJsonTool entityWithJson:object[@"data"][@"record_introduction"] class:[JCGZHBannerModel class]];
-                self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 100);
-                self.headView.model = self.bannerModel;
-                self.tableView.tableHeaderView = self.headView;
+                if (self.bannerModel.img_info) {
+                    self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 100);
+                    self.headView.model = self.bannerModel;
+                    self.tableView.tableHeaderView = self.headView;
+                }
+
 
 
             }
@@ -146,7 +149,8 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 //刷新UI的代码放到主线程执行
-                weakSelf.emptyView.contentViewOffset = height;
+//                weakSelf.emptyView.contentViewOffset = height-50;
+                weakSelf.emptyView.contentViewY = height;
                 weakSelf.tableView.ly_emptyView = weakSelf.emptyView;
             });
 
