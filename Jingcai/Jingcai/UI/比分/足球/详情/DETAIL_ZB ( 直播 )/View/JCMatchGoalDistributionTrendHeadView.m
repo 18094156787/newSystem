@@ -25,12 +25,14 @@
 
 @property (nonatomic,strong) UILabel *label90;
 
+@property (nonatomic,assign)  float singlewidth;
+
 @end
 
 @implementation JCMatchGoalDistributionTrendHeadView
 
 - (void)initViews {
-
+    self.singlewidth = (SCREEN_WIDTH-70)/90.0f;
     self.backgroundColor= JCWhiteColor;
     [self addSubview:self.bgScrollow];
     
@@ -59,8 +61,8 @@
 - (void)drawGoalViewWithDataArray:(NSArray *)rateArray view:(UIView *)trendView{
         NSMutableArray *pointArray = [NSMutableArray array];
 //        NSArray *rateArray = @[@"1",@"2",@"2",@"1",@"5",@"5",@"1"];
-    NSLog(@"每个宽度=%.0f",singleWidth);
-    float xLength = singleWidth;//每一格x的宽度
+    NSLog(@"每个宽度=%.0f",self.singlewidth);
+    float xLength = self.singlewidth;//每一格x的宽度
 //    float xLength = 10;//每一格x的宽度
     float yLength = 20/100.0f;
         float startX = 0;
@@ -247,49 +249,52 @@
     self.lastValue = self.goalArray.lastObject;
     [self.goalArray insertObject:@"0" atIndex:0];
     [self.goalArray addObject:@"0"];
-
+    if (self.goalArray.count>98) {
+        self.singlewidth = (SCREEN_WIDTH-50)/self.goalArray.count;
+    }
+    
     [self drawGoalViewWithDataArray:self.goalArray view:self.homeView];
     [self drawGoalViewWithDataArray:self.goalArray view:self.awayView];
 //    return;
-    self.homeActionView.frame = CGRectMake(40, 50, singleWidth*95, 10);
-    self.awayActionView.frame = CGRectMake(40, 100, singleWidth*95, 10);
+    self.homeActionView.frame = CGRectMake(40, 50, self.singlewidth*95, 10);
+    self.awayActionView.frame = CGRectMake(40, 100, self.singlewidth*95, 10);
     
-    self.homeView.frame = CGRectMake(0, 0, singleWidth*92, 20);
-    self.awayView.frame = CGRectMake(0, 20, singleWidth*92, 20);
+    self.homeView.frame = CGRectMake(0, 0, self.singlewidth*92, 20);
+    self.awayView.frame = CGRectMake(0, 20, self.singlewidth*92, 20);
     UIView *lineView = [UIView new];
      lineView.backgroundColor = COLOR_DDDDDD;
-    lineView.frame = CGRectMake(40, 80, singleWidth*95, 0.5);
+    lineView.frame = CGRectMake(40, 80, self.singlewidth*95, 0.5);
     [self addSubview:lineView];
 
     if (self.goalArray.count>92) {
-        self.bgScrollow.frame = CGRectMake(40, 60, singleWidth*(self.goalArray.count-2), 40);
-        self.bgScrollow.frame = CGRectMake(40, 60, singleWidth*self.goalArray.count-2, 40);
-        self.homeView.frame = CGRectMake(0, 0, singleWidth*(self.goalArray.count-2), 20);
-        self.awayView.frame = CGRectMake(0, 20, singleWidth*(self.goalArray.count-2), 20);
-        self.homeActionColorView.frame = CGRectMake(40, 50, singleWidth*(self.goalArray.count-2), 10);
-        self.awayActionColorView.frame = CGRectMake(40, 100, singleWidth*(self.goalArray.count-2), 10);
+        self.bgScrollow.frame = CGRectMake(40, 60, self.singlewidth*(self.goalArray.count-2), 40);
+        self.bgScrollow.frame = CGRectMake(40, 60, self.singlewidth*self.goalArray.count-2, 40);
+        self.homeView.frame = CGRectMake(0, 0, self.singlewidth*(self.goalArray.count-2), 20);
+        self.awayView.frame = CGRectMake(0, 20, self.singlewidth*(self.goalArray.count-2), 20);
+        self.homeActionColorView.frame = CGRectMake(40, 50, self.singlewidth*(self.goalArray.count-2), 10);
+        self.awayActionColorView.frame = CGRectMake(40, 100, self.singlewidth*(self.goalArray.count-2), 10);
 
 
-        if (singleWidth*(self.goalArray.count-2)>totalWidth) {
+        if (self.singlewidth*(self.goalArray.count-2)>totalWidth) {
             self.bgScrollow.frame = CGRectMake(40, 60, totalWidth, 40);
-            self.bgScrollow.contentSize = CGSizeMake(singleWidth*(self.goalArray.count-2), 40);
+            self.bgScrollow.contentSize = CGSizeMake(self.singlewidth*(self.goalArray.count-2), 40);
         }
 
     }else{
-        self.bgScrollow.frame = CGRectMake(40, 60, singleWidth*self.goalArray.count-2, 40);
-//        self.bgScrollow.frame = CGRectMake(40, 60, singleWidth*95, 40);
-        self.homeView.frame = CGRectMake(0, 0, singleWidth*(self.goalArray.count-2), 20);
-        self.awayView.frame = CGRectMake(0, 20, singleWidth*(self.goalArray.count-2), 20);
-        self.homeActionColorView.frame = CGRectMake(40, 50, singleWidth*(self.goalArray.count-2), 10);
-        self.awayActionColorView.frame = CGRectMake(40, 100, singleWidth*(self.goalArray.count-2), 10);
+        self.bgScrollow.frame = CGRectMake(40, 60, self.singlewidth*self.goalArray.count-2, 40);
+//        self.bgScrollow.frame = CGRectMake(40, 60, self.singlewidth*95, 40);
+        self.homeView.frame = CGRectMake(0, 0, self.singlewidth*(self.goalArray.count-2), 20);
+        self.awayView.frame = CGRectMake(0, 20, self.singlewidth*(self.goalArray.count-2), 20);
+        self.homeActionColorView.frame = CGRectMake(40, 50, self.singlewidth*(self.goalArray.count-2), 10);
+        self.awayActionColorView.frame = CGRectMake(40, 100, self.singlewidth*(self.goalArray.count-2), 10);
     }
     
-//     self.bgScrollow.frame = CGRectMake(40, 60, singleWidth*95, 40);
+//     self.bgScrollow.frame = CGRectMake(40, 60, self.singlewidth*95, 40);
     
 
 
      [self addSubview:self.endLineView];
-    self.endLineView.frame = CGRectMake(40+singleWidth*(self.goalArray.count-2), 60, 1, 40);
+    self.endLineView.frame = CGRectMake(40+self.singlewidth*(self.goalArray.count-2), 60, 1, 40);
 
     
     self.homeImgView.frame = CGRectMake(12, 50, 24, 24);
@@ -350,7 +355,7 @@
                 timeLab.text = title;
                 
                 
-                startX = startX +singleWidth*valueInt;
+                startX = startX +self.singlewidth*valueInt;
                  timeLab.frame = CGRectMake(30+startX, 20, 20, 20);
 
                  [self addSubview:timeLab];

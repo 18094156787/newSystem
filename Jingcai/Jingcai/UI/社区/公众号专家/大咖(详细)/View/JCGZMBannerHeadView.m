@@ -13,7 +13,8 @@
 - (void)initViews {
     [self addSubview:self.imgView];
     [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.offset(0);
+        make.left.right.offset(0);
+        make.top.offset(AUTO(5));
         make.height.mas_equalTo(50);
     }];
     

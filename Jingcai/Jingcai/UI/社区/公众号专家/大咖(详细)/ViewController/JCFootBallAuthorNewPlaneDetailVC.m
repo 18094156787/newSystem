@@ -140,7 +140,7 @@
     
 //    WeakSelf;
     self.headView.JCHeightBlock = ^(float height) {
-        weakSelf.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, height);
+        weakSelf.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, height+AUTO(10));
         weakSelf.tableView.tableHeaderView = weakSelf.headView;
         
         if (weakSelf.bannerModel.img_info) {

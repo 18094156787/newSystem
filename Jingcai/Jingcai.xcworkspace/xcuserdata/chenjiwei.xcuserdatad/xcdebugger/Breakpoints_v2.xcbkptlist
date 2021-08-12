@@ -7,97 +7,33 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "78C49B66-B5B5-48FB-A5B3-2F3893C81953"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/ViewController/JCFootBallAuthorNewPlaneDetailVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "-refreshData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C61409D7-9323-48F5-B485-1F9D565CA662"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/ViewController/JCFootBallAuthorNewPlaneDetailVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "-refreshData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1FC6B06E-CEF4-488F-8E40-33AB035D2AC2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/ViewController/JCFootBallAuthorNewPlaneDetailVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "-refreshData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F097F1D8-0565-4217-9DF8-B9948B2FC3BB"
+            uuid = "0F59FAD5-1EE5-4D58-B648-0E2F1748D3A6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Jingcai/UI/&#x6bd4;&#x5206;/&#x8db3;&#x7403;/&#x8be6;&#x60c5;/DETAIL_ZB ( &#x76f4;&#x64ad; )/View/JCMatchGoalDistributionTrendHeadView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "-drawGoalViewWithDataArray:view:"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
+            landmarkName = "-setDataArray:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "F097F1D8-0565-4217-9DF8-B9948B2FC3BB - 299df658918f0aaa"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[JCMatchGoalDistributionTrendHeadView drawGoalViewWithDataArray:view:]"
-                  moduleName = "&#x9cb8;&#x731c;&#x8db3;&#x7403;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/chenjiwei/Desktop/%E6%99%BA%E8%83%9C%E8%B6%B3%E7%90%83_git/Jingcai/Jingcai/UI/%E6%AF%94%E5%88%86/%E8%B6%B3%E7%90%83/%E8%AF%A6%E6%83%85/DETAIL_ZB%20(%20%E7%9B%B4%E6%92%AD%20)/View/JCMatchGoalDistributionTrendHeadView.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "107"
-                  endingLineNumber = "107"
-                  offsetFromSymbolStart = "1224">
-               </Location>
-               <Location
-                  uuid = "F097F1D8-0565-4217-9DF8-B9948B2FC3BB - 299df658918f0aaa"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[JCMatchGoalDistributionTrendHeadView drawGoalViewWithDataArray:view:]"
-                  moduleName = "&#x9cb8;&#x731c;&#x8db3;&#x7403;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/chenjiwei/Desktop/%E6%99%BA%E8%83%9C%E8%B6%B3%E7%90%83_git/Jingcai/Jingcai/UI/%E6%AF%94%E5%88%86/%E8%B6%B3%E7%90%83/%E8%AF%A6%E6%83%85/DETAIL_ZB%20(%20%E7%9B%B4%E6%92%AD%20)/View/JCMatchGoalDistributionTrendHeadView.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "107"
-                  endingLineNumber = "107"
-                  offsetFromSymbolStart = "1248">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "894C57B0-8E2F-4F78-B8EA-4E3A209D17D5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/&#x6bd4;&#x5206;/&#x8db3;&#x7403;/&#x8be6;&#x60c5;/DETAIL_ZB ( &#x76f4;&#x64ad; )/View/JCMatchGoalDistributionTrendHeadView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
+            landmarkName = "-setDataArray:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
