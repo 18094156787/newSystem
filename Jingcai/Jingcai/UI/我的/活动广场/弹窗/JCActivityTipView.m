@@ -18,30 +18,7 @@
         make.centerX.equalTo(self);
         make.size.mas_equalTo(CGSizeMake(AUTO(315), AUTO(390)));
     }];
-    
-//    UIView *sureView = [UIView new];
-////    sureView.userInteractionEnabled = YES;
-//    [self.imgView addSubview:sureView];
-//    [sureView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.offset(AUTO(-25));
-//        make.centerX.equalTo(self.imgView);
-//        make.size.mas_equalTo(CGSizeMake(AUTO(275), AUTO(44)));
-//    }];
-//    CAGradientLayer *gl = [CAGradientLayer layer];
-//    gl.frame = CGRectMake(0,0,AUTO(275),AUTO(44));
-//    gl.startPoint = CGPointMake(0.5, 0);
-//    gl.endPoint = CGPointMake(0.5, 1);
-//    gl.colors = @[(__bridge id)[UIColor colorWithRed:255/255.0 green:229/255.0 blue:145/255.0 alpha:1.0].CGColor, (__bridge id)[UIColor colorWithRed:255/255.0 green:201/255.0 blue:113/255.0 alpha:1.0].CGColor];
-//    gl.locations = @[@(0), @(1.0f)];
-//    sureView.layer.cornerRadius = AUTO(22);
-//    sureView.layer.masksToBounds = YES;
-//    [sureView.layer addSublayer:gl];
-    
-//    [sureView addSubview:self.sureBtn];
-//    [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.insets(UIEdgeInsetsZero);
-//    }];
-    
+
     [self addSubview:self.closeBtn];
     [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);

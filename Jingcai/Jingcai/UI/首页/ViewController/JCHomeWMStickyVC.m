@@ -24,6 +24,8 @@
 #import "JCActivityTipView.h"
 #import "JCActivityDetailCommomVC.h"
 #import "JCAppGuideView.h"
+#import "JCHomeErCodeView.h"
+#import "JCImageModel.h"
 static CGFloat const kWMMenuViewHeight = 44;
 @interface JCHomeWMStickyVC ()<UISearchBarDelegate>
 
@@ -69,6 +71,8 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 @property (nonatomic,assign) NSInteger first_login;//首登
 
+@property (nonatomic,strong) NSMutableArray *qrCodeArray;
+
 @property (nonatomic,assign) BOOL is_hide;
 
 @property (nonatomic,assign) BOOL needNextGetData;//是否需要下次页面出现的时候请求数据
@@ -103,8 +107,13 @@ static CGFloat const kWMMenuViewHeight = 44;
         [self setNavEffect];
     }
     if (self.needNextGetData) {
-        [self getCommomData];
+        [self getGZH_qrCodeData];
+    }else {
+        if (self.qrCodeArray.count>0) {
+            [self showQR_CodeView];
+        }
     }
+
     self.activityImgView.hidden = self.show_activity==1?NO:YES;
     self.is_hide = NO;
 }
@@ -166,10 +175,12 @@ static CGFloat const kWMMenuViewHeight = 44;
     [self showGuideView];
   
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isInCurrentVC) name:NotificationUserLogin object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCommomData) name:UserRegisterSuccess object:nil];//新用户注册成功,获取新人红包
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getGZH_qrCodeData) name:UserRegisterSuccess object:nil];//新用户注册成功,获取新人红包
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(topViewClickEnable) name:@"WMPageControllerScrollowStop" object:nil];
 #pragma mark test
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isInCurrentVC) name:NotificationUserLogin object:nil];
+    
+//    [self showQR_CodeView];
     
 }
 
@@ -310,11 +321,11 @@ static CGFloat const kWMMenuViewHeight = 44;
         view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         WeakSelf;
         view.JCBlock = ^{
-            [weakSelf getCommomData];//,包含拉新,节日红包
+            [weakSelf getGZH_qrCodeData];//,包含拉新,节日红包
         };
         [self.jcWindow addSubview:view];
     }else{
-        [self getCommomData];
+        [self getGZH_qrCodeData];
         [[NSUserDefaults standardUserDefaults] objectForKey:JCAppGuide];
     }
 
@@ -411,6 +422,85 @@ static CGFloat const kWMMenuViewHeight = 44;
     return NO;
 }
 
+
+
+//展示公众号二维码弹窗
+- (void)getGZH_qrCodeData {
+    self.needNextGetData = NO;
+    JCHomeService_New *service = [JCHomeService_New  service];
+    [service getHomeGZH_QrCodeWithSuccess:^(id  _Nullable object) {
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"] class:[JCImageModel class]];
+            self.qrCodeArray = [NSMutableArray arrayWithArray:array];
+    //            weakSelf.headView.bannerArray = self.bannerArray;
+            if (array.count>0) {
+                JCMainTabBarController *tabbar =  (JCMainTabBarController *)[UIApplication sharedApplication].delegate.window.rootViewController;
+               tabbar.tabSelIndex = 0;
+                [self showQR_CodeView];
+            }else{
+                if ([JCWUserBall currentUser]) {
+                    [self getCommomData];
+
+                }else{
+                    [self showActivityPresentWithPosition:@"1" ViewController:self];//获取活动弹窗
+                }
+               
+    //            if (self.newPeople==1) {
+    //                [self userNewGiftPacket];
+    //            }else if (self.first_login==1) {
+    //                [self firstLoginPacket];
+    //            }else {
+    //                [self showActivityPresentWithPosition:@"1" ViewController:self];//获取活动弹窗
+    //            }
+            }
+
+            }
+        
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+
+}
+
+- (void)showQR_CodeView {
+    if (self.qrCodeArray.count>0) {
+        JCImageModel *model = self.qrCodeArray.firstObject;
+        JCHomeErCodeView *view = [JCHomeErCodeView new];
+    //        view.dataArray = array;
+        view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        view.model = model;
+    //        WeakSelf;
+//        @weakify(view);
+        WeakSelf;
+        view.JCClickBlock = ^{
+            if (model.url.length>0) {
+                [JCPageRedirectManager jumpVCWithRoute:model.url vc:self];
+            }
+            
+        };
+        view.JCCloseBlock = ^{
+            if ([weakSelf.qrCodeArray containsObject:model]) {
+                [weakSelf.qrCodeArray removeObject:model];
+            }
+            
+            if (weakSelf.qrCodeArray.count>0) {
+                [weakSelf showQR_CodeView];
+            }else{
+                if ([JCWUserBall currentUser]) {
+                    [weakSelf getCommomData];
+                }else{
+                    [self showActivityPresentWithPosition:@"1" ViewController:self];//获取活动弹窗
+                    
+                }
+                
+            }
+            
+
+        };
+        [[UIApplication sharedApplication].keyWindow addSubview:view];
+    }
+
+}
 //新人红包
 - (void)userNewGiftPacket {
     JCHomeService_New *service = [JCHomeService_New  service];
@@ -458,6 +548,7 @@ static CGFloat const kWMMenuViewHeight = 44;
     }];
 
 }
+
 //首登红包
 - (void)firstLoginPacket {
     
@@ -628,12 +719,12 @@ static CGFloat const kWMMenuViewHeight = 44;
 }
 
 - (void)getCommomData {
-    self.needNextGetData = NO;
+    
 //    [self.view showLoading];
-    if (![JCWUserBall currentUser]) {
-        [self showActivityPresentWithPosition:@"1" ViewController:self];//获取活动弹窗
-        return;
-    }
+//    if (![JCWUserBall currentUser]) {
+//        [self getGZH_qrCodeData];//获取公众号弹窗
+//        return;
+//    }
     JCHomeService_New *service = [JCHomeService_New service];
     [service getHomeCommonDataWithsuccess:^(id  _Nullable object) {
         [self.view endLoading];
@@ -730,7 +821,7 @@ static CGFloat const kWMMenuViewHeight = 44;
     BOOL value =  [tabBarController isCurrentBaseVCWtihIndex:0]&&self.navigationController.topViewController==self;
     self.needNextGetData = !value;//是否需要下次页面出现的时候请求数据
     if (value) {
-        [self getCommomData];
+        [self getGZH_qrCodeData];
     }
 }
 

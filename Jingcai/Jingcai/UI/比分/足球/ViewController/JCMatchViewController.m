@@ -17,7 +17,6 @@
 #import "UISegmentedControl+Extension.h"
 #import "JCMatchFilterSegmentView.h"
 #import "JCMatchFilterSegmentCurrentView.h"
-#import "JCTeamMatchInfoMatchVC.h"
 #import "NSDate+BRPickerView.h"
 @interface JCMatchViewController ()
 
@@ -294,7 +293,7 @@
     JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
         [weakSelf refreshData];
     }];
-    emptyView.contentViewOffset = -AUTO(100);
+    emptyView.contentViewOffset = -AUTO(50);
     self.tableView.ly_emptyView = emptyView;
 //    [self showNoDataViewImageStr:@"empty_img_follow_expert" Title:@"暂时没有比赛" BtnTitle:@"" Btnwidth:0 HiddenBtn:YES];
     

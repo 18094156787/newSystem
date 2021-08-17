@@ -164,34 +164,6 @@
     } failure:^(NSError * _Nonnull error) {
         [self endRefresh];
     }];
-//    [service getMatchEnterBallTipsSetttingWithParam:dic Success:^(id  _Nullable object) {
-//          [self endRefresh];
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            NSString *is_gz = object[@"data"][@"is_gz"];
-//            NSString *is_voice = object[@"data"][@"is_voice"];
-//            NSString *is_shock = object[@"data"][@"is_shock"];
-//
-//            if (is_gz.length>0) {
-//                [[NSUserDefaults standardUserDefaults] setValue:is_gz forKey:@"is_gz"];
-//                [[NSNotificationCenter defaultCenter] postNotificationName:JCMatchConcern object:nil];
-//            }
-//            if (is_voice.length>0) {
-//                [[NSUserDefaults standardUserDefaults] setValue:is_voice forKey:@"is_voice"];
-//            }
-//            if (is_shock.length>0) {
-//                [[NSUserDefaults standardUserDefaults] setValue:is_shock forKey:@"is_shock"];
-//            }
-//            self.is_gz = is_gz;
-//            self.is_voice = is_voice;
-//            self.is_shock = is_shock;
-//            [self.tableView reloadData];
-//        }else{
-//            [JCWToastTool showHint:object[@"msg"]];
-//        }
-//
-//    } failure:^(NSError * _Nonnull error) {
-//         [self endRefresh];
-//    }];
 
 }
 

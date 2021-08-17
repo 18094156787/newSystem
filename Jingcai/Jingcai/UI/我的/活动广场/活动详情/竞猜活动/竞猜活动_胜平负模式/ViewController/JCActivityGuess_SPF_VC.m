@@ -53,6 +53,7 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
 //    [self.headView.countDown destoryTimer];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)backItemClick {
@@ -453,6 +454,8 @@
     }];
 
 }
+
+
 
 - (JCActivityGuess_SPF_HeadView *)headView {
     if (!_headView) {

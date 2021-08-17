@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 //首页红包数据弹窗判断
 - (void)getHomeCommonDataWithsuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//二维码弹窗
+- (void)getHomeGZH_QrCodeWithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //新人红包
 - (void)getNewPeoplePrizeWithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //用户首登红包

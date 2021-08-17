@@ -53,9 +53,10 @@ dispatch_async(dispatch_get_main_queue(), block);\
     if(self.webScoket){
         return;
     }
+//    @"ws://106.75.32.127:9511"
 //ws://117.50.88.188:9811
 //    @"ws://106.75.32.127:9511"
-    self.webScoket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:@"ws://106.75.32.127:9511"]];
+    self.webScoket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:@"ws://117.50.88.188:9811"]];
     self.webScoket.delegate = self;
     [self.webScoket open];
 }

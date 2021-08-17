@@ -108,73 +108,49 @@
     }];
     
 }
+
+
+
 //- (void)data {
-//    self.timeLab.text = @"12";
-//    self.homeNameLab.text = @"121";
-//    self.awayNameLab.text = @"555";
-////        self.homeNameLab.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:AUTO(12)];
-//    //    self.awayNameLab.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:AUTO(12)];
-//        
+////    [self.gifImgView sd]
+////    NSString *path = [[NSBundle mainBundle] pathForResource:@"jc_enterlball" ofType:@"gif"];
+////    NSData *data = [NSData dataWithContentsOfFile:path];
+////    self.gifImgView.image = [UIImage sd_imageWithGIFData:data];
+////    self.gifImgView.animationImages
+//    NSMutableArray *imageArray = [NSMutableArray array];
+//    for (int i=0; i<45; i++) {
+//        NSString *name = [NSString stringWithFormat:@"jc_enterlball_%d",i];
+//        UIImage *img = JCIMAGE(name);
+//        [imageArray addObject:img];
+//    }
+//    self.gifImgView.animationImages = imageArray;
+//    self.gifImgView.animationDuration = 1.5;
+//    [self.gifImgView startAnimating];
+//
+//    self.timeLab.text = @"50'";
+//    self.matchNameLab.text = @"球会友谊";
+//    self.homeNameLab.text = @"主队";
+//    self.awayNameLab.text = @"主队";
 //    self.homeScoreLab.text = @"5";
-//    self.awayScoreLab.text = @"5";
+//    self.awayScoreLab.text = @"6";
+//
 //    self.homeNameLab.textColor = JCWhiteColor;
-//    self.awayNameLab.textColor = [JCWhiteColor colorWithAlphaComponent:0.5];
+//    self.homeNameLab.font = [UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(14)];
 //    self.homeScoreLab.textColor = JCWhiteColor;
-//    self.awayScoreLab.textColor = [JCWhiteColor colorWithAlphaComponent:0.5];
-////    if ([model.position integerValue]==1) {
-////        self.homeNameLab.textColor = JCWhiteColor;
-////        self.awayNameLab.textColor = [JCWhiteColor colorWithAlphaComponent:0.5];
-////        self.homeScoreLab.textColor = JCWhiteColor;
-////        self.awayScoreLab.textColor = [JCWhiteColor colorWithAlphaComponent:0.5];
-////    }else{
-////        self.homeNameLab.textColor = JCWhiteColor;
-////        self.awayNameLab.textColor = [JCWhiteColor colorWithAlphaComponent:0.5];
-////        self.homeScoreLab.textColor = JCWhiteColor;
-////        self.awayScoreLab.textColor = [JCWhiteColor colorWithAlphaComponent:0.5];
-////    }
+//    self.homeScoreLab.font = [UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(14)];
+//
+//    self.awayNameLab.textColor = [JCWhiteColor colorWithAlphaComponent:0.8];
+//    self.awayNameLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(14)];
+//    self.awayScoreLab.textColor = [JCWhiteColor colorWithAlphaComponent:0.8];
+//    self.awayScoreLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(14)];
+//
+//    [self.ballImgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(self.awayNameLab.mas_left).offset(-2);
+//        make.centerY.equalTo(self.awayNameLab);
+//        make.width.height.mas_equalTo(AUTO(12));
+//    }];
+//
 //}
-
-
-- (void)data {
-//    [self.gifImgView sd]
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"jc_enterlball" ofType:@"gif"];
-//    NSData *data = [NSData dataWithContentsOfFile:path];
-//    self.gifImgView.image = [UIImage sd_imageWithGIFData:data];
-//    self.gifImgView.animationImages
-    NSMutableArray *imageArray = [NSMutableArray array];
-    for (int i=0; i<45; i++) {
-        NSString *name = [NSString stringWithFormat:@"jc_enterlball_%d",i];
-        UIImage *img = JCIMAGE(name);
-        [imageArray addObject:img];
-    }
-    self.gifImgView.animationImages = imageArray;
-    self.gifImgView.animationDuration = 1.5;
-    [self.gifImgView startAnimating];
-    
-    self.timeLab.text = @"50'";
-    self.matchNameLab.text = @"球会友谊";
-    self.homeNameLab.text = @"主队";
-    self.awayNameLab.text = @"主队";
-    self.homeScoreLab.text = @"5";
-    self.awayScoreLab.text = @"6";
-    
-    self.homeNameLab.textColor = JCWhiteColor;
-    self.homeNameLab.font = [UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(14)];
-    self.homeScoreLab.textColor = JCWhiteColor;
-    self.homeScoreLab.font = [UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(14)];
-    
-    self.awayNameLab.textColor = [JCWhiteColor colorWithAlphaComponent:0.8];
-    self.awayNameLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(14)];
-    self.awayScoreLab.textColor = [JCWhiteColor colorWithAlphaComponent:0.8];
-    self.awayScoreLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(14)];
-    
-    [self.ballImgView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.awayNameLab.mas_left).offset(-2);
-        make.centerY.equalTo(self.awayNameLab);
-        make.width.height.mas_equalTo(AUTO(12));
-    }];
-
-}
 
 - (void)setModel:(JCTipMatchInfoModel *)model {
     _model = model;

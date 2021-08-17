@@ -76,6 +76,21 @@
         [self dealWithError:error];
     }];
 }
+
+//二维码弹窗
+- (void)getHomeGZH_QrCodeWithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock {
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{};
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"qr_code_popup" paramDic:param ignoreArray:@[]];
+    [manager POST:urlString parameters:param headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+
 //新人红包
 - (void)getNewPeoplePrizeWithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock {
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];

@@ -358,13 +358,16 @@
 - (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section {
     if (self.scrolluUp) {
         if (self.timeRightArray.count>0) {
-//            self.selectRightIndex = section;
-            NSString *time = self.timeRightArray[section];
-            if (self.userSelect) {
-                time = self.timeRightArray[self.selectRightIndex];
-                self.userSelect = NO;
+            if (section<self.timeRightArray.count) {
+                NSString *time = self.timeRightArray[section];
+                if (self.userSelect) {
+                    time = self.timeRightArray[self.selectRightIndex];
+                    self.userSelect = NO;
+                }
+                self.headView.timeLab.text = time;
             }
-            self.headView.timeLab.text = time;
+
+
         }
          
     }
@@ -373,13 +376,16 @@
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     if (self.scrolluDown) {
          if (self.timeRightArray.count>0) {
-//             self.selectRightIndex = section;
-             NSString *time = self.timeRightArray[section];
-             if (self.userSelect) {
-                 time = self.timeRightArray[self.selectRightIndex];
-                 self.userSelect = NO;
+             if (section<self.timeRightArray.count) {
+                 NSString *time = self.timeRightArray[section];
+                 if (self.userSelect) {
+                     time = self.timeRightArray[self.selectRightIndex];
+                     self.userSelect = NO;
+                 }
+                 self.headView.timeLab.text = time;
              }
-             self.headView.timeLab.text = time;
+//             self.selectRightIndex = section;
+
          }
     }
 }

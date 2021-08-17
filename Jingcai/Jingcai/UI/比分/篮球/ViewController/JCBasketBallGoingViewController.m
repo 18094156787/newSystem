@@ -17,7 +17,6 @@
 #import "UISegmentedControl+Extension.h"
 #import "JCMatchFilterSegmentView.h"
 #import "JCMatchFilterSegmentCurrentView.h"
-#import "JCTeamMatchInfoMatchVC.h"
 @interface JCBasketBallGoingViewController ()
 
 @property (nonatomic,strong) JCMathDateSelectionView *dateHeadView;

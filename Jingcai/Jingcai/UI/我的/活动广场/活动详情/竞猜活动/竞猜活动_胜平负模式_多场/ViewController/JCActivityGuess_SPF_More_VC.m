@@ -71,8 +71,6 @@
     // Do any additional setup after loading the view.
     [self refreshData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:NotificationUserLogin object:nil];
-
-
 }
 
 - (void)refreshData {
@@ -301,12 +299,12 @@
         WeakSelf;
         cell.JCSelectBlock = ^{
             weakSelf.selMatchArray = [NSMutableArray array];
-            for (JCActivityGuess_SPF_More_MatchModel * matchModel in self.detailModel.get_match_info_array) {
+            for (JCActivityGuess_SPF_More_MatchModel * matchModel in weakSelf.detailModel.get_match_info_array) {
                 if (matchModel.select_btn) {
                     [weakSelf.selMatchArray addObject:matchModel];
                 }
             }
-            [self.sureBtn setTitle:[NSString stringWithFormat:@"提交选项  (%ld/%ld)",weakSelf.selMatchArray.count,weakSelf.match_count] forState:0];
+            [weakSelf.sureBtn setTitle:[NSString stringWithFormat:@"提交选项  (%ld/%ld)",weakSelf.selMatchArray.count,weakSelf.match_count] forState:0];
         };
         return cell;
     }
@@ -523,6 +521,10 @@
 //    self.checkView.dataArray  = array;
     self.checkView.dataArray = self.selMatchArray;;
     [self.jcWindow addSubview:self.checkView];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (JCActivityGuess_SPF_HeadView *)headView {

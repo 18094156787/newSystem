@@ -11,6 +11,17 @@
 @implementation JCMatchFilter_BasketBall_SegmentView
 
 - (void)initViews {
+    self.backImgView.layer.borderWidth = 1;
+    self.backImgView.layer.borderColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1.0].CGColor;
+
+    self.backImgView.layer.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0].CGColor;
+    self.backImgView.layer.cornerRadius = 16;
+    self.backImgView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.12].CGColor;
+    self.backImgView.layer.shadowOffset = CGSizeMake(0,0);
+    self.backImgView.layer.shadowOpacity = 1;
+    self.backImgView.layer.shadowRadius = 10;
+    
+    
     [self addSubview:self.backImgView];
     self.backImgView.frame = CGRectMake(0, 0, 148, 32);
     
@@ -94,7 +105,7 @@
     if (!_backImgView) {
         _backImgView = [UIImageView new];
         _backImgView.backgroundColor = JCWhiteColor;
-        [_backImgView hg_setAllCornerWithCornerRadius:16];
+//        [_backImgView hg_setAllCornerWithCornerRadius:16];
 //        _backImgView.image = JCIMAGE(@"ic_match_filterSegment");
         _backImgView.userInteractionEnabled = YES;
     }

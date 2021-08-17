@@ -478,6 +478,13 @@
         self.homeSectionFourLab.text = @"";
         self.homeSectionOTLab.text = @"";
         
+        self.awaySectionOneLab.text = @"";
+        self.awaySectionTwoLab.text = @"";
+        self.awaySectionThreeLab.text = @"";
+        self.awaySectionFourLab.text = @"";
+        self.awaySectionOTLab.text = @"";
+
+        
 
     }
     

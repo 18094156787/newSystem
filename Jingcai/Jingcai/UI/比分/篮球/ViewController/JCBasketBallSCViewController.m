@@ -17,7 +17,6 @@
 #import "UISegmentedControl+Extension.h"
 #import "JCMatchFilterSegmentView.h"
 #import "JCMatchFilterSegmentCurrentView.h"
-#import "JCTeamMatchInfoMatchVC.h"
 #import "NSDate+BRPickerView.h"
 #import "JCMatchFilter_BasketBall_SegmentView.h"
 #import "JCMatchFilterSegment_BasketBall_CurrentView.h"

@@ -340,16 +340,7 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //充值方式
-    if (indexPath.section == 2) {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        for (JCPayWayBall * itemBall in self.chargeWayArray) {
-            itemBall.state_issel = NO;
-        }
-        JCPayWayBall * currentBall = self.chargeWayArray[indexPath.row];
-        currentBall.state_issel = YES;
-        [self.tableView reloadData];
-    }
+
 }
 - (IBAction)payBtnClick:(UIButton *)sender {
     if (!self.sureProtocolBtn.selected) {

@@ -15,7 +15,6 @@
 #import "JCActivityKindCell.h"
 #import "JCShareView.h"
 #import "JCActivityGuessCompleteVC.h"
-#import "JCActivityGuessSuccessTipView.h"
 #import "JCActivityKindGetPrizeCell.h"
 #import "JCActivityKindProgressCell.h"
 #import "JCKindScoreCompleteView.h"
