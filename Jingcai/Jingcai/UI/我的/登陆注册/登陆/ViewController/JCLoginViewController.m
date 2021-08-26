@@ -9,7 +9,6 @@
 #import "JCLoginViewController.h"
 #import <UMShare/UMShare.h>
 #import "WXApiManager.h"
-#import "ProtocolViewController.h"
 #import "JCRegisterViewController.h"
 #import "JCForgetPsdViewController.h"
 #import "JCBindTelViewController.h"

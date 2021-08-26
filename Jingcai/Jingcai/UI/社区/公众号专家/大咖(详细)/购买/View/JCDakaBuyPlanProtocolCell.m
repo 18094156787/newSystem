@@ -7,7 +7,6 @@
 //
 
 #import "JCDakaBuyPlanProtocolCell.h"
-#import "ProtocolViewController.h"
 @implementation JCDakaBuyPlanProtocolCell
 
 - (void)initViews {

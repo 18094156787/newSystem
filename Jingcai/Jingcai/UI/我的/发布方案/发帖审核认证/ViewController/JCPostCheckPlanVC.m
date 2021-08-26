@@ -313,11 +313,13 @@
         self.title = @"发布方案(进球数)";
     }
     
-    self.submitBtn.frame = CGRectMake(0, 0, 40, 40);
-    UIView *itemBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [itemBgView addSubview:self.submitBtn];
-    UIBarButtonItem *submitItem = [[UIBarButtonItem alloc] initWithCustomView:itemBgView];
-    self.navigationItem.rightBarButtonItem = submitItem;
+    [self.view addSubview:self.submitBtn];
+    [self.submitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(15));
+        make.right.offset(AUTO(-15));
+        make.height.mas_equalTo(AUTO(44));
+        make.bottom.offset(-kBottomTabSafeAreaHeight-AUTO(10));
+    }];
     
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.offset(AUTO(8));
@@ -419,6 +421,7 @@
                     weakSelf.currentIndex = 0;
                 }
                  [weakSelf showSelectMatchCount];
+                [weakSelf canPostEanble];
         //        NSLog(@"%")
             }];
 
@@ -483,6 +486,7 @@
                 }
             }
              [weakSelf showSelectMatchCount];
+            [weakSelf canPostEanble];
     //        NSLog(@"%")
         }];
     return cell;
@@ -545,7 +549,7 @@
         return AUTO(70);
     }
     if (section==1) {
-         return AUTO(1120);
+         return AUTO(1170);
     }
     
     return 10;
@@ -711,6 +715,7 @@
                 [self.dataArray replaceObjectAtIndex:self.currentIndex withObject:infoModel];
             }
             [self.tableView reloadData];
+            [self canPostEanble];
         }
         
     } failure:^(NSError * _Nonnull error) {
@@ -1105,12 +1110,12 @@
 }
 //符合条件,发布按钮才能高亮点击
 - (void)canPostEanble {
-    if (self.titleTV.text.length>0&&self.content.length>300&&self.matchArray.count>0) {
+    if (self.titleTV.text.length>0&&self.content.length>0&&self.dataArray.count>0) {
         self.submitBtn.userInteractionEnabled = YES;
-        [self.submitBtn setTitleColor:COLOR_2F2F2F forState:0];
+        self.submitBtn.backgroundColor = JCBaseColor;
     }else{
+        self.submitBtn.backgroundColor = COLOR_9F9F9F;
         self.submitBtn.userInteractionEnabled = NO;
-        [self.submitBtn setTitleColor:[COLOR_2F2F2F colorWithAlphaComponent:0.7] forState:0];
     }
 }
 
@@ -1149,8 +1154,9 @@
 
 - (UIButton *)submitBtn {
     if (!_submitBtn) {
-        _submitBtn = [UIButton initWithText:@"发布" FontSize:14 BackGroundColor:JCClearColor TextColors:[COLOR_2F2F2F colorWithAlphaComponent:0.6]];
+        _submitBtn = [UIButton initWithText:@"发布" FontSize:16 BackGroundColor:COLOR_9F9F9F TextColors:JCWhiteColor];
         [_submitBtn addTarget:self action:@selector(submitBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        [_submitBtn hg_setAllCornerWithCornerRadius:AUTO(22)];
     }
     return _submitBtn;
 }

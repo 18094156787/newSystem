@@ -28,7 +28,6 @@
 #import "JCFootBallBuyPlanEndBuyCell.h"
 #import "JCHongbangOrderVC.h"
 #import "JCHongbangOrderInfoCell.h"
-#import "ProtocolViewController.h"
 #import "JCHongbangPriceInfoView.h"
 #import "JCHongbangInfoTopCell.h"
 #import "JCDakaBuyPayWayTopView.h"

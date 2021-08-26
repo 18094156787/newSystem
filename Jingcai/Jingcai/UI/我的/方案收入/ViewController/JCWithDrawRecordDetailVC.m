@@ -10,7 +10,6 @@
 #import "JCWithDrawRecordItemCell.h"
 #import "JCPostCheckRuleHeadView.h"
 #import "JCPostCheckRuleTitleView.h"
-#import "ProtocolViewController.h"
 #import "JCWithDrawRecordDetailHeadView.h"
 #import "JCBaseTitleAlertView.h"
 #import "JCMyGaoChouDetailModel.h"

@@ -97,6 +97,7 @@
     self.navigationBarStyle = JCNavigationBarStyleDefault;
     [self setNavBackImg];
     
+    
 }
 
 
@@ -132,11 +133,19 @@
         self.title = @"发布方案(进球数)";
     }
     
-    self.submitBtn.frame = CGRectMake(0, 0, 40, 40);
-    UIView *itemBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [itemBgView addSubview:self.submitBtn];
-    UIBarButtonItem *submitItem = [[UIBarButtonItem alloc] initWithCustomView:itemBgView];
-    self.navigationItem.rightBarButtonItem = submitItem;
+//    self.submitBtn.frame = CGRectMake(0, 0, 40, 40);
+//    UIView *itemBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+//    [itemBgView addSubview:self.submitBtn];
+//    UIBarButtonItem *submitItem = [[UIBarButtonItem alloc] initWithCustomView:itemBgView];
+//    self.navigationItem.rightBarButtonItem = submitItem;
+    
+    [self.view addSubview:self.submitBtn];
+    [self.submitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(15));
+        make.right.offset(AUTO(-15));
+        make.height.mas_equalTo(AUTO(44));
+        make.bottom.offset(-kBottomTabSafeAreaHeight-AUTO(10));
+    }];
     
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.offset(AUTO(8));
@@ -217,6 +226,7 @@
             weakSelf.currentIndex = indexPath.row;
             [weakSelf.dataArray removeObjectAtIndex:indexPath.row];
             [weakSelf.tableView reloadData];
+            [weakSelf canPostEanble];
 
 
         }];
@@ -254,12 +264,6 @@
         if (weakSelf.dataArray.count==1) {
             JCPostPlanMathInfoModel *infoModel = weakSelf.dataArray.firstObject;
             [infoModel.btnArray removeAllObjects];
-//            if (infoModel.btnArray.count==1) {
-//                JCPostButton *btn = infoModel.btnArray.firstObject;
-//                if ([btn.value intValue]<1.4) {
-//                    [infoModel.btnArray removeObject:btn];
-//                }
-//            }
         }
         [weakSelf.tableView reloadData];
         [weakSelf configMatchCount];
@@ -328,7 +332,7 @@
         return AUTO(60);
     }
     if (section==2) {
-         return AUTO(1120);
+         return AUTO(1170);
     }
     
     return 10;
@@ -1408,12 +1412,12 @@
 //    NSInteger number = 300;
 
     
-    if (self.titleTV.text.length>0&&self.content.length>=300&&self.dataArray.count>0) {
+    if (self.titleTV.text.length>0&&self.content.length>0&&self.dataArray.count>0) {
         self.submitBtn.userInteractionEnabled = YES;
-//        [self.submitBtn setTitleColor:JCWhiteColor forState:0];
+        self.submitBtn.backgroundColor = JCBaseColor;
     }else{
+        self.submitBtn.backgroundColor = COLOR_9F9F9F;
         self.submitBtn.userInteractionEnabled = NO;
-//        [self.submitBtn setTitleColor:[JCWhiteColor colorWithAlphaComponent:0.7] forState:0];
     }
 }
 /*
@@ -1743,8 +1747,9 @@
 
 - (UIButton *)submitBtn {
     if (!_submitBtn) {
-        _submitBtn = [UIButton initWithText:@"发布" FontSize:14 BackGroundColor:JCClearColor TextColors:COLOR_1B1B1B];
+        _submitBtn = [UIButton initWithText:@"发布" FontSize:16 BackGroundColor:COLOR_9F9F9F TextColors:JCWhiteColor];
         [_submitBtn addTarget:self action:@selector(submitBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        [_submitBtn hg_setAllCornerWithCornerRadius:AUTO(22)];
     }
     return _submitBtn;
 }

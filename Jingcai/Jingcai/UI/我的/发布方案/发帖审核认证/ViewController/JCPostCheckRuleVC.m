@@ -10,7 +10,6 @@
 #import "JCPostCheckRuleCell.h"
 #import "JCPostCheckRuleHeadView.h"
 #import "JCPostCheckRuleTitleView.h"
-#import "ProtocolViewController.h"
 #import "JCPostCheckUserInfoVC.h"
 @interface JCPostCheckRuleVC ()
 
@@ -109,19 +108,7 @@
 
     
         NSString *codeLoginString = @"阅读并同意《作者规则说明》";
-//        NSMutableAttributedString* atext = [[NSMutableAttributedString alloc] initWithString:codeLoginString attributes:@{NSForegroundColorAttributeName:COLOR_A9A9A9,NSFontAttributeName:[UIFont systemFontOfSize:AUTO(12)]}];
-//        NSRange loginRange = [codeLoginString rangeOfString:@"《用户服务条款》"];
-//    //    [atext yy_setFont:[UIFont systemFontOfSize:AUTO(12)] range:atext.yy_rangeOfAll];
-//        [atext addAttributes:@{NSForegroundColorAttributeName:COLOR_5194E3} range:loginRange];
-//        YYTextHighlight *hi = [YYTextHighlight new];
-//        [atext setTextHighlight:hi range:codeLoginString.rangeOfAll];
-//
-//        WeakSelf;
-//        hi.tapAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {
-//            [weakSelf.navigationController pushViewController:[ProtocolViewController new] animated:YES];
-//        };
 
-//        self.protocolLab.attributedText=atext;
     self.protocolLab.text = codeLoginString;
     
     

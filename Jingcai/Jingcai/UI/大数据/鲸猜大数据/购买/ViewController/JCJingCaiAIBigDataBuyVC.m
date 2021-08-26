@@ -18,7 +18,6 @@
 #import "WXApiManager.h"
 #import "JCHongbangDetailWMstckyVC.h"
 #import "JCChargeVC.h"
-#import "ProtocolViewController.h"
 #import "JCHongbangInfoTopCell.h"
 #import "JCJingCaiAIBigDataBuyPriceView.h"
 #import "JCJingCaiAIBigDataBuyInfoHeadView.h"

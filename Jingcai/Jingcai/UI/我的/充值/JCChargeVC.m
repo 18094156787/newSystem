@@ -214,6 +214,7 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
             if (self.actTipArray.count>0) {
                 tipHeihgt = 40;
             }
+
             self.bannerHeight = bannerHeihgt+tipHeihgt;
             self.tableHeightConstraint.constant = JCChargeAccountH + JCChargeInputH + JCChargeWayH*self.chargeWayArray.count + JCChargeHeaderH+AUTO(16)+self.bannerHeight;
             [self.tableView reloadData];
@@ -345,7 +346,14 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 - (IBAction)payBtnClick:(UIButton *)sender {
     if (!self.sureProtocolBtn.selected) {
         [JCWToastTool showHint:@"请先勾选同意《鲸猜足球用户购买协议》"];
-        [self.scrollow scrollToBottomAnimated:YES];
+//        [self.scrollow scrollToBottomAnimated:YES];
+        NSLog(@"屏幕高%.0f",SCREEN_HEIGHT-kNavigationBarHeight-kBottomTabSafeAreaHeight-100);
+        float content = SCREEN_HEIGHT-kNavigationBarHeight-kBottomTabSafeAreaHeight-100;
+        if (self.sureProtocolBtn.bottom>content) {
+            [self.scrollow setContentOffset:CGPointMake(0, self.sureProtocolBtn.bottom-content+50) animated:YES];
+        }
+        NSLog(@"按钮位置%.0f",self.sureProtocolBtn.bottom);
+//        [self.scrollow setContentOffset:CGPointMake(0, 150) animated:YES];
         return;
     }
     

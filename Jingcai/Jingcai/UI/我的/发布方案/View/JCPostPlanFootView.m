@@ -87,7 +87,7 @@
     [self.zhengwenBgView addSubview:self.zhengweContentTV];
     [self.zhengweContentTV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(10));
-        make.right.offset(AUTO(-15));
+        make.right.offset(AUTO(-10));
         make.top.equalTo(self.zhengweLab.mas_bottom).offset(AUTO(5));
         make.bottom.offset(AUTO(-30));
     }];
@@ -730,6 +730,7 @@
         _zhengweContentTV = [UITextView new];
         _zhengweContentTV.textColor = COLOR_333333;
         _zhengweContentTV.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(14)];
+        _zhengweContentTV.showsVerticalScrollIndicator = NO;
     }
     return _zhengweContentTV;
 }

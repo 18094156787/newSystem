@@ -11,7 +11,6 @@
 #import "JNMatchLineupBall.h"
 #import "JNMatchDrawCell.h"
 #import "JNMatchBattleCell.h"
-#import "JNMatchHeaderView.h"
 #import "RNNoData.h"
 #import "JCDataBaseTitleHeadView.h"
 #import "JCWMatchBall.h"
@@ -103,10 +102,7 @@
     if (section == 0) {
         return [UIView new];
     }
-    
-//    JNMatchHeaderView * headerView = [[JNMatchHeaderView alloc] init];
-//    headerView.backgroundColor = UIColorFromRGB(0xF4F4F4);
-//    headerView.title = section == 1 ? @"首发阵容" : @"替补阵容";
+
     JCDataBaseTitleHeadView *headView = [JCDataBaseTitleHeadView new];
     headView.backgroundColor = JCWhiteColor;
     headView.titleLab.font = [UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(14)];

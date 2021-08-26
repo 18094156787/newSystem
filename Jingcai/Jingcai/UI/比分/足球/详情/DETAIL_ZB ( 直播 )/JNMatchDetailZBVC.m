@@ -125,14 +125,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
-//        if (indexPath.row==0) {
-//            if (self.trandArray.count>0) {
-//                return 130;
-//            }else{
-//                return 0;;
-//            }
-//            
-//        }
+
         if (indexPath.row==0) {
             if (self.liveStatsModel) {
                 return AUTO(200);

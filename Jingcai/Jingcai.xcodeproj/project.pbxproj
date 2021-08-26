@@ -761,13 +761,8 @@
 		7B99E68B2316644C00AA5AB6 /* JNMatchDetailZBCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B99E5FA2316644B00AA5AB6 /* JNMatchDetailZBCell.m */; };
 		7B99E68C2316644C00AA5AB6 /* JNMatchDetailZBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B99E5FC2316644B00AA5AB6 /* JNMatchDetailZBCell.xib */; };
 		7B99E68D2316644C00AA5AB6 /* JNMatchDetailZBTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B99E5FE2316644B00AA5AB6 /* JNMatchDetailZBTopCell.m */; };
-		7B99E68F2316644C00AA5AB6 /* JNMatchTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B99E6022316644B00AA5AB6 /* JNMatchTitleView.m */; };
-		7B99E6902316644C00AA5AB6 /* JNMatchHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B99E6052316644B00AA5AB6 /* JNMatchHeaderView.m */; };
 		7B99E6912316644C00AA5AB6 /* JNMatchTimeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B99E6072316644B00AA5AB6 /* JNMatchTimeHeaderView.m */; };
 		7B99E6922316644C00AA5AB6 /* JNMatchFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B99E6082316644B00AA5AB6 /* JNMatchFooterView.m */; };
-		7B99E6932316644C00AA5AB6 /* JNMatchHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B99E60A2316644B00AA5AB6 /* JNMatchHeaderView.xib */; };
-		7B99E6942316644C00AA5AB6 /* JNMatchTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B99E60C2316644B00AA5AB6 /* JNMatchTitleView.xib */; };
-		7B99E6952316644C00AA5AB6 /* JNMatchTitlePosView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B99E60D2316644B00AA5AB6 /* JNMatchTitlePosView.m */; };
 		7B99E6962316644C00AA5AB6 /* JNMatchQBSectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B99E6102316644B00AA5AB6 /* JNMatchQBSectionVC.xib */; };
 		7B99E6972316644C00AA5AB6 /* JNMatchDetailQBVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B99E6112316644B00AA5AB6 /* JNMatchDetailQBVC.m */; };
 		7B99E6982316644C00AA5AB6 /* JNMatchQBSectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B99E6122316644B00AA5AB6 /* JNMatchQBSectionVC.m */; };
@@ -1165,8 +1160,6 @@
 		C31665C52252FB3800DDB4DD /* JCTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = C31665C42252FB3800DDB4DD /* JCTagView.m */; };
 		C31665C72252FB4400DDB4DD /* JCTagView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C31665C62252FB4400DDB4DD /* JCTagView.xib */; };
 		C31665D522535A6100DDB4DD /* JCWCoinRecordBall.m in Sources */ = {isa = PBXBuildFile; fileRef = C31665D422535A6100DDB4DD /* JCWCoinRecordBall.m */; };
-		C3190016216DE0830033DC02 /* ProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3190014216DE0830033DC02 /* ProtocolViewController.m */; };
-		C3190017216DE0830033DC02 /* ProtocolViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3190015216DE0830033DC02 /* ProtocolViewController.xib */; };
 		C31A2406216F545600F1432E /* JCSettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C31A2404216F545600F1432E /* JCSettingVC.m */; };
 		C31A2407216F545600F1432E /* JCSettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C31A2405216F545600F1432E /* JCSettingVC.xib */; };
 		C31A2424216F611400F1432E /* JCSettingNameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C31A2422216F611400F1432E /* JCSettingNameVC.m */; };
@@ -2778,18 +2771,10 @@
 		7B99E5FD2316644B00AA5AB6 /* JNMatchDetailZBVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNMatchDetailZBVC.h; sourceTree = "<group>"; };
 		7B99E5FE2316644B00AA5AB6 /* JNMatchDetailZBTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNMatchDetailZBTopCell.m; sourceTree = "<group>"; };
 		7B99E5FF2316644B00AA5AB6 /* JNMatchDetailZBCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNMatchDetailZBCell.h; sourceTree = "<group>"; };
-		7B99E6022316644B00AA5AB6 /* JNMatchTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNMatchTitleView.m; sourceTree = "<group>"; };
 		7B99E6032316644B00AA5AB6 /* JNMatchFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNMatchFooterView.h; sourceTree = "<group>"; };
 		7B99E6042316644B00AA5AB6 /* JNMatchTimeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNMatchTimeHeaderView.h; sourceTree = "<group>"; };
-		7B99E6052316644B00AA5AB6 /* JNMatchHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNMatchHeaderView.m; sourceTree = "<group>"; };
-		7B99E6062316644B00AA5AB6 /* JNMatchTitlePosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNMatchTitlePosView.h; sourceTree = "<group>"; };
 		7B99E6072316644B00AA5AB6 /* JNMatchTimeHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNMatchTimeHeaderView.m; sourceTree = "<group>"; };
 		7B99E6082316644B00AA5AB6 /* JNMatchFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNMatchFooterView.m; sourceTree = "<group>"; };
-		7B99E6092316644B00AA5AB6 /* JNMatchTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNMatchTitleView.h; sourceTree = "<group>"; };
-		7B99E60A2316644B00AA5AB6 /* JNMatchHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JNMatchHeaderView.xib; sourceTree = "<group>"; };
-		7B99E60B2316644B00AA5AB6 /* JNMatchHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNMatchHeaderView.h; sourceTree = "<group>"; };
-		7B99E60C2316644B00AA5AB6 /* JNMatchTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JNMatchTitleView.xib; sourceTree = "<group>"; };
-		7B99E60D2316644B00AA5AB6 /* JNMatchTitlePosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNMatchTitlePosView.m; sourceTree = "<group>"; };
 		7B99E60F2316644B00AA5AB6 /* JNMatchQBSectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNMatchQBSectionVC.h; sourceTree = "<group>"; };
 		7B99E6102316644B00AA5AB6 /* JNMatchQBSectionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JNMatchQBSectionVC.xib; sourceTree = "<group>"; };
 		7B99E6112316644B00AA5AB6 /* JNMatchDetailQBVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNMatchDetailQBVC.m; sourceTree = "<group>"; };
@@ -3532,9 +3517,6 @@
 		C31665C62252FB4400DDB4DD /* JCTagView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JCTagView.xib; sourceTree = "<group>"; };
 		C31665D322535A6100DDB4DD /* JCWCoinRecordBall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCWCoinRecordBall.h; sourceTree = "<group>"; };
 		C31665D422535A6100DDB4DD /* JCWCoinRecordBall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCWCoinRecordBall.m; sourceTree = "<group>"; };
-		C3190013216DE0830033DC02 /* ProtocolViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProtocolViewController.h; sourceTree = "<group>"; };
-		C3190014216DE0830033DC02 /* ProtocolViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProtocolViewController.m; sourceTree = "<group>"; };
-		C3190015216DE0830033DC02 /* ProtocolViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProtocolViewController.xib; sourceTree = "<group>"; };
 		C31A2403216F545600F1432E /* JCSettingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCSettingVC.h; sourceTree = "<group>"; };
 		C31A2404216F545600F1432E /* JCSettingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCSettingVC.m; sourceTree = "<group>"; };
 		C31A2405216F545600F1432E /* JCSettingVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JCSettingVC.xib; sourceTree = "<group>"; };
@@ -7667,18 +7649,10 @@
 		7B99E6012316644B00AA5AB6 /* HEADER && FOOTER */ = {
 			isa = PBXGroup;
 			children = (
-				7B99E6022316644B00AA5AB6 /* JNMatchTitleView.m */,
 				7B99E6032316644B00AA5AB6 /* JNMatchFooterView.h */,
 				7B99E6042316644B00AA5AB6 /* JNMatchTimeHeaderView.h */,
-				7B99E6052316644B00AA5AB6 /* JNMatchHeaderView.m */,
-				7B99E6062316644B00AA5AB6 /* JNMatchTitlePosView.h */,
 				7B99E6072316644B00AA5AB6 /* JNMatchTimeHeaderView.m */,
 				7B99E6082316644B00AA5AB6 /* JNMatchFooterView.m */,
-				7B99E6092316644B00AA5AB6 /* JNMatchTitleView.h */,
-				7B99E60A2316644B00AA5AB6 /* JNMatchHeaderView.xib */,
-				7B99E60B2316644B00AA5AB6 /* JNMatchHeaderView.h */,
-				7B99E60C2316644B00AA5AB6 /* JNMatchTitleView.xib */,
-				7B99E60D2316644B00AA5AB6 /* JNMatchTitlePosView.m */,
 			);
 			path = "HEADER && FOOTER";
 			sourceTree = "<group>";
@@ -9406,9 +9380,6 @@
 				C3EABE242227861700A90B4E /* JCLoginLotteryVC.xib */,
 				C3C9A17E218C358B00773879 /* WebViewController.h */,
 				C3C9A17D218C358B00773879 /* WebViewController.m */,
-				C3190013216DE0830033DC02 /* ProtocolViewController.h */,
-				C3190014216DE0830033DC02 /* ProtocolViewController.m */,
-				C3190015216DE0830033DC02 /* ProtocolViewController.xib */,
 				C3C0F2CE21AB9E6100FCF725 /* PayProtocolViewController.h */,
 				C3C0F2CD21AB9E6100FCF725 /* PayProtocolViewController.m */,
 				C3C0F2CF21AB9E6100FCF725 /* PayProtocolViewController.xib */,
@@ -10428,7 +10399,6 @@
 				7B5D0384265E1F7F00C65F51 /* guide_4@3x.png in Resources */,
 				7B0CFB3C2303B54F00AF8A6A /* Assets.xcassets in Resources */,
 				590A3E7E26A191E30012EDE6 /* jc_ayh_1@2x.png in Resources */,
-				7B99E6942316644C00AA5AB6 /* JNMatchTitleView.xib in Resources */,
 				7B99E6DD2316644C00AA5AB6 /* JNMatchDetailZSVC.xib in Resources */,
 				C349963B21C7930A00C3E282 /* MagicAlertCell.xib in Resources */,
 				7B5D03E3265F7D2800C65F51 /* course_min_2@2x.png in Resources */,
@@ -10469,7 +10439,6 @@
 				590A3F5226B7E7BC0012EDE6 /* jc_enterlball_5@2x.png in Resources */,
 				7BC4CAB1235FEDF7002226C1 /* Final_Animation_00002@2x.png in Resources */,
 				7B5FC849256FCBBF0006D6F0 /* ic_launch_5@3x.png in Resources */,
-				7B99E6932316644C00AA5AB6 /* JNMatchHeaderView.xib in Resources */,
 				C3C3E1792178623D00466AAF /* JCAboutVC.xib in Resources */,
 				7B5C2E4F25A850F700777964 /* cjLoading-7@2x.png in Resources */,
 				7B5C2E5525A850F700777964 /* cjLoading-2@2x.png in Resources */,
@@ -10486,7 +10455,6 @@
 				C31665C72252FB4400DDB4DD /* JCTagView.xib in Resources */,
 				7B5D03DF265F7D2800C65F51 /* course_min_1@2x.png in Resources */,
 				C3A5E9B421B05E48005E15F9 /* JCSettingAvatarVC.xib in Resources */,
-				C3190017216DE0830033DC02 /* ProtocolViewController.xib in Resources */,
 				7B5C2E5325A850F700777964 /* cjLoading-6@2x.png in Resources */,
 				7BE61B3E23CF11C20079A86C /* xryd_14.png in Resources */,
 				C3F023D4216F735000A1B98F /* JCUpdateView.xib in Resources */,
@@ -10575,7 +10543,6 @@
 			files = (
 				590A3E8526A7CE620012EDE6 /* JCMatchHomeListTableViewCell.m in Sources */,
 				7BE8922724B7FD0E00AE2E79 /* JCEventScoreXiaoZuModel.m in Sources */,
-				C3190016216DE0830033DC02 /* ProtocolViewController.m in Sources */,
 				7B8BCE4F26083F590032EDA2 /* WMMagicScrollView.m in Sources */,
 				7BA96C3B26202D4A00E2DFC1 /* JCDakaPlanDetailStickWMVC.m in Sources */,
 				C3B01CF22268228C00F5D057 /* JCBackRefreshManager.m in Sources */,
@@ -11338,7 +11305,6 @@
 				7B45F43725F0B86E0099D108 /* JCActivityNewsVC.m in Sources */,
 				7B6C1A1724BBEC5200072C62 /* JCTeamDetailWMStickVC.m in Sources */,
 				7BE891E824B5F9E400AE2E79 /* JNMatchZS_JC_BF_InfoStyleFourCell.m in Sources */,
-				7B99E6902316644C00AA5AB6 /* JNMatchHeaderView.m in Sources */,
 				7B45F45725F1DCB60099D108 /* JCActivityFanganVC.m in Sources */,
 				7BC0967925007F4C0020D92A /* JCDatabaseViewController.m in Sources */,
 				7BCA27BE251DF4AD008787FF /* JCAIPlanPriceInfoView.m in Sources */,
@@ -11353,7 +11319,6 @@
 				C3C80D3322042F290092E0FD /* JCWSettingBall.m in Sources */,
 				7B5C2E1225A6D9EC00777964 /* JNMatchZS_ZF_TableViewCell.m in Sources */,
 				7BF167ED2351C24600DFDB00 /* LYEmptyBaseView.m in Sources */,
-				7B99E68F2316644C00AA5AB6 /* JNMatchTitleView.m in Sources */,
 				7B99E6F7231667D000AA5AB6 /* JNMatchBQCBall.m in Sources */,
 				7B9BF1242488E99900DB3589 /* JCYCExpertYcViewController.m in Sources */,
 				7B5E26B8247F66F6008CAEE4 /* JCJingCaiMatchModel.m in Sources */,
@@ -11674,7 +11639,6 @@
 				7B61BEED24ED4DEF0068F148 /* YBIBDefaultWebImageMediator.m in Sources */,
 				7B80CAEA24C588C000C14117 /* JCMatchFilterVC.m in Sources */,
 				7BB075882553FB46004FB701 /* JCInviteFriendCycleCell.m in Sources */,
-				7B99E6952316644C00AA5AB6 /* JNMatchTitlePosView.m in Sources */,
 				7B6D3447253FDADD0038FD5D /* JNMatchSJAgainstFootTipView.m in Sources */,
 				7B74E98C249B5ED2003144B1 /* JCMatchConcernVC.m in Sources */,
 				7BCA2846253432D9008787FF /* JCBigDataSimilarModel.m in Sources */,
