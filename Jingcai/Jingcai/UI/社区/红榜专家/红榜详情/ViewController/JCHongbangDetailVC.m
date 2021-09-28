@@ -22,6 +22,7 @@
 #import "JCMatchDetailWMStickVC.h"
 #import "JCHongBangOrderDetailVC.h"
 #import "JCHongBangDetail_youkeCell.h"
+#import "JCFanganSaleOut_BuyCell.h"
 @interface JCHongbangDetailVC ()
 
 @property (nonatomic,strong) JCHongbangExpertHeadView *headView;
@@ -38,6 +39,8 @@
 
 @property (nonatomic, assign) BOOL hideMatchRate;
 
+@property (nonatomic, assign) BOOL is_saleOut;
+
 @end
 
 @implementation JCHongbangDetailVC
@@ -48,6 +51,7 @@
     self.view.backgroundColor = JCWhiteColor;
     // Do any additional setup after loading the view.
     [self initViews];
+//    self.is_saleOut = YES;
     [self loadDataInfo];
     [self refreshData];
 //    [self dataInfoWithdataDic:self.dataDic];
@@ -118,7 +122,9 @@
     
     [self.tableView registerClass:[JCHongBangDetail_youkeCell class] forCellReuseIdentifier:@"JCHongBangDetail_youkeCell"];
     
-
+    [self.tableView registerClass:[JCFanganSaleOut_BuyCell class] forCellReuseIdentifier:@"JCFanganSaleOut_BuyCell"];
+    
+    
 }
 
 
@@ -136,6 +142,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
+    if (self.is_saleOut) {
+        if (section==0) {
+            return 0;
+        }
+        if (section==1) {
+            return 1;
+        }
+    }
     if (section==0) {
         return self.matchDataArray.count;
     }
@@ -151,6 +165,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.is_saleOut) {
+        return UITableViewAutomaticDimension;
+    }
     if (indexPath.section==0) {
         if (self.tjInfoDetailBall.classfly>1) {
 //            return AUTO(170);
@@ -181,6 +198,18 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+//    if (self.is_saleOut) {
+    if (self.is_saleOut&&indexPath.section==0) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+        return cell;
+    }
+ 
+        if (self.is_saleOut&&indexPath.section==1) {
+            JCFanganSaleOut_BuyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCFanganSaleOut_BuyCell"];
+            return cell;
+        }
+
 
     if (indexPath.section==0) {
         if (self.tjInfoDetailBall.classfly>1) {

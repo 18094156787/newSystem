@@ -498,6 +498,7 @@
 
 
 -(void)updateTimeInVisibleCells{
+    
     NSArray  *cells = self.tableView.visibleCells; //取出屏幕可见ceLl
     for (UITableViewCell *cell in cells) {
         if ([cell isKindOfClass:[JNMatchSJAgainstCountdown_Cell class]]) {

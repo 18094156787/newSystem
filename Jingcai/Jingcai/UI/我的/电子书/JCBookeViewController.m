@@ -48,7 +48,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.navigationBarStyle = JCNavigationBarStyleRed;
+    self.navigationBarStyle = JCNavigationBarStyleDefault;
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     [_player vc_viewWillDisappear];
 }

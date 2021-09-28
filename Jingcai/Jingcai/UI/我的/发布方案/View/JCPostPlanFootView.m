@@ -592,7 +592,14 @@
 
 - (void)refreshCollectionViewWithAddedAsset:(id)asset image:(UIImage *)image {
 //    [_selectedAssets addObject:asset];
-    [_selectedPhotos addObject:image];
+//    [_selectedPhotos addObject:image];
+    
+    JCPostImageModel *model = [JCPostImageModel new];
+    model.url = image;
+    model.width = image.size.width;
+    model.height = image.size.height;
+    model.asset = asset;
+    [self.selectedPhotos addObject:model];
     [_collectionView reloadData];
     
 }

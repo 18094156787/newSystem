@@ -23,11 +23,23 @@
     [super viewWillAppear:animated];
     self.navigationBarStyle = JCNavigationBarStyleDefault;
     [self hideNavShadow];
+    
+//    if (@available(iOS 15.0, *)) {
+//        UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
+//        NSDictionary *dic = @{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor blackColor]};
+//        UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
+//        barApp.backgroundImage = nil;
+//        barApp.backgroundColor = [UIColor whiteColor];
+////        barApp.titleTextAttributes = dic;
+//        self.navigationController.navigationBar.scrollEdgeAppearance = barApp;
+//        self.navigationController.navigationBar.standardAppearance = barApp;
+//    }
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
 
 }
 - (void)viewDidLoad {

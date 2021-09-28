@@ -3,4 +3,102 @@
    uuid = "26447FE1-64B4-4153-9E47-5606331C1ED7"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3F1AC9A6-415A-4C2E-8790-21EC08716F2D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/&#x8d2d;&#x4e70;/Controller/JCDakaBuyPlanVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0A73BF79-7139-4828-BEBE-23B4EAC16B24"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/&#x8d2d;&#x4e70;/Controller/JCDakaBuyPlanVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "601"
+            endingLineNumber = "601"
+            landmarkName = "-getPeoPleList"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EA09D003-E7FE-407A-9615-604287F6B129"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/&#x6211;&#x7684;/&#x8d2d;&#x4e70;&#x8bb0;&#x5f55;/ViewController/JCMyBuyPlanWMViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "-viewWillDisappear:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9062D6CD-4AC2-496F-BD91-151DA944B364"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/&#x6211;&#x7684;/&#x8d2d;&#x4e70;&#x8bb0;&#x5f55;/ViewController/JCMyBuyPlanWMViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "-viewWillAppear:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1F7058AC-9E22-43BD-8566-59FCE828BEF3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/ViewController/JCDakaPlanDetailStickWMVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "-viewWillAppear:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5D0DEDB2-2DE8-470A-8719-BB6653514059"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/ViewController/JCDakaPlanDetailStickWMVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "-viewWillDisappear:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

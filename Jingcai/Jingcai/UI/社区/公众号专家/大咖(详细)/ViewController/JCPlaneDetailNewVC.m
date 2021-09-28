@@ -30,6 +30,7 @@
 
 @property (nonatomic, assign) NSInteger index;
 
+
 @end
 
 @implementation JCPlaneDetailNewVC
@@ -37,13 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = JCWhiteColor;
-    // Do any additional setup after loading the view.
-//    if (self.planDetailModel) {
-//        NSMutableArray *array  = [NSMutableArray arrayWithArray:self.matchArray];
-//        JCGZHTuiJianModel *tjModel = array[0];
-//        [array removeObject:tjModel];
-//        self.matchArray = [NSArray arrayWithArray:array];
-//    }
+
     [self initViews];
 //    [self refreshData];
     [self getPeoPleList];
@@ -141,6 +136,7 @@
 #pragma mark <UITableViewDataSource>
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
     if (self.matchArray.count>0) {
         
         if (self.planDetailModel.qr_code_info.url.count>0||self.planDetailModel.qr_code_info.desc>0) {

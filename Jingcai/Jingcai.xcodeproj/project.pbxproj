@@ -91,6 +91,8 @@
 		595884B82689C3FF0085206B /* JCActivityGuess_SPF_CheckView.m in Sources */ = {isa = PBXBuildFile; fileRef = 595884B72689C3FF0085206B /* JCActivityGuess_SPF_CheckView.m */; };
 		595884BB2689CAF20085206B /* JCActivityGuess_SPF_CompleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 595884BA2689CAF20085206B /* JCActivityGuess_SPF_CompleteCell.m */; };
 		595884BE268B23D00085206B /* JCActivityGuessCheckView.m in Sources */ = {isa = PBXBuildFile; fileRef = 595884BD268B23D00085206B /* JCActivityGuessCheckView.m */; };
+		596A1D9D2701B06D001B6E17 /* JCFanganSaleOutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 596A1D9C2701B06D001B6E17 /* JCFanganSaleOutCell.m */; };
+		596A1DA02701B261001B6E17 /* JCFanganSaleOut_BuyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 596A1D9F2701B261001B6E17 /* JCFanganSaleOut_BuyCell.m */; };
 		59E8472A26C75CDF00D9DFBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59E8472926C75CDF00D9DFBB /* LaunchScreen.storyboard */; };
 		59E8472D26CA41E900D9DFBB /* JCHomeErCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59E8472C26CA41E900D9DFBB /* JCHomeErCodeView.m */; };
 		7B04CCAF2390A9E00039E117 /* JCPayFreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B04CCAE2390A9E00039E117 /* JCPayFreeView.m */; };
@@ -200,7 +202,6 @@
 		7B1BDD3F25063D3B00D7C034 /* JCBankCardInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1BDD3E25063D3B00D7C034 /* JCBankCardInfoModel.m */; };
 		7B1BDD422507544000D7C034 /* JCGaoChouRuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1BDD412507544000D7C034 /* JCGaoChouRuleCell.m */; };
 		7B1BDD45250A22D700D7C034 /* JCCommomTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1BDD44250A22D700D7C034 /* JCCommomTool.m */; };
-		7B1BDD48250B12B000D7C034 /* JCMatchGoalDistributionTrendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1BDD47250B12B000D7C034 /* JCMatchGoalDistributionTrendView.m */; };
 		7B1BDD4B250F15CC00D7C034 /* JCAAVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1BDD4A250F15CB00D7C034 /* JCAAVC.m */; };
 		7B1BDD532510652D00D7C034 /* JCAiProfitDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1BDD522510652D00D7C034 /* JCAiProfitDetailVC.m */; };
 		7B1BDD562510659100D7C034 /* JCAiProfitDetailPieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1BDD552510659100D7C034 /* JCAiProfitDetailPieCell.m */; };
@@ -1473,6 +1474,10 @@
 		595884BA2689CAF20085206B /* JCActivityGuess_SPF_CompleteCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityGuess_SPF_CompleteCell.m; sourceTree = "<group>"; };
 		595884BC268B23D00085206B /* JCActivityGuessCheckView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityGuessCheckView.h; sourceTree = "<group>"; };
 		595884BD268B23D00085206B /* JCActivityGuessCheckView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityGuessCheckView.m; sourceTree = "<group>"; };
+		596A1D9B2701B06D001B6E17 /* JCFanganSaleOutCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCFanganSaleOutCell.h; sourceTree = "<group>"; };
+		596A1D9C2701B06D001B6E17 /* JCFanganSaleOutCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCFanganSaleOutCell.m; sourceTree = "<group>"; };
+		596A1D9E2701B261001B6E17 /* JCFanganSaleOut_BuyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCFanganSaleOut_BuyCell.h; sourceTree = "<group>"; };
+		596A1D9F2701B261001B6E17 /* JCFanganSaleOut_BuyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCFanganSaleOut_BuyCell.m; sourceTree = "<group>"; };
 		59E8472926C75CDF00D9DFBB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		59E8472B26CA41E900D9DFBB /* JCHomeErCodeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCHomeErCodeView.h; sourceTree = "<group>"; };
 		59E8472C26CA41E900D9DFBB /* JCHomeErCodeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCHomeErCodeView.m; sourceTree = "<group>"; };
@@ -1687,8 +1692,6 @@
 		7B1BDD412507544000D7C034 /* JCGaoChouRuleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCGaoChouRuleCell.m; sourceTree = "<group>"; };
 		7B1BDD43250A22D700D7C034 /* JCCommomTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCCommomTool.h; sourceTree = "<group>"; };
 		7B1BDD44250A22D700D7C034 /* JCCommomTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCCommomTool.m; sourceTree = "<group>"; };
-		7B1BDD46250B12B000D7C034 /* JCMatchGoalDistributionTrendView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCMatchGoalDistributionTrendView.h; sourceTree = "<group>"; };
-		7B1BDD47250B12B000D7C034 /* JCMatchGoalDistributionTrendView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCMatchGoalDistributionTrendView.m; sourceTree = "<group>"; };
 		7B1BDD49250F15CB00D7C034 /* JCAAVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCAAVC.h; sourceTree = "<group>"; };
 		7B1BDD4A250F15CB00D7C034 /* JCAAVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCAAVC.m; sourceTree = "<group>"; };
 		7B1BDD512510652D00D7C034 /* JCAiProfitDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCAiProfitDetailVC.h; sourceTree = "<group>"; };
@@ -4399,6 +4402,10 @@
 				7BF4D47D2644D34E00403BDF /* JCQR_CollectionViewCell.m */,
 				590A3F5F26C0BCA00012EDE6 /* JCGZMBannerHeadView.h */,
 				590A3F6026C0BCA00012EDE6 /* JCGZMBannerHeadView.m */,
+				596A1D9B2701B06D001B6E17 /* JCFanganSaleOutCell.h */,
+				596A1D9C2701B06D001B6E17 /* JCFanganSaleOutCell.m */,
+				596A1D9E2701B261001B6E17 /* JCFanganSaleOut_BuyCell.h */,
+				596A1D9F2701B261001B6E17 /* JCFanganSaleOut_BuyCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -9437,8 +9444,6 @@
 				C3B8CA3522602955001E04DF /* JCTestVC.h */,
 				C3B8CA3622602955001E04DF /* JCTestVC.m */,
 				C3B8CA3722602955001E04DF /* JCTestVC.xib */,
-				7B1BDD46250B12B000D7C034 /* JCMatchGoalDistributionTrendView.h */,
-				7B1BDD47250B12B000D7C034 /* JCMatchGoalDistributionTrendView.m */,
 				C3B8CA3A22602B04001E04DF /* JCDebugButton.h */,
 				C3B8CA3B22602B04001E04DF /* JCDebugButton.m */,
 			);
@@ -10557,7 +10562,6 @@
 				7B5E26B5247F66F6008CAEE4 /* JCQianYueModel.m in Sources */,
 				7BE891C624B5B62A00AE2E79 /* JNMatchZS_JC_ZJQ_TableViewCell.m in Sources */,
 				7BB0757025514E99004FB701 /* JCPostCheckFailVC.m in Sources */,
-				7B1BDD48250B12B000D7C034 /* JCMatchGoalDistributionTrendView.m in Sources */,
 				7B80CB1D24CAC07700C14117 /* JCHomeTitleView.m in Sources */,
 				7BCA2795251C7A9D008787FF /* JCJingCaiAIHomeVC.m in Sources */,
 				7BE8920424B6F6F000AE2E79 /* JCDataBaseAreaModel.m in Sources */,
@@ -10671,6 +10675,7 @@
 				7BCA27C1251DF5AE008787FF /* JCAIPlanBuyInfoView.m in Sources */,
 				7B5D03BA265F302900C65F51 /* JCActivityGuessFailureTipView.m in Sources */,
 				7BE891B624B5AD6500AE2E79 /* JNMatchZS_JC_RqSPF_TableViewCell.m in Sources */,
+				596A1DA02701B261001B6E17 /* JCFanganSaleOut_BuyCell.m in Sources */,
 				7BE891F424B6A71200AE2E79 /* JNMatchZS_BD_SXPTableViewCell.m in Sources */,
 				7B87D6562603274400E0FEB4 /* JCMineActivityCell.m in Sources */,
 				7BD8939024F200290058B951 /* JCPostCheckUserInfoVC.m in Sources */,
@@ -11179,6 +11184,7 @@
 				7B61BEF724ED4DEF0068F148 /* YBIBLoadingView.m in Sources */,
 				7B80CAFD24C922D000C14117 /* JCTeamDetailPlayerTableView.m in Sources */,
 				7B5C79262498B4DB00F97A51 /* JCMatchFilterCell.m in Sources */,
+				596A1D9D2701B06D001B6E17 /* JCFanganSaleOutCell.m in Sources */,
 				7BB075942554E193004FB701 /* JCMyPostRecordCell.m in Sources */,
 				7B80CA7A24BEA07E00C14117 /* JCTeamMatchZhenRongSelModel.m in Sources */,
 				7B20657F256B9353006149BB /* SandBoxHelper.m in Sources */,

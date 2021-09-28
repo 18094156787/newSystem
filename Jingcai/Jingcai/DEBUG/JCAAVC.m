@@ -10,12 +10,11 @@
 #import "JCMainTabBarController.h"
 #import "JCYCHomeWMStickVC.h"
 #import <WebKit/WebKit.h>
-#import "JCMatchGoalDistributionTrendView.h"
 @interface JCAAVC ()<WKNavigationDelegate, WKUIDelegate>
 //@property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) WKWebView *wkWebView; //webview
 @property (strong, nonatomic) UIProgressView *progressView; //进度条
-@property (strong, nonatomic) JCMatchGoalDistributionTrendView *trendView;
+
 
 @end
 
@@ -36,12 +35,7 @@
 }
 
 - (void)initViews {
-//    []
-    self.trendView= [JCMatchGoalDistributionTrendView new];
-    [self.view addSubview:self.trendView];
-    [self.trendView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.insets(UIEdgeInsetsMake(100, 0, 0, 0));
-    }];
+
 }
 
 - (void)didReceiveMemoryWarning {

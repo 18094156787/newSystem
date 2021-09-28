@@ -332,6 +332,7 @@
                 TZImagePickerController *imagePicker = [[TZImagePickerController alloc] initCropTypeWithAsset:assetModel.asset photo:image completion:^(UIImage *cropImage, id asset) {
                     self.isSelImage = YES;
                     self.iconImageView.image = cropImage;
+                    self.selImage = cropImage;
 //                    [self refreshCollectionViewWithAddedAsset:asset image:cropImage];
                 }];
                 imagePicker.allowPickingImage = YES;

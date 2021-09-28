@@ -128,6 +128,7 @@
 //         [[self getViewController].navigationController pushViewController:vc animated:YES];
 //        return;
 //    }
+    
     if ([self.model.surplus_profit integerValue]==0) {
         return;
     }
@@ -160,7 +161,7 @@
         alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         [[UIApplication sharedApplication].keyWindow addSubview:alertView];
 
-        return;;
+        return;
     }
     WeakSelf;
     JCWithDrawRecordDetailVC *vc = [JCWithDrawRecordDetailVC new];

@@ -62,17 +62,7 @@
 //修改返回键的颜色
 - (void)configBackTypeWithVC:(UIViewController *)vc btn:(JCNavButton *)sender{
 
-//    if ([vc isKindOfClass:[JCPostPlanViewController class]]) {
-//         sender.navButtonType = JCNavButtonTypeWhite;
-//    }
-//    if ([vc isKindOfClass:[JCBaseViewController class]]) {
-//        JCBaseViewController *baseVC =  (JCBaseViewController *)vc;
-//        if (baseVC.navigationBarStyle == JCNavigationBarStyleRed||baseVC.navigationBarStyle ==JCNavigationBarStyleTransparent) {
-//            sender.navButtonType = JCNavButtonTypeWhite;
-//        }else{
-//            sender.navButtonType = JCNavButtonTypeBack;
-//        }
-//    }
+
     
 }
 

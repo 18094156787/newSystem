@@ -24,6 +24,7 @@
 #import "JCPlaneDetailFreeHeadView.h"
 #import "JCPlaneDetailQRcodeCell.h"
 #import "JCPlanDetailMZ_Cell.h"
+#import "JCFanganSaleOutCell.h"
 @interface JCPlaneDetailFreeVC ()
 
 @property (nonatomic,strong) JCFootBallBuyPlaneFootView *footView;
@@ -31,6 +32,8 @@
 @property (nonatomic,strong) JCPlaneDetailSM_View *smView;
 
 @property (nonatomic, assign) float cellHeight;
+
+@property (nonatomic, assign)  BOOL is_soldOut;//已下架
 
 @end
 
@@ -41,6 +44,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = JCWhiteColor;
     // Do any additional setup after loading the view.
+//    self.is_soldOut = YES;
     [self initViews];
 //    [self refreshData];
 //    [self getPeoPleList];
@@ -72,6 +76,7 @@
     [self.tableView registerClass:[JCPlanDetailFreeContentCell class] forCellReuseIdentifier:@"JCPlanDetailFreeContentCell"];
     [self.tableView registerClass:[JCPlaneDetailMatchCell class] forCellReuseIdentifier:@"JCPlaneDetailMatchCell"];
     [self.tableView registerClass:[JCPlaneDetailQRcodeCell class] forCellReuseIdentifier:@"JCPlaneDetailQRcodeCell"];
+    [self.tableView registerClass:[JCFanganSaleOutCell class] forCellReuseIdentifier:@"JCFanganSaleOutCell"];
     
     
     
@@ -156,6 +161,10 @@
 #pragma mark <UITableViewDataSource>
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    if (self.is_soldOut) {
+        return 4;
+    }
     if (self.planDetailModel.qr_code_info.url.count>0||self.planDetailModel.qr_code_info.desc.length>0) {
         return 5+self.matchArray.count;
     }
@@ -163,6 +172,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.is_soldOut) {
+        return 1;
+    }
     if (section==0) {
         return 1;
     }
@@ -185,16 +197,16 @@
         return model.match_info.count;
     }
 
-
-//    if (section==3) {
-//        return self.matchModel.match_info.count;
-//    }
     return 0;
 //    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    if (indexPath.section==1) {
+    if (self.is_soldOut) {
+        return UITableViewAutomaticDimension;
+    }
+    
     if (indexPath.section==0&&self.planDetailModel.subtitle.length==0) {
         return 0.01f;
     }
@@ -210,12 +222,6 @@
             return UITableViewAutomaticDimension;
         }
     }
-//    if (indexPath.section==self.matchArray.count+4) {
-//        return 1;
-//    }
-//    if (self.planDetailModel.qr_code_info.url.count>0||self.planDetailModel.qr_code_info.desc.length>0) {
-//
-//    }
 
     
     if (indexPath.section>2) {
@@ -226,6 +232,29 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.is_soldOut) {
+        if (indexPath.section==0) {
+            JCPlaneDetailNewSubTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailNewSubTitleCell"];
+            cell.planDetailModel = self.planDetailModel;
+            return cell;
+            
+        }
+        if (indexPath.section==1) {
+            JCFanganSaleOutCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCFanganSaleOutCell"];
+//            cell.planDetailModel = self.planDetailModel;
+            return cell;
+            
+        }
+        if (indexPath.section==2) {
+            JCPlanDetailMZ_Cell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlanDetailMZ_Cell"];
+            return cell;
+        }
+        if (indexPath.section==3) {
+            JCPlaneDetailQRcodeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailQRcodeCell"];
+            cell.model= self.planDetailModel.qr_code_info;
+            return cell;
+        }
+    }
 
     if (indexPath.section==0) {
         JCPlaneDetailNewSubTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailNewSubTitleCell"];
@@ -287,7 +316,7 @@
     return attrStr;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section==1&&self.planDetailModel.content.length>0) {
+    if (!self.is_soldOut&&section==1&&self.planDetailModel.content.length>0) {
         JCPlaneDetailFreeHeadView *headView = [JCPlaneDetailFreeHeadView new];
         return headView;
     }
@@ -297,10 +326,17 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+
+    if (self.is_soldOut) {
+        if (section==0||section==3) {
+            return AUTO(4);
+        }
+        return 0.001f;
+    }
     if (section==0) {
         return AUTO(4);
     }
-    if (section==1&&self.planDetailModel.content.length>0) {
+    if (!self.is_soldOut&&section==1&&self.planDetailModel.content.length>0) {
         
         return AUTO(45);
     }

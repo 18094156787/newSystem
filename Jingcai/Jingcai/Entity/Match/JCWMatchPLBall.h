@@ -24,20 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) NSInteger status;
 @property (strong, nonatomic) NSDate * created_at;
 @property (strong, nonatomic) NSDate * updated_at;
-//{
-//    "id": "412526",
-//    "match_num": "118957",
-//    "company_id": "-2",
-//    "company_name": "竞彩网",
-//    "win": "1.94",
-//    "lose": "2.82",
-//    "equal": "3.45",
-//    "rq": "0",
-//    "lrq": "",
-//    "type": "0",
-//    "status": "1",
-//    "created_at": "2019-05-10 21:31:04",
-//    "updated_at": "2019-05-10 21:31:04"
-//},z
+
 @end
 NS_ASSUME_NONNULL_END

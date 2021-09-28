@@ -26,6 +26,9 @@
     UIImage *navImg =[UIImage imageNamed:@"euro_img_bg"];
       navImg = [navImg resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];
     [self.navigationController.navigationBar setBackgroundImage:navImg forBarMetrics:UIBarMetricsDefault];
+    if (@available(iOS 15.0, *)) {
+        [self configNavBarImage:@"euro_img_bg"];
+    }
 //    self.navigationBarStyle = JCNavigationBarStyleDefault;
 //    [self hideNavShadow];
 }
@@ -33,6 +36,9 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.navigationBarStyle = JCNavigationBarStyleDefault;
+    if (@available(iOS 15.0, *)) {
+        [self configNavBarImageToNormal];
+    }
 
 }
 

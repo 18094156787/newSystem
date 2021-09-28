@@ -49,6 +49,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
     
     [self initViews];
     [self setNavBackImgWhiteColor];
+    
 }
 
 

@@ -103,7 +103,9 @@
 
 
     NSLog(@"构建版本号：%@",[JCWInterfaceTool appBuildVersion]);
-
+    
+    NSLog(@"手机系统版本：%@",[[UIDevice currentDevice] systemVersion]);
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyUserInfo) name:NotificationApplyExpertSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getConcernMatchList) name:JCMatchConcern object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startConnect) name:NotificationUserLogin object:nil];

@@ -23,6 +23,7 @@
 #import "JCPayFreeView.h"
 #import "JCBaseTitleAlertView.h"
 #import "JCFamousExpertCell.h"
+#import "JCFanganSaleOut_BuyCell.h"
 @interface JCDakaBuyPlanVC ()
 
 @property (nonatomic,strong) JCDakaBuyPlanHeadView *headView;
@@ -45,6 +46,8 @@
 
 @property (nonatomic,strong) NSString *highest;//可用的最大额红包
 
+@property (nonatomic,assign) BOOL is_saleOut;//已下架
+
 
 @end
 
@@ -54,14 +57,21 @@
     self.style = 1;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+//    self.is_saleOut = YES;
     [self initViews];
     [self getUserInfo];
     [self getHongbaoList];
     [self getMyFreeCoupon];
-    if (self.payInfoModel.is_end==1) {
+
+
+
+    if (self.payInfoModel.is_end==1||self.is_saleOut) {
         [self getTuiJianList];
     }else {
-        [self getPeoPleList];
+        if (!self.is_saleOut) {
+            [self getPeoPleList];
+        }
+       
     }
     
 }
@@ -88,6 +98,7 @@
     [self.tableView registerClass:[JCBuyPlanPayWayCell class] forCellReuseIdentifier:@"JCBuyPlanPayWayCell"];
     [self.tableView registerClass:[JCDakaBuyPlanProtocolCell class] forCellReuseIdentifier:@"JCDakaBuyPlanProtocolCell"];
     [self.tableView registerClass:[JCFamousExpertCell class] forCellReuseIdentifier:@"JCFamousExpertCell"];
+    [self.tableView registerClass:[JCFanganSaleOut_BuyCell class] forCellReuseIdentifier:@"JCFanganSaleOut_BuyCell"];
     
     
     
@@ -121,6 +132,9 @@
     if (self.tuijianArray.count>0) {
         return 2+self.tuijianArray.count;
     }
+    if (self.tuijianArray.count==0&&self.is_saleOut) {
+        return 2;
+    }
     return 3;
 }
 
@@ -130,6 +144,9 @@
     }
     if (section==1) {
         if (self.tuijianArray.count>0){
+            return 0;
+        }
+        if (self.is_saleOut) {
             return 0;
         }
         return self.payWayArray.count;
@@ -161,10 +178,16 @@
 
     
     if (indexPath.section==0) {
+        if (self.is_saleOut) {
+            JCFanganSaleOut_BuyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCFanganSaleOut_BuyCell"];
+            cell.payInfoModel = self.payInfoModel;
+            return cell;
+        }
         JCBuyPlanLock_GZH_Cell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCBuyPlanLock_GZH_Cell"];
 //        cell.infoLab.hidden = NO;
         cell.payInfoModel = self.payInfoModel;
         return cell;
+        
     }
     if (indexPath.section==1) {
         JCBuyPlanPayWayCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCBuyPlanPayWayCell"];
@@ -320,10 +343,15 @@
             [view addSubview:titleLab];
             return view;
         }
-        JCDakaBuyPayWayTopView *headView = [JCDakaBuyPayWayTopView new];
-        headView.titleLab.text = @"购买方式";
+        if (!self.is_saleOut) {
+            JCDakaBuyPayWayTopView *headView = [JCDakaBuyPayWayTopView new];
+            headView.titleLab.text = @"购买方式";
+            return headView;
+        }
+        
 
-        return headView;
+
+     
     }
     UIView *view = [UIView new];
     view.backgroundColor = COLOR_F4F6F9;
@@ -336,7 +364,14 @@
         return AUTO(4);
     }
     if (section==1) {
+//        if (self.tuijianArray.count==0) {
+//            return 0.01f;
+//        }
+        if (self.is_saleOut&&self.tuijianArray.count==0) {
+            return 0.01f;
+        }
         return 50;
+        
     }
     return 0.001f;
 }
@@ -377,6 +412,8 @@
     [alertView alertTitle:@"提示" TitleColor:COLOR_2F2F2F Mesasge:@"是否确认支付?" MessageColor:COLOR_666666 SureTitle:@"确认" SureColor:JCWhiteColor SureHandler:^{
         [alertView removeFromSuperview];
         if (self.selPayWay.payWay==JCPayWayEnumCaiyun) {
+            [self caiyunPayWithAmount:totalPrice hongbaoId:self.useHbModel.id];
+            [self caiyunPayWithAmount:totalPrice hongbaoId:self.useHbModel.id];
             [self caiyunPayWithAmount:totalPrice hongbaoId:self.useHbModel.id];
         }
 
@@ -419,7 +456,7 @@
 }
 //下单并支付
 - (void)finalPayWithOrder_key:(NSString *)order_key coupon_id:(NSString *)coupon_id hongbao_id:(NSString *)hongbao_id {
-    [self.jcWindow endLoading];
+    [self.jcWindow showLoading];
     JCHomeService_New *service = [JCHomeService_New new];
     [service getPayOrderWithOrder_key:order_key pay_type:@"3" hongbao_id:hongbao_id coupon_id:coupon_id Success:^(id  _Nullable object) {
         [self.jcWindow endLoading];
@@ -453,14 +490,12 @@
          [freeView removeFromSuperview];
         [self.jcWindow showLoading];
         NSString *scene = @"2";
-        [self.jcWindow showLoading];
         JCHomeService_New *service = [JCHomeService_New new];
         [service getConfirmOrderWithUnique:self.payInfoModel.id scene:scene source:@"1" Success:^(id  _Nullable object) {
             [self.jcWindow endLoading];
             if ([JCWJsonTool isSuccessResponse:object]) {
                 NSString *order_key = object[@"data"][@"order_key"];
                 [self finalPayWithOrder_key:order_key coupon_id:self.mdModel.id hongbao_id:@""];
-
 
             }else{
                 [JCWToastTool showHint:object[@"msg"]];
@@ -680,6 +715,12 @@
 }
 
 -(void)updateTimeInVisibleCells{
+    if (self.is_saleOut) {
+        if (self.JCEndBlock) {
+            self.JCEndBlock(YES);
+            [self.countDown destoryTimer];
+        }
+    }
     NSArray  *cells = self.tableView.visibleCells; //取出屏幕可见ceLl
     for (UITableViewCell *cell in cells) {
         if ([cell isKindOfClass:[JCBuyPlanLock_GZH_Cell class]]) {

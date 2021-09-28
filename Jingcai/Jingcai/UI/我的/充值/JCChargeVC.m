@@ -114,6 +114,7 @@ static NSString * const productId007 = @"com.zhisheng.zq.price.007";
 - (void)initSubViews {
 //    self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 136);
 //    self.tableView.tableHeaderView = self.headView;
+
     
     [self.scrollow addSubview:self.sureProtocolBtn];
     [self.sureProtocolBtn mas_makeConstraints:^(MASConstraintMaker *make) {

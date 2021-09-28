@@ -16,16 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString * company_id;
 @property (strong, nonatomic) NSString * company_name;
 @property (strong, nonatomic) JCWMatchOddsBall * current_odds;
-//                        {
-//                            company_name = "竞彩网",
-//                            id = "89362",
-//                            current_odds =     {
-//                                win = "1.80",
-//                                equal = "3.45",
-//                                lose = "3.55",
-//                            },
-//                            company_id = "666",
-//                        }
+
 @end
 
 NS_ASSUME_NONNULL_END

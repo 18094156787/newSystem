@@ -29,7 +29,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    self.navigationBarStyle = JCNavigationBarStyleRed;
     [self setNavBackImg];
 }
 

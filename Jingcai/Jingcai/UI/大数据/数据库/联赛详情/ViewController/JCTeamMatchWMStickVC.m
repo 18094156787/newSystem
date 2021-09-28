@@ -63,11 +63,17 @@ static CGFloat const kWMMenuViewHeight = 44;
     navBarHairlineImageView.hidden = YES;
     [self setNavBackImg];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"match_top_nav"] forBarMetrics:UIBarMetricsDefault];
+    if (@available(iOS 15.0, *)) {
+        [self configNavBarImage:@"match_top_nav"];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.navigationBarStyle = JCNavigationBarStyleDefault;
+    if (@available(iOS 15.0, *)) {
+        [self configNavBarImageToNormal];
+    }
 }
 
 - (NSArray *)titleArray {

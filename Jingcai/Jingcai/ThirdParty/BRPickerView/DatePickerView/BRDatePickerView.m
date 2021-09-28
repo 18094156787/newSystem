@@ -732,7 +732,8 @@ typedef NS_ENUM(NSInteger, BRDatePickerStyle) {
         // 设置该 UIDatePicker 的国际化 Locale
         _datePicker.locale = [[NSLocale alloc]initWithLocaleIdentifier:self.pickerStyle.language];
         // textColor 隐藏属性，使用KVC赋值
-        [_datePicker setValue:self.pickerStyle.pickerTextColor forKey:@"textColor"];
+        _datePicker.tintColor = self.pickerStyle.pickerTextColor;
+//        [_datePicker setValue:self.pickerStyle.pickerTextColor forKey:@"textColor"];
         
     /*
          // 通过 NSInvocation 来改变默认选中字体的状态

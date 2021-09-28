@@ -104,6 +104,18 @@
         [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         [self.navigationController.navigationBar setShadowImage:[UIImage new]];
         [self.navigationController.navigationBar setTranslucent:YES];
+        
+        if (@available(iOS 15.0, *)) {
+            UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
+            UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
+            NSDictionary *dic = @{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]};
+            barApp.backgroundColor = [UIColor clearColor];
+
+            barApp.titleTextAttributes = dic;
+            [barApp configureWithTransparentBackground];
+            self.navigationController.navigationBar.scrollEdgeAppearance = nil;
+            self.navigationController.navigationBar.standardAppearance = barApp;
+        }
     } else {
         [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
         [self.navigationController.navigationBar setShadowImage:nil];
@@ -113,11 +125,20 @@
     //navtitle设定
     if (navigationBarStyle == JCNavigationBarStyleDefault) {
         UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
-//        [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor blackColor]}];
-//        [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-        
-        [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor blackColor]}];
+        NSDictionary *dic = @{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor blackColor]};
+        [self.navigationController.navigationBar setTitleTextAttributes:dic];
         [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+        
+
+        if (@available(iOS 15.0, *)) {
+            UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
+            barApp.backgroundImage = nil;
+            barApp.backgroundColor = [UIColor whiteColor];
+            barApp.titleTextAttributes = dic;
+            self.navigationController.navigationBar.scrollEdgeAppearance = barApp;
+            self.navigationController.navigationBar.standardAppearance = barApp;
+        }
+        
         return ;
     } else if (navigationBarStyle == JCNavigationBarStyleRed) {
         UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
@@ -135,9 +156,49 @@
         [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]}];
         //[self.navigationController.navigationBar setBarTintColor:UIColorFromRGB(0xE23F3D)];
         [self.navigationController.navigationBar setBarTintColor:[UIColor clearColor]];
+        
+//        if (@available(iOS 13.0, *)) {
+//            UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
+//            appearance.titleTextAttributes = @{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]};
+//            appearance.backgroundColor = [UIColor clearColor];
+////            appearance.backgroundEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
+//            self.navigationController.navigationBar.scrollEdgeAppearance = appearance;
+////
+//           }
         return ;
     }
 }
+
+//用来配置导航栏背景图
+- (void)configNavBarImage:(NSString *)imageStr {
+    UIImage *navImg =[UIImage imageNamed:imageStr];
+      navImg = [navImg resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];
+    [self.navigationController.navigationBar setBackgroundImage:navImg forBarMetrics:UIBarMetricsDefault];
+
+    if (@available(iOS 15.0, *)) {
+        UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
+        UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
+        NSDictionary *dic = @{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]};
+        barApp.titleTextAttributes = dic;
+        barApp.backgroundImage = navImg;
+        self.navigationController.navigationBar.scrollEdgeAppearance = barApp;
+        self.navigationController.navigationBar.standardAppearance = barApp;
+    }
+}
+//取消导航栏背景图
+- (void)configNavBarImageToNormal{
+    if (@available(iOS 15.0, *)) {
+        UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
+        
+        barApp.backgroundImage = nil;
+        barApp.backgroundColor = [UIColor whiteColor];
+//        barApp.shadowColor = [UIColor whiteColor];
+//        barApp.titleTextAttributes = dic;
+        self.navigationController.navigationBar.scrollEdgeAppearance = barApp;
+        self.navigationController.navigationBar.standardAppearance = barApp;
+    }
+}
+
 //- (void)changeNavAlphaByScrollView:(UIScrollView *)scrollView maxOffseY:(CGFloat)maxOffsetY {
 //    //self.hideNavBackWhenAppear = YES;
 //    self.hideNavTitleWhenAppear = YES;

@@ -1946,8 +1946,12 @@
         if (array.count>1) {
             NSString *price = array[0];
             NSInteger prize = [price integerValue];
+
             
             if (self.dataArray.count<=1) {
+//                if (!self.dcRefundModel) {
+//                    return NO;
+//                }
                 NSInteger rufundPrice = [self.dcRefundModel.sf intValue]/100.0f;
                 if (prize>=rufundPrice) {
                     return YES;
@@ -1955,6 +1959,9 @@
                 
             }
             if (self.dataArray.count>1) {
+//                if (!self.scRefundModel) {
+//                    return NO;
+//                }
                 NSInteger rufundPrice = [self.scRefundModel.sf intValue]/100.0f;
                 if (prize>=rufundPrice) {
                     return YES;

@@ -52,6 +52,9 @@
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 //    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    if (@available(iOS 15.0, *)) {
+        [UITableView appearance].sectionHeaderTopPadding = 0;
+    }
     self.launchOptions = launchOptions;
 //    [self configUM];
     [self configWXApp];

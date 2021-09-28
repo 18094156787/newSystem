@@ -20,7 +20,6 @@
 #import "JNMatchSJAgainstTeam_ZhanjiCell.h"
 #import "JNMatchSJAgainstTeam_HistoryBattleCell.h"
 #import "JNMatchSJAgainstTeam_SeasonRankCell.h"
-#import "JNMatchSJAgainstCountdown_Cell.h"
 #import "CountDown.h"
 #import "JNMatchSJAgainstMZ_Cell.h"
 #import "JCJingCaiAIBigDataHeadView.h"

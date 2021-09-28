@@ -58,6 +58,9 @@ static CGFloat const kWMMenuViewHeight = 44;
     UIImage *navImg =[UIImage imageNamed:@"match_top_nav_basketBall"];
       navImg = [navImg resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];
     [self.navigationController.navigationBar setBackgroundImage:navImg forBarMetrics:UIBarMetricsDefault];
+    if (@available(iOS 15.0, *)) {
+        [self configNavBarImage:@"match_top_nav_basketBall"];
+    }
     self.navigationController.navigationBar.hidden = self.hideNavBar;
     
 
@@ -72,6 +75,9 @@ static CGFloat const kWMMenuViewHeight = 44;
     [super viewWillDisappear:animated];
     self.navigationBarStyle = JCNavigationBarStyleDefault;
     self.navigationController.navigationBar.hidden = NO;
+    if (@available(iOS 15.0, *)) {
+        [self configNavBarImageToNormal];
+    }
 }
 
 - (NSArray *)titleArray {

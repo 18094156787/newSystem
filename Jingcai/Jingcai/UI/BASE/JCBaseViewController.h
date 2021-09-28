@@ -40,6 +40,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isStatusBarConnectionMode;
 - (void)setNavBackImg;//修改返回按钮的颜色
 - (void)setNavBackImgWhiteColor;//白色返回箭头
+//用来配置导航栏背景图
+- (void)configNavBarImage:(NSString *)imageStr;
+//取消导航栏背景图
+- (void)configNavBarImageToNormal;
 //- (void)refreshData;
 - (void)hideNavShadow;//隐藏导航栏顶部的线,阴影
 - (void)initSubViews;

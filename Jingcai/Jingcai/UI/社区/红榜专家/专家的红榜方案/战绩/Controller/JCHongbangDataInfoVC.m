@@ -178,14 +178,17 @@
 - (void)setEvent_Data:(NSDictionary *)event_Data {
     _event_Data = event_Data;
     NSArray *array = event_Data[@"list"];
-    [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSString *type = obj[@"type"]; //类别 1盈利率 0命中率
-        if ([type integerValue]==1) {
-            self.hbArray = [JCWJsonTool arrayWithJson:obj[@"info"] class:[JCCommunityEventModel class]];
+    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            NSString *type = obj[@"type"]; //类别 1盈利率 0命中率
+            if ([type integerValue]==1) {
+                self.hbArray = [JCWJsonTool arrayWithJson:obj[@"info"] class:[JCCommunityEventModel class]];
+            }
+            if ([type integerValue]==0) {
+                self.hotArray = [JCWJsonTool arrayWithJson:obj[@"info"] class:[JCCommunityEventModel class]];
+            }
         }
-        if ([type integerValue]==0) {
-            self.hotArray = [JCWJsonTool arrayWithJson:obj[@"info"] class:[JCCommunityEventModel class]];
-        }
+
         
     }];
     
