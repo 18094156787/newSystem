@@ -68,6 +68,9 @@ static CGFloat const kWMMenuViewHeight = 0;
     [super viewWillAppear:animated];
      self.navigationBarStyle = JCNavigationBarStyleTransparent;
     [self setNavBackImg];
+//    if (@available(iOS 15.0, *)) {
+//        [self configNavBarImage:@"blank"];
+//    }
     
 }
 

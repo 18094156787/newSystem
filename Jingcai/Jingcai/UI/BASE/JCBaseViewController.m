@@ -124,6 +124,10 @@
             barApp.backgroundImage = nil;
             barApp.backgroundColor = [UIColor whiteColor];
             barApp.titleTextAttributes = dic;
+            
+
+            
+            
             self.navigationController.navigationBar.scrollEdgeAppearance = barApp;
             self.navigationController.navigationBar.standardAppearance = barApp;
         }
@@ -143,6 +147,7 @@
             UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
             NSDictionary *dic = @{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]};
             barApp.backgroundColor = [UIColor clearColor];
+
 
             barApp.titleTextAttributes = dic;
             [barApp configureWithTransparentBackground];
