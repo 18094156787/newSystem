@@ -105,17 +105,6 @@
         [self.navigationController.navigationBar setShadowImage:[UIImage new]];
         [self.navigationController.navigationBar setTranslucent:YES];
         
-        if (@available(iOS 15.0, *)) {
-            UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
-            UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
-            NSDictionary *dic = @{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]};
-            barApp.backgroundColor = [UIColor clearColor];
-
-            barApp.titleTextAttributes = dic;
-            [barApp configureWithTransparentBackground];
-            self.navigationController.navigationBar.scrollEdgeAppearance = nil;
-            self.navigationController.navigationBar.standardAppearance = barApp;
-        }
     } else {
         [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
         [self.navigationController.navigationBar setShadowImage:nil];
@@ -140,14 +129,6 @@
         }
         
         return ;
-    } else if (navigationBarStyle == JCNavigationBarStyleRed) {
-        UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
-//        [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor blackColor]}];
-//        [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0xE23F3D)];
-        
-        [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]}];
-        [self.navigationController.navigationBar setBarTintColor:COLOR_E4463E];
-        return ;
     } else if (navigationBarStyle == JCNavigationBarStyleTransparent) {
         UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
 //        [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -157,14 +138,25 @@
         //[self.navigationController.navigationBar setBarTintColor:UIColorFromRGB(0xE23F3D)];
         [self.navigationController.navigationBar setBarTintColor:[UIColor clearColor]];
         
-//        if (@available(iOS 13.0, *)) {
-//            UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
-//            appearance.titleTextAttributes = @{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]};
-//            appearance.backgroundColor = [UIColor clearColor];
-////            appearance.backgroundEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
-//            self.navigationController.navigationBar.scrollEdgeAppearance = appearance;
-////
-//           }
+        if (@available(iOS 15.0, *)) {
+            UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
+            UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
+            NSDictionary *dic = @{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]};
+            barApp.backgroundColor = [UIColor clearColor];
+
+            barApp.titleTextAttributes = dic;
+            [barApp configureWithTransparentBackground];
+            self.navigationController.navigationBar.scrollEdgeAppearance = nil;
+            self.navigationController.navigationBar.standardAppearance = barApp;
+        }
+        return ;
+    } else if (navigationBarStyle == JCNavigationBarStyleRed) {
+        UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
+//        [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor blackColor]}];
+//        [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0xE23F3D)];
+        
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        [self.navigationController.navigationBar setBarTintColor:COLOR_E4463E];
         return ;
     }
 }

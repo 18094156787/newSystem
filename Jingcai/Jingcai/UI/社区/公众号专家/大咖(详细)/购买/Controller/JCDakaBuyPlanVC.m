@@ -413,8 +413,6 @@
         [alertView removeFromSuperview];
         if (self.selPayWay.payWay==JCPayWayEnumCaiyun) {
             [self caiyunPayWithAmount:totalPrice hongbaoId:self.useHbModel.id];
-            [self caiyunPayWithAmount:totalPrice hongbaoId:self.useHbModel.id];
-            [self caiyunPayWithAmount:totalPrice hongbaoId:self.useHbModel.id];
         }
 
         
