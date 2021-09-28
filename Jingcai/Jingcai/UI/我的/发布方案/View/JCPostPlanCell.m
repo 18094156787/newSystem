@@ -142,7 +142,7 @@
     }else{
         NSString *title = @"主胜";
         if ([self.type integerValue]==3) {
-            title = @"大球";
+            title = @"高";
         }
         [self.masterWin_normalBtn setTitle:[NSString stringWithFormat:@"%@%@",title,sfpModel.win] forState:0];
         self.masterWin_normalBtn.userInteractionEnabled = YES;
@@ -156,7 +156,7 @@
     }else{
         self.equal_normalBtn.backgroundColor = COLOR_DDDDDD;
         [self.equal_normalBtn setTitleColor:COLOR_999999 forState:0];
-        [self.equal_normalBtn setTitle:sfpModel.draw forState:0];
+        [self.equal_normalBtn setTitle:[NSString stringWithFormat:@"盘口%@",sfpModel.draw] forState:0];
         self.equal_normalBtn.userInteractionEnabled = YES;
     }
     if (!sfpModel.lost) {
@@ -165,7 +165,7 @@
     }else{
         NSString *title = @"客胜";
         if ([self.type integerValue]==3) {
-            title = @"小球";
+            title = @"低";
         }
         [self.customerWin_normalBtn setTitle:[NSString stringWithFormat:@"%@%@",title,sfpModel.lost] forState:0];
         self.customerWin_normalBtn.userInteractionEnabled = YES;
