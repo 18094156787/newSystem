@@ -117,15 +117,7 @@
                 }
                 //可以直接查看
                  JCWTjInfoBall *model = (JCWTjInfoBall *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCWTjInfoBall class]];
-                
-                //test
-//                JCPlaneDetailQRModel *testModel = [JCPlaneDetailQRModel new];
-//                testModel.url = @[@"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKPVk4Fiak3Lwx8ic9joyN951nS0E1HBZer7bGhgib6jxItfA7fS0XicwTLYMdP0tZicaB4ABv9XsnpZXg/132",@"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKPVk4Fiak3Lwx8ic9joyN951nS0E1HBZer7bGhgib6jxItfA7fS0XicwTLYMdP0tZicaB4ABv9XsnpZXg/132",@"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKPVk4Fiak3Lwx8ic9joyN951nS0E1HBZer7bGhgib6jxItfA7fS0XicwTLYMdP0tZicaB4ABv9XsnpZXg/132",@"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKPVk4Fiak3Lwx8ic9joyN951nS0E1HBZer7bGhgib6jxItfA7fS0XicwTLYMdP0tZicaB4ABv9XsnpZXg/132",@"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKPVk4Fiak3Lwx8ic9joyN951nS0E1HBZer7bGhgib6jxItfA7fS0XicwTLYMdP0tZicaB4ABv9XsnpZXg/132",@"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKPVk4Fiak3Lwx8ic9joyN951nS0E1HBZer7bGhgib6jxItfA7fS0XicwTLYMdP0tZicaB4ABv9XsnpZXg/132",@"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKPVk4Fiak3Lwx8ic9joyN951nS0E1HBZer7bGhgib6jxItfA7fS0XicwTLYMdP0tZicaB4ABv9XsnpZXg/132"];
-//                testModel.desc = @"史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵";
-//                model.qr_code_info = testModel;
-//
-                
-                
+
                 
                 JCDakaPlanDetailStickWMVC *vc = [JCDakaPlanDetailStickWMVC new];
                 vc.autherID = model.user_id;
@@ -148,14 +140,7 @@
                     //免费方案可直接查看
                     JCWTjInfoBall *model = (JCWTjInfoBall *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCWTjInfoBall class]];
                     
-                    
-                    
-//                    JCPlaneDetailQRModel *testModel = [JCPlaneDetailQRModel new];
-//                    testModel.url = @[@"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKPVk4Fiak3Lwx8ic9joyN951nS0E1HBZer7bGhgib6jxItfA7fS0XicwTLYMdP0tZicaB4ABv9XsnpZXg/13211",@"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKPVk4Fiak3Lwx8ic9joyN951nS0E1HBZer7bGhgib6jxItfA7fS0XicwTLYMdP0tZicaB4ABv9XsnpZXg/132",@"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKPVk4Fiak3Lwx8ic9joyN951nS0E1HBZer7bGhgib6jxItfA7fS0XicwTLYMdP0tZicaB4ABv9XsnpZXg/132",@"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKPVk4Fiak3Lwx8ic9joyN951nS0E1HBZer7bGhgib6jxItfA7fS0XicwTLYMdP0tZicaB4ABv9XsnpZXg/132",@"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKPVk4Fiak3Lwx8ic9joyN951nS0E1HBZer7bGhgib6jxItfA7fS0XicwTLYMdP0tZicaB4ABv9XsnpZXg/132",@"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKPVk4Fiak3Lwx8ic9joyN951nS0E1HBZer7bGhgib6jxItfA7fS0XicwTLYMdP0tZicaB4ABv9XsnpZXg/132",@"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKPVk4Fiak3Lwx8ic9joyN951nS0E1HBZer7bGhgib6jxItfA7fS0XicwTLYMdP0tZicaB4ABv9XsnpZXg/132"];
-//                    testModel.desc = @"史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵史蒂夫大富大贵";
-//                    model.qr_code_info = testModel;
-                    
-                    
+
                    JCDakaPlanDetailStickWMVC *vc = [JCDakaPlanDetailStickWMVC new];
                    vc.autherID = model.user_id;
                    vc.planDetailModel = model;
@@ -169,16 +154,6 @@
                     vc.payInfoModel = model;
 //                    vc.autherID = model.user_id;
                     [viewController.navigationController pushViewController:vc animated:YES];
-                    
-//                    //清空购买页,避免重复返回购买页
-//                    NSMutableArray*tempMarr = [NSMutableArray arrayWithArray : viewController.navigationController.viewControllers];
-//                    //    [tempMarr removeObject:weakSelf];
-//                        for (UIViewController *vc in viewController.navigationController.viewControllers) {
-//                            if ([vc isKindOfClass:[JCDakaBuyPlanStickWMVC class]]) {
-//                                [tempMarr removeObject:vc];
-//                            }
-//                        }
-//                        [viewController.navigationController setViewControllers:tempMarr animated:YES];
                     
                 }
                 

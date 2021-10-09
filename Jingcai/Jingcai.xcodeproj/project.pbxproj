@@ -11797,7 +11797,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Jingcai/鲸猜足球Debug.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MFKWUW9XYJ;
 				ENABLE_BITCODE = NO;
@@ -11819,7 +11819,7 @@
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/UPPayPlugin",
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/WeChatSDK1.8.6.1",
 				);
-				MARKETING_VERSION = 3.60;
+				MARKETING_VERSION = 3.62;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -11882,7 +11882,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MFKWUW9XYJ;
 				ENABLE_BITCODE = NO;
@@ -11904,7 +11904,7 @@
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/UPPayPlugin",
 					"$(PROJECT_DIR)/Jingcai/ThirdParty/WeChatSDK1.8.6.1",
 				);
-				MARKETING_VERSION = 3.60;
+				MARKETING_VERSION = 3.62;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

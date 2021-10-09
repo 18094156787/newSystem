@@ -14,9 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UILabel *introduceLab;//简介
 
+@property (nonatomic,strong) UIImageView *imgView;
+
 @property (nonatomic, strong) JCWTjInfoDetailBall *tjInfoDetailBall;//方案详情
 
 @property (nonatomic,strong) JCWTjInfoBall *payInfoModel;
+
+@property (nonatomic,assign) BOOL is_wz;//是文章,则显示文章对应的图片
 
 
 @end

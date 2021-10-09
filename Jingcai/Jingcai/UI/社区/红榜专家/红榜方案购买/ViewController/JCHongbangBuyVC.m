@@ -34,6 +34,7 @@
 #import "JCTuiJianManager.h"
 #import "JCMatchDetailWMStickVC.h"
 #import "JCHongbangOrderWMstckyVC.h"
+#import "JCFanganSaleOut_BuyCell.h"
 
 @interface JCHongbangBuyVC ()
 
@@ -71,6 +72,8 @@
 
 @property (nonatomic,assign) double time_distance;
 
+@property (nonatomic,assign) BOOL is_saleOut;//已下架
+
 @end
 
 @implementation JCHongbangBuyVC
@@ -83,7 +86,11 @@
 - (void)viewDidLoad {
     self.style = 1;
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    if (self.detailModel.talent_plan.status==8) {
+        //
+        self.is_saleOut = YES;
+    }
     [self initViews];
     [self loadDataInfo];
 //    [self refreshData];
@@ -147,6 +154,8 @@
 
     [self.tableView registerClass:[JCHongbangCommomCell class] forCellReuseIdentifier:@"JCHongbangCommomCell"];
     
+    [self.tableView registerClass:[JCFanganSaleOut_BuyCell class] forCellReuseIdentifier:@"JCFanganSaleOut_BuyCell"];
+    
 
     self.buyUserView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(50));
     [self.buyUserView addSubview:self.buyCountLab];
@@ -168,6 +177,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     if (section==0) {
+        if (self.is_saleOut) {
+            return 0;
+        }
         return self.matchDataArray.count;
     }
     if (section==1) {
@@ -214,6 +226,10 @@
         return cell;
     }
     if (indexPath.section==1) {
+        if (self.is_saleOut) {
+            JCFanganSaleOut_BuyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCFanganSaleOut_BuyCell"];
+            return cell;
+                }
         JCBuyPlanLock_HB_Cell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCBuyPlanLock_HB_Cell"];
         cell.tjInfoDetailBall = self.tjInfoDetailBall;
         return cell;
@@ -268,7 +284,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section==0) {
+    if (section==0&&!self.is_saleOut) {
+        
         return AUTO(4);
     }
     if (section==1&&self.tuiJianArray.count>0) {
@@ -350,6 +367,9 @@
 
 
 -(void)updateTimeInVisibleCells{
+    if (self.is_saleOut) {
+        [self.countDown destoryTimer];
+    }
     NSArray  *cells = self.tableView.visibleCells; //取出屏幕可见ceLl
     for (UITableViewCell *cell in cells) {
         if ([cell isKindOfClass:[JCBuyPlanLock_HB_Cell class]]) {
@@ -370,20 +390,12 @@
             if (self.time_distance>0) {
                 self.time_distance--;
             }else{
+                if (self.JCMatchStatusBlock) {
+                    self.JCMatchStatusBlock(YES);
+                }
                 timeCell.timeLab.text = @"00:00:00";
             }
-//            if (self.match_end) {
-//                timeCell.timeLab.text = @"00:00:00";
-//            }
- 
-            
-//            if ([self.tjInfoDetailBall.timestamp intValue]>0) {
-//                NSInteger time = [self.tjInfoDetailBall.timestamp intValue]-1;
-//                self.tjInfoDetailBall.timestamp = [NSString stringWithFormat:@"%ld",time];
-//            }else{
-//                timeCell.timeLab.text = @"00:00:00";
-//            }
-            
+
             
         }
 
@@ -432,9 +444,7 @@
     if (timeInterval==0) {
         self.match_end = YES;
     }
-    if (self.JCMatchStatusBlock) {
-        self.JCMatchStatusBlock(self.match_end);
-    }
+
     if (days) {
         
     }
@@ -463,7 +473,10 @@
         [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
         [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(12)]} range:range];
         self.buyCountLab.attributedText = attr;
-        self.tableView.tableFooterView= self.buyUserView;
+        if (!self.is_saleOut) {
+            self.tableView.tableFooterView= self.buyUserView;
+        }
+       
     }else{
         self.buyCountLab.text = @"";
     }

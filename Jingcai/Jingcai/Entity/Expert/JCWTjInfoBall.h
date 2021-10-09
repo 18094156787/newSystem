@@ -134,7 +134,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (assign, nonatomic) NSInteger wl;// 0未开始 1红 2黑 3赢半 4输半 5走水 6延迟 7取消
 
-@property (strong, nonatomic) NSString *status;// 1 正常
+@property (strong, nonatomic) NSString *status;// 1 正常 8下架
 
 @property (strong, nonatomic) NSString *week_number;//周几 序号 例如 周四4306
 
@@ -237,7 +237,7 @@ NS_ASSUME_NONNULL_BEGIN
 //在公众号里,1付费方案 0免费方案
 @property (assign, nonatomic) NSInteger type;
 //用户是否能查看内容 0不能查看 1能查看
-@property (assign, nonatomic) NSInteger is_look;
+@property (strong, nonatomic) NSString *is_look;
 //0未购买 1已购买
 @property (assign, nonatomic) NSInteger is_pay; 
 

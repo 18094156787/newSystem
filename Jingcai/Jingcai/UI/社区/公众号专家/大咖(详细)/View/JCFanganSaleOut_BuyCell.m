@@ -29,6 +29,7 @@
         make.size.mas_equalTo(CGSizeMake(AUTO(220), AUTO(144)));
         make.top.equalTo(self.introduceLab.mas_bottom).offset(20);
     }];
+    self.imgView = imgView;
     
     UILabel *infoLab = [UILabel initWithTitle:@"免责声明：鲸猜足球仅为信息发布平台，并不对第三方发布的信息真实性及准确性负责，且不提供彩票售卖服务，请您注意投资风险，理性购买！" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
     infoLab.numberOfLines= 0;
@@ -45,6 +46,14 @@
     _payInfoModel = payInfoModel;
     self.introduceLab.text = payInfoModel.subtitle;
 }
+
+- (void)setIs_wz:(BOOL)is_wz {
+    _is_wz = is_wz;
+    if (is_wz) {
+        self.imgView.image = JCIMAGE(@"jc_wenzhang_saleOut");
+    }
+}
+
 - (UILabel *)introduceLab {
     if (!_introduceLab) {
         _introduceLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:[COLOR_2F2F2F colorWithAlphaComponent:0.6] andBackgroundColor:JCClearColor andTextAlignment:0];

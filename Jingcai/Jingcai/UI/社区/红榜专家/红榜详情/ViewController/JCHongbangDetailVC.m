@@ -51,7 +51,10 @@
     self.view.backgroundColor = JCWhiteColor;
     // Do any additional setup after loading the view.
     [self initViews];
-//    self.is_saleOut = YES;
+//
+    if (self.detailModel.talent_plan.status==8) {
+        self.is_saleOut = YES;
+    }
     [self loadDataInfo];
     [self refreshData];
 //    [self dataInfoWithdataDic:self.dataDic];

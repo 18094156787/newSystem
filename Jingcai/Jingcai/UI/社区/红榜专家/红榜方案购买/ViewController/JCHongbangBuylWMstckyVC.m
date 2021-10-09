@@ -197,6 +197,7 @@ static CGFloat const kWMMenuViewUserHeight = 60;
         }
 
     };
+
     return self.homeVC;
 //    return [UIViewController new];
 
@@ -237,6 +238,13 @@ static CGFloat const kWMMenuViewUserHeight = 60;
     self.viewTop = self.height;
     self.maximumHeaderViewHeight = self.height;
     self.minimumHeaderViewHeight = self.height-kNavigationBarHeight;
+    
+    
+    if (self.detailModel.talent_plan.status==8) {
+        //
+        self.priceInfoView.hidden = YES;
+    }
+
     
 
 }

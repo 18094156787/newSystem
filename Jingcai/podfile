@@ -28,5 +28,6 @@ target 'Jingcai' do
     pod 'YYKit'
     pod 'SocketRocket'
     pod 'JXCategoryView'
+    pod 'KMNavigationBarTransition'
 end
 

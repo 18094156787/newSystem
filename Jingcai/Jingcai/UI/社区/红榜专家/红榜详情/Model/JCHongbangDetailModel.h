@@ -21,10 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSArray <JCHongbangDetail_MatchModel *>*match_info;
 
 
-
 @property (strong, nonatomic) NSArray <JCWExpertBall *>*tuijian_pay;//购买人数
 
 @property (strong, nonatomic) NSString *tuijian_pay_num;//购买人数
+
+
 
 @end
 

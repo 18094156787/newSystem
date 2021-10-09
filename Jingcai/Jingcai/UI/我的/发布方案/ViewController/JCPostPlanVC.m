@@ -88,6 +88,7 @@
 
 @property (nonatomic,strong) JCPostPriceModel *scRefundModel;//多串不中返还价格
 
+@property (nonatomic,assign) NSInteger refund_enable;//是否使用不中返还,1是 2否
 @end
 
 @implementation JCPostPlanVC
@@ -109,12 +110,12 @@
 
 - (void)viewDidLoad {
     self.style = 1;
+
     [super viewDidLoad];
     self.view.backgroundColor = COLOR_F0F0F0;
     self.title = @"达人方案";
     self.fabu_count = [[JCWUserBall currentUser].fabu_count integerValue];
     [self initViews];
-//    self.postID = @"37157";
     [self getPriceList];
     [self getMatchListWithShow:NO];//获取比赛列表
     [self getMyPostPlanDetail];//获取我发布的方案详情(ps:重新编辑时调用)
@@ -187,7 +188,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     if (section==0) {
-       return self.itemArray.count;
+        if (self.refund_enable==1) {
+            return self.itemArray.count;
+        }
+        return 2;
+       
     }
     if (section==1) {
         return self.dataArray.count;
@@ -476,7 +481,7 @@
 
         }
         
-        if (indexPath.row==1&&self.itemArray.count==3) {
+        if (indexPath.row==1) {
             JCCommomSelectView *selectView = [[JCCommomSelectView alloc] initWithTitle:@"是否推送"];
             selectView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
             selectView.dataArray = @[@"是",@"否"];
@@ -524,6 +529,11 @@
         if ([JCWJsonTool isSuccessResponse:object]) {
             self.dcPriceArray = [JCWJsonTool arrayWithJson:object[@"data"][@"dc"] class:[JCPostPriceModel class]];
             self.scPriceArray = [JCWJsonTool arrayWithJson:object[@"data"][@"sc"] class:[JCPostPriceModel class]];
+            if (object[@"data"][@"is_show_repay"]) {
+                self.refund_enable = [object[@"data"][@"is_show_repay"] integerValue];
+
+            }
+            
             NSMutableArray *dcInfoArray = [NSMutableArray array];
             [self.dcPriceArray enumerateObjectsUsingBlock:^(JCPostPriceModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 [dcInfoArray addObject:obj.total];
@@ -541,6 +551,8 @@
                 
             }];
             self.scPriceInfoArray = [NSArray arrayWithArray:scInfoArray];
+            
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
             
         }else{
             [JCWToastTool showHint:object[@"msg"]];
@@ -1495,16 +1507,7 @@
                 [alertView alertTitle:@"" TitleColor:COLOR_666666 Mesasge:@"您的单场双选付费达人方案发布已达本月上限请下个月再来吧！" MessageColor:COLOR_666666 SureTitle:@"放弃发布" SureColor:JCWhiteColor SureHandler:^{
                     [alertView removeFromSuperview];
                     [self.navigationController popToRootViewControllerAnimated:YES];
-//                    JCPostPlanItemModel *model = self.itemArray.firstObject;
-//                    JCPostPlanItemModel *bztkModel = self.itemArray[2];
-//                    bztkModel.bztk = NO;
-//                    if (model.is_sf) {
-//                        model.price = @"免费";
-//                        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-//                        [alertView removeFromSuperview];
-//                        [self observeSensitiveWord];
-//                    }
-                    
+
                 } CancleTitle:@"我要修改" CancleColor:JCBaseColor CancelHandler:^{
                    [alertView removeFromSuperview];
                 }];
@@ -1804,7 +1807,7 @@
                 model.bztk_string = @"不中返还";
                 model.is_bztk = YES;
                 model.bztk = NO;
-                
+
             }
  
             [array addObject:model];
@@ -1949,9 +1952,9 @@
 
             
             if (self.dataArray.count<=1) {
-//                if (!self.dcRefundModel) {
-//                    return NO;
-//                }
+                if (!self.dcRefundModel) {
+                    return NO;
+                }
                 NSInteger rufundPrice = [self.dcRefundModel.sf intValue]/100.0f;
                 if (prize>=rufundPrice) {
                     return YES;
@@ -1959,9 +1962,9 @@
                 
             }
             if (self.dataArray.count>1) {
-//                if (!self.scRefundModel) {
-//                    return NO;
-//                }
+                if (!self.scRefundModel) {
+                    return NO;
+                }
                 NSInteger rufundPrice = [self.scRefundModel.sf intValue]/100.0f;
                 if (prize>=rufundPrice) {
                     return YES;

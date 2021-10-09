@@ -45,6 +45,10 @@
     self.view.backgroundColor = JCWhiteColor;
     // Do any additional setup after loading the view.
 //    self.is_soldOut = YES;
+    if ([self.planDetailModel.status integerValue]==8) {
+//        planDetailModel.status  ==8 表示需要展示已下架的情况
+        self.is_soldOut = YES;
+    }
     [self initViews];
 //    [self refreshData];
 //    [self getPeoPleList];
@@ -328,7 +332,13 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
     if (self.is_soldOut) {
-        if (section==0||section==3) {
+        if (section==0) {
+            return AUTO(4);
+        }
+        if (section==3) {
+            if (self.planDetailModel.qr_code_info.url.count==0) {
+                return 0.01;
+            }
             return AUTO(4);
         }
         return 0.001f;

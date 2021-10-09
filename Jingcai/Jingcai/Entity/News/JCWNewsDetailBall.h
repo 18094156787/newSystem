@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString *user_name;
 
+@property (assign, nonatomic) NSInteger status;//8 是已下架
 
 @end
 NS_ASSUME_NONNULL_END

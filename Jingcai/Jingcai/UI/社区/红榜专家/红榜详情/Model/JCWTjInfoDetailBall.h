@@ -90,7 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSArray <JCPostImageModel *>*image;
 
-@property (assign, nonatomic) NSInteger status;
+@property (assign, nonatomic) NSInteger status;// 8 方案已下架
 
 @property (strong, nonatomic) NSString *user_img;
 

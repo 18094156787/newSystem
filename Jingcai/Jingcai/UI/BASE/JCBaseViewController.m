@@ -124,10 +124,6 @@
             barApp.backgroundImage = nil;
             barApp.backgroundColor = [UIColor whiteColor];
             barApp.titleTextAttributes = dic;
-            
-
-            
-            
             self.navigationController.navigationBar.scrollEdgeAppearance = barApp;
             self.navigationController.navigationBar.standardAppearance = barApp;
         }
@@ -135,20 +131,13 @@
         return ;
     } else if (navigationBarStyle == JCNavigationBarStyleTransparent) {
         UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
-//        [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]}];
-//        [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0xE23F3D)];
-        
-        [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]}];
-        //[self.navigationController.navigationBar setBarTintColor:UIColorFromRGB(0xE23F3D)];
+        NSDictionary *dic = @{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]};
+        [self.navigationController.navigationBar setTitleTextAttributes:dic];
         [self.navigationController.navigationBar setBarTintColor:[UIColor clearColor]];
         
         if (@available(iOS 15.0, *)) {
             UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
-            UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
-            NSDictionary *dic = @{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]};
             barApp.backgroundColor = [UIColor clearColor];
-
-
             barApp.titleTextAttributes = dic;
             [barApp configureWithTransparentBackground];
             self.navigationController.navigationBar.scrollEdgeAppearance = nil;
@@ -157,9 +146,6 @@
         return ;
     } else if (navigationBarStyle == JCNavigationBarStyleRed) {
         UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
-//        [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor blackColor]}];
-//        [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0xE23F3D)];
-        
         [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]}];
         [self.navigationController.navigationBar setBarTintColor:COLOR_E4463E];
         return ;

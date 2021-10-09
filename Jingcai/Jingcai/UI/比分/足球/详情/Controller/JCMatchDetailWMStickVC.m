@@ -133,13 +133,14 @@ static CGFloat const kWMMenuViewHeight = 44;
 }
 
 - (void)viewDidLoad {
-
+    
 //    self.view.backgroundColor = [UIColor greenColor]
         [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = COLOR_F0F0F0;
     [self initViews];
     [self loadMatchInfo];
+
 
     
 }

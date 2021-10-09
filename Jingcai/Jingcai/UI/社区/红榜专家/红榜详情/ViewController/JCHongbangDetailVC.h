@@ -16,8 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) JCWTjInfoBall *planDetailModel;//方案详情
 
-@property (nonatomic,strong) NSDictionary *dataDic;
-
 @property (nonatomic,strong) JCHongbangDetailModel *detailModel;
 
 @end

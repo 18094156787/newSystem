@@ -12,6 +12,7 @@
 #import "JCWNewsDetailBall.h"
 #import "JCShareView.h"
 #import "JCBaseTitleAlertView.h"
+#import "JCFanganSaleOut_BuyCell.h"
 @interface JCArticleDetailVC ()
 
 @property (nonatomic, strong) UIView *bottomView;
@@ -33,6 +34,8 @@
 @property (nonatomic,assign) float cellHeight;
 
 @property (strong, nonatomic) JCWNewsDetailBall * newsDetailBall;
+
+@property (nonatomic,assign) BOOL is_saleOut;//已下架
 
 @end
 
@@ -61,16 +64,15 @@
         if ([JCWJsonTool isSuccessResponse:object]) {
             [self.view endLoading];
             self.newsDetailBall = (JCWNewsDetailBall *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCWNewsDetailBall class]];
+            if (self.newsDetailBall.status==8) {
+                self.is_saleOut = YES;
+                self.bottomView.hidden = YES;
+            }
             [self.tableView reloadData];
             self.likeLab.text = [self.newsDetailBall.dz_number integerValue]>0?self.newsDetailBall.dz_number:@"点赞";
             self.likeImgView.image = self.newsDetailBall.is_good==1?JCIMAGE(@"daka_icon_dz"):JCIMAGE(@"daka_icon_dz_un");
             
 
-            
-//            self.shareView.title = self.newsDetailBall.information;
-//            self.shareView.desc = self.newsDetailBall.desc;
-//            self.shareView.webPageUrl = self.newsDetailBall.url;
-//            self.shareView.friend_url = self.newsDetailBall.friend_url;
             
             self.shareView.title = self.newsDetailBall.wechat_share.share_title;
             self.shareView.content = self.newsDetailBall.wechat_share.share_desc;
@@ -92,6 +94,9 @@
     self.tableView.estimatedRowHeight = 100;
     [self.tableView registerClass:[JCArticleDetailContentCell class] forCellReuseIdentifier:@"JCArticleDetailContentCell"];
     [self.tableView registerClass:[JCArticleDetailHeadViewCell class] forCellReuseIdentifier:@"JCArticleDetailHeadViewCell"];
+    [self.tableView registerClass:[JCFanganSaleOut_BuyCell class] forCellReuseIdentifier:@"JCFanganSaleOut_BuyCell"];
+    
+    
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.offset(-49-kBottomTabSafeAreaHeight);
     }];
@@ -206,6 +211,9 @@
     if (indexPath.row==0) {
         return UITableViewAutomaticDimension;
     }
+    if(self.is_saleOut&&indexPath.row==1){
+        return UITableViewAutomaticDimension;
+    }
     return self.cellHeight;
 }
 
@@ -219,6 +227,11 @@
         };
         return cell;
     }
+    if (self.is_saleOut) {
+        JCFanganSaleOut_BuyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCFanganSaleOut_BuyCell"];
+        cell.is_wz = YES;
+        return cell;
+            }
 
     JCArticleDetailContentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCArticleDetailContentCell"];
     WeakSelf;

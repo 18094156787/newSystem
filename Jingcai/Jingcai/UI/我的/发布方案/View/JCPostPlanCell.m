@@ -156,7 +156,7 @@
     }else{
         self.equal_normalBtn.backgroundColor = COLOR_DDDDDD;
         [self.equal_normalBtn setTitleColor:COLOR_999999 forState:0];
-        [self.equal_normalBtn setTitle:[NSString stringWithFormat:@"盘口%@",sfpModel.draw] forState:0];
+        [self.equal_normalBtn setTitle:sfpModel.draw forState:0];
         self.equal_normalBtn.userInteractionEnabled = YES;
     }
     if (!sfpModel.lost) {

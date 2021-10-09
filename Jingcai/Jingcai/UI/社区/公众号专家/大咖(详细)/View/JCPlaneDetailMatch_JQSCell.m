@@ -224,9 +224,9 @@
             }
         }
         if (matchModel.classfly==103) {
-            self.no_rq_windLab.text = [NSString stringWithFormat:@"大分 %@",matchModel.no_rq_odds.win];
+            self.no_rq_windLab.text = [NSString stringWithFormat:@"高 %@",matchModel.no_rq_odds.win];
             self.no_rq_equalLab.text = [NSString stringWithFormat:@"指数 %@",matchModel.no_rq_odds.equal];
-            self.no_rq_loseLab.text = [NSString stringWithFormat:@"小分 %@",matchModel.no_rq_odds.lose];
+            self.no_rq_loseLab.text = [NSString stringWithFormat:@"低 %@",matchModel.no_rq_odds.lose];
             switch ([matchModel.spf intValue]) {
                 case 1:
                 {

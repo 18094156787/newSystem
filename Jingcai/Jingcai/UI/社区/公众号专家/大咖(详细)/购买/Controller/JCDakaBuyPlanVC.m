@@ -58,6 +58,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 //    self.is_saleOut = YES;
+    if ([self.payInfoModel.status integerValue]==8) {
+        //payInfoModel.status ==8 表示需要展示已下载
+        self.is_saleOut = YES;
+    }
     [self initViews];
     [self getUserInfo];
     [self getHongbaoList];
@@ -110,8 +114,12 @@
         [weakSelf caculatePrice];
     };
     
-    
+ 
     self.time_distance = [self.payInfoModel.end_time doubleValue]-[self.payInfoModel.now_time doubleValue];
+    if (self.payInfoModel.is_look.length>0&&[self.payInfoModel.is_look integerValue]==0) {
+        self.time_distance = 0;
+    }
+
     self.countDown = [[CountDown alloc] init];
     ///每秒回调一次
     [self.countDown countDownWithPER_SECBlock:^{
@@ -520,7 +528,7 @@
         [[UIApplication sharedApplication].keyWindow endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
                self.mdModel = (JCWMyHongbaoBall *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCWMyHongbaoBall class]];
-            if (self.mdModel.id.length>0) {
+            if (self.mdModel.id.length>0&&self.time_distance>0) {
                 if (!self.match_end) {
                     //购买未截止时,再显示免单券
                     [self payFree];
@@ -714,11 +722,11 @@
 
 -(void)updateTimeInVisibleCells{
     if (self.is_saleOut) {
-        if (self.JCEndBlock) {
-            self.JCEndBlock(YES);
-            [self.countDown destoryTimer];
-        }
+        //下架
+        [self.countDown destoryTimer];
     }
+
+    
     NSArray  *cells = self.tableView.visibleCells; //取出屏幕可见ceLl
     for (UITableViewCell *cell in cells) {
         if ([cell isKindOfClass:[JCBuyPlanLock_GZH_Cell class]]) {
@@ -733,22 +741,15 @@
                 }
                 [self.countDown destoryTimer];
             }
+
             timeCell.timeLab.text = [NSString stringWithFormat:@"%@:%@:%@",dic[@"hours"],dic[@"minutes"],dic[@"seconds"]];
 
             if (self.time_distance>0) {
-//                NSInteger time = [self.payInfoModel.timestamp intValue]-1;
                 self.time_distance--;
-//                self.payInfoModel.timestamp = [NSString stringWithFormat:@"%ld",time];
-                NSLog(@"%@",self.payInfoModel.timestamp);
             }else{
                 timeCell.timeLab.text = @"00:00:00";
             }
-//            timeCell.hours = dic[@"hours"];
-//            timeCell.minutes = dic[@"minutes"];
-//            timeCell.seconds = dic[@"seconds"];
-//            timeCell.introduceLab.text = @"434343";
-//
-//            @{@"hours":hoursStr,@"minutes":hoursStr,@"seconds":secondsStr}
+
         }
 
     }

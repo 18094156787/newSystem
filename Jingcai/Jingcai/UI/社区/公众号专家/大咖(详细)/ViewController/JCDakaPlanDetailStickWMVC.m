@@ -104,7 +104,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 
     [super viewDidLoad];
     self.title = @"方案详情";
-    self.view.backgroundColor = COLOR_002868;
+//    self.view.backgroundColor = COLOR_002868;
     [self initViews];
     // Do any additional setup after loading the view.
     self.autherHeadView = [[JCDakaPlanDetailAutherHeadView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, kWHongbangDetailHeaderViewHeight)];
@@ -227,6 +227,10 @@ static CGFloat const kWMMenuViewHeight = 0;
 
 
 - (void)loadDataInfo {
+    if ([self.planDetailModel.status integerValue]==8) {
+        self.bottomView.hidden = YES;
+    }
+    
 //    _planDetailModel =planDetailModel;
      self.likeLab.text = [self.planDetailModel.dz_number integerValue]==0?@"点赞":self.planDetailModel.dz_number;
     self.likeImgView.image = self.planDetailModel.is_good==0?JCIMAGE(@"daka_icon_dz_un"):JCIMAGE(@"daka_icon_dz");
@@ -245,6 +249,7 @@ static CGFloat const kWMMenuViewHeight = 0;
     self.minimumHeaderViewHeight =self.height-kNavigationBarHeight;
     self.autherHeadView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), self.height);
     self.viewTop = self.height;
+    
 }
 //获取详情关联的比赛
 - (void)getMatchList {

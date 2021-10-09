@@ -90,7 +90,7 @@ static CGFloat const kWMMenuViewHeight = 0;
         [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"方案详情";
-    self.view.backgroundColor = JCNavColor;
+//    self.view.backgroundColor = JCNavColor;
     self.autherHeadView = [[JCDakaPlanDetailAutherHeadView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, kWHongbangDetailHeaderViewHeight)];
     
     WeakSelf;
@@ -122,6 +122,8 @@ static CGFloat const kWMMenuViewHeight = 0;
     self.autherHeadView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), self.height);
     self.viewTop = self.height;
     self.isLoad = YES;
+    
+
     
     [self reloadData];
 }
@@ -178,6 +180,11 @@ static CGFloat const kWMMenuViewHeight = 0;
         make.left.equalTo(priceLab.mas_right).offset(15);
         make.centerY.equalTo(sureBtn).offset(3);
     }];
+    
+    if ([self.payInfoModel.status integerValue]==8) {
+        //payInfoModel.status ==8 表示需要展示已下载
+        self.bottomView.hidden = YES;
+    }
 
     
     WeakSelf;
@@ -259,6 +266,8 @@ static CGFloat const kWMMenuViewHeight = 0;
                 weakSelf.hbPriceLab.text = @"";
             }
         };
+
+        
         return self.homeVC;
     }
 

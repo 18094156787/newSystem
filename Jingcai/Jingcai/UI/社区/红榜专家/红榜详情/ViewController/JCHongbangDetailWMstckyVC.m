@@ -262,6 +262,9 @@ static CGFloat const kWMMenuViewUserHeight = 60;
     if (!self.detailModel) {
         return;
     }
+    if (self.detailModel.talent_plan.status==8) {
+        self.bottomView.hidden = YES;
+    }
     NSArray *matchDataArray = self.detailModel.match_info;
     self.tjInfoDetailBall = self.detailModel.talent_plan;
   if (matchDataArray.count>1) {

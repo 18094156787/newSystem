@@ -35,6 +35,7 @@ PODS:
   - JPush (3.6.2):
     - JCore (< 3.0.0, >= 2.0.0)
   - JXCategoryView (1.5.9)
+  - KMNavigationBarTransition (1.1.8)
   - LBXScan (2.5.1):
     - LBXScan/All (= 2.5.1)
   - LBXScan/All (2.5.1):
@@ -143,6 +144,7 @@ DEPENDENCIES:
   - IQKeyboardManager
   - JPush
   - JXCategoryView
+  - KMNavigationBarTransition
   - LBXScan (~> 2.3)
   - Masonry
   - MJRefresh
@@ -170,6 +172,7 @@ SPEC REPOS:
     - JCore
     - JPush
     - JXCategoryView
+    - KMNavigationBarTransition
     - LBXScan
     - Masonry
     - MJRefresh
@@ -198,6 +201,7 @@ SPEC CHECKSUMS:
   JCore: 0cb4fc5892bc97af4f27283875369ead3eaa3067
   JPush: 5272c18a040c5dd695053816f7c7ce33422a21b4
   JXCategoryView: 2ef9ecfd3735158d009ce02d1f29811aa822da65
+  KMNavigationBarTransition: 7ee1a05ff758bce9258845a803f7a8b00585bd58
   LBXScan: 90ca10d0c38fb4a5a6980d7782354f3f69f50093
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: d2c1970d1cf6e77fcfcdfe76c943dfab8dbfa5c1
@@ -218,6 +222,6 @@ SPEC CHECKSUMS:
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 1476bddcb1229fc343940989b4958256c3339e4a
+PODFILE CHECKSUM: 9a3b5dabf3d5488124c589ea1347b4e0fcdea1d4
 
 COCOAPODS: 1.10.1
