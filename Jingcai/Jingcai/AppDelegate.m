@@ -54,6 +54,9 @@
 //    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     if (@available(iOS 15.0, *)) {
         [UITableView appearance].sectionHeaderTopPadding = 0;
+        [UITableView appearance].tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
+        [UITableView appearance].tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
+
     }
     self.launchOptions = launchOptions;
 //    [self configUM];

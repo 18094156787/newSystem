@@ -185,6 +185,9 @@
         [view registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
         
         _tableView = view;
+//        if (@available(iOS 15.0, *)) {
+//            view.sectionHeaderTopPadding = 0;
+//        }
         if (@available(iOS 11.0, *)) {
             
             view.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;

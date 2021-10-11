@@ -440,7 +440,7 @@
 - (void)showBigImage:(NSArray *)imgArray {
     NSMutableArray *datas = [NSMutableArray array];
     [imgArray enumerateObjectsUsingBlock:^(UIImage *_Nonnull img, NSUInteger idx, BOOL * _Nonnull stop) {
-//                    JCImgCollectionViewCell *cell = (JCImgCollectionViewCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
+
 //        // 网络图片
         YBIBImageData *data = [YBIBImageData new];
         data.image = ^UIImage * _Nullable{

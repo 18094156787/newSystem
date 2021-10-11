@@ -209,6 +209,10 @@
         }
         [self.collectionView reloadData];
         
+        if (!self.historyArray) {
+            self.historyArray = [NSMutableArray array];
+        }
+        
         NSData *data = [NSJSONSerialization dataWithJSONObject:self.historyArray options:NSJSONWritingPrettyPrinted error:nil];
         if (self.type==0) {
             [[NSUserDefaults standardUserDefaults] setObject:data forKey:JCSearch_Home_FootBall];
