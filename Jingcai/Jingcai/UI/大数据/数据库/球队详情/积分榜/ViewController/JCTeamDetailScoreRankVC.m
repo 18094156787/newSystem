@@ -108,7 +108,7 @@
     [service getDataBaseScoreRankWithType:@"1" competiton_id:self.team_id Season_id:self.season_id stage_id:NonNil(self.stage_id) Success:^(id  _Nullable object) {
         [self.fatherView endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
-            
+            [self.dataArray removeAllObjects];
             self.type = [object[@"data"][@"comp_type"] integerValue];
             self.rule = object[@"data"][@"rule"];
             if (self.type==1) {

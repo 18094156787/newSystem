@@ -238,23 +238,11 @@
         cell.labelThree.text = @"最低";
         cell.labelFour.text = @"平均";
         cell.labelFive.text = @"趋势\n（相比初始）";
-//        cell.labelOne.backgroundColor = COLOR_F0F0F0;
-//        cell.labelTwo.backgroundColor = COLOR_F0F0F0;
-//        cell.labelThree.backgroundColor = COLOR_F0F0F0;
-//        cell.labelFour.backgroundColor = COLOR_F0F0F0;
-//        cell.labelFive.backgroundColor = COLOR_F0F0F0;
-//        cell.labelSix.backgroundColor = COLOR_F0F0F0;
-//        cell.labelOne.backgroundColor = JCWhiteColor;
-//        cell.labelTwo.backgroundColor = JCWhiteColor;
-//        cell.labelThree.backgroundColor = JCWhiteColor;
-//        cell.labelFour.backgroundColor = JCWhiteColor;
-//        cell.labelFive.backgroundColor = JCWhiteColor;
-//        cell.labelSix.backgroundColor = JCWhiteColor;
-
 
         
     }else{
         cell.model = self.dataArray[indexPath.row-1];
+        cell.labelFive.text = @"";
     }
 
     return cell;

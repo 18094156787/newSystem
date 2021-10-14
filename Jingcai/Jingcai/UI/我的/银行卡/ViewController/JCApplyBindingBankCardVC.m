@@ -62,7 +62,7 @@
     self.tableView.tableHeaderView = headView;
     
     JCApplyBindingFootView *footView = [JCApplyBindingFootView new];
-    footView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(120));
+    footView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(140));
     self.tableView.tableFooterView = footView;
     
     [self.view addSubview:self.nextBtn];

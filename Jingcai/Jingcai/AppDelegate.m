@@ -43,6 +43,7 @@
 #import "IAPManager.h"
 #import "JCBaseTitleAlertView.h"
 #import "KSGuaidViewManager.h"
+#import <JJException.h>
 @interface AppDelegate () <JPUSHRegisterDelegate>
 
 @property (nonatomic,strong) NSDictionary *launchOptions;
@@ -52,6 +53,12 @@
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 //    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
+    [JJException configExceptionCategory:JJExceptionGuardAll];
+    [JJException startGuardException];
+//当异常时，默认程序不会中断，如果需要遇到异常时退出，需要如下设置:
+//    JJException.exceptionWhenTerminate = YES;
+    
     if (@available(iOS 15.0, *)) {
         [UITableView appearance].sectionHeaderTopPadding = 0;
         [UITableView appearance].tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];

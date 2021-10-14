@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,22 +36,22 @@
                     </connections>
                 </segmentedControl>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39a-aW-r2b">
-                    <rect key="frame" x="0.0" y="95" width="414" height="767"/>
+                    <rect key="frame" x="0.0" y="95" width="414" height="801"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="sSX-cP-jVD"/>
                     </connections>
                 </scrollView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="W6m-uU-3UT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="3" id="588-zO-CWA"/>
                 <constraint firstItem="39a-aW-r2b" firstAttribute="top" secondItem="W6m-uU-3UT" secondAttribute="bottom" constant="11" id="PAq-P1-oqu"/>
                 <constraint firstItem="W6m-uU-3UT" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="8" id="Q4s-jh-bIK"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="39a-aW-r2b" secondAttribute="bottom" id="Thh-Go-J05"/>
                 <constraint firstItem="39a-aW-r2b" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="UX0-qJ-h52"/>
+                <constraint firstAttribute="bottom" secondItem="39a-aW-r2b" secondAttribute="bottom" id="nbg-uI-D9J"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="39a-aW-r2b" secondAttribute="trailing" id="vP6-xF-V85"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="-2494.202898550725" y="9.375"/>
         </view>
     </objects>

@@ -109,6 +109,11 @@
     [self getBuyInfo];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getBuyInfo) name:JingcaiAIProduceBuy object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getBuyInfo) name:NotificationUserLogin object:nil];
+
+    [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(0);
+        make.left.bottom.right.equalTo(self.view);
+    }];
     
 }
 

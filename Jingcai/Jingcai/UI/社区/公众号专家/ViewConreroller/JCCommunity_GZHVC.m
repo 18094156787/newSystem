@@ -167,8 +167,6 @@
     JCWTjInfoBall *model = self.dataArray[indexPath.section];
     JCFamousExpertCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCFamousExpertCell"];
     cell.model = model;
-//    cell.timeLab.text = [NSString stringWithFormat:@"截止时间: %@",model.end_time];
-    
     return cell;
 }
 

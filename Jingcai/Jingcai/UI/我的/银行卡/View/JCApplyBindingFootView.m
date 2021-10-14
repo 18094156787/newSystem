@@ -28,8 +28,12 @@
         make.centerY.equalTo(iconView);
         make.height.mas_equalTo(16);
     }];
-    
-    UILabel *contentLab = [UILabel initWithTitle:@"请上方填写您的真实的个人信息，信息出错或者不一致，会导致您提现失败。上述信息仅用于开通作者提现的稿酬提现，平台尊重并保护用户的隐私信息" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+    NSString *str  = @"请上方填写您的真实的个人信息，银行卡开户名必须和认证的账号身份信息一致,信息出错或者不一致，会导致您提现失败。上述信息仅用于开通作者提现的稿酬提现，平台尊重并保护用户的隐私信息";
+    NSRange range = [str rangeOfString:@"银行卡开户名必须和认证的账号身份信息一致"];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:str];
+    [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
+    UILabel *contentLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+    contentLab.attributedText = attr;
     contentLab.numberOfLines = 0;
     [self addSubview:contentLab];
     [contentLab mas_makeConstraints:^(MASConstraintMaker *make) {

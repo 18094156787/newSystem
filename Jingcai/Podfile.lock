@@ -32,6 +32,24 @@ PODS:
     - BlocksKit/DynamicDelegate
   - IQKeyboardManager (6.5.6)
   - JCore (2.6.2)
+  - JJException (0.2.9):
+    - JJException/All (= 0.2.9)
+  - JJException/All (0.2.9):
+    - JJException/ARC
+    - JJException/DeallocBlock
+    - JJException/Main
+    - JJException/MRC
+    - JJException/Swizzle
+  - JJException/ARC (0.2.9):
+    - JJException/DeallocBlock
+    - JJException/Main
+    - JJException/Swizzle
+  - JJException/DeallocBlock (0.2.9)
+  - JJException/Main (0.2.9)
+  - JJException/MRC (0.2.9):
+    - JJException/Main
+    - JJException/Swizzle
+  - JJException/Swizzle (0.2.9)
   - JPush (3.6.2):
     - JCore (< 3.0.0, >= 2.0.0)
   - JXCategoryView (1.5.9)
@@ -142,6 +160,7 @@ DEPENDENCIES:
   - ATNavigationController
   - BlocksKit
   - IQKeyboardManager
+  - JJException
   - JPush
   - JXCategoryView
   - KMNavigationBarTransition
@@ -170,6 +189,7 @@ SPEC REPOS:
     - BlocksKit
     - IQKeyboardManager
     - JCore
+    - JJException
     - JPush
     - JXCategoryView
     - KMNavigationBarTransition
@@ -199,6 +219,7 @@ SPEC CHECKSUMS:
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
   JCore: 0cb4fc5892bc97af4f27283875369ead3eaa3067
+  JJException: da7c64ccf29d9938a4075378a7e9a29db7383c37
   JPush: 5272c18a040c5dd695053816f7c7ce33422a21b4
   JXCategoryView: 2ef9ecfd3735158d009ce02d1f29811aa822da65
   KMNavigationBarTransition: 7ee1a05ff758bce9258845a803f7a8b00585bd58
@@ -222,6 +243,6 @@ SPEC CHECKSUMS:
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 9a3b5dabf3d5488124c589ea1347b4e0fcdea1d4
+PODFILE CHECKSUM: 92543a845d9b07c05fb9d494252fb47c9cb6ddb8
 
 COCOAPODS: 1.10.1

@@ -774,7 +774,7 @@ static CGFloat const kWMMenuViewHeight = 0;
     }
 }
 
-#pragma mark - -
+#pragma mark - -每周开奖结果
 - (void)showWeekView {
     if (self.weekResultModel.is_win.length>0) {
         if ([self.weekResultModel.is_win intValue]==1) {

@@ -241,10 +241,12 @@
         cell.labelThree.text = @"最低";
         cell.labelFour.text = @"平均";
         cell.labelFive.text = @"趋势\n相比初始";
+        
 
         
     }else{
         cell.model = self.dataArray[indexPath.row-1];
+        cell.labelFive.text = @"";
 
     }
 

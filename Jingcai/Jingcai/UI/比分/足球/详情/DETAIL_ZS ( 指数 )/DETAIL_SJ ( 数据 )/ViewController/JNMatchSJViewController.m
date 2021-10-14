@@ -49,6 +49,13 @@
     [self.tableView registerClass:[JNMatchSJZhanjiTableViewCell class] forCellReuseIdentifier:@"JNMatchSJZhanjiTableViewCell"];
     self.footView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 40);
     self.tableView.tableFooterView = self.footView;
+    
+    [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(0);
+        make.left.bottom.right.equalTo(self.view);
+    }];
+    
+    
 }
 
 - (void)getDataList {

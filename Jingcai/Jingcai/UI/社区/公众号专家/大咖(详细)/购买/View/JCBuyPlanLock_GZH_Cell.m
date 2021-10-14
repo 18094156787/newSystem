@@ -211,7 +211,7 @@
             make.top.equalTo(self.introduceLab.mas_bottom);
         }];
     }
-        self.endTimeLab.text = [NSString stringWithFormat:@"%@ 截止购买",[NSDate wholeTimeStringToMinuteWithInterval:[payInfoModel.end_time longLongValue]]];
+    self.endTimeLab.text = [NSString stringWithFormat:@"%@ 截止购买",[NSDate wholeTimeStringToMinuteWithInterval:[payInfoModel.end_time longLongValue]]];
     self.infoLab.text = @"";
     self.buyTipLab.text = @"";
     if ([payInfoModel.pre_sale integerValue]==1) {

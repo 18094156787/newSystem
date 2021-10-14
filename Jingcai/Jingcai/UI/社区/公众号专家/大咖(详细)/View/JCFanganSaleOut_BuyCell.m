@@ -47,6 +47,11 @@
     self.introduceLab.text = payInfoModel.subtitle;
 }
 
+- (void)setTjInfoDetailBall:(JCWTjInfoDetailBall *)tjInfoDetailBall {
+    _tjInfoDetailBall = tjInfoDetailBall;
+    self.introduceLab.text = tjInfoDetailBall.citation;
+}
+
 - (void)setIs_wz:(BOOL)is_wz {
     _is_wz = is_wz;
     if (is_wz) {

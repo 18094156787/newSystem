@@ -162,6 +162,9 @@
         self.lineThree.backgroundColor = JCWhiteColor;
         self.lineFour.backgroundColor = JCWhiteColor;
 
+        self.upLabel.hidden = YES;
+        self.equalLabel.hidden = YES;
+        self.downLabel.hidden = YES;
         
         self.upImgView.hidden = YES;
         self.equalImgView.hidden = YES;
@@ -193,6 +196,9 @@
         self.upImgView.hidden = NO;
         self.equalImgView.hidden = NO;
         self.downImgView.hidden = NO;
+        self.upLabel.hidden = NO;
+        self.equalLabel.hidden = NO;
+        self.downLabel.hidden = NO;
     }
 
 

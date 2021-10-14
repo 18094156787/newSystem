@@ -21,7 +21,7 @@
 - (void)initViews {
     
     UIView *titleBgView = [UIView new];
-    [self addSubview:titleBgView];
+    [self.contentView addSubview:titleBgView];
     titleBgView.backgroundColor = [COLOR_002868 colorWithAlphaComponent:0.06];
     [titleBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(0);
@@ -46,7 +46,7 @@
     UIView *awayWinView =[UIView new];
     awayWinView.backgroundColor = COLOR_002868;
     [awayWinView hg_setAllCornerWithCornerRadius:AUTO(4)];
-    [self addSubview:awayWinView];
+    [self.contentView addSubview:awayWinView];
     [awayWinView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleBgView);
         make.right.equalTo(awayWinLab.mas_left).offset(-4);
@@ -54,7 +54,7 @@
     }];
     
     UILabel *eqalWinLab = [UILabel initWithTitle:@"平" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
-    [self addSubview:eqalWinLab];
+    [self.contentView addSubview:eqalWinLab];
     [eqalWinLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleBgView);
         make.height.mas_equalTo(AUTO(15));
@@ -64,7 +64,7 @@
     UIView *eqalView =[UIView new];
     eqalView.backgroundColor = COLOR_30B27A;
     [eqalView hg_setAllCornerWithCornerRadius:AUTO(4)];
-    [self addSubview:eqalView];
+    [self.contentView addSubview:eqalView];
     [eqalView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleBgView);
         make.right.equalTo(eqalWinLab.mas_left).offset(-4);
@@ -72,7 +72,7 @@
     }];
     
     UILabel *homeWinLab = [UILabel initWithTitle:@"主胜" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
-    [self addSubview:homeWinLab];
+    [self.contentView addSubview:homeWinLab];
     [homeWinLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleBgView);
         make.height.mas_equalTo(AUTO(15));
@@ -82,7 +82,7 @@
     UIView *homeWindView =[UIView new];
     homeWindView.backgroundColor = JCBaseColor;
     [homeWindView hg_setAllCornerWithCornerRadius:AUTO(4)];
-    [self addSubview:homeWindView];
+    [self.contentView addSubview:homeWindView];
     [homeWindView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleBgView);
         make.right.equalTo(homeWinLab.mas_left).offset(-4);
@@ -90,7 +90,7 @@
     }];
     
     UIView *bottomView = [UIView new];
-    [self addSubview:bottomView];
+    [self.contentView addSubview:bottomView];
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(titleBgView.mas_bottom).offset(AUTO(10));
         make.left.offset(AUTO(15));
@@ -113,7 +113,7 @@
     }];
     
     
-    [self addSubview:self.bgView];
+    [self.contentView addSubview:self.bgView];
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.offset(0);
         make.top.equalTo(bottomView.mas_bottom).offset(AUTO(20));
@@ -122,14 +122,14 @@
     
 
     
-    [self addSubview:self.lastTimeLab];
+    [self.contentView addSubview:self.lastTimeLab];
     [self.lastTimeLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(45));
         make.top.equalTo(self.bgView.mas_bottom).offset(0);
         make.height.mas_equalTo(AUTO(17));
     }];
     
-    [self addSubview:self.nowTimeLab];
+    [self.contentView addSubview:self.nowTimeLab];
     [self.nowTimeLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_centerX).offset(AUTO(10));
         make.top.equalTo(self.bgView.mas_bottom).offset(0);
@@ -139,7 +139,7 @@
 
 
     
-    [self addSubview:self.tableView];
+    [self.contentView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
@@ -150,7 +150,7 @@
     
     UIView *lineView = [UIView new];
     lineView.backgroundColor = COLOR_F0F0F0;
-    [self addSubview:lineView];
+    [self.contentView addSubview:lineView];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
@@ -254,6 +254,7 @@
         
     }else{
         cell.model = self.dataArray[indexPath.row-1];
+        cell.labelSix.text = @"";
 
     }
 

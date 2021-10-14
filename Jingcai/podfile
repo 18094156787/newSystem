@@ -29,5 +29,6 @@ target 'Jingcai' do
     pod 'SocketRocket'
     pod 'JXCategoryView'
     pod 'KMNavigationBarTransition'
+    pod 'JJException'
 end
 

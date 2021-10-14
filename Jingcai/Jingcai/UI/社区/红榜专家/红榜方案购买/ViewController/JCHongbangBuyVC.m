@@ -228,6 +228,7 @@
     if (indexPath.section==1) {
         if (self.is_saleOut) {
             JCFanganSaleOut_BuyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCFanganSaleOut_BuyCell"];
+            cell.tjInfoDetailBall = self.tjInfoDetailBall;
             return cell;
                 }
         JCBuyPlanLock_HB_Cell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCBuyPlanLock_HB_Cell"];

@@ -8,7 +8,6 @@
 
 #import "JCMyBankCardVC.h"
 #import "JCDakaBuyPayWayTopView.h"
-#import "JCApplyBindingFootView.h"
 #import "JCMyBindBankCardCell.h"
 #import "JCBaseTitleAlertView.h"
 #import "JCBankCardInfoModel.h"

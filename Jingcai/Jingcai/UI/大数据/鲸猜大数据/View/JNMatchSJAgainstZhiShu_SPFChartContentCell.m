@@ -162,6 +162,9 @@
         self.upImgView.hidden = YES;
         self.equalImgView.hidden = YES;
         self.downImgView.hidden = YES;
+        self.upLabel.hidden = YES;
+        self.equalLabel.hidden = YES;
+        self.downLabel.hidden = YES;
 
     }else{
         
@@ -184,6 +187,9 @@
         self.upImgView.hidden = NO;
         self.equalImgView.hidden = NO;
         self.downImgView.hidden = NO;
+        self.upLabel.hidden = NO;
+        self.equalLabel.hidden = NO;
+        self.downLabel.hidden = NO;
 
     }
 }
