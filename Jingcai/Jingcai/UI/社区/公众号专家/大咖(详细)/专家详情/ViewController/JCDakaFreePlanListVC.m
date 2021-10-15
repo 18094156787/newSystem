@@ -1,46 +1,32 @@
 //
-//  JCFootBallAuthorDetailVC.m
+//  JCDakaFreePlanListVC.m
 //  Jingcai
 //
-//  Created by 陈继伟 on 2019/8/8.
-//  Copyright © 2019年 blockstar. All rights reserved.
+//  Created by 陈继伟 on 2020/9/16.
+//  Copyright © 2020 blockstar. All rights reserved.
 //
 
-#import "JCFootBallAuthorNewPlaneDetailVC.h"
+#import "JCDakaFreePlanListVC.h"
 #import "JCFootBallAuthorNewPlaneCell.H"
 #import "JCFootBallAuthorCodeView.h"
 #import "JCFootBallAuthorCodeNodataView.h"
 #import "JCWMyHongbaoBall.h"
 #import "JCDakaPlanDetailStickWMVC.h"
-#import "JCGZHBannerModel.h"
-#import "JCGZMBannerHeadView.h"
-#import "JCGZMBannerDetailVC.h"
-#import "JCWExpertBall.h"
-@interface JCFootBallAuthorNewPlaneDetailVC ()
+@interface JCDakaFreePlanListVC ()
 
 @property (nonatomic,strong) JCFootBallAuthorCodeView *codeView;
 
 @property (nonatomic,strong) JCFootBallAuthorCodeNodataView *codeNoDataView;
 
-@property (nonatomic,strong) JCGZMBannerHeadView *headView;
-
-@property (nonatomic,strong) JCWExpertBall *expertDetailModel;
-
-@property (nonatomic,strong) JCGZHBannerModel *bannerModel;
-
-@property (nonatomic,strong) JNDIYemptyView *emptyView;
-
 @property (nonatomic,assign) BOOL isLoad;
-
 
 @end
 
-@implementation JCFootBallAuthorNewPlaneDetailVC
+@implementation JCDakaFreePlanListVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = COLOR_F0F0F0;
-    
     // Do any additional setup after loading the view.
     [self initViews];
     [self refreshData];
@@ -50,30 +36,15 @@
     if (!self.expertID) {
         return;
     }
+
     [self.jcWindow showLoading];
-//    @weakify(self);
-    
     JCHomeService_New *service = [JCHomeService_New new];
-    [service getGZHT_TuijianExpertDetailWithExpert_id:self.expertID type:@"1" page:self.pageNo Success:^(id  _Nullable object) {
-        [self.jcWindow endLoading];
+    [service getGZHT_TuijianExpertDetailWithExpert_id:self.expertID type:NonNil(self.type) page:self.pageNo Success:^(id  _Nullable object) {
         if ([JCWJsonTool isSuccessResponse:object]) {
             [self endRefresh];
             if (self.pageNo==1) {
                 [self.dataArray removeAllObjects];
             }
-            if (object[@"data"][@"record_introduction"]) {
-                self.bannerModel = (JCGZHBannerModel *)[JCWJsonTool entityWithJson:object[@"data"][@"record_introduction"] class:[JCGZHBannerModel class]];
-                if (self.bannerModel.img_info) {
-                    self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 100);
-                    self.headView.model = self.bannerModel;
-                    self.tableView.tableHeaderView = self.headView;
-                }
-
-
-
-            }
-            self.expertDetailModel = (JCWExpertBall *)[JCWJsonTool entityWithJson:object[@"data"][@"base_info"] class:[JCWExpertBall class]];
-            
             NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"best_new_plans"] class:[JCWTjInfoBall class]];
             
             [self.dataArray addObjectsFromArray:array];
@@ -101,9 +72,9 @@
     } failure:^(NSError * _Nonnull error) {
         [self chageImageStr:@"nodata_fangan" Title:@"暂时还没有发布方案哦~" BtnTitle:@""];
         [self endRefresh];
-        [self.jcWindow endLoading];
     }];
 }
+
 
 - (void)initViews {
     self.tableView.separatorStyle = 0;
@@ -112,14 +83,18 @@
     self.tableView.scrollEnabled = YES;
     // 表格注册cell
     [self.tableView registerClass:[JCFootBallAuthorNewPlaneCell class] forCellReuseIdentifier:@"JCFootBallAuthorNewPlaneCell"];
-//    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.top.equalTo(self.view);
-//        make.bottom.equalTo(self.view).mas_offset(-kTabBarHeight);
-//
-//    }];
+
+    
+    WeakSelf;
+    JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
+        [weakSelf refreshData];
+    }];
+    emptyView.contentViewOffset = -150;
+    self.tableView.ly_emptyView = emptyView;
+
     
 
-    WeakSelf;
+    
     self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
         weakSelf.pageNo = 1;
 //        [self.dataArray removeAllObjects];
@@ -130,59 +105,6 @@
         [weakSelf refreshData];
     }];
     
-    JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
-        [weakSelf refreshData];
-    }];
-    emptyView.contentViewOffset = -150;
-    self.emptyView =  emptyView;
-    self.tableView.ly_emptyView = emptyView;
-    
-    
-//    WeakSelf;
-    self.headView.JCHeightBlock = ^(float height) {
-        weakSelf.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, height+AUTO(10));
-        weakSelf.tableView.tableHeaderView = weakSelf.headView;
-        
-        if (weakSelf.bannerModel.img_info) {
-
-
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //刷新UI的代码放到主线程执行
-//                weakSelf.emptyView.contentViewOffset = height-50;
-                weakSelf.emptyView.contentViewY = height;
-                weakSelf.tableView.ly_emptyView = weakSelf.emptyView;
-            });
-
-
-        }
-    };
-    
-    [self.headView bk_whenTapped:^{
-        if (weakSelf.bannerModel.describe.length>0) {
-            JCGZMBannerDetailVC *vc = [JCGZMBannerDetailVC new];
-            vc.content = weakSelf.bannerModel.describe;
-            vc.title = weakSelf.expertDetailModel.user_name;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-            
-//            WebViewController *vc = [WebViewController new];
-////            vc.content = weakSelf.bannerModel.describe;
-////            vc.title = weakSelf.expertDetailModel.user_name;
-//            [weakSelf.navigationController pushViewController:vc animated:YES];
-        }
-            
-    }];
-    
-//    self.headView.JCClickBlock = ^{
-//        if (weakSelf.bannerModel.describe.length>0) {
-//            JCGZMBannerDetailVC *vc = [JCGZMBannerDetailVC new];
-//            vc.content = weakSelf.bannerModel.describe;
-////            vc.title = weakSelf.expertDetailModel.user_name;
-//            [weakSelf.navigationController pushViewController:vc animated:YES];
-//        }
-//
-//    };
-    
 }
 
 
@@ -192,34 +114,32 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 //    return 1;
-    return self.dataArray.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 1;
+    return self.dataArray.count;
 
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JCFootBallAuthorNewPlaneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCFootBallAuthorNewPlaneCell"];
-    cell.model = self.dataArray[indexPath.section];
+    cell.type = self.type;
+    cell.model = self.dataArray[indexPath.row];
     return cell;
     
     
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *view = [UIView new];
-    view.backgroundColor = COLOR_F0F0F0;
+    view.backgroundColor = COLOR_F6F6F6;
     return view;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section==self.dataArray.count-1) {
-        return 0.001f;
-    }
-    return AUTO(5);
+    return 0.001f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -228,7 +148,7 @@
         [self presentLogin];
         return ;
     }
-    JCWTjInfoBall *model = self.dataArray[indexPath.section];
+    JCWTjInfoBall *model = self.dataArray[indexPath.row];
     [JCTuiJianManager loadGZH_ArticleDetailWithArticleID:model.id orderID:@"" type:@"" WithViewController:self is_push:YES];
 
 }
@@ -239,8 +159,8 @@
     return UITableViewAutomaticDimension;
 }
 
-//- (void)setCodeUrl:(NSString *)codeUrl {
-//    _codeUrl = codeUrl;
+- (void)setCodeUrl:(NSString *)codeUrl {
+    _codeUrl = codeUrl;
 //    if (self.isLoad) {
 //        if (self.dataArray.count>0) {
 //            self.codeView.url = codeUrl;
@@ -250,8 +170,8 @@
 //            self.tableView.tableFooterView = self.codeNoDataView;
 //        }
 //    }
-//
-//}
+
+}
 
 - (JCFootBallAuthorCodeView *)codeView {
     if (!_codeView) {
@@ -269,21 +189,5 @@
     }
     return _codeNoDataView;
 }
-- (JCGZMBannerHeadView *)headView {
-    if (!_headView) {
-        _headView = [JCGZMBannerHeadView new];
-    }
-    return _headView;
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

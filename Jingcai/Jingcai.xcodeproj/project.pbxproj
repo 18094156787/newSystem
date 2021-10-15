@@ -73,11 +73,30 @@
 		590A3F6726C24B420012EDE6 /* JCActivityGuessMore_CompleteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 590A3F6626C24B410012EDE6 /* JCActivityGuessMore_CompleteVC.m */; };
 		590A3F6A26C24C5F0012EDE6 /* JCActivityGuessMore_HeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 590A3F6926C24C5F0012EDE6 /* JCActivityGuessMore_HeadView.m */; };
 		590A3F7026C24E3D0012EDE6 /* JCActivityGuess_SPF_CompleteMore_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 590A3F6F26C24E3D0012EDE6 /* JCActivityGuess_SPF_CompleteMore_Cell.m */; };
+		59442B49271916FB00B5C831 /* JCCommunityMoreColumnVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B48271916FB00B5C831 /* JCCommunityMoreColumnVC.m */; };
+		59442B4F2719174700B5C831 /* JCCommunityMoreColumnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B4E2719174700B5C831 /* JCCommunityMoreColumnCell.m */; };
+		59442B5227195DF100B5C831 /* JCDakaHistoryTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B5127195DF100B5C831 /* JCDakaHistoryTitleView.m */; };
+		59442B5527195EA400B5C831 /* JCFootBallAuthorNewPlaneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B5327195EA400B5C831 /* JCFootBallAuthorNewPlaneCell.m */; };
+		59442B5827195EC900B5C831 /* JCFootBallAuthorHistoryPlaneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B5727195EC800B5C831 /* JCFootBallAuthorHistoryPlaneCell.m */; };
+		59442B5B271961BD00B5C831 /* JCFootBallAuthorColumnVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B5A271961BD00B5C831 /* JCFootBallAuthorColumnVC.m */; };
+		59442B5E271961D500B5C831 /* JCFootBallAuthorColumnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B5D271961D500B5C831 /* JCFootBallAuthorColumnCell.m */; };
+		59442B632719646D00B5C831 /* JCMyBuyColumnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B622719646D00B5C831 /* JCMyBuyColumnViewController.m */; };
+		59442B672719653D00B5C831 /* JCMyBuyColumnViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B662719653D00B5C831 /* JCMyBuyColumnViewCell.m */; };
+		59442B6A2719765600B5C831 /* JCMyBuyColumnDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B692719765600B5C831 /* JCMyBuyColumnDetailVC.m */; };
+		59442B6D2719782600B5C831 /* JCColumnDetailTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B6C2719782600B5C831 /* JCColumnDetailTopView.m */; };
+		59442B7027197C8600B5C831 /* JCMyBuyColumnOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B6F27197C8600B5C831 /* JCMyBuyColumnOrderVC.m */; };
 		5945488D268578CF00C1AF38 /* JCAccountSettingTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5945488C268578CF00C1AF38 /* JCAccountSettingTextCell.m */; };
 		594548902685809700C1AF38 /* JCAccountSettingIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5945488F2685809700C1AF38 /* JCAccountSettingIconCell.m */; };
 		594548932685A96C00C1AF38 /* JCSmallPriceWithDrawSuccessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 594548922685A96C00C1AF38 /* JCSmallPriceWithDrawSuccessVC.m */; };
 		594548962685A98100C1AF38 /* JCSmallPriceWithDrawFailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 594548952685A98100C1AF38 /* JCSmallPriceWithDrawFailVC.m */; };
 		594548992685B7B900C1AF38 /* JCActivityGuess_SPF_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 594548982685B7B900C1AF38 /* JCActivityGuess_SPF_VC.m */; };
+		59465DDA271823FA0095168F /* JCCommunityColumnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59465DD9271823FA0095168F /* JCCommunityColumnTableViewCell.m */; };
+		59465DDD271824830095168F /* JCCommunityColumnCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59465DDC271824830095168F /* JCCommunityColumnCollectionViewCell.m */; };
+		59465DE227190EFF0095168F /* ic_launch_5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59465DDE27190EFE0095168F /* ic_launch_5@3x.png */; };
+		59465DE327190EFF0095168F /* ic_launch_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59465DDF27190EFE0095168F /* ic_launch_2@3x.png */; };
+		59465DE427190EFF0095168F /* ic_launch_4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59465DE027190EFF0095168F /* ic_launch_4@3x.png */; };
+		59465DE527190EFF0095168F /* ic_launch_1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59465DE127190EFF0095168F /* ic_launch_1@3x.png */; };
+		59465DE727190F1A0095168F /* ic_launch_3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59465DE627190F1A0095168F /* ic_launch_3@3x.png */; };
 		594A8FF52692D29200B69BF2 /* JCPostCheckArticle_Invite_Gaochou_FootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 594A8FF42692D29200B69BF2 /* JCPostCheckArticle_Invite_Gaochou_FootView.m */; };
 		594A8FF82693035500B69BF2 /* JCActivityGuessChooseItem_Check_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 594A8FF72693035500B69BF2 /* JCActivityGuessChooseItem_Check_Cell.m */; };
 		594A8FFB26943B1D00B69BF2 /* JCImageCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 594A8FFA26943B1D00B69BF2 /* JCImageCodeModel.m */; };
@@ -150,7 +169,6 @@
 		7B11DB4D261EEC2800C1F7D6 /* JCFamousExpertCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B11DAEE261EEC2700C1F7D6 /* JCFamousExpertCell.m */; };
 		7B11DB4E261EEC2800C1F7D6 /* JCDakaTopExpertCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B11DAEF261EEC2700C1F7D6 /* JCDakaTopExpertCollectionCell.m */; };
 		7B11DB4F261EEC2800C1F7D6 /* JCPlaneDetailNewContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B11DAF0261EEC2700C1F7D6 /* JCPlaneDetailNewContentCell.m */; };
-		7B11DB50261EEC2800C1F7D6 /* JCFootBallAuthorHistoryPlaneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B11DAF1261EEC2700C1F7D6 /* JCFootBallAuthorHistoryPlaneCell.m */; };
 		7B11DB51261EEC2800C1F7D6 /* JCFamousExpertHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B11DAF2261EEC2700C1F7D6 /* JCFamousExpertHeadView.m */; };
 		7B11DB52261EEC2800C1F7D6 /* JCPlaneDetailInfoTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B11DAF4261EEC2700C1F7D6 /* JCPlaneDetailInfoTipCell.m */; };
 		7B11DB53261EEC2800C1F7D6 /* JCPlaneDetailMatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B11DAF7261EEC2700C1F7D6 /* JCPlaneDetailMatchCell.m */; };
@@ -163,7 +181,6 @@
 		7B11DB5A261EEC2800C1F7D6 /* JCPlaneDetailNewAnalysisCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B11DB02261EEC2700C1F7D6 /* JCPlaneDetailNewAnalysisCell.m */; };
 		7B11DB5B261EEC2800C1F7D6 /* JCPlaneDetailMatch_JQSCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B11DB04261EEC2700C1F7D6 /* JCPlaneDetailMatch_JQSCell.m */; };
 		7B11DB5C261EEC2800C1F7D6 /* JCPlaneDetailNewSubTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B11DB0A261EEC2700C1F7D6 /* JCPlaneDetailNewSubTitleCell.m */; };
-		7B11DB5D261EEC2800C1F7D6 /* JCFootBallAuthorNewPlaneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B11DB0B261EEC2700C1F7D6 /* JCFootBallAuthorNewPlaneCell.m */; };
 		7B11DB5E261EEC2800C1F7D6 /* JCPlaneDetailSM_View.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B11DB0C261EEC2700C1F7D6 /* JCPlaneDetailSM_View.m */; };
 		7B11DB5F261EEC2800C1F7D6 /* JCDakaPlanDetailAutherHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B11DB0D261EEC2700C1F7D6 /* JCDakaPlanDetailAutherHeadView.m */; };
 		7B11DB60261EEC2800C1F7D6 /* JCPlaneDetailMatch_ZFSCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B11DB0E261EEC2700C1F7D6 /* JCPlaneDetailMatch_ZFSCell.m */; };
@@ -481,12 +498,8 @@
 		7B5FC827256F57200006D6F0 /* JCMatchFilterSegmentCurrentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5FC826256F57200006D6F0 /* JCMatchFilterSegmentCurrentView.m */; };
 		7B5FC82B256F9E980006D6F0 /* JCMatchDetailZSVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5FC82A256F9E980006D6F0 /* JCMatchDetailZSVC.m */; };
 		7B5FC845256FCBBF0006D6F0 /* ic_launch_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5FC83B256FCBBE0006D6F0 /* ic_launch_1@2x.png */; };
-		7B5FC846256FCBBF0006D6F0 /* ic_launch_3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5FC83C256FCBBE0006D6F0 /* ic_launch_3@3x.png */; };
 		7B5FC847256FCBBF0006D6F0 /* ic_launch_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5FC83D256FCBBE0006D6F0 /* ic_launch_3@2x.png */; };
-		7B5FC848256FCBBF0006D6F0 /* ic_launch_1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5FC83E256FCBBE0006D6F0 /* ic_launch_1@3x.png */; };
-		7B5FC849256FCBBF0006D6F0 /* ic_launch_5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5FC83F256FCBBE0006D6F0 /* ic_launch_5@3x.png */; };
 		7B5FC84A256FCBBF0006D6F0 /* ic_launch_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5FC840256FCBBE0006D6F0 /* ic_launch_5@2x.png */; };
-		7B5FC84D256FCBBF0006D6F0 /* ic_launch_4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5FC843256FCBBE0006D6F0 /* ic_launch_4@3x.png */; };
 		7B5FC84E256FCBBF0006D6F0 /* ic_launch_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5FC844256FCBBE0006D6F0 /* ic_launch_4@2x.png */; };
 		7B61BE9724ECD3270068F148 /* JCHBExpertZhanjiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B61BE9624ECD3270068F148 /* JCHBExpertZhanjiCell.m */; };
 		7B61BE9A24ED1B290068F148 /* JCHongbangCommomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B61BE9924ED1B290068F148 /* JCHongbangCommomCell.m */; };
@@ -1135,7 +1148,6 @@
 		7BF4D4792644D02600403BDF /* JCPlaneDetailQRModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4D4782644D02600403BDF /* JCPlaneDetailQRModel.m */; };
 		7BF4D47E2644D34E00403BDF /* JCQR_CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4D47D2644D34E00403BDF /* JCQR_CollectionViewCell.m */; };
 		7BF4D4822645141600403BDF /* JCPlanDetailMZ_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF4D4812645141600403BDF /* JCPlanDetailMZ_Cell.m */; };
-		7BFA938825749A190043CE3A /* ic_launch_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BFA938625749A170043CE3A /* ic_launch_2@3x.png */; };
 		7BFA938925749A190043CE3A /* ic_launch_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BFA938725749A180043CE3A /* ic_launch_2@2x.png */; };
 		7BFACD6D2462AF720057C310 /* PGIndexBannerSubiew.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFACD692462AF720057C310 /* PGIndexBannerSubiew.m */; };
 		7BFACD6E2462AF720057C310 /* NewPagedFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFACD6A2462AF720057C310 /* NewPagedFlowView.m */; };
@@ -1438,6 +1450,30 @@
 		590A3F6926C24C5F0012EDE6 /* JCActivityGuessMore_HeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityGuessMore_HeadView.m; sourceTree = "<group>"; };
 		590A3F6E26C24E3D0012EDE6 /* JCActivityGuess_SPF_CompleteMore_Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityGuess_SPF_CompleteMore_Cell.h; sourceTree = "<group>"; };
 		590A3F6F26C24E3D0012EDE6 /* JCActivityGuess_SPF_CompleteMore_Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityGuess_SPF_CompleteMore_Cell.m; sourceTree = "<group>"; };
+		59442B47271916FB00B5C831 /* JCCommunityMoreColumnVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCCommunityMoreColumnVC.h; sourceTree = "<group>"; };
+		59442B48271916FB00B5C831 /* JCCommunityMoreColumnVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCCommunityMoreColumnVC.m; sourceTree = "<group>"; };
+		59442B4D2719174700B5C831 /* JCCommunityMoreColumnCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCCommunityMoreColumnCell.h; sourceTree = "<group>"; };
+		59442B4E2719174700B5C831 /* JCCommunityMoreColumnCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCCommunityMoreColumnCell.m; sourceTree = "<group>"; };
+		59442B5027195DF100B5C831 /* JCDakaHistoryTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCDakaHistoryTitleView.h; sourceTree = "<group>"; };
+		59442B5127195DF100B5C831 /* JCDakaHistoryTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCDakaHistoryTitleView.m; sourceTree = "<group>"; };
+		59442B5327195EA400B5C831 /* JCFootBallAuthorNewPlaneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCFootBallAuthorNewPlaneCell.m; sourceTree = "<group>"; };
+		59442B5427195EA400B5C831 /* JCFootBallAuthorNewPlaneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCFootBallAuthorNewPlaneCell.h; sourceTree = "<group>"; };
+		59442B5627195EC800B5C831 /* JCFootBallAuthorHistoryPlaneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCFootBallAuthorHistoryPlaneCell.h; sourceTree = "<group>"; };
+		59442B5727195EC800B5C831 /* JCFootBallAuthorHistoryPlaneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCFootBallAuthorHistoryPlaneCell.m; sourceTree = "<group>"; };
+		59442B59271961BD00B5C831 /* JCFootBallAuthorColumnVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCFootBallAuthorColumnVC.h; sourceTree = "<group>"; };
+		59442B5A271961BD00B5C831 /* JCFootBallAuthorColumnVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCFootBallAuthorColumnVC.m; sourceTree = "<group>"; };
+		59442B5C271961D500B5C831 /* JCFootBallAuthorColumnCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCFootBallAuthorColumnCell.h; sourceTree = "<group>"; };
+		59442B5D271961D500B5C831 /* JCFootBallAuthorColumnCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCFootBallAuthorColumnCell.m; sourceTree = "<group>"; };
+		59442B612719646D00B5C831 /* JCMyBuyColumnViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCMyBuyColumnViewController.h; sourceTree = "<group>"; };
+		59442B622719646D00B5C831 /* JCMyBuyColumnViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCMyBuyColumnViewController.m; sourceTree = "<group>"; };
+		59442B652719653D00B5C831 /* JCMyBuyColumnViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCMyBuyColumnViewCell.h; sourceTree = "<group>"; };
+		59442B662719653D00B5C831 /* JCMyBuyColumnViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCMyBuyColumnViewCell.m; sourceTree = "<group>"; };
+		59442B682719765600B5C831 /* JCMyBuyColumnDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCMyBuyColumnDetailVC.h; sourceTree = "<group>"; };
+		59442B692719765600B5C831 /* JCMyBuyColumnDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCMyBuyColumnDetailVC.m; sourceTree = "<group>"; };
+		59442B6B2719782600B5C831 /* JCColumnDetailTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCColumnDetailTopView.h; sourceTree = "<group>"; };
+		59442B6C2719782600B5C831 /* JCColumnDetailTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCColumnDetailTopView.m; sourceTree = "<group>"; };
+		59442B6E27197C8600B5C831 /* JCMyBuyColumnOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCMyBuyColumnOrderVC.h; sourceTree = "<group>"; };
+		59442B6F27197C8600B5C831 /* JCMyBuyColumnOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCMyBuyColumnOrderVC.m; sourceTree = "<group>"; };
 		5945488B268578CF00C1AF38 /* JCAccountSettingTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCAccountSettingTextCell.h; sourceTree = "<group>"; };
 		5945488C268578CF00C1AF38 /* JCAccountSettingTextCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCAccountSettingTextCell.m; sourceTree = "<group>"; };
 		5945488E2685809700C1AF38 /* JCAccountSettingIconCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCAccountSettingIconCell.h; sourceTree = "<group>"; };
@@ -1448,6 +1484,15 @@
 		594548952685A98100C1AF38 /* JCSmallPriceWithDrawFailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCSmallPriceWithDrawFailVC.m; sourceTree = "<group>"; };
 		594548972685B7B900C1AF38 /* JCActivityGuess_SPF_VC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityGuess_SPF_VC.h; sourceTree = "<group>"; };
 		594548982685B7B900C1AF38 /* JCActivityGuess_SPF_VC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCActivityGuess_SPF_VC.m; sourceTree = "<group>"; };
+		59465DD8271823FA0095168F /* JCCommunityColumnTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCCommunityColumnTableViewCell.h; sourceTree = "<group>"; };
+		59465DD9271823FA0095168F /* JCCommunityColumnTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCCommunityColumnTableViewCell.m; sourceTree = "<group>"; };
+		59465DDB271824830095168F /* JCCommunityColumnCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCCommunityColumnCollectionViewCell.h; sourceTree = "<group>"; };
+		59465DDC271824830095168F /* JCCommunityColumnCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCCommunityColumnCollectionViewCell.m; sourceTree = "<group>"; };
+		59465DDE27190EFE0095168F /* ic_launch_5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_launch_5@3x.png"; sourceTree = "<group>"; };
+		59465DDF27190EFE0095168F /* ic_launch_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_launch_2@3x.png"; sourceTree = "<group>"; };
+		59465DE027190EFF0095168F /* ic_launch_4@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_launch_4@3x.png"; sourceTree = "<group>"; };
+		59465DE127190EFF0095168F /* ic_launch_1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_launch_1@3x.png"; sourceTree = "<group>"; };
+		59465DE627190F1A0095168F /* ic_launch_3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_launch_3@3x.png"; sourceTree = "<group>"; };
 		594A8FF32692D29200B69BF2 /* JCPostCheckArticle_Invite_Gaochou_FootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCPostCheckArticle_Invite_Gaochou_FootView.h; sourceTree = "<group>"; };
 		594A8FF42692D29200B69BF2 /* JCPostCheckArticle_Invite_Gaochou_FootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCPostCheckArticle_Invite_Gaochou_FootView.m; sourceTree = "<group>"; };
 		594A8FF62693035500B69BF2 /* JCActivityGuessChooseItem_Check_Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCActivityGuessChooseItem_Check_Cell.h; sourceTree = "<group>"; };
@@ -1584,14 +1629,12 @@
 		7B11DAE7261EEC2700C1F7D6 /* JCPlaneDetailMatch_CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPlaneDetailMatch_CustomCell.h; sourceTree = "<group>"; };
 		7B11DAE8261EEC2700C1F7D6 /* JCBuyPlanPayWayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCBuyPlanPayWayCell.h; sourceTree = "<group>"; };
 		7B11DAE9261EEC2700C1F7D6 /* JCPlaneDetailSM_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPlaneDetailSM_View.h; sourceTree = "<group>"; };
-		7B11DAEA261EEC2700C1F7D6 /* JCFootBallAuthorNewPlaneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCFootBallAuthorNewPlaneCell.h; sourceTree = "<group>"; };
 		7B11DAEB261EEC2700C1F7D6 /* JCPlaneDetailNewSubTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPlaneDetailNewSubTitleCell.h; sourceTree = "<group>"; };
 		7B11DAEC261EEC2700C1F7D6 /* JCPlaneDetailMatch_JZCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPlaneDetailMatch_JZCell.m; sourceTree = "<group>"; };
 		7B11DAED261EEC2700C1F7D6 /* JCFootBallDakaCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCFootBallDakaCollectionViewCell.m; sourceTree = "<group>"; };
 		7B11DAEE261EEC2700C1F7D6 /* JCFamousExpertCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCFamousExpertCell.m; sourceTree = "<group>"; };
 		7B11DAEF261EEC2700C1F7D6 /* JCDakaTopExpertCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCDakaTopExpertCollectionCell.m; sourceTree = "<group>"; };
 		7B11DAF0261EEC2700C1F7D6 /* JCPlaneDetailNewContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPlaneDetailNewContentCell.m; sourceTree = "<group>"; };
-		7B11DAF1261EEC2700C1F7D6 /* JCFootBallAuthorHistoryPlaneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCFootBallAuthorHistoryPlaneCell.m; sourceTree = "<group>"; };
 		7B11DAF2261EEC2700C1F7D6 /* JCFamousExpertHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCFamousExpertHeadView.m; sourceTree = "<group>"; };
 		7B11DAF3261EEC2700C1F7D6 /* JCFootBallBuyPlaneUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCFootBallBuyPlaneUserCell.h; sourceTree = "<group>"; };
 		7B11DAF4261EEC2700C1F7D6 /* JCPlaneDetailInfoTipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPlaneDetailInfoTipCell.m; sourceTree = "<group>"; };
@@ -1617,7 +1660,6 @@
 		7B11DB08261EEC2700C1F7D6 /* JCFamousExpertCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCFamousExpertCell.h; sourceTree = "<group>"; };
 		7B11DB09261EEC2700C1F7D6 /* JCPlaneDetailMatch_JZCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPlaneDetailMatch_JZCell.h; sourceTree = "<group>"; };
 		7B11DB0A261EEC2700C1F7D6 /* JCPlaneDetailNewSubTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPlaneDetailNewSubTitleCell.m; sourceTree = "<group>"; };
-		7B11DB0B261EEC2700C1F7D6 /* JCFootBallAuthorNewPlaneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCFootBallAuthorNewPlaneCell.m; sourceTree = "<group>"; };
 		7B11DB0C261EEC2700C1F7D6 /* JCPlaneDetailSM_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPlaneDetailSM_View.m; sourceTree = "<group>"; };
 		7B11DB0D261EEC2700C1F7D6 /* JCDakaPlanDetailAutherHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCDakaPlanDetailAutherHeadView.m; sourceTree = "<group>"; };
 		7B11DB0E261EEC2700C1F7D6 /* JCPlaneDetailMatch_ZFSCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPlaneDetailMatch_ZFSCell.m; sourceTree = "<group>"; };
@@ -1625,7 +1667,6 @@
 		7B11DB10261EEC2700C1F7D6 /* JCFootBallBuyPlaneUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCFootBallBuyPlaneUserCell.m; sourceTree = "<group>"; };
 		7B11DB11261EEC2700C1F7D6 /* JCFamousExpertHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCFamousExpertHeadView.h; sourceTree = "<group>"; };
 		7B11DB12261EEC2700C1F7D6 /* JCPlaneDetailNewContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCPlaneDetailNewContentCell.h; sourceTree = "<group>"; };
-		7B11DB13261EEC2700C1F7D6 /* JCFootBallAuthorHistoryPlaneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCFootBallAuthorHistoryPlaneCell.h; sourceTree = "<group>"; };
 		7B11DB14261EEC2700C1F7D6 /* JCDakaBuyPlanHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCDakaBuyPlanHeadView.m; sourceTree = "<group>"; };
 		7B11DB15261EEC2700C1F7D6 /* JCPlaneDetailResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCPlaneDetailResultCell.m; sourceTree = "<group>"; };
 		7B11DB16261EEC2700C1F7D6 /* JCFootBallNormalHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCFootBallNormalHeadCell.m; sourceTree = "<group>"; };
@@ -2211,12 +2252,8 @@
 		7B5FC829256F9E980006D6F0 /* JCMatchDetailZSVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCMatchDetailZSVC.h; sourceTree = "<group>"; };
 		7B5FC82A256F9E980006D6F0 /* JCMatchDetailZSVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCMatchDetailZSVC.m; sourceTree = "<group>"; };
 		7B5FC83B256FCBBE0006D6F0 /* ic_launch_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_launch_1@2x.png"; sourceTree = "<group>"; };
-		7B5FC83C256FCBBE0006D6F0 /* ic_launch_3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_launch_3@3x.png"; sourceTree = "<group>"; };
 		7B5FC83D256FCBBE0006D6F0 /* ic_launch_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_launch_3@2x.png"; sourceTree = "<group>"; };
-		7B5FC83E256FCBBE0006D6F0 /* ic_launch_1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_launch_1@3x.png"; sourceTree = "<group>"; };
-		7B5FC83F256FCBBE0006D6F0 /* ic_launch_5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_launch_5@3x.png"; sourceTree = "<group>"; };
 		7B5FC840256FCBBE0006D6F0 /* ic_launch_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_launch_5@2x.png"; sourceTree = "<group>"; };
-		7B5FC843256FCBBE0006D6F0 /* ic_launch_4@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_launch_4@3x.png"; sourceTree = "<group>"; };
 		7B5FC844256FCBBE0006D6F0 /* ic_launch_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_launch_4@2x.png"; sourceTree = "<group>"; };
 		7B61BE9524ECD3270068F148 /* JCHBExpertZhanjiCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCHBExpertZhanjiCell.h; sourceTree = "<group>"; };
 		7B61BE9624ECD3270068F148 /* JCHBExpertZhanjiCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCHBExpertZhanjiCell.m; sourceTree = "<group>"; };
@@ -3478,7 +3515,6 @@
 		7BF4D47D2644D34E00403BDF /* JCQR_CollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCQR_CollectionViewCell.m; sourceTree = "<group>"; };
 		7BF4D4802645141600403BDF /* JCPlanDetailMZ_Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCPlanDetailMZ_Cell.h; sourceTree = "<group>"; };
 		7BF4D4812645141600403BDF /* JCPlanDetailMZ_Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCPlanDetailMZ_Cell.m; sourceTree = "<group>"; };
-		7BFA938625749A170043CE3A /* ic_launch_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_launch_2@3x.png"; sourceTree = "<group>"; };
 		7BFA938725749A180043CE3A /* ic_launch_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_launch_2@2x.png"; sourceTree = "<group>"; };
 		7BFACD692462AF720057C310 /* PGIndexBannerSubiew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGIndexBannerSubiew.m; sourceTree = "<group>"; };
 		7BFACD6A2462AF720057C310 /* NewPagedFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPagedFlowView.m; sourceTree = "<group>"; };
@@ -3981,6 +4017,83 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		59442B462719125C00B5C831 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7BA96C2D26202D4800E2DFC1 /* JCFootBallAuthorDetailWMViewController.h */,
+				7BA96C2726202D4600E2DFC1 /* JCFootBallAuthorDetailWMViewController.m */,
+				59442B59271961BD00B5C831 /* JCFootBallAuthorColumnVC.h */,
+				59442B5A271961BD00B5C831 /* JCFootBallAuthorColumnVC.m */,
+				7BA96C2426202D4500E2DFC1 /* JCFootBallAuthorNewPlaneDetailVC.h */,
+				7BA96C2A26202D4700E2DFC1 /* JCFootBallAuthorNewPlaneDetailVC.m */,
+				7BA96C3126202D4900E2DFC1 /* JCFootBallAuthorHistoryPlaneDetailVC.h */,
+				7BA96C2326202D4400E2DFC1 /* JCFootBallAuthorHistoryPlaneDetailVC.m */,
+				7B11DAC5261EEC2600C1F7D6 /* JCDakaFreePlanListVC.h */,
+				7B11DAC6261EEC2600C1F7D6 /* JCDakaFreePlanListVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		59442B4A2719170D00B5C831 /* 专栏 */ = {
+			isa = PBXGroup;
+			children = (
+				59442B4C2719172300B5C831 /* View */,
+				59442B4B2719171800B5C831 /* ViewController */,
+			);
+			path = "专栏";
+			sourceTree = "<group>";
+		};
+		59442B4B2719171800B5C831 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				59442B47271916FB00B5C831 /* JCCommunityMoreColumnVC.h */,
+				59442B48271916FB00B5C831 /* JCCommunityMoreColumnVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		59442B4C2719172300B5C831 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				59442B4D2719174700B5C831 /* JCCommunityMoreColumnCell.h */,
+				59442B4E2719174700B5C831 /* JCCommunityMoreColumnCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		59442B5F2719643600B5C831 /* 方案专栏 */ = {
+			isa = PBXGroup;
+			children = (
+				59442B642719648200B5C831 /* View */,
+				59442B602719643F00B5C831 /* ViewController */,
+			);
+			path = "方案专栏";
+			sourceTree = "<group>";
+		};
+		59442B602719643F00B5C831 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				59442B612719646D00B5C831 /* JCMyBuyColumnViewController.h */,
+				59442B622719646D00B5C831 /* JCMyBuyColumnViewController.m */,
+				59442B682719765600B5C831 /* JCMyBuyColumnDetailVC.h */,
+				59442B692719765600B5C831 /* JCMyBuyColumnDetailVC.m */,
+				59442B6E27197C8600B5C831 /* JCMyBuyColumnOrderVC.h */,
+				59442B6F27197C8600B5C831 /* JCMyBuyColumnOrderVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		59442B642719648200B5C831 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				59442B652719653D00B5C831 /* JCMyBuyColumnViewCell.h */,
+				59442B662719653D00B5C831 /* JCMyBuyColumnViewCell.m */,
+				59442B6B2719782600B5C831 /* JCColumnDetailTopView.h */,
+				59442B6C2719782600B5C831 /* JCColumnDetailTopView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		5945488A2685789300C1AF38 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -4216,6 +4329,7 @@
 		7B11DAC2261EEC2600C1F7D6 /* 公众号专家 */ = {
 			isa = PBXGroup;
 			children = (
+				59442B4A2719170D00B5C831 /* 专栏 */,
 				7B11DB75261EEDBF00C1F7D6 /* ViewConreroller */,
 				7B11DAC3261EEC2600C1F7D6 /* 大咖(详细) */,
 				7B11DB39261EEC2700C1F7D6 /* View */,
@@ -4226,7 +4340,6 @@
 		7B11DAC3261EEC2600C1F7D6 /* 大咖(详细) */ = {
 			isa = PBXGroup;
 			children = (
-				7B11DAC4261EEC2600C1F7D6 /* 免费 */,
 				7B11DAC7261EEC2600C1F7D6 /* CountDown */,
 				7B11DACA261EEC2600C1F7D6 /* 购买 */,
 				7B11DAD3261EEC2600C1F7D6 /* 专家详情 */,
@@ -4236,15 +4349,6 @@
 				7B11DB1F261EEC2700C1F7D6 /* ViewController */,
 			);
 			path = "大咖(详细)";
-			sourceTree = "<group>";
-		};
-		7B11DAC4261EEC2600C1F7D6 /* 免费 */ = {
-			isa = PBXGroup;
-			children = (
-				7B11DAC5261EEC2600C1F7D6 /* JCDakaFreePlanListVC.h */,
-				7B11DAC6261EEC2600C1F7D6 /* JCDakaFreePlanListVC.m */,
-			);
-			path = "免费";
 			sourceTree = "<group>";
 		};
 		7B11DAC7261EEC2600C1F7D6 /* CountDown */ = {
@@ -4292,8 +4396,8 @@
 		7B11DAD3261EEC2600C1F7D6 /* 专家详情 */ = {
 			isa = PBXGroup;
 			children = (
+				59442B462719125C00B5C831 /* ViewController */,
 				7B11DAD4261EEC2600C1F7D6 /* View */,
-				7B11DAD9261EEC2600C1F7D6 /* ViewController */,
 			);
 			path = "专家详情";
 			sourceTree = "<group>";
@@ -4301,19 +4405,20 @@
 		7B11DAD4261EEC2600C1F7D6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				59442B5427195EA400B5C831 /* JCFootBallAuthorNewPlaneCell.h */,
+				59442B5327195EA400B5C831 /* JCFootBallAuthorNewPlaneCell.m */,
+				59442B5627195EC800B5C831 /* JCFootBallAuthorHistoryPlaneCell.h */,
+				59442B5727195EC800B5C831 /* JCFootBallAuthorHistoryPlaneCell.m */,
+				59442B5C271961D500B5C831 /* JCFootBallAuthorColumnCell.h */,
+				59442B5D271961D500B5C831 /* JCFootBallAuthorColumnCell.m */,
 				7B11DAD5261EEC2600C1F7D6 /* JCFootBall_GZH_AuthorHeadView.h */,
 				7B11DAD6261EEC2600C1F7D6 /* JCFootBall_GZH_AuthorErCodeView.m */,
 				7B11DAD7261EEC2600C1F7D6 /* JCFootBall_GZH_AuthorHeadView.m */,
 				7B11DAD8261EEC2600C1F7D6 /* JCFootBall_GZH_AuthorErCodeView.h */,
+				59442B5027195DF100B5C831 /* JCDakaHistoryTitleView.h */,
+				59442B5127195DF100B5C831 /* JCDakaHistoryTitleView.m */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		7B11DAD9261EEC2600C1F7D6 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 		7B11DADA261EEC2600C1F7D6 /* Model */ = {
@@ -4344,14 +4449,12 @@
 				7B11DAE7261EEC2700C1F7D6 /* JCPlaneDetailMatch_CustomCell.h */,
 				7B11DAE8261EEC2700C1F7D6 /* JCBuyPlanPayWayCell.h */,
 				7B11DAE9261EEC2700C1F7D6 /* JCPlaneDetailSM_View.h */,
-				7B11DAEA261EEC2700C1F7D6 /* JCFootBallAuthorNewPlaneCell.h */,
 				7B11DAEB261EEC2700C1F7D6 /* JCPlaneDetailNewSubTitleCell.h */,
 				7B11DAEC261EEC2700C1F7D6 /* JCPlaneDetailMatch_JZCell.m */,
 				7B11DAED261EEC2700C1F7D6 /* JCFootBallDakaCollectionViewCell.m */,
 				7B11DAEE261EEC2700C1F7D6 /* JCFamousExpertCell.m */,
 				7B11DAEF261EEC2700C1F7D6 /* JCDakaTopExpertCollectionCell.m */,
 				7B11DAF0261EEC2700C1F7D6 /* JCPlaneDetailNewContentCell.m */,
-				7B11DAF1261EEC2700C1F7D6 /* JCFootBallAuthorHistoryPlaneCell.m */,
 				7B11DAF2261EEC2700C1F7D6 /* JCFamousExpertHeadView.m */,
 				7B11DAF3261EEC2700C1F7D6 /* JCFootBallBuyPlaneUserCell.h */,
 				7B11DAF4261EEC2700C1F7D6 /* JCPlaneDetailInfoTipCell.m */,
@@ -4377,7 +4480,6 @@
 				7B11DB08261EEC2700C1F7D6 /* JCFamousExpertCell.h */,
 				7B11DB09261EEC2700C1F7D6 /* JCPlaneDetailMatch_JZCell.h */,
 				7B11DB0A261EEC2700C1F7D6 /* JCPlaneDetailNewSubTitleCell.m */,
-				7B11DB0B261EEC2700C1F7D6 /* JCFootBallAuthorNewPlaneCell.m */,
 				7B11DB0C261EEC2700C1F7D6 /* JCPlaneDetailSM_View.m */,
 				7B11DB0D261EEC2700C1F7D6 /* JCDakaPlanDetailAutherHeadView.m */,
 				7B11DB0E261EEC2700C1F7D6 /* JCPlaneDetailMatch_ZFSCell.m */,
@@ -4385,7 +4487,6 @@
 				7B11DB10261EEC2700C1F7D6 /* JCFootBallBuyPlaneUserCell.m */,
 				7B11DB11261EEC2700C1F7D6 /* JCFamousExpertHeadView.h */,
 				7B11DB12261EEC2700C1F7D6 /* JCPlaneDetailNewContentCell.h */,
-				7B11DB13261EEC2700C1F7D6 /* JCFootBallAuthorHistoryPlaneCell.h */,
 				7B11DB14261EEC2700C1F7D6 /* JCDakaBuyPlanHeadView.m */,
 				7B11DB15261EEC2700C1F7D6 /* JCPlaneDetailResultCell.m */,
 				7B11DB16261EEC2700C1F7D6 /* JCFootBallNormalHeadCell.m */,
@@ -4424,12 +4525,6 @@
 			children = (
 				7BA96C2C26202D4800E2DFC1 /* JCDakaPlanDetailStickWMVC.h */,
 				7BA96C3226202D4900E2DFC1 /* JCDakaPlanDetailStickWMVC.m */,
-				7BA96C2D26202D4800E2DFC1 /* JCFootBallAuthorDetailWMViewController.h */,
-				7BA96C2726202D4600E2DFC1 /* JCFootBallAuthorDetailWMViewController.m */,
-				7BA96C3126202D4900E2DFC1 /* JCFootBallAuthorHistoryPlaneDetailVC.h */,
-				7BA96C2326202D4400E2DFC1 /* JCFootBallAuthorHistoryPlaneDetailVC.m */,
-				7BA96C2426202D4500E2DFC1 /* JCFootBallAuthorNewPlaneDetailVC.h */,
-				7BA96C2A26202D4700E2DFC1 /* JCFootBallAuthorNewPlaneDetailVC.m */,
 				7BA96C2626202D4600E2DFC1 /* JCFootBallBuyUserImgView.h */,
 				7BA96C3326202D4A00E2DFC1 /* JCFootBallBuyUserImgView.m */,
 				7BA96C2E26202D4800E2DFC1 /* JCPlaneDetailNewVC.h */,
@@ -4460,9 +4555,13 @@
 			isa = PBXGroup;
 			children = (
 				7B11DB3A261EEC2700C1F7D6 /* JCCommunityExpertCollectionCell.h */,
-				7B11DB3B261EEC2700C1F7D6 /* JCCommunity_GZH_HeadView.m */,
 				7B11DB3C261EEC2700C1F7D6 /* JCCommunityExpertCollectionCell.m */,
 				7B11DB3D261EEC2700C1F7D6 /* JCCommunity_GZH_HeadView.h */,
+				7B11DB3B261EEC2700C1F7D6 /* JCCommunity_GZH_HeadView.m */,
+				59465DD8271823FA0095168F /* JCCommunityColumnTableViewCell.h */,
+				59465DD9271823FA0095168F /* JCCommunityColumnTableViewCell.m */,
+				59465DDB271824830095168F /* JCCommunityColumnCollectionViewCell.h */,
+				59465DDC271824830095168F /* JCCommunityColumnCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5979,15 +6078,15 @@
 			isa = PBXGroup;
 			children = (
 				7B5FC83B256FCBBE0006D6F0 /* ic_launch_1@2x.png */,
-				7B5FC83E256FCBBE0006D6F0 /* ic_launch_1@3x.png */,
-				7B5FC83C256FCBBE0006D6F0 /* ic_launch_3@3x.png */,
 				7B5FC83D256FCBBE0006D6F0 /* ic_launch_3@2x.png */,
 				7BFA938725749A180043CE3A /* ic_launch_2@2x.png */,
-				7BFA938625749A170043CE3A /* ic_launch_2@3x.png */,
-				7B5FC83F256FCBBE0006D6F0 /* ic_launch_5@3x.png */,
 				7B5FC840256FCBBE0006D6F0 /* ic_launch_5@2x.png */,
-				7B5FC843256FCBBE0006D6F0 /* ic_launch_4@3x.png */,
 				7B5FC844256FCBBE0006D6F0 /* ic_launch_4@2x.png */,
+				59465DE127190EFF0095168F /* ic_launch_1@3x.png */,
+				59465DDF27190EFE0095168F /* ic_launch_2@3x.png */,
+				59465DE027190EFF0095168F /* ic_launch_4@3x.png */,
+				59465DDE27190EFE0095168F /* ic_launch_5@3x.png */,
+				59465DE627190F1A0095168F /* ic_launch_3@3x.png */,
 			);
 			path = "ios启动图";
 			sourceTree = "<group>";
@@ -10124,6 +10223,7 @@
 		C3EABE372227DC1000A90B4E /* 购买记录 */ = {
 			isa = PBXGroup;
 			children = (
+				59442B5F2719643600B5C831 /* 方案专栏 */,
 				7BCA27C225202375008787FF /* 公众号方案 */,
 				7BCA27EF25206450008787FF /* 达人方案 */,
 				7BCA27C525202CBA008787FF /* AI方案 */,
@@ -10305,6 +10405,7 @@
 				7BA54A912513463B00297D1F /* JNMatchDetailSJVC.xib in Resources */,
 				7B5C2E5425A850F700777964 /* cjLoading-4@2x.png in Resources */,
 				7BC4CAB2235FEDF7002226C1 /* Final_Animation_00012@2x.png in Resources */,
+				59465DE527190EFF0095168F /* ic_launch_1@3x.png in Resources */,
 				7B5D039B265E3BDB00C65F51 /* course_3@3x.png in Resources */,
 				7BE61B3723CF11C20079A86C /* xryd_13.png in Resources */,
 				7B16CD2223D7E1A20043531F /* laxin1.jpg in Resources */,
@@ -10316,6 +10417,7 @@
 				7B5D0387265E1F7F00C65F51 /* guide_3@2x.png in Resources */,
 				7B5D03E2265F7D2800C65F51 /* course_2@3x.png in Resources */,
 				7BE61B4023CF11C20079A86C /* xryd_17.png in Resources */,
+				59465DE427190EFF0095168F /* ic_launch_4@3x.png in Resources */,
 				7BE61B3923CF11C20079A86C /* xryd_10.png in Resources */,
 				C3E02B8C222666B500FFDC74 /* JCNoNewTuijianView.xib in Resources */,
 				7B99E69D2316644C00AA5AB6 /* JNMatchDrawCell.xib in Resources */,
@@ -10353,7 +10455,6 @@
 				C30C8E3A224C6373001ECA18 /* JCChargeHeaderView.xib in Resources */,
 				590A3F4026B7E7BC0012EDE6 /* jc_enterlball_27@2x.png in Resources */,
 				7B5C2E5125A850F700777964 /* cjLoading-1@2x.png in Resources */,
-				7B5FC84D256FCBBF0006D6F0 /* ic_launch_4@3x.png in Resources */,
 				7B5FC84E256FCBBF0006D6F0 /* ic_launch_4@2x.png in Resources */,
 				590A3F3E26B7E7BC0012EDE6 /* jc_enterlball_37@2x.png in Resources */,
 				590A3F3126B7E7BC0012EDE6 /* jc_enterlball_15@2x.png in Resources */,
@@ -10388,6 +10489,7 @@
 				7B99E6A02316644C00AA5AB6 /* JNMatchBattleCell.xib in Resources */,
 				7B45F42E25F08B890099D108 /* euro_ic_title@2x.png in Resources */,
 				7B5D03A1265E3BDB00C65F51 /* course_3@2x.png in Resources */,
+				59465DE227190EFF0095168F /* ic_launch_5@3x.png in Resources */,
 				590A3F3026B7E7BC0012EDE6 /* jc_enterlball_44@2x.png in Resources */,
 				7B5D036D265E1EEC00C65F51 /* course_min_3@2x.png in Resources */,
 				7BE61B3823CF11C20079A86C /* xryd_12.png in Resources */,
@@ -10414,10 +10516,12 @@
 				7B45F42D25F08B890099D108 /* euro_img_bg@2x.png in Resources */,
 				7B4FCBAC25EF957F00281492 /* ic_euro1@2x.png in Resources */,
 				C30C8E32224C6373001ECA18 /* JCChargeWayCell.xib in Resources */,
+				59465DE327190EFF0095168F /* ic_launch_2@3x.png in Resources */,
 				C3C80D282203DFAD0092E0FD /* JCPushSettingVC.xib in Resources */,
 				7B61BF0824ED4DF00068F148 /* YBImageBrowser.bundle in Resources */,
 				590A3F4726B7E7BC0012EDE6 /* jc_enterlball_23@2x.png in Resources */,
 				590A3F3D26B7E7BC0012EDE6 /* jc_enterlball_31@2x.png in Resources */,
+				59465DE727190F1A0095168F /* ic_launch_3@3x.png in Resources */,
 				C3C80D39220437E10092E0FD /* JCShareView.xib in Resources */,
 				7B5D03E4265F7D2800C65F51 /* course_2@2x.png in Resources */,
 				590A3F4226B7E7BC0012EDE6 /* jc_enterlball_10@2x.png in Resources */,
@@ -10429,7 +10533,6 @@
 				590A3F4326B7E7BC0012EDE6 /* jc_enterlball_17@2x.png in Resources */,
 				7BC4CAAF235FEDF7002226C1 /* Final_Animation_00001@2x.png in Resources */,
 				C3D0A73D2213C733000F10AA /* JCLoadingFailureView.xib in Resources */,
-				7B5FC846256FCBBF0006D6F0 /* ic_launch_3@3x.png in Resources */,
 				C31A2407216F545600F1432E /* JCSettingVC.xib in Resources */,
 				7BC4CAB6235FEDF7002226C1 /* Final_Animation_00005@2x.png in Resources */,
 				7B5D03E0265F7D2800C65F51 /* course_1@3x.png in Resources */,
@@ -10443,7 +10546,6 @@
 				590A3F4526B7E7BC0012EDE6 /* jc_enterlball_42@2x.png in Resources */,
 				590A3F5226B7E7BC0012EDE6 /* jc_enterlball_5@2x.png in Resources */,
 				7BC4CAB1235FEDF7002226C1 /* Final_Animation_00002@2x.png in Resources */,
-				7B5FC849256FCBBF0006D6F0 /* ic_launch_5@3x.png in Resources */,
 				C3C3E1792178623D00466AAF /* JCAboutVC.xib in Resources */,
 				7B5C2E4F25A850F700777964 /* cjLoading-7@2x.png in Resources */,
 				7B5C2E5525A850F700777964 /* cjLoading-2@2x.png in Resources */,
@@ -10454,7 +10556,6 @@
 				7BE61B3523CF11C20079A86C /* xryd_6.png in Resources */,
 				C3D7C7092216689000BC84A3 /* JCRacePickerView.xib in Resources */,
 				7B16CD2323D7E1A20043531F /* laxin4.jpg in Resources */,
-				7B5FC848256FCBBF0006D6F0 /* ic_launch_1@3x.png in Resources */,
 				7B99E6882316644C00AA5AB6 /* JNMatchDetailZBVC.xib in Resources */,
 				7B5FC84A256FCBBF0006D6F0 /* ic_launch_5@2x.png in Resources */,
 				C31665C72252FB4400DDB4DD /* JCTagView.xib in Resources */,
@@ -10465,7 +10566,6 @@
 				C3F023D4216F735000A1B98F /* JCUpdateView.xib in Resources */,
 				7BE61B3C23CF11C20079A86C /* xryd_11.png in Resources */,
 				C3C568FA21A7926900876A40 /* JCNoDataRetryView.xib in Resources */,
-				7BFA938825749A190043CE3A /* ic_launch_2@3x.png in Resources */,
 				C3C80D3E220445EC0092E0FD /* JCShareItemCell.xib in Resources */,
 				590A3F2B26B7E7BC0012EDE6 /* jc_enterlball_14@2x.png in Resources */,
 				7BE61B3023CF11C20079A86C /* xryd_2.png in Resources */,
@@ -10578,6 +10678,7 @@
 				C3C54D16219A5F23004FD994 /* UIButton+Effect.m in Sources */,
 				7B7BEF4A25A2FA8400691132 /* JCBasketBallMatchDetailWMStickVC.m in Sources */,
 				7B9E92192599A97200E233D7 /* JCPostPriceModel.m in Sources */,
+				59442B49271916FB00B5C831 /* JCCommunityMoreColumnVC.m in Sources */,
 				7B80CAD524C52F4A00C14117 /* JCTeamDetailHonorShowHeadView.m in Sources */,
 				7BD893E024F4BB140058B951 /* JCFootBallBuyPlanLockCell.m in Sources */,
 				7B74582624EF592900EB05A4 /* JCHongbangTopRankItemCell.m in Sources */,
@@ -10649,7 +10750,6 @@
 				7B99E6922316644C00AA5AB6 /* JNMatchFooterView.m in Sources */,
 				7B44A6A52665C15500AF56B0 /* JCKindScoreCompleteView.m in Sources */,
 				C3F023CB216F6E6300A1B98F /* JCWStringTool.m in Sources */,
-				7B11DB5D261EEC2800C1F7D6 /* JCFootBallAuthorNewPlaneCell.m in Sources */,
 				7B99E6FD2316686200AA5AB6 /* JNMatchTableBall.m in Sources */,
 				7B3F9D1B25C8FD7B00C1A559 /* JCHongbangDetail_MatchModel.m in Sources */,
 				7B2C737A237BD1F90041604B /* JCCoinRecordsViewController.m in Sources */,
@@ -10704,6 +10804,7 @@
 				7BB827F424B32A590012EDA8 /* JCTeamMatchInfoZhenRongCell.m in Sources */,
 				59532A0F268DC79C00437A19 /* JCPostCheckArticle_Invite_Gaochou_VC.m in Sources */,
 				7BF193E524D155C500FD57E3 /* JCPostPlanHeadView.m in Sources */,
+				59442B6D2719782600B5C831 /* JCColumnDetailTopView.m in Sources */,
 				7B80CA9C24C0223200C14117 /* JCTeamDetailMatchHeadView.m in Sources */,
 				7BDA571F24EFCB9100A0E1C8 /* TZPhotoPickerController.m in Sources */,
 				C3C9A17F218C358B00773879 /* WebViewController.m in Sources */,
@@ -10822,6 +10923,7 @@
 				7BF193E424D155C500FD57E3 /* JCPostPlanOPCell.m in Sources */,
 				C3D9DF68221E8EEA0031EEA6 /* JCEdgeTouchScrollView.m in Sources */,
 				7B61BE9724ECD3270068F148 /* JCHBExpertZhanjiCell.m in Sources */,
+				59465DDA271823FA0095168F /* JCCommunityColumnTableViewCell.m in Sources */,
 				7B74581D24EE7E5A00EB05A4 /* JCHongBangWaitCheckView.m in Sources */,
 				7B72D19625FF0B6600607520 /* JCJingCaiAIBigDataXufeiInfoView.m in Sources */,
 				7B11DB65261EEC2800C1F7D6 /* JCDakaGanHuoListVC.m in Sources */,
@@ -10863,6 +10965,7 @@
 				7B31AE1425F71A52003FD686 /* JCContractUsViewController.m in Sources */,
 				C30C8E3B224C6373001ECA18 /* JCChargeVC.m in Sources */,
 				7B44A6DA2667A86C00AF56B0 /* JCActivityKindUserView.m in Sources */,
+				59442B5827195EC900B5C831 /* JCFootBallAuthorHistoryPlaneCell.m in Sources */,
 				7B6D33EB2537E94B0038FD5D /* JCMatchNoDataFootView.m in Sources */,
 				594548902685809700C1AF38 /* JCAccountSettingIconCell.m in Sources */,
 				C3C3E1782178623D00466AAF /* JCAboutVC.m in Sources */,
@@ -10890,7 +10993,6 @@
 				C3F023D2216F734900A1B98F /* JCUpdateView.m in Sources */,
 				7BD893E724F551020058B951 /* JCPostCheckPlanVC.m in Sources */,
 				7BE891B924B5AD9B00AE2E79 /* JNMatchZS_JC_RqSPFHeadView.m in Sources */,
-				7B11DB50261EEC2800C1F7D6 /* JCFootBallAuthorHistoryPlaneCell.m in Sources */,
 				7BE891D624B5BF5E00AE2E79 /* JNMatchZS_JC_BCSPF_titleCell.m in Sources */,
 				595884BE268B23D00085206B /* JCActivityGuessCheckView.m in Sources */,
 				C3C80D2F2203E02F0092E0FD /* JCPushSettingCell.m in Sources */,
@@ -10917,6 +11019,7 @@
 				7B099C7026291F03005E18FC /* JCAgreeProtocolView.m in Sources */,
 				7BCA27B2251DD6A2008787FF /* JCAIHomeNoticeCollectionViewCell.m in Sources */,
 				7B8AE30225A460A900B805EA /* JJStockScrollView.m in Sources */,
+				59442B5E271961D500B5C831 /* JCFootBallAuthorColumnCell.m in Sources */,
 				7B44A69C2664DB6700AF56B0 /* JCKindMoreFootView.m in Sources */,
 				C35F8FCE218F4E3100C6CBE7 /* JCWConvertTool.m in Sources */,
 				7BB585BF260046FE0060AD04 /* JCSpecialAttentionVC.m in Sources */,
@@ -10928,6 +11031,7 @@
 				C3E5BEC222118431007801A5 /* JCWExpertBall.m in Sources */,
 				7BB83988260B259E00F68800 /* JCActivityPrizeTableViewCell.m in Sources */,
 				7BFACD6D2462AF720057C310 /* PGIndexBannerSubiew.m in Sources */,
+				59442B5527195EA400B5C831 /* JCFootBallAuthorNewPlaneCell.m in Sources */,
 				7BDA571D24EFCB9100A0E1C8 /* TZProgressView.m in Sources */,
 				C30C8E35224C6373001ECA18 /* JCChargeAreaCell.m in Sources */,
 				C3CE8E29218BF26500A4676D /* JCWConst.m in Sources */,
@@ -11105,6 +11209,7 @@
 				7B5E26B4247F66F6008CAEE4 /* JCYuceCommomModel.m in Sources */,
 				7B6298B62456D21B00AC576C /* JCPostPlanMatchTypeSelectVC.m in Sources */,
 				7B1082222655F44500D07377 /* KKPaddingLabel.m in Sources */,
+				59442B7027197C8600B5C831 /* JCMyBuyColumnOrderVC.m in Sources */,
 				7BE891A824B5A1C500AE2E79 /* JNMatchZS_JCViewController.m in Sources */,
 				7BCA28552534600A008787FF /* JCBigDataZhishuModel.m in Sources */,
 				C3C8B7E02193D320004F29B0 /* JCWMatchOPBall.m in Sources */,
@@ -11143,6 +11248,7 @@
 				7B11DB4D261EEC2800C1F7D6 /* JCFamousExpertCell.m in Sources */,
 				7B8AE2A525A3007200B805EA /* JCBasketBallMatchFanganVC.m in Sources */,
 				7BF193E824D155C500FD57E3 /* JCPostButton.m in Sources */,
+				59442B672719653D00B5C831 /* JCMyBuyColumnViewCell.m in Sources */,
 				7B2DAD5524810A4F000E2282 /* JCHongbangDetailVC.m in Sources */,
 				7B0B376225C15CBC00CC2FD8 /* JCPostPlanMathInfoSPFModel.m in Sources */,
 				7B4621D124985A08002EEFA9 /* JCMatchHomeWMVC.m in Sources */,
@@ -11152,6 +11258,7 @@
 				7B79CBEE24FDD49600812FC5 /* JCWithDrawRecordDetailHeadView.m in Sources */,
 				7BDA571A24EFCB9100A0E1C8 /* UIView+Layout.m in Sources */,
 				7B61BE9A24ED1B290068F148 /* JCHongbangCommomCell.m in Sources */,
+				59442B5B271961BD00B5C831 /* JCFootBallAuthorColumnVC.m in Sources */,
 				7B56F4E422F978C200C98B3B /* JCBaseTableViewController.m in Sources */,
 				7B888EBD255FE0420058B4BD /* JCBindTelViewController.m in Sources */,
 				7B8AE2B825A309DC00B805EA /* JCBasketBallMatchGoalDistributionTrendCell.m in Sources */,
@@ -11172,6 +11279,7 @@
 				7B72D19E25FF0B9800607520 /* JCJingCaiAIBigDataMZInfoView.m in Sources */,
 				7BB827D924B2F29D0012EDA8 /* JCDatabaseAllMatchCell.m in Sources */,
 				7B5E26AC247F66F6008CAEE4 /* JCYuCeHongBaoWithDrawErrorView.m in Sources */,
+				59442B632719646D00B5C831 /* JCMyBuyColumnViewController.m in Sources */,
 				7B11DB4B261EEC2800C1F7D6 /* JCPlaneDetailMatch_JZCell.m in Sources */,
 				C3F87F302289087200BF8E58 /* JCWMatchPLBall.m in Sources */,
 				7B99E6912316644C00AA5AB6 /* JNMatchTimeHeaderView.m in Sources */,
@@ -11267,6 +11375,7 @@
 				7BB827D024B2CB560012EDA8 /* JCTeamMatchWMStickVC.m in Sources */,
 				7BB8285024B47D3E0012EDA8 /* JCTeamMatchInfoTeamListVC.m in Sources */,
 				7BB624E3233CBB460058E7AF /* UIView+Extension.m in Sources */,
+				59465DDD271824830095168F /* JCCommunityColumnCollectionViewCell.m in Sources */,
 				C3E02B8A222666A800FFDC74 /* JCNoNewTuijianView.m in Sources */,
 				7B72D1B925FF52DB00607520 /* JCJingCaiAIBigDataSearchVC.m in Sources */,
 				594A8FF52692D29200B69BF2 /* JCPostCheckArticle_Invite_Gaochou_FootView.m in Sources */,
@@ -11367,6 +11476,7 @@
 				7B6799C825594A920035D06B /* JCHomeMatchCollectionCell.m in Sources */,
 				7B99E703231668C100AA5AB6 /* UILabel+JNHtml.m in Sources */,
 				7B43325924EA1438002974EF /* JCHongBangCircleView.m in Sources */,
+				59442B4F2719174700B5C831 /* JCCommunityMoreColumnCell.m in Sources */,
 				7BB827D324B2CBCF0012EDA8 /* JCTeamMatchWMStickHeadView.m in Sources */,
 				7B40DA1625E5F243007AB695 /* JCMatchGoalDistributionTrendHeadView.m in Sources */,
 				7BB0758B2554DF24004FB701 /* JCPostRecordWMVC.m in Sources */,
@@ -11430,6 +11540,7 @@
 				7B99E69E2316644C00AA5AB6 /* JNMatchDrawCell.m in Sources */,
 				7B11DB53261EEC2800C1F7D6 /* JCPlaneDetailMatchCell.m in Sources */,
 				7BCA28372524621F008787FF /* JCMyBuyOrderDataSingleHeadView.m in Sources */,
+				59442B5227195DF100B5C831 /* JCDakaHistoryTitleView.m in Sources */,
 				7B74E986249B391A003144B1 /* JCMatchInfoModel.m in Sources */,
 				7B6C1A0624BAD27300072C62 /* JNMatchZS_ZSDetailInfoCell.m in Sources */,
 				7B1BDD45250A22D700D7C034 /* JCCommomTool.m in Sources */,
@@ -11474,6 +11585,7 @@
 				7B80CA5D24BD57DE00C14117 /* JNMatchZS_PLInfoModel.m in Sources */,
 				7B5D03D4265F6FC300C65F51 /* JCRechargeTextBannerView.m in Sources */,
 				7B80CAB024C1AA9100C14117 /* JNMatchSJZhanjiTableViewCell.m in Sources */,
+				59442B6A2719765600B5C831 /* JCMyBuyColumnDetailVC.m in Sources */,
 				595884B2268971AE0085206B /* JCActivityGuess_SPF_HeadView.m in Sources */,
 				7BB83996260B331800F68800 /* JCActivityHeadView.m in Sources */,
 				7B6D19442485F1ED002D5006 /* JCHomeMatchTableViewCell.m in Sources */,

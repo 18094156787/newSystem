@@ -11,6 +11,7 @@
 #import "JCMyBuyDakaViewController.h"
 #import "JCMyBuyAIViewController.h"
 #import "JCMyBuyOrderDataViewController.h"
+#import "JCMyBuyColumnViewController.h"
 @interface JCMyBuyPlanWMViewController ()
 
 @property (nonatomic,strong) UIView *lineView;
@@ -24,16 +25,6 @@
     self.navigationBarStyle = JCNavigationBarStyleDefault;
     [self hideNavShadow];
     
-//    if (@available(iOS 15.0, *)) {
-//        UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
-//        NSDictionary *dic = @{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor blackColor]};
-//        UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
-//        barApp.backgroundImage = nil;
-//        barApp.backgroundColor = [UIColor whiteColor];
-////        barApp.titleTextAttributes = dic;
-//        self.navigationController.navigationBar.scrollEdgeAppearance = barApp;
-//        self.navigationController.navigationBar.standardAppearance = barApp;
-//    }
 }
 
 
@@ -52,7 +43,7 @@
 }
 
 - (NSArray<NSString *> *)titles {
-    return @[@"公众号方案",@"达人方案",@"AI方案",@"数据订阅"];
+    return @[@"公众号方案",@"达人方案",@"方案专栏",@"AI方案",@"数据订阅"];
 //    return @[@"公众号方案",@"达人方案",@"数据订阅"];
 }
 - (void)initWMViews {
@@ -98,6 +89,11 @@
         vc.fatherView = self.view;
         return vc;
     }
+    if (index==2) {
+        JCMyBuyColumnViewController *vc = [JCMyBuyColumnViewController new];
+        return vc;
+    }
+    
     if (index==2) {
         JCMyBuyAIViewController *vc = [JCMyBuyAIViewController   new];
         vc.fatherView = self.view;

@@ -12,6 +12,8 @@
 #import "JCFamousExpertCell.h"
 #import "JCDakaPlanDetailStickWMVC.h"
 #import "JCWMyHongbaoBall.h"
+#import "JCCommunityColumnTableViewCell.h"
+#import "JCCommunityMoreColumnVC.h"
 @interface JCCommunity_GZHVC ()
 
 @property (nonatomic,strong) JCCommunity_GZH_HeadView *headView;
@@ -123,7 +125,7 @@
     self.tableView.estimatedRowHeight = 80;
     // 表格注册cell
     [self.tableView registerClass:[JCFamousExpertCell class] forCellReuseIdentifier:@"JCFamousExpertCell"];
-
+    [self.tableView registerClass:[JCCommunityColumnTableViewCell class] forCellReuseIdentifier:@"JCCommunityColumnTableViewCell"];
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self.view);
         make.bottom.equalTo(self.view);
@@ -165,6 +167,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JCWTjInfoBall *model = self.dataArray[indexPath.section];
+    if (indexPath.section==3) {
+        JCCommunityColumnTableViewCell *columnCell = [tableView dequeueReusableCellWithIdentifier:@"JCCommunityColumnTableViewCell"];
+        WeakSelf;
+        columnCell.JCBlock = ^{
+            [weakSelf.navigationController pushViewController:[JCCommunityMoreColumnVC new] animated:YES];
+        };
+        return columnCell;
+    }
     JCFamousExpertCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCFamousExpertCell"];
     cell.model = model;
     return cell;

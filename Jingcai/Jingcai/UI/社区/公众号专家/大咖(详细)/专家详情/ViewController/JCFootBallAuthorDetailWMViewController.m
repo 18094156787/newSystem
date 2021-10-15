@@ -14,6 +14,7 @@
 #import "WMMagicScrollView.h"
 #import "JCDakaFreePlanListVC.h"
 #import "JCDakaGanHuoListVC.h"
+#import "JCFootBallAuthorColumnVC.h"
 static CGFloat const kWMMenuViewHeight = 44.0;
 @interface JCFootBallAuthorDetailWMViewController ()
 
@@ -37,7 +38,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
 
 - (NSArray *)titleArray {
     if (!_titleArray) {
-        _titleArray = @[@"最新", @"历史",@"免费",@"干货"];
+        _titleArray = @[@"最新", @"专栏",@"免费",@"干货"];
     }
     return _titleArray;
 }
@@ -203,10 +204,9 @@ static CGFloat const kWMMenuViewHeight = 44.0;
         return self.newPlanVC;
     }
     if (index==1) {
-        JCFootBallAuthorHistoryPlaneDetailVC *vc = [JCFootBallAuthorHistoryPlaneDetailVC new];
-        vc.expertID = self.autherID;
-        vc.fatherView = self.view;
-        vc.type = @"2";
+        
+        JCFootBallAuthorColumnVC *vc = [JCFootBallAuthorColumnVC new];
+
         return vc;
     }
     if (index==2) {

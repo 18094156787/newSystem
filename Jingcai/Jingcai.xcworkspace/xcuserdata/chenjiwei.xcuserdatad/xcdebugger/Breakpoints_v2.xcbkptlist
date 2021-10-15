@@ -5,66 +5,78 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
-            uuid = "9FBE4900-04EF-4F38-B88D-38CDFA73CA03"
+            uuid = "0B3D9D80-3BBE-4828-8971-28B9D2042432"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x6211;&#x7684;/Controller/JCMineWMStickViewController.m"
+            breakpointStackSelectionBehavior = "1"
+            scope = "1"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CF1CB17B-F507-48B5-80B6-F5082105076C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/&#x4e13;&#x5bb6;&#x8be6;&#x60c5;/ViewController/JCFootBallAuthorHistoryPlaneDetailVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "383"
-            endingLineNumber = "383"
-            landmarkName = "-getAppInfo"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "-refreshData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "43AA5837-12F7-4154-8417-E973A3D25271"
+            uuid = "612E84D7-9063-40E0-849F-D360D4EEFC87"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x6211;&#x7684;/Controller/JCMineWMStickViewController.m"
+            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/&#x4e13;&#x5bb6;&#x8be6;&#x60c5;/ViewController/JCFootBallAuthorNewPlaneDetailVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "395"
-            endingLineNumber = "395"
-            landmarkName = "-getAppInfo"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "-getHistoryListData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F22189CF-D002-47B1-9FDD-EB83D25399EE"
+            uuid = "EB052768-7E18-45EF-A7D7-4120C5D1D5EE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x6211;&#x7684;/Controller/JCMineWMStickViewController.m"
+            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x7ea2;&#x699c;&#x4e13;&#x5bb6;/ViewController/JCHongBangOrderDetailVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "381"
-            endingLineNumber = "381"
-            landmarkName = "-getAppInfo"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "633A2875-E2C6-4E14-9CAB-80850F8ED032"
+            uuid = "081C24A1-86CD-4422-AF9B-2D9637AD9C8F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/Services_New/JCAppService_New.m"
+            filePath = "Jingcai/UI/&#x6211;&#x7684;/&#x8d2d;&#x4e70;&#x8bb0;&#x5f55;/&#x6570;&#x636e;&#x8ba2;&#x9605;/ViewController/JCMyBuyOrderDataDetailVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "-getKefuWXWithsuccess:failure:"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "-refreshData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

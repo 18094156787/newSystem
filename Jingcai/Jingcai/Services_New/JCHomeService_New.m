@@ -230,7 +230,7 @@
                             @"expert_id":expert_id,
                             @"type":type,
                             @"page":Integet_ToString(page),
-                            @"page_size":@"10"
+                            @"page_size":@"100"
     };
 
 
