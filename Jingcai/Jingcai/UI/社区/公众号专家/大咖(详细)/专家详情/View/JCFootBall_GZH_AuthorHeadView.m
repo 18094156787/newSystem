@@ -245,13 +245,6 @@
       [paraStyle setLineSpacing:5];
     label.attributedText = [[NSAttributedString alloc] initWithString:self.expertDetailModel.desc attributes:@{NSFontAttributeName : font16,NSForegroundColorAttributeName : COLOR_A7A7A7,NSParagraphStyleAttributeName:paraStyle}];
 
-
-//    NSString *moreString = @"展开▼";
-//    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"...%@", moreString]];
-//    NSRange expandRange = [text.string rangeOfString:moreString];
-//
-//    [text addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:expandRange];
-//    [text addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, expandRange.location)];
     
     NSString *moreString = @" 查看更多";
     NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", moreString]];
@@ -296,7 +289,7 @@
         font = [UIFont systemFontOfSize:12];
     }
     
-//    NSString *appendText = @" 收起▲";
+
     NSString *appendText = @" 收起";
     NSMutableAttributedString *append = [[NSMutableAttributedString alloc] initWithString:appendText attributes:@{NSFontAttributeName : font, NSForegroundColorAttributeName : COLOR_A7A7A7}];
     
@@ -328,7 +321,6 @@
 }
 
 - (void)packUpString {
-//    NSString *appendText = @" 收起▲";
     NSString *appendText = @" 收起";
     NSMutableAttributedString *attri = [self.infoLab.attributedText mutableCopy];
     NSRange range = [attri.string rangeOfString:appendText options:NSBackwardsSearch];

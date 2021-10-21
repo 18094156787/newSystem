@@ -8,6 +8,7 @@
 
 #import "JCCommunityMoreColumnVC.h"
 #import "JCCommunityMoreColumnCell.h"
+#import "JCColumnDetailWMViewController.h"
 @interface JCCommunityMoreColumnVC ()
 
 @end
@@ -113,7 +114,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 
 }

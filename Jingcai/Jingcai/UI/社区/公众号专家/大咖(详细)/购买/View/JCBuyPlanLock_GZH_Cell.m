@@ -95,11 +95,19 @@
     [attr addAttributes:@{NSForegroundColorAttributeName: JCBaseColor} range:range];
     tipLab.attributedText = attr;
     
+   
+    [self.topBgView addSubview:self.columnView];
+    [self.columnView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.offset(0);
+        make.top.equalTo(tipLab.mas_bottom);
+        make.height.mas_equalTo(0);
+    }];
+    
     [self.topBgView addSubview:self.buyTipLab];
     [self.buyTipLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
-        make.top.equalTo(tipLab.mas_bottom).offset(AUTO(10));
+        make.top.equalTo(self.columnView.mas_bottom).offset(AUTO(10));
     }];
     
     [self.topBgView addSubview:self.yushouLab];
@@ -214,6 +222,25 @@
     self.endTimeLab.text = [NSString stringWithFormat:@"%@ 截止购买",[NSDate wholeTimeStringToMinuteWithInterval:[payInfoModel.end_time longLongValue]]];
     self.infoLab.text = @"";
     self.buyTipLab.text = @"";
+    
+    
+    
+    
+    if ([payInfoModel.pre_sale integerValue]==1||[payInfoModel.refund integerValue]==1||[payInfoModel.refund integerValue]==2) {
+        self.columnView.haveBottomDistance = YES;
+    }
+    self.columnView.hidden = self.payInfoModel.column_info?NO:YES;
+        self.columnView.model = self.payInfoModel.column_info;
+        [self.columnView mas_updateConstraints:^(MASConstraintMaker *make) {
+            if (self.payInfoModel.column_info) {
+                make.height.mas_equalTo(AUTO(150));
+            }else{
+                make.height.mas_equalTo(0);
+            }
+            
+        }];
+    
+    
     if ([payInfoModel.pre_sale integerValue]==1) {
         //预售
         self.buyTipLab.text = @"购买须知：";
@@ -466,6 +493,14 @@
         _topBgView = [UIView new];
     }
     return _topBgView;
+}
+
+- (JCDakaColumnAssociatedView *)columnView {
+    if (!_columnView) {
+        _columnView = [JCDakaColumnAssociatedView new];
+        _columnView.hidden = YES;
+    }
+    return _columnView;
 }
 
 @end

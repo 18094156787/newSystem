@@ -48,6 +48,7 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 #define kWMRankHeaderViewHeight  (100+NavigationStatusBarHeight)
 #define kWMHeaderViewHeight  (190)
 #define kWHongbangHeaderViewHeight  (AUTO(155)+NavigationStatusBarHeight)
+#define JCColumnHeaderViewHeight  (AUTO(165))
 #define kWHongbangDetailHeaderViewHeight  (AUTO(160)+NavigationStatusBarHeight)
 #define kWJingCaiBigDataHeaderViewHeight  AUTO(465)
 #define kWMTopHeadHeight  AUTO(273)

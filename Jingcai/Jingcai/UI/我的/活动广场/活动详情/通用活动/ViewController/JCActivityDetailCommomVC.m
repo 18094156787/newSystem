@@ -195,21 +195,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.section==0&&self.detailModel.goods_info.count>0) {
-//        JCActivityPrizeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityPrizeCell"];
-//        cell.detailModel = self.detailModel;
-//        cell.dataSource = self.detailModel.goods_info;
-//
-//        WeakSelf;
-//        cell.JCClickBlock = ^{
-//            weakSelf.prizeView.showHeader = YES;
-//            weakSelf.prizeView.detailModel = weakSelf.detailModel;
-//            weakSelf.prizeView.dataArray = weakSelf.detailModel.goods_info;
-//            [weakSelf.jcWindow addSubview:weakSelf.prizeView];
-//        };
-//        return cell;
-//    }
-    
+
     if (indexPath.section==0) {
         JCActivityRuleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCActivityRuleCell"];
         WeakSelf;

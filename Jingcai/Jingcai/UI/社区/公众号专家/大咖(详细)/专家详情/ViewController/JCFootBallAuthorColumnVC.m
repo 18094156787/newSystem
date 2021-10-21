@@ -8,6 +8,7 @@
 
 #import "JCFootBallAuthorColumnVC.h"
 #import "JCFootBallAuthorColumnCell.h"
+#import "JCColumnDetailWMViewController.h"
 @interface JCFootBallAuthorColumnVC ()
 
 @end
@@ -112,7 +113,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    JCColumnDetailWMViewController *vc = [JCColumnDetailWMViewController new];
+    vc.column_id = @"2";
+    [self.navigationController pushViewController:vc animated:YES];
+
 
 
 }

@@ -13,6 +13,7 @@
 #import "JCShareModel.h"
 #import "JCPlaneDetailQRModel.h"
 #import "JCPostImageModel.h"
+#import "JCColumnInfoModel.h"
 NS_ASSUME_NONNULL_BEGIN
 @interface JCWTjInfoBall : JCWBaseBall
 
@@ -248,6 +249,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) NSInteger is_end;//1是已截止 0是未截止
 
 @property (strong, nonatomic) JCPlaneDetailQRModel *qr_code_info;
+
+@property (strong, nonatomic) JCColumnInfoModel *column_info;//关联的专栏
 
 
 

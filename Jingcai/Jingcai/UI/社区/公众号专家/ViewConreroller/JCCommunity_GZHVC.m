@@ -207,7 +207,8 @@
         return ;
     }
     JCWTjInfoBall *model = self.dataArray[indexPath.section];
-    [JCTuiJianManager loadGZH_ArticleDetailWithArticleID:model.id orderID:@"" type:@"" WithViewController:self is_push:YES];
+    [JCTuiJianManager loadGZH_ArticleDetailWithArticleID:@"3" orderID:@"" type:@"" WithViewController:self is_push:YES];
+//    [JCTuiJianManager loadGZH_ArticleDetailWithArticleID:model.id orderID:@"" type:@"" WithViewController:self is_push:YES];
 }
 
 #pragma mark <UITableViewDelegate>

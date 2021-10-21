@@ -392,13 +392,18 @@
         [JCWToastTool showHint:@"方案购买时间已截止"];
         return;
     }
-    
-    if (!self.sureProtocolBtn.selected) {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"JCFanganAgree"]) {
         [JCWToastTool showHint:@"请阅读《鲸猜足球用户购买协议》并点击同意"];
-//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
         [self.tableView scrollToBottomAnimated:YES];
         return ;
     }
+    
+//    if (!self.sureProtocolBtn.selected) {
+//        [JCWToastTool showHint:@"请阅读《鲸猜足球用户购买协议》并点击同意"];
+////        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
+//        [self.tableView scrollToBottomAnimated:YES];
+//        return ;
+//    }
     
     
     NSInteger needPayNum = [self.payInfoModel.sf integerValue];

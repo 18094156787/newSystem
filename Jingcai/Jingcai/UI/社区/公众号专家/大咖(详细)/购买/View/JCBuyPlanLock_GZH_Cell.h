@@ -9,6 +9,7 @@
 #import "JCBaseTableViewCell_New.h"
 #import "JCWTjInfoDetailBall.h"
 #import "JCImgCollectionViewCell.h"
+#import "JCDakaColumnAssociatedView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCBuyPlanLock_GZH_Cell : JCBaseTableViewCell_New<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
@@ -31,7 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UILabel *secondsLab;
 
-
 @property (nonatomic,strong) UILabel *endTimeLab;
 
 @property (nonatomic,strong) UILabel *timeLab;
@@ -47,6 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UIImageView *iconImageView;
 
 @property (nonatomic,strong) UILabel *priceLab;//
+
+@property (nonatomic,strong) JCDakaColumnAssociatedView *columnView;
 
 @property (nonatomic,strong) NSString * hours;
 

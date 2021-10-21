@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JCCommunityMoreColumnVC : JCBaseTableViewController
 
+@property (nonatomic,strong) NSString *column_id;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -67,7 +67,7 @@
 //            if (self.pageNo==1) {
 //                [self.dataArray removeAllObjects];
 //            }
-            [self.dataArray removeAllObjects];
+//            [self.dataArray removeAllObjects];
             if (object[@"data"][@"record_introduction"]) {
                 self.bannerModel = (JCGZHBannerModel *)[JCWJsonTool entityWithJson:object[@"data"][@"record_introduction"] class:[JCGZHBannerModel class]];
                 if (self.bannerModel.img_info) {
@@ -82,25 +82,14 @@
             self.expertDetailModel = (JCWExpertBall *)[JCWJsonTool entityWithJson:object[@"data"][@"base_info"] class:[JCWExpertBall class]];
             
             NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"best_new_plans"] class:[JCWTjInfoBall class]];
-            
-            [self.dataArray addObjectsFromArray:array];
+            self.dataArray = [NSMutableArray arrayWithArray:array];
+//            [self.dataArray addObjectsFromArray:array];
             if (array.count < PAGE_LIMIT) {
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }
             [self.tableView reloadData];
 
 
-
-//            if (array.count < PAGE_LIMIT&&self.dataArray.count>0) {
-//                    self.tableView.tableFooterView = self.noMore_footView;
-//                    self.tableView.mj_footer.hidden = YES;
-//                }else{
-//                    self.tableView.tableFooterView = [UIView new];
-//                    self.tableView.mj_footer.hidden = NO;
-//                }
-//
-//            NSLog(@"数据%@",self.dataArray);
-//            [self chageImageStr:@"nodata_fangan" Title:@"暂时还没有发布方案哦~" BtnTitle:@""];
             [self show_NoDataView];
         }else {
             [JCWToastTool showHint:object[@"msg"]];
@@ -124,7 +113,7 @@
         if ([JCWJsonTool isSuccessResponse:object]) {
             [self endRefresh];
             if (self.pageNo==1) {
-                [self.dataArray removeAllObjects];
+                [self.historyArray removeAllObjects];
             }
             NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"best_new_plans"] class:[JCWTjInfoBall class]];
             self.last_historyArray = array;

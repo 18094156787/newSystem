@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseTableViewCell_New.h"
-
+#import "JCDakaColumnAssociatedView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCPlaneDetailResultCell : JCBaseTableViewCell_New
@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel *resultLab;
 
 @property (nonatomic,strong) UILabel *infoLab;
+
+@property (nonatomic,strong) JCDakaColumnAssociatedView *columnView;
 
 @property (nonatomic,strong) JCWTjInfoBall *planDetailModel;
 

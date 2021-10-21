@@ -425,7 +425,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
     if (data[@"aps"][@"alert"]) {
         NSDictionary *dic = data[@"aps"][@"alert"];
-//        type 0 首页 1红榜 2大咖 11 红榜方案 21 大咖方案  3是文章详情 4 全民首页 5 消息列表 8大咖方案详情 7.发帖
+//        type 0 首页 1红榜 2大咖 11 红榜方案 21 大咖方案  3是文章详情 4 全民首页 5 消息列表  6.提现 7.发帖 8大咖方案详情
         NSString*type = [NSString stringWithFormat:@"%@",dic[@"content_type"]];
         //专家id
         NSString *userID = dic[@"user_id"];

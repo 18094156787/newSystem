@@ -28,13 +28,26 @@
 //        make.height.mas_equalTo(0.5);
     }];
     
+    [self.contentView addSubview:self.columnView];
+    [self.columnView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.offset(0);
+        make.top.equalTo(self.resultLab.mas_bottom);
+        make.height.mas_equalTo(0);
+    }];
+    [self.resultLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(15));
+        make.right.offset(AUTO(-15));
+        make.top.equalTo(self.lineView.mas_bottom).offset(AUTO(15));
+//        make.height.mas_equalTo(0.5);
+    }];
+    
     UILabel *infoLab = [UILabel initWithTitle:@"免责声明：鲸猜足球仅为信息发布平台，并不对第三方发布的信息真实性及准确性负责，且不提供彩票售卖服务，请您注意投资风险，理性购买！" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
     infoLab.numberOfLines= 0;
     [self.contentView addSubview:infoLab];
     [infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
-        make.top.equalTo(self.resultLab.mas_bottom).offset(AUTO(15));
+        make.top.equalTo(self.columnView.mas_bottom).offset(AUTO(15));
         make.bottom.offset(AUTO(-15));
     }];
 }
@@ -56,6 +69,16 @@
         }];
     }
     
+    self.columnView.hidden = self.planDetailModel.column_info?NO:YES;
+    self.columnView.model = self.planDetailModel.column_info;
+    [self.columnView mas_updateConstraints:^(MASConstraintMaker *make) {
+        if (self.planDetailModel.column_info) {
+            make.height.mas_equalTo(AUTO(150));
+        }else{
+            make.height.mas_equalTo(0);
+        }
+        
+    }];
     
 }
 
@@ -73,6 +96,14 @@
         _resultLab.numberOfLines = 0;
     }
     return _resultLab;
+}
+
+- (JCDakaColumnAssociatedView *)columnView {
+    if (!_columnView) {
+        _columnView = [JCDakaColumnAssociatedView new];
+        _columnView.haveBottomDistance = YES;
+    }
+    return _columnView;
 }
 
 @end

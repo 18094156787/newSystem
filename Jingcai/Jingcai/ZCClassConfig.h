@@ -79,6 +79,7 @@
 #import "JCJingCaiService_New.h"
 #import "JCPayService_New.h"
 #import "JCAppService_New.h"
+#import "JCColumnService.h"
 
 
 

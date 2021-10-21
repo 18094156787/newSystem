@@ -76,15 +76,6 @@
     }];
 }
 
-//- (void)setHaveTime:(BOOL)haveTime {
-//    _haveTime = haveTime;
-//    self.titleLab.text = @"活动时间&规则";
-//    [self.timeBgView mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(151, 16));
-//    }];
-//
-//    
-//}
 
 - (void)setDetailModel:(JCActivityDetailModel *)detailModel {
     _detailModel = detailModel;
@@ -99,7 +90,7 @@
     NSString  * str = [NSString stringWithFormat:@"%@<html><meta content=\"width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=0; \" name=\"viewport\" /><body style=\"overflow-wrap:break-word;word-break:break-all;white-space: normal; font-size:14px!important;  \">%@</body></html>",headStr,self.detailModel.rule];
     [self.webView loadHTMLString:str baseURL:nil];
     
-//    [self.webView loadHTMLString:self.detailModel.rule baseURL:nil];
+
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
