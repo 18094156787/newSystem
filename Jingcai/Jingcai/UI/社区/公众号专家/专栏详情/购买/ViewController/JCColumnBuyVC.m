@@ -13,6 +13,8 @@
 #import "JCBuyPlanPayWayCell.h"
 #import "JCDakaBuyPlanProtocolCell.h"
 #import "JCColumnBuySuccessView.h"
+#import "JCColumnDetailModel.h"
+#import "JCChargeVC.h"
 @interface JCColumnBuyVC ()
 
 @property (nonatomic,strong) JCColumnBuyHeadView *headView;
@@ -29,12 +31,15 @@
 
 @property (nonatomic,strong) NSMutableArray *payWayArray;
 
+@property (nonatomic,strong) JCColumnDetailModel *detailModel;
+
 @end
 
 @implementation JCColumnBuyVC
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-     self.navigationBarStyle = JCNavigationBarStyleDefault;
+     self.navigationBarStyle = JCNavigationBarStyleWhite;
     [self setNavBackImgWhiteColor];
     UIImage *navImg =[UIImage imageNamed:@"JCColumnNav"];
       navImg = [navImg resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];
@@ -65,34 +70,31 @@
 
 - (void)refreshData {
 
-//    [self.   view showLoading];
+    [self.jcWindow showLoading];
 
     
-//    JCHomeService_New *service = [JCHomeService_New new];
-//    [service getGZHT_TuijianExpertDetailWithExpert_id:self.expertID type:@"2" page:self.pageNo Success:^(id  _Nullable object) {
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            [self endRefresh];
-//            if (self.pageNo==1) {
-//                [self.dataArray removeAllObjects];
-//            }
-//            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"best_new_plans"] class:[JCWTjInfoBall class]];
-//
-//            [self.dataArray addObjectsFromArray:array];
-//            if (array.count < PAGE_LIMIT) {
-//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-//            }
-//            [self.tableView reloadData];
-//            self.pageNo++;
-//
-//
-//
-//        }else {
-//            [JCWToastTool showHint:object[@"msg"]];
-//        }
-//    } failure:^(NSError * _Nonnull error) {
-//
-//        [self endRefresh];
-//    }];
+    JCColumnService *service = [JCColumnService new];
+    [service getColumnCheckOrderInfoWithPeriod_id:self.period_id success:^(id  _Nullable object) {
+        [self endRefresh];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            self.detailModel = (JCColumnDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCColumnDetailModel class]];
+            self.headView.detailModel = self.detailModel;
+            
+            NSString *price = [NSString stringWithFormat:@"%@红币",@([self.detailModel.reality_price floatValue]/1.0f)];
+            NSMutableAttributedString *price_attr = [[NSMutableAttributedString alloc]initWithString:price];
+            NSRange price_range = [price rangeOfString:@"红币"];
+            [price_attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)],NSForegroundColorAttributeName:COLOR_2F2F2F} range:price_range];
+            self.priceLab.attributedText = price_attr;
+            
+            [self.tableView reloadData];
+
+        }else {
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        [self endRefresh];
+    }];
+
 }
 - (void)initViews {
     
@@ -125,7 +127,7 @@
     [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(AUTO(-15));
         make.centerY.equalTo(bottomView);
-        make.size.mas_equalTo(CGSizeMake(AUTO(144), AUTO(48)));
+        make.size.mas_equalTo(CGSizeMake(AUTO(120), AUTO(48)));
     }];
     
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -144,27 +146,22 @@
     [self.tableView registerClass:[JCBuyPlanPayWayCell class] forCellReuseIdentifier:@"JCBuyPlanPayWayCell"];
     [self.tableView registerClass:[JCDakaBuyPlanProtocolCell class] forCellReuseIdentifier:@"JCDakaBuyPlanProtocolCell"];
     
-    WeakSelf;
-    self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
-        weakSelf.pageNo = 1;
-        [weakSelf refreshData];
-    }];
+//    WeakSelf;
+//    self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
+//        weakSelf.pageNo = 1;
+//        [weakSelf refreshData];
+//    }];
+//
+//    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+//        [weakSelf refreshData];
+//    }];
+//
+//    JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
+//        [weakSelf refreshData];
+//    }];
+//    self.tableView.ly_emptyView = emptyView;
+//
 
-    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [weakSelf refreshData];
-    }];
-    
-    JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
-        [weakSelf refreshData];
-    }];
-    self.tableView.ly_emptyView = emptyView;
-    
-    NSString *price = [NSString stringWithFormat:@"%@红币",@"688"];
-    NSMutableAttributedString *price_attr = [[NSMutableAttributedString alloc]initWithString:price];
-    NSRange price_range = [price rangeOfString:@"红币"];
-    [price_attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)],NSForegroundColorAttributeName:COLOR_2F2F2F} range:price_range];
-    self.priceLab.attributedText = price_attr;
-    
 
     
 }
@@ -198,11 +195,7 @@
     cell.backgroundColor = JCClearColor;
     self.sureProtocolBtn = cell.sureProtocolBtn;
     return cell;
-    
-    
-//    JCFootBallAuthorColumnCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCFootBallAuthorColumnCell"];
-////    cell.model = model;
-//    return cell;
+
 
     
 }
@@ -241,18 +234,71 @@
 
 #pragma mark//购买
 
+
+//创建订单
 - (void)sureBtnClick {
-    self.buySuccessView = [JCColumnBuySuccessView new];
-    self.buySuccessView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    [self.jcWindow addSubview:self.buySuccessView];
-    [self.navigationController popViewControllerAnimated:YES];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.buySuccessView removeFromSuperview];
-    });
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"JCFanganAgree"]) {
+        [JCWToastTool showHint:@"请阅读《鲸猜足球用户购买协议》并点击同意"];
+        return ;
+    }
+
+    if ([self.detailModel.reality_price floatValue]>0&&[[JCWUserBall currentUser].prize floatValue]/100.0f<[self.detailModel.reality_price floatValue]) {
+
+        [JCWToastTool showHint:@"红币余额不足,请及时充值"];
+        [self.navigationController pushViewController:[JCChargeVC new] animated:YES];
+        return;
+    }
+
+    NSString *scene = @"6";
+    [self.jcWindow showLoading];
+    JCHomeService_New *service = [JCHomeService_New new];
+    [service getConfirmOrderWithUnique:self.period_id scene:scene source:@"1" Success:^(id  _Nullable object) {
+        [self.jcWindow endLoading];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSString *order_key = object[@"data"][@"order_key"];
+            [self finalPayWithOrder_key:order_key coupon_id:@"" hongbao_id:@""];
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+        
+    } failure:^(NSError * _Nonnull error) {
+        [self.jcWindow endLoading];
+    }];
+
 }
 
-- (void)dealloc {
-    
+//下单并支付
+- (void)finalPayWithOrder_key:(NSString *)order_key coupon_id:(NSString *)coupon_id hongbao_id:(NSString *)hongbao_id {
+    [self.jcWindow showLoading];
+    JCHomeService_New *service = [JCHomeService_New new];
+    [service getPayOrderWithOrder_key:order_key pay_type:@"3" hongbao_id:hongbao_id coupon_id:coupon_id Success:^(id  _Nullable object) {
+        [self.jcWindow endLoading];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSString *is_pay = object[@"data"][@"is_pay"];
+            if ([is_pay intValue]==1) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:JCRefreshBuyColumn object:nil];
+                self.buySuccessView = [JCColumnBuySuccessView new];
+                self.buySuccessView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                [self.jcWindow addSubview:self.buySuccessView];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.buySuccessView removeFromSuperview];
+                });
+
+//                [JCTuiJianManager loadGZH_ArticleDetailWithArticleID:self.payInfoModel.id orderID:@"" type:@"" WithViewController:self is_push:YES];
+            }
+
+            [self.tableView reloadData];
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+        
+    } failure:^(NSError * _Nonnull error) {
+        [self.jcWindow endLoading];
+    }];
 }
 
 - (JCColumnBuyHeadView *)headView {

@@ -9,11 +9,19 @@
 #import "JCCommunityMoreColumnVC.h"
 #import "JCCommunityMoreColumnCell.h"
 #import "JCColumnDetailWMViewController.h"
+#import "JCColumnDetailModel.h"
+#import "JCColumnDetailWMViewController.h"
 @interface JCCommunityMoreColumnVC ()
 
 @end
 
 @implementation JCCommunityMoreColumnVC
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+     self.navigationBarStyle = JCNavigationBarStyleDefault;
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,34 +34,36 @@
 
 - (void)refreshData {
 
-//    [self.   view showLoading];
+    [self.view showLoading];
 
     
-//    JCHomeService_New *service = [JCHomeService_New new];
-//    [service getGZHT_TuijianExpertDetailWithExpert_id:self.expertID type:@"2" page:self.pageNo Success:^(id  _Nullable object) {
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            [self endRefresh];
-//            if (self.pageNo==1) {
-//                [self.dataArray removeAllObjects];
-//            }
-//            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"best_new_plans"] class:[JCWTjInfoBall class]];
-//
-//            [self.dataArray addObjectsFromArray:array];
-//            if (array.count < PAGE_LIMIT) {
-//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-//            }
-//            [self.tableView reloadData];
-//            self.pageNo++;
-//
-//
-//
-//        }else {
-//            [JCWToastTool showHint:object[@"msg"]];
-//        }
-//    } failure:^(NSError * _Nonnull error) {
-//
-//        [self endRefresh];
-//    }];
+    JCColumnService *service = [JCColumnService new];
+    [service getHomeMoreColumnListWithPge:self.pageNo success:^(id  _Nullable object) {
+        [self endRefresh];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+           
+            if (self.pageNo==1) {
+                [self.dataArray removeAllObjects];
+            }
+            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"] class:[JCColumnDetailModel class]];
+
+            [self.dataArray addObjectsFromArray:array];
+            if (array.count < PAGE_LIMIT) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            [self.tableView reloadData];
+            self.pageNo++;
+
+
+
+        }else {
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        [self endRefresh];
+    }];
+
 }
 - (void)initViews {
     
@@ -84,7 +94,7 @@
 #pragma mark <UITableViewDataSource>
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return self.dataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -96,7 +106,7 @@
 
 //    JCWTjInfoBall *model = self.dataArray[indexPath.section];
     JCCommunityMoreColumnCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCCommunityMoreColumnCell"];
-//    cell.model = model;
+    cell.model = self.dataArray[indexPath.section];
     return cell;
 
     
@@ -114,8 +124,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-
+    JCColumnDetailWMViewController *vc = [JCColumnDetailWMViewController new];
+    JCColumnDetailModel *model = self.dataArray[indexPath.section];
+    vc.column_id = model.zctj_special_column_id;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark <UITableViewDelegate>

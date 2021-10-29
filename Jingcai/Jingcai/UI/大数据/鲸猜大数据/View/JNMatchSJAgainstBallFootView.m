@@ -19,7 +19,7 @@
         make.height.mas_equalTo(AUTO(17));
     }];
     
-    UILabel *infoLab = [UILabel initWithTitle:@"1.预测数据仅供参考！不做结果保证，请理性对待！\n2.数据提前12小时给出，每小时更新，请及时关注！" andFont:AUTO(10) andWeight:1 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:0];
+    UILabel *infoLab = [UILabel initWithTitle:@"1.数据仅供参考！不做结果保证，请理性对待！\n2.数据提前12小时给出，每小时更新，请及时关注！" andFont:AUTO(10) andWeight:1 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:0];
     infoLab.numberOfLines = 2;
      [self addSubview:infoLab];
      [infoLab mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -43,6 +43,7 @@
 @implementation JCFootBallAuthorNewPlaneDetailVC
 
 - (void)viewDidLoad {
+    self.style = 1;
     [super viewDidLoad];
     self.view.backgroundColor = COLOR_F0F0F0;
     

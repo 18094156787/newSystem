@@ -1,4 +1,4 @@
-//
+
 //  JCBigDataWMVC.m
 //  Jingcai
 //
@@ -15,6 +15,7 @@
 #import "UISegmentedControl+Extension.h"
 #import "LMJTab.h"
 #import "JCMainTabBarController.h"
+#import "JCShowModel.h"
 @interface JCBigDataWMVC ()<LMJTabDelegate>
 
 @property (nonatomic, strong) NSArray *titleArray;
@@ -25,25 +26,22 @@
 
 @property (nonatomic, strong) UIBarButtonItem *buyRecordItem;
 
+@property (nonatomic, strong) NSMutableArray *dataArray;
+
+@property (nonatomic, strong) NSMutableArray *itemWidthArray;
+
 @property (nonatomic,assign) BOOL needNextGetData;//是否需要下次页面出现的时候请求数据
 
 @end
 
 @implementation JCBigDataWMVC
 
-- (NSArray *)titleArray {
-    if (!_titleArray) {
-        
-        _titleArray = @[@"鲸猜大数据",@"鲸猜AI",@"资料库"];
-//        _titleArray = @[@"鲸猜大数据",@"资料库"];
-    }
-    return _titleArray;
-}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
      self.navigationBarStyle = JCNavigationBarStyleDefault;
+    [self hideNavShadow];
     if (self.needNextGetData) {
         [self showActivityTipView];
     }
@@ -59,31 +57,125 @@
 - (instancetype)init {
     if (self = [super init]) {
 //        self.height = kWMTopHeadHeight;
-        self.titleSizeNormal = 15;
-        self.titleSizeSelected = 15;
-        self.titleColorSelected = JCWhiteColor;//COLOR_FE1F19
-        self.titleColorNormal = JCBaseColor;
-        self.menuViewStyle = WMMenuViewStyleFloodHollow;
-        self.itemsWidths = @[@(70),@(90),@(70)];
+        [self defaultData];
+        self.titleSizeNormal = 18;
+        self.titleSizeSelected = 20;
+        self.titleColorSelected = JCBaseColor;//COLOR_FE1F19
+        self.titleColorNormal = COLOR_9F9F9F;
+//        self.menuViewStyle = WMMenuViewStyleFloodHollow;
+        self.itemsWidths = @[@(120),@(90),@(60)];
+//        self.menuItemWidth = AUTO(90);
+        self.menuViewLayoutMode = WMMenuViewLayoutModeLeft;
+//        self.menuViewContentMargin = -20;
+//        self.menuViewContentMargin = 30;
         self.progressHeight =30;
         self.progressColor = [UIColor redColor];
-
-//        self.showOnNavigationBar = YES;
-//        self.progressColor = [UIColor colorWithRed:168.0/255.0 green:20.0/255.0 blue:4/255.0 alpha:1];
-//        self.showOnNavigationBar = YES;
-        self.menuViewLayoutMode = WMMenuViewLayoutModeCenter;
-//        self.titleFontName = @"PingFangSC-Medium";
-//        [self setNavBackImg];
-//        self.contentView.bounces = NO;
+        self.titleFontName = @"PingFangSC-Medium";
+        self.showOnNavigationBar = YES;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"资料库";
     [self initViews];
+    [self getHomeTab];
     [self showActivityTipView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isInCurrentVC) name:NotificationUserLogin object:nil];
+}
+
+- (void)defaultData {
+    self.titleArray = @[@"鲸猜大数据",@"鲸猜AI",@"资料库"];
+    for (int i=0; i<3; i++) {
+        JCShowModel *model = [JCShowModel new];
+        if (i==0) {
+            model.title = @"鲸猜大数据";
+            model.is_show_big_data = @"1";
+        }
+        if (i==1) {
+            model.title = @"鲸猜AI";
+            model.is_show_whale_ai = @"1";
+        }
+        if (i==2) {
+            model.title = @"资料库";
+            model.is_show_database = @"1";
+        }
+        [self.dataArray addObject:model];
+    }
+}
+
+- (void)getHomeTab {
+    
+//    [self.view showLoading];
+    JCHomeService_New *service = [JCHomeService_New service];
+    [service getHomeTabWithsuccess:^(id  _Nullable object) {
+        //        self.titleArray = @[@"推荐",@"干货",@"情报"];
+         if ([JCWJsonTool isSuccessResponse:object]) {
+             if (object[@"data"][@"is_show_expert_qr_code"]) {
+                 NSString *is_show_expert_qr_code = object[@"data"][@"is_show_expert_qr_code"];
+                 [[NSUserDefaults standardUserDefaults] setObject:is_show_expert_qr_code forKey:@"is_show_expert_qr_code"];
+             }
+             
+             
+             NSString *is_show_big_data   = object[@"data"][@"is_show_big_data"];
+//             is_show_big_data = @"1";
+             NSString *is_show_whale_ai   = object[@"data"][@"is_show_whale_ai"];
+//             is_show_whale_ai = @"1";
+             if ([is_show_big_data integerValue]==1&&[is_show_whale_ai integerValue]==1) {
+                 return;
+             }
+             NSMutableArray *titleArray = [NSMutableArray array];
+             [self.dataArray removeAllObjects];
+             if ([is_show_big_data intValue]==1) {
+                 JCShowModel *is_show_big_data_model = [JCShowModel new];
+                 is_show_big_data_model.title = @"鲸猜大数据";
+                 is_show_big_data_model.is_show_big_data = @"1";
+                 [self.dataArray addObject:is_show_big_data_model];
+                 [titleArray addObject:@"鲸猜大数据"];
+                 [self.itemWidthArray addObject:@(120)];
+//                 self.itemsWidths = @[@(AUTO(90)),@(AUTO(90)),@(AUTO(50))];
+             }
+             if ([is_show_whale_ai intValue]==1) {
+                 JCShowModel *is_show_whale_ai_model = [JCShowModel new];
+                 is_show_whale_ai_model.title = @"鲸猜AI";
+                 is_show_whale_ai_model.is_show_whale_ai = @"1";
+                 [self.dataArray addObject:is_show_whale_ai_model];
+                 [titleArray addObject:@"鲸猜AI"];
+                 [self.itemWidthArray addObject:@(80)];
+             }
+             JCShowModel *is_show_big_data_model = [JCShowModel new];
+             is_show_big_data_model.title = @"数据库";
+             is_show_big_data_model.is_show_database = @"1";
+             [self.dataArray addObject:is_show_big_data_model];
+             [titleArray addObject:@"数据库"];
+             [self.itemWidthArray addObject:@(68)];
+             
+             self.titleArray = [NSArray arrayWithArray:titleArray];
+
+             if (self.titleArray.count==1) {
+                 UILabel *titleView = [UILabel initWithTitle:@"数据库" andFont:AUTO(18) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+                 titleView.frame = CGRectMake(50, 0, SCREEN_WIDTH-100, 44);
+                 self.navigationItem.titleView = titleView;
+                 
+                 UIBarButtonItem *leftItem =  [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"icon_fagm") style:0 target:nil action:nil];
+                 leftItem.tintColor = JCClearColor;
+                 self.navigationItem.leftBarButtonItem = leftItem;
+                 
+             }
+//             self.itemsWidths = @[@(110),@(90)];
+             self.itemsWidths = [NSArray arrayWithArray:self.itemWidthArray];
+             [self forceLayoutSubviews];
+             [self reloadData];
+
+            
+         }
+        
+
+    } failure:^(NSError * _Nonnull error) {
+        [self reloadData];
+    }];
+
 }
 
 - (void)showActivityTipView {
@@ -107,30 +199,7 @@
     UIView *titleView = [UIView new];
     titleView.frame = CGRectMake(0, 0, 270, 26);
     self.segControl.frame = CGRectMake(0, 0, 270, 26);
-//    [titleView addSubview:self.segControl];
-////    self.segControl.frame = CGRectMake(0, 0, 270, 26);
-//    self.navigationItem.titleView = titleView;
-//    self.segControl.backgroundColor= JCClearColor;
-//    [self.segControl setTitleTextAttributes:@{NSForegroundColorAttributeName:COLOR_9F9F9F,NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:12]} forState:UIControlStateNormal];
-//    [self.segControl setTitleTextAttributes:@{NSForegroundColorAttributeName:JCWhiteColor,NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:12]} forState:UIControlStateSelected];
-//    [self.segControl setTintColor:JCBaseColor normalColor:COLOR_9F9F9F];
-//
-//
-//    self.segControl.selectedSegmentIndex = 0;
-//    [self.segControl addTarget:self action:@selector(segControlClick:) forControlEvents:UIControlEventValueChanged];
 
-    
-    
-    LMJTab * tab = [[LMJTab alloc] initWithFrame:CGRectMake(0, 0, 270, 26) lineWidth:1 lineColor:[UIColor whiteColor]];
-    [tab setItemsWithTitle:self.titleArray normalItemColor:COLOR_F0F0F0 selectItemColor:JCBaseColor normalTitleColor:COLOR_9F9F9F selectTitleColor:[UIColor whiteColor] titleTextSize:12 selectItemNumber:0];
-    tab.layer.cornerRadius = 5.0;
-    self.tabSegment = tab;
-    [titleView addSubview:tab];
-    tab.delegate = self;
-    self.navigationItem.titleView = titleView;
-//    tab.selectIndex = 2;
-    
-    
     self.buyRecordItem = [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"icon_fagm") style:0 target:self action:@selector(recordItemClick)];//购买记录
     self.buyRecordItem.tintColor = JCBaseColor;
     self.navigationItem.rightBarButtonItem = self.buyRecordItem;
@@ -148,16 +217,17 @@
 
 #pragma mark - Datasource & Delegate
 - (NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController {
-    return self.titleArray.count;
+    return self.dataArray.count;
 }
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
-    if (index==0) {
-
+    JCShowModel *model = self.dataArray[index];
+    if ([model.is_show_big_data integerValue]==1) {
         JCJingCaiAIBigDataStickVC *vc = [JCJingCaiAIBigDataStickVC new];
         return vc;
     }
-    if (index==1) {
+
+    if ([model.is_show_whale_ai integerValue]==1) {
         JCJingCaiAIWMStickVC *vc = [JCJingCaiAIWMStickVC new];
          return vc;
     }
@@ -166,26 +236,23 @@
     return vc;
     
 
-//    if (index==0) {
-//        JCJingCaiAIBigDataHomeVC *vc = [JCJingCaiAIBigDataHomeVC new];
-//        return vc;
-//    }
-//
-//    JCDatabaseViewController *vc = [JCDatabaseViewController new];
-//    return vc;
-    
 
 }
 
 - (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
-    return self.titleArray[index];
+    JCShowModel *model = self.dataArray[index];
+    return model.title;
 }
 
 - (void)pageController:(WMPageController *)pageController willEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info {
-    
-//    NSLog(@"将会%d",self.selectIndex);
-    if (self.selectIndex==2) {
-        self.navigationItem.rightBarButtonItem = nil;
+
+    JCShowModel *model = self.dataArray[self.selectIndex];
+    if ([model.is_show_database integerValue]==1) {
+        UIBarButtonItem *righItem =  [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"icon_fagm") style:0 target:nil action:nil];
+        righItem.tintColor = JCClearColor;
+        self.navigationItem.rightBarButtonItem = righItem;
+        
+        
     }else{
         self.navigationItem.rightBarButtonItem = self.buyRecordItem;
     }
@@ -198,8 +265,12 @@
 
 }
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView {
-    menuView.backgroundColor = COLOR_F0F0F0;
-    return CGRectMake(0, 0, self.view.frame.size.width, 0);
+//    menuView.backgroundColor = COLOR_F0F0F0;
+    float height = 44;
+    if (self.dataArray.count==1) {
+        height = 0;
+    }
+    return CGRectMake(0, 0, SCREEN_WIDTH-60, height);
 
 }
 
@@ -222,11 +293,12 @@
         return;
     }
     JCMyBuyPlanWMViewController *vc = [JCMyBuyPlanWMViewController new];
-    if (self.selectIndex==0) {
-        vc.selectIndex = 3;
+    JCShowModel *model = self.dataArray[self.selectIndex];
+    if ([model.is_show_big_data integerValue]==1) {
+        vc.selectIndex = 4;
     }
-    if (self.selectIndex==1) {
-        vc.selectIndex = 2;
+    if ([model.is_show_whale_ai integerValue]==1) {
+        vc.selectIndex = 3;
     }
     
     [self.navigationController pushViewController:vc animated:YES];//JCJingCaiAIWMStickVC,
@@ -249,4 +321,18 @@
     UIGraphicsEndImageContext();
     return theImage;
 }
+- (NSMutableArray *)dataArray {
+    if (!_dataArray) {
+        _dataArray = [NSMutableArray array];
+    }
+    return _dataArray;
+}
+
+- (NSMutableArray *)itemWidthArray {
+    if (!_itemWidthArray) {
+        _itemWidthArray = [NSMutableArray array];
+    }
+    return _itemWidthArray;
+}
+
 @end

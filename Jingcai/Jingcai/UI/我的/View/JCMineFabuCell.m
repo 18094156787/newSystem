@@ -23,7 +23,7 @@
         make.bottom.offset(0);
     }];
     
-    float width = (SCREEN_WIDTH-AUTO(16))/3.0f;
+    float width = (SCREEN_WIDTH-AUTO(16))/4.0f;
     [bgView addSubview:self.fabuView];
     [self.fabuView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.bottom.equalTo(bgView);
@@ -41,6 +41,13 @@
     [self.recordView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(bgView);
         make.left.equalTo(self.incomeView.mas_right);
+        make.width.mas_equalTo(width);
+    }];
+    
+    [bgView addSubview:self.ruleView];
+    [self.ruleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.equalTo(bgView);
+        make.left.equalTo(self.recordView.mas_right);
         make.width.mas_equalTo(width);
     }];
     
@@ -62,6 +69,12 @@
     [self.recordView bk_whenTapped:^{
         if (weakSelf.JCMineClick) {
             weakSelf.JCMineClick(102);
+        }
+    }];
+    
+    [self.ruleView bk_whenTapped:^{
+        if (weakSelf.JCMineClick) {
+            weakSelf.JCMineClick(103);
         }
     }];
 
@@ -95,5 +108,13 @@
     return _recordView;
 }
 
+- (JCMineCellItemView *)ruleView {
+    if (!_ruleView) {
+        _ruleView = [JCMineCellItemView new];
+        _ruleView.iconImg = JCIMAGE(@"me_ic_rule");
+        _ruleView.title = @"规则说明";
+    }
+    return _ruleView;
+}
 
 @end

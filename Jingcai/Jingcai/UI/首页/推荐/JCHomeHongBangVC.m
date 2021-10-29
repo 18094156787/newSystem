@@ -126,7 +126,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"JCCommentCell" bundle:nil] forCellReuseIdentifier:@"JCCommentCell"];
     [self.tableView registerClass:[JCHongbangCommomCell class] forCellReuseIdentifier:@"JCHongbangCommomCell"];
     [self.tableView registerClass:[JCFamousExpertCell class] forCellReuseIdentifier:@"JCFamousExpertCell"];
-    
+    self.tableView.estimatedRowHeight = 200;
 //    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
 //        make.left.right.top.equalTo(self.view);
 //        make.bottom.equalTo(self.view).mas_offset(-kBottomTabSafeAreaHeight);

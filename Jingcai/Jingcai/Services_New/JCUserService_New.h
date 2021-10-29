@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 //获取图形验证码
 - (void)getImageCodeWithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;
 - (void)getCheckImageCodeWithID:(NSString *)ID img_code:(NSString *)img_code Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//检测该手机号是否被绑定
+- (void)getCheckThePhoneHadBeenBindWithMobile:(NSString *)mobile oauth_id:(NSString *)oauth_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //发送短信验证码
 //0注册，1登录，2绑定手机，3忘记密码 默认为0
 - (void)getSmsCodeWithTelNum:(NSString *)telNum type:(NSInteger)type success:(successBlock)successBlock failure:(failureBlock)failureBlock;

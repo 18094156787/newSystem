@@ -32,9 +32,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) UILabel *likeLab;
 
+@property (strong, nonatomic) UIView *lineView;
+
 @property (nonatomic,assign) BOOL isNew;//最新方案
 
 @property (nonatomic,assign) BOOL isTop;//顶部没有间距
+
+@property (nonatomic,assign) BOOL is_column;//专栏标记,是专栏,则时间统一用发布时间
 
 @property (nonatomic,strong) JCWTjInfoBall *model;
 @end

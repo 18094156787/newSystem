@@ -23,6 +23,7 @@
         self.get_service = [aDecoder decodeObjectForKey:@"get_service"];
         self.get_tz = [aDecoder decodeObjectForKey:@"get_tz"];
         self.get_jctzsc = [aDecoder decodeObjectForKey:@"get_jctzsc"];
+        self.get_rule = [aDecoder decodeObjectForKey:@"get_rule"];
 
     }
     return self;
@@ -38,6 +39,7 @@
     [aCoder encodeObject:self.get_tz forKey:@"get_tz"];
     [aCoder encodeObject:self.get_jctzsc forKey:@"get_jctzsc"];
     [aCoder encodeObject:self.get_question forKey:@"get_question"];
+    [aCoder encodeObject:self.get_rule forKey:@"get_rule"];
     
 }
 

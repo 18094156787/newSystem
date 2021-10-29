@@ -76,6 +76,7 @@
         [_ruleBtn setImage:JCIMAGE(@"post_rule_icon") forState:0];
         [_ruleBtn setImage:JCIMAGE(@"post_rule_icon") forState:UIControlStateHighlighted];
         [_ruleBtn addTarget:self action:@selector(ruleBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        _ruleBtn.hidden = YES;
     }
     return _ruleBtn;
 }

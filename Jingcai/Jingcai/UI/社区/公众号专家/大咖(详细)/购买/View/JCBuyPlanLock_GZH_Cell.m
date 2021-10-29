@@ -126,6 +126,12 @@
         make.bottom.offset(AUTO(0));
     }];
 
+    WeakSelf;
+    [self.columnView bk_whenTapped:^{
+        if (weakSelf.JCBlock) {
+            weakSelf.JCBlock();
+        }
+    }];
 
 
 }

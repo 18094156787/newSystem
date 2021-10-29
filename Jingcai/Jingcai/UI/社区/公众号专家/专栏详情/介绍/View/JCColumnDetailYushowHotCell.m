@@ -71,9 +71,10 @@
     }];
 }
 
-- (void)data {
+- (void)setPresellColumnModel:(JCPresellColumnModel *)presellColumnModel {
+    _presellColumnModel = presellColumnModel;
     self.titleLab.text = @"火爆预售中···";
-    self.dateLab.text = @"第13期";
+    self.dateLab.text = [NSString stringWithFormat:@"第%@期",presellColumnModel.period];
     
 }
 

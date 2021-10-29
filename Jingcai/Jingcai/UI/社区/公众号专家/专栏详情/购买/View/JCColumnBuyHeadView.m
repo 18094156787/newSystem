@@ -77,17 +77,17 @@
     }];
 }
 
-- (void)data {
-    self.imgView.backgroundColor = JCBaseColor;
-    self.titleLab.text = @"英超精选方案推荐英超精选方案推荐";
-    self.headImgView.backgroundColor = JCBaseColor;
-    self.nameLab.text = @"老詹带你飞";
-    self.dateLab.text = @"第10期";
+- (void)setDetailModel:(JCColumnDetailModel *)detailModel {
+    _detailModel = detailModel;
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:detailModel.image]];
+    self.titleLab.text = detailModel.title;
+    [self.headImgView sd_setImageWithURL:[NSURL URLWithString:detailModel.user_img] placeholderImage:JCIMAGE(@"userImg_default")];
+    self.nameLab.text = detailModel.user_name;
+    self.dateLab.text = [NSString stringWithFormat:@"第%@期",NonNil(detailModel.period)];
     
-    self.timeLab.text = @"更新时间：2021-10-12 ~ 2021-11-12 ";
-    
-
+    self.timeLab.text = [NSString stringWithFormat:@"创建时间：%@",detailModel.time];
 }
+
 
 
 

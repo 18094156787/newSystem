@@ -16,6 +16,8 @@ typedef void(^JCBindTelBlock)(BOOL isBind);
 
 @property (nonatomic, copy) JCBindTelBlock bindTelBlock;
 
+@property (nonatomic, assign) BOOL phoneHadBeenUser;//记录该手机用户已经注册
+
 @end
 
 NS_ASSUME_NONNULL_END

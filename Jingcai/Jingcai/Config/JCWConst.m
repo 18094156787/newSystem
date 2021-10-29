@@ -9,8 +9,8 @@
 #import "JCWConst.h"
 
 //#pragma mark - 预配置项
-NSString * const JCTestApiUrl_New  = @"http://192.168.10.223:9501/";//秋阳本地
-//NSString * const JCTestApiUrl_New           = @"http://106.75.32.127:9503/";//测试
+//NSString * const JCTestApiUrl_New  = @"http://117.50.17.182:6001/";//秋阳本地
+NSString * const JCTestApiUrl_New           = @"http://106.75.32.127:9503/";//测试
 //NSString * const JCTestApiUrl_New           = @"http://ios.yixinzuqiu.com/";//上架专用,会自己映射
 ////NSString * const JCTestApiUrl_New            @"http://pay.yixinzuqiu.com/";//正式
 
@@ -92,6 +92,8 @@ NSString * const JCMatchConcern     = @"jcMatchConcern";//足球赛程关注
 NSString * const JCBasketBallMatchConcern     = @"jcBasketBallMatchConcern";//赛程关注
 NSString * const JCMatchEntetBallTip     = @"jcMatchEntetBallTip";//足球进球提醒设置改变
 NSString * const jcMatchEntetBallRefresh     = @"jcMatchEntetBallRefresh";//足球进球提醒刷新页面
+//公众号专栏
+NSString * const JCRefreshBuyColumn   = @"JCRefreshBuyColumn";//刷新公众号专栏
 #pragma mark - 数据缓存
 NSString * const ReceiveRedPacket = @"receiveRedPacket";////活动红包
 NSString * const JCHomeCache = @"jcHomeCache";//首页数据缓存

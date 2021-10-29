@@ -156,6 +156,10 @@ static CGFloat const kWMMenuViewHeight = 44;
              if ([type intValue]==1) {
                  self.titleArray = @[@"公众号专家",@"红榜达人",@"全民鲸猜"];
              }
+             if (object[@"data"][@"is_show_expert_qr_code"]) {
+                 NSString *is_show_expert_qr_code = object[@"data"][@"is_show_expert_qr_code"];
+                 [[NSUserDefaults standardUserDefaults] setObject:is_show_expert_qr_code forKey:@"is_show_expert_qr_code"];
+             }
          }
          [self reloadData];
 

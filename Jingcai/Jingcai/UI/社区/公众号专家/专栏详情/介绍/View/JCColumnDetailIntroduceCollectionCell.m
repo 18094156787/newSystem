@@ -31,12 +31,12 @@
         make.right.offset(AUTO(-15));
     }];
     
-    [self data];
 }
 
-- (void)data {
-    self.titileLab.text = [NSString stringWithFormat:@"%@ %@",@"用户昵称****",@"已成功订阅第13期专栏"];
-    self.timeLab.text = @"刚刚";
+- (void)setModel:(JCColunmHorseModel *)model {
+    _model = model;
+    self.titileLab.text = [NSString stringWithFormat:@"%@ 已成功订阅第%@期专栏",model.user_name,NonNil(model.period)];
+    self.timeLab.text = model.time;
 }
 
 - (UILabel *)titileLab {

@@ -85,7 +85,8 @@
     self.titleLab.text = detailModel.title;
     [self.headImgView sd_setImageWithURL:[NSURL URLWithString:detailModel.user_img] placeholderImage:JCIMAGE(@"userImg_default")];
     self.nameLab.text = detailModel.user_name;
-    self.countLab.text = [NSString stringWithFormat:@"%@人已关注",NonNil(detailModel.subscribe)];
+    NSLog(@"关注人数%@",detailModel.subscribe);
+    self.countLab.text = [NSString stringWithFormat:@"%@人已关注",detailModel.subscribe];
     self.contentLab.text = detailModel.synopsis;
     [self configConcernStatus];
 }

@@ -57,18 +57,23 @@
 
 }
 
-- (void)data {
-    self.imgView.backgroundColor = JCBaseColor;
-    self.titleLab.text = @"英超精选方案推荐英超精选方案推荐";
-    self.contentLab.text = @"专栏第3期";
-    self.headImgView.backgroundColor = JCBaseColor;
-    self.nameLab.text = @"老詹带你飞";
+- (void)setModel:(JCColumnDetailModel *)model {
+    _model = model;
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:model.image]];
+    self.titleLab.text = NonNil(model.title);
+    self.contentLab.text = [NSString stringWithFormat:@"专栏第%@期",model.period];
+    [self.headImgView sd_setImageWithURL:[NSURL URLWithString:model.user_img] placeholderImage:JCIMAGE(@"userImg_default")];
+    self.nameLab.text = model.user_name;
     
-    NSString *price = [NSString stringWithFormat:@"实付：%@红币",@"688"];
+    NSString *price = [NSString stringWithFormat:@"实付：%@红币",NonNil(model.pay_price)];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:price];
     NSRange range = [price rangeOfString:@"实付："];
     [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)],NSForegroundColorAttributeName:COLOR_2F2F2F} range:range];
     self.priceLab.attributedText = attr;
+}
+
+- (void)data {
+ 
     
     
 }

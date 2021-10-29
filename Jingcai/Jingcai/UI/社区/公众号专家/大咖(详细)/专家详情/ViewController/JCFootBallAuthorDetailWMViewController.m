@@ -32,13 +32,15 @@ static CGFloat const kWMMenuViewHeight = 44.0;
 
 @property (nonatomic, assign) float height;
 
+@property (nonatomic, strong) NSString *is_colunm;//是否有专栏 1是2否
+
 @end
 
 @implementation JCFootBallAuthorDetailWMViewController
 
 - (NSArray *)titleArray {
     if (!_titleArray) {
-        _titleArray = @[@"最新", @"专栏",@"免费",@"干货"];
+        _titleArray = @[@"最新",@"免费",@"干货"];
     }
     return _titleArray;
 }
@@ -132,6 +134,13 @@ static CGFloat const kWMMenuViewHeight = 44.0;
         if ([JCWJsonTool isSuccessResponse:object]) {
             self.expertDetailModel = (JCWExpertBall *)[JCWJsonTool entityWithJson:object[@"data"][@"base_info"] class:[JCWExpertBall class]];
             self.autherHeadView.expertDetailModel = self.expertDetailModel;
+            
+            self.is_colunm = object[@"data"][@"is_have_column"];
+            if ([self.is_colunm integerValue]==1) {
+                self.titleArray = @[@"最新",@"专栏",@"免费",@"干货"];
+                [self reloadData];
+            }
+           
         }else {
             [JCWToastTool showHint:object[@"msg"]];
         }
@@ -196,33 +205,58 @@ static CGFloat const kWMMenuViewHeight = 44.0;
 }
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
-    if (index==0) {
-//        JCFootBallAuthorNewPlaneDetailVC *vc = [[JCFootBallAuthorNewPlaneDetailVC alloc] init];
-        self.newPlanVC.expertID = self.autherID;
-        self.newPlanVC.fatherView = self.view;
-        self.newPlanVC.type = @"1";
-        return self.newPlanVC;
-    }
-    if (index==1) {
-        
-        JCFootBallAuthorColumnVC *vc = [JCFootBallAuthorColumnVC new];
+    if ([self.is_colunm integerValue]==1) {
+        if (index==0) {
+    //        JCFootBallAuthorNewPlaneDetailVC *vc = [[JCFootBallAuthorNewPlaneDetailVC alloc] init];
+            self.newPlanVC.expertID = self.autherID;
+            self.newPlanVC.fatherView = self.view;
+            self.newPlanVC.type = @"1";
+            return self.newPlanVC;
+        }
+        if (index==1) {
+            
+            JCFootBallAuthorColumnVC *vc = [JCFootBallAuthorColumnVC new];
+            vc.expertID = self.autherID;
+            return vc;
+        }
+        if (index==2) {
+            JCDakaFreePlanListVC *vc = [JCDakaFreePlanListVC new];
+            vc.expertID = self.autherID;
+            vc.fatherView = self.view;
+            vc.type = @"3";
+            return vc;
+            
+        }
 
-        return vc;
-    }
-    if (index==2) {
-        JCDakaFreePlanListVC *vc = [JCDakaFreePlanListVC new];
+        JCDakaGanHuoListVC *vc = [JCDakaGanHuoListVC new];
         vc.expertID = self.autherID;
         vc.fatherView = self.view;
-        vc.type = @"3";
+        vc.type = @"4";
         return vc;
-        
+    }else{
+        if (index==0) {
+    //        JCFootBallAuthorNewPlaneDetailVC *vc = [[JCFootBallAuthorNewPlaneDetailVC alloc] init];
+            self.newPlanVC.expertID = self.autherID;
+            self.newPlanVC.fatherView = self.view;
+            self.newPlanVC.type = @"1";
+            return self.newPlanVC;
+        }
+        if (index==1) {
+            JCDakaFreePlanListVC *vc = [JCDakaFreePlanListVC new];
+            vc.expertID = self.autherID;
+            vc.fatherView = self.view;
+            vc.type = @"3";
+            return vc;
+            
+        }
+
+        JCDakaGanHuoListVC *vc = [JCDakaGanHuoListVC new];
+        vc.expertID = self.autherID;
+        vc.fatherView = self.view;
+        vc.type = @"4";
+        return vc;
     }
 
-    JCDakaGanHuoListVC *vc = [JCDakaGanHuoListVC new];
-    vc.expertID = self.autherID;
-    vc.fatherView = self.view;
-    vc.type = @"4";
-    return vc;
 
 }
 

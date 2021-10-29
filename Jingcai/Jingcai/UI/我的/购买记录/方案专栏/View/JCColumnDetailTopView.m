@@ -49,30 +49,19 @@
     }];
     
 
-    [self addSubview:self.priceLab];
-    [self.priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.headImgView);
-        make.left.equalTo(self.nameLab.mas_right).offset(AUTO(4));
-        make.right.offset(AUTO(-15));
-    }];
+}
+
+- (void)setDetailModel:(JCColumnDetailModel *)detailModel {
+    _detailModel = detailModel;
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:detailModel.image_url]];
+    self.titleLab.text = NonNil(detailModel.title);
+    self.contentLab.text = [NSString stringWithFormat:@"专栏第%@期",detailModel.period];
+    [self.headImgView sd_setImageWithURL:[NSURL URLWithString:detailModel.user_img] placeholderImage:JCIMAGE(@"userImg_default")];
+    self.nameLab.text = NonNil(detailModel.user_name);
 
 }
 
-- (void)data {
-    self.imgView.backgroundColor = JCBaseColor;
-    self.titleLab.text = @"英超精选方案推荐英超精选方案推荐";
-    self.contentLab.text = @"专栏第3期";
-    self.headImgView.backgroundColor = JCBaseColor;
-    self.nameLab.text = @"老詹带你飞";
-    
-    NSString *price = [NSString stringWithFormat:@"实付：%@红币",@"688"];
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:price];
-    NSRange range = [price rangeOfString:@"实付："];
-    [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)],NSForegroundColorAttributeName:COLOR_2F2F2F} range:range];
-    self.priceLab.attributedText = attr;
-    
-    
-}
+
 
 - (UIImageView *)imgView {
     if (!_imgView) {

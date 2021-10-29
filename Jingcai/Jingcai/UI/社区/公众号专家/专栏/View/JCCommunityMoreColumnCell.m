@@ -50,14 +50,15 @@
 
 }
 
-- (void)data {
-    self.imgView.backgroundColor = JCBaseColor;
-    self.titleLab.text = @"英超精选方案推荐英超精选方案推荐";
-    self.headImgView.backgroundColor = JCBaseColor;
-    self.nameLab.text = @"老詹带你飞";
-    self.contentLab.text = @"擅长足球解盘，让足彩更简单明了；分享解读比赛的思路，在鲸猜带你一起红！";
-    
+- (void)setModel:(JCColumnDetailModel *)model {
+    _model = model;
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:model.image_url]];
+    self.titleLab.text = NonNil(model.title);
+    [self.headImgView sd_setImageWithURL:[NSURL URLWithString:model.user_img] placeholderImage:JCIMAGE(@"userImg_default")];
+    self.nameLab.text = NonNil(model.user_name);
+    self.contentLab.text = NonNil(model.synopsis);
 }
+
 
 - (UIImageView *)imgView {
     if (!_imgView) {

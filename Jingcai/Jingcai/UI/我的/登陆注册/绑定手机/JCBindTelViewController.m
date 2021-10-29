@@ -266,6 +266,33 @@ NSRange privacyRange = [codeLoginString rangeOfString:@"《隐私协议》"];
         return ;
     }
 
+    if (self.phoneHadBeenUser) {
+        JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
+        [alertView alertTitle:@"手机绑定" TitleColor:COLOR_2F2F2F Mesasge:@"" MessageColor:COLOR_666666 SureTitle:@"确认绑定" SureColor:JCWhiteColor SureHandler:^{
+
+            [self finalSubmit];
+            [alertView removeFromSuperview];
+        } CancleTitle:@"取消" CancleColor:JCBaseColor CancelHandler:^{
+           [alertView removeFromSuperview];
+        }];
+        NSString *title = @"注意：该手机号码将被强制绑定，以后使用该手机号登录将使用微信号的账号信息。\n如有疑问，请联系客服人员！";
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+        NSRange range = [title rangeOfString:@"注意：该手机号码将被强制绑定"];
+        [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
+        alertView.contentLab.attributedText = attr;
+        alertView.contentLab.textAlignment = 0;
+        alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+        
+    }else{
+        [self finalSubmit];
+    }
+
+
+
+}
+#pragma mark 最后一步提交注册
+- (void)finalSubmit {
     NSString *phone = [JCWAppTool getRSA_String:self.phoneTF.text];
     NSString *password = [JCWAppTool getRSA_String:self.passwordTF.text];
     
@@ -278,14 +305,10 @@ NSRange privacyRange = [codeLoginString rangeOfString:@"《隐私协议》"];
                 if (userBall.user_phone.length>0) {
                     [JCWToastTool showHint:@"绑定成功"];
                     [self getUserInfo];
-//                    self.bindTelBlock(YES);
-//                    [self.navigationController popViewControllerAnimated:YES];
+
                 }
                 
             }
-//            [JCWToastTool showHint:@"绑定成功"];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:UserRegisterSuccess object:nil];
-//            [weakSelf.navigationController popViewControllerAnimated:YES];
             return ;
         }else{
            [JCWToastTool showHint:object[@"msg"]];
@@ -294,9 +317,9 @@ NSRange privacyRange = [codeLoginString rangeOfString:@"《隐私协议》"];
     } failure:^(NSError * _Nonnull error) {
         [JCWToastTool showHint:@"绑定失败"];
     }];
-
-
 }
+
+
 - (void)getUserInfo {
     
     [self.jcWindow showLoading];
@@ -340,7 +363,60 @@ NSRange privacyRange = [codeLoginString rangeOfString:@"《隐私协议》"];
         return;
     }
 
-    //校验短信验证码
+    [self checkPhone];
+    
+}
+
+
+//检测该手机号是否已是注册
+- (void)checkPhone {
+    self.phoneHadBeenUser = NO;
+    NSString *phone = [JCWAppTool getRSA_String:self.phoneTF.text];
+    JCUserService_New *service = [JCUserService_New service];
+    [service getCheckThePhoneHadBeenBindWithMobile:phone oauth_id:self.oauth_id Success:^(id  _Nullable object) {
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSString *status = object[@"data"][@"status"];
+            if ([status integerValue]==200) {
+                self.phoneHadBeenUser = NO;
+                [self checkImgCode];
+            }else if ([status integerValue]==201) {
+                self.phoneHadBeenUser = YES;
+                JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
+                [alertView alertTitle:@"提示" TitleColor:COLOR_2F2F2F Mesasge:@"" MessageColor:COLOR_666666 SureTitle:@"强制绑定" SureColor:JCWhiteColor SureHandler:^{
+                    [self checkImgCode];
+                    [alertView removeFromSuperview];
+                } CancleTitle:@"取消绑定" CancleColor:JCBaseColor CancelHandler:^{
+                   [alertView removeFromSuperview];
+                }];
+                NSString *title = @"此手机号已被绑定或者已创建账号！是否强制绑定该手机号？强制绑定后该手机号关联的账号将被注销，以后用该手机号登录将使用微信号的账号信息。\n如有疑问，请联系客服人员！";
+                NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+                NSRange range = [title rangeOfString:@"强制绑定后该手机号关联的账号将被注销，"];
+                [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
+                alertView.contentLab.attributedText = attr;
+                alertView.contentLab.textAlignment = 0;
+                alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+            }
+            else{
+                [JCWToastTool showHint:object[@"msg"]];
+            }
+
+  
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+        
+    } failure:^(NSError * _Nonnull error) {
+        [JCWToastTool showHint:@"网络异常"];
+    }];
+
+
+}
+
+//校验图像验证码
+- (void)checkImgCode {
+    
     JCUserService_New *service = [JCUserService_New service];
     [service getCheckImageCodeWithID:self.imageModel.id img_code:self.imageCodeTF.text Success:^(id  _Nullable object) {
         if ([JCWJsonTool isSuccessResponse:object]) {
@@ -359,11 +435,6 @@ NSRange privacyRange = [codeLoginString rangeOfString:@"《隐私协议》"];
         [JCWToastTool showHint:@"网络异常"];
 
     }];
-    
-    
-    
-    
-
 }
 
 - (void)postsmsCode {

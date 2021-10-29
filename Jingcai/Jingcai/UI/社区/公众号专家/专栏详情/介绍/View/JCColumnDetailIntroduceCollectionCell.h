@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseCollectionViewCell_New.h"
-
+#import "JCColunmHorseModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCColumnDetailIntroduceCollectionCell : JCBaseCollectionViewCell_New
@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel *titileLab;
 
 @property (nonatomic,strong) UILabel *timeLab;
+
+@property (nonatomic,strong) JCColunmHorseModel *model;
 
 @end
 

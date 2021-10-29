@@ -44,9 +44,7 @@
     [super viewWillAppear:animated];
     self.navigationBarStyle = JCNavigationBarStyleDefault;
     [self hideNavShadow];
-    self.navigationItem.leftBarButtonItem = nil;
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:0 target:self action:nil];
-    self.navigationItem.leftBarButtonItem = leftItem;
+
     
 }
 
@@ -180,10 +178,11 @@
     
 
     
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:0 target:self action:nil];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"common_title_back_black_bold") style:0 target:self action:@selector(backItemClick)];
+    leftItem.tintColor = COLOR_2F2F2F;
     self.navigationItem.leftBarButtonItem = leftItem;
-    
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:0 target:self action:@selector(rightItemClick)];
+//
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"搜索" style:0 target:self action:@selector(rightItemClick)];
     rightItem.tintColor = JCBaseColor;
     self.navigationItem.rightBarButtonItem = rightItem;
     
@@ -347,11 +346,15 @@
 
 }
 
-- (void)rightItemClick {
-    [self.view endEditing:YES];
+- (void)backItemClick {
+//    [self.view endEditing:YES];
+    [self.searchBar endEditing:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)rightItemClick {
+    [self searchBarSearchButtonClicked:self.searchBar];
+}
 - (JCSearchHistoryView *)historySearchView {
     if (!_historySearchView) {
         _historySearchView = [JCSearchHistoryView new];

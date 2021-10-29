@@ -8,8 +8,7 @@
 
 #import "JCCommunityColumnTableViewCell.h"
 #import "JCCommunityColumnCollectionViewCell.h"
-#import "JCFootBallAuthorDetailWMViewController.h"
-#import "JCExpertWMViewController.h"
+#import "JCColumnDetailWMViewController.h"
 @implementation JCCommunityColumnTableViewCell
 
 - (void)initViews {
@@ -79,7 +78,7 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
 
-    return 3;
+    return self.dataSource.count;
     
 }
 
@@ -111,16 +110,21 @@
 {
 
     JCCommunityColumnCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"JCCommunityColumnCollectionViewCell" forIndexPath:indexPath];
-//    cell.model = self.dataSource[indexPath.row];
+    JCColumnDetailModel *model = self.dataSource[indexPath.row];
+    cell.model = model;
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    JCColumnDetailModel *model = self.dataSource[indexPath.row];
+    JCColumnDetailWMViewController *vc = [JCColumnDetailWMViewController new];
+    vc.column_id = model.zctj_special_column_id;
+    [[self getViewController].navigationController pushViewController:vc animated:YES];
 
 
 }
 
-- (void)setDataSource:(NSMutableArray *)dataSource {
+- (void)setDataSource:(NSArray *)dataSource {
     _dataSource = dataSource;
     [self.collectionView reloadData];
 }

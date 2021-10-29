@@ -91,7 +91,7 @@
 //        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     }
-    else if (navigationBarStyle == JCNavigationBarStyleRed){
+    else if (navigationBarStyle == JCNavigationBarStyleWhite){
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     }
     else{
@@ -144,7 +144,7 @@
             self.navigationController.navigationBar.standardAppearance = barApp;
         }
         return ;
-    } else if (navigationBarStyle == JCNavigationBarStyleRed) {
+    } else if (navigationBarStyle == JCNavigationBarStyleWhite) {
         UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
         [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]}];
         [self.navigationController.navigationBar setBarTintColor:COLOR_E4463E];
@@ -160,6 +160,7 @@
 
     if (@available(iOS 15.0, *)) {
         UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
+        barApp.shadowColor = JCClearColor;
         UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
         NSDictionary *dic = @{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]};
         barApp.titleTextAttributes = dic;
@@ -283,7 +284,7 @@
 
 - (void)setNavBackImg {
     JCNavButton * backBtn = [[JCNavButton alloc] initWithFrame:CGRectMake(0, 0, NavigationBar_HEIGHT, NavigationBar_HEIGHT)];
-    if (self.navigationBarStyle == JCNavigationBarStyleRed||self.navigationBarStyle ==JCNavigationBarStyleTransparent) {
+    if (self.navigationBarStyle == JCNavigationBarStyleWhite||self.navigationBarStyle ==JCNavigationBarStyleTransparent) {
         backBtn.navButtonType = JCNavButtonTypeWhite;
     }else{
         backBtn.navButtonType = JCNavButtonTypeBack;

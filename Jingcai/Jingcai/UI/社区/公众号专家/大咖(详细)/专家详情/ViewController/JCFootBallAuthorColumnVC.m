@@ -9,6 +9,7 @@
 #import "JCFootBallAuthorColumnVC.h"
 #import "JCFootBallAuthorColumnCell.h"
 #import "JCColumnDetailWMViewController.h"
+#import "JCColumnDetailModel.h"
 @interface JCFootBallAuthorColumnVC ()
 
 @end
@@ -25,34 +26,43 @@
 
 - (void)refreshData {
 
-//    [self.   view showLoading];
+    [self.jcWindow showLoading];
 
     
-//    JCHomeService_New *service = [JCHomeService_New new];
-//    [service getGZHT_TuijianExpertDetailWithExpert_id:self.expertID type:@"2" page:self.pageNo Success:^(id  _Nullable object) {
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            [self endRefresh];
-//            if (self.pageNo==1) {
-//                [self.dataArray removeAllObjects];
-//            }
-//            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"best_new_plans"] class:[JCWTjInfoBall class]];
-//
-//            [self.dataArray addObjectsFromArray:array];
-//            if (array.count < PAGE_LIMIT) {
-//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-//            }
-//            [self.tableView reloadData];
-//            self.pageNo++;
-//
-//
-//
-//        }else {
-//            [JCWToastTool showHint:object[@"msg"]];
-//        }
-//    } failure:^(NSError * _Nonnull error) {
-//
-//        [self endRefresh];
-//    }];
+    JCHomeService_New *service = [JCHomeService_New new];
+    [service getGZHT_TuijianExpertDetailWithExpert_id:self.expertID type:@"5" page:self.pageNo Success:^(id  _Nullable object) {
+        [self endRefresh];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+           
+            if (self.pageNo==1) {
+                [self.dataArray removeAllObjects];
+            }
+            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"best_new_plans"] class:[JCColumnDetailModel class]];
+
+            [self.dataArray addObjectsFromArray:array];
+            [self.tableView reloadData];
+            self.pageNo++;
+            
+            if (array.count < PAGE_LIMIT&&self.dataArray.count>0) {
+                    self.tableView.tableFooterView = self.noMore_footView;
+                    self.tableView.mj_footer.hidden = YES;
+                }else{
+                    self.tableView.tableFooterView = [UIView new];
+                    self.tableView.mj_footer.hidden = NO;
+                }
+            
+            NSLog(@"数据%@",self.dataArray);
+            [self chageImageStr:@"nodata_fangan" Title:@"暂时还没有专栏哦~" BtnTitle:@""];
+
+
+
+        }else {
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        [self chageImageStr:@"nodata_fangan" Title:@"暂时还没有专栏哦~" BtnTitle:@""];
+        [self endRefresh];
+    }];
 }
 - (void)initViews {
     
@@ -83,7 +93,7 @@
 #pragma mark <UITableViewDataSource>
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return self.dataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -93,9 +103,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-//    JCWTjInfoBall *model = self.dataArray[indexPath.section];
+    JCColumnDetailModel *model = self.dataArray[indexPath.section];
     JCFootBallAuthorColumnCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCFootBallAuthorColumnCell"];
-//    cell.model = model;
+    cell.model = model;
     return cell;
 
     
@@ -114,7 +124,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     JCColumnDetailWMViewController *vc = [JCColumnDetailWMViewController new];
-    vc.column_id = @"2";
+    JCColumnDetailModel *model = self.dataArray[indexPath.section];
+    vc.column_id = model.zctj_special_column_id;
     [self.navigationController pushViewController:vc animated:YES];
 
 

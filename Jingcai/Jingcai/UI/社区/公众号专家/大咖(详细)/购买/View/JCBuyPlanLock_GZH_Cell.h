@@ -60,6 +60,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) JCWTjInfoBall *payInfoModel;
 
+@property (nonatomic,copy) void(^JCBlock)(void);
+
 @end
 
 NS_ASSUME_NONNULL_END

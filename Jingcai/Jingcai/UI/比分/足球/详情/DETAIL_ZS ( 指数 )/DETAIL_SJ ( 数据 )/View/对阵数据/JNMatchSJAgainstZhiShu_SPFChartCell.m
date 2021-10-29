@@ -53,7 +53,7 @@
         make.width.height.mas_equalTo(AUTO(8));
     }];
     
-    UILabel *eqalWinLab = [UILabel initWithTitle:@"平" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+    UILabel *eqalWinLab = [UILabel initWithTitle:@"指数" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     [self.contentView addSubview:eqalWinLab];
     [eqalWinLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleBgView);

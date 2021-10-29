@@ -18,15 +18,13 @@
     [self.bgView hg_setAllCornerWithCornerRadius:AUTO(5)];
     self.bgView.frame = CGRectMake(0,0,SCREEN_WIDTH,AUTO(235));
     [self addSubview:self.bgView];
-    UILabel *titleLab = [UILabel initWithTitle:@"鲸猜大数据服务" andFont:18 andWeight:1 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:0];
+    UILabel *titleLab = [UILabel initWithTitle:@"鲸猜大数据服务" andFont:AUTO(16) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     [self.bgView addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(15);
-        make.top.offset(0);
+        make.top.offset(10);
     }];
 
-    
-    
     
     UIImageView *imgView = [UIImageView new];
     imgView.image = JCIMAGE(@"ic_bigdata_homeTop");
@@ -155,7 +153,7 @@
     self.noticeCycleScrollView.scrollDirection = UICollectionViewScrollDirectionVertical;
     [self.bottomView addSubview:self.noticeCycleScrollView];
     
-    self.titleLab.text = @"根据对阵双方的实力、状态、交战、战绩、指数等数据进行分析，给出各种玩法的预测概率。可包月，也可单场订阅（单场订阅可在比分-对应比赛的数据模块中进行购买）";
+    self.titleLab.text = @"根据对阵双方的实力、状态、交战、战绩、指数等数据进行分析，给出各种玩法的概率。可包月，也可单场订阅（单场订阅可在比分-对应比赛的数据模块中进行购买）";
 
     
     WeakSelf;

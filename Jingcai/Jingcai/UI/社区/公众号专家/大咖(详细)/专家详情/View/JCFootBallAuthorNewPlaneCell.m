@@ -86,24 +86,21 @@
 
 
     
-    NSString *title = [NSString stringWithFormat:@" %@",model.title];
+    NSString *title = model.title;
     NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:title];
-    
-    {
+    if (model.is_column==1) {
+        title = [NSString stringWithFormat:@" %@",model.title];
+        NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+           // 表情图片
+           attch.image = JCIMAGE(@"ic_icon_column");
+           // 设置图片大小
+           attch.bounds = CGRectMake(0, -2, 44, 16);
+           // 创建带有图片的富文本
+           NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
 
-                NSTextAttachment *attch = [[NSTextAttachment alloc] init];
-                   // 表情图片
-                   attch.image = JCIMAGE(@"ic_icon_column");
-                   // 设置图片大小
-                   attch.bounds = CGRectMake(0, -2, 44, 16);
-                   // 创建带有图片的富文本
-                   NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
-
-           //    [attr appendAttributedString:string]; //在文字后面添加图片
-                [attrTitle insertAttributedString:string atIndex:0];
-         
-
-        }
+   //    [attr appendAttributedString:string]; //在文字后面添加图片
+        [attrTitle insertAttributedString:string atIndex:0];
+    }
     self.titleLab.attributedText = attrTitle;
     
     self.contentLab.text = model.subtitle;

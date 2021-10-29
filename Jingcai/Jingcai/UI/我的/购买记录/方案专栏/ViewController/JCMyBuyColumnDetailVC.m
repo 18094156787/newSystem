@@ -11,9 +11,12 @@
 #import "JCDakaPlanDetailStickWMVC.h"
 #import "JCColumnDetailTopView.h"
 #import "JCMyBuyColumnOrderVC.h"
+#import "JCColumnDetailModel.h"
 @interface JCMyBuyColumnDetailVC ()
 
 @property (nonatomic,strong) JCColumnDetailTopView *headView;
+
+
 
 @end
 
@@ -31,24 +34,38 @@
     // Do any additional setup after loading the view.
     self.title = @"专栏方案列表";
     [self initViews];
+    [self getTopInfo];
     [self refreshData];
 }
 
-- (void)refreshData {
-//    if (!self.expertID) {
-//        return;
-//    }
-    [self.view showLoading];
-//    @weakify(self);
-    
-    JCHomeService_New *service = [JCHomeService_New new];
-    [service getGZHT_TuijianExpertDetailWithExpert_id:@"6117" type:@"2" page:self.pageNo Success:^(id  _Nullable object) {
+- (void)getTopInfo {
+
+    JCColumnService *service = [JCColumnService new];
+    [service getColumnDetailTopInfoWithID:NonNil(self.model.special_column_id) WithSuccess:^(id  _Nullable object) {
+
         if ([JCWJsonTool isSuccessResponse:object]) {
-            [self endRefresh];
+            JCColumnDetailModel *detailModel = (JCColumnDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCColumnDetailModel class]];
+            self.headView.detailModel = detailModel;
+        }else {
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
+}
+
+
+- (void)refreshData {
+    [self.view showLoading];
+    JCColumnService *service = [JCColumnService new];
+    [service getColumn_periodPlanListWithcolumn_id:NonNil(self.model.special_column_id) period_id:NonNil(self.model.unique_id) Page:self.pageNo success:^(id  _Nullable object) {
+        [self endRefresh];
+        if ([JCWJsonTool isSuccessResponse:object]) {
             if (self.pageNo==1) {
                 [self.dataArray removeAllObjects];
             }
-            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"best_new_plans"] class:[JCWTjInfoBall class]];
+            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"] class:[JCWTjInfoBall class]];
             
             [self.dataArray addObjectsFromArray:array];
             if (array.count < PAGE_LIMIT) {
@@ -56,15 +73,14 @@
             }
             [self.tableView reloadData];
             self.pageNo++;
-
-            [self showNoDataView];
         }else {
             [JCWToastTool showHint:object[@"msg"]];
         }
     } failure:^(NSError * _Nonnull error) {
-
         [self endRefresh];
     }];
+
+
 }
 - (void)initViews {
     
@@ -86,6 +102,7 @@
     WeakSelf;
     self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
         weakSelf.pageNo = 1;
+        [weakSelf getTopInfo];
         [weakSelf refreshData];
     }];
 
@@ -143,7 +160,7 @@
         return ;
     }
     JCWTjInfoBall *model = self.dataArray[indexPath.section];
-    [JCTuiJianManager loadGZH_ArticleDetailWithArticleID:model.id orderID:@"" type:@"" WithViewController:self is_push:YES];
+    [JCTuiJianManager loadGZH_ArticleDetailWithArticleID:model.zctj_newtuijian_id orderID:@"" type:@"" WithViewController:self is_push:YES];
 
 }
 
@@ -155,7 +172,9 @@
 
 - (void)detailBtnClick {
     JCMyBuyColumnOrderVC *vc = [JCMyBuyColumnOrderVC new];
-    vc.order_id = @"1094354";
+    vc.column_id = self.model.special_column_id;
+    vc.order_id = self.model.id;
+    
     [self.navigationController pushViewController:vc animated:YES];
     
 }

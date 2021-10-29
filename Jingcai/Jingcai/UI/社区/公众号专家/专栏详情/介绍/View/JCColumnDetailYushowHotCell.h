@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseTableViewCell_New.h"
-
+#import "JCPresellColumnModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCColumnDetailYushowHotCell : JCBaseTableViewCell_New
@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel *introduceLab;
 
 @property (nonatomic,copy) void(^JCBlock)(void);
+
+@property (nonatomic,strong) JCPresellColumnModel *presellColumnModel;
 
 @end
 

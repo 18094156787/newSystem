@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseTableViewCell_New.h"
-
+#import "JCColumnListPlanModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCColumnDerailEmptyFanganCell : JCBaseTableViewCell_New
@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UIImageView *imgView;
 
 @property (nonatomic,strong) UILabel *titleLab;
+
+@property (nonatomic,strong) JCColumnListPlanModel *model;
 
 @end
 

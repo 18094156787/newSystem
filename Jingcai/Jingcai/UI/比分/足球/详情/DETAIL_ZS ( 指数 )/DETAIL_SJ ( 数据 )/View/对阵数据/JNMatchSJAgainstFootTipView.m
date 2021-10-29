@@ -47,7 +47,7 @@
 
 - (UILabel *)infoLab {
     if (!_infoLab) {
-        _infoLab = [UILabel initWithTitle:@"1.预测数据仅供参考！不做结果保证，请理性对待！\n2.数据提前12小时给出，每小时更新，请及时关注！" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
+        _infoLab = [UILabel initWithTitle:@"1.数据仅供参考！不做结果保证，请理性对待！\n2.数据提前12小时给出，每小时更新，请及时关注！" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
         _infoLab.numberOfLines = 0;
     }
     return _infoLab;

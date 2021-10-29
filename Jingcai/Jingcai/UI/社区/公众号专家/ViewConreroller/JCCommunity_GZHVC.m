@@ -14,6 +14,8 @@
 #import "JCWMyHongbaoBall.h"
 #import "JCCommunityColumnTableViewCell.h"
 #import "JCCommunityMoreColumnVC.h"
+#import "JCColumnDetailModel.h"
+#import "JCHomeColumnModel.h"
 @interface JCCommunity_GZHVC ()
 
 @property (nonatomic,strong) JCCommunity_GZH_HeadView *headView;
@@ -53,19 +55,19 @@
 }
 
 - (void)refreshData {
-
     [self.jcWindow showLoading];
     JCCommunityService_New *service = [JCCommunityService_New service];
     [service getDakaExpertLsitWithPage:self.pageNo success:^(id  _Nullable object) {
         [self endRefresh];
         if ([JCWJsonTool isSuccessResponse:object]) {
             if (self.pageNo==1) {
+                [self.dataArray removeAllObjects];
  
                 
                 NSData *data = [NSJSONSerialization dataWithJSONObject:object options:NSJSONWritingPrettyPrinted error:nil];
                 [[NSUserDefaults standardUserDefaults] setObject:data forKey:JCCommunity_GZH];
                 
-                [self.dataArray removeAllObjects];
+               
                 
                 NSArray *expertArray = [JCWJsonTool arrayWithJson:object[@"data"][@"expert_info"] class:[JCWExpertBall class]];
                 NSMutableArray *array = [NSMutableArray arrayWithArray:expertArray];
@@ -81,11 +83,15 @@
             NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"expert_list"] class:[JCWTjInfoBall class]];
             
             [self.dataArray addObjectsFromArray:array];
+            if (self.pageNo==1) {
+                [self getColumnData];
+            }
             if (array.count < PAGE_LIMIT) {
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }
             [self showNoDataView];
             [self.tableView reloadData];
+            
             self.pageNo++;
             NSLog(@"数据%@",self.dataArray);
             
@@ -97,7 +103,32 @@
 
 }
 
+- (void)getColumnData {
+    JCColumnService *service = [JCColumnService service];
+    [service getHomeColumnListWithSuccess:^(id  _Nullable object) {
+        [self endRefresh];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"] class:[JCColumnDetailModel class]];
+            
+            if (array.count>0) {
 
+                if (self.dataArray.count<3) {
+                    [self.dataArray addObject:array];
+                }else{
+                    [self.dataArray insertObject:array atIndex:3];
+                }
+            }
+
+            [self.tableView reloadData];
+        }else {
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        [self endRefresh];
+    }];
+ 
+}
 
 
 - (void)getCache {
@@ -122,7 +153,7 @@
     
     self.tableView.separatorInset = UIEdgeInsetsZero;
     self.tableView.separatorStyle = 0;
-    self.tableView.estimatedRowHeight = 80;
+    self.tableView.estimatedRowHeight = 200;
     // 表格注册cell
     [self.tableView registerClass:[JCFamousExpertCell class] forCellReuseIdentifier:@"JCFamousExpertCell"];
     [self.tableView registerClass:[JCCommunityColumnTableViewCell class] forCellReuseIdentifier:@"JCCommunityColumnTableViewCell"];
@@ -166,15 +197,20 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    JCWTjInfoBall *model = self.dataArray[indexPath.section];
-    if (indexPath.section==3) {
+    id data = self.dataArray[indexPath.section];
+    if ([data isKindOfClass:[NSArray class]]) {
         JCCommunityColumnTableViewCell *columnCell = [tableView dequeueReusableCellWithIdentifier:@"JCCommunityColumnTableViewCell"];
         WeakSelf;
         columnCell.JCBlock = ^{
             [weakSelf.navigationController pushViewController:[JCCommunityMoreColumnVC new] animated:YES];
         };
+        columnCell.dataSource = (NSArray *)data;
         return columnCell;
+
     }
+
+
+    JCWTjInfoBall *model = (JCWTjInfoBall *)data;
     JCFamousExpertCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCFamousExpertCell"];
     cell.model = model;
     return cell;
@@ -207,7 +243,7 @@
         return ;
     }
     JCWTjInfoBall *model = self.dataArray[indexPath.section];
-    [JCTuiJianManager loadGZH_ArticleDetailWithArticleID:@"3" orderID:@"" type:@"" WithViewController:self is_push:YES];
+    [JCTuiJianManager loadGZH_ArticleDetailWithArticleID:model.id orderID:@"" type:@"" WithViewController:self is_push:YES];
 //    [JCTuiJianManager loadGZH_ArticleDetailWithArticleID:model.id orderID:@"" type:@"" WithViewController:self is_push:YES];
 }
 

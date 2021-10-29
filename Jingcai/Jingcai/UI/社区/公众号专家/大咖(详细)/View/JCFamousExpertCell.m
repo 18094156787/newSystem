@@ -176,15 +176,27 @@
     self.tagLab.hidden = model.zhong.length==0?YES:NO;
     
     [self.headImgView sd_setImageWithURL:[NSURL URLWithString:model.user_img] placeholderImage:JCIMAGE(@"ic_gzh_default")];
-    self.titleLab.text = model.title;
+//    self.titleLab.text = model.title;
+    NSString *title = model.title;
+    NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:title];
+    if (model.is_column==1) {
+        title = [NSString stringWithFormat:@" %@",model.title];
+        NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+           // 表情图片
+           attch.image = JCIMAGE(@"ic_icon_column");
+           // 设置图片大小
+           attch.bounds = CGRectMake(0, -2, 44, 16);
+           // 创建带有图片的富文本
+           NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
+
+   //    [attr appendAttributedString:string]; //在文字后面添加图片
+        [attrTitle insertAttributedString:string atIndex:0];
+    }
+    self.titleLab.attributedText = attrTitle;
+
     self.contentLab.text = model.subtitle;
-//    [self.contentLab mas_updateConstraints:^(MASConstraintMaker *make) {
-//        if (model.subtitle.length==0) {
-//            make.top.equalTo(self.titleLab.mas_bottom);
-//        }else{
-//            make.top.equalTo(self.titleLab.mas_bottom).offset(AUTO(8));
-//        }
-//     }];
+
+    
     if ((model.subtitle.length==0)) {
         [self.contentLab mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.offset(AUTO(15));
@@ -247,14 +259,7 @@
         }
 
     }
-//    if (self.isDetail) {
-//        if (model.is_free==0) {
-//            self.timeLab.text = [NSString stringWithFormat:@"%@ 发布",model.time];
-//        }else{
-////            self.timeLab.text = [NSString stringWithFormat:@"截止时间:%@",model.end_time];
-//            self.timeLab.text = [NSString stringWithFormat:@"截止时间: %@",[NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd HH:mm" time:[model.end_time doubleValue]]];
-//        }
-//    }
+
     if ([model.click intValue]==0) {
         self.likeImgView.hidden = YES;
         self.likeLab.text = @"";

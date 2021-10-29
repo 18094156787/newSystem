@@ -12,6 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JCColumnDetailFanganVC : JCBaseTableViewController
 
+@property (nonatomic,copy) NSString *column_id;
+
+//该专栏已购买
+- (void)columnIsBuy;
+
 @end
 
 NS_ASSUME_NONNULL_END

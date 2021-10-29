@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseView.h"
-
+#import "JCColumnDetailModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCColumnDetailTopView : JCBaseView
@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel *contentLab;
 
 @property (nonatomic,strong) UILabel *priceLab;
+
+@property (nonatomic,strong) JCColumnDetailModel *detailModel;
 
 @end
 

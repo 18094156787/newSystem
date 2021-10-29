@@ -21,7 +21,7 @@
 #import "JCJingCaiAIBigDataBuyVC.h"
 #import "JCBigDataMingZhongModel.h"
 #import "JCJingCaiAIBigDataMatchListVC.h"
-static CGFloat const kWMMenuViewHeight = 44.0;
+static CGFloat const kWMMenuViewHeight = 0;
 
 @interface JCJingCaiAIBigDataStickVC ()
 
@@ -44,7 +44,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
 
 - (NSArray *)titleArray {
     if (!_titleArray) {
-        _titleArray = @[@"大数据实例",@"预测的比赛"];
+        _titleArray = @[@""];
     }
     return _titleArray;
 }
@@ -220,9 +220,9 @@ static CGFloat const kWMMenuViewHeight = 44.0;
 }
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
-    if (index==0) {
-        return self.bigDataVC;
-    }
+//    if (index==0) {
+//        return self.bigDataVC;
+//    }
     return self.matchVC;
 
 }

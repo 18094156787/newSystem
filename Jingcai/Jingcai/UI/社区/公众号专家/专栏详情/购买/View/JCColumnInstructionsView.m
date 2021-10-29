@@ -48,13 +48,16 @@
     
 }
 
-
-
-- (void)setString:(NSString *)string {
-    _string = string;
-    NSString *headStr = [NSString stringWithFormat:@"<head><style>img{max-width:%f !important;height:auto;font-size:14px}*{font-size:14px!important}</style></head>", SCREEN_WIDTH-60];
-//    str = [str stringByAppendingString:@"\n\n\n\n"];
-    NSString  * str = [NSString stringWithFormat:@"%@<html><meta content=\"width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=0; \" name=\"viewport\" /><body style=\"overflow-wrap:break-word;word-break:break-all;white-space: normal; font-size:14px!important;  \">%@</body></html>",headStr,string];
+- (void)setPeriod_foreshow:(NSString *)period_foreshow {
+    _period_foreshow = period_foreshow;
+//    NSString *headStr = [NSString stringWithFormat:@"<head><style>img{max-width:%f !important;height:auto;font-size:14px}*{font-size:14px!important}</style></head>", SCREEN_WIDTH-60];
+////    str = [str stringByAppendingString:@"\n\n\n\n"];
+//    NSString  * str = [NSString stringWithFormat:@"%@<html><meta content=\"width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=0; \" name=\"viewport\" /><body style=\"overflow-wrap:break-word;word-break:break-all;white-space: normal; font-size:14px!important;  \">%@</body></html>",headStr,period_foreshow];
+//    [self.webView loadHTMLString:period_foreshow baseURL:nil];
+    
+    NSString *imgWidth = [NSString stringWithFormat:@"<head><style>img{width:%fpx !important;height:auto}</style></head>",SCREEN_WIDTH-AUTO(30)];
+    NSString *style = [NSString stringWithFormat:@"<html><head><meta content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0\" name=\"viewport\"><style type=\"text/css\"></style><style>img{max-width: 100%;width:auto; height:auto}</style></head>%@<body></body></html>",imgWidth];
+    NSString *str = [NSString stringWithFormat:@"%@%@",period_foreshow,style];
     [self.webView loadHTMLString:str baseURL:nil];
 }
 

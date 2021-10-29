@@ -49,7 +49,7 @@
         value= @"+";
     }
 
-    if (recordBall.icon_type==1) {
+    if (recordBall.icon_type==1||recordBall.icon_type==6) {
         self.iconImgView.image = JCIMAGE(@"icon-gm");
          self.priceLab.text = [NSString stringWithFormat:@"%@%@",value,@(money)];
 //        self.priceLab.textColor = COLOR_333333;

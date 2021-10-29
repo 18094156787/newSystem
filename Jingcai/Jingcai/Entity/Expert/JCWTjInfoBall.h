@@ -125,6 +125,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString * id;
 
+@property (nonatomic, strong) NSString *zctj_newtuijian_id;
+
 @property (strong, nonatomic) NSString *tuijian_id;
 
 @property (strong, nonatomic) NSString *event_id;
@@ -247,6 +249,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) NSInteger is_good;
 
 @property (assign, nonatomic) NSInteger is_end;//1是已截止 0是未截止
+
+@property (assign, nonatomic) NSInteger is_column;//是否专栏,1是2否
 
 @property (strong, nonatomic) JCPlaneDetailQRModel *qr_code_info;
 

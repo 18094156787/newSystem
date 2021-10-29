@@ -22,10 +22,18 @@
 }
 
 - (void)setString:(NSString *)string {
+    if (!string) {
+        return;
+    }
     _string = string;
-    NSString *headStr = [NSString stringWithFormat:@"<head><style>img{max-width:%f !important;height:auto;font-size:14px}*{font-size:14px!important}</style></head>", SCREEN_WIDTH-60];
-//    str = [str stringByAppendingString:@"\n\n\n\n"];
-    NSString  * str = [NSString stringWithFormat:@"%@<html><meta content=\"width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=0; \" name=\"viewport\" /><body style=\"overflow-wrap:break-word;word-break:break-all;white-space: normal; font-size:14px!important;  \">%@</body></html>",headStr,string];
+//    NSString *headStr = [NSString stringWithFormat:@"<head><style>img{max-width:%f !important;height:auto;font-size:14px}*{font-size:14px!important}</style></head>", SCREEN_WIDTH-60];
+////    str = [str stringByAppendingString:@"\n\n\n\n"];
+//    NSString  * str = [NSString stringWithFormat:@"%@<html><meta content=\"width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=0; \" name=\"viewport\" /><body style=\"overflow-wrap:break-word;word-break:break-all;white-space: normal; font-size:14px!important;  \">%@</body></html>",headStr,string];
+//    [self.webView loadHTMLString:string baseURL:nil];
+    
+    NSString *imgWidth = [NSString stringWithFormat:@"<head><style>img{width:%fpx !important;height:auto}</style></head>",SCREEN_WIDTH-AUTO(30)];
+    NSString *style = [NSString stringWithFormat:@"<html><head><meta content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0\" name=\"viewport\"><style type=\"text/css\"></style><style>img{max-width: 100%;width:auto; height:auto}</style></head>%@<body></body></html>",imgWidth];
+    NSString *str = [NSString stringWithFormat:@"%@%@",string,style];
     [self.webView loadHTMLString:str baseURL:nil];
 }
 
@@ -79,7 +87,17 @@
 
 - (WKWebView *)webView {
     if (!_webView) {
-        _webView = [WKWebView new];
+
+        
+        NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+                WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+                WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+                [wkUController addUserScript:wkUScript];
+                
+                WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
+        
+        _webView = [[WKWebView alloc] initWithFrame:self.frame configuration:wkWebConfig];
+
         _webView.scrollView.showsVerticalScrollIndicator = NO;
         _webView.scrollView.showsHorizontalScrollIndicator = NO;
         _webView.navigationDelegate = self;
@@ -87,6 +105,7 @@
         _webView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _webView.scrollView.scrollEnabled = NO;
         _webView.userInteractionEnabled = YES;
+
 //        _webView.contentScaleFactor = 1;
     }
     return _webView;

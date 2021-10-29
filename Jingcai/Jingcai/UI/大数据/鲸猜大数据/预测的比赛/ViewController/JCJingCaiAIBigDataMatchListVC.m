@@ -11,6 +11,8 @@
 #import "JCJingCaiAIBigDataMatchCell.h"
 #import "JCJingCaiAIBigDataSearchView.h"
 #import "JCJingCaiAIBigDataSearchVC.h"
+#import "JCJingCaiAIBigDataMatchTitleView.h"
+#import "JCJingCaiAIBigDataHomeVC.h"
 @interface JCJingCaiAIBigDataMatchListVC ()
 
 @property (nonatomic,strong) JCJingCaiAIBigDataSearchView *headView;
@@ -86,6 +88,18 @@
 
 
 - (void)initViews {
+    JCJingCaiAIBigDataMatchTitleView *titleView = [[JCJingCaiAIBigDataMatchTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, AUTO(45))];
+    titleView.backgroundColor = JCWhiteColor;
+    titleView.titleLab.text = @"比赛列表";
+    titleView.iconView.hidden = NO;
+    self.tableView.tableHeaderView = titleView;
+    WeakSelf;
+    titleView.JCBlcok = ^{
+        [weakSelf.navigationController pushViewController:[JCJingCaiAIBigDataHomeVC new] animated:YES];
+    };
+    
+    
+    
     self.tableView.estimatedRowHeight = 100;
     self.tableView.backgroundColor = COLOR_F4F6F9;
     self.tableView.separatorColor = COLOR_DDDDDD;
@@ -98,7 +112,7 @@
     
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
-    WeakSelf;
+
     JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
         [weakSelf refreshData];
     }];

@@ -138,7 +138,7 @@ static CGFloat const kWMMenuViewHeight = 0;
             [self.mineVC refreshUserData];
             [self isInCurrentVC];//活动弹窗展示
 
-            NSLog(@"user_id == %@",[JCWUserBall currentUser].user_id);
+            NSLog(@"user_id == %@",[JCWUserBall currentUser].id);
             NSLog(@"user_token == %@",[JCWUserBall currentUser].token);
 
         }else {

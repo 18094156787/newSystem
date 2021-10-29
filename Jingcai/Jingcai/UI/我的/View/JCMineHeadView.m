@@ -210,8 +210,9 @@
     self.qyImgView.hidden = [userBall.fabu intValue]==1?NO:YES;
     
     if ([userBall.prize integerValue]>0) {
-        self.moneyLab.text = [JCCommomTool formatePointZero1:userBall.prize];
+       
     }
+    self.moneyLab.text = [JCCommomTool formatePointZero1:userBall.prize];
     if ([userBall.fensi intValue]>0&&[userBall.fabu intValue]==1) {
         self.fensiLab.text = [NSString stringWithFormat:@"粉丝数: %@",userBall.fensi];
          [self.nameLab mas_remakeConstraints:^(MASConstraintMaker *make) {

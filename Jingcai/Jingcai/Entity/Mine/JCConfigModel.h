@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString  * get_jctzsc;//鲸猜学院进阶视频
 
+@property (strong, nonatomic) NSString  * get_rule;//红榜规则
+
 
 + (void)save:(JCConfigModel *)configModel;
 

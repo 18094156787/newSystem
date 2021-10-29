@@ -40,8 +40,9 @@
     [self.jcWindow showLoading];
     JCHomeService_New *service = [JCHomeService_New new];
     [service getGZHT_TuijianExpertDetailWithExpert_id:self.expertID type:NonNil(self.type) page:self.pageNo Success:^(id  _Nullable object) {
+        [self endRefresh];
         if ([JCWJsonTool isSuccessResponse:object]) {
-            [self endRefresh];
+           
             if (self.pageNo==1) {
                 [self.dataArray removeAllObjects];
             }

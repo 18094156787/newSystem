@@ -196,6 +196,13 @@
             if (index==102) {
                 [weakSelf pushPostPlanDetal];
             }
+            if (index==102) {
+                [weakSelf pushPostPlanDetal];
+            }
+            if (index==103) {
+                [weakSelf pushPostRule];
+            }
+            
         };
         return cell;
     }
@@ -333,7 +340,6 @@
     NSString *url = [NSString stringWithFormat:@"%@?dev=1&sv=%@",[JCConfigModel currentConfigModel].get_about,[JCWInterfaceTool appVersion]];
     vc.urlStr = NonNil(url);
     [self.navigationController pushViewController:vc animated:YES];
-
 }
 - (void)pushContact {
     WebViewController *vc = [WebViewController new];
@@ -398,6 +404,19 @@
     }
     JCPostRecordWMVC *vc = [JCPostRecordWMVC  new];
     [self.navigationController pushViewController:vc animated:YES];//
+}
+
+//发布规则
+- (void)pushPostRule {
+    if (![JCWUserBall currentUser]) {
+        [self presentLogin];
+        return ;
+    }
+    WebViewController *vc = [WebViewController new];
+    vc.titleStr = @"规则说明";
+    NSString *url = [NSString stringWithFormat:@"%@?user_id=%@&dev=1&sv=%@",[JCConfigModel currentConfigModel].get_rule,[JCWUserBall currentUser].id,[JCWInterfaceTool appVersion]];
+    vc.urlStr = NonNil(url);
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)incomeDetail {

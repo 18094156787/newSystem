@@ -67,6 +67,9 @@ UIKIT_EXTERN NSString * const JCBasketBallMatchConcern;
 UIKIT_EXTERN NSString * const JCMatchEntetBallTip;//足球进球提醒设置改变
 UIKIT_EXTERN NSString * const jcMatchEntetBallRefresh;//足球进球提醒刷新页面
 
+//公众号专栏
+UIKIT_EXTERN NSString * const JCRefreshBuyColumn;
+
 
 #pragma mark - 用于友盟分享和微信登录区分的字段
 UIKIT_EXTERN NSString * const WXSendAuthReqStateLogin;

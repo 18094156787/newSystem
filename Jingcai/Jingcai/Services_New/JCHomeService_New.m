@@ -230,8 +230,16 @@
                             @"expert_id":expert_id,
                             @"type":type,
                             @"page":Integet_ToString(page),
-                            @"page_size":@"100"
+                            @"page_size":@"10"
     };
+    if ([type integerValue]==1) {
+        param = @{
+                                @"expert_id":expert_id,
+                                @"type":type,
+                                @"page":Integet_ToString(page),
+                                @"page_size":@"100"
+        };
+    }
 
 
     NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"expert_info" paramDic:param ignoreArray:@[]];

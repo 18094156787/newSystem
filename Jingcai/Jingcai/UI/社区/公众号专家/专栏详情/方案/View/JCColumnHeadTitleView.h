@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseView.h"
-
+#import "JCColumnListPlanModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCColumnHeadTitleView : JCBaseView
@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel *titleLab;
 
 @property (nonatomic,strong) UILabel *statusLab;
+
+@property (nonatomic,strong) JCColumnListPlanModel *model;
 
 @property (nonatomic,assign) BOOL isbottom;
 

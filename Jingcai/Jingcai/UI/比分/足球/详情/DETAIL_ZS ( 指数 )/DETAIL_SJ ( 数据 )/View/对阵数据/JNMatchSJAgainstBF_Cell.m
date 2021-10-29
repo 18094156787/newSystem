@@ -67,7 +67,7 @@
 
 - (void)setModel:(JCBigDataMonthProduceModel *)model {
     _model = model;
-    self.titleLab.text = @"  比分预测";
+    self.titleLab.text = @"  比分结果";
     self.timeLab.text = model.match_time;
     self.scoreLab.text = [NSString stringWithFormat:@"%@ : %@",model.home_score,model.away_score];
     [self.homeImgView sd_setImageWithURL:[NSURL URLWithString:model.home_team_logo] placeholderImage:JCIMAGE(@"home_placeholder")];

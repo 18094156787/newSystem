@@ -11,7 +11,8 @@
 @implementation JCColumnDetailIntroduceHeadView
 
 - (void)initViews {
-    self.noticeCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 32) imageNamesGroup:nil];
+    self.backgroundColor = JCWhiteColor;
+    self.noticeCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 8, SCREEN_WIDTH, 32) imageNamesGroup:nil];
     self.noticeCycleScrollView.delegate = self;
 //    self.noticeCycleScrollView.clipsToBounds = YES;
     self.noticeCycleScrollView.showPageControl = NO;
@@ -28,7 +29,7 @@
 
 - (void)setupCustomCell:(UICollectionViewCell *)cell forIndex:(NSInteger)index cycleScrollView:(SDCycleScrollView *)view {
     JCColumnDetailIntroduceCollectionCell *myCell = (JCColumnDetailIntroduceCollectionCell *)cell;
-//    myCell.model = self.titleArray[index];
+    myCell.model = self.titleArray[index];
 }
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {

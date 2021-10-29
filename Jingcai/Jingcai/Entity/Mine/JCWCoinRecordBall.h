@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger type;
 
 #pragma mark//新版本接口
-@property (nonatomic, assign) NSInteger  icon_type;//类型:1.购买方案,2.退款,3.充值红币,4.赠送红币,5.过期红币
+@property (nonatomic, assign) NSInteger  icon_type;//类型:1.购买方案,2.退款,3.充值红币,4.赠送红币,5.过期红币 6.购买专栏
 
 @property (nonatomic, strong) NSString * num;
 

@@ -43,6 +43,8 @@ static CGFloat const kWMMenuViewHeight = 44.0;
 
 @property (nonatomic, strong) JCColumnDetailIntroduceVC *introduceVC;
 
+@property (nonatomic, strong) JCColumnDetailFanganVC *fangan_VC;
+
 @property (nonatomic, assign) float height;
 
 @property (nonatomic, assign) float scrollowOffset;
@@ -60,8 +62,9 @@ static CGFloat const kWMMenuViewHeight = 44.0;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
 //    self.navigationController.navigationBarHidden = NO;
-     self.navigationBarStyle = JCNavigationBarStyleDefault;
+     self.navigationBarStyle = JCNavigationBarStyleWhite;
     [self setNavBackImgWhiteColor];
     [self initViews];
     
@@ -155,6 +158,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
     [self.priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.centerY.equalTo(self.priceView);
+        make.width.mas_lessThanOrEqualTo(AUTO(140));
     }];
     
     [self.priceView addSubview:self.yPriceLab];
@@ -168,7 +172,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
     [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(AUTO(-15));
         make.centerY.equalTo(self.priceView);
-        make.size.mas_equalTo(CGSizeMake(AUTO(144), AUTO(48)));
+        make.size.mas_equalTo(CGSizeMake(AUTO(120), AUTO(48)));
     }];
     
     [self.sureBtn addSubview:self.btnView];
@@ -189,34 +193,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
         make.centerX.equalTo(self.btnView);
     }];
     
-    
-    NSString *price = [NSString stringWithFormat:@"%@红币/期",@"688"];
-    NSMutableAttributedString *price_attr = [[NSMutableAttributedString alloc]initWithString:price];
-    NSRange price_range = [price rangeOfString:@"红币/期"];
-    [price_attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(10)],} range:price_range];
-    self.priceLab.attributedText = price_attr;
 
-    NSString *yPrice = [NSString stringWithFormat:@"%@红币",@"588"];
-    NSMutableAttributedString *yPrice_attr = [[NSMutableAttributedString alloc]initWithString:yPrice];
-
-    [yPrice_attr addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSBaselineOffsetAttributeName:@(NSUnderlineStyleSingle)} range:yPrice_attr.rangeOfAll];
-    self.yPriceLab.attributedText = yPrice_attr;
-    
-    self.statusLab.text = @"立即订购";
-    self.dateLab.text = @"第13期";
-    
-//    {
-//        self.priceView.hidden = YES;
-//        self.btnView.hidden = YES;
-//            [self.sureBtn setTitle:@"第199期专栏将于30日99:99开始预售，敬请期待" forState:0];
-//            [self.sureBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-//                make.right.offset(AUTO(-15));
-//                make.centerY.equalTo(self.bottomView);
-//                make.left.offset(AUTO(15));
-//                make.height.mas_equalTo(AUTO(48));
-//        //        make.size.mas_equalTo(CGSizeMake(AUTO(144), AUTO(48)));
-//            }];
-//    }
     
     WeakSelf;
     [self.priceView bk_whenTapped:^{
@@ -285,6 +262,20 @@ static CGFloat const kWMMenuViewHeight = 44.0;
             self.introduceVC.JCBlock = ^(JCColumnDetailModel * _Nonnull detailModel) {
                 weakSelf.detailModel = detailModel;
                 weakSelf.autherHeadView.detailModel = weakSelf.detailModel;
+                CGSize size =   [weakSelf returnTextWidth:detailModel.synopsis size:CGSizeMake(SCREEN_WIDTH-AUTO(30), AUTO(1000)) font:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)]];
+
+
+                weakSelf.height = size.height+AUTO(135);
+                weakSelf.autherHeadView.frame = CGRectMake(0, 0, SCREEN_WIDTH, weakSelf.height);
+                    weakSelf.viewTop = weakSelf.height;
+                    weakSelf.maximumHeaderViewHeight = weakSelf.height;
+                    weakSelf.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
+            //        [weakSelf forceLayoutSubviews];
+                [weakSelf configBuyColumnStatus];
+                if ([weakSelf.detailModel.newest_period.type integerValue]==4) {
+                    weakSelf.fangan_VC.column_id = weakSelf.column_id;
+                    [weakSelf.fangan_VC columnIsBuy];
+                }
             };
         }
         
@@ -292,8 +283,9 @@ static CGFloat const kWMMenuViewHeight = 44.0;
     }
 
 
-    JCColumnDetailFanganVC *vc = [JCColumnDetailFanganVC new];
-    return vc;
+
+    self.fangan_VC.column_id = self.column_id;
+    return self.fangan_VC;
 
 }
 
@@ -333,7 +325,12 @@ static CGFloat const kWMMenuViewHeight = 44.0;
 }
 #pragma mark //购买
 - (void)sureBtnClick {
+    if (![JCWUserBall currentUser]) {
+        [self presentLogin];
+        return ;
+    }
     JCColumnBuyVC *vc = [JCColumnBuyVC new];
+    vc.period_id = self.detailModel.newest_period.id;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -345,12 +342,14 @@ static CGFloat const kWMMenuViewHeight = 44.0;
     [service getConcernColumnWithID:NonNil(self.column_id) success:^(id  _Nullable object) {
         [self.jcWindow endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
-            
-//            self.detailModel.is_subscribe
-            if (object[@"is_subscribe"]) {
-                self.detailModel.is_subscribe = object[@"is_subscribe"];
-                self.autherHeadView.detailModel = self.detailModel;
+            if (object[@"data"][@"is_subscribe"]) {
+                self.detailModel.is_subscribe = object[@"data"][@"is_subscribe"];
             }
+            if (object[@"data"][@"subscribe_num"]) {
+                self.detailModel.subscribe = object[@"data"][@"subscribe_num"];
+               
+            }
+            self.autherHeadView.detailModel = self.detailModel;
 
         }else {
             [JCWToastTool showHint:object[@"msg"]];
@@ -360,6 +359,101 @@ static CGFloat const kWMMenuViewHeight = 44.0;
         [self.jcWindow endLoading];
     }];
  
+}
+
+//最新一期专栏购买情况
+- (void)configBuyColumnStatus {
+    if ([self.detailModel.newest_period.type integerValue]==0) {
+        self.sureBtn.backgroundColor = COLOR_9F9F9F;
+        self.bottomView.hidden = NO;
+        self.priceView.hidden = YES;
+        self.btnView.hidden = YES;
+        [self.sureBtn setTitle:@"新一期专栏暂未发布，敬请期待" forState:0];
+        [self.sureBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.right.offset(AUTO(-15));
+            make.centerY.equalTo(self.bottomView);
+            make.left.offset(AUTO(15));
+            make.height.mas_equalTo(AUTO(48));
+    //        make.size.mas_equalTo(CGSizeMake(AUTO(144), AUTO(48)));
+        }];
+    }
+
+    if ([self.detailModel.newest_period.type integerValue]==1) {
+        self.sureBtn.backgroundColor = COLOR_9F9F9F;
+        self.bottomView.hidden = NO;
+        self.priceView.hidden = YES;
+        self.btnView.hidden = YES;
+        [self.sureBtn setTitle:[NSString stringWithFormat:@"第%@期专栏将于%@开始预售，敬请期待",self.detailModel.newest_period.period,self.detailModel.newest_period.time] forState:0];
+        [self.sureBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.right.offset(AUTO(-15));
+            make.centerY.equalTo(self.bottomView);
+            make.left.offset(AUTO(15));
+            make.height.mas_equalTo(AUTO(48));
+    //        make.size.mas_equalTo(CGSizeMake(AUTO(144), AUTO(48)));
+        }];
+    }
+    if ([self.detailModel.newest_period.type integerValue]==2) {
+        self.bottomView.hidden = NO;
+        self.priceView.hidden = NO;
+        self.btnView.hidden = NO;
+        self.sureBtn.backgroundColor = JCBaseColor;
+        NSString *price = [NSString stringWithFormat:@"%@红币/期",@([self.detailModel.newest_period.reality_price floatValue])];
+        NSMutableAttributedString *price_attr = [[NSMutableAttributedString alloc]initWithString:price];
+        NSRange price_range = [price rangeOfString:@"红币/期"];
+        [price_attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(10)],} range:price_range];
+        self.priceLab.attributedText = price_attr;
+
+        NSString *yPrice = [NSString stringWithFormat:@"%@红币",@([self.detailModel.newest_period.original_price floatValue])];
+
+        NSMutableAttributedString *yPrice_attr = [[NSMutableAttributedString alloc]initWithString:yPrice];
+
+        [yPrice_attr addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSBaselineOffsetAttributeName:@(NSUnderlineStyleSingle)} range:yPrice_attr.rangeOfAll];
+        self.yPriceLab.attributedText = yPrice_attr;
+        
+        if ([self.detailModel.newest_period.original_price floatValue]<=[self.detailModel.newest_period.reality_price floatValue]) {
+            self.yPriceLab.text = @"";
+        }
+        self.sureBtn.userInteractionEnabled = YES;
+        self.statusLab.text = @"立即订购";
+        self.dateLab.text = [NSString stringWithFormat:@"第%@期",self.detailModel.newest_period.period];
+    }
+    if ([self.detailModel.newest_period.type integerValue]==3) {
+        
+        self.bottomView.hidden = NO;
+        self.priceView.hidden = NO;
+        self.btnView.hidden = NO;
+        self.sureBtn.backgroundColor = COLOR_9F9F9F;
+        NSString *price = [NSString stringWithFormat:@"%@红币/期",@([self.detailModel.newest_period.reality_price floatValue])];
+        NSMutableAttributedString *price_attr = [[NSMutableAttributedString alloc]initWithString:price];
+        NSRange price_range = [price rangeOfString:@"红币/期"];
+        [price_attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(10)],} range:price_range];
+        self.priceLab.attributedText = price_attr;
+
+        NSString *yPrice = [NSString stringWithFormat:@"%@红币",@([self.detailModel.newest_period.original_price floatValue])];
+        NSMutableAttributedString *yPrice_attr = [[NSMutableAttributedString alloc]initWithString:yPrice];
+
+        [yPrice_attr addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSBaselineOffsetAttributeName:@(NSUnderlineStyleSingle)} range:yPrice_attr.rangeOfAll];
+        self.yPriceLab.attributedText = yPrice_attr;
+        
+        if ([self.detailModel.newest_period.original_price floatValue]<=[self.detailModel.newest_period.reality_price floatValue]) {
+            self.yPriceLab.text = @"";
+        }
+        
+        self.statusLab.text = @"购买已截止";
+        self.dateLab.text = [NSString stringWithFormat:@"第%@期",self.detailModel.newest_period.period];
+    }
+    if ([self.detailModel.newest_period.type integerValue]==4) {
+        
+        self.bottomView.hidden = YES;
+ 
+    }
+    
+
+}
+
+- (CGSize)returnTextWidth:(NSString *)text size:(CGSize)size font:(UIFont *)font{
+    CGSize textSize = [text boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : font} context:nil].size;
+    return textSize;
 }
 
 - (UIView *)lineView {
@@ -374,6 +468,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
     if (!_bottomView) {
         _bottomView = [UIView new];
         _bottomView.backgroundColor = [UIColor whiteColor];
+        _bottomView.hidden = YES;
     }
     return _bottomView;
 }
@@ -394,6 +489,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
     if (!_sureBtn) {
         _sureBtn = [UIButton initWithText:@"" FontSize:AUTO(15) Weight:2 BackGroundColor:JCBaseColor TextColors:JCWhiteColor];
         [_sureBtn hg_setAllCornerWithCornerRadius:AUTO(24)];
+        _sureBtn.userInteractionEnabled = NO;
 //        [_sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sureBtn;
@@ -427,5 +523,12 @@ static CGFloat const kWMMenuViewHeight = 44.0;
         [_btnView addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _btnView;
+}
+
+- (JCColumnDetailFanganVC *)fangan_VC {
+    if (!_fangan_VC) {
+        _fangan_VC = [JCColumnDetailFanganVC new];
+    }
+    return _fangan_VC;
 }
 @end

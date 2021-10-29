@@ -110,7 +110,7 @@
 
 
     }else{
-        self.titleInfoLab.text = @"  进球数&让球";
+        self.titleInfoLab.text = @"  进球&让球概率分布";
         
         self.homeProgressView.frame = CGRectMake(AUTO(16), AUTO(68), SCREEN_WIDTH-AUTO(32), AUTO(24));
         
@@ -120,8 +120,8 @@
         
         
         self.titleLab.text = [NSString stringWithFormat:@"进球数(%@)",model.jqs];
-        self.homeInfoLab.text = @"大球";
-        self.awayInfoLab.text = @"小球";
+        self.homeInfoLab.text = @"高";
+        self.awayInfoLab.text = @"低";
         [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:0 endPoint:[model.ai_dx_win floatValue]];
         [self setupLineView:self.homeProgressView colors:COLOR_002868 startPoint:[model.ai_dx_win floatValue] endPoint:1];
         self.homeRateLab.text = [NSString stringWithFormat:@"%.0f%%",[model.ai_dx_win floatValue]*100];

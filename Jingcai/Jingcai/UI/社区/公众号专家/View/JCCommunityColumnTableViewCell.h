@@ -7,14 +7,14 @@
 //
 
 #import "JCBaseTableViewCell_New.h"
-
+#import "JCColumnDetailModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCCommunityColumnTableViewCell : JCBaseTableViewCell_New<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 
-@property (nonatomic,strong) NSMutableArray *dataSource;
+@property (nonatomic,strong) NSArray *dataSource;
 
 @property (nonatomic,copy) void(^JCBlock)(void);
 

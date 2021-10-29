@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseTableViewCell_New.h"
-
+#import "JCColumnDetailModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCMyBuyColumnViewCell : JCBaseTableViewCell_New
@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel *contentLab;
 
 @property (nonatomic,strong) UILabel *priceLab;
+
+@property (nonatomic,strong) JCColumnDetailModel *model; 
 
 @end
 

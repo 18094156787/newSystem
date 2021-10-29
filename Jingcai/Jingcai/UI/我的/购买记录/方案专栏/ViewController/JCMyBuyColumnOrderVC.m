@@ -41,7 +41,25 @@
     self.view.backgroundColor = COLOR_F4F6F9;
     self.tableView.hidden = YES;
     self.title = @"订单详情";
+    [self getTopInfo];
     [self refreshData];
+}
+
+- (void)getTopInfo {
+
+    JCColumnService *service = [JCColumnService new];
+    [service getColumnDetailTopInfoWithID:NonNil(self.column_id) WithSuccess:^(id  _Nullable object) {
+
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            JCColumnDetailModel *detailModel = (JCColumnDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCColumnDetailModel class]];
+            self.headView.detailModel = detailModel;
+        }else {
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)refreshData {

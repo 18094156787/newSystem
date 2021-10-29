@@ -24,6 +24,7 @@
 #import "JCBaseTitleAlertView.h"
 #import "JCFamousExpertCell.h"
 #import "JCFanganSaleOut_BuyCell.h"
+#import "JCColumnDetailWMViewController.h"
 @interface JCDakaBuyPlanVC ()
 
 @property (nonatomic,strong) JCDakaBuyPlanHeadView *headView;
@@ -194,6 +195,13 @@
         JCBuyPlanLock_GZH_Cell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCBuyPlanLock_GZH_Cell"];
 //        cell.infoLab.hidden = NO;
         cell.payInfoModel = self.payInfoModel;
+        WeakSelf;
+        cell.JCBlock = ^{
+            JCColumnDetailWMViewController *vc = [JCColumnDetailWMViewController new];
+            vc.column_id = weakSelf.payInfoModel.column_info.id;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+            
+        };
         return cell;
         
     }
@@ -414,7 +422,7 @@
   
     NSInteger totalPrice = needPayNum-discountNum;
     
-    if (totalPrice>0&&[[JCWUserBall currentUser].prize integerValue]<totalPrice) {
+    if (totalPrice>0&&[[JCWUserBall currentUser].prize floatValue]<totalPrice) {
 
         [JCWToastTool showHint:@"红币余额不足,请及时充值"];
         [self.navigationController pushViewController:[JCChargeVC new] animated:YES];

@@ -50,6 +50,13 @@
         make.top.equalTo(self.columnView.mas_bottom).offset(AUTO(15));
         make.bottom.offset(AUTO(-15));
     }];
+    
+    WeakSelf;
+    [self.columnView bk_whenTapped:^{
+        if (weakSelf.JCBlock) {
+            weakSelf.JCBlock();
+        }
+    }];
 }
 
 - (void)setPlanDetailModel:(JCWTjInfoBall *)planDetailModel {

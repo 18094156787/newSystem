@@ -89,7 +89,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
+//    self.navigationController.navigationBarHidden = NO;
      self.navigationBarStyle = JCNavigationBarStyleDefault;
     [self hideNavShadow];
 }
@@ -100,12 +100,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 //    self.isLock = YES;
-    self.tableView.hidden= YES;
+//    self.tableView.hidden= YES;
+    self.title = @"示例";
     [self initSubViews];
     [self refreshData];
 //    [self getTopCycleData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTopInfoData) name:JingcaiAIProduceBuy object:nil];//包月购买
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTopInfoData) name:NotificationUserLogin object:nil];
+    
     
     
 }
@@ -517,7 +519,7 @@
     }
     
     if (section==1) {
-        titleView.titleLab.text = @"大数据预测";
+        titleView.titleLab.text = @"鲸猜大数据";
         titleView.iconView.hidden = NO;
         return titleView;
     }

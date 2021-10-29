@@ -90,7 +90,7 @@
 
 - (void)setModel:(JCBigDataMonthProduceModel *)model {
     _model = model;
-    self.titleLab.text = @"  胜平负预测";
+    self.titleLab.text = @"  胜平负概率分布";
     self.winLab.text = [NSString stringWithFormat:@"%.0f%%",[model.ai_op_win floatValue]*100];
     self.eqalLab.text = [NSString stringWithFormat:@"%.0f%%",[model.ai_op_draw floatValue]*100];
     self.loseLab.text = [NSString stringWithFormat:@"%.0f%%",[model.ai_op_lose floatValue]*100];

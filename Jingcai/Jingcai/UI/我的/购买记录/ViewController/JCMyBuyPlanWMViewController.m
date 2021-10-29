@@ -94,7 +94,7 @@
         return vc;
     }
     
-    if (index==2) {
+    if (index==3) {
         JCMyBuyAIViewController *vc = [JCMyBuyAIViewController   new];
         vc.fatherView = self.view;
         return vc;

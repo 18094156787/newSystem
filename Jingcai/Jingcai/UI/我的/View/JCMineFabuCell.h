@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) JCMineCellItemView *recordView;
 
+@property (nonatomic,strong) JCMineCellItemView *ruleView;
+
 @property (nonatomic,copy) void(^JCMineClick)(NSInteger index);
 
 @end

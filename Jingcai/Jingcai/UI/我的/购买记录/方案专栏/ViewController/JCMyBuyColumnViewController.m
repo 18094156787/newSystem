@@ -9,6 +9,7 @@
 #import "JCMyBuyColumnViewController.h"
 #import "JCMyBuyColumnViewCell.h"
 #import "JCMyBuyColumnDetailVC.h"
+#import "JCColumnDetailModel.h"
 @interface JCMyBuyColumnViewController ()
 
 @end
@@ -25,34 +26,34 @@
 
 - (void)refreshData {
 
-//    [self.   view showLoading];
+    [self.view showLoading];
+    JCColumnService *service = [JCColumnService new];
+    [service getMyBuyColumnPlanListWithPage:self.pageNo success:^(id  _Nullable object) {
+        [self endRefresh];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            
+            if (self.pageNo==1) {
+                [self.dataArray removeAllObjects];
+            }
+            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCColumnDetailModel class]];
+            
+            [self.dataArray addObjectsFromArray:array];
+            if (array.count < PAGE_LIMIT) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            [self.tableView reloadData];
+            self.pageNo++;
 
-    
-//    JCHomeService_New *service = [JCHomeService_New new];
-//    [service getGZHT_TuijianExpertDetailWithExpert_id:self.expertID type:@"2" page:self.pageNo Success:^(id  _Nullable object) {
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            [self endRefresh];
-//            if (self.pageNo==1) {
-//                [self.dataArray removeAllObjects];
-//            }
-//            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"best_new_plans"] class:[JCWTjInfoBall class]];
-//
-//            [self.dataArray addObjectsFromArray:array];
-//            if (array.count < PAGE_LIMIT) {
-//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-//            }
-//            [self.tableView reloadData];
-//            self.pageNo++;
-//
-//
-//
-//        }else {
-//            [JCWToastTool showHint:object[@"msg"]];
-//        }
-//    } failure:^(NSError * _Nonnull error) {
-//
-//        [self endRefresh];
-//    }];
+
+        }else {
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        [self endRefresh];
+    }];
+
+
 }
 - (void)initViews {
     
@@ -83,7 +84,7 @@
 #pragma mark <UITableViewDataSource>
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return self.dataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -95,7 +96,7 @@
 
 //    JCWTjInfoBall *model = self.dataArray[indexPath.section];
     JCMyBuyColumnViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCMyBuyColumnViewCell"];
-//    cell.model = model;
+    cell.model = self.dataArray[indexPath.section];
     return cell;
 
     
@@ -114,8 +115,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
     JCMyBuyColumnDetailVC *vc = [JCMyBuyColumnDetailVC new];
+    JCColumnDetailModel *model = self.dataArray[indexPath.section];
+    vc.model = model;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

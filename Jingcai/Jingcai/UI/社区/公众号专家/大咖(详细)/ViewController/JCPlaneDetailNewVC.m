@@ -21,6 +21,7 @@
 #import "JCHongBangOrderDetailVC.h"
 #import "JCPlaneDetailNewMatchCell.h"
 #import "JCPlaneDetailQRcodeCell.h"
+#import "JCColumnDetailWMViewController.h"
 @interface JCPlaneDetailNewVC ()
 
 @property (nonatomic,strong) JCFootBallBuyPlaneFootView *footView;
@@ -256,6 +257,13 @@
         if (indexPath.section==self.matchArray.count+2) {
             JCPlaneDetailResultCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailResultCell"];
             cell.planDetailModel= self.planDetailModel;
+            WeakSelf;
+            cell.JCBlock = ^{
+                JCColumnDetailWMViewController *vc = [JCColumnDetailWMViewController new];
+                vc.column_id = weakSelf.planDetailModel.column_info.id;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+                
+            };
             return cell;
         }
         if (indexPath.section==self.matchArray.count+3) {
@@ -319,6 +327,13 @@
         if (indexPath.section==3) {
             JCPlaneDetailResultCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailResultCell"];
             cell.planDetailModel= self.planDetailModel;
+            WeakSelf;
+            cell.JCBlock = ^{
+                JCColumnDetailWMViewController *vc = [JCColumnDetailWMViewController new];
+                vc.column_id = weakSelf.planDetailModel.column_info.id;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+                
+            };
             return cell;
         }
         if (indexPath.section==4) {

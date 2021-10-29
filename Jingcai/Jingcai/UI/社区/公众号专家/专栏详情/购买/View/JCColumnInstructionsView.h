@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) WKWebView *webView;
 
-@property (nonatomic,strong) NSString *string;
+@property (nonatomic,strong) NSString *period_foreshow;//周期说明
 
 - (void)show;
 

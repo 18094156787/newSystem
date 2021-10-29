@@ -7,10 +7,13 @@
 //
 
 #import "JCBaseTableViewController.h"
-
+#import "JCColumnDetailModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCMyBuyColumnDetailVC : JCBaseTableViewController
+
+@property (nonatomic,strong) JCColumnDetailModel *model;
+
 
 @end
 

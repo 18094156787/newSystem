@@ -161,6 +161,12 @@
     self.infoLab.text = expertDetailModel.desc;
      self.daiHongLab.text = [NSString stringWithFormat:@"%@粉丝 | %@方案",expertDetailModel.fensi,expertDetailModel.plan_num];
     self.erCodeBtn.hidden = expertDetailModel.qr_code.length>0?NO:YES;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"is_show_expert_qr_code"]) {
+        NSString *is_show_expert_qr_code = [[NSUserDefaults standardUserDefaults] objectForKey:@"is_show_expert_qr_code"];
+        if ([is_show_expert_qr_code integerValue]!=1) {
+            self.erCodeBtn.hidden = YES;
+        }
+    }
     
     
     

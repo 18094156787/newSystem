@@ -35,16 +35,21 @@
     
     [bgView addSubview:self.titleLab];
     [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconImgView);
+        make.left.right.equalTo(self.iconImgView);
         make.top.equalTo(self.iconImgView.mas_bottom).offset(AUTO(5));
     }];
     
     [self data];
 }
 
+- (void)setModel:(JCColumnDetailModel *)model {
+    _model = model;
+    [self.iconImgView sd_setImageWithURL:[NSURL URLWithString:model.image_url]];
+    self.titleLab.text = NonNil(model.title);
+}
+
 - (void)data {
-    self.iconImgView.backgroundColor = JCBaseColor;
-    self.titleLab.text = @"英超精选方案推荐";
+
 }
 
 - (UIImageView *)iconImgView {
@@ -56,7 +61,7 @@
 
 - (UILabel *)titleLab {
     if (!_titleLab) {
-        _titleLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+        _titleLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     }
     return _titleLab;
 }

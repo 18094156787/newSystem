@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) CGFloat viewTop;
 
-@property (nonatomic,copy) NSString *column_id;
+@property (nonatomic,copy) NSString *column_id;//专栏id
 
 @end
 

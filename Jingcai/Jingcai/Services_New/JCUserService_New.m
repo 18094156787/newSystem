@@ -42,6 +42,22 @@
 
 }
 
+//检测该手机号是否被绑定
+- (void)getCheckThePhoneHadBeenBindWithMobile:(NSString *)mobile oauth_id:(NSString *)oauth_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSDictionary *param = @{@"mobile":mobile,@"oauth_id":oauth_id};
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"wechat_bind_check" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self deathWithSuccessInfo:responseObject];
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+        [self dealWithError:error];
+    }];
+
+}
+
 //发送短信验证码
 - (void)getSmsCodeWithTelNum:(NSString *)telNum type:(NSInteger)type success:(successBlock)successBlock failure:(failureBlock)failureBlock {
 //0注册，1登录，2绑定手机，3忘记密码 默认为0

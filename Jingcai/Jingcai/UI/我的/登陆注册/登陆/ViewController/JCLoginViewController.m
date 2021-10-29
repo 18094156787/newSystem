@@ -39,6 +39,42 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    {
+//        JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
+//        [alertView alertTitle:@"提示" TitleColor:COLOR_2F2F2F Mesasge:@"" MessageColor:COLOR_666666 SureTitle:@"强制绑定" SureColor:JCWhiteColor SureHandler:^{
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
+//            [alertView removeFromSuperview];
+//        } CancleTitle:@"取消绑定" CancleColor:JCBaseColor CancelHandler:^{
+//           [alertView removeFromSuperview];
+//        }];
+//        NSString *title = @"此手机号已被绑定或者已创建账号！是否强制绑定该手机号？强制绑定后该手机号关联的账号将被注销，以后用该手机号登录将使用微信号的账号信息";
+//        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+//        NSRange range = [title rangeOfString:@"强制绑定后该手机号关联的账号将被注销，"];
+//        [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
+//        alertView.contentLab.attributedText = attr;
+//        alertView.contentLab.textAlignment = 0;
+//        alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+//        [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+//    }
+    
+    {
+//        JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
+//        [alertView alertTitle:@"手机绑定" TitleColor:COLOR_2F2F2F Mesasge:@"" MessageColor:COLOR_666666 SureTitle:@"确认绑定" SureColor:JCWhiteColor SureHandler:^{
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
+//            [alertView removeFromSuperview];
+//        } CancleTitle:@"取消" CancleColor:JCBaseColor CancelHandler:^{
+//           [alertView removeFromSuperview];
+//        }];
+//        NSString *title = @"注意：强制绑定后该手机号关联的账号将被注销，以后使用该手机号登录将使用微信号的账号信息。\n如有疑问，请联系客服人员！";
+//        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+//        NSRange range = [title rangeOfString:@"注意：强制绑定后该手机号关联的账号将被注销，"];
+//        [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
+//        alertView.contentLab.attributedText = attr;
+//        alertView.contentLab.textAlignment = 0;
+//        alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+//        [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+    }
 
 }
 

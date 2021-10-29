@@ -11,7 +11,7 @@
 
 typedef NS_ENUM(NSInteger, JCNavigationBarStyle) {
     JCNavigationBarStyleDefault,//白底黑字
-    JCNavigationBarStyleRed,     //红底白字
+    JCNavigationBarStyleWhite,     //白底白字
     JCNavigationBarStyleTransparent,     //透明底白字
 };
 typedef NS_ENUM(NSInteger, JCStatusBarStyle) {

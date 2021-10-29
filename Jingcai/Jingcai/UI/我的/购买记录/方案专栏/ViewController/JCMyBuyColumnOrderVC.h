@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *order_id;
 
+@property (nonatomic,strong) NSString *column_id;
+
 @end
 
 NS_ASSUME_NONNULL_END

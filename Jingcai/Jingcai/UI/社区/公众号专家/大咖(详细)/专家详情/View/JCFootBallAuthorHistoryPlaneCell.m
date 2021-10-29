@@ -87,6 +87,7 @@
         make.height.mas_equalTo(0.5);
         make.top.equalTo(self.timeLab.mas_bottom).offset(AUTO(10));
     }];
+    self.lineView = lineView;
     
     [bgView addSubview:self.scroeLab];
     [self.scroeLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -103,7 +104,8 @@
 - (void)setModel:(JCWTjInfoBall *)model {
     
     _model = model;
-    NSString *title = [NSString stringWithFormat:@" %@",model.title];
+    NSString *blank = @" ";
+    NSString *title = model.title;
     if (model.is_bd==1) {
         title = [NSString stringWithFormat:@"【补】%@",model.title];
     }
@@ -113,9 +115,9 @@
     if (range.location!=NSNotFound) {
         [attrTitle addAttribute:NSForegroundColorAttributeName value:JCBaseColor range:range];
     }
-
-    {
-
+    
+    if (model.is_column==1) {
+        title = [NSString stringWithFormat:@"%@%@",title,blank];
         NSTextAttachment *attch = [[NSTextAttachment alloc] init];
            // 表情图片
         attch.image = JCIMAGE(@"ic_icon_column");
@@ -126,9 +128,8 @@
 
    //    [attr appendAttributedString:string]; //在文字后面添加图片
         [attrTitle insertAttributedString:string atIndex:0];
-         
+    }
 
-        }
 
      self.titleLab.attributedText = attrTitle;
     self.timeLab.text = [NSString stringWithFormat:@"%@ 截止",model.end_time];
@@ -185,13 +186,7 @@
     }
 
 
-    if (model.result.length>0) {
-        self.scroeLab.text = model.result;
-        self.scroeLab.textColor = JCBaseColor;
-    }else {
-        self.scroeLab.text = @"待定";
-        self.scroeLab.textColor = COLOR_60BA02;
-    }
+
     if ([model.click intValue]==0) {
         self.likeImgView.hidden = YES;
         self.likeLab.text = @"";
@@ -199,12 +194,38 @@
         self.likeImgView.hidden = NO;
         self.likeLab.text = model.click;
     }
+    
+    if (self.is_column) {
+        self.timeLab.text = [NSString stringWithFormat:@"发布时间：%@",model.time];
+    }
+    
+    if (model.is_end==0) {
+        self.scroeLab.text = @"";
+        self.lineView.hidden = YES;
+        [self.scroeLab mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.offset(AUTO(5));
+        }];
+    }else{
+        self.lineView.hidden = NO;
+        if (model.result.length>0) {
+            self.scroeLab.text = model.result;
+            self.scroeLab.textColor = JCBaseColor;
+        }else {
+            self.scroeLab.text = @"待定";
+            self.scroeLab.textColor = COLOR_60BA02;
+        }
+        
+        [self.scroeLab mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.offset(AUTO(-15));
+        }];
+    }
+    
 
 }
 
 - (void)setIsTop:(BOOL)isTop {
     _isTop = isTop;
-    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
         if (isTop) {
             make.top.offset(AUTO(8));
         }else{
