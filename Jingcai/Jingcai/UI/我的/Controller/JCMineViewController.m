@@ -196,9 +196,6 @@
             if (index==102) {
                 [weakSelf pushPostPlanDetal];
             }
-            if (index==102) {
-                [weakSelf pushPostPlanDetal];
-            }
             if (index==103) {
                 [weakSelf pushPostRule];
             }
