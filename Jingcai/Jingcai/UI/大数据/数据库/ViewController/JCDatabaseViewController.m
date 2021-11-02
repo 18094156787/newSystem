@@ -32,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"数据库";
+    self.title = @"资料库";
     [self initViews];
     [self getCache];
     [self refreshData];
