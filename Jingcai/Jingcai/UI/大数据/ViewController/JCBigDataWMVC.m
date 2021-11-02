@@ -145,16 +145,16 @@
                  [self.itemWidthArray addObject:@(80)];
              }
              JCShowModel *is_show_big_data_model = [JCShowModel new];
-             is_show_big_data_model.title = @"数据库";
+             is_show_big_data_model.title = @"资料库";
              is_show_big_data_model.is_show_database = @"1";
              [self.dataArray addObject:is_show_big_data_model];
-             [titleArray addObject:@"数据库"];
+             [titleArray addObject:@"资料库"];
              [self.itemWidthArray addObject:@(68)];
              
              self.titleArray = [NSArray arrayWithArray:titleArray];
 
              if (self.titleArray.count==1) {
-                 UILabel *titleView = [UILabel initWithTitle:@"数据库" andFont:AUTO(18) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+                 UILabel *titleView = [UILabel initWithTitle:@"资料库" andFont:AUTO(18) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
                  titleView.frame = CGRectMake(50, 0, SCREEN_WIDTH-100, 44);
                  self.navigationItem.titleView = titleView;
                  
