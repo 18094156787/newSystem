@@ -87,6 +87,7 @@
     self.nameLab.text = detailModel.user_name;
     NSLog(@"关注人数%@",detailModel.subscribe);
     self.countLab.text = [NSString stringWithFormat:@"%@人已关注",detailModel.subscribe];
+    self.countLab.hidden = [detailModel.subscribe integerValue]>0?NO:YES;
     self.contentLab.text = detailModel.synopsis;
     [self configConcernStatus];
 }

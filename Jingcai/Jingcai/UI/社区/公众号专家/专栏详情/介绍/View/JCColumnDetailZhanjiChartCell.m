@@ -66,9 +66,9 @@
     CAGradientLayer *layer = [CAGradientLayer layer];
     layer.frame = CGRectMake(0, 50, width, height);
     //渐变的颜色
-    layer.colors = @[(__bridge id)[UIColor whiteColor].CGColor,  (__bridge id)[UIColor redColor].CGColor];
+    layer.colors = @[(__bridge id)[UIColor whiteColor].CGColor,  (__bridge id)COLOR_EF2F2F.CGColor];
     //渐变点
-    layer.locations = @[@0, @0.7,@1];
+    layer.locations = @[@0,@1];
     //起
     layer.startPoint = CGPointMake(0, 0);
     //终点
@@ -89,7 +89,7 @@
     }
     for (int i=0; i<self.dataArray.count; i++) {
         JCColumnHitRateModel *model = self.dataArray[i];
-        float value = [model.hit_rate floatValue];
+        float value = [model.hit_rate floatValue]/100.0f;
         float startX = i*XLength;
         float startY = value*height;
         CGPoint point = CGPointMake(startX, startY);
@@ -120,7 +120,7 @@
 
             if (i>=1&&i<=(self.dataArray.count-2)) {
                 JCColumnHitRateModel *model = self.dataArray[i];
-                float value = [model.hit_rate floatValue];
+                float value = [model.hit_rate floatValue]/100.0f;
                 float startX = i*XLength;
                 float startY = value*height;
                 CGPoint points = CGPointMake(startX, startY);
@@ -166,7 +166,7 @@
         }
     
     
-    
+    [self.bgView bringSubviewToFront:self.bgView];
 }
 
 
@@ -176,7 +176,7 @@
 //    self.dataArray
 
     self.showLab.frame = CGRectMake(0, 0, 50, 20);
-    self.showLab.text = [NSString stringWithFormat:@"%@%%",@([model.hit_rate floatValue]*100)];
+    self.showLab.text = [NSString stringWithFormat:@"%@%%",@([model.hit_rate floatValue])];
     self.showLab.center = CGPointMake(view.center.x, view.center.y+AUTO(10));
     [self.bgView addSubview:self.showLab];
     self.showLab.transform = CGAffineTransformScale(self.transform, 1.0, -1.0);
