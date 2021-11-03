@@ -115,7 +115,7 @@
     [bottomView addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
-        make.centerY.equalTo(bottomView);
+        make.top.offset(AUTO(32));
     }];
     [bottomView addSubview:self.priceLab];
     [self.priceLab mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -40,20 +40,21 @@
         make.width.height.mas_equalTo(AUTO(24));
     }];
     
+    [self.contentView addSubview:self.priceLab];
+    [self.priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.headImgView);
+        make.right.offset(AUTO(-15));
+    }];
+    
     [self.contentView addSubview:self.nameLab];
     [self.nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.headImgView);
         make.left.equalTo(self.headImgView.mas_right).offset(AUTO(4));
-        make.width.mas_lessThanOrEqualTo(AUTO(100));
+        make.right.equalTo(self.priceLab.mas_left).offset(AUTO(-4));
     }];
     
 
-    [self.contentView addSubview:self.priceLab];
-    [self.priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.headImgView);
-        make.left.equalTo(self.nameLab.mas_right).offset(AUTO(4));
-        make.right.offset(AUTO(-15));
-    }];
+
 
 }
 
@@ -117,7 +118,7 @@
 
 - (UILabel *)priceLab {
     if (!_priceLab) {
-        _priceLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:2 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:0];
+        _priceLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:2 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentRight];
     }
     return _priceLab;
 }

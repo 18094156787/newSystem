@@ -242,9 +242,13 @@
         [self presentLogin];
         return ;
     }
-    JCWTjInfoBall *model = self.dataArray[indexPath.section];
-    [JCTuiJianManager loadGZH_ArticleDetailWithArticleID:model.id orderID:@"" type:@"" WithViewController:self is_push:YES];
-//    [JCTuiJianManager loadGZH_ArticleDetailWithArticleID:model.id orderID:@"" type:@"" WithViewController:self is_push:YES];
+    id model = self.dataArray[indexPath.section];
+    if ([model isKindOfClass:[JCWTjInfoBall class]]) {
+        JCWTjInfoBall *tjModel = (JCWTjInfoBall *)model;
+        [JCTuiJianManager loadGZH_ArticleDetailWithArticleID:tjModel.id orderID:@"" type:@"" WithViewController:self is_push:YES];
+    }
+
+
 }
 
 #pragma mark <UITableViewDelegate>
