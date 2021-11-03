@@ -134,6 +134,7 @@
 
     JCWTjInfoBall *model = self.dataArray[indexPath.section];
     JCFootBallAuthorHistoryPlaneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCFootBallAuthorHistoryPlaneCell"];
+    cell.is_column = YES;
     cell.model = model;
     return cell;
 

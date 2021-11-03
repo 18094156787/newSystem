@@ -197,6 +197,9 @@
     
     if (self.is_column) {
         self.timeLab.text = [NSString stringWithFormat:@"发布时间：%@",model.time];
+        if (model.time.length==0) {
+            self.timeLab.text = [NSString stringWithFormat:@"发布时间：%@",model.created_at];
+        }
     }
     
     if (model.is_end==0) {
