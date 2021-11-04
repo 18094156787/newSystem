@@ -38,6 +38,10 @@
 
 @property (nonatomic, strong)JCBasketBallHomeMatchWMVC *basketBallVC;
 
+@property (nonatomic, assign)NSInteger footBall_Index;
+
+@property (nonatomic, assign)NSInteger basketBall_Index;
+
 @property (nonatomic,assign) BOOL needNextGetData;//是否需要下次页面出现的时候请求数据
 
 @end
@@ -48,7 +52,6 @@
     if (!_titleArray) {
         
         _titleArray = @[@"足球",@"篮球"];
-//        _titleArray = @[@"鲸猜大数据",@"资料库"];
     }
     return _titleArray;
 }
@@ -189,10 +192,14 @@
         self.footBallVC = [JCMatchHomeWMVC new];
         WeakSelf;
         self.footBallVC.JCIndexBlock = ^(int idex) {
+            weakSelf.footBall_Index = idex;
             if (idex==3) {
-                weakSelf.navigationItem.rightBarButtonItem = nil;
+
+
+                weakSelf.navigationItem.rightBarButtonItems = @[weakSelf.settingItem];
             }else{
-                weakSelf.navigationItem.rightBarButtonItem =  weakSelf.fileterItem;
+                weakSelf.navigationItem.rightBarButtonItems = @[weakSelf.spaceItem,weakSelf.fileterItem,weakSelf.settingItem];
+
             }
         };
         return self.footBallVC;
@@ -200,11 +207,20 @@
     self.basketBallVC = [JCBasketBallHomeMatchWMVC new];
     WeakSelf;
     self.basketBallVC.JCIndexBlock = ^(int idex) {
+        weakSelf.basketBall_Index = idex;
         if (idex==3) {
-            weakSelf.navigationItem.rightBarButtonItem = nil;
+            weakSelf.navigationItem.rightBarButtonItems = nil;
         }else{
-            weakSelf.navigationItem.rightBarButtonItem =  weakSelf.fileterItem;
+            weakSelf.navigationItem.rightBarButtonItems =  @[weakSelf.fileterItem];
         }
+//        if (idex==3) {
+//
+//
+//            weakSelf.navigationItem.rightBarButtonItems = @[weakSelf.settingItem];
+//        }else{
+//            weakSelf.navigationItem.rightBarButtonItems = @[weakSelf.spaceItem,weakSelf.fileterItem,weakSelf.settingItem];
+//
+//        }
     };
     return self.basketBallVC;
 
@@ -221,13 +237,22 @@
 - (void)pageController:(WMPageController *)pageController didEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info {
 //    NSLog(@"已经%d",self.selectIndex);
 //    [self.segControl setSelectedSegmentIndex:(NSInteger)self.selectIndex];
-    self.tabSegment.selectIndex = (NSInteger)self.selectIndex;
-    
+//    self.tabSegment.selectIndex = (NSInteger)self.selectIndex;
+//
     if (self.selectIndex==0) {
+        if (self.footBall_Index==3) {
+            self.navigationItem.rightBarButtonItems = @[self.settingItem];
+        }else{
+            self.navigationItem.rightBarButtonItems = @[self.spaceItem,self.fileterItem,self.settingItem];
+        }
 
-        self.navigationItem.rightBarButtonItems = @[self.spaceItem,self.fileterItem,self.settingItem];
+
     }else{
-        self.navigationItem.rightBarButtonItems = @[self.fileterItem];
+        if (self.basketBall_Index==3) {
+            self.navigationItem.rightBarButtonItems = @[];
+        }else{
+            self.navigationItem.rightBarButtonItems = @[self.fileterItem];
+        }
     }
 
 }
