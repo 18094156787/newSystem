@@ -218,7 +218,19 @@
         self.gradientLayelayer.frame = CGRectMake(0, 0, AUTO(94), 24);
         self.gradientLayelayer.colors = @[(__bridge id)UIColorFromRGB(0x7C92FF).CGColor, (__bridge id)UIColorFromRGB(0x3C5BF7).CGColor, (__bridge id)UIColorFromRGB(0x2143EF).CGColor];
         [self.yushowView.layer addSublayer:self.gradientLayelayer];
-        self.dateLab.text = [NSString stringWithFormat:@"专家过往推荐「%@-%@」的历史战绩",NonNil(model.combat.event_name),NonNil(model.combat.classfly)];
+        if (model.combat.event_name.length>0) {
+            self.dateLab.text = [NSString stringWithFormat:@"专家过往推荐「%@」的历史战绩",NonNil(model.combat.event_name)];
+            [self.dateLab mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_greaterThanOrEqualTo(AUTO(20));
+            }];
+        }else{
+            [self.dateLab mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_greaterThanOrEqualTo(0);
+            }];
+
+            self.dateLab.text = @"";
+        }
+
         self.introduceLab.text = @"";
     }
     

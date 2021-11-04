@@ -112,10 +112,10 @@
             
             if (array.count>0) {
 
-                if (self.dataArray.count<3) {
+                if (self.dataArray.count<4) {
                     [self.dataArray addObject:array];
                 }else{
-                    [self.dataArray insertObject:array atIndex:3];
+                    [self.dataArray insertObject:array atIndex:4];
                 }
             }
 
