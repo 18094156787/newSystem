@@ -4814,8 +4814,8 @@
 				7B11DB29261EEC2700C1F7D6 /* JCPlaneDetailFreeVC.h */,
 				7B11DB25261EEC2700C1F7D6 /* JCPlaneDetailFreeVC.m */,
 				7B11DB26261EEC2700C1F7D6 /* JCPlanDetailFreeContentCell.h */,
-				7B11DB27261EEC2700C1F7D6 /* JCPlaneDetailFreeHeadView.h */,
 				7B11DB28261EEC2700C1F7D6 /* JCPlanDetailFreeContentCell.m */,
+				7B11DB27261EEC2700C1F7D6 /* JCPlaneDetailFreeHeadView.h */,
 				7B11DB2A261EEC2700C1F7D6 /* JCPlaneDetailFreeHeadView.m */,
 			);
 			path = "免费";

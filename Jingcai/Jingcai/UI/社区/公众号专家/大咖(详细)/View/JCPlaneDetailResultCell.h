@@ -20,6 +20,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) JCDakaColumnAssociatedView *columnView;
 
+@property (nonatomic,strong) UIView *dsView;//打赏
+
+@property (nonatomic,strong) UIButton *dsBtn;
+
+@property (nonatomic,strong) UILabel *dsCountLab;
+
 @property (nonatomic,strong) JCWTjInfoBall *planDetailModel;
 
 @property (nonatomic,copy) void(^JCBlock)(void);
