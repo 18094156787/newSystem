@@ -8,6 +8,7 @@
 
 #import "JCBaseTableViewCell_New.h"
 #import <WebKit/WebKit.h>
+#import "JCDaShangView.h"
 #import "JCWNewsDetailBall.h"
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) void(^JCRefreshBlock)(float height);
 
 @property (nonatomic,assign) float height;
+
+@property (nonatomic,strong) JCDaShangView *dsView;//打赏
 
 @property (nonatomic,strong) UILabel *infoLab;
 

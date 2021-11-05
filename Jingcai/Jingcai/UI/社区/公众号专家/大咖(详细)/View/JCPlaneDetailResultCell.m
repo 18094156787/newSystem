@@ -36,12 +36,13 @@
     }];
 
     
-//    [self.contentView addSubview:self.dsView];
-//    [self.dsView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.offset(0);
-//        make.top.equalTo(self.resultLab.mas_bottom);
-//        make.height.mas_equalTo(AUTO(140));
-//    }];
+    [self.contentView addSubview:self.dsView];
+    [self.dsView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.offset(0);
+        make.top.equalTo(self.resultLab.mas_bottom);
+        make.height.mas_equalTo(AUTO(140));
+    }];
+    
     
     UILabel *infoLab = [UILabel initWithTitle:@"免责声明：鲸猜足球仅为信息发布平台，并不对第三方发布的信息真实性及准确性负责，且不提供彩票售卖服务，请您注意投资风险，理性购买！" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
     infoLab.numberOfLines= 0;
@@ -49,7 +50,7 @@
     [infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
-        make.top.equalTo(self.columnView.mas_bottom).offset(AUTO(15));
+        make.top.equalTo(self.dsView.mas_bottom).offset(AUTO(15));
         make.bottom.offset(AUTO(-15));
     }];
     
@@ -116,28 +117,14 @@
     return _columnView;
 }
 
-- (UIView *)dsView {
+- (JCDaShangView *)dsView {
     if (!_dsView) {
-        _dsView = [UIView new];
+        _dsView = [JCDaShangView new];
     }
     return _dsView;
 }
 
-- (UIButton *)dsBtn {
-    if (!_dsBtn) {
-        _dsBtn = [UIButton initWithText:@"打赏" FontSize:AUTO(14) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
-        [_dsBtn setBackgroundImage:JCIMAGE(@"button_bg") forState:0];
-        [_dsBtn setBackgroundImage:JCIMAGE(@"button_bg") forState:UIControlStateHighlighted];
-    }
-    return _dsBtn;
-}
 
-- (UILabel *)dsCountLab {
-    if (!_dsCountLab) {
-        _dsCountLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:0];
-    }
-    return _dsCountLab;
-}
 
 
 @end

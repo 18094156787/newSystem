@@ -7,10 +7,12 @@
 //
 
 #import "JCBaseTableViewCell_New.h"
-
+#import "JCDaShangView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCPlanDetailMZ_Cell : JCBaseTableViewCell_New
+
+@property (nonatomic,strong) JCDaShangView *dsView;//打赏
 
 @end
 

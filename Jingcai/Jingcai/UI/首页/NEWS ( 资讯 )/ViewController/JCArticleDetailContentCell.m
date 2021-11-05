@@ -18,10 +18,18 @@
             make.top.offset(0);
             make.left.offset(0);
             make.width.mas_equalTo(SCREEN_WIDTH);
-            make.bottom.offset(AUTO(-50));
+//            make.bottom.offset(AUTO(-50));
             make.height.mas_equalTo(50);
     //        make.bottom.equalTo(self.contentView.mas_bottom).offset(AUTO(-50));
         }];
+    
+    [self.contentView addSubview:self.dsView];
+    [self.dsView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(12));
+        make.right.offset(AUTO(-12));
+        make.top.equalTo(self.webView.mas_bottom);
+        make.height.mas_equalTo(AUTO(140));
+    }];
     
     UILabel *infoLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
     infoLab.numberOfLines= 0;
@@ -29,7 +37,7 @@
     [infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(12));
         make.right.offset(AUTO(-12));
-        make.top.equalTo(self.webView.mas_bottom);
+        make.top.equalTo(self.dsView.mas_bottom);
     }];
     self.infoLab = infoLab;
 }
@@ -65,7 +73,7 @@
     
     [webView evaluateJavaScript:@"document.body.scrollHeight" completionHandler:^(id _Nullable result,NSError *_Nullable error) {
         //获取页面高度
-        CGFloat scrollHeight = [result doubleValue]+AUTO(50);
+        CGFloat scrollHeight = [result doubleValue]+AUTO(0);
 //        CGFloat scrollHeight = self.webView.scrollView.contentSize.height+AUTO(150);
         NSLog(@"滚动高度：%f",scrollHeight);
         NSLog(@"即为所求：%f",[result doubleValue]);
@@ -77,7 +85,7 @@
             self.infoLab.text = @"免责声明：鲸猜足球仅为信息发布平台，并不对第三方发布的信息真实性及准确性负责，且不提供彩票售卖服务，请您注意投资风险，理性购买！";
             if (self.JCRefreshBlock) {
 
-                self.height = scrollHeight;
+                self.height = scrollHeight+AUTO(70)+AUTO(140);
                 self.loadSuccess = YES;
                 self.JCRefreshBlock(self.height);
                 [self.webView setNeedsLayout];
@@ -267,5 +275,12 @@
 //        _webView.contentScaleFactor = 1;
     }
     return _webView;
+}
+
+- (JCDaShangView *)dsView {
+    if (!_dsView) {
+        _dsView = [JCDaShangView new];
+    }
+    return _dsView;
 }
 @end
