@@ -7,7 +7,7 @@
 //
 
 #import "JCDaShangView.h"
-
+#import "JCChargeVC.h"
 @implementation JCDaShangView
 
 - (void)initViews {
@@ -25,6 +25,21 @@
         make.centerX.equalTo(self);
         make.top.equalTo(self.dsBtn.mas_bottom).offset(AUTO(8));
     }];
+    
+    WeakSelf;
+    self.dsShowView.JCBlock = ^{
+        WebViewController *vc = [WebViewController new];
+        vc.showBackItem = YES;
+            vc.titleStr = @"鲸猜足球用户购买协议";
+            NSString *urlStr = [NSString  stringWithFormat:@"%@?dev=1",[JCConfigModel currentConfigModel].get_purchase];
+            vc.urlStr = NonNil(urlStr);
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        [[weakSelf getViewController] presentViewController:nav animated:YES completion:nil];
+    };
+    self.dsShowView.JCRechargeBlock = ^{
+        [weakSelf.dsShowView hide];
+        [[weakSelf getViewController].navigationController pushViewController:[JCChargeVC new] animated:YES];
+    };
 }
 
 - (void)data {
@@ -42,8 +57,15 @@
 }
 
 - (void)dsBtnClick {
-    self.dsShowView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
     JCBaseViewController *vc = (JCBaseViewController *)self.getViewController;
+    if (![JCWUserBall currentUser]) {
+        [self presentLogin];
+        return;
+    }
+    self.dsShowView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    
     [vc.jcWindow addSubview:self.dsShowView];
     [self.dsShowView show];
 }

@@ -38,6 +38,18 @@
     }
     self.title = NonNil(self.titleStr);
     [self.wkWebView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
+    
+    if (self.showBackItem) {
+        UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"common_title_back") style:0 target:self action:@selector(backItemClick)];
+        backItem.tintColor = COLOR_2F2F2F;
+        self.navigationItem.leftBarButtonItem = backItem;
+    }
+    
+
+}
+
+- (void)backItemClick {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

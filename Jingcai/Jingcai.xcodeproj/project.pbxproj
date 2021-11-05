@@ -75,6 +75,7 @@
 		590A3F7026C24E3D0012EDE6 /* JCActivityGuess_SPF_CompleteMore_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 590A3F6F26C24E3D0012EDE6 /* JCActivityGuess_SPF_CompleteMore_Cell.m */; };
 		591C1B802734BBBD0001C2B7 /* JCDaShangView.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C1B7F2734BBBD0001C2B7 /* JCDaShangView.m */; };
 		591C1B832734C4600001C2B7 /* JCDaShangShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C1B822734C4600001C2B7 /* JCDaShangShowView.m */; };
+		591C1B862735038A0001C2B7 /* JCDaShangPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C1B852735038A0001C2B7 /* JCDaShangPriceCell.m */; };
 		5940C32A2721604900F41DF1 /* JCColunmHorseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5940C3292721604900F41DF1 /* JCColunmHorseModel.m */; };
 		5940C32D272162F100F41DF1 /* JCPresellColumnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5940C32C272162F100F41DF1 /* JCPresellColumnModel.m */; };
 		5940C3302721632100F41DF1 /* JCLastColumnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5940C32F2721632100F41DF1 /* JCLastColumnModel.m */; };
@@ -1487,6 +1488,8 @@
 		591C1B7F2734BBBD0001C2B7 /* JCDaShangView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCDaShangView.m; sourceTree = "<group>"; };
 		591C1B812734C4600001C2B7 /* JCDaShangShowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCDaShangShowView.h; sourceTree = "<group>"; };
 		591C1B822734C4600001C2B7 /* JCDaShangShowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCDaShangShowView.m; sourceTree = "<group>"; };
+		591C1B842735038A0001C2B7 /* JCDaShangPriceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCDaShangPriceCell.h; sourceTree = "<group>"; };
+		591C1B852735038A0001C2B7 /* JCDaShangPriceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCDaShangPriceCell.m; sourceTree = "<group>"; };
 		5940C3282721604900F41DF1 /* JCColunmHorseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCColunmHorseModel.h; sourceTree = "<group>"; };
 		5940C3292721604900F41DF1 /* JCColunmHorseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCColunmHorseModel.m; sourceTree = "<group>"; };
 		5940C32B272162F100F41DF1 /* JCPresellColumnModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCPresellColumnModel.h; sourceTree = "<group>"; };
@@ -4123,6 +4126,8 @@
 				591C1B7F2734BBBD0001C2B7 /* JCDaShangView.m */,
 				591C1B812734C4600001C2B7 /* JCDaShangShowView.h */,
 				591C1B822734C4600001C2B7 /* JCDaShangShowView.m */,
+				591C1B842735038A0001C2B7 /* JCDaShangPriceCell.h */,
+				591C1B852735038A0001C2B7 /* JCDaShangPriceCell.m */,
 			);
 			path = "打赏";
 			sourceTree = "<group>";
@@ -11187,6 +11192,7 @@
 				7B7D8CFC2565FC3D00431C77 /* JNMatchDetailZRCell.m in Sources */,
 				7BF193C024CFBAF800FD57E3 /* UITableViewCell+HKRound.m in Sources */,
 				7BE8921824B7F8D800AE2E79 /* JCEventScoreLianSaiSelModel.m in Sources */,
+				591C1B862735038A0001C2B7 /* JCDaShangPriceCell.m in Sources */,
 				7B7A11FE240A3FD6008F4293 /* JCHongbaoShowCell.m in Sources */,
 				5940C33F2722819400F41DF1 /* JCColumnListPlanModel.m in Sources */,
 				7B2DAD6424810A4F000E2282 /* JCExpertWMViewController.m in Sources */,

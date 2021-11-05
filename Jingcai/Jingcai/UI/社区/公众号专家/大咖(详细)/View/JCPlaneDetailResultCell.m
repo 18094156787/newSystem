@@ -39,7 +39,7 @@
     [self.contentView addSubview:self.dsView];
     [self.dsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.offset(0);
-        make.top.equalTo(self.resultLab.mas_bottom);
+        make.top.equalTo(self.columnView.mas_bottom);
         make.height.mas_equalTo(AUTO(140));
     }];
     
