@@ -133,6 +133,7 @@
 //    model.type = @"1";
 //    return;
     _model = model;
+
     
     self.rateLab.text = @"";
     if (model.combat.wl_list.count>0) {
@@ -170,7 +171,7 @@
 
         }
     }else{
-        self.infoLab.text = @"当前方案尚未更新，敬请期待~";
+//        self.infoLab.text = @"当前方案尚未更新，敬请期待~";
         if ([model.type integerValue]==1) {
             [self.botomView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(AUTO(44));
@@ -197,10 +198,13 @@
         self.dateLab.text = [NSString stringWithFormat:@"第%@期",model.period];
         self.introduceLab.text = @"周期说明";
         
-        if (model.combat.wl_list.count==0) {
-            self.infoLab.text = @"当前方案尚未更新，敬请期待~";
+        if (model.update_status==1) {
+            self.infoLab.text = @"方案尚未发布！敬请期待~";
         }
-       
+        if (model.update_status==2) {
+            self.infoLab.text = @"方案已发布，赛果未更新。";
+        }
+
         
 
         
@@ -236,6 +240,9 @@
     
     if ([model.type integerValue]==3) {
         self.bgView.layer.borderColor = UIColorFromRGB(0x2043EF).CGColor;
+        
+    }else if ([model.type integerValue]==2) {
+        self.bgView.layer.borderColor = UIColorFromRGB(0xAEB4C8).CGColor;
         
     }else{
         self.bgView.layer.borderColor = JCBaseColor.CGColor;
