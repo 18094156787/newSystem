@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) JCLastColumnCombatModel *combat;//战绩
 
+@property (nonatomic,assign) NSInteger update_status;
+
 @end
 
 @interface JCLastColumnCombatModel : JCWBaseBall
