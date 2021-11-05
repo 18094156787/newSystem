@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UILabel *nameLab;
 
+- (void)show;
 @end
 
 NS_ASSUME_NONNULL_END

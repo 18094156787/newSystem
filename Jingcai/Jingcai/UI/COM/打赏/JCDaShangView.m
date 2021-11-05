@@ -45,6 +45,7 @@
     self.dsShowView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     JCBaseViewController *vc = (JCBaseViewController *)self.getViewController;
     [vc.jcWindow addSubview:self.dsShowView];
+    [self.dsShowView show];
 }
 
 - (UIButton *)dsBtn {
@@ -53,6 +54,7 @@
         [_dsBtn setBackgroundImage:JCIMAGE(@"button_bg") forState:0];
         [_dsBtn setBackgroundImage:JCIMAGE(@"button_bg") forState:UIControlStateHighlighted];
         [_dsBtn addTarget:self action:@selector(dsBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        [_dsBtn hg_setAllCornerWithCornerRadius:4];
     }
     return _dsBtn;
 }
