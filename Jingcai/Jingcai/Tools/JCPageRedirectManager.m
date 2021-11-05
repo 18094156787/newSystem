@@ -26,6 +26,7 @@
 #import "JCActivityGuess_SPF_VC.h"
 #import "JCArticleDetailVC.h"
 #import "JCActivityGuess_SPF_More_VC.h"
+#import "JCColumnDetailWMViewController.h"
 @interface JCPageRedirectManager ()
 @property (nonatomic, strong) JCMainTabBarController * tabBarController;
 
@@ -116,6 +117,15 @@
 
         return ;
     }
+    //跳转专栏
+    if ([route hasPrefix:@"zhuanlan_"]) {
+        NSArray *array = [route componentsSeparatedByString:@"_"];
+        if (array.count==2) {
+            NSString *column_id = array[1];
+            [[JCPageRedirectManager sharedManager] redirectToColumnWithColumn_d:column_id ViewController:vc];
+        }
+        return ;
+    }
     
     
 }
@@ -160,6 +170,15 @@
     [viewController.navigationController pushViewController:vc animated:YES];
 
 }
+
+//跳转专栏详情
+- (void)redirectToColumnWithColumn_d:(NSString *)column_d ViewController:(UIViewController *)viewController {
+    JCColumnDetailWMViewController *vc = [JCColumnDetailWMViewController new];
+    vc.column_id = column_d;
+    [viewController.navigationController pushViewController:vc animated:YES];
+
+}
+
 
 
 
@@ -303,6 +322,16 @@
         [JCTuiJianManager getTuiJianDetailWithTuiJianID:ID orderID:@"" type:@"" WithViewController:viewController is_push:YES success:^{
             
         }];
+        
+    }
+    if ([app_url isEqualToString:@"zhuanlan"]) {
+        //专栏
+        if (ID.length==0) {
+            return;
+        }
+        JCColumnDetailWMViewController *vc = [JCColumnDetailWMViewController new];
+        vc.column_id = ID;
+        [viewController.navigationController pushViewController:vc animated:YES];
         
     }
     //充值页
