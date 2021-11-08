@@ -32,6 +32,7 @@
 - (JCDaShangView *)dsView {
     if (!_dsView) {
         _dsView = [JCDaShangView new];
+        _dsView.scene = @"8";
     }
     return _dsView;
 }

@@ -8,6 +8,7 @@
 
 #import "JCDaShangView.h"
 #import "JCChargeVC.h"
+#import "JCDaShangSuccessVC.h"
 @implementation JCDaShangView
 
 - (void)initViews {
@@ -79,6 +80,7 @@
             NSString *is_pay = object[@"data"][@"is_pay"];
             if ([is_pay intValue]==1) {
 //                [JCWToastTool showHint:@"支付成功"];
+                [[self getViewController].navigationController pushViewController:[JCDaShangSuccessVC new] animated:YES];
 
             }
 

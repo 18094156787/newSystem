@@ -11,6 +11,7 @@
 #import "JCChargeVC.h"
 
 
+
 @implementation JCDaShangShowView
 
 - (void)initViews {

@@ -64,7 +64,7 @@
 
 - (void)setPlanDetailModel:(JCWTjInfoBall *)planDetailModel {
     _planDetailModel = planDetailModel;
-    planDetailModel.result = @"电商时代电商时代电商时代电商时代电商时代电商时代电商时代电商时代电商时代电商时代电商时代电商时代电商时代电商时代";
+    self.dsView.ID = planDetailModel.id;
     if (planDetailModel.is_end==1) {
         if (planDetailModel.result.length>0) {
             self.resultLab.textColor = JCBaseColor;
@@ -120,6 +120,7 @@
 - (JCDaShangView *)dsView {
     if (!_dsView) {
         _dsView = [JCDaShangView new];
+        _dsView.scene = @"8";
     }
     return _dsView;
 }

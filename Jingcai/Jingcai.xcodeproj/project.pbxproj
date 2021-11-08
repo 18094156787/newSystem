@@ -124,6 +124,7 @@
 		595884BE268B23D00085206B /* JCActivityGuessCheckView.m in Sources */ = {isa = PBXBuildFile; fileRef = 595884BD268B23D00085206B /* JCActivityGuessCheckView.m */; };
 		596A1D9D2701B06D001B6E17 /* JCFanganSaleOutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 596A1D9C2701B06D001B6E17 /* JCFanganSaleOutCell.m */; };
 		596A1DA02701B261001B6E17 /* JCFanganSaleOut_BuyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 596A1D9F2701B261001B6E17 /* JCFanganSaleOut_BuyCell.m */; };
+		598183562738C4B400BF161D /* JCDaShangSuccessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 598183552738C4B400BF161D /* JCDaShangSuccessVC.m */; };
 		59E8472A26C75CDF00D9DFBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59E8472926C75CDF00D9DFBB /* LaunchScreen.storyboard */; };
 		59E8472D26CA41E900D9DFBB /* JCHomeErCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59E8472C26CA41E900D9DFBB /* JCHomeErCodeView.m */; };
 		59EB4E95271D44B500952D4D /* JCColumnDetailWMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4E94271D44B500952D4D /* JCColumnDetailWMViewController.m */; };
@@ -1581,6 +1582,8 @@
 		596A1D9C2701B06D001B6E17 /* JCFanganSaleOutCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCFanganSaleOutCell.m; sourceTree = "<group>"; };
 		596A1D9E2701B261001B6E17 /* JCFanganSaleOut_BuyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCFanganSaleOut_BuyCell.h; sourceTree = "<group>"; };
 		596A1D9F2701B261001B6E17 /* JCFanganSaleOut_BuyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCFanganSaleOut_BuyCell.m; sourceTree = "<group>"; };
+		598183542738C4B400BF161D /* JCDaShangSuccessVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCDaShangSuccessVC.h; sourceTree = "<group>"; };
+		598183552738C4B400BF161D /* JCDaShangSuccessVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCDaShangSuccessVC.m; sourceTree = "<group>"; };
 		59E8472926C75CDF00D9DFBB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		59E8472B26CA41E900D9DFBB /* JCHomeErCodeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCHomeErCodeView.h; sourceTree = "<group>"; };
 		59E8472C26CA41E900D9DFBB /* JCHomeErCodeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCHomeErCodeView.m; sourceTree = "<group>"; };
@@ -4128,6 +4131,8 @@
 				591C1B822734C4600001C2B7 /* JCDaShangShowView.m */,
 				591C1B842735038A0001C2B7 /* JCDaShangPriceCell.h */,
 				591C1B852735038A0001C2B7 /* JCDaShangPriceCell.m */,
+				598183542738C4B400BF161D /* JCDaShangSuccessVC.h */,
+				598183552738C4B400BF161D /* JCDaShangSuccessVC.m */,
 			);
 			path = "打赏";
 			sourceTree = "<group>";
@@ -11564,6 +11569,7 @@
 				7B11DB44261EEC2800C1F7D6 /* JCFootBall_GZH_AuthorHeadView.m in Sources */,
 				7BC0967324FF89990020D92A /* JCPostCheckArticleFootView.m in Sources */,
 				7B1BDD8C2510AFD600D7C034 /* JCMyPostCheckTuiJianDetailModel.m in Sources */,
+				598183562738C4B400BF161D /* JCDaShangSuccessVC.m in Sources */,
 				7B61BEF124ED4DEF0068F148 /* YBIBInteractionProfile.m in Sources */,
 				7B11DB4D261EEC2800C1F7D6 /* JCFamousExpertCell.m in Sources */,
 				7B8AE2A525A3007200B805EA /* JCBasketBallMatchFanganVC.m in Sources */,
