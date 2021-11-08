@@ -491,6 +491,13 @@
     [self presentViewController:imagePickerVc animated:YES completion:nil];
 
 }
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    if ([picker isKindOfClass:[UIImagePickerController class]]) {
+        [picker dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto {
     if (photos.count>0) {
 //        self.isSelImage = YES;
@@ -506,6 +513,8 @@
     }
     
 }
+
+
 
 
 /// 拍照按钮点击事件

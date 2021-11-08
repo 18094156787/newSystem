@@ -822,6 +822,12 @@
     
 }
 
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    if ([picker isKindOfClass:[UIImagePickerController class]]) {
+        [picker dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 
 /// 拍照按钮点击事件
 - (void)takePhoto {
