@@ -129,9 +129,14 @@
     self.no_rq_loseLab.layer.borderColor = COLOR_E4E4E4.CGColor;
     
 
-    
-    self.no_rq_windLab.text = [NSString stringWithFormat:@"客胜 %@",matchModel.no_rq_odds.lose];
-    self.no_rq_loseLab.text = [NSString stringWithFormat:@"主胜 %@",matchModel.no_rq_odds.win];
+    NSString *home = [NSString stringWithFormat:@"%.2f",[matchModel.no_rq_odds.equal floatValue]*-1];
+    NSString *away = [NSString stringWithFormat:@"%.2f",[matchModel.no_rq_odds.equal floatValue]];
+    self.no_rq_windLab.text = [NSString stringWithFormat:@"%@  %@",home,matchModel.no_rq_odds.win];
+    self.no_rq_loseLab.text = [NSString stringWithFormat:@"%@ %@",away,matchModel.no_rq_odds.lose];
+    if (matchModel.classfly==102) {
+        self.no_rq_windLab.text = [NSString stringWithFormat:@"%@  %@",away,matchModel.no_rq_odds.lose];
+        self.no_rq_loseLab.text = [NSString stringWithFormat:@"%@ %@",home,matchModel.no_rq_odds.win];
+    }
     
     
     [JCLayer setupView:self.homeNameLab corners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadius:5 borderWith:1 borderColor:COLOR_E4E4E4];
