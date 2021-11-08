@@ -63,7 +63,6 @@
 
 - (void)setPlanDetailModel:(JCWTjInfoBall *)planDetailModel {
     _planDetailModel = planDetailModel;
-    planDetailModel.result = @"电商时代电商时代电商时代电商时代电商时代电商时代电商时代电商时代电商时代电商时代电商时代电商时代电商时代电商时代";
     if (planDetailModel.is_end==1) {
         if (planDetailModel.result.length>0) {
             self.resultLab.textColor = JCBaseColor;
