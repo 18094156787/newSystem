@@ -12213,9 +12213,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Jingcai/鲸猜足球Debug.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MFKWUW9XYJ;
 				ENABLE_BITCODE = NO;
@@ -12286,7 +12286,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhisheng.zq;
 				PRODUCT_NAME = "鲸猜足球";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = zhisheng_dev_0707;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -12300,9 +12300,9 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MFKWUW9XYJ;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -12371,7 +12371,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhisheng.zq;
 				PRODUCT_NAME = "鲸猜足球";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = zhisheng_dis_0709;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
