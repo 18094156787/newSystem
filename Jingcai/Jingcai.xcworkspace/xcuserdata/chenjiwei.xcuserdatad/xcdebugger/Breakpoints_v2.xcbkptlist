@@ -7,128 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "08D231B3-EBC2-45F6-AFDF-D31A249C054A"
+            uuid = "D963E122-DB5F-4DA7-B362-E726FA07618D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/COM/&#x6253;&#x8d4f;/JCDaShangView.m"
+            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/View/JCPlaneDetailMatch_JQSCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "-finalPayWithOrder_key:"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
+            landmarkName = "-setMatchModel:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "17A962BB-7424-45BB-A629-D06F087E42ED"
+            uuid = "8477FAB0-D284-4D20-8B8C-CF9FDE461739"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/COM/&#x6253;&#x8d4f;/JCDaShangView.m"
+            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/View/JCPlaneDetailMatch_JQSCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "-caiyunPayWithAmount:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "16EC5389-CABA-4623-9310-3987BC69CF7F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/Tools/JCWPhotoTool.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "-imagePickerControllerDidCancel:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "635DA7AB-BEFD-4DAC-A2F5-3D27D90A8F0C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/Tools/JCWPhotoTool.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B32DF481-8194-49AD-9F80-69DFF87FDB22"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/Tools/JCWPhotoTool.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "-takePicture:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4767796E-01C2-4906-919A-F69BA4C1A875"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x6211;&#x7684;/&#x53d1;&#x5e03;&#x65b9;&#x6848;/&#x9080;&#x8bf7;&#x597d;&#x53cb;&#x7b7e;&#x7ea6;/ViewController/JCPostCheckUserInfo_Invite_VC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "6D8BDA13-9D1F-4938-8A6A-2D4BC1874A49"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x6211;&#x7684;/&#x53d1;&#x5e03;&#x65b9;&#x6848;/&#x53d1;&#x5e16;&#x5ba1;&#x6838;&#x8ba4;&#x8bc1;/ViewController/JCPostCheckUserInfoVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "34767420-D4A6-4029-B969-777263457A1A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x6211;&#x7684;/&#x53d1;&#x5e03;&#x65b9;&#x6848;/&#x53d1;&#x5e16;&#x5ba1;&#x6838;&#x8ba4;&#x8bc1;/ViewController/JCPostCheckArticleVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "917"
-            endingLineNumber = "917"
-            landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "-setMatchModel:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

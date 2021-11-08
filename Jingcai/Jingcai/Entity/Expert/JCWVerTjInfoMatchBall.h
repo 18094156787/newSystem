@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString *classfly_name;
 
-@property (nonatomic, assign) NSInteger classfly;//玩法 1欧指 2 让球 3大小球 4 竟足 999 自定义 101 胜负 102让分 103 总分
+@property (nonatomic, assign) NSInteger classfly;//玩法 1欧指 2 让球 3进球数 4 竟足 999 自定义 101 胜负 102让分 103 总分
 @property (nonatomic, assign) NSInteger matchStatus;////0:比赛异常1:未开赛2:上半场3:中场4:下半场5:加时赛6:加时赛(弃用)7:点球决战8:完场9:推迟10:中断11:腰斩12:取消13:待定
 
 @property (nonatomic, strong) NSString *matchStatus_desc;

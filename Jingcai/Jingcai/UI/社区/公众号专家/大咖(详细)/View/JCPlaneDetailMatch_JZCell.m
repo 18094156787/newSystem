@@ -7,7 +7,7 @@
 //
 
 #import "JCPlaneDetailMatch_JZCell.h"
-
+#import "JCLayer.h"
 @implementation JCPlaneDetailMatch_JZCell
 
 - (void)initViews {
@@ -20,6 +20,7 @@
     [self.contentView addSubview:self.typeLab];
     [self.typeLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(AUTO(-10));
+        make.height.mas_equalTo(AUTO(16));
         make.centerY.equalTo(self.titleLab);
     }];
     
@@ -129,11 +130,15 @@
     [awayArray addObject:self.rq_loseLab];
     [awayArray mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:0 leadSpacing:1 tailSpacing:1];
     
+//    [_homeView hg_setAllCornerWithCornerRadius:20];
+//    [self.no_rq_windLab hg_setCornerOnLeftWithRadius:20];
 }
 
 
 - (void)setMatchModel:(JCWVerTjInfoMatchBall *)matchModel {
     _matchModel = matchModel;
+    
+
     NSString *matchTime = [NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd HH:mm" time:[matchModel.match_time doubleValue]];
         NSString *title = NonNil(matchModel.event_name);
         if (matchModel.group_num_new.length>0||matchModel.round_num_two.length>0) {
@@ -227,39 +232,74 @@
     self.no_rq_equalLab.layer.borderColor = COLOR_E4E4E4.CGColor;
     self.no_rq_loseLab.layer.borderColor = COLOR_E4E4E4.CGColor;
     
+    self.rq_windLab.backgroundColor = JCWhiteColor;
+    self.rq_equalLab.backgroundColor = JCWhiteColor;
+    self.rq_loseLab.backgroundColor = JCWhiteColor;
+    self.no_rq_windLab.backgroundColor = JCWhiteColor;
+    self.no_rq_equalLab.backgroundColor = JCWhiteColor;
+    self.no_rq_loseLab.backgroundColor = JCWhiteColor;
+    
+    self.rq_windLab.textColor = COLOR_2F2F2F;
+    self.rq_equalLab.textColor = COLOR_2F2F2F;
+    self.rq_loseLab.textColor = COLOR_2F2F2F;
+    self.no_rq_windLab.textColor = COLOR_2F2F2F;
+    self.no_rq_equalLab.textColor = COLOR_2F2F2F;
+    self.no_rq_loseLab.textColor = COLOR_2F2F2F;
+    
+    [JCLayer setupView:self.no_rq_windLab corners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadius:5 borderWith:1 borderColor:COLOR_E4E4E4];
+    [JCLayer setupView:self.no_rq_loseLab corners:UIRectCornerTopRight | UIRectCornerBottomRight cornerRadius:5 borderWith:1 borderColor:COLOR_E4E4E4];
+    [JCLayer setupView:self.rq_windLab corners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadius:5 borderWith:1 borderColor:COLOR_E4E4E4];
+    [JCLayer setupView:self.rq_loseLab corners:UIRectCornerTopRight | UIRectCornerBottomRight cornerRadius:5 borderWith:1 borderColor:COLOR_E4E4E4];
+    
     
     NSArray *array = [matchModel.spf componentsSeparatedByString:@","];
+//    array = @[@"3",@"5"];
     for (NSString *value in array) {
-        
+
         switch ([value intValue]) {
             case 1:
             {
-                self.no_rq_windLab.layer.borderColor = JCBaseColor.CGColor;
+                self.no_rq_windLab.backgroundColor = UIColorFromRGB(0XFEEAEA);
+                self.no_rq_windLab.textColor = JCBaseColor;
+                [JCLayer setupView:self.no_rq_windLab corners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadius:5 borderWith:1 borderColor:JCBaseColor];
             }
                 break;
             case 2:
             {
+                self.no_rq_windLab.backgroundColor = UIColorFromRGB(0XFEEAEA);
+                self.no_rq_equalLab.textColor = JCBaseColor;
                 self.no_rq_equalLab.layer.borderColor = JCBaseColor.CGColor;
             }
                 break;
             case 3:
             {
-                self.no_rq_loseLab.layer.borderColor = JCBaseColor.CGColor;
+//                self.no_rq_loseLab.layer.borderColor = JCBaseColor.CGColor;
+                self.no_rq_loseLab.backgroundColor = UIColorFromRGB(0XFEEAEA);
+                self.no_rq_loseLab.textColor = JCBaseColor;
+                [JCLayer setupView:self.no_rq_loseLab corners:UIRectCornerTopRight | UIRectCornerBottomRight cornerRadius:5 borderWith:1 borderColor:JCBaseColor];
             }
                 break;
             case 4:
             {
-                self.rq_windLab.layer.borderColor = JCBaseColor.CGColor;
+//                self.rq_windLab.layer.borderColor = JCBaseColor.CGColor;
+                self.rq_windLab.backgroundColor = UIColorFromRGB(0XFEEAEA);
+                self.rq_windLab.textColor = JCBaseColor;
+                [JCLayer setupView:self.rq_windLab corners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadius:5 borderWith:1 borderColor:JCBaseColor];
             }
                 break;
             case 5:
             {
+                self.rq_equalLab.backgroundColor = UIColorFromRGB(0XFEEAEA);
+                self.rq_equalLab.textColor = JCBaseColor;
                 self.rq_equalLab.layer.borderColor = JCBaseColor.CGColor;;
             }
                 break;
             case 6:
             {
-                self.rq_loseLab.layer.borderColor = JCBaseColor.CGColor;
+//                self.rq_loseLab.layer.borderColor = JCBaseColor.CGColor;
+                self.rq_loseLab.backgroundColor = UIColorFromRGB(0XFEEAEA);
+                self.rq_loseLab.textColor = JCBaseColor;
+                [JCLayer setupView:self.rq_loseLab corners:UIRectCornerTopRight | UIRectCornerBottomRight cornerRadius:5 borderWith:1 borderColor:JCBaseColor];
             }
                 break;
 
@@ -287,7 +327,7 @@
         _typeLab = [KKPaddingLabel initWithTitle:@"" andFont:AUTO(10) andWeight:1 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
         _typeLab.layer.borderColor = JCBaseColor.CGColor;
         _typeLab.layer.borderWidth = 1;
-        _typeLab.layer.cornerRadius = AUTO(2);
+        _typeLab.layer.cornerRadius = AUTO(8);
         _typeLab.layer.masksToBounds = YES;
         _typeLab.padding = UIEdgeInsetsMake(0, 8, 0, 8);
     }
@@ -320,8 +360,10 @@
 - (UIView *)homeView {
     if (!_homeView) {
         _homeView = [UIView new];
-//        _homeView.layer.cornerRadius = 5;
+        
+//        _homeView.layer.cornerRadius = 20;
 //        _homeView.layer.masksToBounds =YES;
+//        _homeView.clipsToBounds = YES;
 //        _homeView.layer.borderWidth = 0.5;
 //        _homeView.layer.borderColor = COLOR_E4E4E4.CGColor;
     }
@@ -330,11 +372,12 @@
 
 - (UILabel *)no_rqLab {
     if (!_no_rqLab) {
-        _no_rqLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _no_rqLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:COLOR_F2F2F2 andTextAlignment:NSTextAlignmentCenter];
         _no_rqLab.layer.borderWidth = 0.5;
         _no_rqLab.layer.borderColor = COLOR_E4E4E4.CGColor;
         _no_rqLab.layer.cornerRadius = 5;
         _no_rqLab.layer.masksToBounds = YES;
+        
         
     }
     return _no_rqLab;
@@ -343,8 +386,10 @@
 - (UILabel *)no_rq_windLab {
     if (!_no_rq_windLab) {
         _no_rq_windLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
-        _no_rq_windLab.layer.borderWidth = 0.5;
-        _no_rq_windLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+//        _no_rq_windLab.layer.borderWidth = 0.5;
+//        _no_rq_windLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+//        _no_rq_windLab.layer.masksToBounds = YES;
+//        [_no_rq_windLab hg_setCornerOnLeftWithRadius:20];
 
     }
     return _no_rq_windLab;
@@ -362,8 +407,8 @@
 - (UILabel *)no_rq_loseLab {
     if (!_no_rq_loseLab) {
         _no_rq_loseLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
-        _no_rq_loseLab.layer.borderWidth = 0.5;
-        _no_rq_loseLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+//        _no_rq_loseLab.layer.borderWidth = 0.5;
+//        _no_rq_loseLab.layer.borderColor = COLOR_E4E4E4.CGColor;
     }
     return _no_rq_loseLab;
 }
@@ -371,13 +416,15 @@
 - (UIView *)awayView {
     if (!_awayView) {
         _awayView = [UIView new];
+        _awayView.layer.cornerRadius = 5;
+        _awayView.layer.masksToBounds =YES;
     }
     return _awayView;
 }
 
 - (UILabel *)rqLab {
     if (!_rqLab) {
-        _rqLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _rqLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:COLOR_F2F2F2 andTextAlignment:NSTextAlignmentCenter];
         _rqLab.layer.borderWidth = 0.5;
         _rqLab.layer.borderColor = COLOR_E4E4E4.CGColor;
         _rqLab.layer.cornerRadius = 5;
@@ -389,8 +436,8 @@
 - (UILabel *)rq_windLab {
     if (!_rq_windLab) {
         _rq_windLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
-        _rq_windLab.layer.borderWidth = 0.5;
-        _rq_windLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+//        _rq_windLab.layer.borderWidth = 0.5;
+//        _rq_windLab.layer.borderColor = COLOR_E4E4E4.CGColor;
     }
     return _rq_windLab;
 }
@@ -407,8 +454,8 @@
 - (UILabel *)rq_loseLab {
     if (!_rq_loseLab) {
         _rq_loseLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
-        _rq_loseLab.layer.borderWidth = 0.5;
-        _rq_loseLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+//        _rq_loseLab.layer.borderWidth = 0.5;
+//        _rq_loseLab.layer.borderColor = COLOR_E4E4E4.CGColor;
     }
     return _rq_loseLab;
 }

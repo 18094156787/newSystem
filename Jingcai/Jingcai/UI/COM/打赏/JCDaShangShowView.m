@@ -326,9 +326,36 @@
         return;
     }
     if (self.selItemBall) {
-        if (self.JCDSBlock) {
-            self.JCDSBlock([NSString stringWithFormat:@"%ld",self.selItemBall.prize]);
+        JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
+        alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(16)];
+        [alertView alertTitle:@"确认打赏" TitleColor:COLOR_2F2F2F Mesasge:@"" MessageColor:COLOR_2F2F2F SureTitle:@"确认" SureColor:JCWhiteColor SureHandler:^{
+            if (self.JCDSBlock) {
+                self.JCDSBlock([NSString stringWithFormat:@"%ld",self.selItemBall.prize]);
+                
+            }
+            [alertView removeFromSuperview];
+
+        } CancleTitle:@"取消" CancleColor:JCBaseColor CancelHandler:^{
+           [alertView removeFromSuperview];
+        }];
+        NSString *price =  [NSString stringWithFormat:@"%ld",self.selItemBall.prize];
+        NSString *title = [NSString stringWithFormat:@"您确认支付%@红币打赏吗？",price];
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+        NSRange count_range = [title rangeOfString:price];
+        if (count_range.location!=NSNotFound) {
+            [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:count_range];
         }
+
+        
+        alertView.contentLab.attributedText = attr;
+        alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+  
+        
+ 
+        
+        return;
+       
     }
     BOOL isPureFloat = [self isPureFloat:self.priceTF.text];
     BOOL isPureInt = [self isPureInt:self.priceTF.text];
@@ -336,12 +363,31 @@
         [JCWToastTool showHint:@"请输入正确的金额"];
         return;
     }
-    if (self.JCDSBlock) {
-        if (self.priceTF.text.length>0) {
-            self.JCDSBlock(self.priceTF.text);
+    JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
+    alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(16)];
+    [alertView alertTitle:@"确认打赏" TitleColor:COLOR_2F2F2F Mesasge:@"" MessageColor:COLOR_2F2F2F SureTitle:@"确认" SureColor:JCWhiteColor SureHandler:^{
+        if (self.JCDSBlock) {
+            if (self.priceTF.text.length>0) {
+                self.JCDSBlock(self.priceTF.text);
+            }
         }
+        [alertView removeFromSuperview];
+
+    } CancleTitle:@"取消" CancleColor:JCBaseColor CancelHandler:^{
+       [alertView removeFromSuperview];
+    }];
+    NSString *price =  self.priceTF.text;
+    NSString *title = [NSString stringWithFormat:@"您确认支付%@红币打赏吗？",price];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+    NSRange count_range = [title rangeOfString:price];
+    if (count_range.location!=NSNotFound) {
+        [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:count_range];
     }
-    
+    alertView.contentLab.attributedText = attr;
+    alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+
+
 }
 
 - (void)closeBtnClick {

@@ -34,7 +34,7 @@
         make.centerY.equalTo(titleBgView);
     }];
     
-    UILabel *awayWinLab = [UILabel initWithTitle:@"低" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+    UILabel *awayWinLab = [UILabel initWithTitle:@"小球" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     [titleBgView addSubview:awayWinLab];
     [awayWinLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleBgView);
@@ -69,7 +69,7 @@
         make.width.height.mas_equalTo(AUTO(8));
     }];
     
-    UILabel *homeWinLab = [UILabel initWithTitle:@"高" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+    UILabel *homeWinLab = [UILabel initWithTitle:@"大球" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     [self.contentView addSubview:homeWinLab];
     [homeWinLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(titleBgView);

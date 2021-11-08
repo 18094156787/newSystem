@@ -42,7 +42,7 @@
         [[weakSelf getViewController].navigationController pushViewController:[JCChargeVC new] animated:YES];
     };
     self.dsShowView.JCDSBlock = ^(NSString * _Nonnull price) {
-        
+        [weakSelf caiyunPayWithAmount:price];
     };
 }
 

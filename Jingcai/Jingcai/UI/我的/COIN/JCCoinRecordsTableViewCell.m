@@ -48,32 +48,28 @@
     if (recordBall.is_income==1) {
         value= @"+";
     }
+    self.priceLab.text = [NSString stringWithFormat:@"%@%@",value,@(money)];
 
     if (recordBall.icon_type==1||recordBall.icon_type==6) {
         self.iconImgView.image = JCIMAGE(@"icon-gm");
-         self.priceLab.text = [NSString stringWithFormat:@"%@%@",value,@(money)];
-//        self.priceLab.textColor = COLOR_333333;
+
     }
     if (recordBall.icon_type==2) {
         self.iconImgView.image = JCIMAGE(@"icon-tk");
-        self.priceLab.text = [NSString stringWithFormat:@"%@%@",value,@(money)];
-//        self.priceLab.textColor = COLOR_F4782C;
     }
     if (recordBall.icon_type==3) {
         self.iconImgView.image = JCIMAGE(@"icon-cz");
-        self.priceLab.text = [NSString stringWithFormat:@"%@%@",value,@(money)];
-//        self.priceLab.textColor = COLOR_F4782C;
     }
 
     if (recordBall.icon_type==4) {
         self.iconImgView.image = JCIMAGE(@"icon-zs");
-        self.priceLab.text = [NSString stringWithFormat:@"%@%@",value,@(money)];
-//        self.priceLab.textColor = COLOR_F4782C;
     }
     if (recordBall.icon_type==5) {
-        self.iconImgView.image = JCIMAGE(@"icon_gq");
-         self.priceLab.text = [NSString stringWithFormat:@"%@%@",value,@(money)];
-//        self.priceLab.textColor = COLOR_333333;
+        self.iconImgView.image = JCIMAGE(@"icon-gq");
+    }
+    if (recordBall.icon_type==7) {
+        //打赏
+        self.iconImgView.image = JCIMAGE(@"icon-ds");
     }
 
 }

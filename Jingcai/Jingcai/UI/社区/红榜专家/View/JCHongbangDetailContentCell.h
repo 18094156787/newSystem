@@ -10,6 +10,7 @@
 #import "JCWTjInfoDetailBall.h"
 #import "JCImgCollectionViewCell.h"
 #import "YBImageBrowser.h"
+#import "JCDaShangView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCHongbangDetailContentCell : JCBaseTableViewCell_New<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
@@ -37,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UIView *bgView;
 
 @property (nonatomic,strong) UILabel *infoLab;
+
+@property (nonatomic,strong) JCDaShangView *dsView;//打赏
 
 @property (nonatomic,strong) JCWTjInfoDetailBall *tjInfoDetailBall;
 

@@ -7,7 +7,7 @@
 //
 
 #import "JCPlaneDetailMatch_JQSCell.h"
-
+#import "JCLayer.h"
 @implementation JCPlaneDetailMatch_JQSCell
 
 - (void)initViews {
@@ -111,20 +111,10 @@
          self.typeLab.backgroundColor = [COLOR_1B1B1B colorWithAlphaComponent:0.1];
          self.typeLab.layer.borderColor = COLOR_1B1B1B.CGColor;
          self.typeLab.textColor = COLOR_1B1B1B;
-     }else if(matchModel.classfly==2||matchModel.classfly==102){
-
-         self.typeLab.backgroundColor = [COLOR_002868 colorWithAlphaComponent:0.1];
-         self.typeLab.layer.borderColor = COLOR_002868.CGColor;
-         self.typeLab.textColor = COLOR_002868;
      }else if(matchModel.classfly==3||matchModel.classfly==103){
          self.typeLab.backgroundColor = [COLOR_30B27A colorWithAlphaComponent:0.1];
          self.typeLab.layer.borderColor = COLOR_30B27A.CGColor;
          self.typeLab.textColor = COLOR_30B27A;
-     }
-     else if(matchModel.classfly==4){
-         self.typeLab.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
-         self.typeLab.layer.borderColor = JCBaseColor.CGColor;
-         self.typeLab.textColor = JCBaseColor;
      }
      else{
 //         self.typeLab.text = [NSString stringWithFormat:@"  %@  ",matchModel.name];
@@ -149,88 +139,75 @@
         self.no_rq_equalLab.text = [NSString stringWithFormat:@"平 %@",matchModel.no_rq_odds.equal];
         self.no_rq_loseLab.text = [NSString stringWithFormat:@"客胜 %@",matchModel.no_rq_odds.lose];
     }
-    if (matchModel.classfly==2) {
-        self.no_rq_windLab.text = [NSString stringWithFormat:@"主胜 %@",matchModel.no_rq_odds.win];
-        self.no_rq_equalLab.text = [NSString stringWithFormat:@"指数 %@",matchModel.no_rq_odds.equal];
-        self.no_rq_loseLab.text = [NSString stringWithFormat:@"客胜 %@",matchModel.no_rq_odds.lose];
-    }
+
     if (matchModel.classfly==3) {
-        self.no_rq_windLab.text = [NSString stringWithFormat:@"高 %@",matchModel.no_rq_odds.win];
+        self.no_rq_windLab.text = [NSString stringWithFormat:@"大球 %@",matchModel.no_rq_odds.win];
         self.no_rq_equalLab.text = [NSString stringWithFormat:@"指数 %@",matchModel.no_rq_odds.equal];
-        self.no_rq_loseLab.text = [NSString stringWithFormat:@"低 %@",matchModel.no_rq_odds.lose];
+        self.no_rq_loseLab.text = [NSString stringWithFormat:@"小球 %@",matchModel.no_rq_odds.lose];
+    }
+    if (matchModel.classfly==103) {
+        self.no_rq_windLab.text = [NSString stringWithFormat:@"大分 %@",matchModel.no_rq_odds.win];
+        self.no_rq_equalLab.text = [NSString stringWithFormat:@"指数 %@",matchModel.no_rq_odds.equal];
+        self.no_rq_loseLab.text = [NSString stringWithFormat:@"小分 %@",matchModel.no_rq_odds.lose];
     }
 
     
-    self.no_rq_windLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+
     self.no_rq_equalLab.layer.borderColor = COLOR_E4E4E4.CGColor;
-    self.no_rq_loseLab.layer.borderColor = COLOR_E4E4E4.CGColor;
     
-    
-    switch ([matchModel.spf intValue]) {
-        case 1:
-        {
-            self.no_rq_windLab.layer.borderColor = JCBaseColor.CGColor;
-        }
-            break;
-        case 2:
-        {
-            self.no_rq_equalLab.layer.borderColor = JCBaseColor.CGColor;
-        }
-            break;
-        case 3:
-        {
-            self.no_rq_loseLab.layer.borderColor = JCBaseColor.CGColor;
-        }
-            break;
-        case 4:
+    [JCLayer setupView:self.no_rq_loseLab corners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadius:5 borderWith:1 borderColor:COLOR_E4E4E4];
+    [JCLayer setupView:self.no_rq_windLab corners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadius:5 borderWith:1 borderColor:COLOR_E4E4E4];
+    self.no_rq_windLab.backgroundColor = JCWhiteColor;
+    self.no_rq_loseLab.backgroundColor = JCWhiteColor;
+    self.no_rq_windLab.textColor = COLOR_2F2F2F;
+    self.no_rq_loseLab.textColor = COLOR_2F2F2F;
 
-            
-        default:
-            break;
+    if (matchModel.classfly==1||matchModel.classfly==3) {
+        switch ([matchModel.spf intValue]) {
+            case 1:
+            {
+                self.no_rq_windLab.backgroundColor = UIColorFromRGB(0XFEEAEA);
+                self.no_rq_windLab.textColor = JCBaseColor;
+                [JCLayer setupView:self.no_rq_windLab corners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadius:5 borderWith:1 borderColor:JCBaseColor];
+            }
+                break;
+            case 2:
+            {
+                self.no_rq_equalLab.layer.borderColor = JCBaseColor.CGColor;
+            }
+                break;
+            case 3:
+            {
+                self.no_rq_loseLab.backgroundColor = UIColorFromRGB(0XFEEAEA);
+                self.no_rq_loseLab.textColor = JCBaseColor;
+                [JCLayer setupView:self.no_rq_loseLab corners:UIRectCornerTopRight | UIRectCornerBottomRight cornerRadius:5 borderWith:1 borderColor:JCBaseColor];
+            }
+                break;
+
+            default:
+                break;
+        }
     }
     
-    if (matchModel.classfly==102||matchModel.classfly==103) {
-        self.no_rq_windLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+
+    
+    if (matchModel.classfly==103) {
         self.no_rq_equalLab.layer.borderColor = COLOR_E4E4E4.CGColor;
-        self.no_rq_loseLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+
         self.homeLab.text = matchModel.away_name;
         self.awayLab.text = matchModel.home_name;
 
-        if (matchModel.classfly==102) {
-            self.no_rq_windLab.text = [NSString stringWithFormat:@"客胜 %@",matchModel.no_rq_odds.lose];
-            self.no_rq_equalLab.text = [NSString stringWithFormat:@"指数 %@",matchModel.no_rq_odds.equal];
-            self.no_rq_loseLab.text = [NSString stringWithFormat:@"主胜 %@",matchModel.no_rq_odds.win];
-            switch ([matchModel.spf intValue]) {
-                case 1:
-                {
-                    self.no_rq_loseLab.layer.borderColor = JCBaseColor.CGColor;
-                }
-                    break;
-                case 2:
-                {
-                    self.no_rq_equalLab.layer.borderColor = JCBaseColor.CGColor;
-                }
-                    break;
-                case 3:
-                {
-                    self.no_rq_windLab.layer.borderColor = JCBaseColor.CGColor;
-                }
-                    break;
-                case 4:
-
-                    
-                default:
-                    break;
-            }
-        }
         if (matchModel.classfly==103) {
-            self.no_rq_windLab.text = [NSString stringWithFormat:@"高 %@",matchModel.no_rq_odds.win];
-            self.no_rq_equalLab.text = [NSString stringWithFormat:@"指数 %@",matchModel.no_rq_odds.equal];
-            self.no_rq_loseLab.text = [NSString stringWithFormat:@"低 %@",matchModel.no_rq_odds.lose];
+//            self.no_rq_windLab.text = [NSString stringWithFormat:@"大球 %@",matchModel.no_rq_odds.win];
+//            self.no_rq_equalLab.text = [NSString stringWithFormat:@"指数 %@",matchModel.no_rq_odds.equal];
+//            self.no_rq_loseLab.text = [NSString stringWithFormat:@"小球 %@",matchModel.no_rq_odds.lose];
             switch ([matchModel.spf intValue]) {
                 case 1:
                 {
-                    self.no_rq_windLab.layer.borderColor = JCBaseColor.CGColor;
+  
+                    self.no_rq_windLab.backgroundColor = UIColorFromRGB(0XFEEAEA);
+                    self.no_rq_windLab.textColor = JCBaseColor;
+                    [JCLayer setupView:self.no_rq_windLab corners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadius:5 borderWith:1 borderColor:JCBaseColor];
                 }
                     break;
                 case 2:
@@ -240,12 +217,12 @@
                     break;
                 case 3:
                 {
-                    self.no_rq_loseLab.layer.borderColor = JCBaseColor.CGColor;
+                    self.no_rq_loseLab.backgroundColor = UIColorFromRGB(0XFEEAEA);
+                    self.no_rq_loseLab.textColor = JCBaseColor;
+                    [JCLayer setupView:self.no_rq_loseLab corners:UIRectCornerTopRight | UIRectCornerBottomRight cornerRadius:5 borderWith:1 borderColor:JCBaseColor];
                 }
                     break;
-                case 4:
 
-                    
                 default:
                     break;
             }
@@ -332,9 +309,9 @@
 - (UILabel *)no_rq_windLab {
     if (!_no_rq_windLab) {
         _no_rq_windLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
-        _no_rq_windLab.layer.borderWidth = 0.5;
-        _no_rq_windLab.layer.borderColor = COLOR_E4E4E4.CGColor;
-        _no_rq_windLab.layer.masksToBounds = YES;
+//        _no_rq_windLab.layer.borderWidth = 0.5;
+//        _no_rq_windLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+//        _no_rq_windLab.layer.masksToBounds = YES;
 
     }
     return _no_rq_windLab;
@@ -353,9 +330,9 @@
 - (UILabel *)no_rq_loseLab {
     if (!_no_rq_loseLab) {
         _no_rq_loseLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
-        _no_rq_loseLab.layer.borderWidth = 0.5;
-        _no_rq_loseLab.layer.borderColor = COLOR_E4E4E4.CGColor;
-        _no_rq_loseLab.layer.masksToBounds = YES;
+//        _no_rq_loseLab.layer.borderWidth = 0.5;
+//        _no_rq_loseLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+//        _no_rq_loseLab.layer.masksToBounds = YES;
     }
     return _no_rq_loseLab;
 }

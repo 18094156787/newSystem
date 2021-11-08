@@ -11,6 +11,7 @@
 #import "JCPlaneDetailMatch_JQSCell.h"
 #import "JCPlaneDetailMatch_CustomCell.h"
 #import "JCPlaneDetailMatch_ZFSCell.h"
+#import "JCPlaneDetailMatch_RQCell.h"
 @implementation JCPlaneDetailNewMatchCell
 
 - (void)initViews{
@@ -43,6 +44,7 @@
     [self.tableView registerClass:[JCPlaneDetailMatch_JQSCell class] forCellReuseIdentifier:@"JCPlaneDetailMatch_JQSCell"];
     [self.tableView registerClass:[JCPlaneDetailMatch_CustomCell class] forCellReuseIdentifier:@"JCPlaneDetailMatch_CustomCell"];
     [self.tableView registerClass:[JCPlaneDetailMatch_ZFSCell class] forCellReuseIdentifier:@"JCPlaneDetailMatch_ZFSCell"];
+    [self.tableView registerClass:[JCPlaneDetailMatch_RQCell class] forCellReuseIdentifier:@"JCPlaneDetailMatch_RQCell"];
     
     
     
@@ -68,12 +70,22 @@
     if (matchModel.classfly==4) {
         return AUTO(155);
     }
+    if (matchModel.classfly==2||matchModel.classfly==102) {
+        return AUTO(155);
+    }
     return AUTO(120);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     JCWVerTjInfoMatchBall *matchModel = self.tjModel.match_info[indexPath.row];
+    if(matchModel.classfly==2||matchModel.classfly==102)
+   {
+       JCPlaneDetailMatch_RQCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailMatch_RQCell"];
+       cell.matchModel = matchModel;
+       return cell;
+       
+   }
     if(matchModel.classfly==4)
    {
        JCPlaneDetailMatch_JZCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailMatch_JZCell"];
@@ -81,8 +93,7 @@
        return cell;
        
    }
-    if (matchModel.classfly==1||matchModel.classfly==2||matchModel.classfly==3||matchModel.classfly==102||matchModel.classfly==103) {
-
+    if (matchModel.classfly==1||matchModel.classfly==3||matchModel.classfly==103) {
        JCPlaneDetailMatch_JQSCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailMatch_JQSCell"];
        cell.matchModel = matchModel;
        return cell;

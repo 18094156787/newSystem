@@ -50,7 +50,7 @@
     if (self.loadSuccess&&newsDetailBall) {
         return;
     }
-    self.dsView.ID = newsDetailBall.id;
+    self.dsView.ID = newsDetailBall.zucai_information_id;
     
     
     

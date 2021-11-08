@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @interface JCWNewsDetailBall : JCWBaseBall
+
+@property (strong, nonatomic) NSString *zucai_information_id;//文章id
 @property (strong, nonatomic) NSString * id;
 @property (strong, nonatomic) NSString * title;
 @property (strong, nonatomic) NSString * name;

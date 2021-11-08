@@ -142,7 +142,7 @@
     }else{
         NSString *title = @"主胜";
         if ([self.type integerValue]==3) {
-            title = @"高";
+            title = @"大球";
         }
         [self.masterWin_normalBtn setTitle:[NSString stringWithFormat:@"%@%@",title,sfpModel.win] forState:0];
         self.masterWin_normalBtn.userInteractionEnabled = YES;
@@ -165,7 +165,7 @@
     }else{
         NSString *title = @"客胜";
         if ([self.type integerValue]==3) {
-            title = @"低";
+            title = @"小球";
         }
         [self.customerWin_normalBtn setTitle:[NSString stringWithFormat:@"%@%@",title,sfpModel.lost] forState:0];
         self.customerWin_normalBtn.userInteractionEnabled = YES;

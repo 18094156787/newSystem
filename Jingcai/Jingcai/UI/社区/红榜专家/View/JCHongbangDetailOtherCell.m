@@ -325,11 +325,11 @@
 
     
     if ([matchModel.classfly integerValue]==3) {
-            self.norq_WinLab.text = [NSString stringWithFormat:@"高 %@",no_rq_win];
+            self.norq_WinLab.text = [NSString stringWithFormat:@"大球 %@",no_rq_win];
         //    self.norq_EqualLab.text = [NSString stringWithFormat:@"平 %@",NonNil(model.old_plBall.equal)];
         self.norq_Lab.text = no_rq_eqal;
         
-        self.norq_loseLab.text = [NSString stringWithFormat:@"低 %@",no_rq_lose];
+        self.norq_loseLab.text = [NSString stringWithFormat:@"小球 %@",no_rq_lose];
     }else{
             self.norq_WinLab.text = [NSString stringWithFormat:@"主胜 %@",no_rq_win];
         //    self.norq_EqualLab.text = [NSString stringWithFormat:@"平 %@",NonNil(model.old_plBall.equal)];
@@ -450,10 +450,10 @@
         }
         
         if ([matchModel.classfly integerValue]==3) {//
-                self.norq_WinLab.text = [NSString stringWithFormat:@"高 %@",no_rq_lose];
+                self.norq_WinLab.text = [NSString stringWithFormat:@"大球 %@",no_rq_lose];
             //    self.norq_EqualLab.text = [NSString stringWithFormat:@"平 %@",NonNil(model.old_plBall.equal)];
             self.norq_Lab.text = no_rq_eqal;
-                self.norq_loseLab.text = [NSString stringWithFormat:@"低 %@",no_rq_win];
+                self.norq_loseLab.text = [NSString stringWithFormat:@"小球 %@",no_rq_win];
         }else{
                 self.norq_WinLab.text = [NSString stringWithFormat:@"主胜 %@",no_rq_lose];
             //    self.norq_EqualLab.text = [NSString stringWithFormat:@"平 %@",NonNil(model.old_plBall.equal)];

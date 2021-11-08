@@ -14,9 +14,17 @@
 
 @implementation JCDaShangSuccessVC
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+     self.navigationBarStyle = JCNavigationBarStyleDefault;
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"打赏成功";
+    self.view.backgroundColor = COLOR_F0F0F0;
 }
 
 - (void)initSubViews {
@@ -30,6 +38,7 @@
     }];
     
     UILabel *infoLab = [UILabel initWithTitle:@"谢谢您的支持\n我们必将再接再厉产出更好的内容！" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+    infoLab.numberOfLines = 0;
     [self.view addSubview:infoLab];
     [infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(imgView.mas_bottom);

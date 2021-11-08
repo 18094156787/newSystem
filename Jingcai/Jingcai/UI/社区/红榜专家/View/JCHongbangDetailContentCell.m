@@ -50,6 +50,13 @@
         make.height.mas_equalTo(0);
     }];
     
+    [self.contentView addSubview:self.dsView];
+    [self.dsView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.offset(0);
+        make.top.equalTo(self.collectionView.mas_bottom).offset(AUTO(10));
+        make.height.mas_equalTo(AUTO(140));
+    }];
+    
 
     
     UILabel *infoLab = [UILabel initWithTitle:@"免责声明：鲸猜足球仅为信息发布平台，并不对第三方发布的信息真实性及准确性负责，且不提供彩票售卖服务，请您注意投资风险，理性购买！" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
@@ -59,7 +66,7 @@
     [infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
-        make.top.equalTo(self.collectionView.mas_bottom).offset(AUTO(10));
+        make.top.equalTo(self.dsView.mas_bottom).offset(0);
         make.height.mas_equalTo(AUTO(35+20));
     }];
     
@@ -195,8 +202,7 @@
     if (!_tjInfoDetailBall) {
         return;
     }
-
-
+    self.dsView.ID  = tjInfoDetailBall.id;
     if (tjInfoDetailBall.content.length>0) {
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle.lineSpacing = 5; // 设置行间距
@@ -222,12 +228,7 @@
     }
         [self.collectionView reloadData];
     if (tjInfoDetailBall.content.length==0) {
-//        [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.offset(AUTO(15));
-//            make.right.offset(AUTO(-15));
-//            make.top.equalTo(self.bgView.mas_bottom).offset(AUTO(15));
-//            make.height.mas_equalTo(AUTO(50));
-//        }];
+
         self.bgView.hidden = YES;
         [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.offset(0);
@@ -410,6 +411,12 @@
     }
     return _bgView;
 }
-
+- (JCDaShangView *)dsView {
+    if (!_dsView) {
+        _dsView = [JCDaShangView new];
+        _dsView.scene = @"9";
+    }
+    return _dsView;
+}
 
 @end
