@@ -46,6 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) void(^JCRechargeBlock)(void);
 
+@property (nonatomic,copy) void(^JCDSBlock)(NSString *price);
+
 - (void)show;
 
 - (void)hide;

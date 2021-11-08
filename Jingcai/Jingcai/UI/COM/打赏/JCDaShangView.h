@@ -18,7 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) JCDaShangShowView *dsShowView;
 
+@property (nonatomic,strong) NSString *ID;
 
+//下单购买场景(1充值, 2购买专家方案, 3购买大数据订阅, 4购买红榜方案, 5购买ai方案, 6订阅专栏周期,7购买数据模型,8打赏专家方案,9打赏红榜方案,10打赏文章)
+
+@property (nonatomic,strong) NSString *scene;
 
 @end
 

@@ -40,7 +40,58 @@
         [weakSelf.dsShowView hide];
         [[weakSelf getViewController].navigationController pushViewController:[JCChargeVC new] animated:YES];
     };
+    self.dsShowView.JCDSBlock = ^(NSString * _Nonnull price) {
+        
+    };
 }
+
+#pragma mark - 支付方法
+//创建订单
+
+- (void)caiyunPayWithAmount:(NSString *)amount  {
+
+    JCBaseViewController *baseVC = (JCBaseViewController *)[self getViewController];
+
+    [baseVC.jcWindow showLoading];
+    JCHomeService_New *service = [JCHomeService_New new];
+    [service getConfirmOrderWithUnique:self.ID scene:self.scene source:@"1" price:amount Success:^(id  _Nullable object) {
+        [baseVC.jcWindow endLoading];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSString *order_key = object[@"data"][@"order_key"];
+            [self finalPayWithOrder_key:order_key];
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        [baseVC.jcWindow endLoading];
+    }];
+
+}
+//下单并支付
+- (void)finalPayWithOrder_key:(NSString *)order_key {
+    JCBaseViewController *baseVC = (JCBaseViewController *)[self getViewController];
+    [baseVC.jcWindow showLoading];
+    JCHomeService_New *service = [JCHomeService_New new];
+    [service getPayOrderWithOrder_key:order_key pay_type:@"3" hongbao_id:@"" coupon_id:@"" Success:^(id  _Nullable object) {
+        [baseVC.jcWindow endLoading];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSString *is_pay = object[@"data"][@"is_pay"];
+            if ([is_pay intValue]==1) {
+//                [JCWToastTool showHint:@"支付成功"];
+
+            }
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+        
+    } failure:^(NSError * _Nonnull error) {
+        [baseVC.jcWindow endLoading];
+    }];
+}
+
+
 
 - (void)data {
     NSString *count = @"0";

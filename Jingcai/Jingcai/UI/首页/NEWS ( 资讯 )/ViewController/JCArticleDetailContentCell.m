@@ -50,6 +50,10 @@
     if (self.loadSuccess&&newsDetailBall) {
         return;
     }
+    self.dsView.ID = newsDetailBall.id;
+    
+    
+    
 //    [self.webView loadHTMLString:[self html] baseURL:nil];
     NSString *imgWidth = [NSString stringWithFormat:@"<head><style>img{width:%fpx !important;height:auto}</style></head>",SCREEN_WIDTH-AUTO(30)];
     NSString *style = [NSString stringWithFormat:@"<html><head><meta content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0\" name=\"viewport\"><style type=\"text/css\"></style></head>%@<body></body></html>",imgWidth];
@@ -280,6 +284,7 @@
 - (JCDaShangView *)dsView {
     if (!_dsView) {
         _dsView = [JCDaShangView new];
+        _dsView.scene = @"10";
     }
     return _dsView;
 }

@@ -473,16 +473,18 @@
 //确认订单
 /*
  unique 不同购买场景下的关键值(scene=1时, unique为充值金额;scene=2时, unique为专家方案id;scene=3时, 0为包月,非0为单场比赛方案id;scene=4时, unique为红榜达人方案id;scene=5时, unique为ai发布到红榜达人的方案id)
- scene 下单购买场景(1充值, 2购买专家方案, 3购买大数据订阅, 4购买红榜方案, 5购买ai方案)
+ scene 下单购买场景(1充值, 2购买专家方案, 3购买大数据订阅, 4购买红榜方案, 5购买ai方案, 6订阅专栏周期,7购买数据模型,8打赏专家方案,9打赏红榜方案,10打赏文章)
  source 客户端,订单来源(1 ios app,2 android app,3 (微信h5),5 公众号单独链接支付,6 PC,7 销售,8 订阅号,9 朋友圈,10 服务号,11 非微信h5浏览器(h5))
+ price 打赏金额
  
  **/
-- (void)getConfirmOrderWithUnique:(NSString *)unique scene:(NSString *)scene source:(NSString *)source Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+- (void)getConfirmOrderWithUnique:(NSString *)unique scene:(NSString *)scene source:(NSString *)source price:(NSString *)price Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     NSDictionary * param = @{
                             @"unique":unique,
                             @"scene":scene,
-                            @"source":source
+                            @"source":source,
+                            @"price":price
     };
 
     NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"order_confirm" paramDic:param ignoreArray:@[]];

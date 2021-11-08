@@ -539,7 +539,7 @@
          [freeView removeFromSuperview];
         [self.jcWindow showLoading];
         JCHomeService_New *service = [JCHomeService_New new];
-        [service getConfirmOrderWithUnique:self.tjInfoDetailBall.id scene:@"4" source:@"1" Success:^(id  _Nullable object) {
+        [service getConfirmOrderWithUnique:self.tjInfoDetailBall.id scene:@"4" source:@"1" price:@"" Success:^(id  _Nullable object) {
             [self.jcWindow endLoading];
             if ([JCWJsonTool isSuccessResponse:object]) {
                 NSString *order_key = object[@"data"][@"order_key"];
@@ -549,10 +549,11 @@
             }else{
                 [JCWToastTool showHint:object[@"msg"]];
             }
-            
+
         } failure:^(NSError * _Nonnull error) {
             [self.jcWindow endLoading];
         }];
+
 
         
     };
@@ -575,7 +576,7 @@
     }
     [self.jcWindow showLoading];
     JCHomeService_New *service = [JCHomeService_New new];
-    [service getConfirmOrderWithUnique:self.tjInfoDetailBall.id scene:scene source:@"1" Success:^(id  _Nullable object) {
+    [service getConfirmOrderWithUnique:self.tjInfoDetailBall.id scene:scene source:@"1" price:@"" Success:^(id  _Nullable object) {
         [self.jcWindow endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
             NSString *order_key = object[@"data"][@"order_key"];
@@ -586,6 +587,7 @@
         }else{
             [JCWToastTool showHint:object[@"msg"]];
         }
+
         
     } failure:^(NSError * _Nonnull error) {
         [self.jcWindow endLoading];

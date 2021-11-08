@@ -324,10 +324,21 @@
     if (self.priceTF.text.length==0&&!self.selItemBall) {
         return;
     }
+    if (self.selItemBall) {
+        if (self.JCDSBlock) {
+            self.JCDSBlock([NSString stringWithFormat:@"%ld",self.selItemBall.prize]);
+        }
+    }
     BOOL isPureFloat = [self isPureFloat:self.priceTF.text];
     BOOL isPureInt = [self isPureInt:self.priceTF.text];
     if (!isPureFloat&&!isPureInt) {
         [JCWToastTool showHint:@"请输入正确的金额"];
+        return;
+    }
+    if (self.JCDSBlock) {
+        if (self.priceTF.text.length>0) {
+            self.JCDSBlock(self.priceTF.text);
+        }
     }
     
 }
