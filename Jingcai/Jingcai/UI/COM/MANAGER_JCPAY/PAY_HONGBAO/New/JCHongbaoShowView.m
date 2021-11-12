@@ -13,8 +13,6 @@
 - (void)initViews {
     self.backgroundColor = [JCBlackColor colorWithAlphaComponent:0.5];
     
-
-    
     [self addSubview:self.bgView];
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self);
@@ -37,16 +35,7 @@
         make.width.height.mas_equalTo(AUTO(40));
     }];
     
-//    UIButton *closeBtn = [UIButton new];
-//    [closeBtn setImage:JCIMAGE(@"caiyun_close") forState:0];
-//    [closeBtn setImage:JCIMAGE(@"caiyun_close") forState:UIControlStateHighlighted];
-//    [self.bgView addSubview:closeBtn];
-//    [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.equalTo(self.bgView).offset(AUTO(-10));
-//        make.centerY.equalTo(titleLab);
-//        make.width.height.mas_equalTo(AUTO(30));
-//    }];
-    
+
     UIView *lineView = [UIView new];
     lineView.backgroundColor = COLOR_F8F8F8;
     [self.bgView addSubview:lineView];

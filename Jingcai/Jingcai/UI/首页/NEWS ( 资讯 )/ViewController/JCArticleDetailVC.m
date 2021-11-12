@@ -54,6 +54,8 @@
     [self initViews];
     [self loadNewsDetailData];
     [self browseArticle];//增加浏览记录
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadNewsDetailData) name:@"JCDaShangSuccess" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyUserInfo) name:@"JCDaShangSuccess" object:nil];
 }
 
 - (void)loadNewsDetailData {
@@ -221,6 +223,7 @@
     if (indexPath.row==0) {
         JCArticleDetailHeadViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCArticleDetailHeadViewCell"];
         cell.newsDetailBall = self.newsDetailBall;
+//        cell.newsDetailBall = self.newsDetailBall;
         WeakSelf;
         cell.JCConcernBlock = ^{
             [weakSelf concernTuiJianWithModel:self.newsDetailBall.user_id];

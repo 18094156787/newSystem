@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *title;
 
+@property (nonatomic,strong) NSString *is_show_dataModel;//是否展示数据模型
+
 @property (nonatomic,strong) NSString *is_show_big_data;//是否展示大数据
 
 @property (nonatomic,strong) NSString *is_show_whale_ai;//是否展示鲸猜ai

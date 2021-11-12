@@ -106,6 +106,8 @@ static CGFloat const kWMMenuViewUserHeight = 60;
     [super viewDidLoad];
     [self initViews];
     self.title = @"方案详情";
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadNewsDetailData) name:@"JCDaShangSuccess" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyUserInfo) name:@"JCDaShangSuccess" object:nil];
     self.autherHeadView = [[JCHongbangDetailTopView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, kWMMenuViewUserHeight)];
 
     self.autherHeadView.typeLab.hidden= YES;
@@ -460,8 +462,25 @@ static CGFloat const kWMMenuViewUserHeight = 60;
     } failure:^(NSError * _Nonnull error) {
         [self.view endLoading];
     }];
-    
-    
+}
+
+- (void)loadNewsDetailData {
+    JCHomeService_New *service = [JCHomeService_New new];
+    [service getHongbang_TuijianDetailWithTuijian_id:self.detailModel.talent_plan.id orderID:@"" type:@"" Success:^(id  _Nullable object) {
+        [[UIApplication sharedApplication].keyWindow endLoading];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+           
+            self.detailModel = (JCHongbangDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCHongbangDetailModel class]];
+            [self reloadData];
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        [JCWToastTool showHint:@"网络异常"];
+        [[UIApplication sharedApplication].keyWindow endLoading];
+    }];
 
 }
 

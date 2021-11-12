@@ -80,6 +80,8 @@
             NSString *is_pay = object[@"data"][@"is_pay"];
             if ([is_pay intValue]==1) {
 //                [JCWToastTool showHint:@"支付成功"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"JCDaShangSuccess" object:nil];
+                [self.dsShowView hide];
                 [[self getViewController].navigationController pushViewController:[JCDaShangSuccessVC new] animated:YES];
 
             }
@@ -93,12 +95,11 @@
     }];
 }
 
-
-
-- (void)data {
-    NSString *count = @"0";
-    NSString *countString = [NSString stringWithFormat:@"已有%@人打赏",count];
-    if ([count integerValue]>0) {
+- (void)setReward_num:(NSInteger)reward_num {
+    _reward_num = reward_num;
+    if (reward_num>0) {
+        NSString *count = [NSString stringWithFormat:@"%ld",reward_num];
+        NSString *countString = [NSString stringWithFormat:@"已有%@人打赏",count];
         NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:countString];
         NSRange range = [countString rangeOfString:count];
         [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
@@ -106,8 +107,9 @@
     }else{
         self.dsCountLab.text = @"快来支持一下，为专家打call";
     }
-
+        
 }
+
 
 - (void)dsBtnClick {
 
@@ -126,8 +128,8 @@
 - (UIButton *)dsBtn {
     if (!_dsBtn) {
         _dsBtn = [UIButton initWithText:@"打赏" FontSize:AUTO(14) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
-        [_dsBtn setBackgroundImage:JCIMAGE(@"button_bg") forState:0];
-        [_dsBtn setBackgroundImage:JCIMAGE(@"button_bg") forState:UIControlStateHighlighted];
+        [_dsBtn setBackgroundImage:JCIMAGE(@"button_bg_new") forState:0];
+        [_dsBtn setBackgroundImage:JCIMAGE(@"button_bg_new") forState:UIControlStateHighlighted];
         [_dsBtn addTarget:self action:@selector(dsBtnClick) forControlEvents:UIControlEventTouchUpInside];
         [_dsBtn hg_setAllCornerWithCornerRadius:4];
     }

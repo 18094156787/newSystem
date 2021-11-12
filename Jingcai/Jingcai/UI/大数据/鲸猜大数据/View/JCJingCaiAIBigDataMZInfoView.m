@@ -9,6 +9,7 @@
 #import "JCJingCaiAIBigDataMZInfoView.h"
 #import "JCBigDataMingZhongModel.h"
 #import "JNMatchSJAgainstZhiShu_TopMzChartCell.h"
+#import "JCJingCaiAIBigDataHomeVC.h"
 @implementation JCJingCaiAIBigDataMZInfoView
 
 - (void)initViews {
@@ -29,6 +30,15 @@
         make.left.equalTo(topLineView.mas_right).offset(AUTO(4));
         make.height.mas_equalTo(AUTO(14));
     }];
+    
+    UILabel *exampleLab = [UILabel initWithTitle:@"示例" andFont:AUTO(14) andWeight:2 andTextColor:UIColorFromRGB(0x0085C7) andBackgroundColor:JCClearColor andTextAlignment:0];
+    exampleLab.userInteractionEnabled = YES;
+    [self addSubview:exampleLab];
+    [exampleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(topLineView);
+        make.right.offset(0);
+        make.size.mas_equalTo(CGSizeMake(50, 30));
+    }];
 
     [self addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -39,6 +49,11 @@
         make.bottom.offset(AUTO(-10));
     }];
     [self.tableView registerClass:[JNMatchSJAgainstZhiShu_TopMzChartCell class] forCellReuseIdentifier:@"JNMatchSJAgainstZhiShu_TopMzChartCell"];
+    
+    WeakSelf;
+    [exampleLab bk_whenTapped:^{
+        [[weakSelf getViewController].navigationController pushViewController:[JCJingCaiAIBigDataHomeVC new] animated:YES];
+    }];
 }
 
 #pragma mark <UITableViewDataSource>

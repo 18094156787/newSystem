@@ -79,7 +79,7 @@
     
 
     
-    self.orderDetailView.hidden = infoModel.is_pay==2?NO:YES;
+//    self.orderDetailView.hidden = infoModel.is_pay==2?NO:YES;
 }
 
 - (void)setDetailModel:(JCHongbangOrderDetailModel *)detailModel {

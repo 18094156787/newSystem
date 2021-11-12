@@ -118,6 +118,9 @@ static CGFloat const kWMMenuViewHeight = 0;
     };
     [self loadDataInfo];
     [self getMatchList];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadNewsDetailData) name:@"JCDaShangSuccess" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMyUserInfo) name:@"JCDaShangSuccess" object:nil];
 
 }
 
@@ -448,17 +451,22 @@ static CGFloat const kWMMenuViewHeight = 0;
 #pragma mark --
 
 
-//- (void)back:(UIButton *)sender {
-////    [self.navigationController popViewControllerAnimated:YES];
-//    NSArray *array = self.navigationController.viewControllers;
-//    for (UIViewController *vc in self.navigationController.viewControllers) {
-//        if ([vc isKindOfClass:[JCFootBallAuthorDetailWMViewController class]]||[vc isKindOfClass:[JCMyBuyPlanWMViewController class]]||[vc isKindOfClass:[JCHomeSearchVC class]]||[vc isKindOfClass:[JCBasketBallMatchDetailWMStickVC class]]) {
-//            [self.navigationController popToViewController:vc animated:YES];
-//            return;
-//        }
-//    }
-//    [self.navigationController popToRootViewControllerAnimated:YES];
-//}
+- (void)loadNewsDetailData {
+    JCHomeService_New *service = [JCHomeService_New service];
+    [service getGZHT_TuijianDetailWithTuijian_id:self.planDetailModel.id orderID:@"" type:@"" Success:^(id  _Nullable object) {
+        [[UIApplication sharedApplication].keyWindow endLoading];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            self.planDetailModel = (JCWTjInfoBall *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCWTjInfoBall class]];
+            [self reloadData];
+        }else {
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        [[UIApplication sharedApplication].keyWindow endLoading];
+    }];
+
+}
 
 - (CGSize)returnTextWidth:(NSString *)text size:(CGSize)size font:(UIFont *)font{
     CGSize textSize = [text boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : font} context:nil].size;

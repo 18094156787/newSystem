@@ -341,7 +341,7 @@
 //        }];
 //        self.refundLab.text = @"";
 //    }
-    self.orderDetailView.hidden = infoModel.order_id.length>0?NO:YES;
+//    self.orderDetailView.hidden = infoModel.order_id.length>0?NO:YES;
 
 }
 

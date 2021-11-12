@@ -256,7 +256,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) JCColumnInfoModel *column_info;//关联的专栏
 
+@property (assign, nonatomic) NSInteger is_reward_open;//打赏开启 0不开1开
 
+@property (assign, nonatomic) NSInteger reward_num;//打赏人数
 
 
 @end

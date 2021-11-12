@@ -11,52 +11,57 @@
 @implementation JCJingCaiAIBigDataHeadView
 
 - (void)initViews {
-    
     self.backgroundColor = COLOR_F4F6F9;
-    self.bgView = [[UIView alloc] init];
-    self.bgView.backgroundColor = JCWhiteColor;
-    [self.bgView hg_setAllCornerWithCornerRadius:AUTO(5)];
-    self.bgView.frame = CGRectMake(0,0,SCREEN_WIDTH,AUTO(235));
+    
+    self.bgView = [[UIImageView alloc] init];
+    self.bgView.userInteractionEnabled = YES;
+    self.bgView.image = JCIMAGE(@"bg_img_bigdata");
+//    self.bgView.backgroundColor = JCWhiteColor;
+//    [self.bgView hg_setAllCornerWithCornerRadius:AUTO(5)];
+    self.bgView.frame = CGRectMake(0,0,SCREEN_WIDTH,AUTO(208)+kNavigationBarHeight);
     [self addSubview:self.bgView];
-    UILabel *titleLab = [UILabel initWithTitle:@"鲸猜大数据服务" andFont:AUTO(16) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+    
+    UIView *cornerView = [UIView new];
+    cornerView.backgroundColor = COLOR_F4F6F9;
+    [cornerView hg_setCornerOnTopWithRadius:12];
+    [self.bgView addSubview:cornerView];
+    [cornerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.bgView);
+        make.height.mas_equalTo(AUTO(16));
+    }];
+    
+    UIButton *backBtn = [UIButton new];
+    [self.bgView addSubview:backBtn];
+    [backBtn setImage:JCIMAGE(@"common_title_back_white_bold") forState:0];
+    [backBtn setImage:JCIMAGE(@"common_title_back_white_bold") forState:UIControlStateHighlighted];
+    [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(5);
+        make.top.offset(StatusBar_HEIGHT);
+        make.width.height.mas_equalTo(44);
+    }];
+    
+    
+    UILabel *titleLab = [UILabel initWithTitle:@"鲸猜大数据服务" andFont:AUTO(16) andWeight:2 andTextColor:JCWhiteColor andBackgroundColor:JCClearColor andTextAlignment:0];
     [self.bgView addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(15);
-        make.top.offset(10);
+        make.left.equalTo(backBtn.mas_right).offset(0);
+        make.centerY.equalTo(backBtn);
     }];
 
-    
-    UIImageView *imgView = [UIImageView new];
-    imgView.image = JCIMAGE(@"ic_bigdata_homeTop");
-    [self.bgView addSubview:imgView];
-    [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-15);
-        make.top.offset(8);
-        make.size.mas_equalTo(CGSizeMake(AUTO(163), AUTO(118)));
-    }];
+
     
     [self.bgView addSubview:self.titleLab];
     [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(15);
-        make.top.equalTo(titleLab.mas_bottom).offset(4);
-        make.right.equalTo(imgView.mas_left).offset(15);
-    }];
-    
-    [self.bgView addSubview:self.infoLab];
-    [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(15);
-        make.top.equalTo(self.titleLab.mas_bottom).offset(8);
+        make.top.offset(kNavigationBarHeight+AUTO(12));
+        make.right.offset(AUTO(-115));
     }];
     
 
-
-    
-
-    
     [self.bgView addSubview:self.countLab];
     [self.countLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(-15);
-        make.top.equalTo(self.infoLab.mas_bottom).offset(12);
+        make.top.equalTo(self.titleLab.mas_bottom).offset(AUTO(20));
         make.height.mas_equalTo(AUTO(20));
     }];
 
@@ -77,54 +82,43 @@
     
     [self.bgView addSubview:self.sureBgView];
     [self.sureBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.buyInfoView.mas_bottom).offset(25);
+        make.top.equalTo(self.buyInfoView.mas_bottom).offset(AUTO(20));
         make.left.offset(15);
         make.right.offset(-15);
-        make.height.mas_equalTo(32);
+        make.height.mas_equalTo(AUTO(40));
     }];
+
+    
+    [self.sureBgView addSubview:self.sureBtn];
+    [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.insets(UIEdgeInsetsZero);
+    }];
+    
     
     [self.sureBgView addSubview:self.timeLab];
     [self.timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(0);
         make.top.bottom.offset(0);
-        make.width.mas_equalTo(0);
+        make.right.mas_equalTo(self.sureBgView.mas_centerX);
     }];
     
-    [self.sureBgView addSubview:self.sureBtn];
-    [self.sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self.sureBgView);
-        make.left.equalTo(self.timeLab.mas_right);
+    [self.sureBgView addSubview:self.statusBtn];
+    [self.statusBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(0);
-        make.height.mas_equalTo(32);
+        make.top.bottom.offset(0);
+        make.left.mas_equalTo(self.sureBgView.mas_centerX);
     }];
     
     
 
-    
-    
 
-    
-    
-    
-
-    
+    //放置轮播
     [self addSubview:self.bottomView];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.offset(0);
         make.top.equalTo(self.bgView.mas_bottom).offset(0);
-        make.height.mas_equalTo(36);
+        make.height.mas_equalTo(AUTO(36));
     }];
-    
-    [self addSubview:self.mzInfovView];
-    [self.mzInfovView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.bottomView.mas_bottom).offset(AUTO(8));
-        make.bottom.offset(AUTO(-8));
-//        make.height.mas_equalTo(AUTO(160));
-        
-        make.left.right.offset(0);
-    }];
-
-    
     
     UIImageView *ycImgView = [UIImageView new];
     ycImgView.image = JCIMAGE(@"jc_bigdata_yc");
@@ -145,13 +139,57 @@
         make.size.mas_equalTo(CGSizeMake(0.5, 28));
     }];
     
-    self.noticeCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(AUTO(60), 0, SCREEN_WIDTH-AUTO(40), 36) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    self.noticeCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(AUTO(60), 0, SCREEN_WIDTH-AUTO(40), AUTO(36)) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
     self.noticeCycleScrollView.clipsToBounds = YES;
     self.noticeCycleScrollView.showPageControl = NO;
     self.noticeCycleScrollView.autoScrollTimeInterval = 3;
     self.noticeCycleScrollView.backgroundColor = JCClearColor;
     self.noticeCycleScrollView.scrollDirection = UICollectionViewScrollDirectionVertical;
     [self.bottomView addSubview:self.noticeCycleScrollView];
+    
+    //大数据命中统计
+    [self addSubview:self.mzInfovView];
+    [self.mzInfovView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.bottomView.mas_bottom).offset(AUTO(8));
+        make.height.mas_equalTo(AUTO(28)*5+AUTO(80));
+        make.left.right.offset(0);
+    }];
+
+    //日期标题
+    UIView *timeTitleView = [UIView new];
+    timeTitleView.backgroundColor = JCWhiteColor;
+    [self addSubview:timeTitleView];
+    [timeTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mzInfovView.mas_bottom).offset(AUTO(8));
+        make.left.right.offset(0);
+        make.height.mas_equalTo(AUTO(44));
+    }];
+    
+    UIView *redLine = [UIView new];
+    redLine.backgroundColor = JCBaseColor;
+    [timeTitleView addSubview:redLine];
+    [redLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(15));
+        make.bottom.offset(-8);
+        make.size.mas_equalTo(CGSizeMake(2, 16));
+    }];
+    
+    UILabel *matchTimeLab = [UILabel initWithTitle:@"比赛列表" andFont:AUTO(16) andWeight:2 andTextColor:COLOR_000000 andBackgroundColor:JCClearColor andTextAlignment:0];
+    [timeTitleView addSubview:matchTimeLab];
+    [matchTimeLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(redLine.mas_right).offset(AUTO(10));
+        make.centerY.equalTo(redLine);
+    }];
+    
+    [self addSubview:self.dateHeadView];
+    [self.dateHeadView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.offset(0);
+        make.height.mas_equalTo(AUTO(72));
+        make.top.equalTo(timeTitleView.mas_bottom);
+    }];
+    
+    
+
     
     self.titleLab.text = @"根据对阵双方的实力、状态、交战、战绩、指数等数据进行分析，给出各种玩法的概率。可包月，也可单场订阅（单场订阅可在比分-对应比赛的数据模块中进行购买）";
 
@@ -162,6 +200,10 @@
         if (weakSelf.JCBuyClickBlock) {
             weakSelf.JCBuyClickBlock();
         }
+    }];
+    
+    [backBtn bk_whenTapped:^{
+        [[weakSelf getViewController].navigationController popViewControllerAnimated:YES];
     }];
 
 }
@@ -207,6 +249,31 @@
     }else{
         [self.sureBtn setTitle:@"立即开通" forState:0];
     }
+//    {
+//        [self.sureBtn setBackgroundImage:JCIMAGE(@"button_bg_new") forState:0];
+//        self.statusBtn.hidden = YES;
+//        self.timeLab.hidden = YES;
+//    }
+    self.statusBtn.hidden = YES;
+    self.timeLab.hidden = YES;
+//    {
+//        //下架
+//        [self.sureBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button") forState:0];
+//        [self.sureBtn setTitle:@"" forState:0];
+//        [self.statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_gray") forState:0];
+//        [self.statusBtn setTitle:@"已下架" forState:0];
+//        self.statusBtn.hidden = NO;
+//        self.timeLab.hidden = NO;
+//    }
+//    {
+//        //免费体验,立即续费
+//        [self.sureBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button") forState:0];
+//        [self.sureBtn setTitle:@"" forState:0];
+//        [self.statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_red") forState:0];
+//        [self.statusBtn setTitle:@"免费体验中" forState:0];
+//        self.statusBtn.hidden = NO;
+//        self.timeLab.hidden = NO;
+//    }
     
     
     [self layoutIfNeeded];
@@ -261,11 +328,22 @@
         self.bottomView.hidden = YES;
         [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(0);
+//            make.bottom.offset(0);
         }];
+        
+        [self.mzInfovView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.bottomView.mas_bottom).offset(0);
+        }];
+        
     }else{
         self.bottomView.hidden = NO;
         [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(AUTO(36));
+//            make.bottom.offset(AUTO(-8));
+        }];
+        
+        [self.mzInfovView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.bottomView.mas_bottom).offset(AUTO(8));
         }];
     }
 }
@@ -274,12 +352,16 @@
     _dataArray = dataArray;
     self.mzInfovView.dataArray = dataArray;
     self.mzInfovView.hidden = dataArray.count==0?YES:NO;
+    [self.mzInfovView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(AUTO(28)*dataArray.count+AUTO(80));
+    }];
+    
 }
 
 
 - (UILabel *)titleLab {
     if (!_titleLab) {
-        _titleLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+        _titleLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:JCWhiteColor andBackgroundColor:JCClearColor andTextAlignment:0];
         _titleLab.numberOfLines = 0;
     }
     return _titleLab;
@@ -332,25 +414,37 @@
 
 - (UILabel *)timeLab {
     if (!_timeLab) {
-        _timeLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _timeLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _timeLab.hidden = YES;
     }
     return _timeLab;
+}
+
+- (UIButton *)statusBtn {
+    if (!_statusBtn) {
+        _statusBtn = [UIButton initWithText:@"" FontSize:AUTO(16) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
+        [_statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_red") forState:0];
+        _statusBtn.hidden = YES;
+//        [_statusBtn hg_setAllCornerWithCornerRadius:16];
+    }
+    return _statusBtn;
 }
 
 - (UIView *)sureBgView {
     if (!_sureBgView) {
         _sureBgView = [UIView new];
         _sureBgView.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
-        [_sureBgView hg_setAllCornerWithCornerRadius:16];
+//        [_sureBgView hg_setAllCornerWithCornerRadius:16];
     }
     return _sureBgView;
 }
 
 - (UIButton *)sureBtn {
     if (!_sureBtn) {
-        _sureBtn = [UIButton initWithText:@"立即购买" FontSize:AUTO(16) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
-        _sureBtn.backgroundColor = JCBaseColor;
-        [_sureBtn hg_setAllCornerWithCornerRadius:16];
+        _sureBtn = [UIButton initWithText:@"立即开通" FontSize:AUTO(16) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
+        [_sureBtn setBackgroundImage:JCIMAGE(@"button_bg_new_cor") forState:0];
+//        _sureBtn.backgroundColor = JCBaseColor;
+//        [_sureBtn hg_setAllCornerWithCornerRadius:AUTO(20)];
     }
     return _sureBtn;
 }
@@ -361,5 +455,12 @@
         _mzInfovView.backgroundColor = JCWhiteColor;
     }
     return _mzInfovView;
+}
+- (JCDataModelDateView *)dateHeadView {
+    if (!_dateHeadView) {
+        _dateHeadView = [JCDataModelDateView new];
+//        _dateHeadView.hidden = YES;
+    }
+    return _dateHeadView;
 }
 @end

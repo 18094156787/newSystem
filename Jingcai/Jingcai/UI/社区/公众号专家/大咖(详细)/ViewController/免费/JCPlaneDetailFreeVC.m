@@ -288,6 +288,7 @@
     
     if (indexPath.section==self.matchArray.count+3) {
         JCPlanDetailMZ_Cell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlanDetailMZ_Cell"];
+        cell.planDetailModel = self.planDetailModel;
         return cell;
     }
     if (indexPath.section==self.matchArray.count+4) {

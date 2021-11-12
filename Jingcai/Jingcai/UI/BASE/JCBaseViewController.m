@@ -512,7 +512,30 @@
 
 }
 
+- (void)getMyUserInfo {
+    if ( [JCWUserBall currentUser].token.length==0) {
+        return;
+    }
 
+    JCUserService_New *service = [JCUserService_New service];
+    [service getMyUserInfoWithSuccess:^(id  _Nullable object) {
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSString *token = [JCWUserBall currentUser].token;
+            NSLog(@"token=%@",token);
+            //缓存userBall对象
+            JCWUserBall *userBall = (JCWUserBall *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCWUserBall class]];
+            userBall.token = token;
+            [JCWUserBall save:userBall];
+
+        }else {
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+        
+    } failure:^(NSError * _Nonnull error) {
+
+    }];
+
+}
 #pragma mark - UIGestureRecognizerDelegate
 //- (BOOL)gestureRecognizerShouldBegin：(UIGestureRecognizer *)gestureRecognizer {
 // return self.navigationController.childViewControllers.count > 1;

@@ -29,6 +29,24 @@
     }];
 }
 
+- (void)setPlanDetailModel:(JCWTjInfoBall *)planDetailModel {
+    _planDetailModel = planDetailModel;
+    self.dsView.ID = planDetailModel.id;
+    if (self.planDetailModel.is_reward_open==1) {
+        self.dsView.hidden = NO;
+        self.dsView.reward_num = self.planDetailModel.reward_num;
+        [self.dsView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(AUTO(140));
+        }];
+    }else{
+        self.dsView.hidden = YES;
+        [self.dsView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+    }
+    
+}
+
 - (JCDaShangView *)dsView {
     if (!_dsView) {
         _dsView = [JCDaShangView new];

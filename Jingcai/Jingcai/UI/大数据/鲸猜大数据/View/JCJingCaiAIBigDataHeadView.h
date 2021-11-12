@@ -11,11 +11,12 @@
 #import "JCJingCaiAIBigDataXufeiInfoView.h"
 #import "JCBigDataMonthProduceModel.h"
 #import "JCJingCaiAIBigDataMZInfoView.h"
+#import "JCDataModelDateView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCJingCaiAIBigDataHeadView : JCBaseView<SDCycleScrollViewDelegate>
 
-@property (nonatomic,strong) UIView *bgView;
+@property (nonatomic,strong) UIImageView *bgView;
 
 @property (nonatomic,strong) UILabel *titleLab;
 
@@ -24,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel *countLab;
 
 @property (nonatomic,strong) UILabel *timeLab;
+
+@property (nonatomic,strong) UIButton *statusBtn;
 
 @property (nonatomic,strong)UIView *buyBgView;
 
@@ -44,6 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSArray *titleArray;
 
 @property (nonatomic,strong) JCJingCaiAIBigDataMZInfoView *mzInfovView;
+
+@property (nonatomic,strong) JCDataModelDateView *dateHeadView;
 
 @property (nonatomic,strong) NSArray *dataArray;
 

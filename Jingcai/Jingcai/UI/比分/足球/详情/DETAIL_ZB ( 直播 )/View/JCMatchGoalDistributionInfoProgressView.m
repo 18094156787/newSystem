@@ -158,6 +158,7 @@
     shapeLayer.lineWidth = lineView.bounds.size.height;
     shapeLayer.fillColor = nil;
     shapeLayer.strokeColor = color.CGColor;
+
     //strokeStart defaults to zero and strokeEnd to one.
     shapeLayer.strokeStart = start;
     //分成了多少段，每次加多少分之一

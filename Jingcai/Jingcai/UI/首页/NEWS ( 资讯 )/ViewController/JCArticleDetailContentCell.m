@@ -28,7 +28,7 @@
         make.left.offset(AUTO(12));
         make.right.offset(AUTO(-12));
         make.top.equalTo(self.webView.mas_bottom);
-        make.height.mas_equalTo(AUTO(140));
+        make.height.mas_equalTo(0);
     }];
     
     UILabel *infoLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
@@ -51,6 +51,19 @@
         return;
     }
     self.dsView.ID = newsDetailBall.zucai_information_id;
+    
+    if (self.newsDetailBall.is_reward_open==1) {
+        self.dsView.reward_num = self.newsDetailBall.reward_num;
+        self.dsView.hidden = NO;
+        [self.dsView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(AUTO(140));
+        }];
+    }else{
+        self.dsView.hidden = YES;
+        [self.dsView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+    }
     
     
     
@@ -285,6 +298,7 @@
     if (!_dsView) {
         _dsView = [JCDaShangView new];
         _dsView.scene = @"10";
+        _dsView.hidden = YES;
     }
     return _dsView;
 }

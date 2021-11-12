@@ -126,6 +126,7 @@ static CGFloat const kWMMenuViewHeight = 44;
     self.navShadow.alpha = 0;
     self.activityImgView.hidden = YES;
     self.is_hide = YES;
+    
 }
 
 

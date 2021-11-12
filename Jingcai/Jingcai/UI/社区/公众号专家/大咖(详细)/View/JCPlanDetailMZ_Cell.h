@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) JCDaShangView *dsView;//打赏
 
+@property (nonatomic,strong) JCWTjInfoBall *planDetailModel;
+
 @end
 
 NS_ASSUME_NONNULL_END

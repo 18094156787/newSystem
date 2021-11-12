@@ -93,7 +93,7 @@
         if (!myMoney) {
             myMoney = @"0";
         }
-        NSString *title = [NSString stringWithFormat:@"账户余额 %@红币    ",myMoney];
+        NSString *title = [NSString stringWithFormat:@"账户余额 %@红币  ",myMoney];
 //        NSString *title = [NSString stringWithFormat:@"%@: %@",payWayball.title,money];
         NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
         NSRange range = [title rangeOfString:[NSString stringWithFormat:@"%@红币",myMoney]];

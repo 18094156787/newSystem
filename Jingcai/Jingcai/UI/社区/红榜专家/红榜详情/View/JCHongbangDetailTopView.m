@@ -247,7 +247,7 @@
         }];
         self.refundLab.text = @"";
     }
-    self.orderDetailView.hidden = tjInfoDetailBall.order_id.length>0?NO:YES;
+//    self.orderDetailView.hidden = tjInfoDetailBall.order_id.length>0?NO:YES;
     
     self.typeLab.text = [NSString stringWithFormat:@"  %@  ",tjInfoDetailBall.classfly_desc];
 //    self.typeLab.text = @"43";

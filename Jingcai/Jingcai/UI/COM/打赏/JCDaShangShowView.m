@@ -307,8 +307,9 @@
 }
 
 - (void)data {
-    self.userImgView.backgroundColor = JCBaseColor;
-    self.nameLab.text = @"杰克船长008";
+    JCWUserBall *userBall = [JCWUserBall currentUser];
+    [self.userImgView sd_setImageWithURL:[NSURL URLWithString:userBall.user_img] placeholderImage:JCIMAGE(@"userImg_default")];
+    self.nameLab.text = userBall.user_name;
 }
 
 - (void)rechargeBtnClick {
@@ -426,9 +427,6 @@
 }
 
 - (void)hide {
-    
-
-      
     WeakSelf;
     [UIView animateWithDuration:0.3f animations:^{
         weakSelf.bgView.transform = CGAffineTransformMakeTranslation(0, SCREEN_HEIGHT);
@@ -437,12 +435,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [weakSelf removeFromSuperview];;
     });
-    
-    
 }
-
-
-
 
 //判断字符串是否为浮点数
 - (BOOL)isPureFloat:(NSString*)string{
@@ -569,8 +562,8 @@
 - (UIButton *)sureBtn {
     if (!_sureBtn) {
         _sureBtn = [UIButton initWithText:@"确认打赏" FontSize:AUTO(16) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
-        [_sureBtn setBackgroundImage:JCIMAGE(@"button_bg") forState:0];
-        [_sureBtn setBackgroundImage:JCIMAGE(@"button_bg") forState:UIControlStateHighlighted];
+        [_sureBtn setBackgroundImage:JCIMAGE(@"button_bg_new") forState:0];
+        [_sureBtn setBackgroundImage:JCIMAGE(@"button_bg_new") forState:UIControlStateHighlighted];
         [_sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
         [_sureBtn hg_setAllCornerWithCornerRadius:40];
     }

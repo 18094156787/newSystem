@@ -88,18 +88,18 @@
 
 
 - (void)initViews {
-    JCJingCaiAIBigDataMatchTitleView *titleView = [[JCJingCaiAIBigDataMatchTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, AUTO(45))];
-    titleView.backgroundColor = JCWhiteColor;
-    titleView.titleLab.text = @"比赛列表";
-    titleView.iconView.hidden = NO;
-    self.tableView.tableHeaderView = titleView;
+//    JCJingCaiAIBigDataMatchTitleView *titleView = [[JCJingCaiAIBigDataMatchTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, AUTO(45))];
+//    titleView.backgroundColor = JCWhiteColor;
+//    titleView.titleLab.text = @"比赛列表";
+//    titleView.iconView.hidden = NO;
+//    self.tableView.tableHeaderView = titleView;
+//
+//    titleView.JCBlcok = ^{
+//        [weakSelf.navigationController pushViewController:[JCJingCaiAIBigDataHomeVC new] animated:YES];
+//    };
+    
+    
     WeakSelf;
-    titleView.JCBlcok = ^{
-        [weakSelf.navigationController pushViewController:[JCJingCaiAIBigDataHomeVC new] animated:YES];
-    };
-    
-    
-    
     self.tableView.estimatedRowHeight = 100;
     self.tableView.backgroundColor = COLOR_F4F6F9;
     self.tableView.separatorColor = COLOR_DDDDDD;
@@ -120,9 +120,9 @@
     self.tableView.ly_emptyView = emptyView;
 //    [self showNoDataViewImageStr:@"empty_img_follow_expert" Title:@"暂时没有比赛" BtnTitle:@"" Btnwidth:0 HiddenBtn:YES];
     
-    self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
-        [weakSelf refreshData];
-    }];
+//    self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
+//        [weakSelf refreshData];
+//    }];
 
     
     MJRefreshBackNormalFooter *mj_foot = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -173,10 +173,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section==0) {
-        return 0.01f;
-    }
-    return AUTO(8);
+    return AUTO(4);
 }
 
 

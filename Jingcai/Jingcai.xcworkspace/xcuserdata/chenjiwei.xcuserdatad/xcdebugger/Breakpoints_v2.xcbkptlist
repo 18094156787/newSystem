@@ -3,38 +3,4 @@
    uuid = "26447FE1-64B4-4153-9E47-5606331C1ED7"
    type = "0"
    version = "2.0">
-   <Breakpoints>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D963E122-DB5F-4DA7-B362-E726FA07618D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/View/JCPlaneDetailMatch_JQSCell.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
-            landmarkName = "-setMatchModel:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8477FAB0-D284-4D20-8B8C-CF9FDE461739"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/View/JCPlaneDetailMatch_JQSCell.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
-            landmarkName = "-setMatchModel:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-   </Breakpoints>
 </Bucket>

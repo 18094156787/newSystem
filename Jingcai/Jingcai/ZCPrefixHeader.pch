@@ -50,7 +50,7 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 #define kWHongbangHeaderViewHeight  (AUTO(155)+NavigationStatusBarHeight)
 #define JCColumnHeaderViewHeight  (AUTO(165))
 #define kWHongbangDetailHeaderViewHeight  (AUTO(160)+NavigationStatusBarHeight)
-#define kWJingCaiBigDataHeaderViewHeight  AUTO(465)
+#define kWJingCaiBigDataHeaderViewHeight  AUTO(465)+NavigationStatusBarHeight
 #define kWMTopHeadHeight  AUTO(273)
 #define kWMCommunityTopHeadHeight  AUTO(135)
 
@@ -247,7 +247,8 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 #define COLOR_812BF1 UIColorFromRGB(0x812BF1)
 #define COLOR_F2A15E UIColorFromRGB(0xF2A15E)
 #define COLOR_FB5835 UIColorFromRGB(0xFB5835)
-
+#define COLOR_606062 UIColorFromRGB(0x606062)
+#define COLOR_E8E8E8 UIColorFromRGB(0xE8E8E8)
 
 #define JCIMAGE(name)    [UIImage imageNamed:(name)]
 

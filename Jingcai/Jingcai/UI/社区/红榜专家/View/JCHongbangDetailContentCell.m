@@ -54,7 +54,7 @@
     [self.dsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.offset(0);
         make.top.equalTo(self.collectionView.mas_bottom).offset(AUTO(10));
-        make.height.mas_equalTo(AUTO(140));
+        make.height.mas_equalTo(0);
     }];
     
 
@@ -197,12 +197,26 @@
     [browser show];
 }
 
+
 - (void)setTjInfoDetailBall:(JCWTjInfoDetailBall *)tjInfoDetailBall {
     _tjInfoDetailBall = tjInfoDetailBall;
     if (!_tjInfoDetailBall) {
         return;
     }
-    self.dsView.ID  = tjInfoDetailBall.id;
+
+    if (self.tjInfoDetailBall.is_reward_open==1) {
+        self.dsView.ID  = tjInfoDetailBall.id;
+        self.dsView.reward_num = self.tjInfoDetailBall.reward_num;
+        self.dsView.hidden = NO;
+        [self.dsView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(AUTO(140));
+        }];
+    }else{
+        self.dsView.hidden = YES;
+        [self.dsView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+    }
     if (tjInfoDetailBall.content.length>0) {
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle.lineSpacing = 5; // 设置行间距

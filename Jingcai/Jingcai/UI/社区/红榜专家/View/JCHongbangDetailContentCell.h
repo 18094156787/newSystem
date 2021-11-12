@@ -43,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) JCWTjInfoDetailBall *tjInfoDetailBall;
 
+@property (nonatomic,strong) JCHongbangDetailModel *detailModel;
+
 @end
 
 NS_ASSUME_NONNULL_END

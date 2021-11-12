@@ -47,6 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 //- (void)refreshData;
 - (void)hideNavShadow;//隐藏导航栏顶部的线,阴影
 - (void)initSubViews;
+- (void)getMyUserInfo;
 
 #pragma mark//活动广场
 

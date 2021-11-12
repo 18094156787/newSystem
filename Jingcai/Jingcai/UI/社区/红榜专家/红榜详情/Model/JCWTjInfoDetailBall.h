@@ -138,6 +138,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString *is_self;//是否是自己发布的,如果是自己发布的,不显示实付
 
+@property (assign, nonatomic) NSInteger is_reward_open;//打赏开启 0不开1开
+
+@property (assign, nonatomic) NSInteger reward_num;//打赏人数
+
 
 @end
 

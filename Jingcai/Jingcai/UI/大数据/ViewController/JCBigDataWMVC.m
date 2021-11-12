@@ -16,6 +16,7 @@
 #import "LMJTab.h"
 #import "JCMainTabBarController.h"
 #import "JCShowModel.h"
+#import "JCDataModelHomeVC.h"
 @interface JCBigDataWMVC ()<LMJTabDelegate>
 
 @property (nonatomic, strong) NSArray *titleArray;
@@ -86,12 +87,12 @@
 }
 
 - (void)defaultData {
-    self.titleArray = @[@"鲸猜大数据",@"鲸猜AI",@"资料库"];
+    self.titleArray = @[@"数据模型",@"鲸猜AI",@"资料库"];
     for (int i=0; i<3; i++) {
         JCShowModel *model = [JCShowModel new];
         if (i==0) {
-            model.title = @"鲸猜大数据";
-            model.is_show_big_data = @"1";
+            model.title = @"数据模型";
+            model.is_show_dataModel = @"1";
         }
         if (i==1) {
             model.title = @"鲸猜AI";
@@ -127,15 +128,21 @@
              }
              NSMutableArray *titleArray = [NSMutableArray array];
              [self.dataArray removeAllObjects];
-             if ([is_show_big_data intValue]==1) {
-                 JCShowModel *is_show_big_data_model = [JCShowModel new];
-                 is_show_big_data_model.title = @"鲸猜大数据";
-                 is_show_big_data_model.is_show_big_data = @"1";
-                 [self.dataArray addObject:is_show_big_data_model];
-                 [titleArray addObject:@"鲸猜大数据"];
-                 [self.itemWidthArray addObject:@(120)];
-//                 self.itemsWidths = @[@(AUTO(90)),@(AUTO(90)),@(AUTO(50))];
-             }
+//             if ([is_show_big_data intValue]==1) {
+//                 JCShowModel *is_show_big_data_model = [JCShowModel new];
+//                 is_show_big_data_model.title = @"鲸猜大数据";
+//                 is_show_big_data_model.is_show_big_data = @"1";
+//                 [self.dataArray addObject:is_show_big_data_model];
+//                 [titleArray addObject:@"鲸猜大数据"];
+//                 [self.itemWidthArray addObject:@(120)];
+////                 self.itemsWidths = @[@(AUTO(90)),@(AUTO(90)),@(AUTO(50))];
+//             }
+             JCShowModel *is_data_model = [JCShowModel new];
+             is_data_model.title = @"数据模型";
+             is_data_model.is_show_dataModel = @"1";
+             [self.dataArray addObject:is_data_model];
+             [titleArray addObject:@"数据模型"];
+             [self.itemWidthArray addObject:@(90)];
              if ([is_show_whale_ai intValue]==1) {
                  JCShowModel *is_show_whale_ai_model = [JCShowModel new];
                  is_show_whale_ai_model.title = @"鲸猜AI";
@@ -153,16 +160,16 @@
              
              self.titleArray = [NSArray arrayWithArray:titleArray];
 
-             if (self.titleArray.count==1) {
-                 UILabel *titleView = [UILabel initWithTitle:@"资料库" andFont:AUTO(18) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
-                 titleView.frame = CGRectMake(50, 0, SCREEN_WIDTH-100, 44);
-                 self.navigationItem.titleView = titleView;
-                 
-                 UIBarButtonItem *leftItem =  [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"icon_fagm") style:0 target:nil action:nil];
-                 leftItem.tintColor = JCClearColor;
-                 self.navigationItem.leftBarButtonItem = leftItem;
-                 
-             }
+//             if (self.titleArray.count==1) {
+//                 UILabel *titleView = [UILabel initWithTitle:@"资料库" andFont:AUTO(18) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+//                 titleView.frame = CGRectMake(50, 0, SCREEN_WIDTH-100, 44);
+//                 self.navigationItem.titleView = titleView;
+//                 
+//                 UIBarButtonItem *leftItem =  [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"icon_fagm") style:0 target:nil action:nil];
+//                 leftItem.tintColor = JCClearColor;
+//                 self.navigationItem.leftBarButtonItem = leftItem;
+//                 
+//             }
 //             self.itemsWidths = @[@(110),@(90)];
              self.itemsWidths = [NSArray arrayWithArray:self.itemWidthArray];
              [self forceLayoutSubviews];
@@ -222,8 +229,12 @@
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
     JCShowModel *model = self.dataArray[index];
-    if ([model.is_show_big_data integerValue]==1) {
-        JCJingCaiAIBigDataStickVC *vc = [JCJingCaiAIBigDataStickVC new];
+//    if ([model.is_show_big_data integerValue]==1) {
+//        JCJingCaiAIBigDataStickVC *vc = [JCJingCaiAIBigDataStickVC new];
+//        return vc;
+//    }
+    if ([model.is_show_dataModel integerValue]==1) {
+        JCDataModelHomeVC *vc = [JCDataModelHomeVC new];
         return vc;
     }
 
