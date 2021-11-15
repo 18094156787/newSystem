@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JCKellyDataModelDetailVC : JCBaseTableViewController
 
+@property (nonatomic,assign) BOOL hidetopMatch;
+
 @end
 
 NS_ASSUME_NONNULL_END

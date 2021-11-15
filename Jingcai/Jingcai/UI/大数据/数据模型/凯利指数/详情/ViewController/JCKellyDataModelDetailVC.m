@@ -28,10 +28,12 @@
     [super viewWillAppear:animated];
     self.navigationBarStyle = JCNavigationBarStyleTransparent;
 //    [self initViews];
-    if (!self.topColorView) {
-        [self setupColorView];
-    }else{
-        [self setNavEffect];
+    if (!self.hidetopMatch) {
+        if (!self.topColorView) {
+            [self setupColorView];
+        }else{
+            [self setNavEffect];
+        }
     }
 
 
@@ -114,9 +116,16 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:customView];
     
     
-    self.headView.titleLab.text = @"凯利指数详情";
-    self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(195)+kNavigationBarHeight);
-    self.tableView.tableHeaderView = self.headView;
+
+    if (!self.hidetopMatch) {
+        self.headView.titleLab.text = @"凯利指数详情";
+        self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(180)+kNavigationBarHeight);
+        self.tableView.tableHeaderView = self.headView;
+    }else{
+        [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.view).offset(0);
+        }];
+    }
     
     WeakSelf;
     self.tableView.estimatedRowHeight = 300;
@@ -279,12 +288,9 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [super scrollViewDidScroll:scrollView];
-//    if (scrollView.contentOffset.y < 0) {
-//        [self.view setNeedsLayout];
-//    }
-    [self setNavEffect];
-
-
+    if (!self.hidetopMatch) {
+        [self setNavEffect];
+    }
     NSLog(@"%.0f",scrollView.contentOffset.y);
 }
 

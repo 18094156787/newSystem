@@ -72,7 +72,7 @@
 //定义每个Item 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(AUTO(52), AUTO(56));
+    return CGSizeMake(AUTO(50), AUTO(56));
 
 }
 

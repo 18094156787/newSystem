@@ -228,15 +228,38 @@
 #pragma mark UITextField Delegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if ([textField.text containsString:@"."]&&[string isEqualToString:@"."]) {
-        return NO;
-    }
+    if (range.length >= 1) { // 删除数据, 都允许删除
+         return YES;
+     }
+         if (![self checkDecimal:[textField.text stringByAppendingString:string]]){
+           
+             if (textField.text.length > 0 && [string isEqualToString:@"."] && ![textField.text containsString:@"."]) {
+                 return YES;
+             }
+             
+             return NO;
+             
+         }
     if (self.selItemBall) {
         [self clearSelItem];
         self.selItemBall = nil;
     }
     return YES;
 }
+
+- (BOOL)checkDecimal:(NSString *)str
+{
+    NSString *regex = @"^[0-9]+(\\.[0-9]{1,2})?$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    if([pred evaluateWithObject: str])
+    {
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
 
 - (void)keyboardWillShow:(NSNotification *)notification
 
@@ -305,11 +328,15 @@
     [self.collectionView reloadData];
     
 }
+- (void)setUser_name:(NSString *)user_name {
+    _user_name = user_name;
+    self.nameLab.text = NonNil(user_name);
+}
 
-- (void)data {
-    JCWUserBall *userBall = [JCWUserBall currentUser];
-    [self.userImgView sd_setImageWithURL:[NSURL URLWithString:userBall.user_img] placeholderImage:JCIMAGE(@"userImg_default")];
-    self.nameLab.text = userBall.user_name;
+- (void)setUser_img:(NSString *)user_img {
+    _user_img = user_img;
+    [self.userImgView sd_setImageWithURL:[NSURL URLWithString:user_img] placeholderImage:JCIMAGE(@"userImg_default")];
+
 }
 
 - (void)rechargeBtnClick {
@@ -324,9 +351,17 @@
         return ;
     }
     if (self.priceTF.text.length==0&&!self.selItemBall) {
+        [JCWToastTool showHint:@"请选择打赏金额"];
         return;
     }
     if (self.selItemBall) {
+        if (self.selItemBall.prize>[[JCWUserBall currentUser].prize floatValue]/100) {
+            if (self.JCRechargeBlock) {
+                self.JCRechargeBlock();
+                [JCWToastTool showHint:@"红币不足，请充值"];
+            }
+            return;
+        }
         JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
         alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(16)];
         [alertView alertTitle:@"确认打赏" TitleColor:COLOR_2F2F2F Mesasge:@"" MessageColor:COLOR_2F2F2F SureTitle:@"确认" SureColor:JCWhiteColor SureHandler:^{
@@ -362,6 +397,17 @@
     BOOL isPureInt = [self isPureInt:self.priceTF.text];
     if (!isPureFloat&&!isPureInt) {
         [JCWToastTool showHint:@"请输入正确的金额"];
+        return;
+    }
+    if ([self.priceTF.text floatValue]<0.01) {
+        [JCWToastTool showHint:@"请填写大于等于0.01元的数字"];
+        return;
+    }
+    if ([self.priceTF.text floatValue]>[[JCWUserBall currentUser].prize floatValue]/100) {
+        if (self.JCRechargeBlock) {
+            [JCWToastTool showHint:@"红币不足，请充值"];
+            self.JCRechargeBlock();
+        }
         return;
     }
     JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
@@ -411,11 +457,21 @@
 
 - (void)show {
     
+    //清除上次打赏记录
+    self.priceTF.text = @"";
+    if (self.selItemBall) {
+        self.selItemBall = nil;
+        for (JCCaiyunBall * itemBall in self.dataArray) {
+            itemBall.state_issel = NO;
+        }
+        [self.collectionView reloadData];
+    }
+    
     JCWUserBall *userBall = [JCWUserBall currentUser];
     NSString *price = [NSString stringWithFormat:@"%@红币",[JCCommomTool formatePointZero1:userBall.prize]];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:price];
     NSRange range = [price rangeOfString:@"红币"];
-    [attr addAttributes:@{NSForegroundColorAttributeName: COLOR_2F2F2F} range:range];
+    [attr addAttributes:@{NSForegroundColorAttributeName: COLOR_2F2F2F,NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(14)]} range:range];
     self.priceLab.attributedText = attr;
     
     self.bgView.transform = CGAffineTransformMakeTranslation(0, SCREEN_HEIGHT);
@@ -425,6 +481,8 @@
         }];
     
 }
+
+
 
 - (void)hide {
     WeakSelf;

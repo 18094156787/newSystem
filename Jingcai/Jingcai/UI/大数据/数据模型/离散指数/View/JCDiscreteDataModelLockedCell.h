@@ -8,6 +8,7 @@
 
 #import "JCBaseTableViewCell_New.h"
 #import "JCDiscreteDataModelLockedRateView.h"
+#import "JCKellyDataModelModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCDiscreteDataModelLockedCell : JCBaseTableViewCell_New
@@ -49,6 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) JCDiscreteDataModelLockedRateView *awayEqualView;
 
 @property (nonatomic, strong) JCDiscreteDataModelLockedRateView *awayLoseView;
+
+@property (nonatomic, strong) JCKellyDataModelModel *kellyModel;
 
 @end
 

@@ -211,6 +211,67 @@
     self.historyLab.text = @"查询历史数据，找到相同初赔比赛100场，相同即赔比赛90场";
 }
 
+- (void)setKellyModel:(JCKellyDataModelModel *)kellyModel {
+    _kellyModel = kellyModel;
+    self.matchNameLab.text = kellyModel.short_name_zh;
+    self.matchTimeLab.text = kellyModel.match_time_str;
+    self.matchStatusLab.text = kellyModel.status_cn;
+    self.homeTeamLab.text = kellyModel.home_team_name;
+    self.awayTeamLab.text =  kellyModel.home_team_name;
+
+    
+    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:kellyModel.home_team_logo] placeholderImage:JCIMAGE(@"home_placeholder")];
+    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:kellyModel.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
+    
+
+    self.historyLab.text = [NSString stringWithFormat:@"查询到%ld条赔率数据；已完成凯利指数数据",kellyModel.company_num];
+    //半场比分,角球
+    if (kellyModel.status_id>1&&kellyModel.status_id<9) {
+        self.scoreLab.text = [NSString stringWithFormat:@"%ld : %ld",kellyModel.home_score,kellyModel.away_score];
+    }else{
+        self.scoreLab.text = @"VS";
+    }
+    
+    //进行中的比赛显示分钟数
+     if (kellyModel.status_id>1&&kellyModel.status_id<8) {
+        self.matchStatusLab.textColor = COLOR_30B27A;
+        self.scoreLab.textColor = COLOR_30B27A;
+
+        if (kellyModel.status_id==2||kellyModel.status_id==4) {
+//            self.ongoingTimeLab.text = model.status_cn;
+            if (kellyModel.second_half_time>0) {
+                //计算时间差
+                double currentTime = [[NSDate date] timeIntervalSince1970];
+                double distance = currentTime-kellyModel.second_half_time;
+
+                self.matchStatusLab.text = [NSString stringWithFormat:@"%.0f'",distance/60+45];
+    //            [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)]
+            }else{
+                //计算时间差
+                double currentTime = [[NSDate date] timeIntervalSince1970];
+                double distance = currentTime-kellyModel.first_half_time;
+                if (distance<0) {
+                    distance = 0;
+                }
+                self.matchStatusLab.text = [NSString stringWithFormat:@"%.0f'",distance/60];
+                
+            }
+        }else{
+            self.matchStatusLab.text = kellyModel.status_cn;
+        }
+    }else if(kellyModel.status_id==8){
+        self.matchStatusLab.text = kellyModel.status_cn;
+        self.matchStatusLab.textColor = JCBaseColor;
+        self.scoreLab.textColor = JCBaseColor;
+    }else{
+        self.matchStatusLab.text = kellyModel.status_cn;
+        self.matchStatusLab.textColor = COLOR_9F9F9F;
+        self.scoreLab.textColor = COLOR_9F9F9F;
+    }
+}
+
+
+
 - (UIView *)bgView {
     if (!_bgView) {
         _bgView = [UIView new];

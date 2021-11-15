@@ -32,6 +32,8 @@
 - (void)setPlanDetailModel:(JCWTjInfoBall *)planDetailModel {
     _planDetailModel = planDetailModel;
     self.dsView.ID = planDetailModel.id;
+    self.dsView.dsShowView.user_name = planDetailModel.user_name;
+    self.dsView.dsShowView.user_img = planDetailModel.user_img;
     if (self.planDetailModel.is_reward_open==1) {
         self.dsView.hidden = NO;
         self.dsView.reward_num = self.planDetailModel.reward_num;

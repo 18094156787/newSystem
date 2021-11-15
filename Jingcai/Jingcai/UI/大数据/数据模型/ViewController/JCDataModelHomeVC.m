@@ -15,6 +15,7 @@
 #import "JCDiscreteDataModelStickVC.h"
 #import "JCKellyDataModelStickVC.h"
 #import "JCTransactionDataModelStickVC.h"
+#import "JCDataModelModel.h"
 @interface JCDataModelHomeVC ()
 
 @property (nonatomic,strong) JCDataModelBannerView *headView;
@@ -37,22 +38,25 @@
 }
 
 - (void)refreshData {
-//    [self.view showLoading];
-//    JCDataBaseService_New *service = [JCDataBaseService_New new];
-//    [service getDataBaseHomeDataWithSuccess:^(id  _Nullable object) {
-//        [self endRefresh];
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            NSData *data = [NSJSONSerialization dataWithJSONObject:object options:NSJSONWritingPrettyPrinted error:nil];
-//            [[NSUserDefaults standardUserDefaults] setObject:data forKey:JCBigData_Database];
-//            [self deathWithData:object];
-//
-//        }else{
-//            [JCWToastTool showHint:object[@"msg"]];
-//        }
-//
-//    } failure:^(NSError * _Nonnull error) {
-//        [self endRefresh];
-//    }];
+    [self.view showLoading];
+    JCDataBaseService_New *service = [JCDataBaseService_New new];
+    [service getHomeDataModelWithSuccess:^(id  _Nullable object) {
+        [self endRefresh];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSArray *dataArray = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCDataModelModel class]];
+            self.dataArray = [NSMutableArray arrayWithArray:dataArray];
+            NSString *banner =  object[@"data"][@"banner"];
+            self.headView.url = banner;
+            [self.tableView reloadData];
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        [self endRefresh];
+    }];
+ 
 }
 
 
@@ -78,8 +82,7 @@
 #pragma mark <UITableViewDataSource>
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return self.dataArray.count;
-    return 10;
+    return self.dataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -93,6 +96,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     JCDataModelHomeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCDataModelHomeCell"];
+    cell.model = self.dataArray[indexPath.section];
 //    cell.dataSource = self.dataArray;
     return cell;
 }
@@ -115,38 +119,37 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    JCTeamMatchWMStickVC *vc = [JCTeamMatchWMStickVC new];
-//    JCDataBaseMatchModel *model = self.dataArray[indexPath.row];
-//    vc.event_id = model.event_id;
-//    [self.navigationController pushViewController:vc animated:YES];
-//
-    if (indexPath.section==0) {
-//        //鲸猜大数据
-//        [self.navigationController pushViewController:[JCJingCaiAIBigDataStickVC new] animated:YES];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    JCDataModelModel *model = self.dataArray[indexPath.section];
+////1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5凯利指数 6.离散指数
+    if ([model.id integerValue]==1) {
+        //鲸猜大数据
+        [self.navigationController pushViewController:[JCJingCaiAIBigDataStickVC new] animated:YES];
+    }
+    if ([model.id integerValue]==2) {
         //指数异动
         [self.navigationController pushViewController:[JCTransactionDataModelStickVC new] animated:YES];
     }
-    if (indexPath.section==1) {
+    if ([model.id integerValue]==3) {
         //历史同赔
         [self.navigationController pushViewController:[JCHistoryPayDataModelStickVC new] animated:YES];
     }
-    if (indexPath.section==2) {
+    if ([model.id integerValue]==4) {
         //泊淞
         [self.navigationController pushViewController:[JCPoissonDataModelStickVC new] animated:YES];
     }
-    if (indexPath.section==3) {
+    if ([model.id integerValue]==5) {
+        //凯利指数
+        JCKellyDataModelStickVC *vc = [JCKellyDataModelStickVC new];
+        vc.model_id = model.id;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if ([model.id integerValue]==6) {
         //离散指数
         [self.navigationController pushViewController:[JCDiscreteDataModelStickVC new] animated:YES];
     }
-    if (indexPath.section==4) {
-        //凯利指数
-        [self.navigationController pushViewController:[JCKellyDataModelStickVC new] animated:YES];
-    }
-    if (indexPath.section==5) {
-        //指数异动
-        [self.navigationController pushViewController:[JCTransactionDataModelStickVC new] animated:YES];
-    }
+
+
  
    
     

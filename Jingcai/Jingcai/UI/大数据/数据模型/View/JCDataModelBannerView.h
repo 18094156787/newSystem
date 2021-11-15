@@ -14,7 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) SDCycleScrollView *cycleScrollView;//轮播
 
-@property (nonatomic,strong) NSArray *bannerArray;
+@property (nonatomic,strong) NSString *url;
+
+//@property (nonatomic,strong) NSArray *bannerArray;
 
 
 @end

@@ -51,7 +51,8 @@
         return;
     }
     self.dsView.ID = newsDetailBall.zucai_information_id;
-    
+    self.dsView.dsShowView.user_name = newsDetailBall.user_name;
+    self.dsView.dsShowView.user_img = newsDetailBall.user_img;
     if (self.newsDetailBall.is_reward_open==1) {
         self.dsView.reward_num = self.newsDetailBall.reward_num;
         self.dsView.hidden = NO;

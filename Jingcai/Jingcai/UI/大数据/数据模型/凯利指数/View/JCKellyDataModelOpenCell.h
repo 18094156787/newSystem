@@ -9,6 +9,7 @@
 #import "JCBaseTableViewCell_New.h"
 #import "JCKellyDataModelOpenRateView.h"
 #import "JCKellyDataModelTrackView.h"
+#import "JCKellyDataModelModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCKellyDataModelOpenCell : JCBaseTableViewCell_New
@@ -40,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *zhishuLab;
 
 @property (nonatomic, strong) JCKellyDataModelTrackView *trajectoryView;
+
+@property (nonatomic, strong) JCKellyDataModelModel *model;
 
 @end
 

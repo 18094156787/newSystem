@@ -14,6 +14,7 @@
 #import "JCMatchDetailZSVC.h"
 #import "JNMatchDetailZRVC.h"
 #import "JNMatchDetailSJVC.h"
+#import "JCMatchDetailDataModelVC.h"
 #import "JCMatchDetailTopTitleView.h"
 static CGFloat const kWMMenuViewHeight = 44;
 @interface JCMatchDetailWMStickVC ()
@@ -89,7 +90,7 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 - (NSArray *)titleArray {
     if (!_titleArray) {
-        _titleArray = @[@"方案",@"直播",@"情报",@"指数",@"阵容",@"数据"];
+        _titleArray = @[@"方案",@"直播",@"情报",@"指数",@"阵容",@"数据",@"模型"];
     }
     return _titleArray;
 }
@@ -122,7 +123,7 @@ static CGFloat const kWMMenuViewHeight = 44;
         self.titleSizeSelected = 14;
         self.progressHeight = 2;
         self.progressWidth = 28;
-        self.menuItemWidth = (SCREEN_WIDTH-AUTO(20))/6.0f;
+        self.menuItemWidth = (SCREEN_WIDTH-AUTO(20))/7.0f;
         self.viewTop = kWMMatchDetailHeaderViewHeight;
         self.menuViewHeight = 0;
         self.maximumHeaderViewHeight = kWMMatchDetailHeaderViewHeight-kNavigationBarHeight;
@@ -313,10 +314,23 @@ static CGFloat const kWMMenuViewHeight = 44;
         zrVC.matchBall = self.matchBall;
         return zrVC;
     }
-    JNMatchDetailSJVC *sjVC = [JNMatchDetailSJVC new];
-    sjVC.is_bigData = self.is_bigData;
-    sjVC.matchBall = self.matchBall;
-    return sjVC;
+
+    if (index==5) {
+        JNMatchDetailSJVC *sjVC = [JNMatchDetailSJVC new];
+        sjVC.is_bigData = self.is_bigData;
+        sjVC.matchBall = self.matchBall;
+        return sjVC;
+    }
+    if (index==6) {
+        JCMatchDetailDataModelVC *sjVC = [JCMatchDetailDataModelVC new];
+        sjVC.is_bigData = self.is_bigData;
+        sjVC.matchBall = self.matchBall;
+        return sjVC;
+    }
+    
+    return [UIViewController new];
+    
+    
     
 
 }

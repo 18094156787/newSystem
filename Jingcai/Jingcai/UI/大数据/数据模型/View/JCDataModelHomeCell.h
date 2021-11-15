@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseTableViewCell_New.h"
-
+#import "JCDataModelModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCDataModelHomeCell : JCBaseTableViewCell_New
@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel *priceLab;
 
 @property (nonatomic,strong) UIButton *buyBtn;
+
+@property (nonatomic,strong) JCDataModelModel *model;
 
 @end
 

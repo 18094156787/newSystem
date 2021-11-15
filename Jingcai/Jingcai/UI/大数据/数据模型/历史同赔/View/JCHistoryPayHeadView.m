@@ -84,7 +84,7 @@
     
     [self.bgView addSubview:self.sureBgView];
     [self.sureBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.buyInfoView.mas_bottom).offset(AUTO(20));
+        make.top.equalTo(self.buyInfoView.mas_bottom).offset(AUTO(30));
         make.left.offset(15);
         make.right.offset(-15);
         make.height.mas_equalTo(AUTO(40));
@@ -97,25 +97,25 @@
     }];
     
     
-//    [self.sureBgView addSubview:self.timeLab];
-//    [self.timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.offset(0);
-//        make.top.bottom.offset(0);
-//        make.right.mas_equalTo(self.sureBgView.mas_centerX);
-//    }];
-//    
-//    [self.sureBgView addSubview:self.statusBtn];
-//    [self.statusBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.offset(0);
-//        make.top.bottom.offset(0);
-//        make.left.mas_equalTo(self.sureBgView.mas_centerX);
-//    }];
+    [self.sureBgView addSubview:self.timeLab];
+    [self.timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(0);
+        make.top.bottom.offset(0);
+        make.right.mas_equalTo(self.sureBgView.mas_centerX);
+    }];
+    
+    [self.sureBgView addSubview:self.statusBtn];
+    [self.statusBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.offset(0);
+        make.top.bottom.offset(0);
+        make.left.mas_equalTo(self.sureBgView.mas_centerX);
+    }];
     
     [self addSubview:self.dateHeadView];
     [self.dateHeadView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.offset(0);
         make.height.mas_equalTo(AUTO(72));
-        make.top.equalTo(self.bgView.mas_bottom).offset(AUTO(-10));
+        make.bottom.offset(0);
     }];
     
     
@@ -135,7 +135,122 @@
     [backBtn bk_whenTapped:^{
         [[weakSelf getViewController].navigationController popViewControllerAnimated:YES];
     }];
+    
+    self.dateHeadView.JCTimeBlock = ^(NSString * _Nonnull time) {
+        if (weakSelf.JCTimeBlock) {
+            weakSelf.JCTimeBlock(time);
+        }
+        
+    };
 
+}
+
+- (void)setModel:(JCKellyDataModelPayInfoModel *)model {
+    _model = model;
+    self.buyInfoView.dataModel = model;
+    if (model.show_status==1||model.show_status==3) {
+        //免费体验,立即续费
+        self.statusBtn.hidden = YES;
+        self.timeLab.hidden = YES;
+        [self.sureBtn setBackgroundImage:JCIMAGE(@"button_bg_new_cor") forState:0];
+        [self.sureBtn setTitle:[NSString stringWithFormat:@"免费体验%@天，点击开通",NonNil(model.free_day)] forState:0];
+        if (model.show_status==3) {
+            [self.sureBtn setTitle:@"立即开通" forState:0];
+        }
+        
+    }
+    if (model.show_status==2) {
+        self.statusBtn.hidden = NO;
+        self.timeLab.hidden = NO;
+        NSString *time = [NSString stringWithFormat:@"当前到期时间 %ld 天",model.distance_day];
+        NSRange range = [time rangeOfString:[NSString stringWithFormat:@"%ld",model.distance_day]];
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:time];
+
+        if (range.location!=NSNotFound) {
+            [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(16)]} range:range];
+        }
+        self.timeLab.attributedText = attr;
+        [self.sureBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button") forState:0];
+        if (model.model_status==1) {
+            //免费体验
+            [self.sureBtn setTitle:@"" forState:0];
+            [self.statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_red") forState:0];
+            [self.statusBtn setTitle:@"免费体验中" forState:0];
+        }
+        if (model.model_status==2) {
+            //体验中续费
+
+            [self.sureBtn setTitle:@"" forState:0];
+            [self.statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_red") forState:0];
+            [self.statusBtn setTitle:@"立即续费" forState:0];
+        }
+        if (model.model_status==3) {
+            //体验中下架
+
+            [self.sureBtn setTitle:@"" forState:0];
+            [self.statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_gray") forState:0];
+            [self.statusBtn setTitle:@"已下架" forState:0];
+        }
+        if (model.model_status==4) {
+            //免费
+            self.statusBtn.hidden = YES;
+            self.timeLab.hidden = YES;
+//            [self.sureBtn setTitle:@"" forState:0];
+ 
+            [self.sureBtn setBackgroundImage:JCIMAGE(@"blank") forState:0];
+            [self.sureBtn setTitle:@"免费查看「鲸猜大数据」" forState:0];
+        }
+
+
+        
+    }
+    //未订阅下架
+    if (model.show_status==4) {
+        self.statusBtn.hidden = NO;
+        self.timeLab.hidden = NO;
+        NSString *time = [NSString stringWithFormat:@"当前到期时间 %ld 天",model.distance_day];
+        NSRange range = [time rangeOfString:[NSString stringWithFormat:@"%ld",model.distance_day]];
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:time];
+
+        if (range.location!=NSNotFound) {
+            [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(16)]} range:range];
+        }
+        self.timeLab.attributedText = attr;
+        
+        [self.sureBtn setTitle:@"" forState:0];
+        [self.statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_gray") forState:0];
+        [self.statusBtn setTitle:@"已下架" forState:0];
+        
+    }
+    
+    if (model.show_status==2&&model.model_status==4) {
+        self.sureBtn.layer.borderColor = JCWhiteColor.CGColor;
+    }else{
+        self.sureBtn.layer.borderColor = JCClearColor.CGColor;
+    }
+    
+    if (model.current_count>0) {
+        NSString *buyCount = [NSString stringWithFormat:@"%ld人购买",model.current_count];
+        self.countLab.text = buyCount;
+
+    }else{
+        self.countLab.text = @"";
+    }
+
+    [self layoutIfNeeded];
+    NSArray *userArray = model.user_img;
+    userArray = [[userArray reverseObjectEnumerator] allObjects];
+        for (int i=0; i<userArray.count; i++) {
+             NSString *user_img = userArray[i];
+              UIImageView *imgView = [UIImageView new];
+              [imgView hg_setAllCornerWithCornerRadius:AUTO(11)];
+            imgView.frame = CGRectMake(90-AUTO(15)*i, AUTO(4), AUTO(22), AUTO(22));
+            imgView.image = JCIMAGE(@"userImg_default");
+             [imgView sd_setImageWithURL:[NSURL URLWithString:user_img] placeholderImage:JCIMAGE(@"userImg_default")];
+//              [self.buyBgView addSubview:imgView];
+            [self.buyBgView insertSubview:imgView atIndex:0];
+            [imgView bringSubviewToFront:self.buyBgView];
+      }
 }
 
 - (void)setType:(NSInteger)type {
@@ -208,6 +323,9 @@
     if (!_sureBtn) {
         _sureBtn = [UIButton initWithText:@"立即开通" FontSize:AUTO(16) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
         [_sureBtn setBackgroundImage:JCIMAGE(@"button_bg_new_cor") forState:0];
+        _sureBtn.layer.borderWidth = 1;
+        _sureBtn.layer.cornerRadius = AUTO(22);
+        _sureBtn.layer.masksToBounds = YES;
 //        _sureBtn.backgroundColor = JCBaseColor;
 //        [_sureBtn hg_setAllCornerWithCornerRadius:AUTO(20)];
     }
@@ -228,9 +346,26 @@
 - (UIView *)sureBgView {
     if (!_sureBgView) {
         _sureBgView = [UIView new];
-        _sureBgView.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
+//        _sureBgView.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
 //        [_sureBgView hg_setAllCornerWithCornerRadius:16];
     }
     return _sureBgView;
+}
+- (UILabel *)timeLab {
+    if (!_timeLab) {
+        _timeLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _timeLab.hidden = YES;
+    }
+    return _timeLab;
+}
+
+- (UIButton *)statusBtn {
+    if (!_statusBtn) {
+        _statusBtn = [UIButton initWithText:@"" FontSize:AUTO(16) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
+        [_statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_red") forState:0];
+        _statusBtn.hidden = YES;
+//        [_statusBtn hg_setAllCornerWithCornerRadius:16];
+    }
+    return _statusBtn;
 }
 @end

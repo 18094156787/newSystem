@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) CGFloat viewTop;
 
+@property (nonatomic,assign) BOOL hidetopMatch;
+
 @end
 
 NS_ASSUME_NONNULL_END

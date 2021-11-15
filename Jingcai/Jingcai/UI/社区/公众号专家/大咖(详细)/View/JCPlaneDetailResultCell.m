@@ -65,6 +65,8 @@
 - (void)setPlanDetailModel:(JCWTjInfoBall *)planDetailModel {
     _planDetailModel = planDetailModel;
     self.dsView.ID = planDetailModel.id;
+    self.dsView.dsShowView.user_name = planDetailModel.user_name;
+    self.dsView.dsShowView.user_img = planDetailModel.user_img;
     if (planDetailModel.is_end==1) {
         if (planDetailModel.result.length>0) {
             self.resultLab.textColor = JCBaseColor;

@@ -62,19 +62,22 @@
     }];
 }
 
-- (void)data {
-    self.imgView.image = JCIMAGE(@"ic_dataModel_history");
-    self.titleLab.text = @"鲸猜大数据报告";
-    self.contentLab.text = @"据对阵双方的实力、状态、交战、战役、指数等数据进行分析，给...";
-    self.countLab.text = @"210人已购买";
-//    self.priceLab.text = @"188";
+- (void)setModel:(JCDataModelModel *)model {
+    _model = model;
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:model.image_url]];
+    self.titleLab.text = NonNil(model.title);
+    self.contentLab.text = NonNil(model.introduce);
+    self.countLab.text = [NSString stringWithFormat:@"%ld人已购买",model.current_count];
+    self.countLab.hidden = model.current_count>0?NO:YES;
     [self.buyBtn setTitle:@"立即查看" forState:0];
-    NSString *price = [NSString stringWithFormat:@"%@元/月",@"188"];
+    NSString *price = [NSString stringWithFormat:@"%@元/月",@(model.big_data_price/100)];
     NSRange range = [price rangeOfString:@"元/月"];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:price];
     [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(11)]} range:range];
     self.priceLab.attributedText = attr;
 }
+
+
 
 - (UIImageView *)imgView {
     if (!_imgView) {

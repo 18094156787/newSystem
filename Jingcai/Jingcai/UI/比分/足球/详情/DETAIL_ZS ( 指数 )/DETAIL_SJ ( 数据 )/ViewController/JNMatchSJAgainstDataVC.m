@@ -656,11 +656,11 @@
 - (void)showOrderMsgView {
     self.tipView.frame  = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(430));
     self.tipView.tipImgView.image= JCIMAGE(@"nodata_fangan_small");
-    self.tipView.titleLab.text = @"您还未订阅该数据...";
+    self.tipView.titleLab.text = @"您还未订阅该数据模型...";
     self.tipView.contentLab.text = @"订阅后可获得比分、胜平负、让球、进球数概率预测等\n服务，以及更加全面的分析数据。";
     
     [self.tipView.buyOneBtn setTitle:[NSString stringWithFormat:@"购买本场数据 %ld红币/场",[self.singlePrice integerValue]/100] forState:0];
-    [self.tipView.buyMonthBtn setTitle:[NSString stringWithFormat:@"包月购买所有比赛不限看 %ld红币/月",[self.monthPrice integerValue]/100] forState:0];
+    [self.tipView.buyMonthBtn setTitle:[NSString stringWithFormat:@"订阅此数据模型 %ld红币/月",[self.monthPrice integerValue]/100] forState:0];
     [self.view addSubview:self.tipView];
     WeakSelf;
     self.tipView.JCSingleMatchBlock = ^(NSInteger type) {

@@ -36,9 +36,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UIImageView *vsImgView;
 
-@property (nonatomic,strong) UILabel *statusLab;
+@property (nonatomic,strong) UILabel *matchStatusLab;
 
 @property (nonatomic,strong) JCMyBuyOrderDataModel *model;
+
+@property (nonatomic,strong) UILabel *statusLab;
 
 @property (nonatomic,copy) void(^JCDetailBlock)(void);
 

@@ -206,6 +206,8 @@
 
     if (self.tjInfoDetailBall.is_reward_open==1) {
         self.dsView.ID  = tjInfoDetailBall.id;
+        self.dsView.dsShowView.user_name = tjInfoDetailBall.user_name;
+        self.dsView.dsShowView.user_img = tjInfoDetailBall.user_img;
         self.dsView.reward_num = self.tjInfoDetailBall.reward_num;
         self.dsView.hidden = NO;
         [self.dsView mas_updateConstraints:^(MASConstraintMaker *make) {

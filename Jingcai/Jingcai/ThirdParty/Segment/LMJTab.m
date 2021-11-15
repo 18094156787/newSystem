@@ -83,6 +83,64 @@
     }
 }
 
+-(void)setItemsWithTitle:(NSArray *)titles normalItemColor:(UIColor *)nItemColor selectItemColor:(UIColor *)sItemColor normalTitleColor:(UIColor *)nTitleColor selectTitleColor:(UIColor *)sTitleColor titleTextSize:(CGFloat)size selectItemNumber:(NSInteger)number itemWidth:(NSArray *)itemWidths {
+    if (titles.count==0) {
+        return;
+    }
+    _normalItemColor = nItemColor;
+    _selectItemColor = sItemColor;
+    _normalTitleColor = nTitleColor;
+    _selectTitleColor = sTitleColor;
+    
+//    CGFloat width = self.frame.size.width/titles.count;
+
+    CGFloat f_width = 0;
+    for (int i = 0; i< titles.count; i++) {
+//        CGFloat width
+//
+        
+        NSNumber *contentWidth = itemWidths[i];
+        
+        
+        CGFloat width = [contentWidth floatValue];
+        
+        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setFrame:CGRectMake(f_width, 0, width, self.frame.size.height)];
+        [button setTitle:[titles objectAtIndex:i] forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:size];
+        button.tag = 1000+i;
+        if (i == number) {
+            [button setTitleColor:sTitleColor forState:UIControlStateNormal];
+            [button setBackgroundColor:sItemColor];
+        }else{
+            [button setTitleColor:nTitleColor forState:UIControlStateNormal];
+            [button setBackgroundColor:nItemColor];
+        }
+        [button addTarget:self action:@selector(clickedButton:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:button];
+       
+        
+        if (i < titles.count-1) {
+            UIView * line = [[UIView alloc] initWithFrame:CGRectMake(f_width*(i+1)-(_lineWidth/2), 0, _lineWidth, self.frame.size.height)];
+            line.backgroundColor = _lineColor;
+            [self addSubview:line];
+        }
+        f_width = f_width+width;
+    }
+    
+//    for (int i = 0; i < titles.count-1; i++) {
+//        UIView * line = [[UIView alloc] initWithFrame:CGRectMake(width*(i+1)-(_lineWidth/2), 0, _lineWidth, self.frame.size.height)];
+//        line.backgroundColor = _lineColor;
+//        [self addSubview:line];
+//    }
+}
+
+- (CGSize)returnTextWidth:(NSString *)text size:(CGSize)size font:(UIFont *)font{
+    CGSize textSize = [text boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : font} context:nil].size;
+    return textSize;
+}
+
+
 -(void)clickedButton:(UIButton *)button{
     self.selectIndex = button.tag-1000;
     for (UIView * view in self.subviews) {

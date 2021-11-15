@@ -9,6 +9,7 @@
 #import "JCKellyDataModelVC.h"
 #import "JCDiscreteDataModelLockedCell.h"
 #import "JCKellyDataModelDetailVC.h"
+#import "JCKellyDataModelModel.h"
 @interface JCKellyDataModelVC ()
 
 @end
@@ -20,7 +21,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initViews];
-    [self refreshData];
+//    [self refreshData];
 }
 
 
@@ -32,39 +33,41 @@
 - (void)getDataList {
 
 //    [self.jcWindow showLoading];
-//    JCMatchService_New *service = [JCMatchService_New new];
-//    [service getPredictedMatchListWithType:@"2" Key_word:@"" Page:self.pageNo Success:^(id  _Nullable object) {
-//        [self endRefresh];
-//
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            if (self.pageNo==1) {
-//                [self.dataArray removeAllObjects];
-//            }
-//            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCMatchInfoModel class]];
-//             [self.dataArray addObjectsFromArray:array];
-//            if (array.count <PAGE_LIMIT) {
-//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-//            }
-//            [self.tableView reloadData];
-//            self.pageNo++;
-//            [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-//
-//            if (array.count ==0&&self.dataArray.count>0) {
-//                  self.tableView.tableFooterView = self.noMore_footView;
-//                  self.tableView.mj_footer.hidden = YES;
-//              }else{
-//                  self.tableView.tableFooterView = [UIView new];
-//                  self.tableView.mj_footer.hidden = NO;
-//              }
-//
-//        }else{
-//            [JCWToastTool showHint:object[@"msg"]];
-//        }
-//
-//    } failure:^(NSError * _Nonnull error) {
-//        [self endRefresh];
-//        [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-//    }];
+    JCDataBaseService_New *service = [JCDataBaseService_New new];
+    [service getKellyDataModeListWithDate:self.date Page:self.pageNo success:^(id  _Nullable object) {
+        [self endRefresh];
+
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            if (self.pageNo==1) {
+                [self.dataArray removeAllObjects];
+            }
+            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCKellyDataModelModel class]];
+             [self.dataArray addObjectsFromArray:array];
+            if (array.count <PAGE_LIMIT) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            [self.tableView reloadData];
+            self.pageNo++;
+            [self chageImageStr:@"jc_dataModel_empty" Title:@"" BtnTitle:@""];
+
+            if (array.count ==0&&self.dataArray.count>0) {
+                  self.tableView.tableFooterView = self.noMore_footView;
+                  self.tableView.mj_footer.hidden = YES;
+              }else{
+                  self.tableView.tableFooterView = [UIView new];
+                  self.tableView.mj_footer.hidden = NO;
+              }
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        [self endRefresh];
+        [self chageImageStr:@"jc_dataModel_empty" Title:@"" BtnTitle:@""];
+    }];
+
+
 
 }
 
@@ -100,13 +103,8 @@
     JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
         [weakSelf refreshData];
     }];
-    emptyView.contentViewOffset = 0;
+    emptyView.contentViewOffset = -AUTO(208);
     self.tableView.ly_emptyView = emptyView;
-//    [self showNoDataViewImageStr:@"empty_img_follow_expert" Title:@"暂时没有比赛" BtnTitle:@"" Btnwidth:0 HiddenBtn:YES];
-    
-//    self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
-//        [weakSelf refreshData];
-//    }];
 
     
     MJRefreshBackNormalFooter *mj_foot = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -126,7 +124,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArray.count;
 
 }
 
@@ -158,16 +156,16 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row==0) {
-        JCDiscreteDataModelLockedCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCDiscreteDataModelLockedCell"];
-    //    JCMatchInfoModel *model = self.dataArray[indexPath.section];
-    //    cell.model = model;
+    JCKellyDataModelModel *model = self.dataArray[indexPath.section];
+    if (self.buyInfoModel.show_status==2) {
+        JCKellyDataModelOpenCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCKellyDataModelOpenCell"];
+        
+        cell.model = model;
 
         return cell;
     }
-    JCKellyDataModelOpenCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCKellyDataModelOpenCell"];
-//    JCMatchInfoModel *model = self.dataArray[indexPath.section];
-//    cell.model = model;
+    JCDiscreteDataModelLockedCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCDiscreteDataModelLockedCell"];
+    cell.kellyModel = model;
 
     return cell;
     
@@ -191,4 +189,9 @@
     [super scrollViewDidScroll:scrollView];
     self.isTop = self.tableView.contentOffset.y>0?YES:NO;
 }
+
+//- (void)setBuyInfoModel:(JCKellyDataModelPayInfoModel *)buyInfoModel {
+//    _buyInfoModel = _buyInfoModel;
+//    [self.tableView reloadData];
+//}
 @end

@@ -12,6 +12,7 @@
 #import "NSDate+BRPickerView.h"
 #import "JCMatchTimeModel.h"
 #import "JCPayShowView.h"
+#import "JCKellyDataModelPayInfoModel.h"
 static CGFloat const kWMMenuViewHeight = 0;
 @interface JCKellyDataModelStickVC ()
 
@@ -25,9 +26,9 @@ static CGFloat const kWMMenuViewHeight = 0;
 
 @property (nonatomic, assign) float height;
 
-@property (nonatomic,strong) NSString *time;
+@property (nonatomic,strong) NSMutableArray *timeArray;
 
-@property (nonatomic,strong) NSArray *timeArray;
+@property (nonatomic,strong) JCKellyDataModelPayInfoModel *buyInfoModel;
 
 @end
 
@@ -56,7 +57,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 - (void)setNavEffect {
 
     CGFloat offsetY = self.contentView.contentOffset.y;
-    CGFloat maxOffsetY = AUTO(208);
+    CGFloat maxOffsetY = AUTO(188);
     float percent = offsetY/maxOffsetY;
     self.topColorView.alpha = percent;
 //    NSLog(@"%.2f",percent);
@@ -81,7 +82,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 - (instancetype)init {
     
     if (self = [super init]) {
-        self.height = AUTO(280)+kNavigationBarHeight;
+        self.height = AUTO(260)+kNavigationBarHeight;
         self.titleSizeNormal = 16;
         self.titleSizeSelected = 16;
         self.titleColorSelected = COLOR_2F2F2F;//COLOR_FE1F19
@@ -107,8 +108,8 @@ static CGFloat const kWMMenuViewHeight = 0;
 //    self.view.backgroundColor = [UIColor greenColor]
         [super viewDidLoad];
     [self initViews];
-//    [self getTopInfoData];
-    [self getTimeList];
+    [self getTopInfoData];
+
     
     UIButton *customView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     [customView addTarget:self action:@selector(backItemClick) forControlEvents:UIControlEventTouchUpInside];
@@ -121,79 +122,23 @@ static CGFloat const kWMMenuViewHeight = 0;
 }
 
 
-//- (void)getTopInfoData {
-//    [self.jcWindow showLoading];
-//    JCDataBaseService_New *service = [JCDataBaseService_New service];
-//    [service getBigDataTopInfoWithsuccess:^(id  _Nullable object) {
-//        [self.jcWindow endLoading];
-//        [self.contentView.mj_header endRefreshing];
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            JCBigDataMonthProduceModel *productModel = (JCBigDataMonthProduceModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCBigDataMonthProduceModel class]];
-//            NSArray *noticeArray = [JCWJsonTool arrayWithJson:object[@"data"][@"now_match"] class:[JCJingCaiAINoticeModel class]];
-//            self.headView.productModel = productModel;
-//            self.headView.titleArray = noticeArray;
-//
-//            NSArray*mzArray = [JCWJsonTool arrayWithJson:object[@"data"][@"win_mark"] class:[JCBigDataMingZhongModel class]];
-////            mzArray = @[];
-//            self.headView.dataArray = mzArray;
-////            self.height = kWJingCaiBigDataHeaderViewHeight;
-//
-//            self.height = AUTO(208)+NavigationStatusBarHeight+AUTO(117)+AUTO(12);
-//            if (noticeArray.count>0) {
-//                self.height = AUTO(262)+NavigationStatusBarHeight+AUTO(117)+AUTO(12);
-//            }
-//            if (mzArray.count>0) {
-//                self.height =self.height+ AUTO(28)*mzArray.count+AUTO(80);
-//            }
-//            self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.height);
-//
-////            self.height = 300;
-//
-//            self.maximumHeaderViewHeight = self.height-kNavigationBarHeight-AUTO(77);
-//            self.viewTop = self.height;
-////            [self reloadData];
-//        }else{
-//            [JCWToastTool showHint:object[@"msg"]];
-//        }
-//
-//    } failure:^(NSError * _Nonnull error) {
-//        [self.contentView.mj_header endRefreshing];
-//        [self.jcWindow endLoading];
-//    }];
-//
-//
-//}
-
-- (void)getTimeList {
-    JCMatchService_New * service = [JCMatchService_New new];
-    [service getMatchTimeListWithType:@"1" success:^(id  _Nullable object) {
-//        [self endRefresh];
-         
+- (void)getTopInfoData {
+    [self.jcWindow showLoading];
+    JCDataBaseService_New *service = [JCDataBaseService_New service];
+    [service getKellyDataModelPayInfoWithModel_id:self.model_id Success:^(id  _Nullable object) {
+        [self.jcWindow endLoading];
+        [self.contentView.mj_header endRefreshing];
         if ([JCWJsonTool isSuccessResponse:object]) {
-            NSString *today = object[@"data"][@"time"];
-            self.time = today;
-//            [self refreshData];
-            NSArray *timeArray = [JCWJsonTool arrayWithJson:object[@"data"][@"time_array"] class:[JCMatchTimeModel class]];
-            self.timeArray = timeArray;
-//            if ([self.type integerValue]==2) {
-//                timeArray =  [[timeArray reverseObjectEnumerator] allObjects];
-//            }
-            if (today.length>0) {
-                NSDate *today_date = [NSDate br_getDate:today format:@"yyyy-MM-dd"];
-                [timeArray enumerateObjectsUsingBlock:^(JCMatchTimeModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    NSDate *another_date = [NSDate br_getDate:obj.time format:@"yyyy-MM-dd"];
-                    NSInteger result = [today_date br_compare:another_date format:@"yyyy-MM-dd"];
-                    if (result==0) {
-                        obj.select = YES;
-                        self.headView.dateHeadView.currentModel = obj;
-                        *stop = YES;
-                    }
-                }];
-            }
-            self.headView.dateHeadView.currentDay = self.time;
-//            self.dateHeadView.hidden = NO;
-            self.headView.dateHeadView.dataArray = [NSMutableArray arrayWithArray:timeArray];
-            
+            JCKellyDataModelPayInfoModel *buyInfoModel = (JCKellyDataModelPayInfoModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataModelPayInfoModel class]];
+            NSString *today = [NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd" time:buyInfoModel.server_time];
+            self.dataVC.date = today;
+//            buyInfoModel.show_status = 2;
+//            buyInfoModel.model_status = 4;
+            self.headView.model = buyInfoModel;
+            [self initTimeArrayWithToday:buyInfoModel.server_time];
+            self.buyInfoModel = buyInfoModel;
+            self.dataVC.buyInfoModel = self.buyInfoModel;
+            [self.dataVC refreshData];
 
 
         }else{
@@ -201,11 +146,30 @@ static CGFloat const kWMMenuViewHeight = 0;
         }
 
     } failure:^(NSError * _Nonnull error) {
-
+        [self.contentView.mj_header endRefreshing];
+        [self.jcWindow endLoading];
     }];
 
-    
+
+
 }
+
+- (void)FreeExperience {
+    [self.jcWindow showLoading];
+    JCDataBaseService_New *service = [JCDataBaseService_New service];
+    [service getKellyDataModeFreeExperienceWithModel_id:self.model_id Success:^(id  _Nullable object) {
+        [self.jcWindow endLoading];
+        [self getTopInfoData];
+        
+    } failure:^(NSError * _Nonnull error) {
+        [self.jcWindow endLoading];
+    }];
+
+
+
+}
+
+
 
 - (void)initViews {
 
@@ -213,7 +177,23 @@ static CGFloat const kWMMenuViewHeight = 0;
     [self.view addSubview:self.headView];
     
     WeakSelf;
+    
+    self.contentView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
+        [weakSelf getTopInfoData];
+//        [weakSelf.dataVC refreshData];
+    }];
+        
+    self.headView.JCTimeBlock = ^(NSString * _Nonnull time) {
+        self.dataVC.date = time;
+        [self.dataVC refreshData];
+    };
+
     self.headView.JCBuyClickBlock = ^{
+        if (weakSelf.buyInfoModel.show_status==1) {
+            //免费体验
+            [weakSelf FreeExperience];
+            return;
+        }
 //        if (![JCWUserBall currentUser]) {
 //            [weakSelf presentLogin];
 //            return;
@@ -229,49 +209,12 @@ static CGFloat const kWMMenuViewHeight = 0;
         };
         [payView show];
     };
-    
-    self.contentView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
-//        [weakSelf getTopInfoData];
-//        if (weakSelf.selectIndex==0) {
-//            [weakSelf.bigDataVC refreshData];
-//        }
-//        if (weakSelf.selectIndex==1) {
-//            [weakSelf.matchVC refreshData];
-//        }
-    }];
-        
 
     
 
 
 }
 
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-//    CGFloat headerViewHeight = self.height;
-////    CGFloat headerViewHeight = kWJingCaiBigDataHeaderViewHeight;
-//    CGFloat headerViewX = 0;
-//    UIScrollView *scrollView = (UIScrollView *)self.view;
-//    if (scrollView.contentOffset.y < 0) {
-//        headerViewX = scrollView.contentOffset.y;
-//        headerViewHeight -= headerViewX;
-//
-//    }
-//    self.headView.frame = CGRectMake(0, headerViewX, CGRectGetWidth(self.view.bounds), self.height);
-}
-
-- (void)btnClicked:(id)sender {
-    NSLog(@"touch up inside");
-}
-
-- (void)backBtnClick {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - ScrollViewDelegate
 
@@ -282,15 +225,6 @@ static CGFloat const kWMMenuViewHeight = 0;
     }
     [self setNavEffect];
     self.headView.dateHeadView.clearBg = self.dataVC.isTop?NO:YES;
-//    if ([scrollView isKindOfClass:[WMMagicScrollView class]]) {
-//        if (scrollView.contentOffset.y>AUTO(50)) {
-//            self.autherHeadView.bgView.hidden = YES;
-////            self.title = self.expertDetailModel.user_name;
-//        }else {
-//            self.autherHeadView.bgView.hidden = NO;
-////            self.title = @"";
-//        }
-//    }
 
     NSLog(@"%.0f",scrollView.contentOffset.y);
 }
@@ -301,12 +235,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 }
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
-//    if (index==0) {
-//        return self.bigDataVC;
-//    }
-    if (!self.dataVC) {
-        self.dataVC = [JCKellyDataModelVC new];
-    }
+
     return self.dataVC;
 
 }
@@ -347,7 +276,7 @@ static CGFloat const kWMMenuViewHeight = 0;
         make.bottom.offset(0);
         make.width.mas_equalTo(44);
     }];
-    [backBtn addTarget:self action:@selector(backBtnClick) forControlEvents:UIControlEventTouchUpInside];
+//    [backBtn addTarget:self action:@selector(backBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *titleLab = [UILabel initWithTitle:@"凯利指数" andFont:17 andWeight:3 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     [self.topColorView addSubview:titleLab];
@@ -359,12 +288,73 @@ static CGFloat const kWMMenuViewHeight = 0;
 
 }
 
+- (void)initTimeArrayWithToday:(long)long_today {
+    NSString *today = [NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd" time:long_today];
+    NSString *today_week = [NSDate getChineseWeekFrom:today format:@"yyyy-MM-dd"];
+    NSDate *today_date = [NSDate dateWithString:today format:@"yyyy-MM-dd"];
+    NSString *today_String_short = [NSDate timeStringWithDate:today_date format:@"MM-dd"];
+    NSLog(@"%@-%@",today_String_short,today_week);
+    
+    {
+        for (int i=-5; i<0; i++) {
+            NSDate *lastDay = [NSDate getDate:today_date day:i];
+            NSString *last_String_short = [NSDate timeStringWithDate:lastDay format:@"MM-dd"];
+            NSString *last_String = [NSDate timeStringWithDate:lastDay format:@"yyyy-MM-dd"];
+            NSString *last_week = [NSDate getWeekZhouFromDate:lastDay];
+            JCMatchTimeModel *lastModel = [JCMatchTimeModel new];
+            lastModel.week = last_week;
+            lastModel.sort_time = last_String_short;
+            lastModel.time = last_String;
+            [self.timeArray addObject:lastModel];
+        }
 
+
+    }
+    
+    JCMatchTimeModel *todayModel = [JCMatchTimeModel new];
+    todayModel.week = today_week;
+    todayModel.sort_time = today_String_short;
+    todayModel.time = today;
+    todayModel.select = YES;
+    [self.timeArray addObject:todayModel];
+    
+    {
+        NSDate *tomorrowDay = [NSDate getDate:today_date day:1];
+        NSString *tomorrow_String_short = [NSDate timeStringWithDate:tomorrowDay format:@"MM-dd"];
+        NSString *tomorrow_String = [NSDate timeStringWithDate:tomorrowDay format:@"yyyy-MM-dd"];
+        NSString *tomorrow_week = [NSDate getWeekZhouFromDate:tomorrowDay];
+        JCMatchTimeModel *tomorrowModel = [JCMatchTimeModel new];
+        tomorrowModel.week = tomorrow_week;
+        tomorrowModel.sort_time = tomorrow_String_short;
+        tomorrowModel.time = tomorrow_String;
+        [self.timeArray addObject:tomorrowModel];
+
+    }
+    //
+        self.headView.dateHeadView.currentModel = todayModel;
+        self.headView.dateHeadView.currentDay = today_String_short;
+//            self.dateHeadView.hidden = NO;
+        self.headView.dateHeadView.dataArray = [NSMutableArray arrayWithArray:self.timeArray];
+    NSLog(@"%@",self.timeArray);
+    
+}
 - (JCHistoryPayHeadView *)headView {
     if (!_headView) {
         _headView = [JCHistoryPayHeadView new];
         _headView.type = 3;
     }
     return _headView;
+}
+- (NSMutableArray *)timeArray {
+    if (!_timeArray) {
+        _timeArray = [NSMutableArray array];
+    }
+    return _timeArray;
+}
+- (JCKellyDataModelVC *)dataVC {
+    if (!_dataVC) {
+        _dataVC = [JCKellyDataModelVC new];
+    }
+    return _dataVC;
 }
 @end

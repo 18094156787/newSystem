@@ -15,7 +15,7 @@
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(16));
         make.right.offset(AUTO(-16));
-        make.top.offset(AUTO(2));
+        make.top.offset(AUTO(AUTO(10)));
         make.bottom.offset(AUTO(-8));
 //        make.bottom.offset(AUTO(-20));
 //        make.height.mas_equalTo(100);

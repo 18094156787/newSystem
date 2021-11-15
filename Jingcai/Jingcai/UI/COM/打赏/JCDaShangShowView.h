@@ -48,6 +48,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) void(^JCDSBlock)(NSString *price);
 
+@property (nonatomic,strong) NSString *user_img;
+
+@property (nonatomic,strong) NSString *user_name;
+
 - (void)show;
 
 - (void)hide;

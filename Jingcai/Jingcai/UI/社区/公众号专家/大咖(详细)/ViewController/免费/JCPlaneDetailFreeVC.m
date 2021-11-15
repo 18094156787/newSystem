@@ -251,6 +251,7 @@
         }
         if (indexPath.section==2) {
             JCPlanDetailMZ_Cell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlanDetailMZ_Cell"];
+            cell.planDetailModel = self.planDetailModel;
             return cell;
         }
         if (indexPath.section==3) {

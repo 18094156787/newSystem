@@ -96,6 +96,40 @@
 
 }
 
+- (void)setDataModel:(JCKellyDataModelPayInfoModel *)dataModel {
+    _dataModel = dataModel;
+    NSString *total = [NSString stringWithFormat:@"%@",@(dataModel.big_data_price/100)];
+    NSString *title = [NSString stringWithFormat:@"%@红币/月",total];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+    NSRange range0 = [title rangeOfString:@"红币/月"];
+    [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:12]} range:range0];
+
+    self.priceLab.attributedText = attr;
+    
+    
+    
+//    nsst oriPirce_inter = dataModel.old_big_data_price/100;
+    NSString *oriPrice = [NSString stringWithFormat:@"%@红币/月",@(dataModel.old_big_data_price/100)];
+
+    NSRange range = [oriPrice rangeOfString:[NSString stringWithFormat:@"%@",@(dataModel.old_big_data_price/100)]];
+    if (dataModel.old_big_data_price>dataModel.big_data_price) {
+//        oriPrice = @"红币/月";
+        //中划线
+   //     NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+       
+        NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:oriPrice];
+       [attribtStr addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:range];
+   //    [attribtStr addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle] range:range];
+       [attribtStr setAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSBaselineOffsetAttributeName:@(NSUnderlineStyleSingle)} range:oriPrice.rangeOfAll];
+
+       self.oriPriceLab.attributedText = attribtStr;
+    }else{
+        self.oriPriceLab.text = @"";
+    }
+}
+
+
+
 - (UILabel *)priceLab {
     if (!_priceLab) {
         _priceLab = [UILabel initWithTitle:@"" andFont:AUTO(20) andWeight:2 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:0];

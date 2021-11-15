@@ -44,6 +44,7 @@
     self.dsShowView.JCDSBlock = ^(NSString * _Nonnull price) {
         [weakSelf caiyunPayWithAmount:price];
     };
+
 }
 
 #pragma mark - 支付方法

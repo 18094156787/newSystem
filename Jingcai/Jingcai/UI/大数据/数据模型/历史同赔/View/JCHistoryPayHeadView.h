@@ -9,6 +9,7 @@
 #import "JCBaseView.h"
 #import "JCDataModelDateView.h"
 #import "JCJingCaiAIBigDataBuyInfoView.h"
+#import "JCKellyDataModelPayInfoModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCHistoryPayHeadView : JCBaseView
@@ -29,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong)UIView *buyBgView;
 
-@property (nonatomic,strong) JCJingCaiAIBigDataBuyInfoView *buyInfoView;
+@property (nonatomic,strong)  JCJingCaiAIBigDataBuyInfoView *buyInfoView;
 
 @property (nonatomic, strong) UIView *sureBgView;
 
@@ -41,7 +42,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger type;//0是历史同赔 1是泊凇分布 2是离散 3是凯利 4是指数异动
 
+@property (nonatomic,strong) JCKellyDataModelPayInfoModel *model;
+
 @property (nonatomic, copy) void(^JCBuyClickBlock)(void);
+
+@property (nonatomic,copy) void(^JCTimeBlock)(NSString *time);
 
 @end
 

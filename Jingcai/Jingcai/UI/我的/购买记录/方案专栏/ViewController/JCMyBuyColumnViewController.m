@@ -10,6 +10,7 @@
 #import "JCMyBuyColumnViewCell.h"
 #import "JCMyBuyColumnDetailVC.h"
 #import "JCColumnDetailModel.h"
+#import "JCMyBuyColumnOrderVC.h"
 @interface JCMyBuyColumnViewController ()
 
 @end
@@ -59,7 +60,7 @@
     
     self.tableView.separatorInset = UIEdgeInsetsZero;
     self.tableView.separatorStyle = 0;
-    self.tableView.estimatedRowHeight = 80;
+    self.tableView.estimatedRowHeight = 300;
     // 表格注册cell
     [self.tableView registerClass:[JCMyBuyColumnViewCell class] forCellReuseIdentifier:@"JCMyBuyColumnViewCell"];
 
@@ -96,7 +97,16 @@
 
 //    JCWTjInfoBall *model = self.dataArray[indexPath.section];
     JCMyBuyColumnViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCMyBuyColumnViewCell"];
-    cell.model = self.dataArray[indexPath.section];
+    JCColumnDetailModel *model = self.dataArray[indexPath.section];
+    cell.model = model;
+    WeakSelf;
+    cell.JCBlock = ^{
+        JCMyBuyColumnOrderVC *vc = [JCMyBuyColumnOrderVC new];
+        vc.order_id = model.id;
+        vc.column_id = model.special_column_id;
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+        
+    };
     return cell;
 
     
@@ -124,6 +134,6 @@
 #pragma mark <UITableViewDelegate>
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return AUTO(126);
+    return UITableViewAutomaticDimension;
 }
 @end

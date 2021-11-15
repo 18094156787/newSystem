@@ -41,6 +41,16 @@
     return components.weekday - 1;
 }
 
+/// 获取星期
++ (NSInteger)week:(NSString *)dateStr format:(NSString *)format{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:format];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    NSDate *startDate = [dateFormatter dateFromString:dateStr];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday) fromDate:startDate];
+    return components.weekday - 1;
+}
+
 /// 获取星期 中文
 + (NSString *)getWeekFromDate:(NSDate *)date {
     NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday) fromDate:date];
@@ -54,6 +64,14 @@
 + (NSString *)getChineseWeekFrom:(NSString *)dateStr {
     NSDictionary *weekDic = @{@"0":@"周日",@"1":@"周一",@"2":@"周二",@"3":@"周三",@"4":@"周四",@"5":@"周五",@"6":@"周六"};
     NSInteger week = [NSDate week:dateStr];
+    NSString *weekKey = [NSString stringWithFormat:@"%ld",(long)week];
+    return weekDic[weekKey];
+}
+
+/// 获取星期中文
++ (NSString *)getChineseWeekFrom:(NSString *)dateStr format:(NSString *)format {
+    NSDictionary *weekDic = @{@"0":@"周日",@"1":@"周一",@"2":@"周二",@"3":@"周三",@"4":@"周四",@"5":@"周五",@"6":@"周六"};
+    NSInteger week = [NSDate week:dateStr format:format];
     NSString *weekKey = [NSString stringWithFormat:@"%ld",(long)week];
     return weekDic[weekKey];
 }
@@ -349,5 +367,31 @@
     NSString *total = [NSString stringWithFormat:@"%@ %@",dateString,weekStrng];
     return total;
 }
+//获取指定日期的前后几天
++ (NSDate *)getDate:(NSDate *)currentDate day:(NSInteger)day {
+    NSInteger days = day;    // n天后的天数
+    days = (days == 0 ? 2.f : days);//未指定天数则默认为两天
+    NSDate *appointDate;    // 指定日期声明
+    NSTimeInterval oneDay = 24 * 60 * 60;  // 一天一共有多少秒
+    appointDate = [currentDate initWithTimeIntervalSinceNow: +(oneDay * days)];
+    return appointDate;
+}
 
++ (NSString *)timeStringWithDate:(NSDate *)date format:(NSString *)fotmat{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:fotmat];
+//    [dateFormatter setLocale:[NSLocale currentLocale]];
+//    NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    NSString *dateString = [dateFormatter stringFromDate:date];
+    return dateString;
+}
+
+/// 获取星期 中文
++ (NSString *)getWeekZhouFromDate:(NSDate *)date {
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday) fromDate:date];
+    NSInteger week = components.weekday - 1;
+    NSDictionary *weekDic = @{@"0":@"周日",@"1":@"周一",@"2":@"周二",@"3":@"周三",@"4":@"周四",@"5":@"周五",@"6":@"周六"};
+    NSString *key = [NSString stringWithFormat:@"%ld",(long)week];
+    return weekDic[key];
+}
 @end

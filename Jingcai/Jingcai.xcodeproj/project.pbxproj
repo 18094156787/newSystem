@@ -81,6 +81,14 @@
 		59145F74273E66C500DA5391 /* JCTransactionDataModelDetailSameMatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59145F73273E66C500DA5391 /* JCTransactionDataModelDetailSameMatchCell.m */; };
 		59145F77273E6E0800DA5391 /* JCTransactionDataModelDetailZhiShuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59145F76273E6E0800DA5391 /* JCTransactionDataModelDetailZhiShuCell.m */; };
 		59145F7A273E6E1800DA5391 /* JCTransactionDataModelDetailZhiShuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59145F79273E6E1800DA5391 /* JCTransactionDataModelDetailZhiShuItemCell.m */; };
+		59145F80273FEBFD00DA5391 /* JCMatchDetailDataModelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59145F7D273FEBFD00DA5391 /* JCMatchDetailDataModelVC.m */; };
+		59145F81273FEBFD00DA5391 /* JCMatchDetailDataModelVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59145F7E273FEBFD00DA5391 /* JCMatchDetailDataModelVC.xib */; };
+		59145F84273FF00700DA5391 /* JCTransactionDataModelMatchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59145F83273FF00700DA5391 /* JCTransactionDataModelMatchVC.m */; };
+		59145F882742048400DA5391 /* JCDataModelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59145F872742048400DA5391 /* JCDataModelModel.m */; };
+		59145F8C27420B7200DA5391 /* JCKellyDataModelPayInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59145F8B27420B7200DA5391 /* JCKellyDataModelPayInfoModel.m */; };
+		59145F8F2742518200DA5391 /* JCKellyDataModelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59145F8E2742518200DA5391 /* JCKellyDataModelModel.m */; };
+		59145F9227425F2B00DA5391 /* JCKellyDataModelOddsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59145F9127425F2A00DA5391 /* JCKellyDataModelOddsModel.m */; };
+		59145F9527425F5700DA5391 /* JCKellyDataModelOddsIndexModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59145F9427425F5700DA5391 /* JCKellyDataModelOddsIndexModel.m */; };
 		591C1B802734BBBD0001C2B7 /* JCDaShangView.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C1B7F2734BBBD0001C2B7 /* JCDaShangView.m */; };
 		591C1B832734C4600001C2B7 /* JCDaShangShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C1B822734C4600001C2B7 /* JCDaShangShowView.m */; };
 		591C1B862735038A0001C2B7 /* JCDaShangPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C1B852735038A0001C2B7 /* JCDaShangPriceCell.m */; };
@@ -1570,6 +1578,21 @@
 		59145F76273E6E0800DA5391 /* JCTransactionDataModelDetailZhiShuCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCTransactionDataModelDetailZhiShuCell.m; sourceTree = "<group>"; };
 		59145F78273E6E1800DA5391 /* JCTransactionDataModelDetailZhiShuItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCTransactionDataModelDetailZhiShuItemCell.h; sourceTree = "<group>"; };
 		59145F79273E6E1800DA5391 /* JCTransactionDataModelDetailZhiShuItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCTransactionDataModelDetailZhiShuItemCell.m; sourceTree = "<group>"; };
+		59145F7D273FEBFD00DA5391 /* JCMatchDetailDataModelVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCMatchDetailDataModelVC.m; sourceTree = "<group>"; };
+		59145F7E273FEBFD00DA5391 /* JCMatchDetailDataModelVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JCMatchDetailDataModelVC.xib; sourceTree = "<group>"; };
+		59145F7F273FEBFD00DA5391 /* JCMatchDetailDataModelVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCMatchDetailDataModelVC.h; sourceTree = "<group>"; };
+		59145F82273FF00700DA5391 /* JCTransactionDataModelMatchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCTransactionDataModelMatchVC.h; sourceTree = "<group>"; };
+		59145F83273FF00700DA5391 /* JCTransactionDataModelMatchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCTransactionDataModelMatchVC.m; sourceTree = "<group>"; };
+		59145F862742048400DA5391 /* JCDataModelModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCDataModelModel.h; sourceTree = "<group>"; };
+		59145F872742048400DA5391 /* JCDataModelModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCDataModelModel.m; sourceTree = "<group>"; };
+		59145F8A27420B7200DA5391 /* JCKellyDataModelPayInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCKellyDataModelPayInfoModel.h; sourceTree = "<group>"; };
+		59145F8B27420B7200DA5391 /* JCKellyDataModelPayInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCKellyDataModelPayInfoModel.m; sourceTree = "<group>"; };
+		59145F8D2742518200DA5391 /* JCKellyDataModelModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCKellyDataModelModel.h; sourceTree = "<group>"; };
+		59145F8E2742518200DA5391 /* JCKellyDataModelModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCKellyDataModelModel.m; sourceTree = "<group>"; };
+		59145F9027425F2A00DA5391 /* JCKellyDataModelOddsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCKellyDataModelOddsModel.h; sourceTree = "<group>"; };
+		59145F9127425F2A00DA5391 /* JCKellyDataModelOddsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCKellyDataModelOddsModel.m; sourceTree = "<group>"; };
+		59145F9327425F5700DA5391 /* JCKellyDataModelOddsIndexModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCKellyDataModelOddsIndexModel.h; sourceTree = "<group>"; };
+		59145F9427425F5700DA5391 /* JCKellyDataModelOddsIndexModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCKellyDataModelOddsIndexModel.m; sourceTree = "<group>"; };
 		591C1B7E2734BBBD0001C2B7 /* JCDaShangView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCDaShangView.h; sourceTree = "<group>"; };
 		591C1B7F2734BBBD0001C2B7 /* JCDaShangView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCDaShangView.m; sourceTree = "<group>"; };
 		591C1B812734C4600001C2B7 /* JCDaShangShowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCDaShangShowView.h; sourceTree = "<group>"; };
@@ -4370,6 +4393,50 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		59145F7B273FEB7100DA5391 /* 数据模型 */ = {
+			isa = PBXGroup;
+			children = (
+				59145F7C273FEBD600DA5391 /* ViewController */,
+			);
+			path = "数据模型";
+			sourceTree = "<group>";
+		};
+		59145F7C273FEBD600DA5391 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				59145F7D273FEBFD00DA5391 /* JCMatchDetailDataModelVC.m */,
+				59145F7E273FEBFD00DA5391 /* JCMatchDetailDataModelVC.xib */,
+				59145F7F273FEBFD00DA5391 /* JCMatchDetailDataModelVC.h */,
+				59145F82273FF00700DA5391 /* JCTransactionDataModelMatchVC.h */,
+				59145F83273FF00700DA5391 /* JCTransactionDataModelMatchVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		59145F852742044800DA5391 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				59145F862742048400DA5391 /* JCDataModelModel.h */,
+				59145F872742048400DA5391 /* JCDataModelModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		59145F8927420B5800DA5391 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				59145F8A27420B7200DA5391 /* JCKellyDataModelPayInfoModel.h */,
+				59145F8B27420B7200DA5391 /* JCKellyDataModelPayInfoModel.m */,
+				59145F8D2742518200DA5391 /* JCKellyDataModelModel.h */,
+				59145F8E2742518200DA5391 /* JCKellyDataModelModel.m */,
+				59145F9027425F2A00DA5391 /* JCKellyDataModelOddsModel.h */,
+				59145F9127425F2A00DA5391 /* JCKellyDataModelOddsModel.m */,
+				59145F9327425F5700DA5391 /* JCKellyDataModelOddsIndexModel.h */,
+				59145F9427425F5700DA5391 /* JCKellyDataModelOddsIndexModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		591C1B7D2734BBA50001C2B7 /* 打赏 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4546,13 +4613,15 @@
 		59541CE8273A01F200D470EF /* 数据模型 */ = {
 			isa = PBXGroup;
 			children = (
+				59541CE9273A02BB00D470EF /* ViewController */,
+				59541CED273A039E00D470EF /* View */,
+				59145F852742044800DA5391 /* Model */,
+				7BCA27FB2520748A008787FF /* 鲸猜大数据 */,
 				59541DAF273E2E5F00D470EF /* 指数异动 */,
 				59541D88273D1E8500D470EF /* 凯利指数 */,
 				59541D55273CDBF500D470EF /* 离散指数 */,
 				59541D31273BAB7600D470EF /* 泊松分布 */,
 				59541CFE273A6C6500D470EF /* 历史同赔 */,
-				59541CED273A039E00D470EF /* View */,
-				59541CE9273A02BB00D470EF /* ViewController */,
 			);
 			path = "数据模型";
 			sourceTree = "<group>";
@@ -4806,6 +4875,7 @@
 		59541D88273D1E8500D470EF /* 凯利指数 */ = {
 			isa = PBXGroup;
 			children = (
+				59145F8927420B5800DA5391 /* Model */,
 				59541DA0273E096000D470EF /* 详情 */,
 				59541D8A273D1E9500D470EF /* View */,
 				59541D89273D1E8C00D470EF /* ViewController */,
@@ -8642,6 +8712,7 @@
 		7B99E5F42316644B00AA5AB6 /* 详情 */ = {
 			isa = PBXGroup;
 			children = (
+				59145F7B273FEB7100DA5391 /* 数据模型 */,
 				7BA54A722512124300297D1F /* Controller */,
 				7BCA27A5251C94B2008787FF /* View */,
 				7B99E6DF231664EA00AA5AB6 /* Model */,
@@ -8902,7 +8973,6 @@
 				59541CE8273A01F200D470EF /* 数据模型 */,
 				5940C344272290F500F41DF1 /* Model */,
 				7BCA2790251C794A008787FF /* 鲸猜AI */,
-				7BCA27FB2520748A008787FF /* 鲸猜大数据 */,
 				7B8E75D9251B4AD500FD8D00 /* View */,
 				7B8E75D5251B49D200FD8D00 /* ViewController */,
 				7B8E75D4251B49B400FD8D00 /* 数据库 */,
@@ -11436,6 +11506,7 @@
 				590A3E7E26A191E30012EDE6 /* jc_ayh_1@2x.png in Resources */,
 				7B99E6DD2316644C00AA5AB6 /* JNMatchDetailZSVC.xib in Resources */,
 				C349963B21C7930A00C3E282 /* MagicAlertCell.xib in Resources */,
+				59145F81273FEBFD00DA5391 /* JCMatchDetailDataModelVC.xib in Resources */,
 				7B5D03E3265F7D2800C65F51 /* course_min_2@2x.png in Resources */,
 				590A3F3426B7E7BC0012EDE6 /* jc_enterlball_18@2x.png in Resources */,
 				C3A29F9F219C0BF8009CF405 /* JCSettingBindTelVC.xib in Resources */,
@@ -11699,6 +11770,7 @@
 				C3C8B7D72193D06E004F29B0 /* JCWMatchTJBall.m in Sources */,
 				7B2DAD5224810A4F000E2282 /* JCHongbangBuyVC.m in Sources */,
 				7BF167EE2351C24600DFDB00 /* UIView+Empty.m in Sources */,
+				59145F84273FF00700DA5391 /* JCTransactionDataModelMatchVC.m in Sources */,
 				59541DBA273E3CDB00D470EF /* JCTransactionDataModelStickVC.m in Sources */,
 				7BB8284424B4753A0012EDA8 /* JCTeamMatchInfoUserTypeCell.m in Sources */,
 				59EB4EB9271E5CA600952D4D /* JCColumnDetailZhanjiChartCell.m in Sources */,
@@ -11779,6 +11851,7 @@
 				7BCA27D9252035C9008787FF /* JCBuyOrderDataSingleCell.m in Sources */,
 				7BCA278F251C6F5A008787FF /* JCWithDrawRecordItemCell.m in Sources */,
 				59541D24273B72B500D470EF /* JCHistoryPayDataModelDetailTopView.m in Sources */,
+				59145F9527425F5700DA5391 /* JCKellyDataModelOddsIndexModel.m in Sources */,
 				7BCA27D625202F1F008787FF /* JCBuyOrderDataMonthCell.m in Sources */,
 				7B1BDD4B250F15CC00D7C034 /* JCAAVC.m in Sources */,
 				7BD893C024F355820058B951 /* JCPostImageModel.m in Sources */,
@@ -11929,6 +12002,7 @@
 				594548902685809700C1AF38 /* JCAccountSettingIconCell.m in Sources */,
 				C3C3E1782178623D00466AAF /* JCAboutVC.m in Sources */,
 				7B1BDD712510665600D7C034 /* SCLineChart.m in Sources */,
+				59145F9227425F2B00DA5391 /* JCKellyDataModelOddsModel.m in Sources */,
 				7B11DB3F261EEC2800C1F7D6 /* CountDown.m in Sources */,
 				C32C71A7219AC7C50012B17C /* JCWMySubscribeBall.m in Sources */,
 				C3D6E323216AEA2A003300D8 /* UIView+HGCorner.m in Sources */,
@@ -11953,6 +12027,7 @@
 				59541D48273BC81B00D470EF /* JCPoissonDataModelDetailHeadView.m in Sources */,
 				C3F023D2216F734900A1B98F /* JCUpdateView.m in Sources */,
 				7BD893E724F551020058B951 /* JCPostCheckPlanVC.m in Sources */,
+				59145F80273FEBFD00DA5391 /* JCMatchDetailDataModelVC.m in Sources */,
 				7BE891B924B5AD9B00AE2E79 /* JNMatchZS_JC_RqSPFHeadView.m in Sources */,
 				7BE891D624B5BF5E00AE2E79 /* JNMatchZS_JC_BCSPF_titleCell.m in Sources */,
 				595884BE268B23D00085206B /* JCActivityGuessCheckView.m in Sources */,
@@ -12141,7 +12216,9 @@
 				7B61BEFB24ED4DEF0068F148 /* YBIBCopywriter.m in Sources */,
 				7B5E1BFE254A943F0029747D /* JCCommunity_HB_Item_HeadView.m in Sources */,
 				7B5D03AA265E505800C65F51 /* JCActivityGuessCompleteCell.m in Sources */,
+				59145F8C27420B7200DA5391 /* JCKellyDataModelPayInfoModel.m in Sources */,
 				7B5C79522498C92400F97A51 /* NSBundle+BRPickerView.m in Sources */,
+				59145F882742048400DA5391 /* JCDataModelModel.m in Sources */,
 				7BB624E0233CB82B0058E7AF /* JCActivityRedPacketListView.m in Sources */,
 				7B44A6AE2665CE0200AF56B0 /* JCKindInviteView.m in Sources */,
 				7B79CBE824FCF7BC00812FC5 /* JCWithDrawRecordCell.m in Sources */,
@@ -12294,6 +12371,7 @@
 				C3B9937A225F290F002E2AD3 /* JCUpdateBall.m in Sources */,
 				59541D7E273D08D200D470EF /* JCDiscreteDataModelDetailVC.m in Sources */,
 				7B8AE2A925A3042700B805EA /* JCBasketBallGZHCell.m in Sources */,
+				59145F8F2742518200DA5391 /* JCKellyDataModelModel.m in Sources */,
 				7B94A77525F76CFA00A93B8F /* JCAppService_New.m in Sources */,
 				7B5C794C2498C92400F97A51 /* BRStringPickerView.m in Sources */,
 				7B6C1A0324BAD26300072C62 /* JNMatchZS_ZSDetailInfoTableViewCell.m in Sources */,

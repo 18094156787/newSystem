@@ -28,6 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (assign, nonatomic) NSInteger reward_num;//打赏人数
 
+@property (nonatomic,strong) NSString *user_img;
+
+@property (nonatomic,strong) NSString *user_name;
+
 @end
 
 NS_ASSUME_NONNULL_END

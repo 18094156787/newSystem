@@ -17,55 +17,40 @@
         make.top.offset(AUTO(12));
         make.height.mas_equalTo(AUTO(25));
     }];
+
     
-    UIView *lineView = [UIView new];
-    lineView.backgroundColor = COLOR_F0F0F0;
-    [self.contentView addSubview:lineView];
-    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.contentView addSubview:self.bgView];
+    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
+        make.top.equalTo(self.titleInfoLab.mas_bottom).offset(AUTO(12));
         make.right.offset(AUTO(-15));
-        make.top.equalTo(self.titleInfoLab.mas_bottom).offset(AUTO(8));
-        make.height.mas_equalTo(1);
+        make.height.mas_equalTo(AUTO(113));
     }];
-    
-//    [self.contentView addSubview:self.bgView];
-//    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.offset(0);
-//        make.top.equalTo(lineView.mas_bottom).offset(AUTO(15));
-//        make.right.offset(0);
-////        make.height.mas_equalTo(AUTO(120));
-//    }];
     
 
     
-    [self.contentView addSubview:self.titleLab];
+    [self.bgView addSubview:self.titleLab];
     [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(AUTO(15));
-        make.top.equalTo(lineView.mas_bottom).offset(AUTO(15));
+        make.left.offset(AUTO(8));
+        make.top.offset(AUTO(8));
         make.height.mas_equalTo(AUTO(20));
     }];
-    
-//    [self.bgView addSubview:self.tagLab];
-//    [self.tagLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.offset(AUTO(-15));
-//        make.centerY.equalTo(self.titleLab);
-//    }];
-    
-    [self.contentView addSubview:self.homeImgView];
+
+    [self.bgView addSubview:self.homeImgView];
     [self.homeImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(AUTO(75));
+        make.left.offset(AUTO(50));
         make.top.equalTo(self.titleLab.mas_bottom).offset(AUTO(10));
-        make.size.mas_equalTo(CGSizeMake(AUTO(40), AUTO(40)));
+        make.size.mas_equalTo(CGSizeMake(AUTO(32), AUTO(32)));
     }];
     
-    [self.contentView addSubview:self.awayImgView];
+    [self.bgView addSubview:self.awayImgView];
     [self.awayImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(AUTO(-75));
+        make.right.offset(AUTO(-50));
         make.top.equalTo(self.homeImgView);
-        make.size.mas_equalTo(CGSizeMake(AUTO(40), AUTO(40)));
+        make.size.mas_equalTo(CGSizeMake(AUTO(32), AUTO(32)));
     }];
     
-    [self.contentView addSubview:self.scoreLab];
+    [self.bgView addSubview:self.scoreLab];
     [self.scoreLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.homeImgView);
         make.centerX.equalTo(self.contentView);
@@ -79,13 +64,13 @@
 //        make.size.mas_equalTo(CGSizeMake(AUTO(18), AUTO(13)));
 //    }];
     
-    [self.contentView addSubview:self.statusLab];
-    [self.statusLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.contentView);
+    [self.bgView addSubview:self.matchStatusLab];
+    [self.matchStatusLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.bgView);
         make.top.equalTo(self.scoreLab.mas_bottom);
     }];
     
-    [self.contentView addSubview:self.homeNameLab];
+    [self.bgView addSubview:self.homeNameLab];
     [self.homeNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.homeImgView.mas_bottom).offset(AUTO(3));
         make.centerX.equalTo(self.homeImgView);
@@ -93,7 +78,7 @@
 //        make.height.mas_equalTo(AUTO(21));
     }];
     
-    [self.contentView addSubview:self.awayNameLab];
+    [self.bgView addSubview:self.awayNameLab];
     [self.awayNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.homeImgView.mas_bottom).offset(AUTO(3));
         make.centerX.equalTo(self.awayImgView);
@@ -105,9 +90,15 @@
     [self.contentView addSubview:self.priceLab];
     [self.priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
-        make.top.equalTo(self.homeNameLab.mas_bottom).offset(AUTO(13));
+        make.top.equalTo(self.bgView.mas_bottom).offset(AUTO(13));
         make.height.mas_equalTo(AUTO(20));
         make.bottom.offset(AUTO(-12));
+    }];
+    
+    [self.contentView addSubview:self.statusLab];
+    [self.statusLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.priceLab.mas_right).offset(AUTO(40));
+        make.centerY.equalTo(self.priceLab);
     }];
     
     [self.contentView addSubview:self.orderDetailLab];
@@ -118,12 +109,12 @@
     }];
     
     UIImageView *indicateView  = [UIImageView new];
-    indicateView.image = JCIMAGE(@"post_back");
+    indicateView.image = JCIMAGE(@"common_arrow_right");
     [self.contentView addSubview:indicateView];
     [indicateView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.orderDetailLab.mas_right).offset(2);
         make.centerY.equalTo(self.orderDetailLab);
-        make.size.mas_equalTo(CGSizeMake(AUTO(7), AUTO(12)));
+        make.size.mas_equalTo(CGSizeMake(AUTO(5), AUTO(10)));
     }];
     
     WeakSelf;
@@ -152,23 +143,23 @@
     
     self.homeNameLab.text = model.home_team_name;
     self.awayNameLab.text = model.away_team_name;
-    self.statusLab.text = model.status_cn;
+    self.matchStatusLab.text = model.status_cn;
     
-    if (model.home_team_name.length>model.away_team_name.length) {
-        [self.priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.offset(AUTO(15));
-            make.top.equalTo(self.homeNameLab.mas_bottom).offset(AUTO(13));
-            make.height.mas_equalTo(AUTO(20));
-            make.bottom.offset(AUTO(-12));
-        }];
-    }else{
-        [self.priceLab mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.offset(AUTO(15));
-            make.top.equalTo(self.awayNameLab.mas_bottom).offset(AUTO(13));
-            make.height.mas_equalTo(AUTO(20));
-            make.bottom.offset(AUTO(-12));
-        }];
-    }
+//    if (model.home_team_name.length>model.away_team_name.length) {
+//        [self.priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.offset(AUTO(15));
+//            make.top.equalTo(self.homeNameLab.mas_bottom).offset(AUTO(13));
+//            make.height.mas_equalTo(AUTO(20));
+//            make.bottom.offset(AUTO(-12));
+//        }];
+//    }else{
+//        [self.priceLab mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.left.offset(AUTO(15));
+//            make.top.equalTo(self.awayNameLab.mas_bottom).offset(AUTO(13));
+//            make.height.mas_equalTo(AUTO(20));
+//            make.bottom.offset(AUTO(-12));
+//        }];
+//    }
    
 
     
@@ -183,8 +174,15 @@
         self.scoreLab.text = @"vs";
     }
 
-    self.priceLab.text = [NSString stringWithFormat:@"实付：%@红币",@([model.pay_price floatValue])];
+//    self.priceLab.text = [NSString stringWithFormat:@"实付：%@红币",@([model.pay_price floatValue])];
 
+    NSString *price = [NSString stringWithFormat:@"实付金额：%@红币",@([model.pay_price floatValue])];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:price];
+    NSRange range = [price rangeOfString:@"实付金额："];
+    [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)]} range:range];
+    self.priceLab.attributedText = attr;
+    
+    self.statusLab.text = @"已退款";
     
 
 }
@@ -200,7 +198,10 @@
 - (UIView *)bgView {
     if (!_bgView) {
         _bgView = [UIView new];
-        _bgView.userInteractionEnabled = YES;
+        _bgView.layer.borderWidth = 1;
+        _bgView.layer.borderColor = COLOR_F0F0F0.CGColor;
+        _bgView.layer.cornerRadius = 8;
+        _bgView.layer.masksToBounds = YES;
     }
     return _bgView;
 }
@@ -255,11 +256,11 @@
     return _vsImgView;
 }
 
-- (UILabel *)statusLab {
-    if (!_statusLab) {
-        _statusLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:[COLOR_2F2F2F colorWithAlphaComponent:0.6] andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+- (UILabel *)matchStatusLab {
+    if (!_matchStatusLab) {
+        _matchStatusLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:[COLOR_2F2F2F colorWithAlphaComponent:0.6] andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     }
-    return _statusLab;
+    return _matchStatusLab;
 }
 
 - (UILabel *)homeNameLab {
@@ -282,7 +283,7 @@
 
 - (UILabel *)priceLab {
     if (!_priceLab) {
-        _priceLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:[COLOR_000000 colorWithAlphaComponent:0.6] andBackgroundColor:JCClearColor andTextAlignment:0];
+        _priceLab = [UILabel initWithTitle:@"" andFont:AUTO(13) andWeight:2 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentRight];
     }
     return _priceLab;
 }
@@ -294,4 +295,12 @@
     }
     return _orderDetailLab;
 }
+
+- (UILabel *)statusLab {
+    if (!_statusLab) {
+        _statusLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_30B27A andBackgroundColor:JCClearColor andTextAlignment:0];
+    }
+    return _statusLab;
+}
+
 @end

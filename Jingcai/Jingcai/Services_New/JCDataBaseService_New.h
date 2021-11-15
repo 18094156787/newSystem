@@ -89,6 +89,15 @@ NS_ASSUME_NONNULL_BEGIN
 //2 让球 3进球数 不传 展示 全部 默认全部
 - (void)getJingCaiAiTuiJianListWithType:(NSString *)type classfly:(NSString *)classfly Page:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 
+#pragma mark 数据模型
+//数据模型首页
+- (void)getHomeDataModelWithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//凯利指数模型购买信息
+- (void)getKellyDataModelPayInfoWithModel_id:(NSString *)model_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//凯利指数模型免费体验
+- (void)getKellyDataModeFreeExperienceWithModel_id:(NSString *)model_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//凯利指数列表
+-(void)getKellyDataModeListWithDate:(NSString *)date Page:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,11 +7,6 @@
 //
 
 #import "JCTransactionDataModelDetailVC.h"
-#import "JCPoissonDataModelDetailHeadView.h"
-#import "JCKellyDataModelDetailInfoCell.h"
-
-#import "JCKellyDataModelSampleTitleView.h"
-
 
 #import "JCTransactionDataModelDetailHeadView.h"
 #import "JCTransactionDataModelDetailDataCell.h"

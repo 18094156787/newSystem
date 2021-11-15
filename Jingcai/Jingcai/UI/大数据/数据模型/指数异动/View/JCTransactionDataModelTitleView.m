@@ -17,7 +17,7 @@
     [self addSubview:iconView];
     [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
-        make.bottom.equalTo(self);
+        make.centerY.equalTo(self);
         make.size.mas_equalTo(CGSizeMake(2, 16));
     }];
     

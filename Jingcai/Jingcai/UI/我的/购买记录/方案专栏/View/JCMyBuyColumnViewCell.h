@@ -24,6 +24,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UILabel *priceLab;
 
+@property (nonatomic,strong) UIView *priceView;
+
+@property (nonatomic,strong) UILabel *payPriceLab;
+
+@property (nonatomic,strong) UILabel *statusLab;
+
+@property (nonatomic,strong) UILabel *orderDetailLab;
+
+@property (nonatomic,strong) UIImageView *indicateImgView;
+
+@property (nonatomic,copy) void(^JCBlock)(void);
+
 @property (nonatomic,strong) JCColumnDetailModel *model; 
 
 @end

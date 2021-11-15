@@ -82,6 +82,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)timeStringWithIntervalWithWeekFormat:(NSString *)format time:(NSTimeInterval)timeInterval;
 #pragma mark - 比较两个时间大小（可以指定比较级数，即按指定格式进行比较）
 - (NSComparisonResult)br_compare:(NSDate *)targetDate format:(NSString *)format;
+//获取指定日期的前后几天
++ (NSDate *)getDate:(NSDate *)currentDate day:(NSInteger)day;
+/// 获取星期中文
++ (NSString *)getChineseWeekFrom:(NSString *)dateStr format:(NSString *)format;
++ (NSString *)timeStringWithDate:(NSDate *)date format:(NSString *)fotmat;
+/// 获取星期 中文
++ (NSString *)getWeekZhouFromDate:(NSDate *)date;
 @end
 
 NS_ASSUME_NONNULL_END
