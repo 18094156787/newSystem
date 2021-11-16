@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseTableViewCell_New.h"
-
+#import "JCKellyDataDetailSampleModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCKellyDataModelSampleCell : JCBaseTableViewCell_New
@@ -60,6 +60,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *away_rateLab;
 
 @property (nonatomic, strong) UILabel *companyLab;
+
+@property (nonatomic, strong) JCKellyDataDetailSampleModel *model;
 
 @end
 

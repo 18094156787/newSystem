@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger id;
 
-@property (nonatomic, assign) NSInteger match_id;
+@property (nonatomic, copy) NSString *match_id;
 
 @property (nonatomic, assign) NSInteger match_time;
 

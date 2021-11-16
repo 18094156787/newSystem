@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseView.h"
-
+#import "JCKellyDataDetailModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCHistoryPayDataModelDetailMatchView : JCBaseView
@@ -42,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UIImageView *tuijianImgView;
 
+@property (nonatomic,strong) JCKellyDataDetailModel *model;
 
 @end
 

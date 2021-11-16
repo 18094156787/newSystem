@@ -162,7 +162,15 @@
     [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
     
 
-    self.historyLab.text = [NSString stringWithFormat:@"查询到%ld条赔率数据；已完成凯利指数数据",model.company_num];
+    NSString *title = [NSString stringWithFormat:@"查询到%ld条赔率数据；已完成凯利指数数据运算",model.company_num];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+    NSRange range = [title rangeOfString:[NSString stringWithFormat:@"%ld",model.company_num]];
+    if (range.location!=NSNotFound) {
+        [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
+    }
+    self.historyLab.attributedText = attr;
+    self.chuView.model = self.model.odds_index.begin_odds;
+    self.jiView.model = self.model.odds_index.last_odds;
     //半场比分,角球
     if (model.status_id>1&&model.status_id<9) {
         self.scoreLab.text = [NSString stringWithFormat:@"%ld : %ld",model.home_score,model.away_score];
@@ -305,6 +313,7 @@
 - (JCKellyDataModelOpenRateView *)jiView {
     if (!_jiView) {
         _jiView = [JCKellyDataModelOpenRateView new];
+        _jiView.is_jp = YES;
     }
     return _jiView;
 }

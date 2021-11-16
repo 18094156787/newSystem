@@ -113,9 +113,9 @@
     self.awayLab.text = matchModel.home_name;
     
 
-    
-    [JCLayer setupView:self.no_rq_loseLab corners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadius:5 borderWith:1 borderColor:COLOR_E4E4E4];
-    [JCLayer setupView:self.no_rq_windLab corners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadius:5 borderWith:1 borderColor:COLOR_E4E4E4];
+    [self layoutIfNeeded];
+    [JCLayer setupView:self.no_rq_loseLab corners:UIRectCornerTopRight | UIRectCornerBottomRight cornerRadius:5 borderWith:1 borderColor:COLOR_E4E4E4];
+    [JCLayer setupView:self.no_rq_windLab corners:UIRectCornerBottomLeft | UIRectCornerTopLeft cornerRadius:5 borderWith:1 borderColor:COLOR_E4E4E4];
     self.no_rq_windLab.backgroundColor = JCWhiteColor;
     self.no_rq_loseLab.backgroundColor = JCWhiteColor;
     self.no_rq_windLab.textColor = COLOR_2F2F2F;
@@ -227,9 +227,9 @@
 - (UILabel *)no_rq_windLab {
     if (!_no_rq_windLab) {
         _no_rq_windLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
-        _no_rq_windLab.layer.borderWidth = 0.5;
-        _no_rq_windLab.layer.borderColor = COLOR_E4E4E4.CGColor;
-        _no_rq_windLab.layer.masksToBounds = YES;
+//        _no_rq_windLab.layer.borderWidth = 0.5;
+//        _no_rq_windLab.layer.borderColor = COLOR_E4E4E4.CGColor;
+//        _no_rq_windLab.layer.masksToBounds = YES;
 
     }
     return _no_rq_windLab;

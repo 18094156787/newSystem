@@ -57,7 +57,7 @@
     
     [self.homeView addSubview:self.homeNameLab];
     [self.homeNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.offset(-1);
+        make.top.left.right.offset(0);
         make.height.mas_equalTo(AUTO(28));
     }];
     
@@ -78,7 +78,7 @@
     
     [self.awayView addSubview:self.awayNameLab];
     [self.awayNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.offset(-1);
+        make.top.left.right.offset(0);
         make.height.mas_equalTo(AUTO(28));
     }];
     
@@ -137,7 +137,7 @@
         self.no_rq_windLab.text = [NSString stringWithFormat:@"%@  %@",away,matchModel.no_rq_odds.lose];
         self.no_rq_loseLab.text = [NSString stringWithFormat:@"%@ %@",home,matchModel.no_rq_odds.win];
     }
-    
+    [self layoutIfNeeded];
     
     [JCLayer setupView:self.homeNameLab corners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadius:5 borderWith:1 borderColor:COLOR_E4E4E4];
     [JCLayer setupView:self.awayNameLab corners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadius:5 borderWith:1 borderColor:COLOR_E4E4E4];

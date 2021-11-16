@@ -225,12 +225,41 @@
     
 
     self.historyLab.text = [NSString stringWithFormat:@"查询到%ld条赔率数据；已完成凯利指数数据",kellyModel.company_num];
+    [kellyModel.odds_index.begin_odds.odds enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx==0) {
+            self.homeWinView.bottomLab.text = obj;
+        }
+        if (idx==1) {
+            self.homeEqualView.bottomLab.text = obj;
+        }
+        if (idx==2) {
+            self.homeLoseView.bottomLab.text = obj;
+        }
+    }];
+    [kellyModel.odds_index.last_odds.odds enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx==0) {
+            self.awayWinView.bottomLab.text = obj;
+        }
+        if (idx==1) {
+            self.awayEqualView.bottomLab.text = obj;
+        }
+        if (idx==2) {
+            self.awayLoseView.bottomLab.text = obj;
+        }
+    }];
+    
+    
+    
+    
+    
     //半场比分,角球
     if (kellyModel.status_id>1&&kellyModel.status_id<9) {
         self.scoreLab.text = [NSString stringWithFormat:@"%ld : %ld",kellyModel.home_score,kellyModel.away_score];
     }else{
         self.scoreLab.text = @"VS";
     }
+    
+    
     
     //进行中的比赛显示分钟数
      if (kellyModel.status_id>1&&kellyModel.status_id<8) {

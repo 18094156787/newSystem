@@ -93,6 +93,7 @@
     // 表格注册cell
     [self.tableView registerClass:[JCDiscreteDataModelLockedCell class] forCellReuseIdentifier:@"JCDiscreteDataModelLockedCell"];
     [self.tableView registerClass:[JCKellyDataModelOpenCell class] forCellReuseIdentifier:@"JCKellyDataModelOpenCell"];
+
     
 //    self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(48));
 //    self.tableView.tableHeaderView = self.headView;
@@ -156,7 +157,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    JCKellyDataModelModel *model = self.dataArray[indexPath.section];
+    JCKellyDataModelModel *model = self.dataArray[indexPath.row];
     if (self.buyInfoModel.show_status==2) {
         JCKellyDataModelOpenCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCKellyDataModelOpenCell"];
         
@@ -175,8 +176,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    
+    JCKellyDataModelModel *model = self.dataArray[indexPath.row];
     JCKellyDataModelDetailVC *vc = [JCKellyDataModelDetailVC new];
+    vc.match_id = model.match_id;
     [self.navigationController pushViewController:vc animated:YES];
     
     

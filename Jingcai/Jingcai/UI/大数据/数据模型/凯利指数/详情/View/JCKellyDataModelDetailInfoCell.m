@@ -62,9 +62,21 @@
     }];
 }
 
-- (void)data {
-    self.historyLab.text = @"查询历史数据，找到相同初赔比赛100场，相同即赔比赛90场";
+- (void)setModel:(JCKellyDataDetailModel *)model {
+    _model = model;
+    NSString *title = [NSString stringWithFormat:@"查询到%ld条赔率数据；已完成凯利指数数据运算",model.company_num];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+    NSRange range = [title rangeOfString:[NSString stringWithFormat:@"%ld",model.company_num]];
+    if (range.location!=NSNotFound) {
+        [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
+    }
+    self.historyLab.attributedText = attr;
+    
+    self.chuView.model  = model.odds_index.begin_odds;
+    self.jiView.model = model.odds_index.last_odds;
 }
+
+
 
 - (UIView *)bgView {
     if (!_bgView) {
@@ -85,6 +97,7 @@
 - (JCKellyDataModelOpenRateView *)jiView {
     if (!_jiView) {
         _jiView = [JCKellyDataModelOpenRateView new];
+        _jiView.is_jp = YES;
     }
     return _jiView;
 }

@@ -8,6 +8,7 @@
 
 #import "JCBaseTableViewCell_New.h"
 #import "JCKellyDataModelOpenRateView.h"
+#import "JCKellyDataDetailModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCKellyDataModelDetailInfoCell : JCBaseTableViewCell_New
@@ -19,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) JCKellyDataModelOpenRateView *jiView;//即赔
 
 @property (nonatomic,strong) KKPaddingLabel *historyLab;
+
+@property (nonatomic,strong) JCKellyDataDetailModel *model;
 
 @end
 

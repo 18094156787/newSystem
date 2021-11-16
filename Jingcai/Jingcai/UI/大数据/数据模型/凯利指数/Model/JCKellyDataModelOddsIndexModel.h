@@ -12,7 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JCKellyDataModelOddsIndexModel : JCWBaseBall
 
+@property (nonatomic,strong) NSString *loss_ratio;//指数
+
 @property (nonatomic,strong) NSArray *odds;
+
+@property (nonatomic,strong) NSArray *kelly_index;//凯利指数
+
+@property (nonatomic,strong) NSArray *kelly_variance;//凯利方差
 
 @end
 

@@ -8,6 +8,7 @@
 
 #import "JCBaseView.h"
 #import "JCHistoryPayDataModelDetailMatchView.h"
+#import "JCKellyDataDetailModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCPoissonDataModelDetailHeadView : JCBaseView
@@ -17,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel *titleLab;
 
 @property (nonatomic,strong) JCHistoryPayDataModelDetailMatchView *matchView;
+
+@property (nonatomic,strong) JCKellyDataDetailModel *model;
 
 @end
 

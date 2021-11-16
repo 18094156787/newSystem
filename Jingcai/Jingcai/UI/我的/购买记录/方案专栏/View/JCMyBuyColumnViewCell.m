@@ -58,11 +58,7 @@
         make.width.height.mas_equalTo(AUTO(24));
     }];
     
-    [self.contentView addSubview:self.priceLab];
-    [self.priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.headImgView);
-        make.right.offset(AUTO(-15));
-    }];
+
     
     [self.contentView addSubview:self.nameLab];
     [self.nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -116,7 +112,7 @@
     
     
     //原价
-    NSString *ori_price = [NSString stringWithFormat:@"原价 %@",@"40"];
+    NSString *ori_price = [NSString stringWithFormat:@"原价 %@",model.total_price];
     NSMutableAttributedString *ori_attr = [[NSMutableAttributedString alloc] initWithString:ori_price];
     NSRange ori_range = [ori_price rangeOfString:@"原价"];
     [ori_attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)],NSForegroundColorAttributeName:COLOR_9F9F9F} range:ori_range];

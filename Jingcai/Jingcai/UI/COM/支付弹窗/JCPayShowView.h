@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) void(^JCSureBlock)(NSString *hb_id);
 
+@property (nonatomic,copy) void(^JCRechargeBlock)(void);
+
 - (void)show;
 
 - (void)hide;

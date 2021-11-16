@@ -134,6 +134,10 @@
 //    [self.no_rq_windLab hg_setCornerOnLeftWithRadius:20];
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+}
+
 
 - (void)setMatchModel:(JCWVerTjInfoMatchBall *)matchModel {
     _matchModel = matchModel;
@@ -211,7 +215,10 @@
     }];
     
 
-    self.no_rqLab.text = matchModel.no_rq_odds.rq.length>0? matchModel.no_rq_odds.rq : @"0";
+    self.no_rqLab.text = matchModel.no_rq_odds.rq.length>0? matchModel.no_rq_odds.rq : matchModel.no_rq_odds.rq_num;
+    if (matchModel.no_rq_odds.rq.length==0&&matchModel.no_rq_odds.rq_num==0) {
+        self.no_rqLab.text = @"0";
+    }
     self.no_rq_windLab.text = [NSString stringWithFormat:@"主胜 %@",matchModel.no_rq_odds.win];
     self.no_rq_equalLab.text = [NSString stringWithFormat:@"平 %@",matchModel.no_rq_odds.equal];
     self.no_rq_loseLab.text = [NSString stringWithFormat:@"客胜 %@",matchModel.no_rq_odds.lose];
@@ -219,7 +226,10 @@
 
     self.awayView.hidden = matchModel.classfly==1?YES:NO;
     self.rqLab.hidden = matchModel.classfly==1?YES:NO;
-    self.rqLab.text = matchModel.rq_odds.rq.length>0? matchModel.rq_odds.rq : @"0";
+    self.rqLab.text = matchModel.rq_odds.rq.length>0? matchModel.rq_odds.rq : matchModel.rq_odds.rq_num;
+    if (matchModel.rq_odds.rq.length==0&&matchModel.rq_odds.rq_num==0) {
+        self.rqLab.text = @"0";
+    }
     self.rq_windLab.text = [NSString stringWithFormat:@"主胜 %@",matchModel.rq_odds.win];
     self.rq_equalLab.text = [NSString stringWithFormat:@"平 %@",matchModel.rq_odds.equal];
     self.rq_loseLab.text =[NSString stringWithFormat:@"客胜 %@",matchModel.rq_odds.lose];
@@ -245,6 +255,7 @@
     self.no_rq_windLab.textColor = COLOR_2F2F2F;
     self.no_rq_equalLab.textColor = COLOR_2F2F2F;
     self.no_rq_loseLab.textColor = COLOR_2F2F2F;
+    [self layoutIfNeeded];
     
     [JCLayer setupView:self.no_rq_windLab corners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadius:5 borderWith:1 borderColor:COLOR_E4E4E4];
     [JCLayer setupView:self.no_rq_loseLab corners:UIRectCornerTopRight | UIRectCornerBottomRight cornerRadius:5 borderWith:1 borderColor:COLOR_E4E4E4];

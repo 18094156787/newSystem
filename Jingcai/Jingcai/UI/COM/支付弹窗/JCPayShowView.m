@@ -169,7 +169,10 @@
 }
 
 - (void)rechargeBtnClick {
-    
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"JCFanganAgree"]) {
+        [JCWToastTool showHint:@"请阅读《鲸猜足球用户购买协议》并点击同意"];
+        return ;
+    }
     
     if (self.JCSureBlock) {
         self.JCSureBlock(@"");

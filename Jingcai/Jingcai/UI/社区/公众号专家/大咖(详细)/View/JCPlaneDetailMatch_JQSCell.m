@@ -20,6 +20,7 @@
     [self.contentView addSubview:self.typeLab];
     [self.typeLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(AUTO(-10));
+        make.height.mas_equalTo(AUTO(16));
         make.centerY.equalTo(self.titleLab);
     }];
     
@@ -152,7 +153,7 @@
     }
 
     
-
+    [self layoutIfNeeded];
     self.no_rq_equalLab.layer.borderColor = COLOR_E4E4E4.CGColor;
     
     [JCLayer setupView:self.no_rq_loseLab corners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadius:5 borderWith:1 borderColor:COLOR_E4E4E4];
@@ -262,7 +263,7 @@
         _typeLab = [KKPaddingLabel initWithTitle:@"" andFont:AUTO(10) andWeight:1 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
         _typeLab.layer.borderColor = JCBaseColor.CGColor;
         _typeLab.layer.borderWidth = 1;
-        _typeLab.layer.cornerRadius = AUTO(2);
+        _typeLab.layer.cornerRadius = AUTO(8);
         _typeLab.layer.masksToBounds = YES;
         _typeLab.padding = UIEdgeInsetsMake(0, 8, 0, 8);
     }

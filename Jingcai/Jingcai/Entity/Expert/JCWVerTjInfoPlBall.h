@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString * lose;
 @property (nonatomic, strong) NSString * equal;
 @property (nonatomic, strong) NSString * rq;
+@property (nonatomic, strong) NSString * rq_num;
 @property (nonatomic, strong) NSString * lrq;
 @property (nonatomic, strong) NSString * status;
 @property (nonatomic, strong) NSDate * created_at;

@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseView.h"
-
+#import "JCKellyDataModelModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCKellyDataModelOpenRateView : JCBaseView
@@ -37,6 +37,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *fc_EqualLab;
 
 @property (nonatomic, strong) UILabel *fc_LoseLab;
+
+@property (nonatomic, assign) BOOL is_jp;//记录即赔
+
+@property (nonatomic, strong) JCKellyDataModelOddsIndexModel *model;
 
 @end
 

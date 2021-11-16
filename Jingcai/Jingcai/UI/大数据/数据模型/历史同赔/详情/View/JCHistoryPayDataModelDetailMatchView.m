@@ -120,22 +120,50 @@
     [self.winLab addSubview:self.tuijianImgView];
 }
 
-- (void)data {
-    self.titleLab.text = @"欧洲杯 2021-09-02 18:00";
+- (void)setModel:(JCKellyDataDetailModel *)model {
+    _model = model;
+    self.titleLab.text = [NSString stringWithFormat:@"%@  %@",model.competition_name,model.get_match_time];
     self.resultImgView.image = JCIMAGE(@"ic_dataModel_black");
-    self.homeImgView.backgroundColor = JCBaseColor;
-    self.awayImgView.backgroundColor = JCBaseColor;
-    self.statusLab.text = @"未开赛";
-    self.scoreLab.text = @"VS";
-    self.homeNameLab.text = @"意大利";
-    self.awayNameLab.text = @"意大利";
-    self.homeRankLab.text = @"欧洲杯排名1";
-    self.awayRankLab.text = @"欧洲杯排名2";
+    [self.homeImgView sd_setImageWithURL:[NSURL URLWithString:model.home_team.logo] placeholderImage:JCIMAGE(@"home_placeholder")];
+    [self.awayImgView sd_setImageWithURL:[NSURL URLWithString:model.away_team.logo] placeholderImage:JCIMAGE(@"away_placeholder")];
+    self.statusLab.text = model.status_cn;
+    self.homeNameLab.text = model.home_team.name_zh;
+    self.awayNameLab.text = model.away_team.name_zh;
+    self.homeRankLab.text = [NSString stringWithFormat:@"%@排名%ld",model.competition_name,model.home_team_position];
+    self.awayRankLab.text = [NSString stringWithFormat:@"%@排名%ld",model.competition_name,model.away_team_position];
+    if (model.competition_type!=1) {
+        self.homeRankLab.text = @"";
+        self.awayRankLab.text = @"";
+    }
+
+    if (model.status_id>1&&model.status_id<9) {
+        self.scoreLab.text = [NSString stringWithFormat:@"%ld : %ld",model.home_all_score,model.away_all_score];
+    }else{
+        self.scoreLab.text = @"VS";
+    }
+    
     
     self.winLab.text = @"主胜\n1.75";
     self.equalLab.text = @"平局\n1.75";
     self.loseLab.text = @"客胜\n1.75";
 }
+
+//- (void)data {
+//    self.titleLab.text = @"欧洲杯 2021-09-02 18:00";
+//    self.resultImgView.image = JCIMAGE(@"ic_dataModel_black");
+//    self.homeImgView.backgroundColor = JCBaseColor;
+//    self.awayImgView.backgroundColor = JCBaseColor;
+//    self.statusLab.text = @"未开赛";
+//    self.scoreLab.text = @"VS";
+//    self.homeNameLab.text = @"意大利";
+//    self.awayNameLab.text = @"意大利";
+//    self.homeRankLab.text = @"欧洲杯排名1";
+//    self.awayRankLab.text = @"欧洲杯排名2";
+//    
+//    self.winLab.text = @"主胜\n1.75";
+//    self.equalLab.text = @"平局\n1.75";
+//    self.loseLab.text = @"客胜\n1.75";
+//}
 
 - (UILabel *)titleLab {
     if (!_titleLab) {

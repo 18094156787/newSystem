@@ -473,4 +473,38 @@
         failureBlock(error);
     }];
 }
+//凯利指数详情
+//match_id 比赛id
+- (void)getKellyDataModeDetailWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+ 
+
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+        @"match_id":match_id,
+    };
+    
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"kelly_index_detail" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//凯利指数样本数据
+//match_id 比赛id
+- (void)getKellyDataModeDetailSampleDataWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+ 
+
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+        @"match_id":match_id,
+    };
+    
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"kelly_simple_data" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
 @end

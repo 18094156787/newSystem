@@ -13,6 +13,7 @@
 #import "JCMatchTimeModel.h"
 #import "JCPayShowView.h"
 #import "JCKellyDataModelPayInfoModel.h"
+#import "JCChargeVC.h"
 static CGFloat const kWMMenuViewHeight = 0;
 @interface JCKellyDataModelStickVC ()
 
@@ -154,20 +155,6 @@ static CGFloat const kWMMenuViewHeight = 0;
 
 }
 
-- (void)FreeExperience {
-    [self.jcWindow showLoading];
-    JCDataBaseService_New *service = [JCDataBaseService_New service];
-    [service getKellyDataModeFreeExperienceWithModel_id:self.model_id Success:^(id  _Nullable object) {
-        [self.jcWindow endLoading];
-        [self getTopInfoData];
-        
-    } failure:^(NSError * _Nonnull error) {
-        [self.jcWindow endLoading];
-    }];
-
-
-
-}
 
 
 
@@ -184,14 +171,32 @@ static CGFloat const kWMMenuViewHeight = 0;
     }];
         
     self.headView.JCTimeBlock = ^(NSString * _Nonnull time) {
-        self.dataVC.date = time;
-        [self.dataVC refreshData];
+        weakSelf.dataVC.date = time;
+        [weakSelf.dataVC refreshData];
     };
 
     self.headView.JCBuyClickBlock = ^{
         if (weakSelf.buyInfoModel.show_status==1) {
             //免费体验
             [weakSelf FreeExperience];
+            return;
+        }
+        if (weakSelf.buyInfoModel.show_status==2) {
+            if (weakSelf.buyInfoModel.model_status==1) {
+                //免费体验中不能续费
+                return;
+            }
+            if (weakSelf.buyInfoModel.model_status==3) {
+                //下架不能购买
+                return;
+            }
+            if (weakSelf.buyInfoModel.model_status==4) {
+                //免费,不能购买
+                return;
+            }
+        }
+        if (weakSelf.buyInfoModel.show_status==4) {
+            //下架
             return;
         }
 //        if (![JCWUserBall currentUser]) {
@@ -205,16 +210,82 @@ static CGFloat const kWMMenuViewHeight = 0;
         payView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         [weakSelf.jcWindow addSubview:payView];
         payView.JCSureBlock = ^(NSString * _Nonnull hb_id) {
-//          [payView ]
+            [weakSelf sureBuy];
         };
         [payView show];
     };
 
-    
+}
+//免费体验
+- (void)FreeExperience {
+    [self.jcWindow showLoading];
+    JCDataBaseService_New *service = [JCDataBaseService_New service];
+    [service getKellyDataModeFreeExperienceWithModel_id:self.model_id Success:^(id  _Nullable object) {
+        [self.jcWindow endLoading];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            [self getTopInfoData];
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+        
+    } failure:^(NSError * _Nonnull error) {
+        [self.jcWindow endLoading];
+    }];
+
 
 
 }
 
+//确认购买
+- (void)sureBuy {
+    if (self.buyInfoModel.big_data_price>0&&[[JCWUserBall currentUser].prize floatValue]<self.buyInfoModel.big_data_price) {
+        [JCWToastTool showHint:@"红币余额不足,请及时充值"];
+        [self.navigationController pushViewController:[JCChargeVC new] animated:YES];
+        return;
+    }
+    
+    NSString *scene = @"7";
+    //1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5凯利指数 6.离散指数
+    [self.jcWindow showLoading];
+    JCHomeService_New *service = [JCHomeService_New new];
+    [service getConfirmOrderWithUnique:self.model_id scene:scene source:@"1" price:@"" Success:^(id  _Nullable object) {
+        [self.jcWindow endLoading];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSString *order_key = object[@"data"][@"order_key"];
+            [self finalPayWithOrder_key:order_key coupon_id:@"" hongbao_id:@""];
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        [self.jcWindow endLoading];
+    }];
+    
+}
+//下单并支付
+- (void)finalPayWithOrder_key:(NSString *)order_key coupon_id:(NSString *)coupon_id hongbao_id:(NSString *)hongbao_id {
+    [self.jcWindow showLoading];
+    JCHomeService_New *service = [JCHomeService_New new];
+    [service getPayOrderWithOrder_key:order_key pay_type:@"3" hongbao_id:hongbao_id coupon_id:coupon_id Success:^(id  _Nullable object) {
+        [self.jcWindow endLoading];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSString *is_pay = object[@"data"][@"is_pay"];
+            if ([is_pay intValue]==1) {
+                [self getMyUserInfo];
+                [self getTopInfoData];
+            }
+//            [self.tableView reloadData];
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+        
+    } failure:^(NSError * _Nonnull error) {
+        [self.jcWindow endLoading];
+    }];
+}
 
 #pragma mark - ScrollViewDelegate
 
@@ -251,7 +322,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
     CGFloat originY = _viewTop + kWMMenuViewHeight;
-    return CGRectMake(0, originY, self.view.frame.size.width, self.view.frame.size.height-kWMMenuViewHeight-AUTO(10));
+    return CGRectMake(0, originY, self.view.frame.size.width, self.view.frame.size.height-kWMMenuViewHeight-kBottomTabSafeAreaHeight-kNavigationBarHeight-AUTO(10));
 }
 
 - (void)pageController:(WMPageController *)pageController willEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info {

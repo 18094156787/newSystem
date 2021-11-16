@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *id;//订单id
 
+@property (nonatomic,strong) NSString *type;//type  1  （之前红榜收益）  2 打赏 类型
 
 
 @end

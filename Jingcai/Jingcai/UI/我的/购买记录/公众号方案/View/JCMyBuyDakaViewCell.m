@@ -70,13 +70,11 @@
         make.height.mas_equalTo(AUTO(18));
     }];
     
-    [self.contentView addSubview:self.statusLab];
-    [self.statusLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(AUTO(-15));
+    [self.contentView addSubview:self.priceLab];
+    [self.priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.timeLab);
-        make.height.mas_equalTo(AUTO(18));
+        make.right.offset(AUTO(-15));
     }];
-    
     
     UIView *lineView = [UIView new];
     lineView.backgroundColor = COLOR_DDDDDD;
@@ -94,10 +92,59 @@
         make.left.offset(AUTO(15));
         make.right.offset(AUTO(-15));
         make.top.equalTo(self.lineView.mas_bottom).offset(AUTO(10));
-        make.bottom.offset(AUTO(-10));
+//        make.bottom.offset(AUTO(-10));
     }];
     
+    UIView *lineView1= [UIView new];
+    lineView1.backgroundColor = [COLOR_000000 colorWithAlphaComponent:0.06];
+    [self.contentView addSubview:lineView1];
+    [lineView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(15));
+        make.right.offset(AUTO(-15));
+        make.top.equalTo(self.infoLab.mas_bottom).offset(AUTO(15));
+        make.height.mas_equalTo(1);
+    }];
+    
+    [self.contentView addSubview:self.priceView];
+    [self.priceView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(lineView1.mas_bottom).offset(AUTO(15));
+        make.left.right.offset(0);
+        make.height.mas_equalTo(AUTO(30));
+        make.bottom.offset(AUTO(-5));
+    }];
+    
+    [self.priceView addSubview:self.payPriceLab];
+    [self.payPriceLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(15));
+        make.top.offset(0);
+    }];
+    
+    [self.priceView addSubview:self.statusLab];
+    [self.statusLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.payPriceLab.mas_right).offset(AUTO(40));
+        make.top.offset(0);
+    }];
+    
+    [self.priceView addSubview:self.indicateImgView];
+    [self.indicateImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.offset(AUTO(-15));
+        make.centerY.equalTo(self.payPriceLab);
+        make.size.mas_equalTo(CGSizeMake(AUTO(5), AUTO(10)));
+    }];
+
+    [self.priceView addSubview:self.orderDetailLab];
+    [self.orderDetailLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.indicateImgView.mas_left).offset(-3);
+        make.centerY.equalTo(self.indicateImgView);
+    }];
+
     WeakSelf;
+    [self.orderDetailLab bk_whenTapped:^{
+        if (weakSelf.JCBlock) {
+            weakSelf.JCBlock();
+        }
+    }];
+
     [self.userClickView bk_whenTapped:^{
 
         if (weakSelf.model.zctj_newtuijian_user_id.length==0) {
@@ -125,22 +172,8 @@
     if (range.location!=NSNotFound) {
         [attrTitle addAttribute:NSForegroundColorAttributeName value:JCBaseColor range:range];
     }
-
-
      self.titleLab.attributedText = attrTitle;
-    
-//    if ([model.zctj_newtuijian_refund integerValue]==1) {
-//        self.refundLab.text = [NSString stringWithFormat:@"  %@  ",@"不中返还"];
-//        [self.timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.refundLab.mas_right).offset(AUTO(8));
-//        }];
-//    }else{
-//        [self.timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.refundLab.mas_left);
-//        }];
-//        self.refundLab.text = @"";
-//    }
-    
+
     
     BOOL isRefund = NO;//不中返还
     self.refundLab.text = @"";
@@ -200,7 +233,7 @@
         self.statusLab.text = @"已退款";
         self.statusLab.textColor  =COLOR_30B27A;
     }else {
-        self.statusLab.text =[NSString stringWithFormat:@"实付: %@红币",model.zucai_order_pay_price];
+        self.statusLab.text = @"正常";
         self.statusLab.textColor  =COLOR_999999;
     }
     
@@ -213,15 +246,22 @@
         self.infoLab.textColor = COLOR_30B27A;
         self.infoLab.text = @"待定";
         self.lineView.hidden = NO;
-//            [self.infoLab mas_updateConstraints:^(MASConstraintMaker *make) {
-//               make.bottom.offset(AUTO(10));
-//            }];
     }
-    [self.infoLab mas_updateConstraints:^(MASConstraintMaker *make) {
-       make.bottom.offset(AUTO(-10));
-    }];
-
+    //原价
+    NSString *ori_price = [NSString stringWithFormat:@"原价 %@",model.total_price];
+    NSMutableAttributedString *ori_attr = [[NSMutableAttributedString alloc] initWithString:ori_price];
+    NSRange ori_range = [ori_price rangeOfString:@"原价"];
+    [ori_attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)],NSForegroundColorAttributeName:COLOR_9F9F9F} range:ori_range];
+    self.priceLab.attributedText = ori_attr;
     
+    
+    
+    
+    NSString *price = [NSString stringWithFormat:@"实付金额：%@",NonNil(model.zucai_order_pay_price)];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:price];
+    NSRange pay_range = [price rangeOfString:@"实付金额："];
+    [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)]} range:pay_range];
+    self.payPriceLab.attributedText = attr;
    
 }
 
@@ -241,12 +281,6 @@
     return _timeLab;
 }
 
-- (UILabel *)statusLab {
-    if (!_statusLab) {
-        _statusLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_30B27A andBackgroundColor:JCClearColor andTextAlignment:0];
-    }
-    return _statusLab;
-}
 
 - (UIImageView *)headImgView {
     if (!_headImgView) {
@@ -326,5 +360,49 @@
         _ysImgView.hidden = YES;
     }
     return _ysImgView;
+}
+
+- (UILabel *)priceLab {
+    if (!_priceLab) {
+        _priceLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:2 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentRight];
+    }
+    return _priceLab;
+}
+
+- (UIView *)priceView {
+    if (!_priceView) {
+        _priceView = [UIView new];
+    }
+    return _priceView;
+}
+
+- (UILabel *)payPriceLab {
+    if (!_payPriceLab) {
+        _payPriceLab = [UILabel initWithTitle:@"" andFont:AUTO(13) andWeight:2 andTextColor:COLOR_9F9F9F andBackgroundColor:JCClearColor andTextAlignment:0];
+    }
+    return _payPriceLab;
+}
+
+- (UILabel *)statusLab {
+    if (!_statusLab) {
+        _statusLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_30B27A andBackgroundColor:JCClearColor andTextAlignment:0];
+    }
+    return _statusLab;
+}
+
+- (UILabel *)orderDetailLab {
+    if (!_orderDetailLab) {
+        _orderDetailLab = [UILabel initWithTitle:@"订单详情" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:0];
+        _orderDetailLab.userInteractionEnabled = YES;
+    }
+    return _orderDetailLab;
+}
+
+- (UIImageView *)indicateImgView {
+    if (!_indicateImgView) {
+        _indicateImgView = [UIImageView new];
+        _indicateImgView.image = JCIMAGE(@"common_arrow_right");
+    }
+    return _indicateImgView;
 }
 @end

@@ -114,19 +114,64 @@
     
 }
 
-- (void)data {
-    self.winLab.text = @"3.78";
-    self.equalLab.text = @"3.78";
-    self.loseLab.text = @"3.78";
-    self.rateLab.text = @"返还率\n92.50%";
-    
-    self.zs_WinLab.text = @"99.99";
-    self.zs_EqualLab.text = @"18.00";
-    self.zs_LoseLab.text = @"18.00";
-    self.fc_WinLab.text = @"18.00";
-    self.fc_EqualLab.text = @"18.00";
-    self.fc_LoseLab.text = @"18.00";
+- (void)setIs_jp:(BOOL)is_jp {
+    _is_jp = is_jp;
+    self.chuLab.text = is_jp?@"即赔":@"初赔";
 }
+
+//- (void)data {
+//    self.winLab.text = @"3.78";
+//    self.equalLab.text = @"3.78";
+//    self.loseLab.text = @"3.78";
+//    
+//    
+//    self.zs_WinLab.text = @"99.99";
+//    self.zs_EqualLab.text = @"18.00";
+//    self.zs_LoseLab.text = @"18.00";
+//    self.fc_WinLab.text = @"18.00";
+//    self.fc_EqualLab.text = @"18.00";
+//    self.fc_LoseLab.text = @"18.00";
+//}
+
+- (void)setModel:(JCKellyDataModelOddsIndexModel *)model {
+    _model = model;
+    self.rateLab.text = [NSString stringWithFormat:@"返还率\n%@",model.loss_ratio];
+    [model.odds enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx==0) {
+            self.winLab.text = obj;
+        }
+        if (idx==1) {
+            self.equalLab.text = obj;
+        }
+        if (idx==2) {
+            self.loseLab.text = obj;
+        }
+    }];
+    [model.kelly_index enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx==0) {
+            self.zs_WinLab.text = obj;
+        }
+        if (idx==1) {
+            self.zs_EqualLab.text = obj;
+        }
+        if (idx==2) {
+            self.zs_LoseLab.text = obj;
+        }
+    }];
+    [model.kelly_variance enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx==0) {
+            self.fc_WinLab.text = obj;
+        }
+        if (idx==1) {
+            self.fc_EqualLab.text = obj;
+        }
+        if (idx==2) {
+            self.fc_LoseLab.text = obj;
+        }
+    }];
+}
+
+
 
 - (UILabel *)chuLab {
     if (!_chuLab) {

@@ -114,7 +114,7 @@
     cell.contentLab.textColor = COLOR_2F2F2F;
     if (indexPath.section==1) {
         if (indexPath.row==0) {
-            cell.titleLab.text = @"商品总价";
+            cell.titleLab.text = [self.type integerValue]==2?@"打赏金额":@"商品总价";
             cell.contentLab.text = [NSString stringWithFormat:@"%@红币",@([self.detailModel.total_price floatValue])];
 
         }

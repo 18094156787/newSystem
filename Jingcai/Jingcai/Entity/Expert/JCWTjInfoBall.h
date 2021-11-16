@@ -260,6 +260,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (assign, nonatomic) NSInteger reward_num;//打赏人数
 
+@property (strong, nonatomic) NSString *total_price;
+
 
 @end
 NS_ASSUME_NONNULL_END

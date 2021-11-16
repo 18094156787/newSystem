@@ -7,32 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F25CC1B1-7BB8-4618-AC56-39094894222C"
+            uuid = "8E55B37B-884A-400D-83C8-38CD5DC782A3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/Services_New/JCDataBaseService_New.m"
+            filePath = "Jingcai/UI/&#x6211;&#x7684;/&#x8d2d;&#x4e70;&#x8bb0;&#x5f55;/&#x516c;&#x4f17;&#x53f7;&#x65b9;&#x6848;/View/JCMyBuyDakaViewCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "469"
-            endingLineNumber = "469"
-            landmarkName = "-getKellyDataModeListWithDate:Page:success:failure:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B4562CC4-16EE-48DE-9D00-0B28C3BEB3FD"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/Services_New/JCDataBaseService_New.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "470"
-            endingLineNumber = "470"
-            landmarkName = "-getKellyDataModeListWithDate:Page:success:failure:"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
+            landmarkName = "-setModel:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

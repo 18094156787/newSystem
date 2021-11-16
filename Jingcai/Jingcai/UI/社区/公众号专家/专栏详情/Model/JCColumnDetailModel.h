@@ -55,6 +55,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy)NSString *pay_price;//实付金额
 
+@property (nonatomic,copy)NSString *total_price;//原价
+
 @property (nonatomic,copy)NSString *special_column_id;//专栏id
 
 #pragma mark//社区专栏和更多专栏

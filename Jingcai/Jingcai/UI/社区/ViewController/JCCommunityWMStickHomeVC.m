@@ -50,7 +50,7 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 - (NSArray *)titleArray {
     if (!_titleArray) {
-        _titleArray = @[@"公众号专家",@"红榜达人"];
+        _titleArray = @[@"鲸猜专家",@"红榜达人"];
     }
     return _titleArray;
 }

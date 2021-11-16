@@ -190,8 +190,13 @@
             cell.content = self.model.pc;
             return cell;
         }
+
         if (indexPath.row==6&&[self.model.full_work_attendance floatValue]>0) {
             cell.content = self.model.full_work_attendance;
+            return cell;
+        }
+        if (indexPath.row==7&&[self.model.ds_money floatValue]>0) {
+            cell.content = self.model.ds_money;
             return cell;
         }
         
@@ -247,7 +252,11 @@
 //
 //            return 0;
 //        }
+
         if (indexPath.row==6&&[self.model.full_work_attendance floatValue]==0) {
+            return 0;
+        }
+        if (indexPath.row==7&&[self.model.ds_money floatValue]==0) {
             return 0;
         }
     }
@@ -300,7 +309,7 @@
 
 - (NSArray *)titleArray {
     if (!_titleArray) {
-        _titleArray = @[@[@"基本工资",@"基本稿酬",@"iOS端提成",@"安卓端提成",@"H5端提成",@"网页端提成",@"满勤奖"],@[@"稿酬总计",@"代缴个人所得税",@"可提现"]];
+        _titleArray = @[@[@"基本工资",@"基本稿酬",@"iOS端提成",@"安卓端提成",@"H5端提成",@"网页端提成",@"满勤奖",@"用户打赏"],@[@"稿酬总计",@"代缴个人所得税",@"可提现"]];
     }
     return _titleArray;
 }

@@ -131,7 +131,7 @@
             weakSelf.JCBuyClickBlock();
         }
     }];
-    
+
     [backBtn bk_whenTapped:^{
         [[weakSelf getViewController].navigationController popViewControllerAnimated:YES];
     }];
@@ -355,6 +355,7 @@
     if (!_timeLab) {
         _timeLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
         _timeLab.hidden = YES;
+        
     }
     return _timeLab;
 }
@@ -364,6 +365,7 @@
         _statusBtn = [UIButton initWithText:@"" FontSize:AUTO(16) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
         [_statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_red") forState:0];
         _statusBtn.hidden = YES;
+        _statusBtn.userInteractionEnabled = NO;
 //        [_statusBtn hg_setAllCornerWithCornerRadius:16];
     }
     return _statusBtn;

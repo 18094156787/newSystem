@@ -12,13 +12,16 @@
 #import "JCKellyDataModelSampleCell.h"
 #import "JCKellyDataModelSampleTitleView.h"
 #import "JCPoissonDataModelDetailTitleView.h"
-
+#import "JCKellyDataDetailModel.h"
+#import "JCKellyDataDetailSampleModel.h"
 
 @interface JCKellyDataModelDetailVC ()
 
 @property (nonatomic,strong) JCPoissonDataModelDetailHeadView *headView;
 
 @property (nonatomic,strong) UIView *topColorView;
+
+@property (nonatomic,strong) JCKellyDataDetailModel *detailModel;
 
 @end
 
@@ -54,48 +57,60 @@
     [self refreshData];
 }
 
-
 - (void)refreshData {
-    self.pageNo = 1;
     [self getDataList];
+    [self getSampleData];
 }
 
 - (void)getDataList {
+    [self.view showLoading];
+    JCDataBaseService_New *service = [JCDataBaseService_New new];
+    [service getKellyDataModeDetailWithMatch_id:self.match_id Success:^(id  _Nullable object) {
+        [self endRefresh];
 
-//    [self.jcWindow showLoading];
-//    JCMatchService_New *service = [JCMatchService_New new];
-//    [service getPredictedMatchListWithType:@"2" Key_word:@"" Page:self.pageNo Success:^(id  _Nullable object) {
-//        [self endRefresh];
-//
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            if (self.pageNo==1) {
-//                [self.dataArray removeAllObjects];
-//            }
-//            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCMatchInfoModel class]];
-//             [self.dataArray addObjectsFromArray:array];
-//            if (array.count <PAGE_LIMIT) {
-//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-//            }
-//            [self.tableView reloadData];
-//            self.pageNo++;
-//            [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-//
-//            if (array.count ==0&&self.dataArray.count>0) {
-//                  self.tableView.tableFooterView = self.noMore_footView;
-//                  self.tableView.mj_footer.hidden = YES;
-//              }else{
-//                  self.tableView.tableFooterView = [UIView new];
-//                  self.tableView.mj_footer.hidden = NO;
-//              }
-//
-//        }else{
-//            [JCWToastTool showHint:object[@"msg"]];
-//        }
-//
-//    } failure:^(NSError * _Nonnull error) {
-//        [self endRefresh];
-//        [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-//    }];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+
+            self.detailModel = (JCKellyDataDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataDetailModel class]];
+            self.headView.model = self.detailModel;
+            if ( self.detailModel.competition_type!=1) {
+                self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(160)+kNavigationBarHeight);
+                self.tableView.tableHeaderView = self.headView;
+            }
+            [self.tableView reloadData];
+            self.tableView.tableFooterView = self.noMore_footView;
+            self.tableView.mj_footer.hidden = YES;
+
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        [self endRefresh];
+    }];
+
+}
+
+- (void)getSampleData {
+    JCDataBaseService_New *service = [JCDataBaseService_New new];
+    [service getKellyDataModeDetailSampleDataWithMatch_id:self.match_id Success:^(id  _Nullable object) {
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCKellyDataDetailSampleModel class]];
+            self.dataArray = [NSMutableArray arrayWithArray:array];
+            [self.tableView reloadData];
+//            self.detailModel = (JCKellyDataDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataDetailModel class]];
+
+
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+        
+    } failure:^(NSError * _Nonnull error) {
+        [self endRefresh];
+    }];
+
 
 }
 
@@ -204,22 +219,14 @@
     }
 
 
-    return 10;
+    return self.dataArray.count;
 
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.section==1) {
-//        return AUTO(275);
-//    }
-//    if (indexPath.section==2) {
-//        return AUTO(35);
-//    }
-//    if (indexPath.section==4) {
-//        return AUTO(60);
-//    }
+
     if (indexPath.section==1) {
-        return AUTO(50);
+        return 0.01f;
     }
     if (indexPath.section==2) {
         return AUTO(108);
@@ -271,10 +278,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
         JCKellyDataModelDetailInfoCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCKellyDataModelDetailInfoCell"];
+        cell.model = self.detailModel;
         return cell;
     }
     if (indexPath.section==2) {
         JCKellyDataModelSampleCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCKellyDataModelSampleCell"];
+        cell.model = self.dataArray[indexPath.row];
         return cell;
     }
  

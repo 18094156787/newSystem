@@ -86,7 +86,7 @@
         make.height.mas_equalTo(AUTO(36));
     }];
     
-    UILabel *hbLab = [UILabel initWithTitle:@"红币余额:" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
+    UILabel *hbLab = [UILabel initWithTitle:@"红币余额:" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     [self.bgView addSubview:hbLab];
     [hbLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));

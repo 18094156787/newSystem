@@ -31,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *pc;//pc
 
+@property (nonatomic,strong) NSString *ds_money;//打赏金额
+
 @property (nonatomic,strong) NSString *full_work_attendance;
 
 @property (nonatomic,strong) NSString *remuneration_total;//  稿酬总计

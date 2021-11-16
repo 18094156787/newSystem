@@ -103,7 +103,7 @@
 
 
 - (NSArray<NSString *> *)titles {
-    return @[@"公众号专家",@"红榜达人"];
+    return @[@"鲸猜专家",@"红榜达人"];
 }
 
 @end

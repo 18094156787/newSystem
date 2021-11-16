@@ -73,7 +73,7 @@
     
     float length = (SCREEN_WIDTH - AUTO(48)*4)/4.0f;
     NSArray *imgArray = @[JCIMAGE(@"icon_mjtj"),JCIMAGE(@"icon_hbdr"),JCIMAGE(@"icon_tbgx"),JCIMAGE(@"icon_help")];
-    NSArray *titleArray = @[@"公众号专家",@"红榜达人",@"特别关注",@"帮助&客服"];
+    NSArray *titleArray = @[@"鲸猜专家",@"红榜达人",@"特别关注",@"帮助&客服"];
     for (int i=0; i<4; i++) {
         UIButton *btn = [UIButton new];
         [btn setImage:imgArray[i] forState:0];

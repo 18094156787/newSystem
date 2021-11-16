@@ -58,6 +58,18 @@
     
 }
 
+- (void)setModel:(JCKellyDataDetailModel *)model {
+    _model = model;
+    self.matchView.model = model;
+    if (model.competition_type!=1) {
+        self.bgView.frame = CGRectMake(0,0,SCREEN_WIDTH,AUTO(152)+kNavigationBarHeight);
+        [self.matchView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(AUTO(145));
+        }];
+    }
+    
+}
+
 - (JCHistoryPayDataModelDetailMatchView *)matchView {
     if (!_matchView) {
         _matchView = [JCHistoryPayDataModelDetailMatchView new];

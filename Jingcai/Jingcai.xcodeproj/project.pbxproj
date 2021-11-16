@@ -89,6 +89,8 @@
 		59145F8F2742518200DA5391 /* JCKellyDataModelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59145F8E2742518200DA5391 /* JCKellyDataModelModel.m */; };
 		59145F9227425F2B00DA5391 /* JCKellyDataModelOddsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59145F9127425F2A00DA5391 /* JCKellyDataModelOddsModel.m */; };
 		59145F9527425F5700DA5391 /* JCKellyDataModelOddsIndexModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59145F9427425F5700DA5391 /* JCKellyDataModelOddsIndexModel.m */; };
+		59145F9927434B0B00DA5391 /* JCKellyDataDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59145F9827434B0B00DA5391 /* JCKellyDataDetailModel.m */; };
+		59145F9C27435B0100DA5391 /* JCKellyDataDetailSampleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 59145F9B27435B0100DA5391 /* JCKellyDataDetailSampleModel.m */; };
 		591C1B802734BBBD0001C2B7 /* JCDaShangView.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C1B7F2734BBBD0001C2B7 /* JCDaShangView.m */; };
 		591C1B832734C4600001C2B7 /* JCDaShangShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C1B822734C4600001C2B7 /* JCDaShangShowView.m */; };
 		591C1B862735038A0001C2B7 /* JCDaShangPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C1B852735038A0001C2B7 /* JCDaShangPriceCell.m */; };
@@ -1593,6 +1595,10 @@
 		59145F9127425F2A00DA5391 /* JCKellyDataModelOddsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCKellyDataModelOddsModel.m; sourceTree = "<group>"; };
 		59145F9327425F5700DA5391 /* JCKellyDataModelOddsIndexModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCKellyDataModelOddsIndexModel.h; sourceTree = "<group>"; };
 		59145F9427425F5700DA5391 /* JCKellyDataModelOddsIndexModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCKellyDataModelOddsIndexModel.m; sourceTree = "<group>"; };
+		59145F9727434B0B00DA5391 /* JCKellyDataDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCKellyDataDetailModel.h; sourceTree = "<group>"; };
+		59145F9827434B0B00DA5391 /* JCKellyDataDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCKellyDataDetailModel.m; sourceTree = "<group>"; };
+		59145F9A27435B0100DA5391 /* JCKellyDataDetailSampleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCKellyDataDetailSampleModel.h; sourceTree = "<group>"; };
+		59145F9B27435B0100DA5391 /* JCKellyDataDetailSampleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCKellyDataDetailSampleModel.m; sourceTree = "<group>"; };
 		591C1B7E2734BBBD0001C2B7 /* JCDaShangView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCDaShangView.h; sourceTree = "<group>"; };
 		591C1B7F2734BBBD0001C2B7 /* JCDaShangView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCDaShangView.m; sourceTree = "<group>"; };
 		591C1B812734C4600001C2B7 /* JCDaShangShowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCDaShangShowView.h; sourceTree = "<group>"; };
@@ -4437,6 +4443,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		59145F9627434AE700DA5391 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				59145F9727434B0B00DA5391 /* JCKellyDataDetailModel.h */,
+				59145F9827434B0B00DA5391 /* JCKellyDataDetailModel.m */,
+				59145F9A27435B0100DA5391 /* JCKellyDataDetailSampleModel.h */,
+				59145F9B27435B0100DA5391 /* JCKellyDataDetailSampleModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		591C1B7D2734BBA50001C2B7 /* 打赏 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4450,6 +4467,13 @@
 				598183552738C4B400BF161D /* JCDaShangSuccessVC.m */,
 			);
 			path = "打赏";
+			sourceTree = "<group>";
+		};
+		5931E4F3274388C500EFEF7A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		5940C343272283B700F41DF1 /* Model */ = {
@@ -4914,6 +4938,7 @@
 		59541DA0273E096000D470EF /* 详情 */ = {
 			isa = PBXGroup;
 			children = (
+				59145F9627434AE700DA5391 /* Model */,
 				59541DA5273E09D900D470EF /* View */,
 				59541DA4273E09D200D470EF /* ViewController */,
 			);
@@ -9594,7 +9619,7 @@
 		7BCA27EF25206450008787FF /* 达人方案 */ = {
 			isa = PBXGroup;
 			children = (
-				7BCA27F125206465008787FF /* View */,
+				5931E4F3274388C500EFEF7A /* View */,
 				7BCA27F02520645C008787FF /* ViewController */,
 			);
 			path = "达人方案";
@@ -9607,13 +9632,6 @@
 				7B0CFB7E2306412B00AF8A6A /* JCMyBuyTuijianViewController.m */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		7BCA27F125206465008787FF /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		7BCA27FB2520748A008787FF /* 鲸猜大数据 */ = {
@@ -12132,6 +12150,7 @@
 				7BB8B483255D41AF00E7EAD1 /* JCHomeGanHuoHeadView.m in Sources */,
 				7B61BEFE24ED4DF00068F148 /* YBIBTopView.m in Sources */,
 				59EB4EDE2721465A00952D4D /* JCColumnInfoModel.m in Sources */,
+				59145F9927434B0B00DA5391 /* JCKellyDataDetailModel.m in Sources */,
 				7B35AF0323B4A09A009A52BA /* UIAlertController+Addtional.m in Sources */,
 				7BE891AB24B5A49A00AE2E79 /* JNMatchZS_JC_SPF_TableViewCell.m in Sources */,
 				595884BB2689CAF20085206B /* JCActivityGuess_SPF_CompleteCell.m in Sources */,
@@ -12779,6 +12798,7 @@
 				59532A0C268DB8D500437A19 /* JCPostCheckArticle_Invite_VC.m in Sources */,
 				7BBB2014248E0A7700EED4FD /* JCYCHomeHeadView.m in Sources */,
 				7BF4D4792644D02600403BDF /* JCPlaneDetailQRModel.m in Sources */,
+				59145F9C27435B0100DA5391 /* JCKellyDataDetailSampleModel.m in Sources */,
 				7B5E26C2247F66F6008CAEE4 /* JCYCExpertTopView.m in Sources */,
 				C301A417228C0EB800AE0277 /* JCChargeSuccessVC.m in Sources */,
 				7B5E26D0247F66F6008CAEE4 /* JCYCMyYcRecordCell.m in Sources */,

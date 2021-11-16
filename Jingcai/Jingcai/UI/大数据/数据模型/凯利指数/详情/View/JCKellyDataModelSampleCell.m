@@ -203,6 +203,88 @@
 
 }
 
+- (void)setModel:(JCKellyDataDetailSampleModel *)model {
+    _model = model;
+    self.companyLab.text = model.odds_company_name;
+    [model.begin_odds.odds enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx==0) {
+            self.home_winLab.text = obj;
+        }
+        if (idx==1) {
+            self.home_equalLab.text = obj;
+        }
+        if (idx==2) {
+            self.home_loseLab.text = obj;
+        }
+        
+    }];
+    
+    [model.begin_odds.kelly_index enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx==0) {
+            self.home_zs_WinLab.text = obj;
+        }
+        if (idx==1) {
+            self.home_zs_EqualLab.text = obj;
+        }
+        if (idx==2) {
+            self.home_zs_LoseLab.text = obj;
+        }
+        
+    }];
+    
+    [model.begin_odds.kelly_variance enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx==0) {
+            self.home_fc_WinLab.text = obj;
+        }
+        if (idx==1) {
+            self.home_fc_EqualLab.text = obj;
+        }
+        if (idx==2) {
+            self.home_fc_LoseLab.text = obj;
+        }
+        
+    }];
+    //
+    [model.begin_odds.odds enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx==0) {
+            self.home_winLab.text = obj;
+        }
+        if (idx==1) {
+            self.home_equalLab.text = obj;
+        }
+        if (idx==2) {
+            self.home_loseLab.text = obj;
+        }
+        
+    }];
+    
+    [model.begin_odds.kelly_index enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx==0) {
+            self.home_zs_WinLab.text = obj;
+        }
+        if (idx==1) {
+            self.home_zs_EqualLab.text = obj;
+        }
+        if (idx==2) {
+            self.home_zs_LoseLab.text = obj;
+        }
+        
+    }];
+    
+    [model.begin_odds.kelly_variance enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx==0) {
+            self.home_fc_WinLab.text = obj;
+        }
+        if (idx==1) {
+            self.home_fc_EqualLab.text = obj;
+        }
+        if (idx==2) {
+            self.home_fc_LoseLab.text = obj;
+        }
+        
+    }];
+}
+
 - (void)data {
     self.companyLab.text = @"机构名称";
     self.home_winLab.text = @"3.78";
