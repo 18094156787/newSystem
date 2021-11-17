@@ -44,9 +44,11 @@
     
 }
 //专栏顶部详情,用在订单,购买的专栏
-- (void)getColumnDetailTopInfoWithID:(NSString *)column_id WithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock {
+- (void)getColumnDetailTopInfoWithID:(NSString *)column_id Period_id:(NSString *)period_id WithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSDictionary * param = @{@"id":column_id};
+    NSDictionary * param = @{@"id":column_id,
+                             @"period":period_id
+    };
     NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"special_column_info" paramDic:param ignoreArray:@[]];
 
     [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

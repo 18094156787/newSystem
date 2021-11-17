@@ -36,15 +36,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *home_team_name;
 
-@property (nonatomic, assign) NSInteger id;
+@property (nonatomic, assign) NSInteger id;//1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5凯利指数 6.离散指数
 
 @property (nonatomic, copy) NSString *match_id;
 
 @property (nonatomic, assign) NSInteger match_time;
 
 @property (nonatomic, copy) NSString *match_time_str;
-
-//@property (nonatomic, strong) RootClassDataListOdds_index *odds_index;
 
 @property (nonatomic, assign) long second_half_time;
 
@@ -54,7 +52,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger status_id;
 
+@property (nonatomic, assign) NSInteger can_look;//1可以查看0不能查看
+
 @property (nonatomic, strong) JCKellyDataModelOddsModel *odds_index;
+
+#pragma mark 泊松分布
+
+@property (nonatomic, strong) NSArray *jin_qiu_shu;
+
+@property (nonatomic, strong) NSArray *bi_fen;
 
 @end
 

@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,assign) BOOL hidetopMatch;
 
+@property (nonatomic,strong) NSString *match_id;//比赛id
+
 @end
 
 NS_ASSUME_NONNULL_END

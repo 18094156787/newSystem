@@ -16,14 +16,14 @@
     [self.plLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.offset(0);
         make.left.offset(AUTO(10));
-        make.width.mas_equalTo(AUTO(90));
+        make.width.mas_equalTo(AUTO(75));
     }];
     
     [self addSubview:self.klLab];
     [self.klLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.offset(0);
         make.left.equalTo(self.plLab.mas_right).offset(AUTO(10));
-        make.width.mas_equalTo(AUTO(105));
+        make.width.mas_equalTo(AUTO(129));
     }];
     
 

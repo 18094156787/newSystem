@@ -158,14 +158,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JCKellyDataModelModel *model = self.dataArray[indexPath.row];
-    if (self.buyInfoModel.show_status==2) {
+    if (model.can_look==1) {
         JCKellyDataModelOpenCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCKellyDataModelOpenCell"];
-        
         cell.model = model;
-
         return cell;
     }
     JCDiscreteDataModelLockedCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCDiscreteDataModelLockedCell"];
+    cell.type = 5;
     cell.kellyModel = model;
 
     return cell;
@@ -177,9 +176,17 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     JCKellyDataModelModel *model = self.dataArray[indexPath.row];
-    JCKellyDataModelDetailVC *vc = [JCKellyDataModelDetailVC new];
-    vc.match_id = model.match_id;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (model.can_look==0) {
+        //未开通,前往开通
+        if (self.JCOpenBlock) {
+            self.JCOpenBlock();
+        }
+    }else{
+        JCKellyDataModelDetailVC *vc = [JCKellyDataModelDetailVC new];
+        vc.match_id = model.match_id;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
     
     
     

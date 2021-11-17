@@ -38,6 +38,9 @@
                 NSString *urlStr = [NSString  stringWithFormat:@"%@?dev=1",[JCConfigModel currentConfigModel].get_purchase];
                 vc.urlStr = NonNil(urlStr);
                 [[weakSelf getViewController].navigationController pushViewController:vc animated:YES];
+            if (weakSelf.JCProtocolBlock) {
+                weakSelf.JCProtocolBlock();
+            }
         };
 
     self.protocolLab.attributedText=atext;

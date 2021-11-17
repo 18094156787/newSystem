@@ -7,8 +7,9 @@
 //
 
 #import "JCMyBuyAIViewController.h"
-#import "JCAIPlanTableCell.h"
+#import "JCMyBuyAICell.h"
 #import "JCTuiJianManager.h"
+#import "JCHongBangOrderDetailVC.h"
 @interface JCMyBuyAIViewController ()
 
 @end
@@ -64,7 +65,7 @@
 }
 
 - (void)initSubViews {
-    [self.tableView registerClass:[JCAIPlanTableCell class] forCellReuseIdentifier:@"JCAIPlanTableCell"];
+    [self.tableView registerClass:[JCMyBuyAICell class] forCellReuseIdentifier:@"JCMyBuyAICell"];
     WeakSelf;
     JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
         [weakSelf refreshData];
@@ -96,11 +97,19 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    JCAIPlanTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCAIPlanTableCell"];
+    JCMyBuyAICell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCMyBuyAICell"];
+    JCHongBangBall *model = self.dataArray[indexPath.row];
     cell.is_zh = YES;
     cell.is_round_num= YES;
     cell.isMine =YES;
-    cell.dianPingBall = self.dataArray[indexPath.row];
+    cell.dianPingBall = model;
+    WeakSelf;
+    cell.JCBlock = ^{
+        JCHongBangOrderDetailVC *vc = [JCHongBangOrderDetailVC new];
+        vc.order_id = model.base_info.zucai_order_id;
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+        
+    };
     return cell;
 }
 

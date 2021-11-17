@@ -149,22 +149,26 @@ static CGFloat const kWMMenuViewHeight = 44;
 //    [self.view showLoading];
     JCHomeService_New *service = [JCHomeService_New service];
     [service getHomeTabWithsuccess:^(id  _Nullable object) {
-        self.titleArray = @[@"公众号专家",@"红榜达人"];
+        self.titleArray = @[@"鲸猜专家",@"红榜达人"];
 //        self.titleArray = @[@"公众号专家",@"红榜达人",@"全民鲸猜"];
          if ([JCWJsonTool isSuccessResponse:object]) {
              NSString *type = object[@"data"][@"show_gusess"];
              if ([type intValue]==1) {
-                 self.titleArray = @[@"公众号专家",@"红榜达人",@"全民鲸猜"];
+                 self.titleArray = @[@"鲸猜专家",@"红榜达人",@"全民鲸猜"];
              }
              if (object[@"data"][@"is_show_expert_qr_code"]) {
                  NSString *is_show_expert_qr_code = object[@"data"][@"is_show_expert_qr_code"];
                  [[NSUserDefaults standardUserDefaults] setObject:is_show_expert_qr_code forKey:@"is_show_expert_qr_code"];
              }
+             if (object[@"data"][@"show_odds"]) {
+                 NSString *show_odds = object[@"data"][@"show_odds"];
+                 [[NSUserDefaults standardUserDefaults] setObject:show_odds forKey:@"show_odds"];
+             }
          }
          [self reloadData];
 
     } failure:^(NSError * _Nonnull error) {
-        self.titleArray = @[@"公众号专家",@"红榜达人"];
+        self.titleArray = @[@"鲸猜专家",@"红榜达人"];
         [self reloadData];
     }];
 

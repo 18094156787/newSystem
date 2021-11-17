@@ -59,7 +59,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getMatchHaveBigDataWithMatchnum:(NSString *)matchnum success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //赛程详情-数据-鲸猜
 - (void)getMatchBigDataDetailWithMatchnum:(NSString *)matchnum success:(successBlock)successBlock failure:(failureBlock)failureBlock;
-
+//比分详情模型下的具体模分类
+- (void)getMatchDataModelItemWithMatch_id:(NSString *)match_id success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 
 
 #pragma mark 通用

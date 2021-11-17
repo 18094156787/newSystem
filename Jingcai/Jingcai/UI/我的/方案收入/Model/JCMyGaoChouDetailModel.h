@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *sf_count;//收费成功数
 
+@property (nonatomic,strong) NSString *ds_count;//打赏数量
+
 
 @property (nonatomic,strong) NSString *base_pay;//基础工资
 

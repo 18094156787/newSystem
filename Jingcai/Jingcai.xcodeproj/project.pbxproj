@@ -94,6 +94,12 @@
 		591C1B802734BBBD0001C2B7 /* JCDaShangView.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C1B7F2734BBBD0001C2B7 /* JCDaShangView.m */; };
 		591C1B832734C4600001C2B7 /* JCDaShangShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C1B822734C4600001C2B7 /* JCDaShangShowView.m */; };
 		591C1B862735038A0001C2B7 /* JCDaShangPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 591C1B852735038A0001C2B7 /* JCDaShangPriceCell.m */; };
+		5931E4F627438BF600EFEF7A /* JCMyBuyHongbangCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5931E4F527438BF600EFEF7A /* JCMyBuyHongbangCell.m */; };
+		5931E4FA274397B200EFEF7A /* JCMyBuyAICell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5931E4F9274397B200EFEF7A /* JCMyBuyAICell.m */; };
+		5931E4FD2743AE1C00EFEF7A /* JCKellyDataTrackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5931E4FC2743AE1C00EFEF7A /* JCKellyDataTrackModel.m */; };
+		5931E5012744B0B500EFEF7A /* JCDataModelTitleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5931E5002744B0B500EFEF7A /* JCDataModelTitleModel.m */; };
+		5931E5052744CE4300EFEF7A /* JCMatchDataModelTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5931E5042744CE4300EFEF7A /* JCMatchDataModelTipView.m */; };
+		5931E5082745319300EFEF7A /* JCPoissonDataModelBFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5931E5072745319300EFEF7A /* JCPoissonDataModelBFView.m */; };
 		5940C32A2721604900F41DF1 /* JCColunmHorseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5940C3292721604900F41DF1 /* JCColunmHorseModel.m */; };
 		5940C32D272162F100F41DF1 /* JCPresellColumnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5940C32C272162F100F41DF1 /* JCPresellColumnModel.m */; };
 		5940C3302721632100F41DF1 /* JCLastColumnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5940C32F2721632100F41DF1 /* JCLastColumnModel.m */; };
@@ -1605,6 +1611,18 @@
 		591C1B822734C4600001C2B7 /* JCDaShangShowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCDaShangShowView.m; sourceTree = "<group>"; };
 		591C1B842735038A0001C2B7 /* JCDaShangPriceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCDaShangPriceCell.h; sourceTree = "<group>"; };
 		591C1B852735038A0001C2B7 /* JCDaShangPriceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCDaShangPriceCell.m; sourceTree = "<group>"; };
+		5931E4F427438BF600EFEF7A /* JCMyBuyHongbangCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCMyBuyHongbangCell.h; sourceTree = "<group>"; };
+		5931E4F527438BF600EFEF7A /* JCMyBuyHongbangCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCMyBuyHongbangCell.m; sourceTree = "<group>"; };
+		5931E4F8274397B200EFEF7A /* JCMyBuyAICell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCMyBuyAICell.h; sourceTree = "<group>"; };
+		5931E4F9274397B200EFEF7A /* JCMyBuyAICell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCMyBuyAICell.m; sourceTree = "<group>"; };
+		5931E4FB2743AE1C00EFEF7A /* JCKellyDataTrackModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCKellyDataTrackModel.h; sourceTree = "<group>"; };
+		5931E4FC2743AE1C00EFEF7A /* JCKellyDataTrackModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCKellyDataTrackModel.m; sourceTree = "<group>"; };
+		5931E4FF2744B0B500EFEF7A /* JCDataModelTitleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCDataModelTitleModel.h; sourceTree = "<group>"; };
+		5931E5002744B0B500EFEF7A /* JCDataModelTitleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCDataModelTitleModel.m; sourceTree = "<group>"; };
+		5931E5032744CE4300EFEF7A /* JCMatchDataModelTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCMatchDataModelTipView.h; sourceTree = "<group>"; };
+		5931E5042744CE4300EFEF7A /* JCMatchDataModelTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCMatchDataModelTipView.m; sourceTree = "<group>"; };
+		5931E5062745319300EFEF7A /* JCPoissonDataModelBFView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCPoissonDataModelBFView.h; sourceTree = "<group>"; };
+		5931E5072745319300EFEF7A /* JCPoissonDataModelBFView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCPoissonDataModelBFView.m; sourceTree = "<group>"; };
 		5940C3282721604900F41DF1 /* JCColunmHorseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCColunmHorseModel.h; sourceTree = "<group>"; };
 		5940C3292721604900F41DF1 /* JCColunmHorseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCColunmHorseModel.m; sourceTree = "<group>"; };
 		5940C32B272162F100F41DF1 /* JCPresellColumnModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCPresellColumnModel.h; sourceTree = "<group>"; };
@@ -4402,6 +4420,8 @@
 		59145F7B273FEB7100DA5391 /* 数据模型 */ = {
 			isa = PBXGroup;
 			children = (
+				5931E5022744CE2000EFEF7A /* View */,
+				5931E4FE2744B09F00EFEF7A /* Model */,
 				59145F7C273FEBD600DA5391 /* ViewController */,
 			);
 			path = "数据模型";
@@ -4410,9 +4430,9 @@
 		59145F7C273FEBD600DA5391 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				59145F7F273FEBFD00DA5391 /* JCMatchDetailDataModelVC.h */,
 				59145F7D273FEBFD00DA5391 /* JCMatchDetailDataModelVC.m */,
 				59145F7E273FEBFD00DA5391 /* JCMatchDetailDataModelVC.xib */,
-				59145F7F273FEBFD00DA5391 /* JCMatchDetailDataModelVC.h */,
 				59145F82273FF00700DA5391 /* JCTransactionDataModelMatchVC.h */,
 				59145F83273FF00700DA5391 /* JCTransactionDataModelMatchVC.m */,
 			);
@@ -4439,6 +4459,8 @@
 				59145F9127425F2A00DA5391 /* JCKellyDataModelOddsModel.m */,
 				59145F9327425F5700DA5391 /* JCKellyDataModelOddsIndexModel.h */,
 				59145F9427425F5700DA5391 /* JCKellyDataModelOddsIndexModel.m */,
+				5931E4FB2743AE1C00EFEF7A /* JCKellyDataTrackModel.h */,
+				5931E4FC2743AE1C00EFEF7A /* JCKellyDataTrackModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4472,6 +4494,35 @@
 		5931E4F3274388C500EFEF7A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5931E4F427438BF600EFEF7A /* JCMyBuyHongbangCell.h */,
+				5931E4F527438BF600EFEF7A /* JCMyBuyHongbangCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5931E4F72743979E00EFEF7A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5931E4F8274397B200EFEF7A /* JCMyBuyAICell.h */,
+				5931E4F9274397B200EFEF7A /* JCMyBuyAICell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5931E4FE2744B09F00EFEF7A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5931E4FF2744B0B500EFEF7A /* JCDataModelTitleModel.h */,
+				5931E5002744B0B500EFEF7A /* JCDataModelTitleModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5931E5022744CE2000EFEF7A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5931E5032744CE4300EFEF7A /* JCMatchDataModelTipView.h */,
+				5931E5042744CE4300EFEF7A /* JCMatchDataModelTipView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4819,6 +4870,8 @@
 				59541D50273CC82E00D470EF /* JCPoissonDataModelDetailDistributionCell.m */,
 				59541D52273CC86200D470EF /* JCPoissonDataModelDetailPredictCell.h */,
 				59541D53273CC86200D470EF /* JCPoissonDataModelDetailPredictCell.m */,
+				5931E5062745319300EFEF7A /* JCPoissonDataModelBFView.h */,
+				5931E5072745319300EFEF7A /* JCPoissonDataModelBFView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -8737,7 +8790,6 @@
 		7B99E5F42316644B00AA5AB6 /* 详情 */ = {
 			isa = PBXGroup;
 			children = (
-				59145F7B273FEB7100DA5391 /* 数据模型 */,
 				7BA54A722512124300297D1F /* Controller */,
 				7BCA27A5251C94B2008787FF /* View */,
 				7B99E6DF231664EA00AA5AB6 /* Model */,
@@ -8749,6 +8801,7 @@
 				7B99E6272316644C00AA5AB6 /* SEGMENT_CONTROL */,
 				7B99E62C2316644C00AA5AB6 /* DETAIL_SJ ( 数据 ) */,
 				7B99E6462316644C00AA5AB6 /* DETAIL_ZS ( 指数 ) */,
+				59145F7B273FEB7100DA5391 /* 数据模型 */,
 			);
 			path = "详情";
 			sourceTree = "<group>";
@@ -9544,17 +9597,10 @@
 		7BCA27C525202CBA008787FF /* AI方案 */ = {
 			isa = PBXGroup;
 			children = (
+				5931E4F72743979E00EFEF7A /* View */,
 				7BCA27C725202CD4008787FF /* ViewController */,
-				7BCA27C625202CCB008787FF /* View */,
 			);
 			path = "AI方案";
-			sourceTree = "<group>";
-		};
-		7BCA27C625202CCB008787FF /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		7BCA27C725202CD4008787FF /* ViewController */ = {
@@ -11884,6 +11930,7 @@
 				590A3F7026C24E3D0012EDE6 /* JCActivityGuess_SPF_CompleteMore_Cell.m in Sources */,
 				7B888EB9255FDE430058B4BD /* JCForgetPsdViewController.m in Sources */,
 				7B80CA4524BC49A700C14117 /* JCTeamDetailBaseInfoCell.m in Sources */,
+				5931E5012744B0B500EFEF7A /* JCDataModelTitleModel.m in Sources */,
 				7BEEAD7326550195009FB1DF /* KSGuaidViewController.m in Sources */,
 				7BBB2015248E0A7700EED4FD /* JCYCCheckView.m in Sources */,
 				7B5E26D6247F66F6008CAEE4 /* JCYCSuccessViewController.m in Sources */,
@@ -12073,6 +12120,7 @@
 				7B8AE2D125A4110000B805EA /* JCBasketBallMatchDetailErrorCell.m in Sources */,
 				7B15DA4F25D21E21002CD766 /* JCSystemSettingVC.m in Sources */,
 				7B099C7026291F03005E18FC /* JCAgreeProtocolView.m in Sources */,
+				5931E5082745319300EFEF7A /* JCPoissonDataModelBFView.m in Sources */,
 				59541CD0273909E700D470EF /* JCPlaneDetailImageCell.m in Sources */,
 				7BCA27B2251DD6A2008787FF /* JCAIHomeNoticeCollectionViewCell.m in Sources */,
 				7B8AE30225A460A900B805EA /* JJStockScrollView.m in Sources */,
@@ -12318,6 +12366,7 @@
 				7B5C2E3225A6F7F100777964 /* JCBasketMatchDetailZBFanGuiModel.m in Sources */,
 				7B87D64D2603209300E0FEB4 /* JCMineFuntionCell.m in Sources */,
 				7B87D6472602F77F00E0FEB4 /* JCMineCellItemView.m in Sources */,
+				5931E4FA274397B200EFEF7A /* JCMyBuyAICell.m in Sources */,
 				7BB8282324B45EA00012EDA8 /* JCTeamMatchInfoMatchContentCell.m in Sources */,
 				7B5C2E1625A6D9FF00777964 /* JNMatchZS_ZF_HeadView.m in Sources */,
 				C32F3734219975E500DC9C87 /* JCWActivityBall.m in Sources */,
@@ -12406,7 +12455,9 @@
 				7B115E47230018160039A18E /* EMTextView.m in Sources */,
 				7B5C79502498C92400F97A51 /* BRPickerStyle.m in Sources */,
 				7B74E982249B0894003144B1 /* JCMatchSelectModel.m in Sources */,
+				5931E5052744CE4300EFEF7A /* JCMatchDataModelTipView.m in Sources */,
 				59541D63273CE25400D470EF /* JCDiscreteDataModelLockedCell.m in Sources */,
+				5931E4FD2743AE1C00EFEF7A /* JCKellyDataTrackModel.m in Sources */,
 				7BD8937A24F10D110058B951 /* JCPostCheckRuleVC.m in Sources */,
 				59EB4EB0271D61C500952D4D /* JCColumnDetailYushowHotCell.m in Sources */,
 				C3D4B412221BA842004EEA9E /* JCCommentCell.m in Sources */,
@@ -12713,6 +12764,7 @@
 				7B99E6A12316644C00AA5AB6 /* JNMatchBattleItemCell.m in Sources */,
 				7B5FC827256F57200006D6F0 /* JCMatchFilterSegmentCurrentView.m in Sources */,
 				7B6D19422485F1ED002D5006 /* JCHomeExpertTableViewCell.m in Sources */,
+				5931E4F627438BF600EFEF7A /* JCMyBuyHongbangCell.m in Sources */,
 				7BCA27A8251C94C7008787FF /* JCAnimationLoadingView.m in Sources */,
 				7BB0757F2552AABD004FB701 /* JCMyBuyOrderDataDetail_Single_VC.m in Sources */,
 				7BD893C724F3B1210058B951 /* JCCommunityRankInfoModel.m in Sources */,

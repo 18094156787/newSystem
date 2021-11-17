@@ -422,7 +422,7 @@
 }
 
 //凯利指数模型购买信息
-- (void)getKellyDataModelPayInfoWithModel_id:(NSString *)model_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+- (void)getDataModelPayInfoWithModel_id:(NSString *)model_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
  
 
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
@@ -500,11 +500,65 @@
         @"match_id":match_id,
     };
     
-    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"kelly_simple_data" paramDic:param ignoreArray:@[]];
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"kelly_index_history" paramDic:param ignoreArray:@[]];
     [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         successBlock(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];
 }
+//凯利指数变化轨迹
+//match_id 比赛id
+- (void)getKellyDataModelTrackWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+ 
+
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+        @"match_id":match_id,
+    };
+    
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"kelly_index_history" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+
+//泊松分布列表
+-(void)getPoissonDataModeListWithDate:(NSString *)date Page:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+ 
+
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+                             @"page":Integet_ToString(page),
+                             @"page_size":@"10",
+                             @"date":date
+                             };
+    
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"poisson_index_list" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+
+//泊松分布详情
+- (void)getPoissonDataModeDetailWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+ 
+
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+        @"match_id":match_id,
+    };
+    
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"poisson_index_detail" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+
 @end

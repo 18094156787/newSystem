@@ -110,9 +110,9 @@
     if ([model.paid integerValue]<5) {
         JCHongBangOrderDetailVC *vc = [JCHongBangOrderDetailVC new];
         vc.order_id  = model.id;
-        
+        vc.is_benefit = YES;
         if ([model.paid integerValue]==1||[model.paid integerValue]==2) {
-            vc.is_benefit = YES;
+           
         }
         if ([model.paid integerValue]==3||[model.paid integerValue]==4) {
             vc.type = model.type;

@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JCPoissonDataModelDetailPredictCell : JCBaseTableViewCell_New
 
+@property (nonatomic,strong) NSArray *dataArray;
+
 @end
 
 NS_ASSUME_NONNULL_END

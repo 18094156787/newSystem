@@ -10,6 +10,7 @@
 #import "JCKellyDataModelTrackTitleView.h"
 #import "JCPoissonDataModelDetailTitleView.h"
 #import "JCKellyDataModelTrackCell.h"
+#import "JCKellyDataDetailSampleModel.h"
 @implementation JCKellyDataModelTrackView
 
 - (void)initViews {
@@ -69,13 +70,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 40;
+    return self.dataArray.count;
     
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     JCKellyDataModelTrackCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCKellyDataModelTrackCell"];
+    cell.row = indexPath.row;
+    cell.dataArray = self.dataArray;
+    cell.model = self.dataArray[indexPath.row];
+    
     return cell;
     
 }
@@ -84,7 +89,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-        return AUTO(60);
+        return AUTO(65);
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -95,16 +100,41 @@
     return AUTO(40);
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *view = [UIView new];
-    UILabel *sourceLab = [UILabel initWithTitle:@"数据来源：bet365" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_9F9F9F andBackgroundColor:JCWhiteColor andTextAlignment:NSTextAlignmentCenter];
-    sourceLab.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(40));
-    [view addSubview:sourceLab];
-    return view;;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+//    UIView *view = [UIView new];
+//    UILabel *sourceLab = [UILabel initWithTitle:@"数据来源：bet365" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_9F9F9F andBackgroundColor:JCWhiteColor andTextAlignment:NSTextAlignmentCenter];
+//    sourceLab.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(40));
+//    [view addSubview:sourceLab];
+//    return view;;
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    return AUTO(40);
+//}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return AUTO(40);
+- (void)setMatch_id:(NSString *)match_id {
+    _match_id = match_id;
+    JCBaseViewController *vc = (JCBaseViewController *)[self getViewController];
+    [vc.jcWindow showLoading];
+    JCDataBaseService_New *service = [JCDataBaseService_New new];
+    [service getKellyDataModeDetailSampleDataWithMatch_id:self.match_id Success:^(id  _Nullable object) {
+        [vc.jcWindow endLoading];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"] class:[JCKellyDataDetailSampleModel class]];
+            self.dataArray = [NSMutableArray arrayWithArray:array];
+            [self.tableView reloadData];
+//            self.detailModel = (JCKellyDataDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataDetailModel class]];
+
+
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+        
+    } failure:^(NSError * _Nonnull error) {
+        [vc.view endLoading];
+    }];
 }
 
 - (UITableView *)tableView {
@@ -144,7 +174,9 @@
          
     }];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [weakSelf removeFromSuperview];;
+        [weakSelf removeFromSuperview];
+        self.dataArray = @[];
+        [self.tableView reloadData];
     });
 }
 

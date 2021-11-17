@@ -49,12 +49,133 @@
     }];
 }
 
-- (void)data {
+- (void)setBf_array:(NSArray *)bf_array {
+    _bf_array = bf_array;
     self.typeLab.text = @"比分";
-    self.oneLab.text = @"19.9%\n1:0";
-    self.twoLab.text = @"19.9%\n1:0";
-    self.threeLab.text = @"19.9%\n1:0";
+//    [self getDataWithDataArray:bf_array];
+    for (int i=0; i<bf_array.count; i++) {
+        NSArray *array = bf_array[i];
+        NSString *score = @"";
+        NSString *rate = @"";
+        NSString * color = @"0";
+        if (i==0) {
+            for (int j=0; j<array.count; j++) {
+                if (j==0) {
+                    score = array[j];
+                }
+                if (j==1) {
+                    rate = array[j];
+                }
+                if (j==2) {
+                    color = array[j];
+                }
+            }
+            self.oneLab.text = [NSString stringWithFormat:@"%@\n%@",rate,score];
+            self.oneLab.textColor = [color integerValue]==1?COLOR_EF2F2F:COLOR_2F2F2F;
+
+        }
+        if (i==1) {
+            for (int j=0; j<array.count; j++) {
+                if (j==0) {
+                    score = array[j];
+                }
+                if (j==1) {
+                    rate = array[j];
+                }
+                if (j==2) {
+                    color = array[j];
+                }
+            }
+            self.twoLab.text = [NSString stringWithFormat:@"%@\n%@",rate,score];
+            self.twoLab.textColor = [color integerValue]==0?COLOR_2F2F2F:COLOR_EF2F2F;
+
+        }
+        if (i==2) {
+            for (int j=0; j<array.count; j++) {
+                if (j==0) {
+                    score = array[j];
+                }
+                if (j==1) {
+                    rate = array[j];
+                }
+                if (j==2) {
+                    color = array[j];
+                }
+            }
+            self.threeLab.text = [NSString stringWithFormat:@"%@\n%@",rate,score];
+            self.threeLab.textColor = [color integerValue]==0?COLOR_2F2F2F:COLOR_EF2F2F;
+
+        }
+    }
 }
+
+- (void)setJqs_array:(NSArray *)jqs_array {
+    _jqs_array = jqs_array;
+    self.typeLab.text = @"进球数";
+    for (int i=0; i<jqs_array.count; i++) {
+        NSArray *array = jqs_array[i];
+        NSString *score = @"";
+        NSString *rate = @"";
+        NSString * color = @"0";
+        if (i==0) {
+            for (int j=0; j<array.count; j++) {
+                if (j==0) {
+                    score = array[j];
+                }
+                if (j==1) {
+                    rate = array[j];
+                }
+                if (j==2) {
+                    color = array[j];
+                }
+            }
+            self.oneLab.text = [NSString stringWithFormat:@"%@\n%@球",rate,score];
+            self.oneLab.textColor = [color integerValue]==1?COLOR_EF2F2F:COLOR_2F2F2F;
+
+        }
+        if (i==1) {
+            for (int j=0; j<array.count; j++) {
+                if (j==0) {
+                    score = array[j];
+                }
+                if (j==1) {
+                    rate = array[j];
+                }
+                if (j==2) {
+                    color = array[j];
+                }
+            }
+            self.twoLab.text = [NSString stringWithFormat:@"%@\n%@球",rate,score];
+            self.twoLab.textColor = [color integerValue]==0?COLOR_2F2F2F:COLOR_EF2F2F;
+
+        }
+        if (i==2) {
+            for (int j=0; j<array.count; j++) {
+                if (j==0) {
+                    score = array[j];
+                }
+                if (j==1) {
+                    rate = array[j];
+                }
+                if (j==2) {
+                    color = array[j];
+                }
+            }
+            self.threeLab.text = [NSString stringWithFormat:@"%@\n%@球",rate,score];
+            self.threeLab.textColor = [color integerValue]==0?COLOR_2F2F2F:COLOR_EF2F2F;
+
+        }
+    }
+}
+
+
+
+//- (void)data {
+//    self.typeLab.text = @"比分";
+//    self.oneLab.text = @"19.9%\n1:0";
+//    self.twoLab.text = @"19.9%\n1:0";
+//    self.threeLab.text = @"19.9%\n1:0";
+//}
 
 - (UILabel *)typeLab {
     if (!_typeLab) {

@@ -236,7 +236,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *qr_code;
 
 
-//1单场 2三场 3多场r
+//1单场 2三场 3多场
 //在公众号里,1付费方案 0免费方案
 @property (assign, nonatomic) NSInteger type;
 //用户是否能查看内容 0不能查看 1能查看

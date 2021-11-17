@@ -104,13 +104,6 @@
             self.priceLab.text = price;
         }
     }
-//    if (dianPingBall.base_info.status==7) {
-//        self.priceLab.textColor = COLOR_999999;
-//        self.priceLab.text = @"等待接入";
-////        self.priceLab.text = dianPingBall.status_type;
-//        self.likeBtn.hidden = YES;
-//        
-//    }
 
     
     

@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *column_id;
 
+@property (nonatomic,strong) NSString *period_id;
+
 @end
 
 NS_ASSUME_NONNULL_END

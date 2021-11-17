@@ -43,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) void(^JCRechargeBlock)(void);
 
+@property (nonatomic,copy) void(^JCProtocolBlock)(void);
+
 - (void)show;
 
 - (void)hide;

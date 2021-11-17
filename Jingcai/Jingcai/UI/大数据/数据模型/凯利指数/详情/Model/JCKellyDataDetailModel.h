@@ -43,6 +43,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,assign) NSInteger company_num;//完成凯利指数计算的公司数
 
+#pragma mark 泊松分布
+@property (nonatomic, strong) NSArray<NSString *> *goals_avg;//场均进球：[主队,客队]
+
+@property (nonatomic, strong) NSArray<NSString *> *goals_against_avg;//场均失球：[主队,客队]
+
+@property (nonatomic, strong) NSArray<NSString *> *attacking;//进攻能力：[主队,客队]
+
+@property (nonatomic, strong) NSArray<NSString *> *defending;//防守能力：[主队,客队]
+
+@property (nonatomic, strong) NSArray<NSString *> *score_guess;//比分预测[[0-1,30],[1-2,20]]解释：【比分0-1，概率30】
+
+
+//@property (nonatomic, strong) NSArray<NSString *> *goals_num_guess;//总进球数预测[[1,30],[3,20]] 解释：【进球数1个，概率30】
+
+@property (nonatomic, strong) NSArray<NSString *> *jin_qiu_shu;
+
+@property (nonatomic, strong) NSArray<NSString *> *bi_fen;
+
 @end
 
 NS_ASSUME_NONNULL_END

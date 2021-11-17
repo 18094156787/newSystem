@@ -58,7 +58,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 - (void)setNavEffect {
 
     CGFloat offsetY = self.contentView.contentOffset.y;
-    CGFloat maxOffsetY = AUTO(188);
+    CGFloat maxOffsetY = AUTO(208);
     float percent = offsetY/maxOffsetY;
     self.topColorView.alpha = percent;
 //    NSLog(@"%.2f",percent);
@@ -83,7 +83,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 - (instancetype)init {
     
     if (self = [super init]) {
-        self.height = AUTO(260)+kNavigationBarHeight;
+        self.height = AUTO(280)+kNavigationBarHeight;
         self.titleSizeNormal = 16;
         self.titleSizeSelected = 16;
         self.titleColorSelected = COLOR_2F2F2F;//COLOR_FE1F19
@@ -107,7 +107,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 - (void)viewDidLoad {
 
 //    self.view.backgroundColor = [UIColor greenColor]
-        [super viewDidLoad];
+    [super viewDidLoad];
     [self initViews];
     [self getTopInfoData];
 
@@ -124,9 +124,10 @@ static CGFloat const kWMMenuViewHeight = 0;
 
 
 - (void)getTopInfoData {
+    [self.timeArray removeAllObjects];
     [self.jcWindow showLoading];
     JCDataBaseService_New *service = [JCDataBaseService_New service];
-    [service getKellyDataModelPayInfoWithModel_id:self.model_id Success:^(id  _Nullable object) {
+    [service getDataModelPayInfoWithModel_id:self.model_id Success:^(id  _Nullable object) {
         [self.jcWindow endLoading];
         [self.contentView.mj_header endRefreshing];
         if ([JCWJsonTool isSuccessResponse:object]) {
@@ -137,6 +138,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 //            buyInfoModel.model_status = 4;
             self.headView.model = buyInfoModel;
             [self initTimeArrayWithToday:buyInfoModel.server_time];
+            
             self.buyInfoModel = buyInfoModel;
             self.dataVC.buyInfoModel = self.buyInfoModel;
             [self.dataVC refreshData];
@@ -176,48 +178,89 @@ static CGFloat const kWMMenuViewHeight = 0;
     };
 
     self.headView.JCBuyClickBlock = ^{
-        if (weakSelf.buyInfoModel.show_status==1) {
-            //免费体验
-            [weakSelf FreeExperience];
-            return;
-        }
-        if (weakSelf.buyInfoModel.show_status==2) {
-            if (weakSelf.buyInfoModel.model_status==1) {
-                //免费体验中不能续费
-                return;
-            }
-            if (weakSelf.buyInfoModel.model_status==3) {
-                //下架不能购买
-                return;
-            }
-            if (weakSelf.buyInfoModel.model_status==4) {
-                //免费,不能购买
-                return;
-            }
-        }
-        if (weakSelf.buyInfoModel.show_status==4) {
-            //下架
-            return;
-        }
-//        if (![JCWUserBall currentUser]) {
-//            [weakSelf presentLogin];
-//            return;
-//        }
-//        JCJingCaiAIBigDataBuyVC *vc = [JCJingCaiAIBigDataBuyVC new];
-//        [weakSelf.navigationController pushViewController:vc animated:YES];
-        
-        JCPayShowView *payView = [JCPayShowView new];
-        payView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-        [weakSelf.jcWindow addSubview:payView];
-        payView.JCSureBlock = ^(NSString * _Nonnull hb_id) {
-            [weakSelf sureBuy];
-        };
-        [payView show];
+        [weakSelf payAction];
     };
 
 }
+
+- (void)payAction {
+    if (self.buyInfoModel.show_status==1) {
+        //免费体验
+        [self FreeExperienceCheck];
+        return;
+    }
+    if (self.buyInfoModel.show_status==2) {
+        if (self.buyInfoModel.model_status==1) {
+            //免费体验中不能续费
+            return;
+        }
+        if (self.buyInfoModel.model_status==3) {
+            //下架不能购买
+            return;
+        }
+        if (self.buyInfoModel.model_status==4) {
+            //免费,不能购买
+            return;
+        }
+    }
+    if (self.buyInfoModel.show_status==4) {
+        //下架
+        return;
+    }
+
+    [self showPayView];
+    
+}
+
+- (void)showPayView {
+    WeakSelf;
+    JCPayShowView *payView = [JCPayShowView new];
+    payView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    [self.jcWindow addSubview:payView];
+    payView.JCSureBlock = ^(NSString * _Nonnull hb_id) {
+        [weakSelf sureBuy];
+    };
+    payView.JCProtocolBlock = ^{
+        WebViewController *vc = [WebViewController new];
+        vc.showBackItem = YES;
+            vc.titleStr = @"鲸猜足球用户购买协议";
+            NSString *urlStr = [NSString  stringWithFormat:@"%@?dev=1",[JCConfigModel currentConfigModel].get_purchase];
+            vc.urlStr = NonNil(urlStr);
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        [weakSelf presentViewController:nav animated:YES completion:nil];
+    };
+    [payView show];
+
+}
+
+- (void)FreeExperienceCheck {
+    JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
+    alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(16)];
+    [alertView alertTitle:@"确认开通" TitleColor:COLOR_2F2F2F Mesasge:@"" MessageColor:COLOR_2F2F2F SureTitle:@"确认" SureColor:JCWhiteColor SureHandler:^{
+        
+        [alertView removeFromSuperview];
+        [self FreeExperience];
+
+    } CancleTitle:@"取消" CancleColor:JCBaseColor CancelHandler:^{
+       [alertView removeFromSuperview];
+    }];
+//    NSString *day =  [NSString stringWithFormat:@"%@",self.buyInfoModel.free_day];
+    NSString *title = [NSString stringWithFormat:@"是否开通[凯利指数] %@天免费体验",self.buyInfoModel.free_day];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+    NSRange count_range = [title rangeOfString:self.buyInfoModel.free_day];
+    if (count_range.location!=NSNotFound) {
+        [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:count_range];
+    }
+
+    
+    alertView.contentLab.attributedText = attr;
+    alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+}
+
 //免费体验
 - (void)FreeExperience {
+    
     [self.jcWindow showLoading];
     JCDataBaseService_New *service = [JCDataBaseService_New service];
     [service getKellyDataModeFreeExperienceWithModel_id:self.model_id Success:^(id  _Nullable object) {
@@ -383,7 +426,7 @@ static CGFloat const kWMMenuViewHeight = 0;
     }
     
     JCMatchTimeModel *todayModel = [JCMatchTimeModel new];
-    todayModel.week = today_week;
+    todayModel.week = @"今天";
     todayModel.sort_time = today_String_short;
     todayModel.time = today;
     todayModel.select = YES;
@@ -425,6 +468,10 @@ static CGFloat const kWMMenuViewHeight = 0;
 - (JCKellyDataModelVC *)dataVC {
     if (!_dataVC) {
         _dataVC = [JCKellyDataModelVC new];
+        WeakSelf;
+        _dataVC.JCOpenBlock = ^{
+            [weakSelf payAction];
+        };
     }
     return _dataVC;
 }

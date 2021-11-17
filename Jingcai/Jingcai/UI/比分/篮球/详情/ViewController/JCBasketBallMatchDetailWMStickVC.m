@@ -104,6 +104,18 @@ static CGFloat const kWMMenuViewHeight = 44;
         self.menuViewHeight = 0;
         self.maximumHeaderViewHeight = kWMMatchDetailHeaderViewHeight-kNavigationBarHeight;
         self.contentView.bounces = NO;
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"show_odds"]) {
+            NSString *show = [[NSUserDefaults standardUserDefaults] objectForKey:@"show_odds"];
+            self.show_odds = [show integerValue];
+            if (self.show_odds==1) {
+                self.titleArray = @[@"方案",@"直播",@"统计",@"指数"];
+            }else{
+                self.titleArray = @[@"方案",@"直播",@"统计"];
+            }
+        }else {
+            self.titleArray = @[@"方案",@"直播",@"统计"];
+        }
+
     }
     return self;
 }

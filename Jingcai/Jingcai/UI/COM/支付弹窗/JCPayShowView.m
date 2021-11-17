@@ -106,7 +106,7 @@
             }
 
             if (self.payInfoModel.is_use==0) {
-                cell.infoLab.text = @"暂不支持优惠券";
+                cell.infoLab.text = @"暂无优惠券";
                 cell.selHongbaoLab.textColor = COLOR_9F9F9F;
                 cell.selHongbaoLab.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)];
             }
@@ -140,7 +140,17 @@
 
     JCDakaBuyPlanProtocolCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCDakaBuyPlanProtocolCell"];
     self.sureProtocolBtn = cell.sureProtocolBtn;
+    WeakSelf;
+    cell.JCProtocolBlock = ^{
+        if (weakSelf.JCProtocolBlock) {
+            weakSelf.JCProtocolBlock();
+        }
+    };
     return cell;
+
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
 }
 

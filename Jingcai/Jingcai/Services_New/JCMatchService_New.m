@@ -328,6 +328,26 @@
         [self dealWithError:error];
     }];
 }
+//比分详情模型下的具体模分类
+- (void)getMatchDataModelItemWithMatch_id:(NSString *)match_id success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    
+    NSDictionary * param = @{
+                            @"match_id":match_id
+    };
+
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"match_data_model" paramDic:param ignoreArray:@[]];
+
+    [manager GET:urlString parameters:param headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self deathWithSuccessInfo:responseObject];
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+        [self dealWithError:error];
+    }];
+}
 //赛程详情-数据-鲸猜
 - (void)getMatchBigDataDetailWithMatchnum:(NSString *)matchnum success:(successBlock)successBlock failure:(failureBlock)failureBlock {
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];

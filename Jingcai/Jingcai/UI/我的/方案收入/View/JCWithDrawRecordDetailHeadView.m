@@ -59,7 +59,13 @@
         make.top.equalTo(self.articlecCountLab.mas_bottom).offset(AUTO(8));
         make.left.offset(AUTO(15));
         make.height.mas_equalTo(AUTO(18));
- 
+    }];
+    
+    [self addSubview:self.dsCountLab];
+    [self.dsCountLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.benefitCountLab.mas_bottom).offset(AUTO(8));
+        make.left.offset(AUTO(15));
+        make.height.mas_equalTo(AUTO(18));
     }];
     
     UIView *lineView1 = [UIView new];
@@ -81,6 +87,8 @@
     _model = model;
     self.articlecCountLab.text = [NSString stringWithFormat:@"共发布 %@ 篇付费达人方案",model.tuijian_count];
     self.benefitCountLab.text = [NSString stringWithFormat:@"共获得收益提成 %@ 笔",model.sf_count];
+    
+    self.dsCountLab.text = [NSString stringWithFormat:@"共获得打赏收益 %@ 笔",model.ds_count];
     
  
 }
@@ -104,12 +112,7 @@
     return _articlecCountLab;
 }
 
-- (UILabel *)articlecCountLabel {
-    if (!_articlecCountLabel) {
-        _articlecCountLabel = [UILabel initWithTitle:@"付费达人方案总数" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
-    }
-    return _articlecCountLabel;
-}
+
 
 - (UILabel *)benefitCountLab {
     if (!_benefitCountLab) {
@@ -119,12 +122,11 @@
 }
 
 
-
-- (UILabel *)benefitCountLabel {
-    if (!_benefitCountLabel) {
-        _benefitCountLabel = [UILabel initWithTitle:@"获得收益提成总数" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_999999 andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+- (UILabel *)dsCountLab {
+    if (!_dsCountLab) {
+        _dsCountLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     }
-    return _benefitCountLabel;
+    return _dsCountLab;
 }
 
 

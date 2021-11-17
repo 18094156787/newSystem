@@ -41,8 +41,7 @@
 - (void)getTopInfo {
 
     JCColumnService *service = [JCColumnService new];
-    [service getColumnDetailTopInfoWithID:NonNil(self.model.special_column_id) WithSuccess:^(id  _Nullable object) {
-
+    [service getColumnDetailTopInfoWithID:NonNil(self.model.special_column_id) Period_id:NonNil(self.model.period) WithSuccess:^(id  _Nullable object) {
         if ([JCWJsonTool isSuccessResponse:object]) {
             JCColumnDetailModel *detailModel = (JCColumnDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCColumnDetailModel class]];
             self.headView.detailModel = detailModel;
@@ -53,6 +52,7 @@
     } failure:^(NSError * _Nonnull error) {
         
     }];
+ 
 }
 
 
@@ -84,12 +84,12 @@
 }
 - (void)initViews {
     
-    UIButton *detailBtn = [UIButton initWithText:@"订单详情" FontSize:12 Weight:1 BackGroundColor:JCClearColor TextColors:COLOR_2F2F2F];
-    [detailBtn addTarget:self action:@selector(detailBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    detailBtn.frame = CGRectMake(0, 0, 60, 44);
-    UIBarButtonItem *detailItem = [[UIBarButtonItem alloc] initWithCustomView:detailBtn];
-    detailItem.tintColor = COLOR_2F2F2F;
-    self.navigationItem.rightBarButtonItem = detailItem;
+//    UIButton *detailBtn = [UIButton initWithText:@"订单详情" FontSize:12 Weight:1 BackGroundColor:JCClearColor TextColors:COLOR_2F2F2F];
+//    [detailBtn addTarget:self action:@selector(detailBtnClick) forControlEvents:UIControlEventTouchUpInside];
+//    detailBtn.frame = CGRectMake(0, 0, 60, 44);
+//    UIBarButtonItem *detailItem = [[UIBarButtonItem alloc] initWithCustomView:detailBtn];
+//    detailItem.tintColor = COLOR_2F2F2F;
+//    self.navigationItem.rightBarButtonItem = detailItem;
     
     self.tableView.separatorInset = UIEdgeInsetsZero;
     self.tableView.separatorStyle = 0;
@@ -175,7 +175,7 @@
     JCMyBuyColumnOrderVC *vc = [JCMyBuyColumnOrderVC new];
     vc.column_id = self.model.special_column_id;
     vc.order_id = self.model.id;
-    
+    vc.period_id = self.model.period;
     [self.navigationController pushViewController:vc animated:YES];
     
 }

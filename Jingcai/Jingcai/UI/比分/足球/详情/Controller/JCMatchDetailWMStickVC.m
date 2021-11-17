@@ -88,13 +88,6 @@ static CGFloat const kWMMenuViewHeight = 44;
     
 }
 
-- (NSArray *)titleArray {
-    if (!_titleArray) {
-        _titleArray = @[@"方案",@"直播",@"情报",@"指数",@"阵容",@"数据",@"模型"];
-    }
-    return _titleArray;
-}
-
 - (void)back:(UIButton *)sender {
     if ([self.topHeadView.topView.subviews containsObject:self.topHeadView.wkWebView]) {
         self.navigationController.navigationBar.hidden = NO;
@@ -129,6 +122,17 @@ static CGFloat const kWMMenuViewHeight = 44;
         self.maximumHeaderViewHeight = kWMMatchDetailHeaderViewHeight-kNavigationBarHeight;
         self.contentView.bounces = NO;
         self.preloadPolicy = WMPageControllerPreloadPolicyNeighbour;//预加载下个vc
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"show_odds"]) {
+            NSString *show = [[NSUserDefaults standardUserDefaults] objectForKey:@"show_odds"];
+            self.show_odds = [show integerValue];
+            if (self.show_odds==1) {
+                self.titleArray = @[@"方案",@"直播",@"情报",@"指数",@"阵容",@"数据",@"模型"];
+            }else{
+                self.titleArray = @[@"方案",@"直播",@"情报",@"阵容",@"数据",@"模型"];
+            }
+        }else {
+            self.titleArray = @[@"方案",@"直播",@"情报",@"阵容",@"数据",@"模型"];
+        }
     }
     return self;
 }
@@ -288,45 +292,84 @@ static CGFloat const kWMMenuViewHeight = 44;
 }
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
-    if (index==0) {
-//        self.faVC.matchBall = self.matchBall;
-        JCMatchFanganViewController *faVC = [JCMatchFanganViewController new];
-        faVC.matchNum = self.matchNum;
-        return faVC;
-    }
-    if (index==1) {
-        self.zbVC = [JNMatchDetailZBVC new];
-        self.zbVC.matchBall = self.matchBall;
-        return self.zbVC;
-    }
-    if (index==2) {
-        JNMatchDetailQBVC *qbVC = [JNMatchDetailQBVC new];
-        qbVC.matchBall = self.matchBall;
-        return qbVC;
-    }
-    if (index==3) {
-        JCMatchDetailZSVC *zsVC = [JCMatchDetailZSVC new];
-        zsVC.matchBall = self.matchBall;
-        return zsVC;
-    }
-    if (index==4) {
-        JNMatchDetailZRVC *zrVC = [JNMatchDetailZRVC new];
-        zrVC.matchBall = self.matchBall;
-        return zrVC;
+
+    if (self.show_odds==1) {
+        if (index==0) {
+            JCMatchFanganViewController *faVC = [JCMatchFanganViewController new];
+            faVC.matchNum = self.matchNum;
+            return faVC;
+        }
+        if (index==1) {
+            self.zbVC = [JNMatchDetailZBVC new];
+            self.zbVC.matchBall = self.matchBall;
+            return self.zbVC;
+        }
+        if (index==2) {
+            JNMatchDetailQBVC *qbVC = [JNMatchDetailQBVC new];
+            qbVC.matchBall = self.matchBall;
+            return qbVC;
+        }
+        if (index==3) {
+            JCMatchDetailZSVC *zsVC = [JCMatchDetailZSVC new];
+            zsVC.matchBall = self.matchBall;
+            return zsVC;
+        }
+        if (index==4) {
+            JNMatchDetailZRVC *zrVC = [JNMatchDetailZRVC new];
+            zrVC.matchBall = self.matchBall;
+            return zrVC;
+        }
+
+        if (index==5) {
+            JNMatchDetailSJVC *sjVC = [JNMatchDetailSJVC new];
+            sjVC.is_bigData = self.is_bigData;
+            sjVC.matchBall = self.matchBall;
+            return sjVC;
+        }
+        if (index==6) {
+            JCMatchDetailDataModelVC *dataVC = [JCMatchDetailDataModelVC new];
+            dataVC.is_bigData = self.is_bigData;
+            dataVC.matchBall = self.matchBall;
+            return dataVC;
+        }
+        
+    }else{
+        if (index==0) {
+            JCMatchFanganViewController *faVC = [JCMatchFanganViewController new];
+            faVC.matchNum = self.matchNum;
+            return faVC;
+        }
+        if (index==1) {
+            self.zbVC = [JNMatchDetailZBVC new];
+            self.zbVC.matchBall = self.matchBall;
+            return self.zbVC;
+        }
+        if (index==2) {
+            JNMatchDetailQBVC *qbVC = [JNMatchDetailQBVC new];
+            qbVC.matchBall = self.matchBall;
+            return qbVC;
+        }
+
+        if (index==3) {
+            JNMatchDetailZRVC *zrVC = [JNMatchDetailZRVC new];
+            zrVC.matchBall = self.matchBall;
+            return zrVC;
+        }
+
+        if (index==4) {
+            JNMatchDetailSJVC *sjVC = [JNMatchDetailSJVC new];
+            sjVC.is_bigData = self.is_bigData;
+            sjVC.matchBall = self.matchBall;
+            return sjVC;
+        }
+        if (index==5) {
+            JCMatchDetailDataModelVC *dataVC = [JCMatchDetailDataModelVC new];
+            dataVC.is_bigData = self.is_bigData;
+            dataVC.matchBall = self.matchBall;
+            return dataVC;
+        }
     }
 
-    if (index==5) {
-        JNMatchDetailSJVC *sjVC = [JNMatchDetailSJVC new];
-        sjVC.is_bigData = self.is_bigData;
-        sjVC.matchBall = self.matchBall;
-        return sjVC;
-    }
-    if (index==6) {
-        JCMatchDetailDataModelVC *sjVC = [JCMatchDetailDataModelVC new];
-        sjVC.is_bigData = self.is_bigData;
-        sjVC.matchBall = self.matchBall;
-        return sjVC;
-    }
     
     return [UIViewController new];
     

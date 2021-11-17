@@ -12,6 +12,7 @@
 #import "JCDakaPlanDetailStickWMVC.h"
 #import "JCWMyHongbaoBall.h"
 #import "JCFamousExpertCell.h"
+#import "JCHongBangOrderDetailVC.h"
 @interface JCMyBuyDakaViewController ()
 
 @end
@@ -81,7 +82,15 @@
     
     
     JCMyBuyDakaViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCMyBuyDakaViewCell"];
-    cell.model = self.dataArray[indexPath.section];
+    JCWTjInfoBall *model = self.dataArray[indexPath.section];
+    cell.model = model;
+    WeakSelf;
+    cell.JCBlock = ^{
+        JCHongBangOrderDetailVC *vc = [JCHongBangOrderDetailVC new];
+        vc.order_id = model.zucai_order_id;
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+        
+    };
     return cell;
     
     

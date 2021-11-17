@@ -16,6 +16,8 @@
 #import "JCMyBuyOrderDataSingleHeadView.h"
 #import "JCJingCaiAIBigDataBuyVC.h"
 #import "JCDakaBuyPayWayTopView.h"
+#import "JCPayShowView.h"
+#import "JCChargeVC.h"
 @interface JCMyBuyOrderDataDetailVC ()
 
 @property (nonatomic,strong) JCMyBuyOrderDataHeadView *headView;
@@ -55,7 +57,8 @@
             self.tableView.tableHeaderView = self.headView;
             WeakSelf;
             self.headView.JCBuyBlock = ^{
-                [weakSelf.navigationController pushViewController:[JCJingCaiAIBigDataBuyVC new] animated:YES];
+                [weakSelf showPayView];
+//                [weakSelf.navigationController pushViewController:[JCJingCaiAIBigDataBuyVC new] animated:YES];
             };
 
 
@@ -71,6 +74,75 @@
         [self endRefresh];
     }];
 
+}
+- (void)showPayView {
+    WeakSelf;
+    JCPayShowView *payView = [JCPayShowView new];
+    payView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    [self.jcWindow addSubview:payView];
+    payView.JCSureBlock = ^(NSString * _Nonnull hb_id) {
+        [weakSelf sureBuy];
+    };
+    payView.JCProtocolBlock = ^{
+        WebViewController *vc = [WebViewController new];
+        vc.showBackItem = YES;
+            vc.titleStr = @"鲸猜足球用户购买协议";
+            NSString *urlStr = [NSString  stringWithFormat:@"%@?dev=1",[JCConfigModel currentConfigModel].get_purchase];
+            vc.urlStr = NonNil(urlStr);
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        [weakSelf presentViewController:nav animated:YES completion:nil];
+    };
+    [payView show];
+
+}
+//确认购买
+- (void)sureBuy {
+    if ([self.detailModel.total_price floatValue]>0&&[[JCWUserBall currentUser].prize floatValue]<[self.detailModel.total_price floatValue]) {
+        [JCWToastTool showHint:@"红币余额不足,请及时充值"];
+        [self.navigationController pushViewController:[JCChargeVC new] animated:YES];
+        return;
+    }
+    
+    NSString *scene = @"7";
+    //1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5凯利指数 6.离散指数
+    [self.jcWindow showLoading];
+    JCHomeService_New *service = [JCHomeService_New new];
+    [service getConfirmOrderWithUnique:self.detailModel.zucai_ai_set_id scene:scene source:@"1" price:@"" Success:^(id  _Nullable object) {
+        [self.jcWindow endLoading];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSString *order_key = object[@"data"][@"order_key"];
+            [self finalPayWithOrder_key:order_key coupon_id:@"" hongbao_id:@""];
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        [self.jcWindow endLoading];
+    }];
+    
+}
+//下单并支付
+- (void)finalPayWithOrder_key:(NSString *)order_key coupon_id:(NSString *)coupon_id hongbao_id:(NSString *)hongbao_id {
+    [self.jcWindow showLoading];
+    JCHomeService_New *service = [JCHomeService_New new];
+    [service getPayOrderWithOrder_key:order_key pay_type:@"3" hongbao_id:hongbao_id coupon_id:coupon_id Success:^(id  _Nullable object) {
+        [self.jcWindow endLoading];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSString *is_pay = object[@"data"][@"is_pay"];
+            if ([is_pay intValue]==1) {
+                [self getMyUserInfo];
+                [JCWToastTool showHint:@"购买成功"];
+            }
+//            [self.tableView reloadData];
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+        
+    } failure:^(NSError * _Nonnull error) {
+        [self.jcWindow endLoading];
+    }];
 }
 
 
@@ -113,7 +185,7 @@
     JCMyBuyOrderDataInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCMyBuyOrderDataInfoCell"];
     if (indexPath.section==0) {
         if (indexPath.row==0) {
-            cell.titleLab.text = @"商品总价";
+            cell.titleLab.text = @"商品原价";
             cell.contentLab.text = [NSString stringWithFormat:@"%@红币",@([self.detailModel.total_price floatValue])];
 
         }

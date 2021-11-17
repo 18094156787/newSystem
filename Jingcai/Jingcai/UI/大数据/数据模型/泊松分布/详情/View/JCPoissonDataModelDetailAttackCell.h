@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UIView *awayProgressView;
 
+@property (nonatomic,strong) NSArray *dataArray;
+
 @end
 
 NS_ASSUME_NONNULL_END

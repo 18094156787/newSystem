@@ -75,7 +75,7 @@
     if (indexPath.section==1) {
 
         if (indexPath.row==0) {
-            cell.titleLab.text = @"商品总价";
+            cell.titleLab.text = @"商品原价";
             cell.contentLab.text = [NSString stringWithFormat:@"%ld红币",[self.detailModel.old_total integerValue]/100];
         }
         if (indexPath.row==1) {

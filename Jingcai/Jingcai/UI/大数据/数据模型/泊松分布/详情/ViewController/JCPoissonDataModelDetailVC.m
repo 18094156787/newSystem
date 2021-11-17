@@ -12,11 +12,14 @@
 #import "JCPoissonDataModelDetailAttackCell.h"
 #import "JCPoissonDataModelDetailDistributionCell.h"
 #import "JCPoissonDataModelDetailPredictCell.h"
+#import "JCKellyDataDetailModel.h"
 @interface JCPoissonDataModelDetailVC ()
 
 @property (nonatomic,strong) JCPoissonDataModelDetailHeadView *headView;
 
 @property (nonatomic,strong) UIView *topColorView;
+
+@property (nonatomic,strong) JCKellyDataDetailModel *detailModel;
 
 @end
 
@@ -51,48 +54,32 @@
     [self refreshData];
 }
 
-
 - (void)refreshData {
-    self.pageNo = 1;
-    [self getDataList];
-}
+    [self.view showLoading];
+    JCDataBaseService_New *service = [JCDataBaseService_New new];
+    [service getPoissonDataModeDetailWithMatch_id:self.match_id Success:^(id  _Nullable object) {
+        [self endRefresh];
 
-- (void)getDataList {
+        if ([JCWJsonTool isSuccessResponse:object]) {
 
-//    [self.jcWindow showLoading];
-//    JCMatchService_New *service = [JCMatchService_New new];
-//    [service getPredictedMatchListWithType:@"2" Key_word:@"" Page:self.pageNo Success:^(id  _Nullable object) {
-//        [self endRefresh];
-//
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            if (self.pageNo==1) {
-//                [self.dataArray removeAllObjects];
-//            }
-//            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCMatchInfoModel class]];
-//             [self.dataArray addObjectsFromArray:array];
-//            if (array.count <PAGE_LIMIT) {
-//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-//            }
-//            [self.tableView reloadData];
-//            self.pageNo++;
-//            [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-//
-//            if (array.count ==0&&self.dataArray.count>0) {
-//                  self.tableView.tableFooterView = self.noMore_footView;
-//                  self.tableView.mj_footer.hidden = YES;
-//              }else{
-//                  self.tableView.tableFooterView = [UIView new];
-//                  self.tableView.mj_footer.hidden = NO;
-//              }
-//
-//        }else{
-//            [JCWToastTool showHint:object[@"msg"]];
-//        }
-//
-//    } failure:^(NSError * _Nonnull error) {
-//        [self endRefresh];
-//        [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-//    }];
+            self.detailModel = (JCKellyDataDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataDetailModel class]];
+            self.headView.model = self.detailModel;
+            if (!self.hidetopMatch&&self.detailModel.competition_type!=1) {
+                self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(160)+kNavigationBarHeight);
+                self.tableView.tableHeaderView = self.headView;
+            }
+            [self.tableView reloadData];
+            self.tableView.tableFooterView = self.noMore_footView;
+            self.tableView.mj_footer.hidden = YES;
+
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        [self endRefresh];
+    }];
 
 }
 
@@ -200,8 +187,12 @@
     if (section==1) {
         return 2;
     }
-    
-    return 1;
+    if (section==2) {
+        if (self.detailModel.score_guess.count>0) {
+            return 1;
+        }
+    }
+    return 0;
 
 }
 
@@ -211,6 +202,10 @@
     }
     if (indexPath.section==1) {
         return AUTO(56);
+    }
+    if (indexPath.section==2) {
+        int row = ceil(self.detailModel.score_guess.count/6.0);
+        return row*AUTO(48);
     }
     return UITableViewAutomaticDimension;
 }
@@ -246,6 +241,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+
     return AUTO(50);
 }
 
@@ -255,15 +251,19 @@
         JCPoissonDataModelDetailAttackCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCPoissonDataModelDetailAttackCell"];
         if (indexPath.row==0) {
             cell.titleLab.text = @"场均进球";
+            cell.dataArray = self.detailModel.goals_avg;
         }
         if (indexPath.row==1) {
             cell.titleLab.text = @"进攻能力";
+            cell.dataArray = self.detailModel.attacking;
         }
         if (indexPath.row==2) {
             cell.titleLab.text = @"场均失球";
+            cell.dataArray = self.detailModel.goals_against_avg;
         }
         if (indexPath.row==3) {
             cell.titleLab.text = @"防守能力";
+            cell.dataArray = self.detailModel.defending;
         }
     //    JCMatchInfoModel *model = self.dataArray[indexPath.section];
     //    cell.model = model;
@@ -273,10 +273,16 @@
     if (indexPath.section==1) {
         JCPoissonDataModelDetailDistributionCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCPoissonDataModelDetailDistributionCell"];
         cell.lineView.hidden = indexPath.row==0?NO:YES;
+        if (indexPath.row==0) {
+            cell.bf_array = self.detailModel.bi_fen;
+        }else{
+            cell.jqs_array = self.detailModel.jin_qiu_shu;
+        }
         return cell;
     }
     if (indexPath.section==2) {
         JCPoissonDataModelDetailPredictCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCPoissonDataModelDetailPredictCell"];
+        cell.dataArray = self.detailModel.score_guess;
         return cell;
     }
 

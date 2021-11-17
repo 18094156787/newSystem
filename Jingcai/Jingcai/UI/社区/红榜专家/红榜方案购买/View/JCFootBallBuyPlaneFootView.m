@@ -50,7 +50,6 @@
     [self.bottomView removeAllSubviews];
     NSMutableArray *array = [NSMutableArray array];
     float width = (SCREEN_WIDTH-AUTO(20))/8.0f;
-//    float length = (SCREEN_WIDTH-width*8)/9.0f;
     int row = ceil(self.dataArray.count/8.0);
     for (int i=0; i<row; i++) {
         for (int j=0; j<8; j++) {

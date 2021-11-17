@@ -215,10 +215,10 @@
         WeakSelf;
         hi.tapAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {
             WebViewController *vc = [WebViewController new];
-                            vc.titleStr = @"鲸猜足球用户购买协议";
-                            NSString *urlStr = [NSString  stringWithFormat:@"%@?dev=1",[JCConfigModel currentConfigModel].get_purchase];
-                            vc.urlStr = NonNil(urlStr);
-                            [weakSelf.navigationController pushViewController:vc animated:YES];
+            vc.titleStr = @"鲸猜足球用户购买协议";
+            NSString *urlStr = [NSString  stringWithFormat:@"%@?dev=1",[JCConfigModel currentConfigModel].get_purchase];
+            vc.urlStr = NonNil(urlStr);
+            [weakSelf.navigationController pushViewController:vc animated:YES];
         };
 
         self.protocolLab.attributedText=atext;

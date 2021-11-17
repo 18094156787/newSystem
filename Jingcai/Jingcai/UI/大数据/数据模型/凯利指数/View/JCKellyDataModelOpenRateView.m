@@ -136,17 +136,69 @@
 - (void)setModel:(JCKellyDataModelOddsIndexModel *)model {
     _model = model;
     self.rateLab.text = [NSString stringWithFormat:@"返还率\n%@",model.loss_ratio];
+    
+    [self.chuModel.odds enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx==0) {
+            self.homeWinValue = obj;
+        }
+        if (idx==1) {
+            self.homeEqualValue = obj;
+        }
+        if (idx==2) {
+            self.homeLoseValue = obj;
+        }
+    }];
+    
+    
     [model.odds enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx==0) {
+            self.awayWinValue = obj;
             self.winLab.text = obj;
         }
         if (idx==1) {
+            self.awayEqualValue = obj;
             self.equalLab.text = obj;
         }
         if (idx==2) {
+            self.awayLoseValue = obj;
             self.loseLab.text = obj;
         }
     }];
+    
+    if (self.is_jp) {
+        if ([self.awayWinValue floatValue]>[self.homeWinValue floatValue]) {
+            self.winLab.textColor = COLOR_EF2F2F;
+        }else if([self.awayWinValue floatValue]==[self.homeWinValue floatValue]){
+            self.winLab.textColor = COLOR_2F2F2F;
+        }else{
+            self.winLab.textColor = COLOR_30B27A;
+        }
+        
+        if ([self.awayEqualValue floatValue]>[self.homeEqualValue floatValue]) {
+            self.equalLab.textColor = COLOR_EF2F2F;
+        }else if([self.awayEqualValue floatValue]==[self.homeEqualValue floatValue]){
+            self.equalLab.textColor = COLOR_2F2F2F;
+        }else{
+            self.equalLab.textColor = COLOR_30B27A;
+        }
+        
+        if ([self.awayLoseValue floatValue]>[self.homeLoseValue floatValue]) {
+            self.loseLab.textColor = COLOR_EF2F2F;
+        }else if([self.awayLoseValue floatValue]==[self.homeLoseValue floatValue]){
+            self.loseLab.textColor = COLOR_2F2F2F;
+        }else{
+            self.loseLab.textColor = COLOR_30B27A;
+        }
+        
+    }else{
+        self.winLab.textColor = COLOR_2F2F2F;
+        self.equalLab.textColor = COLOR_2F2F2F;
+        self.loseLab.textColor = COLOR_2F2F2F;
+    }
+    
+ 
+    
+    
     [model.kelly_index enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx==0) {
             self.zs_WinLab.text = obj;

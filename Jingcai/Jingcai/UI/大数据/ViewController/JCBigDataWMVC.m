@@ -117,6 +117,10 @@
                  NSString *is_show_expert_qr_code = object[@"data"][@"is_show_expert_qr_code"];
                  [[NSUserDefaults standardUserDefaults] setObject:is_show_expert_qr_code forKey:@"is_show_expert_qr_code"];
              }
+             if (object[@"data"][@"show_odds"]) {
+                 NSString *show_odds = object[@"data"][@"show_odds"];
+                 [[NSUserDefaults standardUserDefaults] setObject:show_odds forKey:@"show_odds"];
+             }
              
              
              NSString *is_show_big_data   = object[@"data"][@"is_show_big_data"];

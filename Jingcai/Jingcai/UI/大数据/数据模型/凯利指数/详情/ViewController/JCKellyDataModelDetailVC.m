@@ -14,8 +14,10 @@
 #import "JCPoissonDataModelDetailTitleView.h"
 #import "JCKellyDataDetailModel.h"
 #import "JCKellyDataDetailSampleModel.h"
-
+#import "JCMatchDataModelTipView.h"
 @interface JCKellyDataModelDetailVC ()
+
+@property (nonatomic,strong) JCMatchDataModelTipView *tipView;
 
 @property (nonatomic,strong) JCPoissonDataModelDetailHeadView *headView;
 
@@ -72,7 +74,7 @@
 
             self.detailModel = (JCKellyDataDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataDetailModel class]];
             self.headView.model = self.detailModel;
-            if ( self.detailModel.competition_type!=1) {
+            if (!self.hidetopMatch&&self.detailModel.competition_type!=1) {
                 self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(160)+kNavigationBarHeight);
                 self.tableView.tableHeaderView = self.headView;
             }
@@ -116,16 +118,7 @@
 
 
 - (void)initViews {
-//    JCJingCaiAIBigDataMatchTitleView *titleView = [[JCJingCaiAIBigDataMatchTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, AUTO(45))];
-//    titleView.backgroundColor = JCWhiteColor;
-//    titleView.titleLab.text = @"比赛列表";
-//    titleView.iconView.hidden = NO;
-//    self.tableView.tableHeaderView = titleView;
-//
-//    titleView.JCBlcok = ^{
-//        [weakSelf.navigationController pushViewController:[JCJingCaiAIBigDataHomeVC new] animated:YES];
-//    };
-    
+
     UIButton *customView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     [customView addTarget:self action:@selector(backItemClick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:customView];
@@ -166,6 +159,7 @@
     self.tableView.ly_emptyView = emptyView;
 
  
+    
 
 }
 
@@ -327,5 +321,10 @@
     }
     return _headView;
 }
-
+- (JCMatchDataModelTipView *)tipView {
+    if (!_tipView) {
+        _tipView = [JCMatchDataModelTipView new];
+    }
+    return _tipView;
+}
 @end

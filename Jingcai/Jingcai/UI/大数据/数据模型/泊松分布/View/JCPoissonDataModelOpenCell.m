@@ -169,28 +169,203 @@
     
 }
 
-- (void)data {
-    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"home_placeholder")];
-    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"away_placeholder")];
-
-    self.matchNameLab.text = @"赛事名称";
-    self.matchTimeLab.text = @"09-02 18:00";
-    self.matchStatusLab.text = @"未";
-    self.scoreLab.text = @"99 : 99";
-    self.homeTeamLab.text = @"皇家马德里";
-    self.awayTeamLab.text = @"皇家马德里";
-
-    self.homeLab.text = @"比分";
-    self.awayLab.text = @"进球数";
+- (void)setModel:(JCKellyDataModelModel *)model {
+    _model = model;
+        self.homeLab.text = @"比分";
+        self.awayLab.text = @"进球数";
     
-    self.homeWinLab.text = @"1:0 (19.9%)";
-    self.homeEqualLab.text = @"1:0 (19.9%)";
-    self.homeLoseLab.text = @"1:0 (19.9%)";
-    self.awayWinLab.text = @"1:0 (19.9%)";
-    self.awayEqualLab.text = @"1:0 (19.9%)";
-    self.awayLoseLab.text = @"1:0 (19.9%)";
+    self.matchNameLab.text = model.short_name_zh;
+    self.matchNameLab.textColor = model.competition_color.length>0?[UIColor colorWithHexString:NonNil(model.competition_color)]:UIColorFromRGB(0x606062);
+    self.matchTimeLab.text = model.match_time_str;
+    self.matchStatusLab.text = model.status_cn;
+    self.homeTeamLab.text = model.home_team_name;
+    self.awayTeamLab.text =  model.away_team_name;
 
+    
+    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.home_team_logo] placeholderImage:JCIMAGE(@"home_placeholder")];
+    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
+    
+
+    //半场比分,角球
+    if (model.status_id>1&&model.status_id<9) {
+        self.scoreLab.text = [NSString stringWithFormat:@"%ld : %ld",model.home_score,model.away_score];
+    }else{
+        self.scoreLab.text = @"VS";
+    }
+    
+    //进行中的比赛显示分钟数
+     if (model.status_id>1&&model.status_id<8) {
+        self.matchStatusLab.textColor = COLOR_30B27A;
+        self.scoreLab.textColor = COLOR_30B27A;
+
+        if (model.status_id==2||model.status_id==4) {
+//            self.ongoingTimeLab.text = model.status_cn;
+            if (model.second_half_time>0) {
+                //计算时间差
+                double currentTime = [[NSDate date] timeIntervalSince1970];
+                double distance = currentTime-model.second_half_time;
+
+                self.matchStatusLab.text = [NSString stringWithFormat:@"%.0f'",distance/60+45];
+    //            [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)]
+            }else{
+                //计算时间差
+                double currentTime = [[NSDate date] timeIntervalSince1970];
+                double distance = currentTime-model.first_half_time;
+                if (distance<0) {
+                    distance = 0;
+                }
+                self.matchStatusLab.text = [NSString stringWithFormat:@"%.0f'",distance/60];
+                
+            }
+        }else{
+            self.matchStatusLab.text = model.status_cn;
+        }
+    }else if(model.status_id==8){
+        self.matchStatusLab.text = model.status_cn;
+        self.matchStatusLab.textColor = JCBaseColor;
+        self.scoreLab.textColor = JCBaseColor;
+    }else{
+        self.matchStatusLab.text = model.status_cn;
+        self.matchStatusLab.textColor = COLOR_9F9F9F;
+        self.scoreLab.textColor = COLOR_9F9F9F;
+    }
+    //比分
+    for (int i=0; i<self.model.bi_fen.count; i++) {
+        NSArray *array = self.model.bi_fen[i];
+        NSString *score = @"";
+        NSString *rate = @"";
+        NSString * color = @"0";
+        if (i==0) {
+            for (int j=0; j<array.count; j++) {
+                if (j==0) {
+                    score = array[j];
+                }
+                if (j==1) {
+                    rate = array[j];
+                }
+                if (j==2) {
+                    color = array[j];
+                }
+            }
+            self.homeWinLab.text = [NSString stringWithFormat:@"%@ (%@)",score,rate];
+            self.homeWinLab.textColor = [color integerValue]==1?COLOR_EF2F2F:COLOR_2F2F2F;
+
+        }
+        if (i==1) {
+            for (int j=0; j<array.count; j++) {
+                if (j==0) {
+                    score = array[j];
+                }
+                if (j==1) {
+                    rate = array[j];
+                }
+                if (j==2) {
+                    color = array[j];
+                }
+            }
+            self.homeEqualLab.text = [NSString stringWithFormat:@"%@ (%@)",score,rate];
+            self.homeEqualLab.textColor = [color integerValue]==0?COLOR_2F2F2F:COLOR_EF2F2F;
+
+        }
+        if (i==2) {
+            for (int j=0; j<array.count; j++) {
+                if (j==0) {
+                    score = array[j];
+                }
+                if (j==1) {
+                    rate = array[j];
+                }
+                if (j==2) {
+                    color = array[j];
+                }
+            }
+            self.homeLoseLab.text = [NSString stringWithFormat:@"%@ (%@)",score,rate];
+            self.homeLoseLab.textColor = [color integerValue]==0?COLOR_2F2F2F:COLOR_EF2F2F;
+
+        }
+    }
+    
+    //进球数
+    for (int i=0; i<self.model.jin_qiu_shu.count; i++) {
+        NSArray *array = self.model.jin_qiu_shu[i];
+        NSString *score = @"";
+        NSString *rate = @"";
+        NSString * color = @"0";
+        if (i==0) {
+            for (int j=0; j<array.count; j++) {
+                if (j==0) {
+                    score = array[j];
+                }
+                if (j==1) {
+                    rate = array[j];
+                }
+                if (j==2) {
+                    color = array[j];
+                }
+            }
+            self.awayWinLab.text = [NSString stringWithFormat:@"%@球 (%@)",score,rate];
+            self.awayWinLab.textColor = [color integerValue]==1?COLOR_EF2F2F:COLOR_2F2F2F;
+
+        }
+        if (i==1) {
+            for (int j=0; j<array.count; j++) {
+                if (j==0) {
+                    score = array[j];
+                }
+                if (j==1) {
+                    rate = array[j];
+                }
+                if (j==2) {
+                    color = array[j];
+                }
+            }
+            self.awayEqualLab.text = [NSString stringWithFormat:@"%@球 (%@)",score,rate];
+            self.awayEqualLab.textColor = [color integerValue]==0?COLOR_2F2F2F:COLOR_EF2F2F;
+
+        }
+        if (i==2) {
+            for (int j=0; j<array.count; j++) {
+                if (j==0) {
+                    score = array[j];
+                }
+                if (j==1) {
+                    rate = array[j];
+                }
+                if (j==2) {
+                    color = array[j];
+                }
+            }
+            self.awayLoseLab.text = [NSString stringWithFormat:@"%@球 (%@)",score,rate];
+            self.awayLoseLab.textColor = [color integerValue]==0?COLOR_2F2F2F:COLOR_EF2F2F;
+
+        }
+    }
 }
+
+
+
+//- (void)data {
+//    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"home_placeholder")];
+//    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"away_placeholder")];
+//
+//    self.matchNameLab.text = @"赛事名称";
+//    self.matchTimeLab.text = @"09-02 18:00";
+//    self.matchStatusLab.text = @"未";
+//    self.scoreLab.text = @"99 : 99";
+//    self.homeTeamLab.text = @"皇家马德里";
+//    self.awayTeamLab.text = @"皇家马德里";
+//
+//    self.homeLab.text = @"比分";
+//    self.awayLab.text = @"进球数";
+//
+//    self.homeWinLab.text = @"1:0 (19.9%)";
+//    self.homeEqualLab.text = @"1:0 (19.9%)";
+//    self.homeLoseLab.text = @"1:0 (19.9%)";
+//    self.awayWinLab.text = @"1:0 (19.9%)";
+//    self.awayEqualLab.text = @"1:0 (19.9%)";
+//    self.awayLoseLab.text = @"1:0 (19.9%)";
+//
+//}
 
 - (UIView *)bgView {
     if (!_bgView) {

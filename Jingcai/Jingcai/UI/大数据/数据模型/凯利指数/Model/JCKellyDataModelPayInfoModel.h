@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JCKellyDataModelPayInfoModel : JCWBaseBall
 
+@property (nonatomic, copy) NSString *introduce;//介绍
+
 @property (nonatomic, assign) NSInteger big_data_day;//包月天数
 
 @property (nonatomic, assign) NSInteger big_data_price;//实付价格
@@ -31,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray<NSString *> *user_img;
 
 @property (nonatomic, assign) NSInteger distance_day;
+
+@property (nonatomic, strong) NSString *distance_hour;//剩余小时
 
 @end
 

@@ -40,6 +40,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL is_jp;//记录即赔
 
+@property (nonatomic, strong) NSString *homeWinValue;
+@property (nonatomic, strong) NSString *homeEqualValue;
+@property (nonatomic, strong) NSString *homeLoseValue;
+
+@property (nonatomic, strong) NSString *awayWinValue;
+@property (nonatomic, strong) NSString *awayEqualValue;
+@property (nonatomic, strong) NSString *awayLoseValue;
+
+@property (nonatomic, strong) JCKellyDataModelOddsIndexModel *chuModel;
+
 @property (nonatomic, strong) JCKellyDataModelOddsIndexModel *model;
 
 @end

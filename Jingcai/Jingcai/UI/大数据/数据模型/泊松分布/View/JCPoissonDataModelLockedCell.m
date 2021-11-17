@@ -108,23 +108,81 @@
     
 }
 
-- (void)data {
-//    self.bgView.backgroundColor = JCBaseColor;
-//    self.matchNameLab.backgroundColor = JCBaseColor;
-    self.matchNameLab.text = @"赛事名称";
-    self.matchTimeLab.text = @"09-02 18:00";
-    self.matchStatusLab.text = @"未";
-    self.scoreLab.text = @"99 : 99";
-    self.homeTeamLab.text = @"皇家马德里";
-    self.awayTeamLab.text = @"皇家马德里";
-    self.homeTeamImgView.backgroundColor = JCBaseColor;
-    self.awayTeamImgView.backgroundColor = JCBaseColor;
+- (void)setModel:(JCKellyDataModelModel *)model {
+    _model = model;
+    self.matchNameLab.text = model.short_name_zh;
+    self.matchNameLab.textColor = model.competition_color.length>0?[UIColor colorWithHexString:NonNil(model.competition_color)]:UIColorFromRGB(0x606062);
+    self.matchTimeLab.text = model.match_time_str;
+    self.matchStatusLab.text = model.status_cn;
+    self.homeTeamLab.text = model.home_team_name;
+    self.awayTeamLab.text =  model.away_team_name;
 
     
-    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"home_placeholder")];
-    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"away_placeholder")];
+    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.home_team_logo] placeholderImage:JCIMAGE(@"home_placeholder")];
+    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
+    
 
+    //半场比分,角球
+    if (model.status_id>1&&model.status_id<9) {
+        self.scoreLab.text = [NSString stringWithFormat:@"%ld : %ld",model.home_score,model.away_score];
+    }else{
+        self.scoreLab.text = @"VS";
+    }
+    
+    //进行中的比赛显示分钟数
+     if (model.status_id>1&&model.status_id<8) {
+        self.matchStatusLab.textColor = COLOR_30B27A;
+        self.scoreLab.textColor = COLOR_30B27A;
+
+        if (model.status_id==2||model.status_id==4) {
+//            self.ongoingTimeLab.text = model.status_cn;
+            if (model.second_half_time>0) {
+                //计算时间差
+                double currentTime = [[NSDate date] timeIntervalSince1970];
+                double distance = currentTime-model.second_half_time;
+
+                self.matchStatusLab.text = [NSString stringWithFormat:@"%.0f'",distance/60+45];
+    //            [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)]
+            }else{
+                //计算时间差
+                double currentTime = [[NSDate date] timeIntervalSince1970];
+                double distance = currentTime-model.first_half_time;
+                if (distance<0) {
+                    distance = 0;
+                }
+                self.matchStatusLab.text = [NSString stringWithFormat:@"%.0f'",distance/60];
+            }
+        }else{
+            self.matchStatusLab.text = model.status_cn;
+        }
+    }else if(model.status_id==8){
+        self.matchStatusLab.text = model.status_cn;
+        self.matchStatusLab.textColor = JCBaseColor;
+        self.scoreLab.textColor = JCBaseColor;
+    }else{
+        self.matchStatusLab.text = model.status_cn;
+        self.matchStatusLab.textColor = COLOR_9F9F9F;
+        self.scoreLab.textColor = COLOR_9F9F9F;
+    }
 }
+
+//- (void)data {
+////    self.bgView.backgroundColor = JCBaseColor;
+////    self.matchNameLab.backgroundColor = JCBaseColor;
+//    self.matchNameLab.text = @"赛事名称";
+//    self.matchTimeLab.text = @"09-02 18:00";
+//    self.matchStatusLab.text = @"未";
+//    self.scoreLab.text = @"99 : 99";
+//    self.homeTeamLab.text = @"皇家马德里";
+//    self.awayTeamLab.text = @"皇家马德里";
+//    self.homeTeamImgView.backgroundColor = JCBaseColor;
+//    self.awayTeamImgView.backgroundColor = JCBaseColor;
+//
+//
+//    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"home_placeholder")];
+//    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"away_placeholder")];
+//
+//}
 
 - (UIView *)bgView {
     if (!_bgView) {

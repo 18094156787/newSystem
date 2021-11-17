@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 //社区首页更多专栏
 - (void)getHomeMoreColumnListWithPge:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //专栏顶部详情,用在订单,购买的专栏
-- (void)getColumnDetailTopInfoWithID:(NSString *)column_id WithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;
+- (void)getColumnDetailTopInfoWithID:(NSString *)column_id Period_id:(NSString *)period_id WithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //获取专栏详情
 //column_id 专栏id
 - (void)getColumnInfoWithID:(NSString *)column_id success:(successBlock)successBlock failure:(failureBlock)failureBlock;

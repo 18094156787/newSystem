@@ -58,7 +58,11 @@
         make.width.height.mas_equalTo(AUTO(24));
     }];
     
-
+    [self.contentView addSubview:self.priceLab];
+    [self.priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.headImgView);
+        make.right.offset(AUTO(-15));
+    }];
     
     [self.contentView addSubview:self.nameLab];
     [self.nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -115,19 +119,27 @@
     NSString *ori_price = [NSString stringWithFormat:@"原价 %@",model.total_price];
     NSMutableAttributedString *ori_attr = [[NSMutableAttributedString alloc] initWithString:ori_price];
     NSRange ori_range = [ori_price rangeOfString:@"原价"];
-    [ori_attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)],NSForegroundColorAttributeName:COLOR_9F9F9F} range:ori_range];
+    [ori_attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(10)],NSForegroundColorAttributeName:COLOR_9F9F9F} range:ori_range];
     self.priceLab.attributedText = ori_attr;
     
     
     
     
-    NSString *price = [NSString stringWithFormat:@"实付金额：%@红币",NonNil(model.pay_price)];
+    NSString *price = [NSString stringWithFormat:@"实付金额：%@",NonNil(model.pay_price)];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:price];
     NSRange range = [price rangeOfString:@"实付金额："];
     [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)]} range:range];
     self.payPriceLab.attributedText = attr;
     
-    self.statusLab.text = @"已退款";
+    if (model.paid==2) {
+        self.statusLab.text = @"已退款";
+        self.statusLab.textColor = COLOR_30B27A;
+    }else{
+        self.statusLab.text = @"正常";
+        self.statusLab.textColor = COLOR_999999;
+    }
+    
+
 }
 
 - (void)data {
@@ -175,7 +187,7 @@
 
 - (UILabel *)priceLab {
     if (!_priceLab) {
-        _priceLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:2 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentRight];
+        _priceLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:2 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentRight];
     }
     return _priceLab;
 }

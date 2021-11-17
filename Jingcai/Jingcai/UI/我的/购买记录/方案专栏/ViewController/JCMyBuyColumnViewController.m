@@ -104,6 +104,7 @@
         JCMyBuyColumnOrderVC *vc = [JCMyBuyColumnOrderVC new];
         vc.order_id = model.id;
         vc.column_id = model.special_column_id;
+        vc.period_id = model.period;
         [weakSelf.navigationController pushViewController:vc animated:YES];
         
     };

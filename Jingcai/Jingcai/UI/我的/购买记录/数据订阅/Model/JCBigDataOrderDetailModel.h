@@ -87,6 +87,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *pay_time;//付款时间
 
+@property (nonatomic,strong) NSString *zucai_ai_set_id;//模型id 1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5凯利指数 6.离散指数
+
 @end
 
 NS_ASSUME_NONNULL_END

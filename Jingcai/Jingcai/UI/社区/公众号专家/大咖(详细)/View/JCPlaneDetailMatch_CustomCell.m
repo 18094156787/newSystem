@@ -175,7 +175,7 @@
 
 - (UILabel *)tuiJianLab {
     if (!_tuiJianLab) {
-        _tuiJianLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:UIColorFromRGB(0xFEEAEA) andTextAlignment:NSTextAlignmentCenter];
+        _tuiJianLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_EF2F2F andBackgroundColor:UIColorFromRGB(0xFEEAEA) andTextAlignment:NSTextAlignmentCenter];
         _tuiJianLab.layer.borderWidth = 0.5;
         _tuiJianLab.layer.borderColor = JCBaseColor.CGColor;
         _tuiJianLab.layer.cornerRadius = 5;

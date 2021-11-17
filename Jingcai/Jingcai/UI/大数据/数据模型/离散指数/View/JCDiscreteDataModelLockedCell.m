@@ -184,70 +184,132 @@
     
 }
 
-- (void)data {
-//    self.bgView.backgroundColor = JCBaseColor;
-//    self.matchNameLab.backgroundColor = JCBaseColor;
-    self.matchNameLab.text = @"赛事名称";
-    self.matchTimeLab.text = @"09-02 18:00";
-    self.matchStatusLab.text = @"未";
-    self.scoreLab.text = @"99 : 99";
-    self.homeTeamLab.text = @"皇家马德里";
-    self.awayTeamLab.text = @"皇家马德里";
-    self.homeTeamImgView.backgroundColor = JCBaseColor;
-    self.awayTeamImgView.backgroundColor = JCBaseColor;
-    
-    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"home_placeholder")];
-    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"away_placeholder")];
-    
- 
-    self.homeWinView.bottomLab.text = @"22";
-    self.homeEqualView.bottomLab.text = @"23";
-    self.homeLoseView.bottomLab.text = @"24";
-    
-    self.awayWinView.bottomLab.text = @"32";
-    self.awayEqualView.bottomLab.text = @"33";
-    self.awayLoseView.bottomLab.text = @"34";
-
-    self.historyLab.text = @"查询历史数据，找到相同初赔比赛100场，相同即赔比赛90场";
-}
+//- (void)data {
+////    self.bgView.backgroundColor = JCBaseColor;
+////    self.matchNameLab.backgroundColor = JCBaseColor;
+//    self.matchNameLab.text = @"赛事名称";
+//    self.matchTimeLab.text = @"09-02 18:00";
+//    self.matchStatusLab.text = @"未";
+//    self.scoreLab.text = @"99 : 99";
+//    self.homeTeamLab.text = @"皇家马德里";
+//    self.awayTeamLab.text = @"皇家马德里";
+//    self.homeTeamImgView.backgroundColor = JCBaseColor;
+//    self.awayTeamImgView.backgroundColor = JCBaseColor;
+//
+//    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"home_placeholder")];
+//    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"away_placeholder")];
+//
+//
+//    self.homeWinView.bottomLab.text = @"22";
+//    self.homeEqualView.bottomLab.text = @"23";
+//    self.homeLoseView.bottomLab.text = @"24";
+//
+//    self.awayWinView.bottomLab.text = @"32";
+//    self.awayEqualView.bottomLab.text = @"33";
+//    self.awayLoseView.bottomLab.text = @"34";
+//
+//    self.historyLab.text = @"查询历史数据，找到相同初赔比赛100场，相同即赔比赛90场";
+//}
 
 - (void)setKellyModel:(JCKellyDataModelModel *)kellyModel {
     _kellyModel = kellyModel;
     self.matchNameLab.text = kellyModel.short_name_zh;
+    self.matchNameLab.textColor = kellyModel.competition_color.length>0?[UIColor colorWithHexString:NonNil(kellyModel.competition_color)]:UIColorFromRGB(0x606062);
     self.matchTimeLab.text = kellyModel.match_time_str;
     self.matchStatusLab.text = kellyModel.status_cn;
     self.homeTeamLab.text = kellyModel.home_team_name;
-    self.awayTeamLab.text =  kellyModel.home_team_name;
+    self.awayTeamLab.text =  kellyModel.away_team_name;
 
     
     [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:kellyModel.home_team_logo] placeholderImage:JCIMAGE(@"home_placeholder")];
     [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:kellyModel.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
     
 
-    self.historyLab.text = [NSString stringWithFormat:@"查询到%ld条赔率数据；已完成凯利指数数据",kellyModel.company_num];
+    NSString *title = [NSString stringWithFormat:@"查询到%ld条赔率数据；已完成凯利指数数据运算",kellyModel.company_num];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+    NSRange range = [title rangeOfString:[NSString stringWithFormat:@"%ld",kellyModel.company_num]];
+    if (range.location!=NSNotFound) {
+        [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
+    }
+    self.historyLab.attributedText = attr;
+    //1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5凯利指数 6.离散指数
+    NSString *type = @"";
+    if (self.type ==1) {
+        type = @"鲸猜大数据";
+    }
+    if (self.type ==2) {
+        type = @"指数异动";
+    }
+    if (self.type ==3) {
+        type = @"历史同赔";
+    }
+    if (self.type ==4) {
+        type = @"泊松分布";
+    }
+    if (self.type ==5) {
+        type = @"凯利指数";
+    }
+    if (self.type ==6) {
+        type = @"离散指数";
+    }
+
+    
+    [self.lockBtn setTitle:[NSString stringWithFormat:@"开通[%@]服务，解锁数据详情",type] forState:0];
+    
+
+
     [kellyModel.odds_index.begin_odds.odds enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx==0) {
+            self.homeWinValue = obj;
             self.homeWinView.bottomLab.text = obj;
+            
         }
         if (idx==1) {
+            self.homeEqualValue = obj;
             self.homeEqualView.bottomLab.text = obj;
         }
         if (idx==2) {
+            self.homeLoseValue = obj;
             self.homeLoseView.bottomLab.text = obj;
         }
     }];
     [kellyModel.odds_index.last_odds.odds enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx==0) {
+            self.awayWinValue = obj;
             self.awayWinView.bottomLab.text = obj;
         }
         if (idx==1) {
+            self.awayEqualValue = obj;
             self.awayEqualView.bottomLab.text = obj;
         }
         if (idx==2) {
+            self.awayLoseValue = obj;
             self.awayLoseView.bottomLab.text = obj;
         }
     }];
+    if ([self.awayWinValue floatValue]>[self.homeWinValue floatValue]) {
+        self.awayWinView.bottomLab.textColor = COLOR_EF2F2F;
+    }else if([self.awayWinValue floatValue]==[self.homeWinValue floatValue]){
+        self.awayWinView.bottomLab.textColor = COLOR_2F2F2F;
+    }else{
+        self.awayWinView.bottomLab.textColor = COLOR_30B27A;
+    }
     
+    if ([self.awayEqualValue floatValue]>[self.homeEqualValue floatValue]) {
+        self.awayEqualView.bottomLab.textColor = COLOR_EF2F2F;
+    }else if([self.awayEqualValue floatValue]==[self.homeEqualValue floatValue]){
+        self.awayEqualView.bottomLab.textColor = COLOR_2F2F2F;
+    }else{
+        self.awayEqualView.bottomLab.textColor = COLOR_30B27A;
+    }
+    
+    if ([self.awayLoseValue floatValue]>[self.homeLoseValue floatValue]) {
+        self.awayLoseView.bottomLab.textColor = COLOR_EF2F2F;
+    }else if([self.awayLoseValue floatValue]==[self.homeLoseValue floatValue]){
+        self.awayLoseView.bottomLab.textColor = COLOR_2F2F2F;
+    }else{
+        self.awayLoseView.bottomLab.textColor = COLOR_30B27A;
+    }
     
     
     
@@ -433,11 +495,12 @@
 
 - (UIButton *)lockBtn {
     if (!_lockBtn) {
-        _lockBtn = [UIButton initWithText:@"开通[离散指数]服务，解锁数据详情" FontSize:AUTO(14) Weight:1 BackGroundColor:[JCBaseColor colorWithAlphaComponent:0.1] TextColors:JCBaseColor];
+        _lockBtn = [UIButton initWithText:@"" FontSize:AUTO(14) Weight:1 BackGroundColor:[JCBaseColor colorWithAlphaComponent:0.1] TextColors:JCBaseColor];
         [_lockBtn setImage:JCIMAGE(@"ic_dataModel_lock") forState:0];
         [_lockBtn setImage:JCIMAGE(@"ic_dataModel_lock") forState:UIControlStateHighlighted];
         [_lockBtn hg_setAllCornerWithCornerRadius:AUTO(22)];
         [_lockBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, AUTO(10))];
+        _lockBtn.userInteractionEnabled = NO;
     }
     return _lockBtn;
 }

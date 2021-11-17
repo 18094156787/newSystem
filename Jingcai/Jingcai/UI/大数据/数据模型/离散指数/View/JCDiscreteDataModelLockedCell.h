@@ -51,6 +51,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) JCDiscreteDataModelLockedRateView *awayLoseView;
 
+//1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5凯利指数 6.离散指数
+
+@property (nonatomic, assign) NSInteger type;
+
+@property (nonatomic, strong) NSString *homeWinValue;
+@property (nonatomic, strong)NSString *homeEqualValue;
+@property (nonatomic, strong)NSString *homeLoseValue;
+
+@property (nonatomic, strong)NSString *awayWinValue;
+@property (nonatomic, strong)NSString *awayEqualValue;
+@property (nonatomic, strong)NSString *awayLoseValue;
+
 @property (nonatomic, strong) JCKellyDataModelModel *kellyModel;
 
 @end

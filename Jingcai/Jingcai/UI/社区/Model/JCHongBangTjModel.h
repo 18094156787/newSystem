@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString * sf;//收费方式 0 代表免费 金额 （红币 单位：分
 
+@property (strong, nonatomic) NSString *total_price;//原价
+
 @property (strong, nonatomic) NSString * refund;//不中返还 1是 0否
 
 @property (strong, nonatomic) NSString * hb;//是否允许抵扣 红包抵扣 1是 0否

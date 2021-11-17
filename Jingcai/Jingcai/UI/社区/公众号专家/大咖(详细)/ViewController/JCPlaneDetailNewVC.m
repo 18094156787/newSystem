@@ -141,9 +141,9 @@
     if (self.matchArray.count>0) {
         
         if (self.planDetailModel.qr_code_info.url.count>0||self.planDetailModel.qr_code_info.desc>0) {
-            return 4+self.matchArray.count;
+            return 5+self.matchArray.count;
         }
-        return 3+self.matchArray.count;
+        return 4+self.matchArray.count;
     }
     if (self.planDetailModel.qr_code_info.url.count>0||self.planDetailModel.qr_code_info.desc>0) {
         return 5;
@@ -156,14 +156,21 @@
         return 1;
     }
     if (self.matchArray.count>0) {
+
         if (section==self.matchArray.count+1) {
             return self.planDetailModel.image.count;
         }
-        if (self.matchArray.count>0) {
-            if (section>0&&section<self.matchArray.count+1) {
-                return 2;
+        if (section>0&&section<self.matchArray.count+1) {
+            if (self.planDetailModel.type==2) {
+                //三场的时候,只有最后一个是3行,第三方是方案内容
+                if (section<self.matchArray.count) {
+                    return 2;
+                }
             }
+            return 3;
         }
+
+
 
         return 1;
     }else {
@@ -199,29 +206,56 @@
         
         
         if (indexPath.section>0&&indexPath.section<self.matchArray.count+1) {
+            //                //单场 ,模块,内容,解析
+            //                // 3场, 模块 解析,内容
+                            //多场     内容,解析
+            JCGZHTuiJianModel *tjModel = self.matchArray[indexPath.section-1];
             if (indexPath.row==0) {
                 if (self.matchArray.count>0) {
-                    JCGZHTuiJianModel *tjModel = self.matchArray[indexPath.section-1];
-    //                if (indexPath.section==1&&tjModel.match.count==0) {
-    //                    return UITableViewAutomaticDimension;
-    //                }
-                    if (indexPath.section==self.index+1&&tjModel.match_info.count==0) {
-                        return UITableViewAutomaticDimension;
+                    
+                    if (self.planDetailModel.type==1||self.planDetailModel.type==2) {
+                        if (tjModel.match_info.count==0) {
+                            return 0.001f;
+                        }
+                        return tjModel.height+AUTO(20);
                     }
-                    if (tjModel.match_info.count==0) {
-                        return 0.001f;
-                    }
-                    return tjModel.height+AUTO(20);
+                    return 0.001f;
                 }
                 return 0.001f;
 
 
             }
-            JCGZHTuiJianModel *tjModel = self.matchArray[indexPath.section-1];
-            if (tjModel.analysis.length==0) {
-                return 0.01f;
+            if (indexPath.row==1) {
+                if (self.planDetailModel.type==1||self.planDetailModel.type==3){
+                    if (self.planDetailModel.content.length==0) {
+                        return 0.01f;
+                    }
+                    return UITableViewAutomaticDimension;
+                }
+                if (self.planDetailModel.type==2){
+                    if (tjModel.analysis.length==0) {
+                        return 0.01f;
+                    }
+                    return UITableViewAutomaticDimension;
+                }
+
+                return UITableViewAutomaticDimension;
             }
-            return UITableViewAutomaticDimension;
+            if (indexPath.row==2) {
+                if (self.planDetailModel.type==2){
+                    if (self.planDetailModel.content.length==0) {
+                        return 0.01f;
+                    }
+
+                    return UITableViewAutomaticDimension;
+                }
+                return UITableViewAutomaticDimension;
+            }
+//            JCGZHTuiJianModel *tjModel = self.matchArray[indexPath.section-1];
+//            if (tjModel.analysis.length==0) {
+//                return 0.01f;
+//            }
+//            return UITableViewAutomaticDimension;
         }
     }else {
         if (indexPath.section==1) {
@@ -275,29 +309,86 @@
 
         if (self.matchArray.count>0) {
 //            NSLog(@"区:%ld",indexPath.section);
+            JCGZHTuiJianModel *tjModel = self.matchArray[indexPath.section-1];
             if (indexPath.section>0&&indexPath.section<self.matchArray.count+1) {
-                if (indexPath.row==0) {
-                    JCGZHTuiJianModel *tjModel = self.matchArray[indexPath.section-1];
-                    if (indexPath.section==self.index+1&&tjModel.match_info.count==0) {
+                //                //单场 ,模块,内容,解析
+                //                // 3场, 模块 解析,内容
+                                //多场     内容,解析
+                if(self.planDetailModel.type==1||self.planDetailModel.type==3){
+                    //  单场和多场相比,多场无模块
+                    if (indexPath.row==0) {
+                        if (self.planDetailModel.type==1) {
+                            JCPlaneDetailNewMatchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailNewMatchCell"];
+                            cell.tjModel= tjModel;
+                            return cell;
+                        }
+
+                    }
+                    if (indexPath.row==1) {
+                        if (self.planDetailModel.content.length>0) {
+                            JCPlaneDetailNewAnalysisCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailNewAnalysisCell"];
+                            cell.planDetailModel= self.planDetailModel;
+                            return cell;
+                        }
+                    }
+                    if (indexPath.row==2) {
                         JCPlaneDetailNewAnalysisCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailNewAnalysisCell"];
-                        cell.planDetailModel= self.planDetailModel;
+                        cell.tjModel= tjModel;
                         return cell;
                     }
-                    JCPlaneDetailNewMatchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailNewMatchCell"];
-                    cell.tjModel= tjModel;
+                    
+                    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
                     return cell;
+                    
                 }
-                
-                
-                JCGZHTuiJianModel *tjModel = self.matchArray[indexPath.section-1];
-                if (tjModel.analysis.length>0) {
-                    JCPlaneDetailNewAnalysisCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailNewAnalysisCell"];
-                    cell.tjModel= tjModel;
-                    return cell;
-                }
-                
+                if(self.planDetailModel.type==2){
+                    // 3场, 模块 解析,内容
+                    if (indexPath.row==0) {
+                        JCPlaneDetailNewMatchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailNewMatchCell"];
+                        cell.tjModel= tjModel;
+                        return cell;
+                    }
 
 
+                    if (indexPath.row==1) {
+                        JCPlaneDetailNewAnalysisCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailNewAnalysisCell"];
+                        cell.tjModel= tjModel;
+                        return cell;
+//                        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+//                        return cell;
+                    }
+                    
+                    if (indexPath.row==2) {
+                        if (self.planDetailModel.content.length>0) {
+                            JCPlaneDetailNewAnalysisCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailNewAnalysisCell"];
+                            cell.planDetailModel= self.planDetailModel;
+                            return cell;
+                        }
+                    }
+                    
+                    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+                    return cell;
+                    
+                }
+//                if (indexPath.row==0) {
+//                    JCGZHTuiJianModel *tjModel = self.matchArray[indexPath.section-1];
+//                    if (indexPath.section==self.index+1&&tjModel.match_info.count==0) {
+//                        JCPlaneDetailNewAnalysisCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailNewAnalysisCell"];
+//                        cell.planDetailModel= self.planDetailModel;
+//                        return cell;
+//                    }
+//                    JCPlaneDetailNewMatchCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailNewMatchCell"];
+//                    cell.tjModel= tjModel;
+//                    return cell;
+//                }
+//
+//
+//                JCGZHTuiJianModel *tjModel = self.matchArray[indexPath.section-1];
+//                if (tjModel.analysis.length>0) {
+//                    JCPlaneDetailNewAnalysisCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCPlaneDetailNewAnalysisCell"];
+//                    cell.tjModel= tjModel;
+//                    return cell;
+//                }
             }
         }
     }else{

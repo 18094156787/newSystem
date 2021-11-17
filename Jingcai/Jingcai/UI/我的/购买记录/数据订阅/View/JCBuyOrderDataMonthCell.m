@@ -125,7 +125,7 @@
     NSString *ori_price = [NSString stringWithFormat:@"原价 %@",@"40"];
     NSMutableAttributedString *ori_attr = [[NSMutableAttributedString alloc] initWithString:ori_price];
     NSRange ori_range = [ori_price rangeOfString:@"原价"];
-    [ori_attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)],NSForegroundColorAttributeName:COLOR_9F9F9F} range:ori_range];
+    [ori_attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(10)],NSForegroundColorAttributeName:COLOR_9F9F9F} range:ori_range];
     self.priceLab.attributedText = ori_attr;
     
     
@@ -186,7 +186,7 @@
 
 - (UILabel *)priceLab {
     if (!_priceLab) {
-        _priceLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:2 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentRight];
+        _priceLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:2 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentRight];
     }
     return _priceLab;
 }

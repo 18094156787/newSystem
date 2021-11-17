@@ -17,13 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UIButton *ruleBtn;
 
-@property (nonatomic,strong) UILabel *articlecCountLabel;
-
 @property (nonatomic,strong) UILabel *articlecCountLab;
 
-@property (nonatomic,strong) UILabel *benefitCountLabel;
-
 @property (nonatomic,strong) UILabel *benefitCountLab;
+
+@property (nonatomic,strong) UILabel *dsCountLab;
+
 
 @property (nonatomic,strong) JCWithDrawRecordRuleView *ruleView;
 

@@ -18,7 +18,7 @@
     self.bgView.image = JCIMAGE(@"bg_img_history");
 //    self.bgView.backgroundColor = JCWhiteColor;
 //    [self.bgView hg_setAllCornerWithCornerRadius:AUTO(5)];
-    self.bgView.frame = CGRectMake(0,0,SCREEN_WIDTH,AUTO(208)+kNavigationBarHeight);
+    self.bgView.frame = CGRectMake(0,0,SCREEN_WIDTH,AUTO(228)+kNavigationBarHeight);
     [self addSubview:self.bgView];
     
     UIView *cornerView = [UIView new];
@@ -47,6 +47,7 @@
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(backBtn.mas_right).offset(0);
         make.centerY.equalTo(backBtn);
+        make.height.mas_greaterThanOrEqualTo(AUTO(72));
     }];
     self.backTitleLab = titleLab;
 
@@ -147,7 +148,9 @@
 
 - (void)setModel:(JCKellyDataModelPayInfoModel *)model {
     _model = model;
+    self.titleLab.text  = model.introduce;
     self.buyInfoView.dataModel = model;
+    self.buyBgView.hidden= model.big_data_price==0?YES:NO;
     if (model.show_status==1||model.show_status==3) {
         //免费体验,立即续费
         self.statusBtn.hidden = YES;
@@ -162,12 +165,20 @@
     if (model.show_status==2) {
         self.statusBtn.hidden = NO;
         self.timeLab.hidden = NO;
-        NSString *time = [NSString stringWithFormat:@"当前到期时间 %ld 天",model.distance_day];
+        NSString *time = [NSString stringWithFormat:@"当前到期时间%ld天%@小时",model.distance_day,model.distance_hour];
         NSRange range = [time rangeOfString:[NSString stringWithFormat:@"%ld",model.distance_day]];
+        if (model.distance_hour.length==0) {
+            model.distance_hour = @"";
+        }
+
+        NSRange hour_range = [time rangeOfString:model.distance_hour];
         NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:time];
 
         if (range.location!=NSNotFound) {
             [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(16)]} range:range];
+        }
+        if (hour_range.location!=NSNotFound) {
+            [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(16)]} range:hour_range];
         }
         self.timeLab.attributedText = attr;
         [self.sureBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button") forState:0];
@@ -198,7 +209,23 @@
 //            [self.sureBtn setTitle:@"" forState:0];
  
             [self.sureBtn setBackgroundImage:JCIMAGE(@"blank") forState:0];
-            [self.sureBtn setTitle:@"免费查看「鲸猜大数据」" forState:0];
+            NSString *type = @"";
+            if (self.type==0) {
+                type = @"历史同赔";
+            }
+            if (self.type==1) {
+                type = @"泊凇分布";
+            }
+            if (self.type==2) {
+                type = @"离散指数";
+            }
+            if (self.type==3) {
+                type = @"凯利指数";
+            }
+            if (self.type==4) {
+                type = @"指数异动";
+            }
+            [self.sureBtn setTitle:[NSString stringWithFormat:@"免费查看「%@」",type] forState:0];
         }
 
 
@@ -228,14 +255,19 @@
     }else{
         self.sureBtn.layer.borderColor = JCClearColor.CGColor;
     }
-    
-    if (model.current_count>0) {
-        NSString *buyCount = [NSString stringWithFormat:@"%ld人购买",model.current_count];
-        self.countLab.text = buyCount;
 
+    if (model.big_data_price>0) {
+        if (model.current_count>0) {
+            NSString *buyCount = [NSString stringWithFormat:@"%ld人购买",model.current_count];
+            self.countLab.text = buyCount;
+
+        }else{
+            self.countLab.text = @"";
+        }
     }else{
         self.countLab.text = @"";
     }
+
 
     [self layoutIfNeeded];
     NSArray *userArray = model.user_img;

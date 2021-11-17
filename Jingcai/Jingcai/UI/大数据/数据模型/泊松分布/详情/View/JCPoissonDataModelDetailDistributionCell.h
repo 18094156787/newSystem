@@ -21,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel *threeLab;
 
 @property (nonatomic,strong) UIView *lineView;
+
+@property (nonatomic,strong) NSArray *bf_array;
+
+@property (nonatomic,strong) NSArray *jqs_array;
 @end
 
 NS_ASSUME_NONNULL_END

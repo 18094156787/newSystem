@@ -128,15 +128,21 @@
     }
     if ([model.id integerValue]==2) {
         //指数异动
-        [self.navigationController pushViewController:[JCTransactionDataModelStickVC new] animated:YES];
+        JCTransactionDataModelStickVC *vc = [JCTransactionDataModelStickVC new];
+        vc.model_id = model.id;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     if ([model.id integerValue]==3) {
         //历史同赔
-        [self.navigationController pushViewController:[JCHistoryPayDataModelStickVC new] animated:YES];
+        JCHistoryPayDataModelStickVC *vc = [JCHistoryPayDataModelStickVC new];
+        vc.model_id = model.id;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     if ([model.id integerValue]==4) {
         //泊淞
-        [self.navigationController pushViewController:[JCPoissonDataModelStickVC new] animated:YES];
+        JCPoissonDataModelStickVC *vc = [JCPoissonDataModelStickVC new];
+        vc.model_id = model.id;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     if ([model.id integerValue]==5) {
         //凯利指数
@@ -146,7 +152,9 @@
     }
     if ([model.id integerValue]==6) {
         //离散指数
-        [self.navigationController pushViewController:[JCDiscreteDataModelStickVC new] animated:YES];
+        JCDiscreteDataModelStickVC *vc = [JCDiscreteDataModelStickVC new];
+        vc.model_id = model.id;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 
 

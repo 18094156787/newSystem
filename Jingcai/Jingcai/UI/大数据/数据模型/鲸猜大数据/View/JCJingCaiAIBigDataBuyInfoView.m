@@ -108,6 +108,7 @@
     
     
     
+    
 //    nsst oriPirce_inter = dataModel.old_big_data_price/100;
     NSString *oriPrice = [NSString stringWithFormat:@"%@红币/月",@(dataModel.old_big_data_price/100)];
 
@@ -123,7 +124,14 @@
        [attribtStr setAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle],NSBaselineOffsetAttributeName:@(NSUnderlineStyleSingle)} range:oriPrice.rangeOfAll];
 
        self.oriPriceLab.attributedText = attribtStr;
+        
+
     }else{
+        self.oriPriceLab.text = @"";
+    }
+    
+    if (dataModel.big_data_price==0) {
+        self.priceLab.text = @"免费";
         self.oriPriceLab.text = @"";
     }
 }

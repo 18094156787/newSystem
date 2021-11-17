@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL is_bigData;//跳转到 数据-鲸猜大数据
 
+@property (nonatomic, assign) NSInteger show_odds;
+
 @end
 
 NS_ASSUME_NONNULL_END

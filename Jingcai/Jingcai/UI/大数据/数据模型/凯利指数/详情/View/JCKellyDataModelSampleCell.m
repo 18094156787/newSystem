@@ -26,7 +26,7 @@
     [self.companyLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.offset(0);
         make.left.offset(AUTO(10));
-        make.width.mas_equalTo(AUTO(60));
+        make.width.mas_equalTo(AUTO(55));
     }];
     
     UIView *topView = [UIView new];
@@ -64,7 +64,7 @@
         make.top.offset(0);
         make.bottom.equalTo(topView.mas_centerY);
         make.left.equalTo(self.home_loseLab.mas_right).offset(AUTO(10));
-        make.width.mas_equalTo(AUTO(35));
+        make.width.mas_equalTo(AUTO(43));
     }];
     
     [topView addSubview:self.home_zs_EqualLab];
@@ -72,7 +72,7 @@
         make.top.offset(0);
         make.bottom.equalTo(topView.mas_centerY);
         make.left.equalTo(self.home_zs_WinLab.mas_right);
-        make.width.mas_equalTo(AUTO(35));
+        make.width.mas_equalTo(AUTO(43));
     }];
     
     [topView addSubview:self.home_zs_LoseLab];
@@ -80,7 +80,7 @@
         make.top.offset(0);
         make.bottom.equalTo(topView.mas_centerY);
         make.left.equalTo(self.home_zs_EqualLab.mas_right);
-        make.width.mas_equalTo(AUTO(35));
+        make.width.mas_equalTo(AUTO(43));
     }];
     
     [topView addSubview:self.home_fc_WinLab];
@@ -88,7 +88,7 @@
         make.bottom.offset(0);
         make.top.equalTo(topView.mas_centerY);
         make.left.equalTo(self.home_zs_WinLab);
-        make.width.mas_equalTo(AUTO(35));
+        make.width.mas_equalTo(AUTO(43));
     }];
     
     
@@ -97,7 +97,7 @@
         make.bottom.offset(0);
         make.top.equalTo(topView.mas_centerY);
         make.left.equalTo(self.home_fc_WinLab.mas_right);
-        make.width.mas_equalTo(AUTO(35));
+        make.width.mas_equalTo(AUTO(43));
     }];
     
     [topView addSubview:self.home_fc_LoseLab];
@@ -105,7 +105,7 @@
         make.bottom.offset(0);
         make.top.equalTo(topView.mas_centerY);
         make.left.equalTo(self.home_fc_EqualLab.mas_right);
-        make.width.mas_equalTo(AUTO(35));
+        make.width.mas_equalTo(AUTO(43));
     }];
     
     [topView addSubview:self.home_rateLab];
@@ -150,7 +150,7 @@
         make.top.offset(0);
         make.bottom.equalTo(bottomView.mas_centerY);
         make.left.equalTo(self.away_loseLab.mas_right).offset(AUTO(10));
-        make.width.mas_equalTo(AUTO(35));
+        make.width.mas_equalTo(AUTO(43));
     }];
     
     [bottomView addSubview:self.away_zs_EqualLab];
@@ -158,7 +158,7 @@
         make.top.offset(0);
         make.bottom.equalTo(bottomView.mas_centerY);
         make.left.equalTo(self.away_zs_WinLab.mas_right);
-        make.width.mas_equalTo(AUTO(35));
+        make.width.mas_equalTo(AUTO(43));
     }];
     
     [bottomView addSubview:self.away_zs_LoseLab];
@@ -166,7 +166,7 @@
         make.top.offset(0);
         make.bottom.equalTo(bottomView.mas_centerY);
         make.left.equalTo(self.away_zs_EqualLab.mas_right);
-        make.width.mas_equalTo(AUTO(35));
+        make.width.mas_equalTo(AUTO(43));
     }];
     
     [bottomView addSubview:self.away_fc_WinLab];
@@ -174,7 +174,7 @@
         make.bottom.offset(0);
         make.top.equalTo(bottomView.mas_centerY);
         make.left.equalTo(self.away_zs_WinLab);
-        make.width.mas_equalTo(AUTO(35));
+        make.width.mas_equalTo(AUTO(43));
     }];
     
     
@@ -183,7 +183,7 @@
         make.bottom.offset(0);
         make.top.equalTo(bottomView.mas_centerY);
         make.left.equalTo(self.away_fc_WinLab.mas_right);
-        make.width.mas_equalTo(AUTO(35));
+        make.width.mas_equalTo(AUTO(43));
     }];
     
     [bottomView addSubview:self.away_fc_LoseLab];
@@ -191,7 +191,7 @@
         make.bottom.offset(0);
         make.top.equalTo(bottomView.mas_centerY);
         make.left.equalTo(self.away_fc_EqualLab.mas_right);
-        make.width.mas_equalTo(AUTO(35));
+        make.width.mas_equalTo(AUTO(43));
     }];
     
     [bottomView addSubview:self.away_rateLab];
@@ -206,6 +206,8 @@
 - (void)setModel:(JCKellyDataDetailSampleModel *)model {
     _model = model;
     self.companyLab.text = model.odds_company_name;
+    self.home_rateLab.text = model.begin_odds.loss_ratio;
+    self.away_rateLab.text = model.last_odds.loss_ratio;
     [model.begin_odds.odds enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx==0) {
             self.home_winLab.text = obj;
@@ -245,71 +247,111 @@
         
     }];
     //
-    [model.begin_odds.odds enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [model.last_odds.odds enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx==0) {
-            self.home_winLab.text = obj;
+            self.away_winLab.text = obj;
         }
         if (idx==1) {
-            self.home_equalLab.text = obj;
+            self.away_equalLab.text = obj;
         }
         if (idx==2) {
-            self.home_loseLab.text = obj;
+            self.away_loseLab.text = obj;
         }
-        
+
     }];
     
-    [model.begin_odds.kelly_index enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [model.last_odds.kelly_index enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx==0) {
-            self.home_zs_WinLab.text = obj;
+            self.away_zs_WinLab.text = obj;
         }
         if (idx==1) {
-            self.home_zs_EqualLab.text = obj;
+            self.away_zs_EqualLab.text = obj;
         }
         if (idx==2) {
-            self.home_zs_LoseLab.text = obj;
+            self.away_zs_LoseLab.text = obj;
         }
-        
+
+    }];
+
+    [model.last_odds.kelly_variance enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx==0) {
+            self.away_fc_WinLab.text = obj;
+        }
+        if (idx==1) {
+            self.away_fc_EqualLab.text = obj;
+        }
+        if (idx==2) {
+            self.away_fc_LoseLab.text = obj;
+        }
+
     }];
     
-    [model.begin_odds.kelly_variance enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (idx==0) {
-            self.home_fc_WinLab.text = obj;
-        }
-        if (idx==1) {
-            self.home_fc_EqualLab.text = obj;
-        }
-        if (idx==2) {
-            self.home_fc_LoseLab.text = obj;
+    self.away_winLab.textColor = COLOR_2F2F2F;
+    self.away_equalLab.textColor = COLOR_2F2F2F;
+    self.away_loseLab.textColor = COLOR_2F2F2F;
+
+    
+    if (model.begin_odds.odds.count==3&&model.last_odds.odds.count==3) {
+        NSString *homeWin = model.begin_odds.odds[0];
+        NSString *homeEqual = model.begin_odds.odds[1];
+        NSString *homeLose = model.begin_odds.odds[2];
+        
+        NSString *awayWin = model.last_odds.odds[0];
+        NSString *awayEqual = model.last_odds.odds[1];
+        NSString *awayLose = model.last_odds.odds[2];
+        
+        if ([awayWin floatValue]>[homeWin floatValue]) {
+            self.away_winLab.textColor = COLOR_EF2F2F;
+        }else if ([awayWin floatValue]==[homeWin floatValue]) {
+            self.away_winLab.textColor = COLOR_2F2F2F;
+        }else{
+            self.away_winLab.textColor = COLOR_30B27A;
         }
         
-    }];
+        if ([awayEqual floatValue]>[homeEqual floatValue]) {
+            self.away_equalLab.textColor = COLOR_EF2F2F;
+        }else if ([awayEqual floatValue]==[homeEqual floatValue]) {
+            self.away_equalLab.textColor = COLOR_2F2F2F;
+        }else{
+            self.away_equalLab.textColor = COLOR_30B27A;
+        }
+
+        if ([awayLose floatValue]>[homeLose floatValue]) {
+            self.away_equalLab.textColor = COLOR_EF2F2F;
+        }else if ([awayLose floatValue]==[homeLose floatValue]) {
+            self.away_equalLab.textColor = COLOR_2F2F2F;
+        }else{
+            self.away_equalLab.textColor = COLOR_30B27A;
+        }
+        
+    }
 }
 
-- (void)data {
-    self.companyLab.text = @"机构名称";
-    self.home_winLab.text = @"3.78";
-    self.home_equalLab.text = @"3.78";
-    self.home_loseLab.text = @"3.78";
-    self.home_zs_WinLab.text = @"99.99";
-    self.home_zs_EqualLab.text = @"18.00";
-    self.home_zs_LoseLab.text = @"18.00";
-    self.home_fc_WinLab.text = @"18.00";
-    self.home_fc_EqualLab.text = @"18.00";
-    self.home_fc_LoseLab.text = @"18.00";
-    self.home_rateLab.text = @"92.50%";
-    
-
-    self.away_winLab.text = @"3.78";
-    self.away_equalLab.text = @"3.78";
-    self.away_loseLab.text = @"3.78";
-    self.away_zs_WinLab.text = @"99.99";
-    self.away_zs_EqualLab.text = @"18.00";
-    self.away_zs_LoseLab.text = @"18.00";
-    self.away_fc_WinLab.text = @"18.00";
-    self.away_fc_EqualLab.text = @"18.00";
-    self.away_fc_LoseLab.text = @"18.00";
-    self.away_rateLab.text = @"92.50%";
-}
+//- (void)data {
+//    self.companyLab.text = @"机构名称";
+//    self.home_winLab.text = @"3.78";
+//    self.home_equalLab.text = @"3.78";
+//    self.home_loseLab.text = @"3.78";
+//    self.home_zs_WinLab.text = @"99.99";
+//    self.home_zs_EqualLab.text = @"18.00";
+//    self.home_zs_LoseLab.text = @"18.00";
+//    self.home_fc_WinLab.text = @"18.00";
+//    self.home_fc_EqualLab.text = @"18.00";
+//    self.home_fc_LoseLab.text = @"18.00";
+//    self.home_rateLab.text = @"92.50%";
+//
+//
+//    self.away_winLab.text = @"3.78";
+//    self.away_equalLab.text = @"3.78";
+//    self.away_loseLab.text = @"3.78";
+//    self.away_zs_WinLab.text = @"99.99";
+//    self.away_zs_EqualLab.text = @"18.00";
+//    self.away_zs_LoseLab.text = @"18.00";
+//    self.away_fc_WinLab.text = @"18.00";
+//    self.away_fc_EqualLab.text = @"18.00";
+//    self.away_fc_LoseLab.text = @"18.00";
+//    self.away_rateLab.text = @"92.50%";
+//}
 
 - (UILabel *)home_winLab {
     if (!_home_winLab) {

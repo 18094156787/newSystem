@@ -92,8 +92,8 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark 数据模型
 //数据模型首页
 - (void)getHomeDataModelWithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;
-//凯利指数模型购买信息
-- (void)getKellyDataModelPayInfoWithModel_id:(NSString *)model_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//数据模型购买信息
+- (void)getDataModelPayInfoWithModel_id:(NSString *)model_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //凯利指数模型免费体验
 - (void)getKellyDataModeFreeExperienceWithModel_id:(NSString *)model_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //凯利指数列表
@@ -104,6 +104,10 @@ NS_ASSUME_NONNULL_BEGIN
 //凯利指数样本数据
 //match_id 比赛id
 - (void)getKellyDataModeDetailSampleDataWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//泊松分布列表
+-(void)getPoissonDataModeListWithDate:(NSString *)date Page:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//泊松分布详情
+- (void)getPoissonDataModeDetailWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END

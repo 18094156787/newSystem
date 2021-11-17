@@ -78,7 +78,7 @@
 }
 
 - (void)initView {
-    self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(115));
+    self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(140));
     
     self.tableView.backgroundColor = COLOR_F0F0F0;
     self.tableView.hidden = YES;

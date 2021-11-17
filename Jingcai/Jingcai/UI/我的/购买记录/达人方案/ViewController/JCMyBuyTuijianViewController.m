@@ -7,9 +7,10 @@
 //
 
 #import "JCMyBuyTuijianViewController.h"
-#import "JCHongbangCommomCell.h"
+#import "JCMyBuyHongbangCell.h"
 #import "JCHongbangWMstckyVC.h"
 #import "JCTuiJianManager.h"
+#import "JCHongBangOrderDetailVC.h"
 @interface JCMyBuyTuijianViewController ()
 
 @end
@@ -31,7 +32,7 @@
 //    self.tableView.backgroundColor = COLOR_F6F6F6;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 表格注册cell
-    [self.tableView registerClass:[JCHongbangCommomCell class] forCellReuseIdentifier:@"JCHongbangCommomCell"];
+    [self.tableView registerClass:[JCMyBuyHongbangCell class] forCellReuseIdentifier:@"JCMyBuyHongbangCell"];
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self.view);
         make.bottom.equalTo(self.view).mas_offset(-kBottomTabSafeAreaHeight);
@@ -71,7 +72,7 @@
     
     JCHongBangBall *model = self.dataArray[indexPath.section];
     //    JCCommentCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCCommentCell"];
-    JCHongbangCommomCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCHongbangCommomCell"];
+    JCMyBuyHongbangCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCMyBuyHongbangCell"];
     cell.lineView.hidden = YES;
     cell.isMine = YES;
     cell.is_zh = YES;
@@ -89,6 +90,12 @@
         JCHongbangWMstckyVC * userVC = [JCHongbangWMstckyVC new];
         userVC.autherID = tjUserId;
         [weakSelf.navigationController pushViewController:userVC animated:YES];
+    };
+    cell.JCBlock = ^{
+        JCHongBangOrderDetailVC *vc = [JCHongBangOrderDetailVC new];
+        vc.order_id = model.base_info.zucai_order_id;
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+        
     };
     cell.priceInfoView.hbIconImgView.hidden = YES;
     cell.priceInfoView.priceLab.hidden = YES;

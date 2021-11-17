@@ -141,6 +141,7 @@
     
     WeakSelf;
     [self.zhishuLab bk_whenTapped:^{
+        weakSelf.trajectoryView.match_id = self.model.match_id;
         weakSelf.trajectoryView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         [[UIApplication sharedApplication].keyWindow addSubview:weakSelf.trajectoryView];
         [weakSelf.trajectoryView show];
@@ -152,10 +153,11 @@
 - (void)setModel:(JCKellyDataModelModel *)model {
     _model = model;
     self.matchNameLab.text = model.short_name_zh;
+    self.matchNameLab.textColor = model.competition_color.length>0?[UIColor colorWithHexString:NonNil(model.competition_color)]:UIColorFromRGB(0x606062);
     self.matchTimeLab.text = model.match_time_str;
     self.matchStatusLab.text = model.status_cn;
     self.homeTeamLab.text = model.home_team_name;
-    self.awayTeamLab.text =  model.home_team_name;
+    self.awayTeamLab.text =  model.away_team_name;
 
     
     [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.home_team_logo] placeholderImage:JCIMAGE(@"home_placeholder")];
@@ -170,6 +172,7 @@
     }
     self.historyLab.attributedText = attr;
     self.chuView.model = self.model.odds_index.begin_odds;
+    self.jiView.chuModel = self.model.odds_index.begin_odds;
     self.jiView.model = self.model.odds_index.last_odds;
     //半场比分,角球
     if (model.status_id>1&&model.status_id<9) {

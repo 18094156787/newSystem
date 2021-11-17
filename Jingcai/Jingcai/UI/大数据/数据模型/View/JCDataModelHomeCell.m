@@ -70,11 +70,16 @@
     self.countLab.text = [NSString stringWithFormat:@"%ld人已购买",model.current_count];
     self.countLab.hidden = model.current_count>0?NO:YES;
     [self.buyBtn setTitle:@"立即查看" forState:0];
+    self.priceLab.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:AUTO(20)];
     NSString *price = [NSString stringWithFormat:@"%@元/月",@(model.big_data_price/100)];
     NSRange range = [price rangeOfString:@"元/月"];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:price];
     [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(11)]} range:range];
     self.priceLab.attributedText = attr;
+    if (model.big_data_price==0) {
+        self.priceLab.text = @"免费";
+        self.priceLab.font = [UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(15)];
+    }
 }
 
 
@@ -88,7 +93,7 @@
 
 - (UILabel *)titleLab {
     if (!_titleLab) {
-        _titleLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:[COLOR_000000 colorWithAlphaComponent:0.88] andBackgroundColor:JCClearColor andTextAlignment:0];
+        _titleLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:2 andTextColor:[COLOR_000000 colorWithAlphaComponent:0.88] andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _titleLab;
 }
@@ -121,6 +126,7 @@
         [_buyBtn hg_setAllCornerWithCornerRadius:AUTO(22)];
         [_buyBtn setBackgroundImage:JCIMAGE(@"button_bg_new") forState:0];
         [_buyBtn setBackgroundImage:JCIMAGE(@"button_bg_new") forState:UIControlStateHighlighted];
+        _buyBtn.userInteractionEnabled = NO;
     }
     return _buyBtn;
 }

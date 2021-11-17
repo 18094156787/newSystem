@@ -127,7 +127,7 @@
     JCMyBuyOrderDataInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCMyBuyOrderDataInfoCell"];
     if (indexPath.section==1) {
         if (indexPath.row==0) {
-            cell.titleLab.text = @"商品总价";
+            cell.titleLab.text = @"商品原价";
             cell.contentLab.text = [NSString stringWithFormat:@"%@红币",@([self.detailModel.total_price floatValue])];
 
         }

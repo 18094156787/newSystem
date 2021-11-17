@@ -48,8 +48,7 @@
 - (void)getTopInfo {
 
     JCColumnService *service = [JCColumnService new];
-    [service getColumnDetailTopInfoWithID:NonNil(self.column_id) WithSuccess:^(id  _Nullable object) {
-
+    [service getColumnDetailTopInfoWithID:NonNil(self.column_id) Period_id:self.period_id WithSuccess:^(id  _Nullable object) {
         if ([JCWJsonTool isSuccessResponse:object]) {
             JCColumnDetailModel *detailModel = (JCColumnDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCColumnDetailModel class]];
             self.headView.detailModel = detailModel;
@@ -60,6 +59,7 @@
     } failure:^(NSError * _Nonnull error) {
         
     }];
+
 }
 
 - (void)refreshData {
@@ -129,7 +129,7 @@
     cell.contentLab.textColor = COLOR_2F2F2F;
     if (indexPath.section==0) {
         if (indexPath.row==0) {
-            cell.titleLab.text = @"商品总价";
+            cell.titleLab.text = @"商品原价";
             cell.contentLab.text = [NSString stringWithFormat:@"%@红币",@([self.detailModel.total_price floatValue])];
 
         }

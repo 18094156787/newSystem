@@ -67,6 +67,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy)NSString *zctj_column_period_id;//专栏周期id
 
+@property (nonatomic,assign) NSInteger paid;//支付状态,1正常,2已退款 3.退款中
+
 @end
 
 NS_ASSUME_NONNULL_END

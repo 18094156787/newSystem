@@ -48,13 +48,46 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-
-    [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:0.6 endPoint:1];
     
-        [self setupLineView:self.awayProgressView colors:COLOR_002868 startPoint:0 endPoint:0.6];
+    
+
+//    [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:0.6 endPoint:1];
+//
+//        [self setupLineView:self.awayProgressView colors:COLOR_002868 startPoint:0 endPoint:0.6];
+}
+
+- (void)setDataArray:(NSArray *)dataArray {
+    _dataArray = dataArray;
+
+    if (dataArray.count==2) {
+        NSString *left = [NSString stringWithFormat:@"%@",dataArray.firstObject];
+        NSString *right = [NSString stringWithFormat:@"%@",dataArray.lastObject];
+        self.homeRateLab.text = left;
+        self.awayRateLab.text = right;
+        float total = [left floatValue]+[right floatValue];
+
+        if (total>0) {
+
+            float homeRate = [right floatValue]/total;
+            [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:homeRate endPoint:1];
+            [self setupLineView:self.awayProgressView colors:COLOR_002868 startPoint:0 endPoint:homeRate];
+            
+
+        }else{
+            [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:0.5 endPoint:1];
+
+            [self setupLineView:self.awayProgressView colors:COLOR_002868 startPoint:0 endPoint:0.5];
+        }
+    }else{
+        [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:0.5 endPoint:1];
+
+            [self setupLineView:self.awayProgressView colors:COLOR_002868 startPoint:0 endPoint:0.5];
+
+    }
 }
 
 - (void)data {
+    
     self.homeRateLab.text = @"1.86";
     self.awayRateLab.text = @"1.86";
 

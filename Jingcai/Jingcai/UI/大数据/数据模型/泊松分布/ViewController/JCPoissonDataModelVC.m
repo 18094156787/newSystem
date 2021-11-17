@@ -10,6 +10,7 @@
 #import "JCPoissonDataModelLockedCell.h"
 #import "JCPoissonDataModelOpenCell.h"
 #import "JCPoissonDataModelDetailVC.h"
+#import "JCKellyDataModelModel.h"
 @interface JCPoissonDataModelVC ()
 
 @end
@@ -21,7 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initViews];
-    [self refreshData];
+//    [self refreshData];
 }
 
 
@@ -33,39 +34,40 @@
 - (void)getDataList {
 
 //    [self.jcWindow showLoading];
-//    JCMatchService_New *service = [JCMatchService_New new];
-//    [service getPredictedMatchListWithType:@"2" Key_word:@"" Page:self.pageNo Success:^(id  _Nullable object) {
-//        [self endRefresh];
-//
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            if (self.pageNo==1) {
-//                [self.dataArray removeAllObjects];
-//            }
-//            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCMatchInfoModel class]];
-//             [self.dataArray addObjectsFromArray:array];
-//            if (array.count <PAGE_LIMIT) {
-//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-//            }
-//            [self.tableView reloadData];
-//            self.pageNo++;
-//            [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-//
-//            if (array.count ==0&&self.dataArray.count>0) {
-//                  self.tableView.tableFooterView = self.noMore_footView;
-//                  self.tableView.mj_footer.hidden = YES;
-//              }else{
-//                  self.tableView.tableFooterView = [UIView new];
-//                  self.tableView.mj_footer.hidden = NO;
-//              }
-//
-//        }else{
-//            [JCWToastTool showHint:object[@"msg"]];
-//        }
-//
-//    } failure:^(NSError * _Nonnull error) {
-//        [self endRefresh];
-//        [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-//    }];
+    JCDataBaseService_New *service = [JCDataBaseService_New new];
+    [service getPoissonDataModeListWithDate:self.date Page:self.pageNo success:^(id  _Nullable object) {
+        [self endRefresh];
+
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            if (self.pageNo==1) {
+                [self.dataArray removeAllObjects];
+            }
+            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCKellyDataModelModel class]];
+             [self.dataArray addObjectsFromArray:array];
+            if (array.count <PAGE_LIMIT) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            [self.tableView reloadData];
+            self.pageNo++;
+            [self chageImageStr:@"jc_dataModel_empty" Title:@"" BtnTitle:@""];
+
+            if (array.count ==0&&self.dataArray.count>0) {
+                  self.tableView.tableFooterView = self.noMore_footView;
+                  self.tableView.mj_footer.hidden = YES;
+              }else{
+                  self.tableView.tableFooterView = [UIView new];
+                  self.tableView.mj_footer.hidden = NO;
+              }
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        [self endRefresh];
+        [self chageImageStr:@"jc_dataModel_empty" Title:@"" BtnTitle:@""];
+    }];
+
 
 }
 
@@ -127,7 +129,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArray.count;
 
 }
 
@@ -159,29 +161,36 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row==0) {
-        JCPoissonDataModelLockedCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCPoissonDataModelLockedCell"];
-    //    JCMatchInfoModel *model = self.dataArray[indexPath.section];
-    //    cell.model = model;
-
+    
+    JCKellyDataModelModel *model = self.dataArray[indexPath.row];
+    if (model.can_look==1) {
+        JCPoissonDataModelOpenCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCPoissonDataModelOpenCell"];
+        cell.model = model;
         return cell;
     }
-    JCPoissonDataModelOpenCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCPoissonDataModelOpenCell"];
-//    JCMatchInfoModel *model = self.dataArray[indexPath.section];
-//    cell.model = model;
+    JCPoissonDataModelLockedCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCPoissonDataModelLockedCell"];
+    cell.model = model;
 
     return cell;
+
     
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    JCHistoryPayDataModelDetailStickVC *vc = [JCHistoryPayDataModelDetailStickVC new];
-//    [self.navigationController pushViewController:vc animated:YES];
+    JCKellyDataModelModel *model = self.dataArray[indexPath.row];
+    if (model.can_look==0) {
+        //未开通,前往开通
+        if (self.JCOpenBlock) {
+            self.JCOpenBlock();
+        }
+    }else{
+        JCPoissonDataModelDetailVC *vc = [JCPoissonDataModelDetailVC new];
+        vc.match_id = model.match_id;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
-    JCPoissonDataModelDetailVC *vc = [JCPoissonDataModelDetailVC new];
-    [self.navigationController pushViewController:vc animated:YES];
+
     
     
     
