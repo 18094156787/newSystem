@@ -11,13 +11,13 @@
 @implementation JCTransactionDataModelTitleView
 
 - (void)initViews {
-    self.backgroundColor = JCWhiteColor;
+    
     UIView *iconView = [UIView new];
     iconView.backgroundColor = JCBaseColor;
     [self addSubview:iconView];
     [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
-        make.centerY.equalTo(self);
+        make.bottom.offset(0);
         make.size.mas_equalTo(CGSizeMake(2, 16));
     }];
     

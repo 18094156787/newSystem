@@ -8,12 +8,11 @@
 
 #import "JCTransactionDataModelStickVC.h"
 #import "JCTransactionDataModelVC.h"
-
-
 #import "JCHistoryPayHeadView.h"
 #import "NSDate+BRPickerView.h"
 #import "JCMatchTimeModel.h"
 #import "JCPayShowView.h"
+#import "JCChargeVC.h"
 static CGFloat const kWMMenuViewHeight = 44;
 @interface JCTransactionDataModelStickVC ()
 
@@ -24,6 +23,9 @@ static CGFloat const kWMMenuViewHeight = 44;
 @property (nonatomic,strong) UIView *topColorView;
 
 @property (nonatomic, assign) float height;
+
+@property (nonatomic,strong)JCKellyDataModelPayInfoModel *buyInfoModel;
+
 
 @end
 
@@ -52,7 +54,7 @@ static CGFloat const kWMMenuViewHeight = 44;
 - (void)setNavEffect {
 
     CGFloat offsetY = self.contentView.contentOffset.y;
-    CGFloat maxOffsetY = AUTO(208);
+    CGFloat maxOffsetY = AUTO(228);
     float percent = offsetY/maxOffsetY;
     self.topColorView.alpha = percent;
 //    NSLog(@"%.2f",percent);
@@ -87,7 +89,7 @@ static CGFloat const kWMMenuViewHeight = 44;
 - (instancetype)init {
     
     if (self = [super init]) {
-        self.height = AUTO(208)+kNavigationBarHeight;
+        self.height = AUTO(228)+kNavigationBarHeight;
         self.titleSizeNormal = 16;
         self.titleSizeSelected = 16;
         self.titleColorSelected = COLOR_2F2F2F;//COLOR_FE1F19
@@ -114,7 +116,7 @@ static CGFloat const kWMMenuViewHeight = 44;
 //    self.view.backgroundColor = [UIColor greenColor]
         [super viewDidLoad];
     [self initViews];
-//    [self getTopInfoData];
+    [self getTopInfoData];
  
     
     UIButton *customView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
@@ -128,48 +130,36 @@ static CGFloat const kWMMenuViewHeight = 44;
 }
 
 
-//- (void)getTopInfoData {
-//    [self.jcWindow showLoading];
-//    JCDataBaseService_New *service = [JCDataBaseService_New service];
-//    [service getBigDataTopInfoWithsuccess:^(id  _Nullable object) {
-//        [self.jcWindow endLoading];
-//        [self.contentView.mj_header endRefreshing];
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            JCBigDataMonthProduceModel *productModel = (JCBigDataMonthProduceModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCBigDataMonthProduceModel class]];
-//            NSArray *noticeArray = [JCWJsonTool arrayWithJson:object[@"data"][@"now_match"] class:[JCJingCaiAINoticeModel class]];
-//            self.headView.productModel = productModel;
-//            self.headView.titleArray = noticeArray;
-//
-//            NSArray*mzArray = [JCWJsonTool arrayWithJson:object[@"data"][@"win_mark"] class:[JCBigDataMingZhongModel class]];
-////            mzArray = @[];
-//            self.headView.dataArray = mzArray;
-////            self.height = kWJingCaiBigDataHeaderViewHeight;
-//
-//            self.height = AUTO(208)+NavigationStatusBarHeight+AUTO(117)+AUTO(12);
-//            if (noticeArray.count>0) {
-//                self.height = AUTO(262)+NavigationStatusBarHeight+AUTO(117)+AUTO(12);
-//            }
-//            if (mzArray.count>0) {
-//                self.height =self.height+ AUTO(28)*mzArray.count+AUTO(80);
-//            }
-//            self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.height);
-//
-////            self.height = 300;
-//
-//            self.maximumHeaderViewHeight = self.height-kNavigationBarHeight-AUTO(77);
-//            self.viewTop = self.height;
-////            [self reloadData];
-//        }else{
-//            [JCWToastTool showHint:object[@"msg"]];
-//        }
-//
-//    } failure:^(NSError * _Nonnull error) {
-//        [self.contentView.mj_header endRefreshing];
-//        [self.jcWindow endLoading];
-//    }];
-//
-//
-//}
+- (void)getTopInfoData {
+
+    [self.jcWindow showLoading];
+    JCDataBaseService_New *service = [JCDataBaseService_New service];
+    [service getDataModelPayInfoWithModel_id:self.model_id Success:^(id  _Nullable object) {
+        [self.jcWindow endLoading];
+        [self.contentView.mj_header endRefreshing];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            JCKellyDataModelPayInfoModel *buyInfoModel = (JCKellyDataModelPayInfoModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataModelPayInfoModel class]];
+  
+            self.headView.model = buyInfoModel;
+//            [self initTimeArrayWithToday:buyInfoModel.server_time];
+//            
+//            self.buyInfoModel = buyInfoModel;
+//            self.dataVC.buyInfoModel = self.buyInfoModel;
+//            [self.dataVC refreshData];
+
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        [self.contentView.mj_header endRefreshing];
+        [self.jcWindow endLoading];
+    }];
+
+
+
+}
 
 
 - (void)initViews {
@@ -177,23 +167,34 @@ static CGFloat const kWMMenuViewHeight = 44;
     self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.height);
     [self.view addSubview:self.headView];
     
+//    self.contentView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
+//        [weakSelf getTopInfoData];
+////        [weakSelf.dataVC refreshData];
+//    }];
+        
+
     WeakSelf;
     self.headView.JCBuyClickBlock = ^{
-//        if (![JCWUserBall currentUser]) {
-//            [weakSelf presentLogin];
-//            return;
-//        }
-//        JCJingCaiAIBigDataBuyVC *vc = [JCJingCaiAIBigDataBuyVC new];
-//        [weakSelf.navigationController pushViewController:vc animated:YES];
-        
-        JCPayShowView *payView = [JCPayShowView new];
-        payView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-        [weakSelf.jcWindow addSubview:payView];
-        payView.JCSureBlock = ^(NSString * _Nonnull hb_id) {
-//          [payView ]
-        };
-        [payView show];
+        [weakSelf payAction];
     };
+    
+   
+//    self.headView.JCBuyClickBlock = ^{
+////        if (![JCWUserBall currentUser]) {
+////            [weakSelf presentLogin];
+////            return;
+////        }
+////        JCJingCaiAIBigDataBuyVC *vc = [JCJingCaiAIBigDataBuyVC new];
+////        [weakSelf.navigationController pushViewController:vc animated:YES];
+//        
+//        JCPayShowView *payView = [JCPayShowView new];
+//        payView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+//        [weakSelf.jcWindow addSubview:payView];
+//        payView.JCSureBlock = ^(NSString * _Nonnull hb_id) {
+////          [payView ]
+//        };
+//        [payView show];
+//    };
     
     self.contentView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
 //        [weakSelf getTopInfoData];
@@ -205,39 +206,159 @@ static CGFloat const kWMMenuViewHeight = 44;
 //        }
     }];
         
-
-    
-
-
 }
 
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-//    CGFloat headerViewHeight = self.height;
-////    CGFloat headerViewHeight = kWJingCaiBigDataHeaderViewHeight;
-//    CGFloat headerViewX = 0;
-//    UIScrollView *scrollView = (UIScrollView *)self.view;
-//    if (scrollView.contentOffset.y < 0) {
-//        headerViewX = scrollView.contentOffset.y;
-//        headerViewHeight -= headerViewX;
-//
-//    }
-//    self.headView.frame = CGRectMake(0, headerViewX, CGRectGetWidth(self.view.bounds), self.height);
-}
-
-- (void)btnClicked:(id)sender {
-    NSLog(@"touch up inside");
-}
 
 - (void)backBtnClick {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)payAction {
+    if (self.buyInfoModel.show_status==1) {
+        //免费体验
+        [self FreeExperienceCheck];
+        return;
+    }
+    if (self.buyInfoModel.show_status==2) {
+        if (self.buyInfoModel.model_status==1) {
+            //免费体验中不能续费
+            return;
+        }
+        if (self.buyInfoModel.model_status==3) {
+            //下架不能购买
+            return;
+        }
+        if (self.buyInfoModel.model_status==4) {
+            //免费,不能购买
+            return;
+        }
+    }
+    if (self.buyInfoModel.show_status==4) {
+        //下架
+        return;
+    }
+
+    [self showPayView];
+    
 }
 
+- (void)showPayView {
+    WeakSelf;
+    JCPayShowView *payView = [JCPayShowView new];
+    payView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    [self.jcWindow addSubview:payView];
+    payView.JCSureBlock = ^(NSString * _Nonnull hb_id) {
+        [weakSelf sureBuy];
+    };
+    payView.JCProtocolBlock = ^{
+        WebViewController *vc = [WebViewController new];
+        vc.showBackItem = YES;
+            vc.titleStr = @"鲸猜足球用户购买协议";
+            NSString *urlStr = [NSString  stringWithFormat:@"%@?dev=1",[JCConfigModel currentConfigModel].get_purchase];
+            vc.urlStr = NonNil(urlStr);
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        [weakSelf presentViewController:nav animated:YES completion:nil];
+    };
+    [payView show];
+
+}
+
+- (void)FreeExperienceCheck {
+    JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
+    alertView.contentLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(16)];
+    [alertView alertTitle:@"确认开通" TitleColor:COLOR_2F2F2F Mesasge:@"" MessageColor:COLOR_2F2F2F SureTitle:@"确认" SureColor:JCWhiteColor SureHandler:^{
+        
+        [alertView removeFromSuperview];
+        [self FreeExperience];
+
+    } CancleTitle:@"取消" CancleColor:JCBaseColor CancelHandler:^{
+       [alertView removeFromSuperview];
+    }];
+//    NSString *day =  [NSString stringWithFormat:@"%@",self.buyInfoModel.free_day];
+    NSString *title = [NSString stringWithFormat:@"是否开通[凯利指数] %@天免费体验",self.buyInfoModel.free_day];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+    NSRange count_range = [title rangeOfString:self.buyInfoModel.free_day];
+    if (count_range.location!=NSNotFound) {
+        [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:count_range];
+    }
+
+    
+    alertView.contentLab.attributedText = attr;
+    alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    [[UIApplication sharedApplication].keyWindow addSubview:alertView];
+}
+
+//免费体验
+- (void)FreeExperience {
+    
+    [self.jcWindow showLoading];
+    JCDataBaseService_New *service = [JCDataBaseService_New service];
+    [service getKellyDataModeFreeExperienceWithModel_id:self.model_id Success:^(id  _Nullable object) {
+        [self.jcWindow endLoading];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            [self getTopInfoData];
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+        
+    } failure:^(NSError * _Nonnull error) {
+        [self.jcWindow endLoading];
+    }];
+
+
+
+}
+
+//确认购买
+- (void)sureBuy {
+    if (self.buyInfoModel.big_data_price>0&&[[JCWUserBall currentUser].prize floatValue]<self.buyInfoModel.big_data_price) {
+        [JCWToastTool showHint:@"红币余额不足,请及时充值"];
+        [self.navigationController pushViewController:[JCChargeVC new] animated:YES];
+        return;
+    }
+    
+    NSString *scene = @"7";
+    //1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5凯利指数 6.离散指数
+    [self.jcWindow showLoading];
+    JCHomeService_New *service = [JCHomeService_New new];
+    [service getConfirmOrderWithUnique:self.model_id scene:scene source:@"1" price:@"" Success:^(id  _Nullable object) {
+        [self.jcWindow endLoading];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSString *order_key = object[@"data"][@"order_key"];
+            [self finalPayWithOrder_key:order_key coupon_id:@"" hongbao_id:@""];
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        [self.jcWindow endLoading];
+    }];
+    
+}
+//下单并支付
+- (void)finalPayWithOrder_key:(NSString *)order_key coupon_id:(NSString *)coupon_id hongbao_id:(NSString *)hongbao_id {
+    [self.jcWindow showLoading];
+    JCHomeService_New *service = [JCHomeService_New new];
+    [service getPayOrderWithOrder_key:order_key pay_type:@"3" hongbao_id:hongbao_id coupon_id:coupon_id Success:^(id  _Nullable object) {
+        [self.jcWindow endLoading];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            NSString *is_pay = object[@"data"][@"is_pay"];
+            if ([is_pay intValue]==1) {
+                [self getMyUserInfo];
+                [self getTopInfoData];
+            }
+//            [self.tableView reloadData];
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+        
+    } failure:^(NSError * _Nonnull error) {
+        [self.jcWindow endLoading];
+    }];
+}
 #pragma mark - ScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

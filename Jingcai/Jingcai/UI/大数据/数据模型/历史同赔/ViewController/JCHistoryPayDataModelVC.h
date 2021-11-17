@@ -7,12 +7,18 @@
 //
 
 #import "JCBaseTableViewController.h"
-
+#import "JCKellyDataModelPayInfoModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCHistoryPayDataModelVC : JCBaseTableViewController
 
 @property (nonatomic,assign) BOOL isTop;
+
+@property (nonatomic,strong) JCKellyDataModelPayInfoModel *buyInfoModel;
+
+@property (nonatomic,strong) NSString *date;
+
+@property (nonatomic,copy) void(^JCOpenBlock)(void);
 
 @end
 

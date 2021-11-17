@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JCTransactionDataModelVC : JCBaseTableViewController
 
+
 @end
 
 NS_ASSUME_NONNULL_END

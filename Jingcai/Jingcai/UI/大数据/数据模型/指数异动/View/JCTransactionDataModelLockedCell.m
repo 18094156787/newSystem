@@ -11,6 +11,8 @@
 @implementation JCTransactionDataModelLockedCell
 
 - (void)initViews {
+    self.contentView.backgroundColor = JCClearColor;
+    self.backgroundColor = JCClearColor;
     [self.contentView addSubview:self.lockBtn];
     [self.lockBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(8));
