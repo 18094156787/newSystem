@@ -219,24 +219,6 @@
     }
 }
 
-//- (void)data {
-////    self.bgView.backgroundColor = JCBaseColor;
-////    self.matchNameLab.backgroundColor = JCBaseColor;
-//    self.matchNameLab.text = @"赛事名称";
-//    self.matchTimeLab.text = @"09-02 18:00";
-//    self.matchStatusLab.text = @"未";
-//    self.scoreLab.text = @"99 : 99";
-//    self.homeTeamLab.text = @"皇家马德里";
-//    self.awayTeamLab.text = @"皇家马德里";
-//    self.homeTeamImgView.backgroundColor = JCBaseColor;
-//    self.awayTeamImgView.backgroundColor = JCBaseColor;
-//
-//    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"home_placeholder")];
-//    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"away_placeholder")];
-//
-//
-//    self.historyLab.text = @"查询历史数据，找到相同初赔比赛100场，相同即赔比赛90场";
-//}
 
 - (UIView *)bgView {
     if (!_bgView) {

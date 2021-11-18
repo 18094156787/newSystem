@@ -48,6 +48,8 @@
 
 }
 
+
+
 - (void)backItemClick {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -83,6 +85,14 @@
     NSString *link_url = self.urlStr;
     if ([self.urlStr containsString:@"announcement"]) {
         link_url = [NSString stringWithFormat:@"%@?dev=1",self.urlStr];
+    }
+    if ([JCWUserBall currentUser].token.length>0) {
+        NSString *appand = [NSString stringWithFormat:@"token=%@&native=ios&dev=1",[JCWUserBall currentUser].token];
+        if ([link_url containsString:@"?"]) {
+            link_url = [NSString stringWithFormat:@"%@&%@",link_url,appand];
+        }else{
+            link_url = [NSString stringWithFormat:@"%@?%@",link_url,appand];
+        }
     }
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:link_url]];
     [_wkWebView loadRequest:request];

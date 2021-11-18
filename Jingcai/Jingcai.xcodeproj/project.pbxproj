@@ -113,6 +113,11 @@
 		594215CF2745E4B600E95957 /* JCHistoryPayRateDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 594215CE2745E4B600E95957 /* JCHistoryPayRateDataModel.m */; };
 		594215D22745E51600E95957 /* JCHistoryPayBigRateDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 594215D12745E51600E95957 /* JCHistoryPayBigRateDataModel.m */; };
 		594215D527461CF800E95957 /* JCHistoryPayMatchDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 594215D427461CF800E95957 /* JCHistoryPayMatchDataModel.m */; };
+		594215D827464B2600E95957 /* JCTransactionDataModelLockedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 594215D727464B2600E95957 /* JCTransactionDataModelLockedView.m */; };
+		594215DC274650EC00E95957 /* JCTransactionDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 594215DB274650EC00E95957 /* JCTransactionDataModel.m */; };
+		594215DF27465AF100E95957 /* JCTransactionDataChangeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 594215DE27465AF100E95957 /* JCTransactionDataChangeModel.m */; };
+		594215E227465B0800E95957 /* JCTransactionDataOddsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 594215E127465B0800E95957 /* JCTransactionDataOddsModel.m */; };
+		594215E527465B4D00E95957 /* JCTransactionDataChangeFlagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 594215E427465B4D00E95957 /* JCTransactionDataChangeFlagModel.m */; };
 		59442B49271916FB00B5C831 /* JCCommunityMoreColumnVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B48271916FB00B5C831 /* JCCommunityMoreColumnVC.m */; };
 		59442B4F2719174700B5C831 /* JCCommunityMoreColumnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B4E2719174700B5C831 /* JCCommunityMoreColumnCell.m */; };
 		59442B5227195DF100B5C831 /* JCDakaHistoryTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B5127195DF100B5C831 /* JCDakaHistoryTitleView.m */; };
@@ -1653,6 +1658,16 @@
 		594215D12745E51600E95957 /* JCHistoryPayBigRateDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCHistoryPayBigRateDataModel.m; sourceTree = "<group>"; };
 		594215D327461CF800E95957 /* JCHistoryPayMatchDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCHistoryPayMatchDataModel.h; sourceTree = "<group>"; };
 		594215D427461CF800E95957 /* JCHistoryPayMatchDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCHistoryPayMatchDataModel.m; sourceTree = "<group>"; };
+		594215D627464B2600E95957 /* JCTransactionDataModelLockedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCTransactionDataModelLockedView.h; sourceTree = "<group>"; };
+		594215D727464B2600E95957 /* JCTransactionDataModelLockedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCTransactionDataModelLockedView.m; sourceTree = "<group>"; };
+		594215DA274650EC00E95957 /* JCTransactionDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCTransactionDataModel.h; sourceTree = "<group>"; };
+		594215DB274650EC00E95957 /* JCTransactionDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCTransactionDataModel.m; sourceTree = "<group>"; };
+		594215DD27465AF100E95957 /* JCTransactionDataChangeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCTransactionDataChangeModel.h; sourceTree = "<group>"; };
+		594215DE27465AF100E95957 /* JCTransactionDataChangeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCTransactionDataChangeModel.m; sourceTree = "<group>"; };
+		594215E027465B0800E95957 /* JCTransactionDataOddsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCTransactionDataOddsModel.h; sourceTree = "<group>"; };
+		594215E127465B0800E95957 /* JCTransactionDataOddsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCTransactionDataOddsModel.m; sourceTree = "<group>"; };
+		594215E327465B4D00E95957 /* JCTransactionDataChangeFlagModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCTransactionDataChangeFlagModel.h; sourceTree = "<group>"; };
+		594215E427465B4D00E95957 /* JCTransactionDataChangeFlagModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCTransactionDataChangeFlagModel.m; sourceTree = "<group>"; };
 		59442B47271916FB00B5C831 /* JCCommunityMoreColumnVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCCommunityMoreColumnVC.h; sourceTree = "<group>"; };
 		59442B48271916FB00B5C831 /* JCCommunityMoreColumnVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCCommunityMoreColumnVC.m; sourceTree = "<group>"; };
 		59442B4D2719174700B5C831 /* JCCommunityMoreColumnCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCCommunityMoreColumnCell.h; sourceTree = "<group>"; };
@@ -4572,6 +4587,21 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		594215D9274650AA00E95957 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				594215DA274650EC00E95957 /* JCTransactionDataModel.h */,
+				594215DB274650EC00E95957 /* JCTransactionDataModel.m */,
+				594215E027465B0800E95957 /* JCTransactionDataOddsModel.h */,
+				594215E127465B0800E95957 /* JCTransactionDataOddsModel.m */,
+				594215DD27465AF100E95957 /* JCTransactionDataChangeModel.h */,
+				594215DE27465AF100E95957 /* JCTransactionDataChangeModel.m */,
+				594215E327465B4D00E95957 /* JCTransactionDataChangeFlagModel.h */,
+				594215E427465B4D00E95957 /* JCTransactionDataChangeFlagModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		59442B462719125C00B5C831 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -5051,6 +5081,7 @@
 		59541DAF273E2E5F00D470EF /* 指数异动 */ = {
 			isa = PBXGroup;
 			children = (
+				594215D9274650AA00E95957 /* Model */,
 				59145F5D273E58EF00DA5391 /* 详情 */,
 				59541DB1273E2ED700D470EF /* View */,
 				59541DB0273E2ECD00D470EF /* ViewController */,
@@ -5074,6 +5105,8 @@
 			children = (
 				59541DBB273E429C00D470EF /* JCTransactionDataModelTitleView.h */,
 				59541DBC273E429C00D470EF /* JCTransactionDataModelTitleView.m */,
+				594215D627464B2600E95957 /* JCTransactionDataModelLockedView.h */,
+				594215D727464B2600E95957 /* JCTransactionDataModelLockedView.m */,
 				59541DBE273E434100D470EF /* JCTransactionDataModelLockedCell.h */,
 				59541DBF273E434100D470EF /* JCTransactionDataModelLockedCell.m */,
 				59541DC1273E434E00D470EF /* JCTransactionDataModelCell.h */,
@@ -11806,6 +11839,7 @@
 				7BF193E724D155C500FD57E3 /* JCPostPlanCell.m in Sources */,
 				C3DA2C082212C41100B4AD98 /* NSSet+HYBUnicodeReadable.m in Sources */,
 				7B1BDD762510665600D7C034 /* SCChartLabel.m in Sources */,
+				594215E527465B4D00E95957 /* JCTransactionDataChangeFlagModel.m in Sources */,
 				7B0CFB682304EE5700AF8A6A /* JCInviteCodeInfoModel.m in Sources */,
 				C3DAD845221148D1000A748D /* JCWDateTool.m in Sources */,
 				7B0CFB822306413C00AF8A6A /* JCMyBuyDakaViewController.m in Sources */,
@@ -11848,6 +11882,7 @@
 				7BB8282624B461F80012EDA8 /* JCTeamMatchInfoScoreXioaZuCell.m in Sources */,
 				7B99E6922316644C00AA5AB6 /* JNMatchFooterView.m in Sources */,
 				7B44A6A52665C15500AF56B0 /* JCKindScoreCompleteView.m in Sources */,
+				594215E227465B0800E95957 /* JCTransactionDataOddsModel.m in Sources */,
 				C3F023CB216F6E6300A1B98F /* JCWStringTool.m in Sources */,
 				7B99E6FD2316686200AA5AB6 /* JNMatchTableBall.m in Sources */,
 				7B3F9D1B25C8FD7B00C1A559 /* JCHongbangDetail_MatchModel.m in Sources */,
@@ -12270,6 +12305,7 @@
 				7B8AE30125A460A900B805EA /* JJStockViewCell.m in Sources */,
 				7B99E6EB231665D500AA5AB6 /* RNNoDataDIYView.m in Sources */,
 				7B05CB43233CAE4F00A2AFE1 /* JNTabBarMainButton.m in Sources */,
+				594215D827464B2600E95957 /* JCTransactionDataModelLockedView.m in Sources */,
 				7BF193C624CFD1DE00FD57E3 /* JCMineWMStickViewController.m in Sources */,
 				C349963A21C7930A00C3E282 /* MagicAlertCell.m in Sources */,
 				5940C336272165AE00F41DF1 /* JCNewestColumnModel.m in Sources */,
@@ -12525,6 +12561,7 @@
 				7BDA571924EFCB9100A0E1C8 /* NSBundle+TZImagePicker.m in Sources */,
 				590A3F6A26C24C5F0012EDE6 /* JCActivityGuessMore_HeadView.m in Sources */,
 				7B87D6432602F40E00E0FEB4 /* JCMineFabuCell.m in Sources */,
+				594215DC274650EC00E95957 /* JCTransactionDataModel.m in Sources */,
 				59541CE1273909E700D470EF /* JCFootBallAuthorCodeView.m in Sources */,
 				7BB075822553D5E8004FB701 /* JCYuCeHongBaoCrashHeadView.m in Sources */,
 				C3EABE182227786C00A90B4E /* RBApplePayManager.m in Sources */,
@@ -12609,6 +12646,7 @@
 				7BC9F16E25C29E95000E47EC /* JCJingCaiService_New.m in Sources */,
 				7BF167F42351C37200DFDB00 /* JNDIYemptyView.m in Sources */,
 				7B5FC82B256F9E980006D6F0 /* JCMatchDetailZSVC.m in Sources */,
+				594215DF27465AF100E95957 /* JCTransactionDataChangeModel.m in Sources */,
 				C3C80D3322042F290092E0FD /* JCWSettingBall.m in Sources */,
 				7B5C2E1225A6D9EC00777964 /* JNMatchZS_ZF_TableViewCell.m in Sources */,
 				7BF167ED2351C24600DFDB00 /* LYEmptyBaseView.m in Sources */,

@@ -20,7 +20,10 @@
 
 - (void)initViews {
     self.bgVew = [UIView new];
-    [self.bgVew hg_setAllCornerWithCornerRadius:8];
+    self.bgVew.layer.borderColor = JCClearColor.CGColor;
+    self.bgVew.layer.cornerRadius = 8;
+    self.bgVew.layer.borderWidth = 1;
+//    [self.bgVew hg_setAllCornerWithCornerRadius:8];
     [self.contentView addSubview:self.bgVew];
     [self.bgVew mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.insets(UIEdgeInsetsZero);
@@ -60,21 +63,19 @@
     _model = model;
     self.dateLab.text = model.sort_time;
     self.weekLab.text = model.week;
-//    if ([model.hot integerValue]==1) {
-//        self.todayLab.hidden = NO;
-//    }else{
-//        self.todayLab.hidden = YES;
-//    }
+
     if (model.select) {
         self.dateLab.textColor = JCBaseColor;
 //        self.weekLab.textColor = JCBaseColor;
         self.weekLab.textColor = JCBaseColor;
         self.bgVew.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.06];
+        self.bgVew.layer.borderColor = COLOR_EF2F2F.CGColor;
     }else{
         self.dateLab.textColor = COLOR_2F2F2F;
 //        self.weekLab.textColor = COLOR_333333;
         self.weekLab.textColor = COLOR_9F9F9F;
         self.bgVew.backgroundColor = self.clearBg?JCClearColor:JCWhiteColor;
+        self.bgVew.layer.borderColor = JCClearColor.CGColor;
     }
 }
 

@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JCTransactionDataModelVC : JCBaseTableViewController
 
+@property (nonatomic,strong) NSString *type;//0全部 1胜平负、2让球、3进球数
+
+//@property (nonatomic,strong) NSString *order_by;//1正序（历史异动赛事），2倒叙（最新推荐）
 
 @end
 

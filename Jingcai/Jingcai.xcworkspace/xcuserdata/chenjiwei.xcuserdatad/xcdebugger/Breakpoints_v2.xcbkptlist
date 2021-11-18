@@ -7,17 +7,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "582FA2F1-E7A0-4F9F-826D-F925CD60B474"
+            uuid = "8890C4BE-3804-4E5E-AFF7-E460A391A273"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/Services_New/JCMatchService_New.h"
+            filePath = "Jingcai/UI/&#x9996;&#x9875;/NEWS ( &#x8d44;&#x8baf; )/ViewController/JCArticleDetailContentCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "-getPredictedMatchListWithType:Key_word:Page:Success:failure:"
-            landmarkType = "6">
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "-addImgClickJS"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

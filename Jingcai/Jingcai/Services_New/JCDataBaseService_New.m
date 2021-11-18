@@ -611,4 +611,24 @@
         failureBlock(error);
     }];
 }
+
+//指数异动列表
+-(void)getTransactionDataModeListWithType:(NSString *)type order_by:(NSString *)order_by Page:(NSInteger)page PageSize:(NSString *)pageSize success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+ 
+
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+                            @"type":type,
+                            @"order_by":order_by,
+                             @"page":Integet_ToString(page),
+                             @"page_size":pageSize
+                             };
+    
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"change_index_list" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
 @end

@@ -210,6 +210,25 @@
     }];
 }
 
+- (void)setModel:(JCTransactionDataModel *)model {
+    _model = model;
+    self.matchNameLab.text = model.competition_name;
+    self.matchNameLab.textColor = model.competition_color.length>0?[UIColor colorWithHexString:NonNil(model.competition_color)]:UIColorFromRGB(0x606062);
+    self.matchTimeLab.text = model.match_time_str;
+    self.matchStatusLab.text = model.status_cn;
+    self.homeTeamLab.text = model.home_team_name;
+    self.awayTeamLab.text =  model.away_team_name;
+    self.typeLab.text = model.type_name;
+    
+    self.homeScoreLab.text = model.home_score;
+    self.awayScoreLab.text = model.away_score;
+
+    
+    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.home_team_logo] placeholderImage:JCIMAGE(@"home_placeholder")];
+    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
+    self.rateChangeLab.text = model.odds_change_name;
+}
+
 - (void)data {
 //    self.bgView.backgroundColor = JCBaseColor;
 //    self.matchNameLab.backgroundColor = JCBaseColor;

@@ -390,6 +390,7 @@ static CGFloat const kWMMenuViewHeight = 44;
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
     
     JCTransactionDataModelVC *vc = [JCTransactionDataModelVC new];
+    vc.type = [NSString stringWithFormat:@"%ld",index];
     return vc;
 
 }

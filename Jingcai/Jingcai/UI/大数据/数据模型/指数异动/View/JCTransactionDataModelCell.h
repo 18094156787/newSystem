@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseTableViewCell_New.h"
-
+#import "JCTransactionDataModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCTransactionDataModelCell : JCBaseTableViewCell_New
@@ -53,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *rateChangeLab;
 
 @property (nonatomic, strong) UILabel *infoLab;
+
+@property (nonatomic, strong) JCTransactionDataModel *model;
 
 @end
 

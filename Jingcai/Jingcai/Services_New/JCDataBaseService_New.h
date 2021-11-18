@@ -115,6 +115,10 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)getHistoryPayDataModeListWithDate:(NSString *)date Page:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //历史同赔详情
 - (void)getHistoryPayDataModeDetailWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//指数异动列表
+//type 0全部 1胜平负、2让球、3进球数
+//order_by 比赛时间排序：1正序（历史异动赛事），2倒叙（最新推荐）
+-(void)getTransactionDataModeListWithType:(NSString *)type order_by:(NSString *)order_by Page:(NSInteger)page PageSize:(NSString *)pageSize success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END
