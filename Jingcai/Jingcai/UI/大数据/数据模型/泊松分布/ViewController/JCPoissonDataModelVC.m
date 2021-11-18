@@ -51,7 +51,7 @@
             self.pageNo++;
             [self chageImageStr:@"jc_dataModel_empty" Title:@"" BtnTitle:@""];
 
-            if (array.count ==0&&self.dataArray.count>0) {
+            if (array.count <PAGE_LIMIT&&self.dataArray.count>0) {
                   self.tableView.tableFooterView = self.noMore_footView;
                   self.tableView.mj_footer.hidden = YES;
               }else{
@@ -73,17 +73,6 @@
 
 
 - (void)initViews {
-//    JCJingCaiAIBigDataMatchTitleView *titleView = [[JCJingCaiAIBigDataMatchTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, AUTO(45))];
-//    titleView.backgroundColor = JCWhiteColor;
-//    titleView.titleLab.text = @"比赛列表";
-//    titleView.iconView.hidden = NO;
-//    self.tableView.tableHeaderView = titleView;
-//
-//    titleView.JCBlcok = ^{
-//        [weakSelf.navigationController pushViewController:[JCJingCaiAIBigDataHomeVC new] animated:YES];
-//    };
-    
-    
     WeakSelf;
     self.tableView.estimatedRowHeight = 300;
     self.tableView.backgroundColor = COLOR_F4F6F9;
@@ -186,6 +175,7 @@
         }
     }else{
         JCPoissonDataModelDetailVC *vc = [JCPoissonDataModelDetailVC new];
+        model.id = [self.model_id integerValue];
         vc.match_id = model.match_id;
         [self.navigationController pushViewController:vc animated:YES];
     }

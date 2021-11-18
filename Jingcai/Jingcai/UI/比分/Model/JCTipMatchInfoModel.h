@@ -32,6 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,copy) NSString *goal_time;//进球时间（68'）
 
+@property (nonatomic,copy) NSString *match_time;
+
+@property (nonatomic,copy) NSString *wl;
+
 
 @end
 

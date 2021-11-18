@@ -38,7 +38,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initViews];
-    [self refreshData];
+//    [self refreshData];
 }
 
 
@@ -51,9 +51,9 @@
 
     [self.jcWindow showLoading];
     JCMatchService_New *service = [JCMatchService_New new];
-    [service getPredictedMatchListWithType:@"2" Key_word:@"" Page:self.pageNo Success:^(id  _Nullable object) {
+    [service getPredictedMatchListWithType:@"2" date:self.date Key_word:@"" Page:self.pageNo Success:^(id  _Nullable object) {
         [self endRefresh];
-         
+
         if ([JCWJsonTool isSuccessResponse:object]) {
             if (self.pageNo==1) {
                 [self.dataArray removeAllObjects];
@@ -200,6 +200,8 @@
     
     [self.navigationController pushViewController:detailVC animated:YES];
 }
+
+
 
 - (JCJingCaiAIBigDataSearchView *)headView {
     if (!_headView) {

@@ -80,6 +80,7 @@
         self.priceLab.text = @"免费";
         self.priceLab.font = [UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(15)];
     }
+    self.countLab.hidden = model.big_data_price==0?YES:NO;
 }
 
 

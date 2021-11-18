@@ -9,9 +9,13 @@
 #import "JCWBaseBall.h"
 #import "JCMatchTeamBall.h"
 #import "JCKellyDataModelOddsModel.h"
+#import "JCHistoryPayDataModel.h"
+#import "JCHistoryPayMatchDataModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCKellyDataDetailModel : JCWBaseBall
+
+@property (nonatomic,copy) NSString *id;
 
 @property (nonatomic,copy) NSString *get_match_time;//比赛时间
 
@@ -61,6 +65,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSArray<NSString *> *bi_fen;
 
+#pragma mark 历史同赔
+
+@property (nonatomic, strong) JCHistoryPayDataModel *similar;
+
+@property (nonatomic, strong) JCHistoryPayMatchDataModel *similar_match;
+
+@property (nonatomic, assign) NSInteger wl;// 红黑 1红 2黑 0未开奖
+
+@property (nonatomic, strong) NSString *spf_result;//比赛结果 0未结束 1主胜 2平 3主负
 @end
 
 NS_ASSUME_NONNULL_END

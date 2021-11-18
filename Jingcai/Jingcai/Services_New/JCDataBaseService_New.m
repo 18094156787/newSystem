@@ -490,6 +490,23 @@
         failureBlock(error);
     }];
 }
+//凯利指数变化轨迹
+//match_id 比赛id
+- (void)getKellyDataModeDetailTrackDataWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+ 
+
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+        @"match_id":match_id,
+    };
+    
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"kelly_index_history" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
 //凯利指数样本数据
 //match_id 比赛id
 - (void)getKellyDataModeDetailSampleDataWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
@@ -500,7 +517,7 @@
         @"match_id":match_id,
     };
     
-    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"kelly_index_history" paramDic:param ignoreArray:@[]];
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"kelly_simple_data" paramDic:param ignoreArray:@[]];
     [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         successBlock(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -560,5 +577,38 @@
         failureBlock(error);
     }];
 }
+//历史同赔列表
+-(void)getHistoryPayDataModeListWithDate:(NSString *)date Page:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+ 
 
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+                             @"page":Integet_ToString(page),
+                             @"page_size":@"10",
+                             @"date":date
+                             };
+    
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"history_same_odds_list" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//历史同赔详情
+- (void)getHistoryPayDataModeDetailWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+ 
+
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+        @"match_id":match_id,
+    };
+    
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"history_same_odds_detail" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
 @end

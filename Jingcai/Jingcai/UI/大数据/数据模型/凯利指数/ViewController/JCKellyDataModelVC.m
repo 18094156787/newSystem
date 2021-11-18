@@ -50,7 +50,7 @@
             self.pageNo++;
             [self chageImageStr:@"jc_dataModel_empty" Title:@"" BtnTitle:@""];
 
-            if (array.count ==0&&self.dataArray.count>0) {
+            if (array.count <PAGE_LIMIT&&self.dataArray.count>0) {
                   self.tableView.tableFooterView = self.noMore_footView;
                   self.tableView.mj_footer.hidden = YES;
               }else{

@@ -327,31 +327,6 @@
     }
 }
 
-//- (void)data {
-//    self.companyLab.text = @"机构名称";
-//    self.home_winLab.text = @"3.78";
-//    self.home_equalLab.text = @"3.78";
-//    self.home_loseLab.text = @"3.78";
-//    self.home_zs_WinLab.text = @"99.99";
-//    self.home_zs_EqualLab.text = @"18.00";
-//    self.home_zs_LoseLab.text = @"18.00";
-//    self.home_fc_WinLab.text = @"18.00";
-//    self.home_fc_EqualLab.text = @"18.00";
-//    self.home_fc_LoseLab.text = @"18.00";
-//    self.home_rateLab.text = @"92.50%";
-//
-//
-//    self.away_winLab.text = @"3.78";
-//    self.away_equalLab.text = @"3.78";
-//    self.away_loseLab.text = @"3.78";
-//    self.away_zs_WinLab.text = @"99.99";
-//    self.away_zs_EqualLab.text = @"18.00";
-//    self.away_zs_LoseLab.text = @"18.00";
-//    self.away_fc_WinLab.text = @"18.00";
-//    self.away_fc_EqualLab.text = @"18.00";
-//    self.away_fc_LoseLab.text = @"18.00";
-//    self.away_rateLab.text = @"92.50%";
-//}
 
 - (UILabel *)home_winLab {
     if (!_home_winLab) {

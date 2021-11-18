@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseTableViewCell_New.h"
-
+#import "JCKellyDataModelModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCHistoryPayDataModelLockedCell : JCBaseTableViewCell_New
@@ -49,6 +49,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *awayLoseLab;
 
 @property (nonatomic,strong) KKPaddingLabel *historyLab;
+
+@property (nonatomic, strong) JCKellyDataModelModel *model;
 
 @end
 

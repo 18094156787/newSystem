@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JCJingCaiAIBigDataMatchListVC : JCBaseTableViewController
 
+@property (nonatomic, strong) NSString *date;
+
 @end
 
 NS_ASSUME_NONNULL_END

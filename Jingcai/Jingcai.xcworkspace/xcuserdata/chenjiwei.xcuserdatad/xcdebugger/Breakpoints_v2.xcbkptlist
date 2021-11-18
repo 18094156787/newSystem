@@ -7,49 +7,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A70B73A3-3546-4DB2-AD67-8A8B1D34A2CC"
+            uuid = "582FA2F1-E7A0-4F9F-826D-F925CD60B474"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x5927;&#x6570;&#x636e;/&#x6570;&#x636e;&#x6a21;&#x578b;/&#x6cca;&#x677e;&#x5206;&#x5e03;/&#x8be6;&#x60c5;/ViewController/JCPoissonDataModelDetailVC.m"
+            filePath = "Jingcai/Services_New/JCMatchService_New.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "-tableView:heightForRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E9BB6321-46A0-4A0D-AD2D-9EBD4CA67389"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x5927;&#x6570;&#x636e;/&#x6570;&#x636e;&#x6a21;&#x578b;/&#x5386;&#x53f2;&#x540c;&#x8d54;/ViewController/JCHistoryPayDataModelStickVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "-getTopInfoData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C52EC71F-7708-4C99-98CE-449533B10213"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x5927;&#x6570;&#x636e;/&#x6570;&#x636e;&#x6a21;&#x578b;/&#x5386;&#x53f2;&#x540c;&#x8d54;/ViewController/JCHistoryPayDataModelStickVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "452"
-            endingLineNumber = "452"
-            landmarkName = "-initTimeArrayWithToday:"
-            landmarkType = "7">
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "-getPredictedMatchListWithType:Key_word:Page:Success:failure:"
+            landmarkType = "6">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -241,7 +241,7 @@
         type = @"指数异动";
     }
     if (self.type ==3) {
-        type = @"历史同赔";
+        type = @"同赔分析";
     }
     if (self.type ==4) {
         type = @"泊松分布";

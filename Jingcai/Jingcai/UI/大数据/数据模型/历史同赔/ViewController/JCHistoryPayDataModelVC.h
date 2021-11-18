@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,assign) BOOL isTop;
 
+@property (nonatomic,strong) NSString *model_id;
+
 @property (nonatomic,strong) JCKellyDataModelPayInfoModel *buyInfoModel;
 
 @property (nonatomic,strong) NSString *date;

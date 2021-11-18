@@ -12,12 +12,17 @@
 
 - (void)initViews {
     
-    [self addSubview:self.colorView];
-    [self.colorView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self addSubview:self.colorBgView];
+    [self.colorBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(AUTO(20));
         make.centerX.equalTo(self);
         make.height.mas_equalTo(AUTO(50));
         make.width.mas_equalTo(AUTO(16));
+    }];
+    
+    [self.colorBgView addSubview:self.colorView];
+    [self.colorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.offset(0);
     }];
     
     [self addSubview:self.topLab];
@@ -49,6 +54,19 @@
     
 }
 
+- (void)setRate:(float)rate {
+    _rate = rate;
+    [self.colorView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(AUTO(50)*rate);
+    }];
+    if (rate==0) {
+        [self.colorView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(1);
+        }];
+    }
+    
+}
+
 - (UILabel *)topLab {
     if (!_topLab) {
         _topLab =[UILabel initWithTitle:@"" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_1B1B1B andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
@@ -74,6 +92,13 @@
         _colorView = [UIView new];
     }
     return _colorView;
+}
+
+- (UIView *)colorBgView {
+    if (!_colorBgView) {
+        _colorBgView = [UIView new];
+    }
+    return _colorBgView;
 }
 
 - (UILabel *)countLab {

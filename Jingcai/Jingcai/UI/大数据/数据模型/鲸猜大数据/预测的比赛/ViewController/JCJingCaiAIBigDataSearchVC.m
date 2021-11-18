@@ -74,9 +74,8 @@
     }
     [self.view showLoading];
     JCMatchService_New *service = [JCMatchService_New new];
-    [service getPredictedMatchListWithType:@"1" Key_word:NonNil(self.searchBar.text) Page:self.pageNo Success:^(id  _Nullable object) {
+    [service getPredictedMatchListWithType:@"1" date:@"" Key_word:NonNil(self.searchBar.text) Page:self.pageNo Success:^(id  _Nullable object) {
         [self endRefresh];
-         
         if ([JCWJsonTool isSuccessResponse:object]) {
             if (self.pageNo==1) {
                 [self.dataArray removeAllObjects];
@@ -106,10 +105,6 @@
         [self endRefresh];
         [self chageImageStr:@"nodata_fangan" Title:@"没有想要的结果，换个搜索词试试~~" BtnTitle:@""];
     }];
- 
-
-
-
 
 }
 

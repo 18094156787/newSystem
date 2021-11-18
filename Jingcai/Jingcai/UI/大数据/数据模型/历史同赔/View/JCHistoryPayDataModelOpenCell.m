@@ -211,47 +211,189 @@
     }];
 }
 
-- (void)data {
-//    self.bgView.backgroundColor = JCBaseColor;
-//    self.matchNameLab.backgroundColor = JCBaseColor;
-    self.matchNameLab.text = @"赛事名称";
-    self.matchTimeLab.text = @"09-02 18:00";
-    self.matchStatusLab.text = @"未";
-    self.scoreLab.text = @"99 : 99";
-    self.homeTeamLab.text = @"皇家马德里";
-    self.awayTeamLab.text = @"皇家马德里";
-    self.homeTeamImgView.backgroundColor = JCBaseColor;
-    self.awayTeamImgView.backgroundColor = JCBaseColor;
-    self.chuLab.text = @"相同初赔（100）";
-    self.jiLab.text = @"相同即赔（90）";
+- (void)setModel:(JCKellyDataModelModel *)model {
+    _model = model;
+    self.matchNameLab.text = model.short_name_zh;
+    self.matchNameLab.textColor = model.competition_color.length>0?[UIColor colorWithHexString:NonNil(model.competition_color)]:UIColorFromRGB(0x606062);
+    self.matchTimeLab.text = model.match_time_str;
+    self.matchStatusLab.text = model.status_cn;
+    self.homeTeamLab.text = model.home_team_name;
+    self.awayTeamLab.text =  model.away_team_name;
+
     
-    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"home_placeholder")];
-    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"away_placeholder")];
-    self.resultImgView.image = JCIMAGE(@"ic_dataModel_black");
+    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.home_team_logo] placeholderImage:JCIMAGE(@"home_placeholder")];
+    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
+    self.resultImgView.hidden = model.wl==0?YES:NO;
+    if (model.wl==1) {
+        self.resultImgView.image = JCIMAGE(@"ic_dataModel_black");
+    }
+    if (model.wl==2) {
+        self.resultImgView.image = JCIMAGE(@"ic_dataModel_red");
+    }
+    self.chuLab.text = [NSString stringWithFormat:@"相同初赔（%@）",model.similar.begin_count.total];
+    self.jiLab.text = [NSString stringWithFormat:@"相同即赔（%@）",model.similar.last_count.total];
     
-    self.homeWinView.topLab.text = @"22";
-    self.homeWinView.bottomLab.text = @"22";
-    self.homeEqualView.topLab.text = @"23";
-    self.homeEqualView.bottomLab.text = @"23";
-    self.homeLoseView.topLab.text = @"24";
-    self.homeLoseView.bottomLab.text = @"24";
+    self.homeWinView.topLab.text = model.similar.begin_count.won;
+    self.homeWinView.bottomLab.text = model.similar.begin_odds.won;
+    self.homeEqualView.topLab.text = model.similar.begin_count.draw;
+    self.homeEqualView.bottomLab.text = model.similar.begin_odds.draw;
+    self.homeLoseView.topLab.text = model.similar.begin_count.loss;
+    self.homeLoseView.bottomLab.text = model.similar.begin_odds.loss;
     
-    self.awayWinView.topLab.text = @"32";
-    self.awayWinView.bottomLab.text = @"32";
-    self.awayEqualView.topLab.text = @"33";
-    self.awayEqualView.bottomLab.text = @"33";
-    self.awayLoseView.topLab.text = @"34";
-    self.awayLoseView.bottomLab.text = @"34";
+    self.awayWinView.topLab.text =  model.similar.last_count.won;
+    self.awayWinView.bottomLab.text = model.similar.last_odds.won;
+    self.awayEqualView.topLab.text = model.similar.last_count.draw;
+    self.awayEqualView.bottomLab.text = model.similar.last_odds.draw;
+    self.awayLoseView.topLab.text = model.similar.last_count.loss;
+    self.awayLoseView.bottomLab.text = model.similar.last_odds.loss;
     
-    self.historyLab.text = @"查询历史数据，找到相同初赔比赛100场，相同即赔比赛90场";
+    if ([model.similar.last_odds.won floatValue]>[model.similar.begin_odds.won floatValue]) {
+        self.awayWinView.bottomLab.textColor = COLOR_EF2F2F;
+    }else if ([model.similar.last_odds.won floatValue]==[model.similar.begin_odds.won floatValue]) {
+        self.awayWinView.bottomLab.textColor = COLOR_2F2F2F;
+    }else{
+        self.awayWinView.bottomLab.textColor = COLOR_30B27A;
+    }
+    if ([model.similar.last_odds.draw floatValue]>[model.similar.begin_odds.draw floatValue]) {
+        self.awayEqualView.bottomLab.textColor = COLOR_EF2F2F;
+    }else if ([model.similar.last_odds.draw floatValue]==[model.similar.begin_odds.draw floatValue]) {
+        self.awayEqualView.bottomLab.textColor = COLOR_2F2F2F;
+    }else{
+        self.awayEqualView.bottomLab.textColor = COLOR_30B27A;
+    }
+    if ([model.similar.last_odds.loss floatValue]>[model.similar.begin_odds.loss floatValue]) {
+        self.awayLoseView.bottomLab.textColor = COLOR_EF2F2F;
+    }else if ([model.similar.last_odds.loss floatValue]==[model.similar.begin_odds.loss floatValue]) {
+        self.awayLoseView.bottomLab.textColor = COLOR_2F2F2F;
+    }else{
+        self.awayLoseView.bottomLab.textColor = COLOR_30B27A;
+    }
     
-    NSString *result = [NSString stringWithFormat:@"本场推荐：%@",@"客胜"];
-    NSRange range = [result rangeOfString:@"客胜"];
-    NSMutableAttributedString *result_attr = [[NSMutableAttributedString alloc] initWithString:result];
-    [result_attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
-    self.resultLab.attributedText = result_attr;
+    NSString *title = [NSString stringWithFormat:@"查询历史数据，找到相同初赔比赛%@场，%@%%比赛结果指向客胜；",NonNil(model.similar.begin_count.total),NonNil(model.similar.begin_big_rate.rate)];
+    if ([model.similar.last_count.total integerValue]>0) {
+        title = [NSString stringWithFormat:@"%@相同即赔比赛%@场，%@%%比赛指向客胜。",title,NonNil(model.similar.last_count.total),NonNil(model.similar.last_big_rate.rate)];
+    }
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+    if (model.similar.begin_count.total.length>0) {
+        NSRange range = [title rangeOfString:model.similar.begin_count.total];
+        if (range.location!=NSNotFound) {
+            [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
+        }
+    }
+    if (model.similar.begin_big_rate.rate.length>0) {
+        NSRange range = [title rangeOfString:[NSString stringWithFormat:@"%@%%",model.similar.begin_big_rate.rate]];
+        if (range.location!=NSNotFound) {
+            [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
+        }
+    }
+    if (model.similar.last_count.total.length>0) {
+        NSRange range = [title rangeOfString:model.similar.last_count.total];
+        if (range.location!=NSNotFound) {
+            [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
+        }
+    }
+    if (model.similar.last_big_rate.rate.length>0) {
+        NSRange range = [title rangeOfString:[NSString stringWithFormat:@"%@%%",model.similar.last_big_rate.rate]];
+        if (range.location!=NSNotFound) {
+            [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
+        }
+    }
+    self.historyLab.attributedText = attr;
     
+        NSString *result = [NSString stringWithFormat:@"本场推荐：%@",NonNil(model.similar.begin_big_rate.spf_desc)];
+    if (model.similar.begin_big_rate.spf_desc.length>0) {
+            NSRange range = [result rangeOfString:model.similar.begin_big_rate.spf_desc];
+        NSMutableAttributedString *result_attr = [[NSMutableAttributedString alloc] initWithString:result];
+        [result_attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
+        self.resultLab.attributedText = result_attr;
+    }else{
+        self.resultLab.text = @"";
+    }
+
+    //半场比分,角球
+    if (model.status_id>1&&model.status_id<9) {
+        self.scoreLab.text = [NSString stringWithFormat:@"%ld : %ld",model.home_score,model.away_score];
+    }else{
+        self.scoreLab.text = @"VS";
+    }
+    //进行中的比赛显示分钟数
+     if (model.status_id>1&&model.status_id<8) {
+        self.matchStatusLab.textColor = COLOR_30B27A;
+        self.scoreLab.textColor = COLOR_30B27A;
+
+        if (model.status_id==2||model.status_id==4) {
+//            self.ongoingTimeLab.text = model.status_cn;
+            if (model.second_half_time>0) {
+                //计算时间差
+                double currentTime = [[NSDate date] timeIntervalSince1970];
+                double distance = currentTime-model.second_half_time;
+
+                self.matchStatusLab.text = [NSString stringWithFormat:@"%.0f'",distance/60+45];
+    //            [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)]
+            }else{
+                //计算时间差
+                double currentTime = [[NSDate date] timeIntervalSince1970];
+                double distance = currentTime-model.first_half_time;
+                if (distance<0) {
+                    distance = 0;
+                }
+                self.matchStatusLab.text = [NSString stringWithFormat:@"%.0f'",distance/60];
+            }
+        }else{
+            self.matchStatusLab.text = model.status_cn;
+        }
+    }else if(model.status_id==8){
+        self.matchStatusLab.text = model.status_cn;
+        self.matchStatusLab.textColor = JCBaseColor;
+        self.scoreLab.textColor = JCBaseColor;
+    }else{
+        self.matchStatusLab.text = model.status_cn;
+        self.matchStatusLab.textColor = COLOR_9F9F9F;
+        self.scoreLab.textColor = COLOR_9F9F9F;
+    }
 }
+
+//- (void)data {
+////    self.bgView.backgroundColor = JCBaseColor;
+////    self.matchNameLab.backgroundColor = JCBaseColor;
+//    self.matchNameLab.text = @"赛事名称";
+//    self.matchTimeLab.text = @"09-02 18:00";
+//    self.matchStatusLab.text = @"未";
+//    self.scoreLab.text = @"99 : 99";
+//    self.homeTeamLab.text = @"皇家马德里";
+//    self.awayTeamLab.text = @"皇家马德里";
+//    self.homeTeamImgView.backgroundColor = JCBaseColor;
+//    self.awayTeamImgView.backgroundColor = JCBaseColor;
+//    self.chuLab.text = @"相同初赔（100）";
+//    self.jiLab.text = @"相同即赔（90）";
+//
+//    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"home_placeholder")];
+//    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"away_placeholder")];
+//    self.resultImgView.image = JCIMAGE(@"ic_dataModel_black");
+//
+//    self.homeWinView.topLab.text = @"22";
+//    self.homeWinView.bottomLab.text = @"22";
+//    self.homeEqualView.topLab.text = @"23";
+//    self.homeEqualView.bottomLab.text = @"23";
+//    self.homeLoseView.topLab.text = @"24";
+//    self.homeLoseView.bottomLab.text = @"24";
+//
+//    self.awayWinView.topLab.text = @"32";
+//    self.awayWinView.bottomLab.text = @"32";
+//    self.awayEqualView.topLab.text = @"33";
+//    self.awayEqualView.bottomLab.text = @"33";
+//    self.awayLoseView.topLab.text = @"34";
+//    self.awayLoseView.bottomLab.text = @"34";
+//
+//    self.historyLab.text = @"查询历史数据，找到相同初赔比赛100场，相同即赔比赛90场";
+//
+//    NSString *result = [NSString stringWithFormat:@"本场推荐：%@",@"客胜"];
+//    NSRange range = [result rangeOfString:@"客胜"];
+//    NSMutableAttributedString *result_attr = [[NSMutableAttributedString alloc] initWithString:result];
+//    [result_attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
+//    self.resultLab.attributedText = result_attr;
+//
+//}
 
 - (UIView *)bgView {
     if (!_bgView) {
@@ -350,6 +492,7 @@
     if (!_homeWinView) {
         _homeWinView =  [JCHistoryPayDataModelRateView new];
         _homeWinView.nameLab.text = @"主胜";
+        _homeWinView.topLab.textColor = COLOR_EF2F2F;
     }
     return _homeWinView;
 }
@@ -358,6 +501,7 @@
     if (!_homeEqualView) {
         _homeEqualView =  [JCHistoryPayDataModelRateView new];
         _homeEqualView.nameLab.text = @"平";
+        _homeEqualView.topLab.textColor = COLOR_30B27A;
     }
     return _homeEqualView;
 }
@@ -366,6 +510,7 @@
     if (!_homeLoseView) {
         _homeLoseView =  [JCHistoryPayDataModelRateView new];
         _homeLoseView.nameLab.text = @"客胜";
+        _homeLoseView.topLab.textColor = COLOR_002868;
     }
     return _homeLoseView;
 }
@@ -374,6 +519,7 @@
     if (!_awayWinView) {
         _awayWinView =  [JCHistoryPayDataModelRateView new];
         _awayWinView.nameLab.text = @"主胜";
+        _awayWinView.topLab.textColor = COLOR_EF2F2F;
     }
     return _awayWinView;
 }
@@ -382,6 +528,7 @@
     if (!_awayEqualView) {
         _awayEqualView =  [JCHistoryPayDataModelRateView new];
         _awayEqualView.nameLab.text = @"平";
+        _awayEqualView.topLab.textColor = COLOR_30B27A;
     }
     return _awayEqualView;
 }
@@ -390,6 +537,7 @@
     if (!_awayLoseView) {
         _awayLoseView =  [JCHistoryPayDataModelRateView new];
         _awayLoseView.nameLab.text = @"客胜";
+        _awayLoseView.topLab.textColor = COLOR_002868;
     }
     return _awayLoseView;
 }
@@ -406,6 +554,7 @@
 - (UILabel *)historyLab {
     if (!_historyLab) {
         _historyLab =[UILabel initWithTitle:@"" andFont:AUTO(11) andWeight:1 andTextColor:UIColorFromRGB(0x606062) andBackgroundColor:JCClearColor andTextAlignment:0];
+        _historyLab.numberOfLines = 0;
     }
     return _historyLab;
 }

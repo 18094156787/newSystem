@@ -30,53 +30,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initViews];
-    [self refreshData];
-}
-
-
-- (void)refreshData {
-    self.pageNo = 1;
-    [self getDataList];
-}
-
-- (void)getDataList {
-
-//    [self.jcWindow showLoading];
-//    JCMatchService_New *service = [JCMatchService_New new];
-//    [service getPredictedMatchListWithType:@"2" Key_word:@"" Page:self.pageNo Success:^(id  _Nullable object) {
-//        [self endRefresh];
-//
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            if (self.pageNo==1) {
-//                [self.dataArray removeAllObjects];
-//            }
-//            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCMatchInfoModel class]];
-//             [self.dataArray addObjectsFromArray:array];
-//            if (array.count <PAGE_LIMIT) {
-//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-//            }
-//            [self.tableView reloadData];
-//            self.pageNo++;
-//            [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-//
-//            if (array.count ==0&&self.dataArray.count>0) {
-//                  self.tableView.tableFooterView = self.noMore_footView;
-//                  self.tableView.mj_footer.hidden = YES;
-//              }else{
-//                  self.tableView.tableFooterView = [UIView new];
-//                  self.tableView.mj_footer.hidden = NO;
-//              }
-//
-//        }else{
-//            [JCWToastTool showHint:object[@"msg"]];
-//        }
-//
-//    } failure:^(NSError * _Nonnull error) {
-//        [self endRefresh];
-//        [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-//    }];
 
 }
+
+
+
 
 
 - (void)initViews {
@@ -103,13 +61,13 @@
 //    self.tableView.tableHeaderView = self.headView;
     
     
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
-
-    JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
-        [weakSelf refreshData];
-    }];
-    emptyView.contentViewOffset = 0;
-    self.tableView.ly_emptyView = emptyView;
+//    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+//
+//    JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
+//        [weakSelf refreshData];
+//    }];
+//    emptyView.contentViewOffset = 0;
+//    self.tableView.ly_emptyView = emptyView;
 //    [self showNoDataViewImageStr:@"empty_img_follow_expert" Title:@"暂时没有比赛" BtnTitle:@"" Btnwidth:0 HiddenBtn:YES];
     
 //    self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
@@ -117,11 +75,11 @@
 //    }];
 
     
-    MJRefreshBackNormalFooter *mj_foot = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [weakSelf getDataList];
-    }];
-    self.tableView.mj_footer = mj_foot;
-    [mj_foot setTitle:@"" forState:MJRefreshStateNoMoreData];
+//    MJRefreshBackNormalFooter *mj_foot = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+//        [weakSelf getDataList];
+//    }];
+//    self.tableView.mj_footer = mj_foot;
+//    [mj_foot setTitle:@"" forState:MJRefreshStateNoMoreData];
 
 
 }
@@ -133,7 +91,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 20;
+    return self.dataSource.count;
 
 }
 
@@ -165,8 +123,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     JCHistoryPayDataModelDetailTitleHeadCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCHistoryPayDataModelDetailTitleHeadCell"];
-//    JCMatchInfoModel *model = self.dataArray[indexPath.section];
-//    cell.model = model;
+//    JCMatchInfoModel *model = self.dataArray[indexPath.row];
+    cell.model = self.dataSource[indexPath.row];
 
     return cell;
 }
@@ -184,5 +142,10 @@
 ////    detailVC.matchNum = @"3518682";
 //
 //    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+- (void)setDataSource:(NSArray *)dataSource {
+    _dataSource = dataSource;
+    [self.tableView reloadData];
 }
 @end

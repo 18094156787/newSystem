@@ -124,7 +124,9 @@
 ////1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5凯利指数 6.离散指数
     if ([model.id integerValue]==1) {
         //鲸猜大数据
-        [self.navigationController pushViewController:[JCJingCaiAIBigDataStickVC new] animated:YES];
+        JCJingCaiAIBigDataStickVC *vc =[JCJingCaiAIBigDataStickVC new];
+        vc.model_id = model.id;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     if ([model.id integerValue]==2) {
         //指数异动

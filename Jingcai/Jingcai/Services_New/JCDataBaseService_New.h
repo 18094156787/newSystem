@@ -101,6 +101,9 @@ NS_ASSUME_NONNULL_BEGIN
 //凯利指数详情
 //match_id 比赛id
 - (void)getKellyDataModeDetailWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//凯利指数变化轨迹
+//match_id 比赛id
+- (void)getKellyDataModeDetailTrackDataWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //凯利指数样本数据
 //match_id 比赛id
 - (void)getKellyDataModeDetailSampleDataWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
@@ -108,6 +111,10 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)getPoissonDataModeListWithDate:(NSString *)date Page:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //泊松分布详情
 - (void)getPoissonDataModeDetailWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//历史同赔列表
+-(void)getHistoryPayDataModeListWithDate:(NSString *)date Page:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//历史同赔详情
+- (void)getHistoryPayDataModeDetailWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END

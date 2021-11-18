@@ -8,6 +8,7 @@
 
 #import "JCBaseTableViewCell_New.h"
 #import "JCHistoryPayDataModelRateView.h"
+#import "JCKellyDataModelModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCHistoryPayDataModelOpenCell : JCBaseTableViewCell_New
@@ -57,6 +58,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel *resultLab;
 
 @property (nonatomic,strong) UILabel *tipLab;
+
+@property (nonatomic, strong) JCKellyDataModelModel *model;
 
 @end
 

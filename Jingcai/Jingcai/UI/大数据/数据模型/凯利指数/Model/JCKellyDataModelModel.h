@@ -8,6 +8,8 @@
 
 #import "JCWBaseBall.h"
 #import "JCKellyDataModelOddsModel.h"
+#import "JCHistoryPayDataModel.h"
+#import "JCHistoryPayMatchDataModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCKellyDataModelModel : JCWBaseBall
@@ -40,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *match_id;
 
+@property (nonatomic, copy) NSString *model_id;////1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5凯利指数 6.离散指数
+
 @property (nonatomic, assign) NSInteger match_time;
 
 @property (nonatomic, copy) NSString *match_time_str;
@@ -61,6 +65,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *jin_qiu_shu;
 
 @property (nonatomic, strong) NSArray *bi_fen;
+
+#pragma mark 历史同赔
+
+@property (nonatomic, strong) JCHistoryPayDataModel *similar;
+
+@property (nonatomic, strong) JCHistoryPayMatchDataModel *similar_match;
+
+@property (nonatomic, assign) NSInteger wl;// 红黑 1红 2黑 0未开奖
 
 @end
 

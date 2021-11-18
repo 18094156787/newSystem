@@ -12,6 +12,7 @@
 #import "JCBigDataMonthProduceModel.h"
 #import "JCJingCaiAIBigDataMZInfoView.h"
 #import "JCDataModelDateView.h"
+#import "JCKellyDataModelPayInfoModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCJingCaiAIBigDataHeadView : JCBaseView<SDCycleScrollViewDelegate>
@@ -54,7 +55,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) void(^JCBuyClickBlock)(void);
 
+@property (nonatomic,copy) void(^JCTimeBlock)(NSString *time);
+
 @property (nonatomic,strong) JCBigDataMonthProduceModel *productModel;
+
+@property (nonatomic,strong) JCKellyDataModelPayInfoModel *model;
+
+
 
 @end
 

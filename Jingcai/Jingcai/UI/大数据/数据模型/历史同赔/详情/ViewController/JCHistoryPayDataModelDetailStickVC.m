@@ -12,6 +12,7 @@
 #import "NSDate+BRPickerView.h"
 #import "JCMatchTimeModel.h"
 #import "JCPayShowView.h"
+#import "JCKellyDataDetailModel.h"
 static CGFloat const kWMMenuViewHeight = 44;
 
 @interface JCHistoryPayDataModelDetailStickVC ()
@@ -28,6 +29,11 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 @property (nonatomic,strong) NSArray *timeArray;
 
+@property (nonatomic,strong) JCKellyDataDetailModel *detailModel;
+
+@property (nonatomic,strong) JCHistoryPayDataModelDetailVC *chuVC;
+
+@property (nonatomic,strong) JCHistoryPayDataModelDetailVC *jiVC;
 
 @end
 
@@ -106,9 +112,9 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 - (void)viewDidLoad {
 
-        [super viewDidLoad];
+    [super viewDidLoad];
     [self initViews];
-//    [self getTopInfoData];
+    [self getTopInfoData];
 
     
     UIButton *customView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
@@ -121,49 +127,29 @@ static CGFloat const kWMMenuViewHeight = 44;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)getTopInfoData {
+    [self.jcWindow showLoading];
+    JCDataBaseService_New *service = [JCDataBaseService_New new];
+    [service getHistoryPayDataModeDetailWithMatch_id:self.match_id Success:^(id  _Nullable object) {
+        [self.jcWindow endLoading];
 
-//- (void)getTopInfoData {
-//    [self.jcWindow showLoading];
-//    JCDataBaseService_New *service = [JCDataBaseService_New service];
-//    [service getBigDataTopInfoWithsuccess:^(id  _Nullable object) {
-//        [self.jcWindow endLoading];
-//        [self.contentView.mj_header endRefreshing];
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            JCBigDataMonthProduceModel *productModel = (JCBigDataMonthProduceModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCBigDataMonthProduceModel class]];
-//            NSArray *noticeArray = [JCWJsonTool arrayWithJson:object[@"data"][@"now_match"] class:[JCJingCaiAINoticeModel class]];
-//            self.headView.productModel = productModel;
-//            self.headView.titleArray = noticeArray;
-//
-//            NSArray*mzArray = [JCWJsonTool arrayWithJson:object[@"data"][@"win_mark"] class:[JCBigDataMingZhongModel class]];
-////            mzArray = @[];
-//            self.headView.dataArray = mzArray;
-////            self.height = kWJingCaiBigDataHeaderViewHeight;
-//
-//            self.height = AUTO(208)+NavigationStatusBarHeight+AUTO(117)+AUTO(12);
-//            if (noticeArray.count>0) {
-//                self.height = AUTO(262)+NavigationStatusBarHeight+AUTO(117)+AUTO(12);
-//            }
-//            if (mzArray.count>0) {
-//                self.height =self.height+ AUTO(28)*mzArray.count+AUTO(80);
-//            }
-//            self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.height);
-//
-////            self.height = 300;
-//
-//            self.maximumHeaderViewHeight = self.height-kNavigationBarHeight-AUTO(77);
-//            self.viewTop = self.height;
-////            [self reloadData];
-//        }else{
-//            [JCWToastTool showHint:object[@"msg"]];
-//        }
-//
-//    } failure:^(NSError * _Nonnull error) {
-//        [self.contentView.mj_header endRefreshing];
-//        [self.jcWindow endLoading];
-//    }];
-//
-//
-//}
+        if ([JCWJsonTool isSuccessResponse:object]) {
+
+            self.detailModel = (JCKellyDataDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataDetailModel class]];
+            self.headView.model = self.detailModel;
+            self.chuVC.dataSource = self.detailModel.similar_match.begin_similar_match;
+            self.jiVC.dataSource = self.detailModel.similar_match.last_similar_match;
+
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        [self.jcWindow endLoading];
+    }];
+
+}
 
 
 - (void)initViews {
@@ -235,8 +221,13 @@ static CGFloat const kWMMenuViewHeight = 44;
     return self.titleArray.count;
 }
 
-- (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
-    return [JCHistoryPayDataModelDetailVC new];
+- (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index
+{
+    if (index==0) {
+        return self.chuVC;
+    }
+
+    return self.jiVC;
 
 }
 
@@ -278,7 +269,7 @@ static CGFloat const kWMMenuViewHeight = 44;
     }];
     [backBtn addTarget:self action:@selector(backBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel *titleLab = [UILabel initWithTitle:@"历史同赔" andFont:17 andWeight:3 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+    UILabel *titleLab = [UILabel initWithTitle:@"同赔分析" andFont:17 andWeight:3 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     [self.topColorView addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(backBtn);
@@ -294,6 +285,20 @@ static CGFloat const kWMMenuViewHeight = 44;
         _headView = [JCHistoryPayDataModelDetailTopView new];
     }
     return _headView;
+}
+
+- (JCHistoryPayDataModelDetailVC *)chuVC {
+    if (!_chuVC) {
+        _chuVC = [JCHistoryPayDataModelDetailVC new];
+    }
+    return _chuVC;
+}
+
+- (JCHistoryPayDataModelDetailVC *)jiVC {
+    if (!_jiVC) {
+        _jiVC = [JCHistoryPayDataModelDetailVC new];
+    }
+    return _jiVC;
 }
 
 @end

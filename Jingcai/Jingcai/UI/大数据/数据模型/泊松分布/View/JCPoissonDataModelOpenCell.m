@@ -244,11 +244,11 @@
                     rate = array[j];
                 }
                 if (j==2) {
-                    color = array[j];
+                    color = [NSString stringWithFormat:@"%@",array[j]];
                 }
             }
             self.homeWinLab.text = [NSString stringWithFormat:@"%@ (%@)",score,rate];
-            self.homeWinLab.textColor = [color integerValue]==1?COLOR_EF2F2F:COLOR_2F2F2F;
+            self.homeWinLab.textColor =[color integerValue]==1?COLOR_EF2F2F:COLOR_2F2F2F;
 
         }
         if (i==1) {
@@ -264,7 +264,8 @@
                 }
             }
             self.homeEqualLab.text = [NSString stringWithFormat:@"%@ (%@)",score,rate];
-            self.homeEqualLab.textColor = [color integerValue]==0?COLOR_2F2F2F:COLOR_EF2F2F;
+            
+            self.homeEqualLab.textColor = [color integerValue]==1?COLOR_EF2F2F:COLOR_2F2F2F;
 
         }
         if (i==2) {
@@ -280,7 +281,7 @@
                 }
             }
             self.homeLoseLab.text = [NSString stringWithFormat:@"%@ (%@)",score,rate];
-            self.homeLoseLab.textColor = [color integerValue]==0?COLOR_2F2F2F:COLOR_EF2F2F;
+            self.homeLoseLab.textColor =[color integerValue]==1?COLOR_EF2F2F:COLOR_2F2F2F;
 
         }
     }
@@ -304,8 +305,7 @@
                 }
             }
             self.awayWinLab.text = [NSString stringWithFormat:@"%@球 (%@)",score,rate];
-            self.awayWinLab.textColor = [color integerValue]==1?COLOR_EF2F2F:COLOR_2F2F2F;
-
+            self.awayWinLab.textColor =[color integerValue]==1?COLOR_EF2F2F:COLOR_2F2F2F;
         }
         if (i==1) {
             for (int j=0; j<array.count; j++) {
@@ -320,7 +320,7 @@
                 }
             }
             self.awayEqualLab.text = [NSString stringWithFormat:@"%@球 (%@)",score,rate];
-            self.awayEqualLab.textColor = [color integerValue]==0?COLOR_2F2F2F:COLOR_EF2F2F;
+            self.awayEqualLab.textColor =[color integerValue]==1?COLOR_EF2F2F:COLOR_2F2F2F;
 
         }
         if (i==2) {
@@ -336,7 +336,7 @@
                 }
             }
             self.awayLoseLab.text = [NSString stringWithFormat:@"%@球 (%@)",score,rate];
-            self.awayLoseLab.textColor = [color integerValue]==0?COLOR_2F2F2F:COLOR_EF2F2F;
+            self.awayLoseLab.textColor = [color integerValue]==1?COLOR_EF2F2F:COLOR_2F2F2F;
 
         }
     }

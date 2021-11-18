@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseView.h"
-
+#import "JCHistoryPayRateDataModel.h"
 NS_ASSUME_NONNULL_BEGIN
 //柱状图相关视图
 @interface JCHistoryPayDataModelColumnarView : JCBaseView
@@ -20,7 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UILabel *countLab;
 
+@property (nonatomic, strong) UIView *colorBgView;
+
 @property (nonatomic, strong) UIView *colorView;
+
+@property (nonatomic,assign) float rate;
 
 @end
 

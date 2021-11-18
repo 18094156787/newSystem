@@ -15,28 +15,28 @@
     [self.winLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.offset(0);
         make.left.offset(AUTO(10));
-        make.width.mas_equalTo(AUTO(25));
+        make.width.mas_equalTo(AUTO(28));
     }];
     
     [self addSubview:self.equalLab];
     [self.equalLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.offset(0);
         make.left.equalTo(self.winLab.mas_right);
-        make.width.mas_equalTo(AUTO(25));
+        make.width.mas_equalTo(AUTO(28));
     }];
     
     [self addSubview:self.loseLab];
     [self.loseLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.offset(0);
         make.left.equalTo(self.equalLab.mas_right);
-        make.width.mas_equalTo(AUTO(25));
+        make.width.mas_equalTo(AUTO(28));
     }];
     
     [self addSubview:self.zs_WinLab];
     [self.zs_WinLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(0);
         make.bottom.equalTo(self.mas_centerY);
-        make.left.equalTo(self.loseLab.mas_right).offset(AUTO(10));
+        make.left.equalTo(self.loseLab.mas_right).offset(0);
         make.width.mas_equalTo(AUTO(43));
     }];
     
@@ -100,7 +100,7 @@
 - (void)setModel:(JCKellyDataDetailSampleModel *)model {
     _model = model;
 
-    self.rateLab.text = model.last_odds.loss_ratio;
+    self.rateLab.text = model.kelly.last_odds.loss_ratio;
     [model.kelly.last_odds.odds enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx==0) {
             self.winLab.text = obj;

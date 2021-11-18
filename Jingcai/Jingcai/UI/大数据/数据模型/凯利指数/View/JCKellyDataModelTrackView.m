@@ -117,7 +117,7 @@
     JCBaseViewController *vc = (JCBaseViewController *)[self getViewController];
     [vc.jcWindow showLoading];
     JCDataBaseService_New *service = [JCDataBaseService_New new];
-    [service getKellyDataModeDetailSampleDataWithMatch_id:self.match_id Success:^(id  _Nullable object) {
+    [service getKellyDataModeDetailTrackDataWithMatch_id:self.match_id Success:^(id  _Nullable object) {
         [vc.jcWindow endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
             NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"] class:[JCKellyDataDetailSampleModel class]];
@@ -131,10 +131,10 @@
             [JCWToastTool showHint:object[@"msg"]];
         }
 
-        
     } failure:^(NSError * _Nonnull error) {
         [vc.view endLoading];
     }];
+
 }
 
 - (UITableView *)tableView {

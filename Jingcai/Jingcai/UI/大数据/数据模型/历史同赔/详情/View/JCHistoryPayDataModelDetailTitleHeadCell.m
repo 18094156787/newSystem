@@ -57,15 +57,34 @@
 
     
 }
- 
-- (void)data {
-    self.timeLab.text = @"2021-08-20\n赛事名称";
-    self.scoreLab.text = @"1:0";
-    self.homeTeamLab.text = @"主队名称主队名称";
-    self.awayTeamLab.text = @"主队名称主队名称";
-    self.resultLab.text = @"胜";
-    
+
+- (void)setModel:(JCTipMatchInfoModel *)model {
+    if (!model) {
+        return;
+    }
+    _model = model;
+    self.timeLab.text = [NSString stringWithFormat:@"%@\n%@",NonNil(model.match_time),NonNil(model.competition_name)];
+    self.scoreLab.text = [NSString stringWithFormat:@"%@:%@",NonNil(model.home_score),NonNil(model.away_score)];
+    self.homeTeamLab.text = model.home_team_name;
+    self.awayTeamLab.text = model.away_team_name;
+    self.resultLab.text = model.wl;
+    if ([model.wl isEqualToString:@"胜"]) {
+        self.resultLab.textColor = COLOR_EF2F2F;
+    }else if ([model.wl isEqualToString:@"平"]) {
+        self.resultLab.textColor = COLOR_30B27A;
+    }else if ([model.wl isEqualToString:@"负"]) {
+        self.resultLab.textColor = COLOR_002868;
+    }
 }
+// 
+//- (void)data {
+//    self.timeLab.text = @"2021-08-20\n赛事名称";
+//    self.scoreLab.text = @"1:0";
+//    self.homeTeamLab.text = @"主队名称主队名称";
+//    self.awayTeamLab.text = @"主队名称主队名称";
+//    self.resultLab.text = @"胜";
+//    
+//}
 
 - (UILabel *)timeLab {
     if (!_timeLab) {

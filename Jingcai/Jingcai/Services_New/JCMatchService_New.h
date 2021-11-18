@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 //预测的比赛
 //type 1 带上搜索 2 不带上搜索 默认2
 //key_word ype 等于 一 需要带上
-- (void)getPredictedMatchListWithType:(NSString *)type Key_word:(NSString *)key_word Page:(NSInteger)page Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+- (void)getPredictedMatchListWithType:(NSString *)type date:(NSString *)date Key_word:(NSString *)key_word Page:(NSInteger)page Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //足球比赛搜索
 - (void)getFootBallMatchListWithSearchWord:(NSString *)key_word Page:(NSInteger)page Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 

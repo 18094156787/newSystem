@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseTableViewCell_New.h"
-
+#import "JCTipMatchInfoModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCHistoryPayDataModelDetailTitleHeadCell : JCBaseTableViewCell_New
@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *awayTeamLab;
 
 @property (nonatomic, strong) UILabel *resultLab;
+
+@property (nonatomic, strong) JCTipMatchInfoModel *model;
 
 @end
 

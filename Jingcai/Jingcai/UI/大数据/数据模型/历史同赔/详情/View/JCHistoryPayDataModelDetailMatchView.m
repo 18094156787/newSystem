@@ -116,14 +116,13 @@
         make.size.mas_equalTo(CGSizeMake(AUTO(96), AUTO(40)));
     }];
     
-    self.tuijianImgView.frame = CGRectMake(AUTO(68), AUTO(12), AUTO(16), AUTO(16));
-    [self.winLab addSubview:self.tuijianImgView];
+
 }
 
 - (void)setModel:(JCKellyDataDetailModel *)model {
     _model = model;
     self.titleLab.text = [NSString stringWithFormat:@"%@  %@",model.competition_name,model.get_match_time];
-    self.resultImgView.image = JCIMAGE(@"ic_dataModel_black");
+    
     [self.homeImgView sd_setImageWithURL:[NSURL URLWithString:model.home_team.logo] placeholderImage:JCIMAGE(@"home_placeholder")];
     [self.awayImgView sd_setImageWithURL:[NSURL URLWithString:model.away_team.logo] placeholderImage:JCIMAGE(@"away_placeholder")];
     self.statusLab.text = model.status_cn;
@@ -141,29 +140,88 @@
     }else{
         self.scoreLab.text = @"VS";
     }
+    //进行中的比赛显示分钟数
+     if (model.status_id>1&&model.status_id<8) {
+        self.statusLab.textColor = COLOR_30B27A;
+        self.scoreLab.textColor = COLOR_30B27A;
+
+        if (model.status_id==2||model.status_id==4) {
+//            self.ongoingTimeLab.text = model.status_cn;
+            if (model.second_half_time>0) {
+                //计算时间差
+                double currentTime = [[NSDate date] timeIntervalSince1970];
+                double distance = currentTime-[model.second_half_time longValue];
+
+                self.statusLab.text = [NSString stringWithFormat:@"%.0f'",distance/60+45];
+    //            [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)]
+            }else{
+                //计算时间差
+                double currentTime = [[NSDate date] timeIntervalSince1970];
+                double distance = currentTime-[model.first_half_time longValue];
+                if (distance<0) {
+                    distance = 0;
+                }
+                self.statusLab.text = [NSString stringWithFormat:@"%.0f'",distance/60];
+                
+            }
+        }else{
+            self.statusLab.text = model.status_cn;
+        }
+    }else if(model.status_id==8){
+        self.statusLab.text = model.status_cn;
+        self.statusLab.textColor = JCBaseColor;
+        self.scoreLab.textColor = JCBaseColor;
+    }else{
+        self.statusLab.text = model.status_cn;
+        self.statusLab.textColor = COLOR_9F9F9F;
+        self.scoreLab.textColor = COLOR_9F9F9F;
+    }
     
-    
-    self.winLab.text = @"主胜\n1.75";
-    self.equalLab.text = @"平局\n1.75";
-    self.loseLab.text = @"客胜\n1.75";
+    if (model.similar.begin_odds) {
+        self.winLab.text = [NSString stringWithFormat:@"主胜\n%@",model.similar.begin_odds.won];
+        self.equalLab.text = [NSString stringWithFormat:@"平局\n%@",model.similar.begin_odds.draw];
+        self.loseLab.text = [NSString stringWithFormat:@"客胜\n%@",model.similar.begin_odds.loss];
+    }
+    NSArray *spf_Array = model.similar.begin_big_rate.spf;
+    for (NSString *value in spf_Array) {
+        if ([value integerValue]==1) {
+            self.winLab.textColor = COLOR_EF2F2F;
+            self.winLab.layer.borderColor = COLOR_EF2F2F.CGColor;
+            
+            
+            
+        }
+        if ([value integerValue]==2) {
+            self.equalLab.textColor = COLOR_EF2F2F;
+            self.equalLab.layer.borderColor = COLOR_EF2F2F.CGColor;
+        }
+        if ([value integerValue]==3) {
+            self.loseLab.textColor = COLOR_EF2F2F;
+            self.loseLab.layer.borderColor = COLOR_EF2F2F.CGColor;
+        }
+    }
+    self.resultImgView.hidden = model.wl>0?NO:YES;
+    if (model.wl==1) {
+        self.resultImgView.image = JCIMAGE(@"ic_dataModel_red");
+    }
+    if (model.wl==2) {
+        self.resultImgView.image = JCIMAGE(@"ic_dataModel_black");
+    }
+    if ([model.spf_result integerValue]==1) {
+        self.tuijianImgView.frame = CGRectMake(AUTO(68), AUTO(12), AUTO(16), AUTO(16));
+        [self.winLab addSubview:self.tuijianImgView];
+    }else   if ([model.spf_result integerValue]==2) {
+        self.tuijianImgView.frame = CGRectMake(AUTO(68), AUTO(12), AUTO(16), AUTO(16));
+        [self.equalLab addSubview:self.tuijianImgView];
+    }else   if ([model.spf_result integerValue]==3) {
+        self.tuijianImgView.frame = CGRectMake(AUTO(68), AUTO(12), AUTO(16), AUTO(16));
+        [self.loseLab addSubview:self.tuijianImgView];
+    }
+
 }
 
-//- (void)data {
-//    self.titleLab.text = @"欧洲杯 2021-09-02 18:00";
-//    self.resultImgView.image = JCIMAGE(@"ic_dataModel_black");
-//    self.homeImgView.backgroundColor = JCBaseColor;
-//    self.awayImgView.backgroundColor = JCBaseColor;
-//    self.statusLab.text = @"未开赛";
-//    self.scoreLab.text = @"VS";
-//    self.homeNameLab.text = @"意大利";
-//    self.awayNameLab.text = @"意大利";
-//    self.homeRankLab.text = @"欧洲杯排名1";
-//    self.awayRankLab.text = @"欧洲杯排名2";
-//    
-//    self.winLab.text = @"主胜\n1.75";
-//    self.equalLab.text = @"平局\n1.75";
-//    self.loseLab.text = @"客胜\n1.75";
-//}
+
+
 
 - (UILabel *)titleLab {
     if (!_titleLab) {
@@ -175,7 +233,7 @@
 - (UIImageView *)resultImgView {
     if (!_resultImgView) {
         _resultImgView = [UIImageView new];
-
+        _resultImgView.hidden = YES;
     }
     return _resultImgView;
 }

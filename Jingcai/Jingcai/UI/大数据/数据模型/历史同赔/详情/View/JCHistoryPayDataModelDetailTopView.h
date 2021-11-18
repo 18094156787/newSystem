@@ -9,6 +9,7 @@
 #import "JCBaseView.h"
 #import "JCHistoryPayDataModelDetailMatchView.h"
 #import "JCHistoryPayDataModelColumnarView.h"
+#import "JCKellyDataDetailModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCHistoryPayDataModelDetailTopView : JCBaseView
@@ -44,6 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel *resultLab;
 
 @property (nonatomic,strong) UILabel *tipLab;
+
+@property (nonatomic,strong) JCKellyDataDetailModel *model;
 
 @end
 

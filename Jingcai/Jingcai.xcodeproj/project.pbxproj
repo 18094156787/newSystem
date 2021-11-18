@@ -109,6 +109,10 @@
 		5940C3472722911000F41DF1 /* JCShowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5940C3462722911000F41DF1 /* JCShowModel.m */; };
 		5940C34A2722A04900F41DF1 /* JCJingCaiAIBigDataMatchTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5940C3492722A04900F41DF1 /* JCJingCaiAIBigDataMatchTitleView.m */; };
 		5940C34D27269A7A00F41DF1 /* JCHomeColumnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5940C34C27269A7A00F41DF1 /* JCHomeColumnModel.m */; };
+		594215CC2745E01E00E95957 /* JCHistoryPayDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 594215CB2745E01E00E95957 /* JCHistoryPayDataModel.m */; };
+		594215CF2745E4B600E95957 /* JCHistoryPayRateDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 594215CE2745E4B600E95957 /* JCHistoryPayRateDataModel.m */; };
+		594215D22745E51600E95957 /* JCHistoryPayBigRateDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 594215D12745E51600E95957 /* JCHistoryPayBigRateDataModel.m */; };
+		594215D527461CF800E95957 /* JCHistoryPayMatchDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 594215D427461CF800E95957 /* JCHistoryPayMatchDataModel.m */; };
 		59442B49271916FB00B5C831 /* JCCommunityMoreColumnVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B48271916FB00B5C831 /* JCCommunityMoreColumnVC.m */; };
 		59442B4F2719174700B5C831 /* JCCommunityMoreColumnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B4E2719174700B5C831 /* JCCommunityMoreColumnCell.m */; };
 		59442B5227195DF100B5C831 /* JCDakaHistoryTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59442B5127195DF100B5C831 /* JCDakaHistoryTitleView.m */; };
@@ -1641,6 +1645,14 @@
 		5940C3492722A04900F41DF1 /* JCJingCaiAIBigDataMatchTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCJingCaiAIBigDataMatchTitleView.m; sourceTree = "<group>"; };
 		5940C34B27269A7A00F41DF1 /* JCHomeColumnModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCHomeColumnModel.h; sourceTree = "<group>"; };
 		5940C34C27269A7A00F41DF1 /* JCHomeColumnModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCHomeColumnModel.m; sourceTree = "<group>"; };
+		594215CA2745E01E00E95957 /* JCHistoryPayDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCHistoryPayDataModel.h; sourceTree = "<group>"; };
+		594215CB2745E01E00E95957 /* JCHistoryPayDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCHistoryPayDataModel.m; sourceTree = "<group>"; };
+		594215CD2745E4B600E95957 /* JCHistoryPayRateDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCHistoryPayRateDataModel.h; sourceTree = "<group>"; };
+		594215CE2745E4B600E95957 /* JCHistoryPayRateDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCHistoryPayRateDataModel.m; sourceTree = "<group>"; };
+		594215D02745E51600E95957 /* JCHistoryPayBigRateDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCHistoryPayBigRateDataModel.h; sourceTree = "<group>"; };
+		594215D12745E51600E95957 /* JCHistoryPayBigRateDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCHistoryPayBigRateDataModel.m; sourceTree = "<group>"; };
+		594215D327461CF800E95957 /* JCHistoryPayMatchDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCHistoryPayMatchDataModel.h; sourceTree = "<group>"; };
+		594215D427461CF800E95957 /* JCHistoryPayMatchDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCHistoryPayMatchDataModel.m; sourceTree = "<group>"; };
 		59442B47271916FB00B5C831 /* JCCommunityMoreColumnVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCCommunityMoreColumnVC.h; sourceTree = "<group>"; };
 		59442B48271916FB00B5C831 /* JCCommunityMoreColumnVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCCommunityMoreColumnVC.m; sourceTree = "<group>"; };
 		59442B4D2719174700B5C831 /* JCCommunityMoreColumnCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCCommunityMoreColumnCell.h; sourceTree = "<group>"; };
@@ -4545,6 +4557,21 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		594215C92745DFAE00E95957 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				594215CA2745E01E00E95957 /* JCHistoryPayDataModel.h */,
+				594215CB2745E01E00E95957 /* JCHistoryPayDataModel.m */,
+				594215CD2745E4B600E95957 /* JCHistoryPayRateDataModel.h */,
+				594215CE2745E4B600E95957 /* JCHistoryPayRateDataModel.m */,
+				594215D02745E51600E95957 /* JCHistoryPayBigRateDataModel.h */,
+				594215D12745E51600E95957 /* JCHistoryPayBigRateDataModel.m */,
+				594215D327461CF800E95957 /* JCHistoryPayMatchDataModel.h */,
+				594215D427461CF800E95957 /* JCHistoryPayMatchDataModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		59442B462719125C00B5C831 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -4737,6 +4764,7 @@
 		59541CFE273A6C6500D470EF /* 历史同赔 */ = {
 			isa = PBXGroup;
 			children = (
+				594215C92745DFAE00E95957 /* Model */,
 				59541D19273B704100D470EF /* 详情 */,
 				59541D00273A6C8000D470EF /* View */,
 				59541CFF273A6C7500D470EF /* ViewController */,
@@ -12081,6 +12109,7 @@
 				7B79CBE224FCF1A200812FC5 /* JCIncomeDetailHeadView.m in Sources */,
 				7B5D0390265E34F600C65F51 /* JCActivityRechargeResultTipView.m in Sources */,
 				7B11DB66261EEC2800C1F7D6 /* JCPlaneDetailFreeVC.m in Sources */,
+				594215D527461CF800E95957 /* JCHistoryPayMatchDataModel.m in Sources */,
 				7B5E26A8247F66F6008CAEE4 /* JCYCHongbaoChaiView.m in Sources */,
 				7BC83C7C238BB16500BC1152 /* JCJingCaiHongbaoModel.m in Sources */,
 				C320172B21709B4C0063D5B9 /* JCWToastTool.m in Sources */,
@@ -12730,6 +12759,7 @@
 				7B2D3C56266B64460085CE18 /* QiCodeManager.m in Sources */,
 				7B0AF02B24F7A4A500E338D5 /* JCTuiJianManager.m in Sources */,
 				7BC9F17625C2AB16000E47EC /* JCYCTenRedRankVC.m in Sources */,
+				594215CC2745E01E00E95957 /* JCHistoryPayDataModel.m in Sources */,
 				7B72D19525FF0B6600607520 /* JNMatchSJAgainstZhiShu_SPFChartContentCell.m in Sources */,
 				7B18853C24FCD12B002E770B /* JCMineIncomeWMStickyVC.m in Sources */,
 				59541CDD273909E700D470EF /* JCDakaBuyPlanHeadView.m in Sources */,
@@ -12838,6 +12868,7 @@
 				7B6D3439253FDADD0038FD5D /* JNMatchSJAgainstHistortPay_SPFCell.m in Sources */,
 				7B4C9BB025AC2E3C00FE8CD4 /* JCYHQHongBaoViewCell.m in Sources */,
 				7B9BF12C2488EA5100DB3589 /* JCYCLianhongRankCell.m in Sources */,
+				594215CF2745E4B600E95957 /* JCHistoryPayRateDataModel.m in Sources */,
 				7BCA27B8251DE986008787FF /* JCAIPlanTableCell.m in Sources */,
 				7BDA571E24EFCB9100A0E1C8 /* TZImageManager.m in Sources */,
 				7B5D03CB265F6BBE00C65F51 /* JCRechargeBannerTextCell.m in Sources */,
@@ -12941,6 +12972,7 @@
 				7B74E98C249B5ED2003144B1 /* JCMatchConcernVC.m in Sources */,
 				7BCA2846253432D9008787FF /* JCBigDataSimilarModel.m in Sources */,
 				7B8E75CD25198F4500FD8D00 /* JCHongbangPriceInfoView.m in Sources */,
+				594215D22745E51600E95957 /* JCHistoryPayBigRateDataModel.m in Sources */,
 				7B5C79542498C92400F97A51 /* BRAddressPickerView.m in Sources */,
 				7BD893DF24F4BB140058B951 /* JCFootBallBuyPlanEndBuyCell.m in Sources */,
 				7B5D03C7265F490500C65F51 /* JCRechareBannerCell.m in Sources */,

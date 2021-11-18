@@ -61,31 +61,11 @@
     }];
     
 
-    [self.bgView addSubview:self.countLab];
-    [self.countLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-15);
-        make.top.equalTo(self.titleLab.mas_bottom).offset(AUTO(20));
-        make.height.mas_equalTo(AUTO(20));
-    }];
 
-    [self.bgView addSubview:self.buyBgView];
-    [self.buyBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.countLab.mas_left).offset(0);
-        make.width.mas_equalTo(120);
-        make.centerY.equalTo(self.countLab);
-        make.height.mas_equalTo(AUTO(30));
-    }];
-    
-    [self.bgView addSubview:self.buyInfoView];
-    [self.buyInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(0);
-        make.centerY.equalTo(self.buyBgView).offset(-5);
-        make.height.mas_equalTo(AUTO(20));
-    }];
     
     [self.bgView addSubview:self.sureBgView];
     [self.sureBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.buyInfoView.mas_bottom).offset(AUTO(30));
+        make.bottom.offset(AUTO(-30));
         make.left.offset(15);
         make.right.offset(-15);
         make.height.mas_equalTo(AUTO(40));
@@ -110,6 +90,28 @@
         make.right.offset(0);
         make.top.bottom.offset(0);
         make.left.mas_equalTo(self.sureBgView.mas_centerX);
+    }];
+    
+    [self.bgView addSubview:self.countLab];
+    [self.countLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.offset(-15);
+        make.bottom.equalTo(self.sureBgView.mas_top).offset(AUTO(-25));
+        make.height.mas_equalTo(AUTO(20));
+    }];
+
+    [self.bgView addSubview:self.buyBgView];
+    [self.buyBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.countLab.mas_left).offset(0);
+        make.width.mas_equalTo(120);
+        make.centerY.equalTo(self.countLab);
+        make.height.mas_equalTo(AUTO(30));
+    }];
+    
+    [self.bgView addSubview:self.buyInfoView];
+    [self.buyInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(0);
+        make.centerY.equalTo(self.buyBgView).offset(-5);
+        make.height.mas_equalTo(AUTO(20));
     }];
     
     [self addSubview:self.dateHeadView];
@@ -288,33 +290,34 @@
 - (void)setType:(NSInteger)type {
     _type = type;
     if (self.type==0) {
-        self.titleLab.text = @"基于鲸猜足球数十万场足球赛事、几亿赔率数据库积累，分析同赔率历史比赛赛果分布，进而预测未来比赛的赛果。";
+//        self.titleLab.text = @"基于鲸猜足球数十万场足球赛事、几亿赔率数据库积累，分析同赔率历史比赛赛果分布，进而预测未来比赛的赛果。";
         self.backTitleLab.text = @"历史同赔";
     }
     if (self.type==1) {
         self.bgView.image = JCIMAGE(@"bg_img_poisson");
-        self.titleLab.text = @"基于比赛中双方球队进球数的概率符合泊松分布的原理，借助泊松分布数学模型，进行推算比赛赛果。";
+//        self.titleLab.text = @"基于比赛中双方球队进球数的概率符合泊松分布的原理，借助泊松分布数学模型，进行推算比赛赛果。";
         self.backTitleLab.text = @"泊松分布";
         
     }
     if (self.type==2) {
         self.bgView.image = JCIMAGE(@"bg_img_dispersed");
         self.bgView.frame = CGRectMake(0,0,SCREEN_WIDTH,AUTO(228)+kNavigationBarHeight);
-        self.titleLab.text = @"根据百家机构欧赔平均值与每家赔率差值的绝对值求和，再计算得出绝对值平均值作为离散指数。离散值越小，各公司机构观点接近，越容易打出；离散度大则意见分歧大，结果不易打出。";
+//        self.titleLab.text = @"根据百家机构欧赔平均值与每家赔率差值的绝对值求和，再计算得出绝对值平均值作为离散指数。离散值越小，各公司机构观点接近，越容易打出；离散度大则意见分歧大，结果不易打出。";
         self.backTitleLab.text = @"离散指数";
     }
     if (self.type==3) {
         self.bgView.image = JCIMAGE(@"bg_img_kelly");
-        self.titleLab.text = @"凯利指数是利用所有机构开出的赔率和胜平负概率，通过凯利公式计算出来的。通过赔率与赔付率的对比，反应各项赔率存在的风险。";
+//        self.titleLab.text = @"凯利指数是利用所有机构开出的赔率和胜平负概率，通过凯利公式计算出来的。通过赔率与赔付率的对比，反应各项赔率存在的风险。";
         self.backTitleLab.text = @"凯利指数";
     }
     if (self.type==4) {
         self.bgView.image = JCIMAGE(@"bg_img_ transaction");
-        self.titleLab.text = @"实时监控指数数据，获取有大幅变动的赛事，帮助用户发现值得深挖分析的赛事。实时监控指数数据，获取有大幅变动的赛事，帮助用户发现值得深挖分析的赛事。";
+//        self.titleLab.text = @"实时监控指数数据，获取有大幅变动的赛事，帮助用户发现值得深挖分析的赛事。实时监控指数数据，获取有大幅变动的赛事，帮助用户发现值得深挖分析的赛事。";
         self.backTitleLab.text = @"指数异动";
         self.dateHeadView.hidden = YES;
         
     }
+ 
 
 
 }

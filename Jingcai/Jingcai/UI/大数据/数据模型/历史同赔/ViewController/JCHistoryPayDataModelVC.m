@@ -10,6 +10,7 @@
 #import "JCHistoryPayDataModelLockedCell.h"
 #import "JCHistoryPayDataModelOpenCell.h"
 #import "JCHistoryPayDataModelDetailStickVC.h"
+#import "JCKellyDataModelModel.h"
 @interface JCHistoryPayDataModelVC ()
 
 @end
@@ -21,7 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initViews];
-    [self refreshData];
+//    [self refreshData];
 }
 
 
@@ -33,55 +34,44 @@
 - (void)getDataList {
 
 //    [self.jcWindow showLoading];
-//    JCMatchService_New *service = [JCMatchService_New new];
-//    [service getPredictedMatchListWithType:@"2" Key_word:@"" Page:self.pageNo Success:^(id  _Nullable object) {
-//        [self endRefresh];
-//         
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            if (self.pageNo==1) {
-//                [self.dataArray removeAllObjects];
-//            }
-//            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCMatchInfoModel class]];
-//             [self.dataArray addObjectsFromArray:array];
-//            if (array.count <PAGE_LIMIT) {
-//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-//            }
-//            [self.tableView reloadData];
-//            self.pageNo++;
-//            [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-//            
-//            if (array.count ==0&&self.dataArray.count>0) {
-//                  self.tableView.tableFooterView = self.noMore_footView;
-//                  self.tableView.mj_footer.hidden = YES;
-//              }else{
-//                  self.tableView.tableFooterView = [UIView new];
-//                  self.tableView.mj_footer.hidden = NO;
-//              }
-//
-//        }else{
-//            [JCWToastTool showHint:object[@"msg"]];
-//        }
-//
-//    } failure:^(NSError * _Nonnull error) {
-//        [self endRefresh];
-//        [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-//    }];
+    JCDataBaseService_New *service = [JCDataBaseService_New new];
+    [service getHistoryPayDataModeListWithDate:self.date Page:self.pageNo success:^(id  _Nullable object) {        [self endRefresh];
+        if ([JCWJsonTool isSuccessResponse:object]) {
+            if (self.pageNo==1) {
+                [self.dataArray removeAllObjects];
+            }
+            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCKellyDataModelModel class]];
+             [self.dataArray addObjectsFromArray:array];
+            if (array.count <PAGE_LIMIT) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            [self.tableView reloadData];
+            self.pageNo++;
+            [self chageImageStr:@"jc_dataModel_empty" Title:@"" BtnTitle:@""];
+
+            if (array.count <PAGE_LIMIT&&self.dataArray.count>0) {
+                  self.tableView.tableFooterView = self.noMore_footView;
+                  self.tableView.mj_footer.hidden = YES;
+              }else{
+                  self.tableView.tableFooterView = [UIView new];
+                  self.tableView.mj_footer.hidden = NO;
+              }
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+        
+    } failure:^(NSError * _Nonnull error) {
+        [self endRefresh];
+        [self chageImageStr:@"jc_dataModel_empty" Title:@"" BtnTitle:@""];
+    }];
 
 }
 
 
 - (void)initViews {
-//    JCJingCaiAIBigDataMatchTitleView *titleView = [[JCJingCaiAIBigDataMatchTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, AUTO(45))];
-//    titleView.backgroundColor = JCWhiteColor;
-//    titleView.titleLab.text = @"比赛列表";
-//    titleView.iconView.hidden = NO;
-//    self.tableView.tableHeaderView = titleView;
-//
-//    titleView.JCBlcok = ^{
-//        [weakSelf.navigationController pushViewController:[JCJingCaiAIBigDataHomeVC new] animated:YES];
-//    };
-    
-    
+
     WeakSelf;
     self.tableView.estimatedRowHeight = 300;
     self.tableView.backgroundColor = COLOR_F4F6F9;
@@ -92,8 +82,10 @@
     [self.tableView registerClass:[JCHistoryPayDataModelLockedCell class] forCellReuseIdentifier:@"JCHistoryPayDataModelLockedCell"];
     [self.tableView registerClass:[JCHistoryPayDataModelOpenCell class] forCellReuseIdentifier:@"JCHistoryPayDataModelOpenCell"];
     
-//    self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(48));
-//    self.tableView.tableHeaderView = self.headView;
+
+//    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.offset(0);
+//    }];
     
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
@@ -127,7 +119,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArray.count;
 
 }
 
@@ -159,28 +151,38 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row==0) {
-        JCHistoryPayDataModelLockedCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCHistoryPayDataModelLockedCell"];
-    //    JCMatchInfoModel *model = self.dataArray[indexPath.section];
-    //    cell.model = model;
-
+    
+    
+    JCKellyDataModelModel *model = self.dataArray[indexPath.row];
+    model.model_id = self.model_id;
+    if (model.can_look==1) {
+        JCHistoryPayDataModelOpenCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCHistoryPayDataModelOpenCell"];
+        cell.model = model;
         return cell;
     }
-    JCHistoryPayDataModelOpenCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCHistoryPayDataModelOpenCell"];
-//    JCMatchInfoModel *model = self.dataArray[indexPath.section];
-//    cell.model = model;
+    JCHistoryPayDataModelLockedCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCHistoryPayDataModelLockedCell"];
+    cell.model = model;
 
     return cell;
-    
-    
+ 
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    JCHistoryPayDataModelDetailStickVC *vc = [JCHistoryPayDataModelDetailStickVC new];
-    [self.navigationController pushViewController:vc animated:YES];
+
     
-    
+    JCKellyDataModelModel *model = self.dataArray[indexPath.row];
+    if (model.can_look==0) {
+        //未开通,前往开通
+        if (self.JCOpenBlock) {
+            self.JCOpenBlock();
+        }
+    }else{
+        JCHistoryPayDataModelDetailStickVC *vc = [JCHistoryPayDataModelDetailStickVC new];
+        vc.match_id = [NSString stringWithFormat:@"%ld",model.id];
+        vc.model_id = model.model_id;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 
 }
 

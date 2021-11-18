@@ -38,7 +38,7 @@
     [self.bgView addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.offset(0);
-        make.centerY.equalTo(self.bgView);
+        make.centerY.equalTo(backBtn);
     }];
 
     [self addSubview:self.matchView];
@@ -219,38 +219,153 @@
 
 }
 
-- (void)data {
-    self.chuLab.text = @"相同初赔（100）";
-    self.jiLab.text = @"相同即赔（90）";
+- (void)setModel:(JCKellyDataDetailModel *)model {
+    _model = model;
+    self.matchView.model = model;
+    self.chuLab.text = [NSString stringWithFormat:@"相同初赔（%@）",model.similar.begin_count.total];
+    self.jiLab.text = [NSString stringWithFormat:@"相同即赔（%@）",model.similar.last_count.total];
+
+    self.homeWinView.topLab.text = [NSString stringWithFormat:@"%@%%",model.similar.begin_rate.won];
+    self.homeWinView.bottomLab.text = [NSString stringWithFormat:@"%@",model.similar.begin_odds.won];
+    self.homeWinView.countLab.text = [NSString stringWithFormat:@"(%@场)",NonNil(model.similar.begin_count.won)];
+    self.homeEqualView.topLab.text = [NSString stringWithFormat:@"%@%%",model.similar.begin_rate.draw];
+    self.homeEqualView.bottomLab.text = [NSString stringWithFormat:@"%@",model.similar.begin_odds.draw];
+    self.homeEqualView.countLab.text = [NSString stringWithFormat:@"(%@场)",NonNil(model.similar.begin_count.draw)];
+    self.homeLoseView.topLab.text = [NSString stringWithFormat:@"%@%%",model.similar.begin_rate.loss];
+    self.homeLoseView.bottomLab.text = [NSString stringWithFormat:@"%@",model.similar.begin_odds.draw];
+    self.homeLoseView.countLab.text = [NSString stringWithFormat:@"(%@场)",NonNil(model.similar.begin_count.loss)];
     
-    self.homeWinView.topLab.text = @"22";
-    self.homeWinView.bottomLab.text = @"22";
-    self.homeWinView.countLab.text = @"(23场)";
-    self.homeEqualView.topLab.text = @"23";
-    self.homeEqualView.bottomLab.text = @"23";
-    self.homeEqualView.countLab.text = @"(23场)";
-    self.homeLoseView.topLab.text = @"24";
-    self.homeLoseView.bottomLab.text = @"24";
-    self.homeLoseView.countLab.text = @"(23场)";
+    self.awayWinView.topLab.text = [NSString stringWithFormat:@"%@%%",model.similar.last_rate.won];
+    self.awayWinView.bottomLab.text = [NSString stringWithFormat:@"%@",model.similar.last_odds.won];
+    self.awayWinView.countLab.text = [NSString stringWithFormat:@"(%@场)",NonNil(model.similar.last_count.won)];
+    self.awayEqualView.topLab.text = [NSString stringWithFormat:@"%@%%",model.similar.last_rate.draw];
+    self.awayEqualView.bottomLab.text = [NSString stringWithFormat:@"%@",model.similar.last_odds.draw];
+    self.awayEqualView.countLab.text = [NSString stringWithFormat:@"(%@场)",NonNil(model.similar.last_count.draw)];
+    self.awayLoseView.topLab.text = [NSString stringWithFormat:@"%@%%",model.similar.last_rate.loss];
+    self.awayLoseView.bottomLab.text = [NSString stringWithFormat:@"%@",model.similar.last_odds.draw];
+    self.awayLoseView.countLab.text = [NSString stringWithFormat:@"(%@场)",NonNil(model.similar.last_count.loss)];
     
-    self.awayWinView.topLab.text = @"32";
-    self.awayWinView.bottomLab.text = @"32";
-    self.awayWinView.countLab.text = @"(23场)";
-    self.awayEqualView.topLab.text = @"33";
-    self.awayEqualView.bottomLab.text = @"33";
-    self.awayEqualView.countLab.text = @"(23场)";
-    self.awayLoseView.topLab.text = @"34";
-    self.awayLoseView.bottomLab.text = @"34";
-    self.awayLoseView.countLab.text = @"(23场)";
+    if ([model.similar.last_odds.won floatValue]>[model.similar.begin_odds.won floatValue]) {
+        self.awayWinView.bottomLab.textColor = COLOR_EF2F2F;
+    }else  if ([model.similar.last_odds.won floatValue]>[model.similar.begin_odds.won floatValue]) {
+        self.awayWinView.bottomLab.textColor = COLOR_2F2F2F;
+    }else{
+        self.awayWinView.bottomLab.textColor = COLOR_30B27A;
+    }
+    if ([model.similar.last_odds.draw floatValue]>[model.similar.begin_odds.draw floatValue]) {
+        self.awayEqualView.bottomLab.textColor = COLOR_EF2F2F;
+    }else  if ([model.similar.last_odds.draw floatValue]>[model.similar.begin_odds.draw floatValue]) {
+        self.awayEqualView.bottomLab.textColor = COLOR_2F2F2F;
+    }else{
+        self.awayEqualView.bottomLab.textColor = COLOR_30B27A;
+    }
+    if ([model.similar.last_odds.loss floatValue]>[model.similar.begin_odds.loss floatValue]) {
+        self.awayLoseView.bottomLab.textColor = COLOR_EF2F2F;
+    }else  if ([model.similar.last_odds.loss floatValue]>[model.similar.begin_odds.loss floatValue]) {
+        self.awayLoseView.bottomLab.textColor = COLOR_2F2F2F;
+    }else{
+        self.awayLoseView.bottomLab.textColor = COLOR_30B27A;
+    }
     
-    self.historyLab.text = @"查询历史数据，找到相同初赔比赛100场，相同即赔比赛90场";
+    float homeTotal = [model.similar.begin_count.total floatValue];
+    if (homeTotal>0) {
+        self.homeWinView.rate =  [model.similar.begin_count.won floatValue]/homeTotal;
+        self.homeEqualView.rate =  [model.similar.begin_count.draw floatValue]/homeTotal;
+        self.homeLoseView.rate =  [model.similar.begin_count.loss floatValue]/homeTotal;
+    }else{
+        self.homeWinView.rate =  0;
+        self.homeEqualView.rate =  0;
+        self.homeLoseView.rate =  0;
+        
+    }
+    float awayTotal = [model.similar.last_count.total floatValue];
+    if (awayTotal>0) {
+        self.awayWinView.rate =  [model.similar.last_count.won floatValue]/awayTotal;
+        self.awayEqualView.rate =  [model.similar.last_count.draw floatValue]/awayTotal;
+        self.awayLoseView.rate =  [model.similar.last_count.loss floatValue]/awayTotal;
+    }else{
+        self.awayWinView.rate =  0;
+        self.awayEqualView.rate =   0;
+        self.awayLoseView.rate =   0;
+    }
+    NSString *title = [NSString stringWithFormat:@"查询历史数据，找到相同初赔比赛%@场，%@%%比赛结果指向客胜；",NonNil(model.similar.begin_count.total),NonNil(model.similar.begin_big_rate.rate)];
+    if ([model.similar.last_count.total integerValue]>0) {
+        title = [NSString stringWithFormat:@"%@相同即赔比赛%@场，%@%%比赛指向客胜。",title,NonNil(model.similar.last_count.total),NonNil(model.similar.last_big_rate.rate)];
+    }
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+    if (model.similar.begin_count.total.length>0) {
+        NSRange range = [title rangeOfString:model.similar.begin_count.total];
+        if (range.location!=NSNotFound) {
+            [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
+        }
+    }
+    if (model.similar.begin_big_rate.rate.length>0) {
+        NSRange range = [title rangeOfString:[NSString stringWithFormat:@"%@%%",model.similar.begin_big_rate.rate]];
+        if (range.location!=NSNotFound) {
+            [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
+        }
+    }
+    if (model.similar.last_count.total.length>0) {
+        NSRange range = [title rangeOfString:model.similar.last_count.total];
+        if (range.location!=NSNotFound) {
+            [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
+        }
+    }
+    if (model.similar.last_big_rate.rate.length>0) {
+        NSRange range = [title rangeOfString:[NSString stringWithFormat:@"%@%%",model.similar.last_big_rate.rate]];
+        if (range.location!=NSNotFound) {
+            [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
+        }
+    }
+    self.historyLab.attributedText = attr;
     
-    NSString *result = [NSString stringWithFormat:@"本场推荐：%@",@"客胜"];
-    NSRange range = [result rangeOfString:@"客胜"];
-    NSMutableAttributedString *result_attr = [[NSMutableAttributedString alloc] initWithString:result];
-    [result_attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
-    self.resultLab.attributedText = result_attr;
+        NSString *result = [NSString stringWithFormat:@"本场推荐：%@",NonNil(model.similar.begin_big_rate.spf_desc)];
+    if (model.similar.begin_big_rate.spf_desc.length>0) {
+            NSRange range = [result rangeOfString:model.similar.begin_big_rate.spf_desc];
+        NSMutableAttributedString *result_attr = [[NSMutableAttributedString alloc] initWithString:result];
+        [result_attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
+        self.resultLab.attributedText = result_attr;
+    }else{
+        self.resultLab.text = @"";
+    }
+    
+
+    
 }
+
+//- (void)data {
+//    self.chuLab.text = @"相同初赔（100）";
+//    self.jiLab.text = @"相同即赔（90）";
+//
+//    self.homeWinView.topLab.text = @"22";
+//    self.homeWinView.bottomLab.text = @"22";
+//    self.homeWinView.countLab.text = @"(23场)";
+//    self.homeEqualView.topLab.text = @"23";
+//    self.homeEqualView.bottomLab.text = @"23";
+//    self.homeEqualView.countLab.text = @"(23场)";
+//    self.homeLoseView.topLab.text = @"24";
+//    self.homeLoseView.bottomLab.text = @"24";
+//    self.homeLoseView.countLab.text = @"(23场)";
+//
+//    self.awayWinView.topLab.text = @"32";
+//    self.awayWinView.bottomLab.text = @"32";
+//    self.awayWinView.countLab.text = @"(23场)";
+//    self.awayEqualView.topLab.text = @"33";
+//    self.awayEqualView.bottomLab.text = @"33";
+//    self.awayEqualView.countLab.text = @"(23场)";
+//    self.awayLoseView.topLab.text = @"34";
+//    self.awayLoseView.bottomLab.text = @"34";
+//    self.awayLoseView.countLab.text = @"(23场)";
+//
+//
+//
+////    self.historyLab.text = @"查询历史数据，找到相同初赔比赛100场，相同即赔比赛90场";
+////    NSString *result = [NSString stringWithFormat:@"本场推荐：%@",@"客胜"];
+////    NSRange range = [result rangeOfString:@"客胜"];
+////    NSMutableAttributedString *result_attr = [[NSMutableAttributedString alloc] initWithString:result];
+////    [result_attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
+////    self.resultLab.attributedText = result_attr;
+//}
 
 - (JCHistoryPayDataModelDetailMatchView *)matchView {
     if (!_matchView) {
@@ -359,6 +474,7 @@
 - (UILabel *)historyLab {
     if (!_historyLab) {
         _historyLab =[UILabel initWithTitle:@"" andFont:AUTO(11) andWeight:1 andTextColor:UIColorFromRGB(0x606062) andBackgroundColor:JCClearColor andTextAlignment:0];
+        _historyLab.numberOfLines = 0;
     }
     return _historyLab;
 }

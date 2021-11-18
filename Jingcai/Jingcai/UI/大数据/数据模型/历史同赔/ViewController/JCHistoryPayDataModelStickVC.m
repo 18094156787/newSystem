@@ -111,12 +111,7 @@ static CGFloat const kWMMenuViewHeight = 0;
         [super viewDidLoad];
     [self initViews];
     [self getTopInfoData];
-
-    
-    UIButton *customView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-    [customView addTarget:self action:@selector(backItemClick) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:customView];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTopInfoData) name:NotificationUserLogin object:nil];
 }
 
 - (void)backItemClick {
@@ -158,6 +153,9 @@ static CGFloat const kWMMenuViewHeight = 0;
 
 
 - (void)initViews {
+    UIButton *customView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    [customView addTarget:self action:@selector(backItemClick) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:customView];
 
     self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.height);
     [self.view addSubview:self.headView];
@@ -185,6 +183,10 @@ static CGFloat const kWMMenuViewHeight = 0;
 }
 
 - (void)payAction {
+    if (![JCWUserBall currentUser]) {
+        [self presentLogin];
+        return;
+    }
     if (self.buyInfoModel.show_status==1) {
         //免费体验
         [self FreeExperienceCheck];
@@ -246,7 +248,7 @@ static CGFloat const kWMMenuViewHeight = 0;
        [alertView removeFromSuperview];
     }];
 //    NSString *day =  [NSString stringWithFormat:@"%@",self.buyInfoModel.free_day];
-    NSString *title = [NSString stringWithFormat:@"是否开通[凯利指数] %@天免费体验",self.buyInfoModel.free_day];
+    NSString *title = [NSString stringWithFormat:@"是否开通[历史同赔] %@天免费体验",self.buyInfoModel.free_day];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
     NSRange count_range = [title rangeOfString:self.buyInfoModel.free_day];
     if (count_range.location!=NSNotFound) {
@@ -352,6 +354,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
 
+    self.dataVC.model_id = self.model_id;
     return self.dataVC;
 
 }
@@ -367,7 +370,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
     CGFloat originY = _viewTop + kWMMenuViewHeight;
-    return CGRectMake(0, originY, self.view.frame.size.width, self.view.frame.size.height-kWMMenuViewHeight-AUTO(10));
+    return CGRectMake(0, originY, self.view.frame.size.width, self.view.frame.size.height-kWMMenuViewHeight-kNavigationBarHeight-AUTO(72));
 }
 
 - (void)pageController:(WMPageController *)pageController willEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info {

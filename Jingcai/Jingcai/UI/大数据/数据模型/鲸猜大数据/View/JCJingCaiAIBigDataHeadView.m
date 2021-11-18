@@ -58,31 +58,31 @@
     }];
     
 
-    [self.bgView addSubview:self.countLab];
-    [self.countLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-15);
-        make.top.equalTo(self.titleLab.mas_bottom).offset(AUTO(20));
-        make.height.mas_equalTo(AUTO(20));
-    }];
-
-    [self.bgView addSubview:self.buyBgView];
-    [self.buyBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.countLab.mas_left).offset(0);
-        make.width.mas_equalTo(120);
-        make.centerY.equalTo(self.countLab);
-        make.height.mas_equalTo(AUTO(30));
-    }];
-    
-    [self.bgView addSubview:self.buyInfoView];
-    [self.buyInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(0);
-        make.centerY.equalTo(self.buyBgView).offset(-5);
-        make.height.mas_equalTo(AUTO(20));
-    }];
-    
+//    [self.bgView addSubview:self.countLab];
+//    [self.countLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.offset(-15);
+//        make.top.equalTo(self.titleLab.mas_bottom).offset(AUTO(20));
+//        make.height.mas_equalTo(AUTO(20));
+//    }];
+//
+//    [self.bgView addSubview:self.buyBgView];
+//    [self.buyBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(self.countLab.mas_left).offset(0);
+//        make.width.mas_equalTo(120);
+//        make.centerY.equalTo(self.countLab);
+//        make.height.mas_equalTo(AUTO(30));
+//    }];
+//
+//    [self.bgView addSubview:self.buyInfoView];
+//    [self.buyInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.offset(0);
+//        make.centerY.equalTo(self.buyBgView).offset(-5);
+//        make.height.mas_equalTo(AUTO(20));
+//    }];
+//
     [self.bgView addSubview:self.sureBgView];
     [self.sureBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.buyInfoView.mas_bottom).offset(AUTO(20));
+        make.bottom.offset(AUTO(-30));
         make.left.offset(15);
         make.right.offset(-15);
         make.height.mas_equalTo(AUTO(40));
@@ -107,6 +107,28 @@
         make.right.offset(0);
         make.top.bottom.offset(0);
         make.left.mas_equalTo(self.sureBgView.mas_centerX);
+    }];
+    
+    [self.bgView addSubview:self.countLab];
+    [self.countLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.offset(-15);
+        make.bottom.equalTo(self.sureBgView.mas_top).offset(AUTO(-25));
+        make.height.mas_equalTo(AUTO(20));
+    }];
+
+    [self.bgView addSubview:self.buyBgView];
+    [self.buyBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.countLab.mas_left).offset(0);
+        make.width.mas_equalTo(120);
+        make.centerY.equalTo(self.countLab);
+        make.height.mas_equalTo(AUTO(30));
+    }];
+    
+    [self.bgView addSubview:self.buyInfoView];
+    [self.buyInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(0);
+        make.centerY.equalTo(self.buyBgView).offset(-5);
+        make.height.mas_equalTo(AUTO(20));
     }];
     
     
@@ -191,7 +213,7 @@
     
 
     
-    self.titleLab.text = @"根据对阵双方的实力、状态、交战、战绩、指数等数据进行分析，给出各种玩法的概率。可包月，也可单场订阅（单场订阅可在比分-对应比赛的数据模块中进行购买）";
+//    self.titleLab.text = @"根据对阵双方的实力、状态、交战、战绩、指数等数据进行分析，给出各种玩法的概率。可包月，也可单场订阅（单场订阅可在比分-对应比赛的数据模块中进行购买）";
 
     
     WeakSelf;
@@ -205,6 +227,13 @@
     [backBtn bk_whenTapped:^{
         [[weakSelf getViewController].navigationController popViewControllerAnimated:YES];
     }];
+    
+    self.dateHeadView.JCTimeBlock = ^(NSString * _Nonnull time) {
+        if (weakSelf.JCTimeBlock) {
+            weakSelf.JCTimeBlock(time);
+        }
+        
+    };
 
 }
 
@@ -212,72 +241,164 @@
 
 - (void)setProductModel:(JCBigDataMonthProduceModel *)productModel {
     _productModel = productModel;
-    [self.buyBgView removeAllSubviews];
-    self.buyInfoView.productModel = self.productModel;
+//    [self.buyBgView removeAllSubviews];
+//    self.buyInfoView.productModel = self.productModel;
+//
+//    if ([productModel.user_count integerValue]>0) {
+//        NSString *buyCount = [NSString stringWithFormat:@"%@人购买",productModel.user_count];
+//        self.countLab.text = buyCount;
+//
+//    }else{
+//        self.countLab.text = @"";
+//    }
+//    if (productModel.distance_day.length>0&&[productModel.is_buy integerValue]==1) {
+//        
+//        NSString *endDay = [NSString stringWithFormat:@"当前到期时间 %@ 天",productModel.distance_day];
+//        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:endDay];
+//        NSRange range = [endDay rangeOfString:productModel.distance_day];
+//        if (range.location!=NSNotFound) {
+//            [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
+//            [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:16]} range:range];
+//        }
+//        self.timeLab.attributedText = attr;
+//        
+//        [self.timeLab mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.width.mas_equalTo(164);
+//        }];
+//        
+//    }else{
+//        self.timeLab.text = @"";
+//        [self.timeLab mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.width.mas_equalTo(0);
+//        }];
+//    }
+//    
+//    if ([productModel.is_buy intValue]==1) {
+//        [self.sureBtn setTitle:@"立即续费" forState:0];
+//    }else{
+//        [self.sureBtn setTitle:@"立即开通" forState:0];
+//    }
+////    {
+////        [self.sureBtn setBackgroundImage:JCIMAGE(@"button_bg_new") forState:0];
+////        self.statusBtn.hidden = YES;
+////        self.timeLab.hidden = YES;
+////    }
+//    self.statusBtn.hidden = YES;
+//    self.timeLab.hidden = YES;
 
-    if ([productModel.user_count integerValue]>0) {
-        NSString *buyCount = [NSString stringWithFormat:@"%@人购买",productModel.user_count];
-        self.countLab.text = buyCount;
 
-    }else{
-        self.countLab.text = @"";
-    }
-    if (productModel.distance_day.length>0&&[productModel.is_buy integerValue]==1) {
+    
+}
+- (void)setModel:(JCKellyDataModelPayInfoModel *)model {
+    _model = model;
+    self.titleLab.text  = model.introduce;
+    self.buyInfoView.dataModel = model;
+    self.buyBgView.hidden= model.big_data_price==0?YES:NO;
+    if (model.show_status==1||model.show_status==3) {
+        //免费体验,立即续费
+        self.statusBtn.hidden = YES;
+        self.timeLab.hidden = YES;
+        [self.sureBtn setBackgroundImage:JCIMAGE(@"button_bg_new_cor") forState:0];
+        [self.sureBtn setTitle:[NSString stringWithFormat:@"免费体验%@天，点击开通",NonNil(model.free_day)] forState:0];
+        if (model.show_status==3) {
+            [self.sureBtn setTitle:@"立即开通" forState:0];
+        }
         
-        NSString *endDay = [NSString stringWithFormat:@"当前到期时间 %@ 天",productModel.distance_day];
-        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:endDay];
-        NSRange range = [endDay rangeOfString:productModel.distance_day];
+    }
+    if (model.show_status==2) {
+        self.statusBtn.hidden = NO;
+        self.timeLab.hidden = NO;
+        NSString *time = [NSString stringWithFormat:@"当前到期时间%ld天%@小时",model.distance_day,model.distance_hour];
+        NSRange range = [time rangeOfString:[NSString stringWithFormat:@"%ld",model.distance_day]];
+        if (model.distance_hour.length==0) {
+            model.distance_hour = @"";
+        }
+
+        NSRange hour_range = [time rangeOfString:model.distance_hour];
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:time];
+
         if (range.location!=NSNotFound) {
-            [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
-            [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:16]} range:range];
+            [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(16)]} range:range];
+        }
+        if (hour_range.location!=NSNotFound) {
+            [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(16)]} range:hour_range];
+        }
+        self.timeLab.attributedText = attr;
+        [self.sureBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button") forState:0];
+        if (model.model_status==1) {
+            //免费体验
+            [self.sureBtn setTitle:@"" forState:0];
+            [self.statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_red") forState:0];
+            [self.statusBtn setTitle:@"免费体验中" forState:0];
+        }
+        if (model.model_status==2) {
+            //体验中续费
+
+            [self.sureBtn setTitle:@"" forState:0];
+            [self.statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_red") forState:0];
+            [self.statusBtn setTitle:@"立即续费" forState:0];
+        }
+        if (model.model_status==3) {
+            //体验中下架
+
+            [self.sureBtn setTitle:@"" forState:0];
+            [self.statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_gray") forState:0];
+            [self.statusBtn setTitle:@"已下架" forState:0];
+        }
+        if (model.model_status==4) {
+            //免费
+            self.statusBtn.hidden = YES;
+            self.timeLab.hidden = YES;
+//            [self.sureBtn setTitle:@"" forState:0];
+ 
+            [self.sureBtn setBackgroundImage:JCIMAGE(@"blank") forState:0];
+
+            [self.sureBtn setTitle:@"免费查看「鲸猜大数据」" forState:0];
+        }
+
+
+        
+    }
+    //未订阅下架
+    if (model.show_status==4) {
+        self.statusBtn.hidden = NO;
+        self.timeLab.hidden = NO;
+        NSString *time = [NSString stringWithFormat:@"当前到期时间 %ld 天",model.distance_day];
+        NSRange range = [time rangeOfString:[NSString stringWithFormat:@"%ld",model.distance_day]];
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:time];
+
+        if (range.location!=NSNotFound) {
+            [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(16)]} range:range];
         }
         self.timeLab.attributedText = attr;
         
-        [self.timeLab mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(164);
-        }];
+        [self.sureBtn setTitle:@"" forState:0];
+        [self.statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_gray") forState:0];
+        [self.statusBtn setTitle:@"已下架" forState:0];
         
-    }else{
-        self.timeLab.text = @"";
-        [self.timeLab mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(0);
-        }];
     }
     
-    if ([productModel.is_buy intValue]==1) {
-        [self.sureBtn setTitle:@"立即续费" forState:0];
+    if (model.show_status==2&&model.model_status==4) {
+        self.sureBtn.layer.borderColor = JCWhiteColor.CGColor;
     }else{
-        [self.sureBtn setTitle:@"立即开通" forState:0];
+        self.sureBtn.layer.borderColor = JCClearColor.CGColor;
     }
-//    {
-//        [self.sureBtn setBackgroundImage:JCIMAGE(@"button_bg_new") forState:0];
-//        self.statusBtn.hidden = YES;
-//        self.timeLab.hidden = YES;
-//    }
-    self.statusBtn.hidden = YES;
-    self.timeLab.hidden = YES;
-//    {
-//        //下架
-//        [self.sureBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button") forState:0];
-//        [self.sureBtn setTitle:@"" forState:0];
-//        [self.statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_gray") forState:0];
-//        [self.statusBtn setTitle:@"已下架" forState:0];
-//        self.statusBtn.hidden = NO;
-//        self.timeLab.hidden = NO;
-//    }
-//    {
-//        //免费体验,立即续费
-//        [self.sureBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button") forState:0];
-//        [self.sureBtn setTitle:@"" forState:0];
-//        [self.statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_red") forState:0];
-//        [self.statusBtn setTitle:@"免费体验中" forState:0];
-//        self.statusBtn.hidden = NO;
-//        self.timeLab.hidden = NO;
-//    }
-    
-    
+
+    if (model.big_data_price>0) {
+        if (model.current_count>0) {
+            NSString *buyCount = [NSString stringWithFormat:@"%ld人购买",model.current_count];
+            self.countLab.text = buyCount;
+
+        }else{
+            self.countLab.text = @"";
+        }
+    }else{
+        self.countLab.text = @"";
+    }
+
+
     [self layoutIfNeeded];
-    NSArray *userArray = self.productModel.user_img;
+    NSArray *userArray = model.user_img;
     userArray = [[userArray reverseObjectEnumerator] allObjects];
         for (int i=0; i<userArray.count; i++) {
              NSString *user_img = userArray[i];
@@ -290,10 +411,6 @@
             [self.buyBgView insertSubview:imgView atIndex:0];
             [imgView bringSubviewToFront:self.buyBgView];
       }
-    
-    
-    
-
 }
 
 
@@ -433,7 +550,7 @@
 - (UIView *)sureBgView {
     if (!_sureBgView) {
         _sureBgView = [UIView new];
-        _sureBgView.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
+//        _sureBgView.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
 //        [_sureBgView hg_setAllCornerWithCornerRadius:16];
     }
     return _sureBgView;
@@ -443,6 +560,9 @@
     if (!_sureBtn) {
         _sureBtn = [UIButton initWithText:@"立即开通" FontSize:AUTO(16) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
         [_sureBtn setBackgroundImage:JCIMAGE(@"button_bg_new_cor") forState:0];
+        _sureBtn.layer.borderWidth = 1;
+        _sureBtn.layer.cornerRadius = AUTO(22);
+        _sureBtn.layer.masksToBounds = YES;
 //        _sureBtn.backgroundColor = JCBaseColor;
 //        [_sureBtn hg_setAllCornerWithCornerRadius:AUTO(20)];
     }

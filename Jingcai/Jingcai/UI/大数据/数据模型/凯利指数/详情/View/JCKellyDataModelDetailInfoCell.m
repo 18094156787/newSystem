@@ -73,6 +73,7 @@
     self.historyLab.attributedText = attr;
     
     self.chuView.model  = model.odds_index.begin_odds;
+    self.jiView.chuModel = model.odds_index.begin_odds;
     self.jiView.model = model.odds_index.last_odds;
 }
 
