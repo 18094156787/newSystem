@@ -31,9 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UILabel *scoreLab;//比分
 
-@property (nonatomic, strong) UILabel *chuLab;//初赔
+@property (nonatomic, strong) UILabel *chuLab;//初指
 
-@property (nonatomic, strong) UILabel *jiLab;//即赔
+@property (nonatomic, strong) UILabel *jiLab;//即指
 
 @property (nonatomic, strong) UIButton *lockBtn;
 

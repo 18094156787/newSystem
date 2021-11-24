@@ -113,26 +113,27 @@
         return;
     }   
     
-    JCMatchService_New * service = [JCMatchService_New service];//self.matchBall.id
-//    self.matchBall.id = @"3513886";
-    [service getMatchHaveBigDataWithMatchnum:self.matchBall.id success:^(id  _Nullable object) {
-        
-//        [self.scrollView addSubview:self.homeVC.view];
-//        [self.scrollView addSubview:self.awayVC.view];
-//        self.vcArr = @[self.homeVC,self.awayVC];
-        
-        if ([JCWJsonTool isSuccessResponse:object]) {
-            NSString *is_have_ai_big_tab = object[@"data"];
-            self.matchBall.is_have_ai_big_tab = [is_have_ai_big_tab intValue];
-        }else{
-            [JCWToastTool showHint:object[@"msg"]];
-        }
-        [self defaultData];
-
-    } failure:^(NSError * _Nonnull error) {
-        [self defaultData];
-        
-    }];
+//    JCMatchService_New * service = [JCMatchService_New service];//self.matchBall.id
+////    self.matchBall.id = @"3513886";
+//    [service getMatchHaveBigDataWithMatchnum:self.matchBall.id success:^(id  _Nullable object) {
+//        
+////        [self.scrollView addSubview:self.homeVC.view];
+////        [self.scrollView addSubview:self.awayVC.view];
+////        self.vcArr = @[self.homeVC,self.awayVC];
+//        
+//        if ([JCWJsonTool isSuccessResponse:object]) {
+//            NSString *is_have_ai_big_tab = object[@"data"];
+//            self.matchBall.is_have_ai_big_tab = [is_have_ai_big_tab intValue];
+//        }else{
+//            [JCWToastTool showHint:object[@"msg"]];
+//        }
+//        [self defaultData];
+//
+//    } failure:^(NSError * _Nonnull error) {
+//        [self defaultData];
+//        
+//    }];
+    [self defaultData];
 
     
 

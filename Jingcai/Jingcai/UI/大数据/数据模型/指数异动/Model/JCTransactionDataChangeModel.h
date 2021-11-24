@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JCTransactionDataChangeModel : JCWBaseBall
 
+@property (nonatomic, strong) NSArray *value;
+
 @end
 
 NS_ASSUME_NONNULL_END

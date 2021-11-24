@@ -421,7 +421,7 @@
     }];
 }
 
-//凯利指数模型购买信息
+//模型购买信息
 - (void)getDataModelPayInfoWithModel_id:(NSString *)model_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
  
 
@@ -438,7 +438,7 @@
     }];
 }
 
-//凯利指数模型免费体验
+//模型免费体验
 - (void)getKellyDataModeFreeExperienceWithModel_id:(NSString *)model_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
  
 
@@ -455,7 +455,7 @@
         failureBlock(error);
     }];
 }
-//凯利指数列表
+//列表
 -(void)getKellyDataModeListWithDate:(NSString *)date Page:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock {
  
 
@@ -473,7 +473,7 @@
         failureBlock(error);
     }];
 }
-//凯利指数详情
+//详情
 //match_id 比赛id
 - (void)getKellyDataModeDetailWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
  
@@ -490,7 +490,7 @@
         failureBlock(error);
     }];
 }
-//凯利指数变化轨迹
+//变化轨迹
 //match_id 比赛id
 - (void)getKellyDataModeDetailTrackDataWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
  
@@ -507,7 +507,7 @@
         failureBlock(error);
     }];
 }
-//凯利指数样本数据
+//样本数据
 //match_id 比赛id
 - (void)getKellyDataModeDetailSampleDataWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
  
@@ -524,7 +524,7 @@
         failureBlock(error);
     }];
 }
-//凯利指数变化轨迹
+//变化轨迹
 //match_id 比赛id
 - (void)getKellyDataModelTrackWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
  
@@ -625,6 +625,92 @@
                              };
     
     NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"change_index_list" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//指数异动详情
+- (void)getTransactionDataModeDetailWithMatch_id:(NSString *)match_id type:(NSString *)type Page:(NSInteger)page PageSize:(NSString *)pageSize Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+ 
+
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+        @"match_id":match_id,
+        @"type":type,
+        @"page":Integet_ToString(page),
+        @"limit":pageSize,
+    };
+    
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"change_index_detail" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//指数异动联赛详情
+- (void)getTransactionDataModeMatchDetailWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+ 
+
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+        @"match_id":match_id,
+    };
+    
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"change_index_detail_match" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//指数分歧列表
+-(void)getDiscreteDataModeListWithDate:(NSString *)date Page:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+ 
+
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+                             @"page":Integet_ToString(page),
+                             @"page_size":@"10",
+                             @"date":date
+                             };
+    
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"discrete_index_list" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//指数分歧变化轨迹
+//match_id 比赛id
+- (void)getDiscreteModeDetailTrackDataWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+ 
+
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+        @"match_id":match_id,
+    };
+    
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"discrete_sample_data_list" paramDic:param ignoreArray:@[]];
+    [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//指数分歧详情
+- (void)getDiscreteDataModeDetailWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock {
+ 
+
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    NSDictionary * param = @{
+        @"match_id":match_id
+    };
+    
+    NSString * urlString = [JCWInterfaceTool_New serviceUrlWithRoute:@"discrete_index_detail" paramDic:param ignoreArray:@[]];
     [manager GET:urlString parameters:param headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         successBlock(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

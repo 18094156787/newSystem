@@ -8,6 +8,7 @@
 
 #import "JCBaseTableViewCell_New.h"
 #import "JCBigDataAnalysisMatchModel.h"
+#import "JCTransactionDataOddsDetailModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCTransactionDataModelDetailZhiShuItemCell : JCBaseTableViewCell_New
@@ -33,6 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign) NSInteger row;
 
 @property (nonatomic,strong) JCBigDataAnalysisMatchModel *model;
+
+//@property (nonatomic,strong) JCTransactionDataOddsDetailModel *zhishuModel;
 
 @end
 

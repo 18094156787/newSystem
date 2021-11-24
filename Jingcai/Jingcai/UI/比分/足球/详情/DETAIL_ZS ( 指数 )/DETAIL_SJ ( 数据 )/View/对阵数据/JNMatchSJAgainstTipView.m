@@ -71,6 +71,23 @@
     }];
 }
 
+- (void)setIsOnlyMonth:(BOOL)isOnlyMonth {
+    _isOnlyMonth = isOnlyMonth;
+    [self.buyMonthBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(AUTO(15));
+        make.right.offset(AUTO(-15));
+        make.top.offset(AUTO(15));
+        make.height.mas_equalTo(AUTO(50));
+    }];
+}
+
+- (void)setIs_free:(BOOL)is_free {
+    _is_free = is_free;
+    [self.tipImgView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(AUTO(240), AUTO(144)));
+    }];
+}
+
 
 
 - (UIImageView *)tipImgView {

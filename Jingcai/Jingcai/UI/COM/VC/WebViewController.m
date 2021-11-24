@@ -33,17 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initSubviews];
-    if (self.isYCRule) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:AppDidLoad];
-    }
-    self.title = NonNil(self.titleStr);
-    [self.wkWebView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
-    
-    if (self.showBackItem) {
-        UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"common_title_back") style:0 target:self action:@selector(backItemClick)];
-        backItem.tintColor = COLOR_2F2F2F;
-        self.navigationItem.leftBarButtonItem = backItem;
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:NotificationUserLogin object:nil];
     
 
 }
@@ -72,6 +62,18 @@
     //self.disableDragBack = YES;
     //self.navigationController.navigationBar.hidden = YES;
     
+    if (self.isYCRule) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:AppDidLoad];
+    }
+    self.title = NonNil(self.titleStr);
+    [self.wkWebView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
+    
+    if (self.showBackItem) {
+        UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"common_title_back") style:0 target:self action:@selector(backItemClick)];
+        backItem.tintColor = COLOR_2F2F2F;
+        self.navigationItem.leftBarButtonItem = backItem;
+    }
+    
     //wkWebView
     _wkWebView = [[WKWebView alloc] initWithFrame:CGRectZero];
     _wkWebView.navigationDelegate = self;
@@ -80,22 +82,9 @@
     //kvo 添加进度监控
     [_wkWebView addObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress)) options:0 context:nil];
     [self.view addSubview:_wkWebView];
-    
+    [self requestData];//请求数据
 
-    NSString *link_url = self.urlStr;
-    if ([self.urlStr containsString:@"announcement"]) {
-        link_url = [NSString stringWithFormat:@"%@?dev=1",self.urlStr];
-    }
-    if ([JCWUserBall currentUser].token.length>0) {
-        NSString *appand = [NSString stringWithFormat:@"token=%@&native=ios&dev=1",[JCWUserBall currentUser].token];
-        if ([link_url containsString:@"?"]) {
-            link_url = [NSString stringWithFormat:@"%@&%@",link_url,appand];
-        }else{
-            link_url = [NSString stringWithFormat:@"%@?%@",link_url,appand];
-        }
-    }
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:link_url]];
-    [_wkWebView loadRequest:request];
+
     
     //progressView
     _progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
@@ -110,6 +99,23 @@
         shareItem.tintColor = JCBlackColor;
         self.navigationItem.rightBarButtonItem = shareItem;
     }
+}
+
+- (void)requestData {
+    NSString *link_url = self.urlStr;
+    if ([self.urlStr containsString:@"announcement"]) {
+        link_url = [NSString stringWithFormat:@"%@?dev=1",self.urlStr];
+    }
+    if ([JCWUserBall currentUser].token.length>0) {
+        NSString *appand = [NSString stringWithFormat:@"token=%@&native=ios&dev=1",[JCWUserBall currentUser].token];
+        if ([link_url containsString:@"?"]) {
+            link_url = [NSString stringWithFormat:@"%@&%@",link_url,appand];
+        }else{
+            link_url = [NSString stringWithFormat:@"%@?%@",link_url,appand];
+        }
+    }
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:link_url]];
+    [_wkWebView loadRequest:request];
 }
 
 - (void)shareItemClick {

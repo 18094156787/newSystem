@@ -161,7 +161,7 @@
         }
         if (indexPath.row==1) {
             cell.titleLab.text = @"付款时间：";
-            cell.contentLab.text = [NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd HH:mm" time:[self.detailModel.pay_time doubleValue]];
+            cell.contentLab.text = [NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd HH:mm:ss" time:[self.detailModel.pay_time doubleValue]];
             ;
         }
         if (indexPath.row==2) {
@@ -224,9 +224,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-//    if (section==1&&[self.detailModel.style integerValue]==1) {
-//        return 0.001f;
-//    }
+    
     return AUTO(8);
 }
 

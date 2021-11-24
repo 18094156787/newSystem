@@ -49,7 +49,7 @@
             }
             [self.tableView reloadData];
             self.pageNo++;
-            [self chageImageStr:@"jc_dataModel_empty" Title:@"" BtnTitle:@""];
+            [self chageImageStr:@"jc_dataModel_empty" Title:@"当前暂无比赛数据~" BtnTitle:@""];
 
             if (array.count <PAGE_LIMIT&&self.dataArray.count>0) {
                   self.tableView.tableFooterView = self.noMore_footView;
@@ -65,7 +65,7 @@
 
     } failure:^(NSError * _Nonnull error) {
         [self endRefresh];
-        [self chageImageStr:@"jc_dataModel_empty" Title:@"" BtnTitle:@""];
+        [self chageImageStr:@"jc_dataModel_empty" Title:@"当前暂无比赛数据~" BtnTitle:@""];
     }];
 
 

@@ -94,17 +94,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getHomeDataModelWithSuccess:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //数据模型购买信息
 - (void)getDataModelPayInfoWithModel_id:(NSString *)model_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
-//凯利指数模型免费体验
+//机构分歧模型免费体验
 - (void)getKellyDataModeFreeExperienceWithModel_id:(NSString *)model_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
-//凯利指数列表
+//机构分歧列表
 -(void)getKellyDataModeListWithDate:(NSString *)date Page:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock;
-//凯利指数详情
+//机构分歧详情
 //match_id 比赛id
 - (void)getKellyDataModeDetailWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
-//凯利指数变化轨迹
+//机构分歧变化轨迹
 //match_id 比赛id
 - (void)getKellyDataModeDetailTrackDataWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
-//凯利指数样本数据
+//机构分歧样本数据
 //match_id 比赛id
 - (void)getKellyDataModeDetailSampleDataWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
 //泊松分布列表
@@ -119,6 +119,18 @@ NS_ASSUME_NONNULL_BEGIN
 //type 0全部 1胜平负、2让球、3进球数
 //order_by 比赛时间排序：1正序（历史异动赛事），2倒叙（最新推荐）
 -(void)getTransactionDataModeListWithType:(NSString *)type order_by:(NSString *)order_by Page:(NSInteger)page PageSize:(NSString *)pageSize success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//指数异动详情
+- (void)getTransactionDataModeDetailWithMatch_id:(NSString *)match_id type:(NSString *)type Page:(NSInteger)page PageSize:(NSString *)pageSize Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//指数异动联赛详情
+- (void)getTransactionDataModeMatchDetailWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//指数分歧列表
+-(void)getDiscreteDataModeListWithDate:(NSString *)date Page:(NSInteger)page success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//指数分歧变化轨迹
+//match_id 比赛id
+- (void)getDiscreteModeDetailTrackDataWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+//指数分歧详情
+- (void)getDiscreteDataModeDetailWithMatch_id:(NSString *)match_id Success:(successBlock)successBlock failure:(failureBlock)failureBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END

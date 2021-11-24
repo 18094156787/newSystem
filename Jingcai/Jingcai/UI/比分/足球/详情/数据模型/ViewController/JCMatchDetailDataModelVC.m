@@ -25,24 +25,63 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segControl;
 
+@property (strong, nonatomic) JNDIYemptyView *emptyView;
+
 @property (strong, nonatomic) NSMutableArray *vcArr;
 
 @property (strong, nonatomic) NSMutableArray *titleArray;
 
 @property (assign, nonatomic) NSInteger is_have_ai_big_tab;
 
+@property (assign, nonatomic) float total_width;
+
 @end
 
 @implementation JCMatchDetailDataModelVC
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.segControl.hidden = YES;
-    self.scrollView.backgroundColor = COLOR_F0F0F0;
-    self.view.backgroundColor = COLOR_F0F0F0;
+    [self initView];
     [self loadDataWithMatchBall:self.matchBall];
     
 
     
+}
+
+- (void)initView {
+    self.segControl.hidden = YES;
+    self.scrollView.backgroundColor = COLOR_F0F0F0;
+    self.view.backgroundColor = COLOR_F0F0F0;
+    [self initViews];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:NotificationUserLogin object:nil];
+    
+
+
+}
+
+- (void)refreshData {
+    [self.vcArr removeAllObjects];
+    [self.titleArray removeAllObjects];
+    [self.scrollView removeAllSubviews];
+//    for (UIView *view in self.view.subviews) {
+//        if (view==self.scrollView) {
+//            break;
+//        }
+//        [view removeFromSuperview];;
+//    }
+    [self loadDataWithMatchBall:self.matchBall];
+}
+
+- (void)initViews {
+    JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
+//            [weakSelf refreshData];
+        }];
+    emptyView.imageStr = @"jc_dataModel_empty";
+    emptyView.titleStr = @"当前暂无数据模型~";
+    emptyView.contentViewOffset = AUTO(-150);
+    emptyView.hidden = YES;
+    [self.view addSubview:emptyView];
+    self.emptyView = emptyView;
 }
 
 
@@ -71,59 +110,86 @@
     return CGRectGetMinY(self.scrollView.frame)+[vc contentH];
 }
 
-//- (void)setMatchBall:(JCWMatchBall *)matchBall {
-//    if (!matchBall) {
-//        return;
-//    }
-//    _matchBall = matchBall;
-//    [self loadDataWithMatchBall:matchBall];
-//
-//}
 
 #pragma mark - 📌 LOADING
 - (void)loadDataWithMatchBall:(JCMatchBall *)matchBall {
     if (!matchBall) {
         return;
     }
+    
+//    matchBall.id = @"3647153";
     JCMatchService_New * service = [JCMatchService_New service];
     [service getMatchDataModelItemWithMatch_id:matchBall.id success:^(id  _Nullable object) {
         if ([JCWJsonTool isSuccessResponse:object]) {
             NSString *is_have_ai_big_tab = object[@"data"][@"is_have_ai_big"];
+            NSString *free_day = [NSString stringWithFormat:@"%@",object[@"data"][@"free_day"]];
             self.is_have_ai_big_tab = [is_have_ai_big_tab integerValue];
             NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCDataModelTitleModel class]];
+            
+            self.emptyView.hidden = array.count>0?YES:NO;
             self.titleArray = [NSMutableArray array];
             self.vcArr = [NSMutableArray array];
             [array enumerateObjectsUsingBlock:^(JCDataModelTitleModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                obj.free_day = NonNil(free_day);
+                
                 [self.titleArray addObject:obj.title];
-//                id;//1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5凯利指数 6.离散指数
+//                id;//1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5机构分歧 6.指数分歧
+                if ([obj.id integerValue]==1) {
+                    JNMatchSJAgainstDataVC *vc = [JNMatchSJAgainstDataVC new];
+                    vc.matchBall = matchBall;
+                    vc.titleModel = obj;
+                    [self.vcArr addObject:vc];
+                }
                 if ([obj.id integerValue]==2) {
-                    [self.vcArr addObject:[JCTransactionDataModelMatchVC new]];
+                    JCTransactionDataModelMatchVC *vc = [JCTransactionDataModelMatchVC new];
+                    vc.hidetopMatch = YES;
+                    vc.match_id = matchBall.id;
+                    vc.titleModel = obj;
+                    [self.vcArr addObject:vc];
                 }
                 if ([obj.id integerValue]==3) {
-                    [self.vcArr addObject:[JCHistoryPayDataModelDetailStickVC new]];
+                    JCHistoryPayDataModelDetailStickVC *vc = [JCHistoryPayDataModelDetailStickVC new];
+                    vc.hidetopMatch = YES;
+                    vc.isMatch = YES;
+                    vc.titleModel = obj;
+                    vc.match_id = matchBall.id;
+                    [self.vcArr addObject:vc];
                 }
                 if ([obj.id integerValue]==4) {
-                    [self.vcArr addObject:[JCPoissonDataModelDetailVC new]];
+                    JCPoissonDataModelDetailVC *vc =[JCPoissonDataModelDetailVC new];
+                    vc.hidetopMatch = YES;
+                    vc.isMatch = YES;
+                    vc.titleModel = obj;
+                    vc.match_id = matchBall.id;
+                    [self.vcArr addObject:vc];
                 }
                 if ([obj.id integerValue]==5) {
                     JCKellyDataModelDetailVC *vc = [JCKellyDataModelDetailVC new];
                     vc.hidetopMatch = YES;
+                    vc.isMatch = YES;
+                    vc.titleModel = obj;
                     vc.match_id = self.matchBall.id;
                     [self.vcArr addObject:vc];
                 }
                 if ([obj.id integerValue]==6) {
-                    [self.vcArr addObject:[JCDiscreteDataModelDetailVC new]];
+                    JCDiscreteDataModelDetailVC *vc =[JCDiscreteDataModelDetailVC new];
+                    vc.match_id = matchBall.id;
+                    vc.hidetopMatch = YES;
+                    vc.isMatch = YES;
+                    vc.titleModel = obj;
+                    [self.vcArr addObject:vc];
                 }
             }];
-            if ([is_have_ai_big_tab integerValue]==1) {
-                [self.titleArray insertObject:@"鲸猜大数据" atIndex:0];
-                JNMatchSJAgainstDataVC *vc = [JNMatchSJAgainstDataVC new];
-                vc.matchBall = self.matchBall;
-                [self.titleArray insertObject:vc atIndex:0];
-            }
+//            if ([is_have_ai_big_tab integerValue]==1) {
+//                [self.titleArray insertObject:@"鲸猜大数据" atIndex:0];
+//                JNMatchSJAgainstDataVC *vc = [JNMatchSJAgainstDataVC new];
+//                JCDataModelTitleModel *obj = [JCDataModelTitleModel new];
+//                vc.titleModel = obj;
+//                vc.matchBall = self.matchBall;
+//                [self.vcArr insertObject:vc atIndex:0];
+//            }
             
-//            NSString *is_have_ai_big_tab = object[@"data"];
-//            self.matchBall.is_have_ai_big_tab = [is_have_ai_big_tab intValue];
+
         }else{
             [JCWToastTool showHint:object[@"msg"]];
         }
@@ -149,28 +215,32 @@
     [self.vcArr enumerateObjectsUsingBlock:^(UIViewController *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [self.scrollView addSubview:obj.view];
     }];
-
+    float width = AUTO(100);
+    self.total_width = 0;
+    NSMutableArray *itemWidthArray = [NSMutableArray array];
+    [self.titleArray enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [itemWidthArray addObject:@(width)];
+        self.total_width =self.total_width+width;
+    }];
     
-    float width = (SCREEN_WIDTH-AUTO(70)-20)/5.0f;
-    self.tabSegment = [[LMJTab alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH-20, 30) lineWidth:1 lineColor:COLOR_F0F0F0];
-//    self.tabSegment.centerY = self.view.centerY;
-//        self.tabSegment.hidden = YES;
-//    [self.tabSegment setItemsWithTitle:titleArray normalItemColor:JCWhiteColor selectItemColor:JCBaseColor normalTitleColor:COLOR_2F2F2F selectTitleColor:[UIColor whiteColor] titleTextSize:12 selectItemNumber:0];
-    [self.tabSegment setItemsWithTitle:self.titleArray normalItemColor:JCWhiteColor selectItemColor:JCBaseColor normalTitleColor:COLOR_2F2F2F selectTitleColor:[UIColor whiteColor] titleTextSize:12 selectItemNumber:0 itemWidth:@[@(AUTO(70)),@(width),@(width),@(width),@(width),@(width)]];
+    float start = (SCREEN_WIDTH-self.total_width)/2.0f;
+    CGRect frame = CGRectMake(start, 10, self.total_width, 30);
+    if (self.titleArray.count>=4) {
+        frame = CGRectMake(20, 10, SCREEN_WIDTH-40, 30);
+
+    }
+    
+    if (self.tabSegment) {
+        [self.tabSegment removeFromSuperview];
+    }
+    self.tabSegment = [[LMJTab alloc] initWithFrame:frame lineWidth:1 lineColor:COLOR_F0F0F0];
+
+    [self.tabSegment setItemsWithTitle:self.titleArray normalItemColor:JCWhiteColor selectItemColor:JCBaseColor normalTitleColor:COLOR_2F2F2F selectTitleColor:[UIColor whiteColor] titleTextSize:12 selectItemNumber:0 itemWidth:[NSMutableArray arrayWithArray:itemWidthArray]];
     self.tabSegment.layer.cornerRadius = 5.0;
     self.tabSegment.delegate = self;
 
     [self.view addSubview:self.tabSegment];
-    float start = 0;
-    if (self.titleArray.count<7) {
-         start = (SCREEN_WIDTH-self.titleArray.count*width-20)/2.0f;
-        if (self.is_have_ai_big_tab==1) {
-            start = (SCREEN_WIDTH-(self.titleArray.count-1)*width-AUTO(70)-20)/2.0f;
-        }
-    }
-    self.tabSegment.frame = CGRectMake(start, 10, SCREEN_WIDTH-20, 30);
 
-//    self.segControl.selectedSegmentIndex = 0;
 }
 
 -(void)tab:(LMJTab *)tab didSelectedItemNumber:(NSInteger)number{

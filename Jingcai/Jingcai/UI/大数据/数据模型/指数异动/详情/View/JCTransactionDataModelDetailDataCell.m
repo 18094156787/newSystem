@@ -15,13 +15,12 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(0);
         make.right.offset(0);
-        make.top.offset(0);
-        make.height.mas_equalTo(AUTO(100));
+        make.top.bottom.offset(0);
+//        make.height.mas_equalTo(AUTO(100));
     }];
     [self.tableView registerClass:[JCTransactionDataModelDetailDataInfoCell class] forCellReuseIdentifier:@"JCTransactionDataModelDetailDataInfoCell"];
     
-    self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(30));
-    self.tableView.tableHeaderView = self.headView;
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -29,14 +28,15 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return 2;
+    NSLog(@"个数%ld",self.detailModel.odds_change_list.count);
+    return self.detailModel.odds_change_list.count;
     
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JCTransactionDataModelDetailDataInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCTransactionDataModelDetailDataInfoCell"];
-
+    cell.type = self.type;
+    cell.model = self.detailModel.odds_change_list[indexPath.row];
     return cell;
 }
 
@@ -45,6 +45,19 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return AUTO(35);
+}
+
+
+- (void)setDetailModel:(JCKellyDataDetailModel *)detailModel {
+    _detailModel = detailModel;
+   
+    if (self.detailModel.compare_odds.count>0) {
+        self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(30));
+        self.tableView.tableHeaderView = self.headView;
+        self.headView.type = detailModel.type;
+        self.headView.detailModel = detailModel;
+    }
+    [self.tableView reloadData];
 }
 
 
@@ -80,8 +93,8 @@
     return _headView;
 }
 
-- (void)setDataArray:(NSArray *)dataArray {
-    _dataArray = dataArray;
-    [self.tableView reloadData];
-}
+//- (void)setDataArray:(NSArray *)dataArray {
+//    _dataArray = dataArray;
+//    [self.tableView reloadData];
+//}
 @end

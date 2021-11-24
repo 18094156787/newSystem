@@ -7,7 +7,7 @@
 //
 
 #import "JCTransactionDataModelCell.h"
-
+#import "JCTransactionDataChangeFlagModel.h"
 @implementation JCTransactionDataModelCell
 
 - (void)initViews {
@@ -84,7 +84,7 @@
     
     [self.contentView addSubview:self.awayTeamLab];
     [self.awayTeamLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.awayTeamImgView);
+        make.left.equalTo(self.homeTeamLab);
         make.centerY.equalTo(self.awayTeamImgView);
         make.width.mas_equalTo(AUTO(105));
         
@@ -105,7 +105,7 @@
     [self.contentView addSubview:self.awayRateLab];
     [self.awayRateLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lineView.mas_bottom).offset(AUTO(20));
-        make.right.offset(AUTO(-37));
+        make.right.offset(AUTO(-25));
         make.height.mas_equalTo(AUTO(25));
     }];
     
@@ -130,9 +130,10 @@
     [rateChangeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.homeTeamImgView);
         make.top.equalTo(self.awayTeamImgView.mas_bottom).offset(AUTO(16));
-        make.size.mas_equalTo(CGSizeMake(AUTO(150), AUTO(26)));
-        
+//        make.size.mas_equalTo(CGSizeMake(AUTO(150), AUTO(26)));
+        make.height.mas_equalTo(AUTO(26));
     }];
+    self.rateChangeView = rateChangeView;
     
     UILabel *jiLab = [UILabel initWithTitle:@"即" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     [rateChangeView addSubview:jiLab];
@@ -144,9 +145,9 @@
     
     [rateChangeView addSubview:self.windRateLab];
     [self.windRateLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(jiLab.mas_right);
+        make.left.equalTo(jiLab.mas_right).offset(AUTO(2));
         make.centerY.equalTo(rateChangeView);
-        make.width.mas_equalTo(AUTO(35));
+//        make.width.mas_equalTo(AUTO(35));
     }];
     
     [rateChangeView addSubview:self.upImgView];
@@ -158,16 +159,23 @@
     
     [rateChangeView addSubview:self.equalRateLab];
     [self.equalRateLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.upImgView.mas_right);
+        make.left.equalTo(self.upImgView.mas_right).offset(AUTO(2));
         make.centerY.equalTo(rateChangeView);
-        make.width.mas_equalTo(AUTO(35));
+//        make.width.mas_equalTo(AUTO(35));
+    }];
+    
+    [rateChangeView addSubview:self.equalImgView];
+    [self.equalImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.equalRateLab.mas_right);
+        make.centerY.equalTo(rateChangeView);
+        make.size.mas_equalTo(CGSizeMake(AUTO(12), AUTO(12)));
     }];
     
     [rateChangeView addSubview:self.loseRateLab];
     [self.loseRateLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.equalRateLab.mas_right);
+        make.left.equalTo(self.equalImgView.mas_right).offset(AUTO(2));
         make.centerY.equalTo(rateChangeView);
-        make.width.mas_equalTo(AUTO(35));
+//        make.width.mas_equalTo(AUTO(35));
     }];
     
     [rateChangeView addSubview:self.downImgView];
@@ -175,6 +183,7 @@
         make.left.equalTo(self.loseRateLab.mas_right);
         make.centerY.equalTo(rateChangeView);
         make.size.mas_equalTo(CGSizeMake(AUTO(12), AUTO(12)));
+        make.right.offset(AUTO(-5));
     }];
     
     [self.contentView addSubview:self.rateChangeLab];
@@ -220,75 +229,222 @@
     self.awayTeamLab.text =  model.away_team_name;
     self.typeLab.text = model.type_name;
     
-    self.homeScoreLab.text = model.home_score;
-    self.awayScoreLab.text = model.away_score;
+
+    if (model.status_id>1&&model.status_id<9) {
+        self.homeScoreLab.text = model.home_score;
+        self.awayScoreLab.text = model.away_score;
+    }else{
+        self.homeScoreLab.text = @"";
+        self.awayScoreLab.text = @"";
+    }
+    //进行中的比赛显示分钟数
+     if (model.status_id>1&&model.status_id<8) {
+        self.matchStatusLab.textColor = COLOR_30B27A;
+        self.homeScoreLab.textColor = COLOR_30B27A;
+         self.awayScoreLab.textColor = COLOR_30B27A;
+
+        if (model.status_id==2||model.status_id==4) {
+//            self.ongoingTimeLab.text = model.status_cn;
+            if (model.second_half_time>0) {
+                //计算时间差
+                double currentTime = [[NSDate date] timeIntervalSince1970];
+                double distance = currentTime-model.second_half_time;
+
+                self.matchStatusLab.text = [NSString stringWithFormat:@"%.0f'",distance/60+45];
+    //            [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)]
+            }else{
+                //计算时间差
+                double currentTime = [[NSDate date] timeIntervalSince1970];
+                double distance = currentTime-model.first_half_time;
+                if (distance<0) {
+                    distance = 0;
+                }
+                self.matchStatusLab.text = [NSString stringWithFormat:@"%.0f'",distance/60];
+            }
+        }else{
+            self.matchStatusLab.text = model.status_cn;
+        }
+    }else if(model.status_id==8){
+        self.matchStatusLab.text = model.status_cn;
+        self.matchStatusLab.textColor = JCBaseColor;
+
+        self.homeScoreLab.textColor = JCBaseColor;
+         self.awayScoreLab.textColor = JCBaseColor;
+    }else{
+        self.matchStatusLab.text = model.status_cn;
+        self.matchStatusLab.textColor = COLOR_9F9F9F;
+        self.homeScoreLab.textColor = COLOR_9F9F9F;
+         self.awayScoreLab.textColor = COLOR_9F9F9F;
+    }
+
 
     
     [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.home_team_logo] placeholderImage:JCIMAGE(@"home_placeholder")];
     [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
     self.rateChangeLab.text = model.odds_change_name;
+    if (model.type==1) {
+        self.typeLab.layer.borderColor = COLOR_EF2F2F.CGColor;
+        self.typeLab.backgroundColor = [COLOR_EF2F2F colorWithAlphaComponent:0.1];
+        self.typeLab.textColor = COLOR_EF2F2F;
+    }else if (model.type==2){
+        self.typeLab.layer.borderColor = COLOR_002868.CGColor;
+        self.typeLab.backgroundColor = [COLOR_002868 colorWithAlphaComponent:0.1];
+        self.typeLab.textColor = COLOR_002868;
+    }else if (model.type==3){
+        self.typeLab.layer.borderColor = COLOR_30B27A.CGColor;
+        self.typeLab.backgroundColor = [COLOR_30B27A colorWithAlphaComponent:0.1];
+        self.typeLab.textColor = COLOR_30B27A;
+    }
+    //上升指数
+    self.awayRateLab.textColor = COLOR_2F2F2F;
+    self.zhishuImgView.hidden = model.compare_odds_change_data.changeArr.value.count>=2?NO:YES;
+    if (model.compare_odds_change_data.changeArr.value.count>=2) {
+        NSString *homeValue = @"";
+        NSString *awayValue = @"";
+        for (int i=0; i<model.compare_odds_change_data.changeArr.value.count; i++) {
+            NSString *zhishuValue = model.compare_odds_change_data.changeArr.value[i];
+
+            if (i==0) {
+                homeValue = zhishuValue;
+                self.homeRateLab.text = zhishuValue;
+            }
+            if (i==1) {
+                awayValue = zhishuValue;
+                self.awayRateLab.text = zhishuValue;
+            }
+
+        }
+        if ([awayValue floatValue]>[homeValue floatValue]) {
+            self.zhishuImgView.image = JCIMAGE(@"ic_dataModel_zhishu_up");
+            self.awayRateLab.textColor = COLOR_EF2F2F;
+        }else if([awayValue floatValue]<[homeValue floatValue]) {
+            self.zhishuImgView.image = JCIMAGE(@"ic_dataModel_zhishu_down");
+            self.awayRateLab.textColor = COLOR_30B27A;
+        }else{
+            self.zhishuImgView.hidden = YES;
+        }
+    }
+    
+    //即使赔率变化
+    self.rateChangeView.hidden = model.compare_odds_change_data.immediateArr.count>=2?NO:YES;
+    if (model.compare_odds_change_data.immediateArr.count>=2) {
+        NSString *homeValue = @"";
+        NSString *euqalValue = @"";
+        NSString *awayValue = @"";
+        for (int i=0; i<model.compare_odds_change_data.immediateArr.count; i++) {
+            JCTransactionDataChangeFlagModel *flagModel = model.compare_odds_change_data.immediateArr[i];
+            
+//            immediateArr.count==3 是胜平负 immediateArr.count==2是让球和进球数
+            if (model.compare_odds_change_data.immediateArr.count==3) {
+                if (i==0) {
+                    homeValue = flagModel.value;
+                    self.windRateLab.text = homeValue;
+                    if ([flagModel.flage integerValue]==1) {
+                        self.upImgView.image = JCIMAGE(@"ic_dataModel_zhishu_small_up");
+                        self.windRateLab.textColor = COLOR_EF2F2F;
+                    }else if([flagModel.flage integerValue]==2){
+                        self.upImgView.image = JCIMAGE(@"ic_dataModel_zhishu_small_down");
+                        self.windRateLab.textColor = COLOR_30B27A;
+                    }else{
+                        self.windRateLab.textColor = COLOR_2F2F2F;
+                    }
+                    [self showChangeRateView:self.upImgView flag:[flagModel.flage integerValue]];
+                }
+                if (i==1) {
+                    euqalValue = flagModel.value;
+                    self.equalRateLab.text = euqalValue;
+                    if ([flagModel.flage integerValue]==1) {
+                        self.equalImgView.image = JCIMAGE(@"ic_dataModel_zhishu_small_up");
+                        self.equalRateLab.textColor = COLOR_EF2F2F;
+                    }else if([flagModel.flage integerValue]==2){
+                        self.equalImgView.image = JCIMAGE(@"ic_dataModel_zhishu_small_down");
+                        self.equalRateLab.textColor = COLOR_30B27A;
+                    }else{
+                        self.equalRateLab.textColor = COLOR_2F2F2F;
+                    }
+                    [self showChangeRateView:self.equalImgView flag:[flagModel.flage integerValue]];
+                }
+                if (i==2) {
+                    awayValue = flagModel.value;
+                    self.loseRateLab.text = awayValue;
+                    
+                    if ([flagModel.flage integerValue]==1) {
+                        self.downImgView.image = JCIMAGE(@"ic_dataModel_zhishu_small_up");
+                        self.loseRateLab.textColor = COLOR_EF2F2F;
+                    }else if([flagModel.flage integerValue]==2){
+                        self.downImgView.image = JCIMAGE(@"ic_dataModel_zhishu_small_down");
+                        self.loseRateLab.textColor = COLOR_30B27A;
+                    }else{
+                        self.loseRateLab.textColor = COLOR_2F2F2F;
+                    }
+                    [self showChangeRateView:self.downImgView flag:[flagModel.flage integerValue]];
+                }
+            }
+            
+            if (model.compare_odds_change_data.immediateArr.count==2) {
+                if (i==0) {
+                    homeValue = flagModel.value;
+                    self.windRateLab.text = homeValue;
+                    if ([flagModel.flage integerValue]==1) {
+                        self.upImgView.image = JCIMAGE(@"ic_dataModel_zhishu_small_up");
+                        self.windRateLab.textColor = COLOR_EF2F2F;
+                    }else if([flagModel.flage integerValue]==2){
+                        self.upImgView.image = JCIMAGE(@"ic_dataModel_zhishu_small_down");
+                        self.windRateLab.textColor = COLOR_30B27A;
+                    }else{
+                        self.windRateLab.textColor = COLOR_2F2F2F;
+                    }
+                    [self showChangeRateView:self.upImgView flag:[flagModel.flage integerValue]];
+                }
+                self.equalRateLab.text = @"";
+                [self showChangeRateView:self.equalImgView flag:3];
+
+                if (i==1) {
+                    awayValue = flagModel.value;
+                    self.loseRateLab.text = awayValue;
+                    
+                    if ([flagModel.flage integerValue]==1) {
+                        self.downImgView.image = JCIMAGE(@"ic_dataModel_zhishu_small_up");
+                        self.loseRateLab.textColor = COLOR_EF2F2F;
+                    }else if([flagModel.flage integerValue]==2){
+                        self.downImgView.image = JCIMAGE(@"ic_dataModel_zhishu_small_down");
+                        self.loseRateLab.textColor = COLOR_30B27A;
+                    }else{
+                        self.loseRateLab.textColor = COLOR_2F2F2F;
+                    }
+                    [self showChangeRateView:self.downImgView flag:[flagModel.flage integerValue]];
+                }
+            }
+
+
+
+        }
+
+    }
+    //相似变动
+    self.infoLab.text = [NSString stringWithFormat:@"主胜:%@%% 平局:%@%%  客胜:%@%% ",@([model.compensation_data.win_rate floatValue]*100),@([model.compensation_data.draw_rate floatValue]*100),@([model.compensation_data.loss_rate floatValue]*100)];
+    if (model.compensation_data.win_rate.length==0) {
+        self.infoLab.text = @"";
+    }
+
+   
 }
 
-- (void)data {
-//    self.bgView.backgroundColor = JCBaseColor;
-//    self.matchNameLab.backgroundColor = JCBaseColor;
-    self.matchNameLab.text = @"赛事名称";
-    self.matchTimeLab.text = @"09-02 18:00";
-    self.matchStatusLab.text = @"未";
-//    self.scoreLab.text = @"99 : 99";
-    self.homeTeamLab.text = @"皇家马德里";
-    self.awayTeamLab.text = @"皇家马德里";
-    self.homeTeamImgView.backgroundColor = JCBaseColor;
-    self.awayTeamImgView.backgroundColor = JCBaseColor;
-    
-    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"home_placeholder")];
-    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"away_placeholder")];
-    
-    self.homeScoreLab.text = @"1";
-    self.awayScoreLab.text = @"0";
-    self.homeRateLab.text = @"5";
-    self.awayRateLab.text = @"6";
-    self.zhishuImgView.image = JCIMAGE(@"ic_dataModel_zhishu_up");
-    
-    self.upImgView.image = JCIMAGE(@"ic_dataModel_zhishu_small_up");
-    self.downImgView.image = JCIMAGE(@"ic_dataModel_zhishu_small_down");
-    self.windRateLab.text = @"3.99";
-    self.equalRateLab.text = @"3.99";
-    self.loseRateLab.text = @"3.99";
-    
-    self.rateChangeLab.text = @"让球主胜指数升";
-    self.infoLab.text = @"主胜:55% 平局:55%  客胜:55% ";
-    
-    self.typeLab.text = @"胜平负";
-    
-//    if (matchModel.classfly==1) {
-//         self.typeLab.backgroundColor = [COLOR_1B1B1B colorWithAlphaComponent:0.1];
-//         self.typeLab.layer.borderColor = COLOR_1B1B1B.CGColor;
-//         self.typeLab.textColor = COLOR_1B1B1B;
-//     }else if(matchModel.classfly==2){
-//
-//         self.typeLab.backgroundColor = [COLOR_002868 colorWithAlphaComponent:0.1];
-//         self.typeLab.layer.borderColor = COLOR_002868.CGColor;
-//         self.typeLab.textColor = COLOR_002868;
-//     }else if(matchModel.classfly==3){
-//         self.typeLab.backgroundColor = [COLOR_30B27A colorWithAlphaComponent:0.1];
-//         self.typeLab.layer.borderColor = COLOR_30B27A.CGColor;
-//         self.typeLab.textColor = COLOR_30B27A;
-//     }
-//     else if(matchModel.classfly==4){
-//         self.typeLab.backgroundColor = [JCBaseColor colorWithAlphaComponent:0.1];
-//         self.typeLab.layer.borderColor = JCBaseColor.CGColor;
-//         self.typeLab.textColor = JCBaseColor;
-//     }
-//     else{
-//         self.typeLab.text = [NSString stringWithFormat:@"  %@  ",matchModel.name];
-//         self.typeLab.backgroundColor = [COLOR_1B1B1B colorWithAlphaComponent:0.1];
-//         self.typeLab.layer.borderColor = COLOR_1B1B1B.CGColor;
-//         self.typeLab.textColor = COLOR_1B1B1B;
-//     }
- 
-
+- (void)showChangeRateView:(UIImageView *)imageView flag:(NSInteger)flag {
+    if (flag==1||flag==2) {
+        imageView.hidden = NO;
+        [imageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(AUTO(12), AUTO(12)));
+        }];
+    }else{
+        imageView.hidden = YES;
+        [imageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(0, 0));
+        }];
+    }
 }
+
+
 
 - (UIView *)bgView {
     if (!_bgView) {
@@ -329,7 +485,7 @@
 
 - (UILabel *)awayTeamLab {
     if (!_awayTeamLab) {
-        _awayTeamLab =[UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_1B1B1B andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentRight];
+        _awayTeamLab =[UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_1B1B1B andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _awayTeamLab;
 }
@@ -366,14 +522,14 @@
 
 - (UILabel *)homeRateLab {
     if (!_homeRateLab) {
-        _homeRateLab =[UILabel initWithTitle:@"" andFont:AUTO(24) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentRight];
+        _homeRateLab =[UILabel initWithTitle:@"" andFont:AUTO(20) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentRight];
     }
     return _homeRateLab;
 }
 
 - (UILabel *)awayRateLab {
     if (!_awayRateLab) {
-        _awayRateLab =[UILabel initWithTitle:@"" andFont:AUTO(24) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentRight];
+        _awayRateLab =[UILabel initWithTitle:@"" andFont:AUTO(20) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentRight];
     }
     return _awayRateLab;
 }
@@ -394,7 +550,7 @@
 
 - (UILabel *)equalRateLab {
     if (!_equalRateLab) {
-        _equalRateLab =[UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_EF2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+        _equalRateLab =[UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
     }
     return _equalRateLab;
 }
@@ -411,6 +567,13 @@
         _upImgView = [UIImageView new];
     }
     return _upImgView;
+}
+
+- (UIImageView *)equalImgView {
+    if (!_equalImgView) {
+        _equalImgView = [UIImageView new];
+    }
+    return _equalImgView;
 }
 
 - (UIImageView *)downImgView {

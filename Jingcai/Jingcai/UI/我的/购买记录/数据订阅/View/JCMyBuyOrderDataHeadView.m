@@ -37,7 +37,7 @@
     [self.headImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(0);
         make.top.offset(0);
-        make.size.mas_equalTo(CGSizeMake(AUTO(120), AUTO(90)));
+        make.size.mas_equalTo(CGSizeMake(AUTO(100), AUTO(100)));
     }];
 
     [self.bgView addSubview:self.contentLab];
@@ -47,11 +47,11 @@
         make.right.offset(AUTO(-10));
     }];
 
-    [self.bgView addSubview:self.infoLab];
-    [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.contentLab);
-        make.top.equalTo(self.contentLab.mas_bottom).offset(AUTO(5));
-    }];
+//    [self.bgView addSubview:self.infoLab];
+//    [self.infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.contentLab);
+//        make.bottom.equalTo(self.headImgView);
+//    }];
     
     [self.bgView addSubview:self.buyBtn];
     [self.buyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -123,7 +123,7 @@
 - (UILabel *)contentLab {
     if (!_contentLab) {
         _contentLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
-        _contentLab.numberOfLines= 0;
+        _contentLab.numberOfLines= 4;
     }
     return _contentLab;
 }

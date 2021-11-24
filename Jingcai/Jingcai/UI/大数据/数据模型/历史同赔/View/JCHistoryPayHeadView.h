@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UIButton *backBtn;
 
-@property (nonatomic, assign) NSInteger type;//0是历史同赔 1是泊凇分布 2是离散 3是凯利 4是指数异动
+@property (nonatomic, assign) NSInteger type;//0是历史同赔 1是泊凇分布 2是分歧 3是凯利 4是指数异动
 
 @property (nonatomic,strong) JCKellyDataModelPayInfoModel *model;
 

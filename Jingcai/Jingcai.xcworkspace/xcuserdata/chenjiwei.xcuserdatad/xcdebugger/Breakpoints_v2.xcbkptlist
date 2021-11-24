@@ -7,16 +7,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8890C4BE-3804-4E5E-AFF7-E460A391A273"
+            uuid = "E97F0CE6-FCA7-4E0F-9E98-95E4A12D565F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x9996;&#x9875;/NEWS ( &#x8d44;&#x8baf; )/ViewController/JCArticleDetailContentCell.m"
+            filePath = "Jingcai/UI/&#x6bd4;&#x5206;/&#x8db3;&#x7403;/&#x8be6;&#x60c5;/&#x6570;&#x636e;&#x6a21;&#x578b;/ViewController/JCMatchDetailDataModelVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "-addImgClickJS"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
+            landmarkName = "-defaultData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6FDC2584-DF33-4B28-BCD2-3E1E94195C7E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/&#x6bd4;&#x5206;/&#x8db3;&#x7403;/&#x8be6;&#x60c5;/&#x6570;&#x636e;&#x6a21;&#x578b;/ViewController/JCMatchDetailDataModelVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "-viewDidLayoutSubviews"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "856F6F8A-C4AF-44A6-81B3-BE22425B42F6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/&#x6bd4;&#x5206;/&#x8db3;&#x7403;/&#x8be6;&#x60c5;/&#x6570;&#x636e;&#x6a21;&#x578b;/ViewController/JCMatchDetailDataModelVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "-refreshData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

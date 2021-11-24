@@ -14,6 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSArray *dataSource;
 
+@property (nonatomic,assign) BOOL hidetopMatch;
+
+- (void)reloadData;
+
+
+
 @end
 
 NS_ASSUME_NONNULL_END

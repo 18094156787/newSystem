@@ -41,7 +41,7 @@
     }];
     
     
-    UILabel *titleLab = [UILabel initWithTitle:@"鲸猜大数据服务" andFont:AUTO(16) andWeight:2 andTextColor:JCWhiteColor andBackgroundColor:JCClearColor andTextAlignment:0];
+    UILabel *titleLab = [UILabel initWithTitle:@"鲸猜大数据报告" andFont:AUTO(16) andWeight:2 andTextColor:JCWhiteColor andBackgroundColor:JCClearColor andTextAlignment:0];
     [self.bgView addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(backBtn.mas_right).offset(0);
@@ -210,11 +210,6 @@
         make.top.equalTo(timeTitleView.mas_bottom);
     }];
     
-    
-
-    
-//    self.titleLab.text = @"根据对阵双方的实力、状态、交战、战绩、指数等数据进行分析，给出各种玩法的概率。可包月，也可单场订阅（单场订阅可在比分-对应比赛的数据模块中进行购买）";
-
     
     WeakSelf;
 
@@ -542,7 +537,7 @@
         _statusBtn = [UIButton initWithText:@"" FontSize:AUTO(16) Weight:2 BackGroundColor:JCClearColor TextColors:JCWhiteColor];
         [_statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_red") forState:0];
         _statusBtn.hidden = YES;
-//        [_statusBtn hg_setAllCornerWithCornerRadius:16];
+        _statusBtn.userInteractionEnabled = NO;
     }
     return _statusBtn;
 }

@@ -24,7 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *image_url;//图片地址
 
-@property (nonatomic,assign) NSInteger is_subscrib;//是否订阅，1已订阅,0未订阅
+@property (nonatomic,strong) NSString *free_day;//免费体验天数
+
+@property (nonatomic,assign) NSInteger is_subscrib;//是否订阅，1已订阅,2未订阅（曾经免费体验过）,3未订阅（未免费体验过）
+
+@property (nonatomic,strong) NSString *big_data_one_price;//大数据单场价格
 
 @end
 

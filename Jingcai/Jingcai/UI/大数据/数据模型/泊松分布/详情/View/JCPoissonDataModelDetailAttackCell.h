@@ -7,7 +7,7 @@
 //
 
 #import "JCBaseTableViewCell_New.h"
-
+#import "JCTransactionDataContrastModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCPoissonDataModelDetailAttackCell : JCBaseTableViewCell_New
@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UIView *awayProgressView;
 
 @property (nonatomic,strong) NSArray *dataArray;
+
+@property (nonatomic,strong) JCTransactionDataContrastModel *againstModel;
 
 @end
 

@@ -129,6 +129,7 @@
     }else{
         self.oriPriceLab.text = @"";
     }
+    self.oriPriceLab.text = @"";//统一不展示原价
     
     if (dataModel.big_data_price==0) {
         self.priceLab.text = @"免费";

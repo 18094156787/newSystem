@@ -52,7 +52,7 @@
         [self endRefresh];
         if ([JCWJsonTool isSuccessResponse:object]) {
             self.detailModel = (JCBigDataOrderDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCBigDataOrderDetailModel class]];
-            self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(240));
+            self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(220));
             self.headView.detailModel = self.detailModel;
             self.tableView.tableHeaderView = self.headView;
             WeakSelf;
@@ -104,7 +104,7 @@
     }
     
     NSString *scene = @"7";
-    //1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5凯利指数 6.离散指数
+    //1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5机构分歧 6.指数分歧
     [self.jcWindow showLoading];
     JCHomeService_New *service = [JCHomeService_New new];
     [service getConfirmOrderWithUnique:self.detailModel.zucai_ai_set_id scene:scene source:@"1" price:@"" Success:^(id  _Nullable object) {
@@ -173,7 +173,7 @@
     }
     if (section==1) {
 
-        return 2;
+        return 0;
     }
     
     return 4;
@@ -229,7 +229,7 @@
         }
         if (indexPath.row==1) {
             cell.titleLab.text = @"付款时间：";
-            cell.contentLab.text = [NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd HH:mm" time:[self.detailModel.pay_time doubleValue]];
+            cell.contentLab.text = [NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd HH:mm:ss" time:[self.detailModel.pay_time doubleValue]];
         }
         if (indexPath.row==2) {
             cell.titleLab.text = @"订单编号：";
@@ -295,7 +295,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section==1&&[self.detailModel.style integerValue]==1) {
+    if (section==1) {
         return 0.001f;
     }
     return AUTO(8);

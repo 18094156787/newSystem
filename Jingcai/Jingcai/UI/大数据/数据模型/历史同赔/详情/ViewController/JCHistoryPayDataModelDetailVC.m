@@ -33,22 +33,8 @@
 
 }
 
-
-
-
-
 - (void)initViews {
-//    JCJingCaiAIBigDataMatchTitleView *titleView = [[JCJingCaiAIBigDataMatchTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, AUTO(45))];
-//    titleView.backgroundColor = JCWhiteColor;
-//    titleView.titleLab.text = @"比赛列表";
-//    titleView.iconView.hidden = NO;
-//    self.tableView.tableHeaderView = titleView;
-//
-//    titleView.JCBlcok = ^{
-//        [weakSelf.navigationController pushViewController:[JCJingCaiAIBigDataHomeVC new] animated:YES];
-//    };
-    
-    
+
     WeakSelf;
     self.tableView.estimatedRowHeight = 100;
     self.tableView.backgroundColor = COLOR_F4F6F9;
@@ -63,11 +49,18 @@
     
 //    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
 //
-//    JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
-//        [weakSelf refreshData];
-//    }];
-//    emptyView.contentViewOffset = 0;
-//    self.tableView.ly_emptyView = emptyView;
+    JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
+        [weakSelf refreshData];
+    }];
+    emptyView.contentViewOffset = -AUTO(100);
+    self.tableView.ly_emptyView = emptyView;
+    [self chageImageStr:@"jc_dataModel_empty" Title:@"当前暂无比赛数据~" BtnTitle:@""];
+    
+    if (self.hidetopMatch) {
+        [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.offset(0);
+        }];
+    }
 //    [self showNoDataViewImageStr:@"empty_img_follow_expert" Title:@"暂时没有比赛" BtnTitle:@"" Btnwidth:0 HiddenBtn:YES];
     
 //    self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
@@ -91,7 +84,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataSource.count;
+    return self.dataArray.count;
 
 }
 
@@ -124,7 +117,7 @@
 
     JCHistoryPayDataModelDetailTitleHeadCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCHistoryPayDataModelDetailTitleHeadCell"];
 //    JCMatchInfoModel *model = self.dataArray[indexPath.row];
-    cell.model = self.dataSource[indexPath.row];
+    cell.model = self.dataArray[indexPath.row];
 
     return cell;
 }
@@ -144,8 +137,9 @@
 //    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
-- (void)setDataSource:(NSArray *)dataSource {
-    _dataSource = dataSource;
+- (void)reloadData {
     [self.tableView reloadData];
 }
+
+
 @end

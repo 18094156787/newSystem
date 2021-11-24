@@ -144,25 +144,7 @@
     self.homeNameLab.text = model.home_team_name;
     self.awayNameLab.text = model.away_team_name;
     self.matchStatusLab.text = model.status_cn;
-    
-//    if (model.home_team_name.length>model.away_team_name.length) {
-//        [self.priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.offset(AUTO(15));
-//            make.top.equalTo(self.homeNameLab.mas_bottom).offset(AUTO(13));
-//            make.height.mas_equalTo(AUTO(20));
-//            make.bottom.offset(AUTO(-12));
-//        }];
-//    }else{
-//        [self.priceLab mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.left.offset(AUTO(15));
-//            make.top.equalTo(self.awayNameLab.mas_bottom).offset(AUTO(13));
-//            make.height.mas_equalTo(AUTO(20));
-//            make.bottom.offset(AUTO(-12));
-//        }];
-//    }
-   
 
-    
 
     [self.homeImgView sd_setImageWithURL:[NSURL URLWithString:model.home_team_logo] placeholderImage:JCIMAGE(@"home_placeholder")];
     [self.awayImgView sd_setImageWithURL:[NSURL URLWithString:model.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
@@ -182,7 +164,13 @@
     [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)]} range:range];
     self.priceLab.attributedText = attr;
     
-    self.statusLab.text = @"已退款";
+    if (model.zucai_order_order_refund_status==4) {
+        self.statusLab.textColor = COLOR_30B27A;
+        self.statusLab.text = @"已退款";
+    }else{
+        self.statusLab.textColor = COLOR_2F2F2F;
+        self.statusLab.text = @"正常";
+    }
     
 
 }

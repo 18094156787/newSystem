@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger current_count;//订阅人数
 
-@property (nonatomic, copy) NSString * id;//1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5凯利指数 6.离散指数
+@property (nonatomic, copy) NSString * id;//1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5机构分歧 6.指数分歧
 
 @property (nonatomic, copy) NSString *image_url;
 

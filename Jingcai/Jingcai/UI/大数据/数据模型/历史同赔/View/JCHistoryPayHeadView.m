@@ -219,10 +219,10 @@
                 type = @"泊凇分布";
             }
             if (self.type==2) {
-                type = @"离散指数";
+                type = @"指数分歧";
             }
             if (self.type==3) {
-                type = @"凯利指数";
+                type = @"机构分歧";
             }
             if (self.type==4) {
                 type = @"指数异动";
@@ -302,17 +302,15 @@
     if (self.type==2) {
         self.bgView.image = JCIMAGE(@"bg_img_dispersed");
         self.bgView.frame = CGRectMake(0,0,SCREEN_WIDTH,AUTO(228)+kNavigationBarHeight);
-//        self.titleLab.text = @"根据百家机构欧赔平均值与每家赔率差值的绝对值求和，再计算得出绝对值平均值作为离散指数。离散值越小，各公司机构观点接近，越容易打出；离散度大则意见分歧大，结果不易打出。";
-        self.backTitleLab.text = @"离散指数";
+
+        self.backTitleLab.text = @"指数分歧";
     }
     if (self.type==3) {
         self.bgView.image = JCIMAGE(@"bg_img_kelly");
-//        self.titleLab.text = @"凯利指数是利用所有机构开出的赔率和胜平负概率，通过凯利公式计算出来的。通过赔率与赔付率的对比，反应各项赔率存在的风险。";
-        self.backTitleLab.text = @"凯利指数";
+        self.backTitleLab.text = @"机构分歧";
     }
     if (self.type==4) {
-        self.bgView.image = JCIMAGE(@"bg_img_ transaction");
-//        self.titleLab.text = @"实时监控指数数据，获取有大幅变动的赛事，帮助用户发现值得深挖分析的赛事。实时监控指数数据，获取有大幅变动的赛事，帮助用户发现值得深挖分析的赛事。";
+        self.bgView.image = JCIMAGE(@"bg_img_transaction");
         self.backTitleLab.text = @"指数异动";
         self.dateHeadView.hidden = YES;
         

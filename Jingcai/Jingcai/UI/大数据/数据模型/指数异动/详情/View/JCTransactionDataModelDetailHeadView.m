@@ -58,6 +58,11 @@
     
 }
 
+- (void)setModel:(JCKellyDataDetailModel *)model {
+    _model = model;
+    self.matchView.model = model;
+}
+
 - (JCTransactionDataModelDetailMatchView *)matchView {
     if (!_matchView) {
         _matchView = [JCTransactionDataModelDetailMatchView new];

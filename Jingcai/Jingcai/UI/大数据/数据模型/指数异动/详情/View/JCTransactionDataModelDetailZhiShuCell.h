@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UITableView *tableView;
 
+@property (nonatomic,strong) NSString *type;//0全部 1胜平负、2让球、3进球数
+
 @property (nonatomic, strong) NSArray *dataArray;
 
 @end

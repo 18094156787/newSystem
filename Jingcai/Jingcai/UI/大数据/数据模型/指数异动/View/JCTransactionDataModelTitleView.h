@@ -18,6 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UILabel *infoLab;
 
+@property (nonatomic,strong) UIView *detailView;
+
+@property (nonatomic,copy) void(^JCBlock)(void);
+
 @end
 
 NS_ASSUME_NONNULL_END

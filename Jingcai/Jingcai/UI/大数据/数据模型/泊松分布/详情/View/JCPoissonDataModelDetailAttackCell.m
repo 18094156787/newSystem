@@ -49,13 +49,43 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    
+
 
 //    [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:0.6 endPoint:1];
 //
 //        [self setupLineView:self.awayProgressView colors:COLOR_002868 startPoint:0 endPoint:0.6];
 }
 
+- (void)setAgainstModel:(JCTransactionDataContrastModel *)againstModel {
+    if (self.againstModel) {
+        return;
+    }
+    _againstModel = againstModel;
+    [self layoutIfNeeded];
+    if (self.againstModel) {
+        self.titleLab.text = self.againstModel.title;
+        NSString *left = [NSString stringWithFormat:@"%@",self.againstModel.home_average_value];
+        NSString *right = [NSString stringWithFormat:@"%@",self.againstModel.away_average_value];
+        self.homeRateLab.text = left;
+        self.awayRateLab.text = right;
+        float total = [left floatValue]+[right floatValue];
+
+        if (total>0) {
+
+            float homeRate = [right floatValue]/total;
+            [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:homeRate endPoint:1];
+            [self setupLineView:self.awayProgressView colors:COLOR_002868 startPoint:0 endPoint:homeRate];
+            
+
+        }else{
+            [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:0 endPoint:0];
+
+            [self setupLineView:self.awayProgressView colors:COLOR_002868 startPoint:0 endPoint:0];
+        }
+    }
+
+
+}
 - (void)setDataArray:(NSArray *)dataArray {
     _dataArray = dataArray;
 
@@ -74,24 +104,19 @@
             
 
         }else{
-            [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:0.5 endPoint:1];
+            [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:0 endPoint:0];
 
-            [self setupLineView:self.awayProgressView colors:COLOR_002868 startPoint:0 endPoint:0.5];
+            [self setupLineView:self.awayProgressView colors:COLOR_002868 startPoint:0 endPoint:0];
         }
     }else{
-        [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:0.5 endPoint:1];
+        [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:0 endPoint:0];
 
-            [self setupLineView:self.awayProgressView colors:COLOR_002868 startPoint:0 endPoint:0.5];
+            [self setupLineView:self.awayProgressView colors:COLOR_002868 startPoint:0 endPoint:0];
 
     }
 }
 
-- (void)data {
-    
-    self.homeRateLab.text = @"1.86";
-    self.awayRateLab.text = @"1.86";
 
-}
 
 -(void)setupLineView:(UIView *)lineView colors:(UIColor *)color startPoint:(float)start endPoint:(float)end{
     UIBezierPath *linePath = [UIBezierPath bezierPath];

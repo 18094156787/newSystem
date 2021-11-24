@@ -38,7 +38,7 @@
         make.top.equalTo(self.bgView.mas_bottom).offset(AUTO(8));
         make.left.right.offset(0);
         make.height.mas_equalTo(AUTO(30));
-        make.bottom.offset(AUTO(-5));
+        make.bottom.offset(0);
     }];
 
     
@@ -46,7 +46,7 @@
     [self.headImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
         make.top.offset(0);
-        make.size.mas_equalTo(CGSizeMake(AUTO(120), AUTO(90)));
+        make.size.mas_equalTo(CGSizeMake(AUTO(100), AUTO(100)));
     }];
     
     [self.bgView addSubview:self.contentLab];
@@ -94,50 +94,52 @@
         make.centerY.equalTo(self.indicateImgView);
     }];
 
-    WeakSelf;
-    [self.orderDetailLab bk_whenTapped:^{
-        if (weakSelf.JCBlock) {
-            weakSelf.JCBlock();
-        }
-    }];
+//6
     
 }
 
 - (void)setModel:(JCMyBuyOrderDataModel *)model {
     _model = model;
     self.titleInfoLab.text = model.style_desc;
-    if ([model.distance_day intValue]>0) {
-        NSString *title = [NSString stringWithFormat:@"到期时间剩余%@天",model.distance_day];
-        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
-        NSRange range = [title rangeOfString:model.distance_day];
-        if (range.location!=NSNotFound) {
-            [attr addAttribute:NSForegroundColorAttributeName value:JCBaseColor range:range];
-        }
-        self.timeLab.attributedText = attr;
-    }else{
-        self.timeLab.text = @"已过期";
-    }
+//    if ([model.distance_day intValue]>0) {
+//        NSString *title = [NSString stringWithFormat:@"到期时间剩余%@天",model.distance_day];
+//        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+//        NSRange range = [title rangeOfString:model.distance_day];
+//        if (range.location!=NSNotFound) {
+//            [attr addAttribute:NSForegroundColorAttributeName value:JCBaseColor range:range];
+//        }
+//        self.timeLab.attributedText = attr;
+//    }else{
+//        self.timeLab.text = @"已过期";
+//    }
     [self.headImgView sd_setImageWithURL:[NSURL URLWithString:model.logo]];
     self.contentLab.text = model.title;
 
     
     //原价
-    NSString *ori_price = [NSString stringWithFormat:@"原价 %@",@"40"];
+    NSString *ori_price = [NSString stringWithFormat:@"原价 %@",NonNil(model.total_price)];
     NSMutableAttributedString *ori_attr = [[NSMutableAttributedString alloc] initWithString:ori_price];
     NSRange ori_range = [ori_price rangeOfString:@"原价"];
-    [ori_attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(10)],NSForegroundColorAttributeName:COLOR_9F9F9F} range:ori_range];
+    [ori_attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)],NSForegroundColorAttributeName:COLOR_9F9F9F} range:ori_range];
     self.priceLab.attributedText = ori_attr;
     
     
     
     
-    NSString *price = [NSString stringWithFormat:@"实付金额：%@红币",NonNil(model.pay_price)];
+    NSString *price = [NSString stringWithFormat:@"实付金额：%@",NonNil(model.pay_price)];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:price];
     NSRange range = [price rangeOfString:@"实付金额："];
     [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)]} range:range];
     self.payPriceLab.attributedText = attr;
+//    self.statusLab.text = model.zucai_order_refund_status_text;
+    if (model.zucai_order_order_refund_status==4) {
+        self.statusLab.textColor = COLOR_30B27A;
+        self.statusLab.text = @"已退款";
+    }else{
+        self.statusLab.textColor = COLOR_2F2F2F;
+        self.statusLab.text = @"正常";
+    }
     
-    self.statusLab.text = @"已退款";
 }
 
 - (UILabel *)titleInfoLab {
@@ -172,7 +174,7 @@
 - (UILabel *)contentLab {
     if (!_contentLab) {
         _contentLab = [UILabel initWithTitle:@"" andFont:AUTO(14) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
-        _contentLab.numberOfLines= 3;
+        _contentLab.numberOfLines= 4;
     }
     return _contentLab;
 }
@@ -206,7 +208,7 @@
 
 - (UILabel *)statusLab {
     if (!_statusLab) {
-        _statusLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_30B27A andBackgroundColor:JCClearColor andTextAlignment:0];
+        _statusLab = [UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:0];
     }
     return _statusLab;
 }

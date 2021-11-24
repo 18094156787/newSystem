@@ -39,6 +39,8 @@
 -(id)initWithFrame:(CGRect)frame lineWidth:(CGFloat)lineWidth lineColor:(UIColor *)lineColor{
     self = [super initWithFrame:frame];
     if (self) {
+        [self addSubview:self.scrollowView];
+        self.scrollowView.frame = self.bounds;
         self.clipsToBounds = YES;
 //        self.layer.borderWidth = lineWidth;
 //        self.layer.borderColor = lineColor.CGColor;
@@ -73,20 +75,22 @@
             [button setBackgroundColor:nItemColor];
         }
         [button addTarget:self action:@selector(clickedButton:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:button];
+        [self.scrollowView addSubview:button];
     }
     
     for (int i = 0; i < titles.count-1; i++) {
         UIView * line = [[UIView alloc] initWithFrame:CGRectMake(width*(i+1)-(_lineWidth/2), 0, _lineWidth, self.frame.size.height)];
         line.backgroundColor = _lineColor;
-        [self addSubview:line];
+        [self.scrollowView addSubview:line];
     }
 }
 
 -(void)setItemsWithTitle:(NSArray *)titles normalItemColor:(UIColor *)nItemColor selectItemColor:(UIColor *)sItemColor normalTitleColor:(UIColor *)nTitleColor selectTitleColor:(UIColor *)sTitleColor titleTextSize:(CGFloat)size selectItemNumber:(NSInteger)number itemWidth:(NSArray *)itemWidths {
+    self.itemWidths = itemWidths;
     if (titles.count==0) {
         return;
     }
+    
     _normalItemColor = nItemColor;
     _selectItemColor = sItemColor;
     _normalTitleColor = nTitleColor;
@@ -117,16 +121,18 @@
             [button setBackgroundColor:nItemColor];
         }
         [button addTarget:self action:@selector(clickedButton:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:button];
+        [self.scrollowView addSubview:button];
        
         
         if (i < titles.count-1) {
             UIView * line = [[UIView alloc] initWithFrame:CGRectMake(f_width*(i+1)-(_lineWidth/2), 0, _lineWidth, self.frame.size.height)];
             line.backgroundColor = _lineColor;
-            [self addSubview:line];
+            [self.scrollowView addSubview:line];
         }
         f_width = f_width+width;
     }
+    self.scrollowView.contentSize = CGSizeMake(f_width, self.bounds.size.height);
+
     
 //    for (int i = 0; i < titles.count-1; i++) {
 //        UIView * line = [[UIView alloc] initWithFrame:CGRectMake(width*(i+1)-(_lineWidth/2), 0, _lineWidth, self.frame.size.height)];
@@ -143,7 +149,7 @@
 
 -(void)clickedButton:(UIButton *)button{
     self.selectIndex = button.tag-1000;
-    for (UIView * view in self.subviews) {
+    for (UIView * view in self.scrollowView.subviews) {
         if (view.tag >= 1000) {
             UIButton * btn = (UIButton *)view;
             if (btn.tag == button.tag) {
@@ -155,12 +161,23 @@
             }
         }
     }
-    
+    if (self.itemWidths.count>=4) {
+        float offset = 0;
+//        if (self.selectIndex>1&&self.selectIndex<self.itemWidths.count-2) {
+//            for (int i=0; i<self.selectIndex-1; i++) {
+//                NSNumber *width = self.itemWidths[i];
+//                offset = offset+ [width floatValue];
+//            }
+//            [self.scrollowView setContentOffset:CGPointMake(offset, 0) animated:YES];
+//        }
+
+    }
+
     [self.delegate tab:self didSelectedItemNumber:button.tag-1000];
 }
 - (void)setSelectIndex:(NSInteger)selectIndex {
     _selectIndex = selectIndex;
-    for (UIView * view in self.subviews) {
+    for (UIView * view in self.scrollowView.subviews) {
         if (view.tag >= 1000) {
             UIButton * btn = (UIButton *)view;
             if (btn.tag == 1000+selectIndex) {
@@ -173,5 +190,11 @@
         }
     }
 }
-
+- (UIScrollView *)scrollowView {
+    if (!_scrollowView) {
+        _scrollowView = [UIScrollView new];
+        _scrollowView.showsHorizontalScrollIndicator = NO;
+    }
+    return _scrollowView;
+}
 @end

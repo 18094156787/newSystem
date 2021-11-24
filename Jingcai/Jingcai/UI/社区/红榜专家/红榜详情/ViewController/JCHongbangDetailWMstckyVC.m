@@ -293,7 +293,7 @@ static CGFloat const kWMMenuViewUserHeight = 60;
     self.shareView.title = self.detailModel.wechat_share.share_title;
     self.shareView.desc = self.detailModel.wechat_share.share_desc;
     self.shareView.content = self.detailModel.wechat_share.share_desc;
-    self.shareView.webPageUrl = self.detailModel.wechat_share.share_desc;
+    self.shareView.webPageUrl = self.detailModel.wechat_share.share_url;
     self.shareView.friend_url = self.detailModel.wechat_share.friend_url;
 }
 

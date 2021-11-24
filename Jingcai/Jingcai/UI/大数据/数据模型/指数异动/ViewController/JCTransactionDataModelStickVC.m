@@ -24,9 +24,15 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 @property (nonatomic, assign) float height;
 
-@property (nonatomic,strong)JCKellyDataModelPayInfoModel *buyInfoModel;
+@property (nonatomic,strong) JCKellyDataModelPayInfoModel *buyInfoModel;
 
+@property (nonatomic,strong) JCTransactionDataModelVC *allVC;
 
+@property (nonatomic,strong) JCTransactionDataModelVC *spfVC;
+
+@property (nonatomic,strong) JCTransactionDataModelVC *rqVC;
+
+@property (nonatomic,strong) JCTransactionDataModelVC *jqsVC;
 @end
 
 @implementation JCTransactionDataModelStickVC
@@ -78,6 +84,12 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.topColorView removeAllSubviews];
+    [self.topColorView removeFromSuperview];
+    self.topColorView = nil;
+}
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -105,7 +117,7 @@ static CGFloat const kWMMenuViewHeight = 44;
         self.menuItemWidth = SCREEN_WIDTH/4.0f;
         self.maximumHeaderViewHeight = self.height-kNavigationBarHeight;
 //        self.minimumHeaderViewHeight = kNavigationBarHeight;
-        self.contentView.bounces = YES;
+        self.contentView.bounces = NO;
 //        self.view.backgroundColor = COLOR_F0F0F0;
     }
     return self;
@@ -118,10 +130,7 @@ static CGFloat const kWMMenuViewHeight = 44;
     [self initViews];
     [self getTopInfoData];
  
-    
-    UIButton *customView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-    [customView addTarget:self action:@selector(backItemClick) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:customView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTopInfoData) name:NotificationUserLogin object:nil];
     
 }
 
@@ -139,13 +148,22 @@ static CGFloat const kWMMenuViewHeight = 44;
         [self.contentView.mj_header endRefreshing];
         if ([JCWJsonTool isSuccessResponse:object]) {
             JCKellyDataModelPayInfoModel *buyInfoModel = (JCKellyDataModelPayInfoModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataModelPayInfoModel class]];
-  
+            self.buyInfoModel = buyInfoModel;
             self.headView.model = buyInfoModel;
-//            [self initTimeArrayWithToday:buyInfoModel.server_time];
-//            
-//            self.buyInfoModel = buyInfoModel;
-//            self.dataVC.buyInfoModel = self.buyInfoModel;
-//            [self.dataVC refreshData];
+            if (self.selectIndex==0) {
+                self.allVC.buyInfoModel = buyInfoModel;
+            }
+            if (self.selectIndex==1) {
+                self.spfVC.buyInfoModel = buyInfoModel;
+            }
+            if (self.selectIndex==2) {
+                self.rqVC.buyInfoModel = buyInfoModel;
+            }
+            if (self.selectIndex==3) {
+                self.jqsVC.buyInfoModel = buyInfoModel;
+            }
+//            [self reloadData];
+
 
 
         }else{
@@ -163,6 +181,10 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 
 - (void)initViews {
+    
+    UIButton *customView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    [customView addTarget:self action:@selector(backItemClick) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:customView];
 
     self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.height);
     [self.view addSubview:self.headView];
@@ -177,34 +199,7 @@ static CGFloat const kWMMenuViewHeight = 44;
     self.headView.JCBuyClickBlock = ^{
         [weakSelf payAction];
     };
-    
-   
-//    self.headView.JCBuyClickBlock = ^{
-////        if (![JCWUserBall currentUser]) {
-////            [weakSelf presentLogin];
-////            return;
-////        }
-////        JCJingCaiAIBigDataBuyVC *vc = [JCJingCaiAIBigDataBuyVC new];
-////        [weakSelf.navigationController pushViewController:vc animated:YES];
-//        
-//        JCPayShowView *payView = [JCPayShowView new];
-//        payView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-//        [weakSelf.jcWindow addSubview:payView];
-//        payView.JCSureBlock = ^(NSString * _Nonnull hb_id) {
-////          [payView ]
-//        };
-//        [payView show];
-//    };
-    
-    self.contentView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
-//        [weakSelf getTopInfoData];
-//        if (weakSelf.selectIndex==0) {
-//            [weakSelf.bigDataVC refreshData];
-//        }
-//        if (weakSelf.selectIndex==1) {
-//            [weakSelf.matchVC refreshData];
-//        }
-    }];
+
         
 }
 
@@ -214,6 +209,12 @@ static CGFloat const kWMMenuViewHeight = 44;
 }
 
 - (void)payAction {
+    if (self.buyInfoModel.model_status!=4) {
+        if (![JCWUserBall currentUser]) {
+            [self presentLogin];
+            return;
+        }
+    }
     if (self.buyInfoModel.show_status==1) {
         //免费体验
         [self FreeExperienceCheck];
@@ -245,6 +246,7 @@ static CGFloat const kWMMenuViewHeight = 44;
 - (void)showPayView {
     WeakSelf;
     JCPayShowView *payView = [JCPayShowView new];
+    payView.price = [NSString stringWithFormat:@"%@",@(self.buyInfoModel.big_data_price/100)];
     payView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [self.jcWindow addSubview:payView];
     payView.JCSureBlock = ^(NSString * _Nonnull hb_id) {
@@ -275,7 +277,7 @@ static CGFloat const kWMMenuViewHeight = 44;
        [alertView removeFromSuperview];
     }];
 //    NSString *day =  [NSString stringWithFormat:@"%@",self.buyInfoModel.free_day];
-    NSString *title = [NSString stringWithFormat:@"是否开通[凯利指数] %@天免费体验",self.buyInfoModel.free_day];
+    NSString *title = [NSString stringWithFormat:@"是否开通[指数异动] %@天免费体验",self.buyInfoModel.free_day];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
     NSRange count_range = [title rangeOfString:self.buyInfoModel.free_day];
     if (count_range.location!=NSNotFound) {
@@ -319,7 +321,7 @@ static CGFloat const kWMMenuViewHeight = 44;
     }
     
     NSString *scene = @"7";
-    //1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5凯利指数 6.离散指数
+    //1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5机构分歧 6.指数分歧
     [self.jcWindow showLoading];
     JCHomeService_New *service = [JCHomeService_New new];
     [service getConfirmOrderWithUnique:self.model_id scene:scene source:@"1" price:@"" Success:^(id  _Nullable object) {
@@ -389,9 +391,26 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
     
-    JCTransactionDataModelVC *vc = [JCTransactionDataModelVC new];
-    vc.type = [NSString stringWithFormat:@"%ld",index];
-    return vc;
+//    JCTransactionDataModelVC *vc = [JCTransactionDataModelVC new];
+//    vc.type = [NSString stringWithFormat:@"%ld",index];
+    if (index==0) {
+        self.allVC.buyInfoModel = self.buyInfoModel;
+        return self.allVC;;
+    }
+    if (index==1) {
+        self.spfVC.buyInfoModel = self.buyInfoModel;
+        return self.spfVC;;
+    }
+    if (index==2) {
+        self.rqVC.buyInfoModel = self.buyInfoModel;
+        return self.rqVC;;
+    }
+    if (index==3) {
+        self.jqsVC.buyInfoModel = self.buyInfoModel;
+        return self.jqsVC;;
+    }
+
+    return [UIViewController new];
 
 }
 
@@ -407,10 +426,26 @@ static CGFloat const kWMMenuViewHeight = 44;
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
     CGFloat originY = _viewTop + kWMMenuViewHeight;
-    return CGRectMake(0, originY, self.view.frame.size.width, self.view.frame.size.height-kWMMenuViewHeight-AUTO(10));
+    return CGRectMake(0, originY, self.view.frame.size.width, self.view.frame.size.height-kWMMenuViewHeight-kNavigationBarHeight);
 }
 
 - (void)pageController:(WMPageController *)pageController willEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info {
+    if (self.selectIndex==0) {
+        self.allVC.buyInfoModel = self.buyInfoModel;
+//        return self.allVC;;
+    }
+    if (self.selectIndex==1) {
+        self.spfVC.buyInfoModel = self.buyInfoModel;
+//        return self.spfVC;;
+    }
+    if (self.selectIndex==2) {
+        self.rqVC.buyInfoModel = self.buyInfoModel;
+//        return self.rqVC;;
+    }
+    if (self.selectIndex==3) {
+        self.jqsVC.buyInfoModel = self.buyInfoModel;
+//        return self.jqsVC;;
+    }
 
 }
 
@@ -453,5 +488,66 @@ static CGFloat const kWMMenuViewHeight = 44;
     }
     return _headView;
 }
+- (JCTransactionDataModelVC *)allVC {
+    if (!_allVC) {
+        _allVC = [JCTransactionDataModelVC new];
+        _allVC.type = @"0";
+        WeakSelf;
+        _allVC.JCOpenBlock = ^{
+            [weakSelf payAction];
+        };
+        _allVC.JCRefreshBlock = ^{
+            [weakSelf getTopInfoData];
+        };
+    }
+    return _allVC;
+}
 
+- (JCTransactionDataModelVC *)spfVC {
+    if (!_spfVC) {
+        _spfVC = [JCTransactionDataModelVC new];
+        _spfVC.style = 1;
+        _spfVC.type = @"1";
+        WeakSelf;
+        _spfVC.JCOpenBlock = ^{
+            [weakSelf payAction];
+        };
+        _spfVC.JCRefreshBlock = ^{
+            [weakSelf getTopInfoData];
+        };
+    }
+    return _spfVC;
+}
+
+- (JCTransactionDataModelVC *)rqVC {
+    if (!_rqVC) {
+        _rqVC = [JCTransactionDataModelVC new];
+        _rqVC.type = @"2";
+        _rqVC.style = 1;
+        WeakSelf;
+        _rqVC.JCOpenBlock = ^{
+            [weakSelf payAction];
+        };
+        _rqVC.JCRefreshBlock = ^{
+            [weakSelf getTopInfoData];
+        };
+    }
+    return _rqVC;
+}
+
+- (JCTransactionDataModelVC *)jqsVC {
+    if (!_jqsVC) {
+        _jqsVC = [JCTransactionDataModelVC new];
+        _jqsVC.type = @"3";
+        _jqsVC.style = 1;
+        WeakSelf;
+        _jqsVC.JCOpenBlock = ^{
+            [weakSelf payAction];
+        };
+        _jqsVC.JCRefreshBlock = ^{
+            [weakSelf getTopInfoData];
+        };
+    }
+    return _jqsVC;
+}
 @end

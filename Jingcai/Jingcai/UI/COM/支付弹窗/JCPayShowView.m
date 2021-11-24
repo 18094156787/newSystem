@@ -63,8 +63,12 @@
         make.size.mas_equalTo(CGSizeMake(AUTO(128), AUTO(40)));
     }];
     
-    NSString *price = @"168";
-//    NSNumber *priceStr = [[NSNumber alloc] initWithFloat:price];
+
+    
+}
+
+- (void)setPrice:(NSString *)price {
+    _price = price;
     NSString *total = [NSString stringWithFormat:@"需支付 %@ 红币",price];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:total];
     NSRange range = [total rangeOfString:price];
@@ -73,7 +77,6 @@
         [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
     }
     self.priceLab.attributedText = attr;
-    
 }
 
 #pragma mark - Protocol

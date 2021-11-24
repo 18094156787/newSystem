@@ -93,6 +93,7 @@
             if (array.count <PAGE_LIMIT) {
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }
+            self.pageNo++;
             [self.tableView reloadData];
 
 //            [self chageImageStr:@"jc_dataModel_empty" Title:@"" BtnTitle:@""];
@@ -111,7 +112,7 @@
 
     } failure:^(NSError * _Nonnull error) {
         [self endRefresh];
-        [self chageImageStr:@"jc_dataModel_empty" Title:@"" BtnTitle:@""];
+        [self chageImageStr:@"jc_dataModel_empty" Title:@"当前暂无比赛数据~" BtnTitle:@""];
     }];
 
 
@@ -153,9 +154,12 @@
     self.tableView.ly_emptyView = emptyView;
 //    [self showNoDataViewImageStr:@"empty_img_follow_expert" Title:@"暂时没有比赛" BtnTitle:@"" Btnwidth:0 HiddenBtn:YES];
     
-//    self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
-//        [weakSelf refreshData];
-//    }];
+    self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
+        if (weakSelf.JCRefreshBlock) {
+            weakSelf.JCRefreshBlock();
+        }
+        [weakSelf refreshData];
+    }];
 
     
     MJRefreshBackNormalFooter *mj_foot = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -176,7 +180,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section==0) {
-        return self.newstArray.count;
+        if (self.buyInfoModel.show_status==2) {
+            return self.newstArray.count;
+        }
+        return 0;
+        
     }
     return self.historyArray.count;
 
@@ -190,10 +198,14 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     JCTransactionDataModelTitleView *headView = [JCTransactionDataModelTitleView new];
+    headView.detailView.hidden = YES;
     if (section==0) {
-        NSString *string = [NSString stringWithFormat:@"最新推荐（%@场)",@"39"];
+        if (self.newstArray.count==0) {
+            return [UIView new];
+        }
+        NSString *string = [NSString stringWithFormat:@"最新推荐（%ld场)",self.newstArray.count];
         NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:string];
-        NSRange range = [string rangeOfString:@"39"];
+        NSRange range = [string rangeOfString:[NSString stringWithFormat:@"%ld",self.newstArray.count]];
         if (range.location!=NSNotFound) {
             [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
             headView.titleLab.attributedText = attr;
@@ -206,6 +218,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section==0) {
+        if (self.newstArray.count==0) {
+            return 0.01f;
+        }
+    }
     return AUTO(40);
 }
 
@@ -226,15 +243,29 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section==0) {
-        return AUTO(55);
+        if (self.newstArray.count>0&&self.buyInfoModel.show_status!=2&&self.buyInfoModel.show_status!=4) {
+            return AUTO(55);
+        }
+
     }
     return 0.01f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     if (section==0) {
-        JCTransactionDataModelLockedView *lockView = [JCTransactionDataModelLockedView new];
-        return lockView;
+        if (self.buyInfoModel&&self.newstArray.count>0&&self.buyInfoModel.show_status!=2&&self.buyInfoModel.show_status!=4) {
+            JCTransactionDataModelLockedView *lockView = [JCTransactionDataModelLockedView new];
+            WeakSelf;
+            lockView.JCOpenBlock = ^{
+                //未开通,前往开通
+                if (weakSelf.JCOpenBlock) {
+                    weakSelf.JCOpenBlock();
+                }
+            };
+
+            return lockView;
+        }
+
     }
     return [UIView new];
 }
@@ -244,7 +275,25 @@
 
     
     JCTransactionDataModelDetailVC *vc = [JCTransactionDataModelDetailVC new];
+    if (indexPath.section==0) {
+        JCTransactionDataModel *model = self.newstArray[indexPath.row];
+        vc.match_id = [NSString stringWithFormat:@"%ld",model.match_id];
+        vc.type = [NSString stringWithFormat:@"%ld",model.type];
+    }
+    if (indexPath.section==1) {
+        JCTransactionDataModel *model = self.historyArray[indexPath.row];
+        vc.match_id = [NSString stringWithFormat:@"%ld",model.match_id];
+        vc.type = [NSString stringWithFormat:@"%ld",model.type];
+    }
     [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+- (void)setBuyInfoModel:(JCKellyDataModelPayInfoModel *)buyInfoModel {
+    _buyInfoModel = buyInfoModel;
+    if (buyInfoModel) {
+        [self.tableView reloadData];
+    }
     
 }
 

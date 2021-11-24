@@ -8,6 +8,7 @@
 
 #import "JCWBaseBall.h"
 #import "JCTransactionDataOddsModel.h"
+#import "JCTransactionDataSimialModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCTransactionDataModel : JCWBaseBall
@@ -30,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) JCTransactionDataOddsModel *compare_odds_change_data;
 //
-//@property (nonatomic, strong) RootClassDataListCompensation_data *compensation_data;
+@property (nonatomic, strong) JCTransactionDataSimialModel *compensation_data;
 
 @property (nonatomic, copy) NSString *competition_color;
 
@@ -57,11 +58,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *odds_change_name;
 
 @property (nonatomic, assign) NSInteger second_half_time;
+
 @property (nonatomic, copy) NSString *status_cn;
 
 @property (nonatomic, assign) NSInteger status_id;
 
-@property (nonatomic, assign) NSInteger type;
+@property (nonatomic, assign) NSInteger type;//1是胜平负 2是让球 3是进球数
 
 @property (nonatomic, copy) NSString *type_name;
 

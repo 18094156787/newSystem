@@ -8,9 +8,12 @@
 
 #import "JCWBaseBall.h"
 #import "JCTransactionDataChangeFlagModel.h"
+#import "JCTransactionDataChangeModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCTransactionDataOddsModel : JCWBaseBall
+
+@property (nonatomic, strong)JCTransactionDataChangeModel *changeArr;
 
 @property (nonatomic, strong) NSArray *immediateArr;
 

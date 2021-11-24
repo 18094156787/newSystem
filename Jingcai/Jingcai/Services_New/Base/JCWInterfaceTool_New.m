@@ -74,9 +74,14 @@
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]];
     
     NSString *url = [NSString stringWithFormat:@"%@%@?sign=%@&timestamp=%@", [self serviceUrl], route,md5_Sign,timeSp];
-
+    NSString *client_sign =@"";
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"app_sign"]) {
+        client_sign = [[NSUserDefaults standardUserDefaults] objectForKey:@"app_sign"];
+    }
     //cid 渠道号 rid审核标记
-    url = [NSString stringWithFormat:@"%@%@?sign=%@&timestamp=%@&token=%@&dev=1&sv=%@&cid=0&rid=1", [self serviceUrl], route,md5_Sign,timeSp,token,[JCWInterfaceTool appVersion]];
+    url = [NSString stringWithFormat:@"%@%@?sign=%@&timestamp=%@&token=%@&dev=1&sv=%@&cid=0&rid=1&client_sign=%@", [self serviceUrl], route,md5_Sign,timeSp,token,[JCWInterfaceTool appVersion],client_sign];
+    
+//    [[NSUserDefaults standardUserDefaults] objectForKey:@"app_sign"];
 //    if ([JCWUserBall currentUser].token.length>0) {
 //
 //    }

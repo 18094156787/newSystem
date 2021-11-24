@@ -41,14 +41,13 @@ static CGFloat const kWMMenuViewHeight = 0;
 
 @property (nonatomic,strong) UIView *topColorView;
 
+@property (nonatomic,strong) UIButton *exampleBtn;
+
 @property (nonatomic, assign) float height;
 
 @property (nonatomic,strong) NSMutableArray *timeArray;
 
 @property (nonatomic,strong) JCKellyDataModelPayInfoModel *buyInfoModel;
-
-
-
 
 @end
 
@@ -77,15 +76,17 @@ static CGFloat const kWMMenuViewHeight = 0;
 - (void)setNavEffect {
 
     CGFloat offsetY = self.contentView.contentOffset.y;
-    CGFloat maxOffsetY = AUTO(208);
+    CGFloat maxOffsetY = AUTO(300);
     float percent = offsetY/maxOffsetY;
     self.topColorView.alpha = percent;
 //    NSLog(@"%.2f",percent);
 //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     if (percent>=1) {
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;//
+        self.exampleBtn.hidden = NO;
     }else{
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        self.exampleBtn.hidden = YES;
     }
 //    self.navShadow.alpha= percent;
 
@@ -183,7 +184,7 @@ static CGFloat const kWMMenuViewHeight = 0;
         
 //            self.height = 300;
             
-            self.maximumHeaderViewHeight = self.height-kNavigationBarHeight-AUTO(77);
+            self.maximumHeaderViewHeight = self.height-kNavigationBarHeight-AUTO(77)+AUTO(10);
             self.viewTop = self.height;
 //            [self reloadData];
         }else{
@@ -208,11 +209,12 @@ static CGFloat const kWMMenuViewHeight = 0;
         if ([JCWJsonTool isSuccessResponse:object]) {
             JCKellyDataModelPayInfoModel *buyInfoModel = (JCKellyDataModelPayInfoModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataModelPayInfoModel class]];
             NSString *today = [NSDate timeStringWithIntervalWithFormat:@"yyyy-MM-dd" time:buyInfoModel.server_time];
-            self.dataVC.date = today;
-//            buyInfoModel.show_status = 2;
-//            buyInfoModel.model_status = 4;
+            if (!self.buyInfoModel) {
+                self.dataVC.date = today;
+                [self initTimeArrayWithToday:buyInfoModel.server_time];
+            }
             self.headView.model = buyInfoModel;
-            [self initTimeArrayWithToday:buyInfoModel.server_time];
+
 
             self.buyInfoModel = buyInfoModel;
 //            self.dataVC.buyInfoModel = self.buyInfoModel;
@@ -228,11 +230,10 @@ static CGFloat const kWMMenuViewHeight = 0;
         [self.jcWindow endLoading];
     }];
 
-
-
 }
 
 - (void)initViews {
+    
     self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, kWJingCaiBigDataHeaderViewHeight);
     [self.view addSubview:self.headView];
     WeakSelf;
@@ -270,10 +271,13 @@ static CGFloat const kWMMenuViewHeight = 0;
 
 
 - (void)payAction {
-    if (![JCWUserBall currentUser]) {
-        [self presentLogin];
-        return;
+    if (self.buyInfoModel.model_status!=4) {
+        if (![JCWUserBall currentUser]) {
+            [self presentLogin];
+            return;
+        }
     }
+
     if (self.buyInfoModel.show_status==1) {
         //免费体验
         [self FreeExperienceCheck];
@@ -305,6 +309,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 - (void)showPayView {
     WeakSelf;
     JCPayShowView *payView = [JCPayShowView new];
+    payView.price = [NSString stringWithFormat:@"%@",@(self.buyInfoModel.big_data_price/100)];
     payView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [self.jcWindow addSubview:payView];
     payView.JCSureBlock = ^(NSString * _Nonnull hb_id) {
@@ -335,7 +340,7 @@ static CGFloat const kWMMenuViewHeight = 0;
        [alertView removeFromSuperview];
     }];
 //    NSString *day =  [NSString stringWithFormat:@"%@",self.buyInfoModel.free_day];
-    NSString *title = [NSString stringWithFormat:@"是否开通[凯利指数] %@天免费体验",self.buyInfoModel.free_day];
+    NSString *title = [NSString stringWithFormat:@"是否开通[鲸猜大数据报告] %@天免费体验",self.buyInfoModel.free_day];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
     NSRange count_range = [title rangeOfString:self.buyInfoModel.free_day];
     if (count_range.location!=NSNotFound) {
@@ -379,7 +384,7 @@ static CGFloat const kWMMenuViewHeight = 0;
     }
     
     NSString *scene = @"7";
-    //1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5凯利指数 6.离散指数
+    //1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5机构分歧 6.指数分歧
     [self.jcWindow showLoading];
     JCHomeService_New *service = [JCHomeService_New new];
     [service getConfirmOrderWithUnique:self.model_id scene:scene source:@"1" price:@"" Success:^(id  _Nullable object) {
@@ -468,7 +473,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
     CGFloat originY = _viewTop + kWMMenuViewHeight;
-    return CGRectMake(0, originY, self.view.frame.size.width, self.view.frame.size.height-kWMMenuViewHeight);
+    return CGRectMake(0, originY, self.view.frame.size.width, self.view.frame.size.height-kWMMenuViewHeight-kNavigationBarHeight-AUTO(82));
 }
 
 - (void)pageController:(WMPageController *)pageController willEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info {
@@ -509,7 +514,7 @@ static CGFloat const kWMMenuViewHeight = 0;
         make.centerY.equalTo(backBtn);
         make.size.mas_equalTo(CGSizeMake(60, 44));
     }];
-//    [exampleBtn addTarget:self action:@selector(exampleBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    self.exampleBtn = exampleBtn;
 }
 
 - (void)initTimeArrayWithToday:(long)long_today {

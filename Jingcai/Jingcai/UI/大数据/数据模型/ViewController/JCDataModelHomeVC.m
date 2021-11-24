@@ -121,7 +121,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     JCDataModelModel *model = self.dataArray[indexPath.section];
-////1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5凯利指数 6.离散指数
+////1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5机构分歧 6.指数分歧
     if ([model.id integerValue]==1) {
         //鲸猜大数据
         JCJingCaiAIBigDataStickVC *vc =[JCJingCaiAIBigDataStickVC new];
@@ -147,13 +147,13 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     if ([model.id integerValue]==5) {
-        //凯利指数
+        //机构分歧
         JCKellyDataModelStickVC *vc = [JCKellyDataModelStickVC new];
         vc.model_id = model.id;
         [self.navigationController pushViewController:vc animated:YES];
     }
     if ([model.id integerValue]==6) {
-        //离散指数
+        //指数分歧
         JCDiscreteDataModelStickVC *vc = [JCDiscreteDataModelStickVC new];
         vc.model_id = model.id;
         [self.navigationController pushViewController:vc animated:YES];

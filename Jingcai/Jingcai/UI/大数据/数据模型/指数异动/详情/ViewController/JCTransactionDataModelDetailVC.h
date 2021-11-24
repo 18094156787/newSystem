@@ -7,10 +7,20 @@
 //
 
 #import "JCBaseTableViewController.h"
-
+#import "JCDataModelTitleModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCTransactionDataModelDetailVC : JCBaseTableViewController
+
+@property (nonatomic,assign) BOOL hidetopMatch;
+
+@property (nonatomic,assign) BOOL isMatch;//标记联赛详情进来的
+
+@property (nonatomic,strong) NSString *type;//0全部 1胜平负、2让球、3进球数
+
+@property (nonatomic,strong) NSString *match_id;
+
+@property (nonatomic,strong) JCDataModelTitleModel *titleModel;
 
 @end
 

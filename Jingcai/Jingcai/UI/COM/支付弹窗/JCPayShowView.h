@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) JCWMyHongbaoBall *useHbModel;//当前选中的红包
 
+@property (nonatomic,strong) NSString *price;
+
 @property (nonatomic,copy) void(^JCSureBlock)(NSString *hb_id);
 
 @property (nonatomic,copy) void(^JCRechargeBlock)(void);

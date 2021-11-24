@@ -54,5 +54,7 @@
 -(void)setItemsWithTitle:(NSArray *)titles normalItemColor:(UIColor *)nItemColor selectItemColor:(UIColor *)sItemColor normalTitleColor:(UIColor *)nTitleColor selectTitleColor:(UIColor *)sTitleColor titleTextSize:(CGFloat)size selectItemNumber:(NSInteger)number itemWidth:(NSArray *)itemWidths;
 
 
+@property (nonatomic,strong) UIScrollView *scrollowView;
 
+@property (nonatomic,strong) NSArray *itemWidths;
 @end

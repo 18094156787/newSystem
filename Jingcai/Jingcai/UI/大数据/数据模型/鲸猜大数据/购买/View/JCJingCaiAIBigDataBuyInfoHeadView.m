@@ -18,7 +18,7 @@
     [self addSubview:self.bgView];
     self.bgView.frame = CGRectMake(0,0,SCREEN_WIDTH,AUTO(155));
     
-    UILabel *titleLab = [UILabel initWithTitle:@"鲸猜大数据服务" andFont:18 andWeight:1 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:0];
+    UILabel *titleLab = [UILabel initWithTitle:@"鲸猜大数据报告" andFont:18 andWeight:1 andTextColor:JCBaseColor andBackgroundColor:JCClearColor andTextAlignment:0];
     [self.bgView addSubview:titleLab];
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(15);

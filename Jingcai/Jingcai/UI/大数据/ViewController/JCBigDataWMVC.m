@@ -309,7 +309,7 @@
     }
     JCMyBuyPlanWMViewController *vc = [JCMyBuyPlanWMViewController new];
     JCShowModel *model = self.dataArray[self.selectIndex];
-    if ([model.is_show_big_data integerValue]==1) {
+    if ([model.is_show_dataModel integerValue]==1) {
         vc.selectIndex = 4;
     }
     if ([model.is_show_whale_ai integerValue]==1) {

@@ -225,13 +225,14 @@
     [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
     self.resultImgView.hidden = model.wl==0?YES:NO;
     if (model.wl==1) {
-        self.resultImgView.image = JCIMAGE(@"ic_dataModel_black");
-    }
-    if (model.wl==2) {
         self.resultImgView.image = JCIMAGE(@"ic_dataModel_red");
     }
-    self.chuLab.text = [NSString stringWithFormat:@"相同初赔（%@）",model.similar.begin_count.total];
-    self.jiLab.text = [NSString stringWithFormat:@"相同即赔（%@）",model.similar.last_count.total];
+    if (model.wl==2) {
+        self.resultImgView.image = JCIMAGE(@"ic_dataModel_black");
+    }
+    
+    self.chuLab.text = [NSString stringWithFormat:@"相同初指（%@）",NonNil(model.similar.begin_count.total)];
+    self.jiLab.text = [NSString stringWithFormat:@"相同即指（%@）",NonNil(model.similar.last_count.total)];
     
     self.homeWinView.topLab.text = model.similar.begin_count.won;
     self.homeWinView.bottomLab.text = model.similar.begin_odds.won;
@@ -269,9 +270,9 @@
         self.awayLoseView.bottomLab.textColor = COLOR_30B27A;
     }
     
-    NSString *title = [NSString stringWithFormat:@"查询历史数据，找到相同初赔比赛%@场，%@%%比赛结果指向客胜；",NonNil(model.similar.begin_count.total),NonNil(model.similar.begin_big_rate.rate)];
+    NSString *title = [NSString stringWithFormat:@"查询历史数据，找到相同初指比赛%@场，%@%%比赛结果指向客胜；",NonNil(model.similar.begin_count.total),NonNil(model.similar.begin_big_rate.rate)];
     if ([model.similar.last_count.total integerValue]>0) {
-        title = [NSString stringWithFormat:@"%@相同即赔比赛%@场，%@%%比赛指向客胜。",title,NonNil(model.similar.last_count.total),NonNil(model.similar.last_big_rate.rate)];
+        title = [NSString stringWithFormat:@"%@相同即指比赛%@场，%@%%比赛指向客胜。",title,NonNil(model.similar.last_count.total),NonNil(model.similar.last_big_rate.rate)];
     }
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
     if (model.similar.begin_count.total.length>0) {
@@ -364,8 +365,8 @@
 //    self.awayTeamLab.text = @"皇家马德里";
 //    self.homeTeamImgView.backgroundColor = JCBaseColor;
 //    self.awayTeamImgView.backgroundColor = JCBaseColor;
-//    self.chuLab.text = @"相同初赔（100）";
-//    self.jiLab.text = @"相同即赔（90）";
+//    self.chuLab.text = @"相同初指（100）";
+//    self.jiLab.text = @"相同即指（90）";
 //
 //    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"home_placeholder")];
 //    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"away_placeholder")];
@@ -385,7 +386,7 @@
 //    self.awayLoseView.topLab.text = @"34";
 //    self.awayLoseView.bottomLab.text = @"34";
 //
-//    self.historyLab.text = @"查询历史数据，找到相同初赔比赛100场，相同即赔比赛90场";
+//    self.historyLab.text = @"查询历史数据，找到相同初指比赛100场，相同即指比赛90场";
 //
 //    NSString *result = [NSString stringWithFormat:@"本场推荐：%@",@"客胜"];
 //    NSRange range = [result rangeOfString:@"客胜"];

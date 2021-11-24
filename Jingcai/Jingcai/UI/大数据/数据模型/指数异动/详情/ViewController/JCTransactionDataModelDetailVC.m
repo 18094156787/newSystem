@@ -14,12 +14,16 @@
 #import "JCTransactionDataModelDetailZhiShuCell.h"
 #import "JCPoissonDataModelDetailAttackCell.h"
 #import "JCTransactionDataModelTitleView.h"
+#import "JCTransactionDataModelAgainstTitleView.h"
+#import "JCKellyDataDetailModel.h"
 
 @interface JCTransactionDataModelDetailVC ()
 
 @property (nonatomic,strong) JCTransactionDataModelDetailHeadView *headView;
 
 @property (nonatomic,strong) UIView *topColorView;
+
+@property (nonatomic,strong) JCKellyDataDetailModel *detailModel;
 
 @end
 
@@ -38,6 +42,13 @@
 
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.topColorView removeAllSubviews];
+    [self.topColorView removeFromSuperview];
+    self.topColorView = nil;
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 //      self.navigationBarStyle = JCNavigationBarStyleTransparent;
@@ -52,64 +63,47 @@
     [self initViews];
     [self refreshData];
 }
-
-
 - (void)refreshData {
-    self.pageNo = 1;
-    [self getDataList];
-}
+    [self.view showLoading];
+    JCDataBaseService_New *service = [JCDataBaseService_New new];
+    [service getTransactionDataModeDetailWithMatch_id:self.match_id type:self.type Page:self.pageNo PageSize:@"20" Success:^(id  _Nullable object) {
+        [self endRefresh];
+        if ([JCWJsonTool isSuccessResponse:object]) {
 
-- (void)getDataList {
+            if (self.pageNo==1) {
+                [self.dataArray removeAllObjects];
+                self.detailModel = (JCKellyDataDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataDetailModel class]];
+                self.headView.model = self.detailModel;
+            }
+            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"odds_list"] class:[JCTransactionDataOddsDetailModel class]];
+            if (array.count < 20) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            [self.dataArray addObjectsFromArray:array];
+            if (self.pageNo>1&&array.count>0) {
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationFade];
+            }else{
 
-//    [self.jcWindow showLoading];
-//    JCMatchService_New *service = [JCMatchService_New new];
-//    [service getPredictedMatchListWithType:@"2" Key_word:@"" Page:self.pageNo Success:^(id  _Nullable object) {
-//        [self endRefresh];
-//
-//        if ([JCWJsonTool isSuccessResponse:object]) {
-//            if (self.pageNo==1) {
-//                [self.dataArray removeAllObjects];
-//            }
-//            NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCMatchInfoModel class]];
-//             [self.dataArray addObjectsFromArray:array];
-//            if (array.count <PAGE_LIMIT) {
-//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-//            }
-//            [self.tableView reloadData];
-//            self.pageNo++;
-//            [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-//
-//            if (array.count ==0&&self.dataArray.count>0) {
-//                  self.tableView.tableFooterView = self.noMore_footView;
-//                  self.tableView.mj_footer.hidden = YES;
-//              }else{
-//                  self.tableView.tableFooterView = [UIView new];
-//                  self.tableView.mj_footer.hidden = NO;
-//              }
-//
-//        }else{
-//            [JCWToastTool showHint:object[@"msg"]];
-//        }
-//
-//    } failure:^(NSError * _Nonnull error) {
-//        [self endRefresh];
-//        [self chageImageStr:@"nodata" Title:@"暂无更多比赛" BtnTitle:@""];
-//    }];
+                [self.tableView reloadData];
+            }
+            
+            self.pageNo++;
+
+
+        }else{
+            [JCWToastTool showHint:object[@"msg"]];
+        }
+
+    } failure:^(NSError * _Nonnull error) {
+        [self endRefresh];
+    }];
+
 
 }
 
 
 - (void)initViews {
-//    JCJingCaiAIBigDataMatchTitleView *titleView = [[JCJingCaiAIBigDataMatchTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, AUTO(45))];
-//    titleView.backgroundColor = JCWhiteColor;
-//    titleView.titleLab.text = @"比赛列表";
-//    titleView.iconView.hidden = NO;
-//    self.tableView.tableHeaderView = titleView;
-//
-//    titleView.JCBlcok = ^{
-//        [weakSelf.navigationController pushViewController:[JCJingCaiAIBigDataHomeVC new] animated:YES];
-//    };
-    
+
     UIButton *customView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     [customView addTarget:self action:@selector(backItemClick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:customView];
@@ -119,7 +113,7 @@
     self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(175)+kNavigationBarHeight);
     self.tableView.tableHeaderView = self.headView;
     
-    WeakSelf;
+   
     self.tableView.estimatedRowHeight = 300;
 //    self.tableView.backgroundColor = COLOR_F4F6F9;
     self.tableView.separatorColor = COLOR_DDDDDD;
@@ -139,12 +133,16 @@
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
 
-    JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
+//    JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
+//        [weakSelf refreshData];
+//    }];
+//    emptyView.contentViewOffset = 0;
+//    self.tableView.ly_emptyView = emptyView;
+
+    WeakSelf;
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [weakSelf refreshData];
     }];
-    emptyView.contentViewOffset = 0;
-    self.tableView.ly_emptyView = emptyView;
-
  
 
 }
@@ -195,10 +193,15 @@
         return 1;
     }
     if (section==1) {
-        return 1;
+        if (self.detailModel.same_initial_compensation.count>0) {
+            return 1;
+        }
+        return 0;
     }
     if (section==2) {
-        return 5;
+        
+       
+        return self.detailModel.data_contrast.count;
     }
 
 
@@ -208,7 +211,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
-        return AUTO(100);
+        NSInteger height = self.detailModel.compare_odds.count>=2?AUTO(30):0;
+        return height+self.detailModel.odds_change_list.count*AUTO(35);
     }
 //    if (indexPath.section==2) {
 //        return AUTO(35);
@@ -223,7 +227,10 @@
         return AUTO(50);
     }
     if (indexPath.section==3) {
-        return AUTO(30)*5+AUTO(10);
+        if (!self.detailModel) {
+            return 1000;
+        }
+        return AUTO(30)*self.dataArray.count+AUTO(40);
     }
     
     return UITableViewAutomaticDimension;
@@ -232,7 +239,19 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-
+    if (section==1) {
+        if(self.detailModel.same_initial_compensation.count==0){
+            return 0.01f;
+        }
+    }
+    if (section==2) {
+        if(self.detailModel.data_contrast.count==0){
+            return 0.01f;
+        }
+    }
+    if (section==3) {
+        return 0.01f;
+    }
     return AUTO(8);
 }
 
@@ -246,18 +265,51 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
     JCTransactionDataModelTitleView *headView = [JCTransactionDataModelTitleView new];
-    
+    headView.detailView.hidden = YES;
+    headView.infoLab.text = @"";
     if (section==0) {
         headView.titleLab.text = @"异动数据";
 //        headView.inf
     }
     if (section==1) {
-        headView.titleLab.text = @"初赔相同的比赛";
+        
+        if(self.detailModel.same_initial_compensation.count==0){
+            return [UIView new];
+        }
+//
+        if (self.detailModel.same_initial_compensation.count>0) {
+            JCHistoryPayDataModel *model = self.detailModel.same_initial_compensation.firstObject;
+
+            if ([self.type integerValue]==1) {
+                headView.infoLab.text = [NSString stringWithFormat:@"初指 %@ %@ %@",model.last_odds.won,model.last_odds.draw,model.last_odds.loss];
+            }else{
+                NSString *equal = [NSString stringWithFormat:@" (%@) ",model.last_odds.draw];
+                NSMutableAttributedString *equalAttr = [[NSMutableAttributedString alloc] initWithString:equal];
+                NSRange range = [equal rangeOfString:model.last_odds.draw];
+                if (range.location!=NSNotFound) {
+                    [equalAttr addAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0x0050D0)} range:range];
+                }
+                NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:@"初指 "];
+                [attr appendString:model.last_odds.won];
+                [attr appendAttributedString:equalAttr];
+                [attr appendString:model.last_odds.loss];
+                headView.infoLab.attributedText = attr;
+            }
+        }
+        headView.titleLab.text = @"初指相同的比赛";
     }
     if (section==2) {
-        headView.titleLab.text = @"数据对比";
+        if (self.detailModel.data_contrast.count==0) {
+            return [UIView new];
+        }
+        JCTransactionDataModelAgainstTitleView *againstView = [JCTransactionDataModelAgainstTitleView new];
+        againstView.titleLab.text = @"数据对比";
+        return againstView;
     }
     if (section==3) {
+        if (self.dataArray.count==0) {
+            return [UIView new];
+        }
         headView.titleLab.text = @"指数详情";
     }
 
@@ -266,6 +318,21 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section==1) {
+        if(self.detailModel.same_initial_compensation.count==0){
+            return 0.01;
+        }
+    }
+    if (section==2) {
+        if(self.detailModel.data_contrast.count==0){
+            return 0.01;
+        }
+    }
+    if (section==3) {
+        if (self.dataArray.count==0) {
+            return 0.01f;
+        }
+    }
     return AUTO(40);
 }
 
@@ -273,35 +340,29 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
         JCTransactionDataModelDetailDataCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCTransactionDataModelDetailDataCell"];
+        cell.type = self.type;
+        cell.detailModel = self.detailModel;
+        cell.dataArray = self.detailModel.compare_odds;
         return cell;
     }
     if (indexPath.section==1) {
         JCTransactionDataModelDetailSameMatchCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCTransactionDataModelDetailSameMatchCell"];
+        cell.type = self.type;
+        cell.dataArray = self.detailModel.same_initial_compensation;
         return cell;
     }
     if (indexPath.section==2) {
+        
         JCPoissonDataModelDetailAttackCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCPoissonDataModelDetailAttackCell"];
-        if (indexPath.row==0) {
-            cell.titleLab.text = @"场均进球";
-        }
-        if (indexPath.row==1) {
-            cell.titleLab.text = @"场均失球";
-        }
-        if (indexPath.row==2) {
-            cell.titleLab.text = @"场均角球";
-        }
-        if (indexPath.row==3) {
-            cell.titleLab.text = @"场均射门";
-        }
-        if (indexPath.row==4) {
-            cell.titleLab.text = @"场均控球率";
-        }
-
+        cell.againstModel = self.detailModel.data_contrast[indexPath.row];
         return cell;
     }
     
     if (indexPath.section==3) {
+        
         JCTransactionDataModelDetailZhiShuCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCTransactionDataModelDetailZhiShuCell"];
+        cell.type = self.type;
+        cell.dataArray = self.dataArray;
         return cell;
     }
     
@@ -332,7 +393,7 @@
     self.topColorView.alpha = percent;
 //    NSLog(@"%.2f",percent);
 //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    if (percent>=1) {
+    if (percent>=0.98) {
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;//
     }else{
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;

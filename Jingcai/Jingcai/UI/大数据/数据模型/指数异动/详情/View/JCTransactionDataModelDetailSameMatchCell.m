@@ -26,11 +26,14 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    if (self.dataArray.count>0) {
+        return 1;
+    }
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+
     return 3;
     
 }
@@ -48,11 +51,29 @@
         cell.labelTwo.text = @"胜";
         cell.labelThree.text = @"平";
         cell.labelFour.text = @"负";
+        if ([self.type integerValue]!=1) {
+            cell.labelThree.text = @"平(走水)";
+        }
 
 
 
         
     }else{
+        JCHistoryPayDataModel *model = self.dataArray.firstObject;
+        if (indexPath.row==1) {
+            cell.labelOne.text = @"场次";
+            cell.labelTwo.text = [NSString stringWithFormat:@"%@%%",model.last_count.won];
+            cell.labelThree.text =[NSString stringWithFormat:@"%@%%",model.last_count.draw];
+            cell.labelFour.text = [NSString stringWithFormat:@"%@%%",model.last_count.loss];
+
+        }
+        if (indexPath.row==2) {
+            cell.labelOne.text = @"占比";
+            cell.labelTwo.text = [NSString stringWithFormat:@"%@%%",model.last_rate.won];
+            cell.labelThree.text = [NSString stringWithFormat:@"%@%%",model.last_rate.draw];
+            cell.labelFour.text = [NSString stringWithFormat:@"%@%%",model.last_rate.loss];
+
+        }
 //        JCBigDataAnalysisMatchModel *model = self.model.match[indexPath.row-1];
 //        cell.model = model;
         cell.labelOne.backgroundColor = JCWhiteColor;
@@ -60,10 +81,10 @@
         cell.labelThree.backgroundColor = JCWhiteColor;
         cell.labelFour.backgroundColor = JCWhiteColor;
         
-        cell.labelOne.text = @"赛果";
-        cell.labelTwo.text = @"胜";
-        cell.labelThree.text = @"平";
-        cell.labelFour.text = @"负";
+//        cell.labelOne.text = @"赛果";
+//        cell.labelTwo.text = @"胜";
+//        cell.labelThree.text = @"平";
+//        cell.labelFour.text = @"负";
 
     }
 
@@ -74,6 +95,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return AUTO(30);
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.01f;
 }
 
 

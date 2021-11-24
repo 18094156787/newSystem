@@ -48,11 +48,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UIImageView *upImgView;
 
+@property (nonatomic, strong) UIImageView *equalImgView;
+
 @property (nonatomic, strong) UIImageView *downImgView;
 
 @property (nonatomic, strong) UILabel *rateChangeLab;
 
 @property (nonatomic, strong) UILabel *infoLab;
+
+@property (nonatomic, strong) UIView *rateChangeView;
 
 @property (nonatomic, strong) JCTransactionDataModel *model;
 

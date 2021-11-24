@@ -8,7 +8,7 @@
 
 #import "JCBaseTableViewCell_New.h"
 #import "JNMatchSJAgainstTeam_HistoryBattleContentCell.h"
-
+#import "JCKellyDataDetailModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCTransactionDataModelDetailSameMatchCell : JCBaseTableViewCell_New<UITableViewDataSource, UITableViewDelegate>
@@ -18,6 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, strong) NSArray *dataArray;
+
+@property (nonatomic,strong) NSString *type;//0全部 1胜平负、2让球、3进球数
+
+@property (nonatomic,strong) JCKellyDataDetailModel *detailModel;
 
 @end
 

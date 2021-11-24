@@ -22,9 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UIView *historyBgView;//历史同赔
 
-@property (nonatomic, strong) UILabel *chuLab;//初赔
+@property (nonatomic, strong) UILabel *chuLab;//初指
 
-@property (nonatomic, strong) UILabel *jiLab;//即赔
+@property (nonatomic, strong) UILabel *jiLab;//即指
 
 @property (nonatomic, strong) JCHistoryPayDataModelColumnarView *homeWinView;
 
@@ -45,6 +45,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) UILabel *resultLab;
 
 @property (nonatomic,strong) UILabel *tipLab;
+
+@property (nonatomic,strong) UIView *redLineView;
+
+@property (nonatomic,assign) BOOL hidetopMatch;
 
 @property (nonatomic,strong) JCKellyDataDetailModel *model;
 

@@ -65,6 +65,7 @@
     UIView *redLineView = [UIView new];
     redLineView.backgroundColor = JCBaseColor;
     [self.tpBgView addSubview:redLineView];
+    self.redLineView =redLineView;
     [redLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(16));
         make.top.offset(AUTO(35));
@@ -222,8 +223,8 @@
 - (void)setModel:(JCKellyDataDetailModel *)model {
     _model = model;
     self.matchView.model = model;
-    self.chuLab.text = [NSString stringWithFormat:@"相同初赔（%@）",model.similar.begin_count.total];
-    self.jiLab.text = [NSString stringWithFormat:@"相同即赔（%@）",model.similar.last_count.total];
+    self.chuLab.text = [NSString stringWithFormat:@"相同初指（%@）",model.similar.begin_count.total];
+    self.jiLab.text = [NSString stringWithFormat:@"相同即指（%@）",model.similar.last_count.total];
 
     self.homeWinView.topLab.text = [NSString stringWithFormat:@"%@%%",model.similar.begin_rate.won];
     self.homeWinView.bottomLab.text = [NSString stringWithFormat:@"%@",model.similar.begin_odds.won];
@@ -288,9 +289,9 @@
         self.awayEqualView.rate =   0;
         self.awayLoseView.rate =   0;
     }
-    NSString *title = [NSString stringWithFormat:@"查询历史数据，找到相同初赔比赛%@场，%@%%比赛结果指向客胜；",NonNil(model.similar.begin_count.total),NonNil(model.similar.begin_big_rate.rate)];
+    NSString *title = [NSString stringWithFormat:@"查询历史数据，找到相同初指比赛%@场，%@%%比赛结果指向客胜；",NonNil(model.similar.begin_count.total),NonNil(model.similar.begin_big_rate.rate)];
     if ([model.similar.last_count.total integerValue]>0) {
-        title = [NSString stringWithFormat:@"%@相同即赔比赛%@场，%@%%比赛指向客胜。",title,NonNil(model.similar.last_count.total),NonNil(model.similar.last_big_rate.rate)];
+        title = [NSString stringWithFormat:@"%@相同即指比赛%@场，%@%%比赛指向客胜。",title,NonNil(model.similar.last_count.total),NonNil(model.similar.last_big_rate.rate)];
     }
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
     if (model.similar.begin_count.total.length>0) {
@@ -333,39 +334,20 @@
     
 }
 
-//- (void)data {
-//    self.chuLab.text = @"相同初赔（100）";
-//    self.jiLab.text = @"相同即赔（90）";
-//
-//    self.homeWinView.topLab.text = @"22";
-//    self.homeWinView.bottomLab.text = @"22";
-//    self.homeWinView.countLab.text = @"(23场)";
-//    self.homeEqualView.topLab.text = @"23";
-//    self.homeEqualView.bottomLab.text = @"23";
-//    self.homeEqualView.countLab.text = @"(23场)";
-//    self.homeLoseView.topLab.text = @"24";
-//    self.homeLoseView.bottomLab.text = @"24";
-//    self.homeLoseView.countLab.text = @"(23场)";
-//
-//    self.awayWinView.topLab.text = @"32";
-//    self.awayWinView.bottomLab.text = @"32";
-//    self.awayWinView.countLab.text = @"(23场)";
-//    self.awayEqualView.topLab.text = @"33";
-//    self.awayEqualView.bottomLab.text = @"33";
-//    self.awayEqualView.countLab.text = @"(23场)";
-//    self.awayLoseView.topLab.text = @"34";
-//    self.awayLoseView.bottomLab.text = @"34";
-//    self.awayLoseView.countLab.text = @"(23场)";
-//
-//
-//
-////    self.historyLab.text = @"查询历史数据，找到相同初赔比赛100场，相同即赔比赛90场";
-////    NSString *result = [NSString stringWithFormat:@"本场推荐：%@",@"客胜"];
-////    NSRange range = [result rangeOfString:@"客胜"];
-////    NSMutableAttributedString *result_attr = [[NSMutableAttributedString alloc] initWithString:result];
-////    [result_attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
-////    self.resultLab.attributedText = result_attr;
-//}
+- (void)setHidetopMatch:(BOOL)hidetopMatch {
+    _hidetopMatch = hidetopMatch;
+    if (hidetopMatch) {
+        self.bgView.hidden = hidetopMatch;
+        self.matchView.hidden = YES;
+        [self.matchView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.offset(0);
+            make.height.mas_equalTo(0);
+        }];
+        [self.redLineView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.offset(AUTO(16));
+        }];
+    }
+}
 
 - (JCHistoryPayDataModelDetailMatchView *)matchView {
     if (!_matchView) {

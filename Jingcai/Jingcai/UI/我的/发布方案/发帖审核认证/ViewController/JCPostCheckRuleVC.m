@@ -159,16 +159,6 @@
     JCPostCheckRuleTitleView *headView = [JCPostCheckRuleTitleView new];
     NSString *text = self.titleArray[section];
     headView.titleLab.text = text;
-//    if (section<4) {
-//        headView.titleLab.text = text;
-//    }else{
-//        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:text];//
-//        NSRange range = [text rangeOfString:@"不可发布"];
-//        NSRange range1 = [text rangeOfString:@"心水、杀庄、爆庄、外围、微信、彩票、立博、威廉希尔、bet365、必发、澳彩、凯利指数、凯利方差、凯利离散度、澳门彩票、庄家、闲家、玩球、回血、赌狗"];
-//        [attr setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(14)]} range:range];
-//        [attr setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(14)]} range:range1];
-//        headView.titleLab.attributedText = attr;
-//    }
 
     return headView;
 }

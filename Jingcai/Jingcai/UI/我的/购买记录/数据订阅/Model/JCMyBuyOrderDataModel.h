@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *total;
 
+@property (nonatomic,strong) NSString *total_price;
+
 @property (nonatomic,strong) NSString *logo;
 
 @property (nonatomic,strong) NSString *order_id;
@@ -66,7 +68,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *zucai_order_order_id;//订单号
 
-@property (nonatomic,assign) NSInteger zucai_order_order_refund_status;
+@property (nonatomic,assign) NSInteger zucai_order_order_refund_status;//退款状态0未退款 1申请中 2已退款 3拒绝退款 4是已退款
+
+@property (nonatomic,strong) NSString *zucai_order_refund_status_text;
 
 @property (nonatomic,strong) NSString *wl;
 @end

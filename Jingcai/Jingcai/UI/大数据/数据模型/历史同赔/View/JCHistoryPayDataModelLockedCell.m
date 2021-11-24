@@ -188,16 +188,16 @@
     
     [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.home_team_logo] placeholderImage:JCIMAGE(@"home_placeholder")];
     [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
-    self.chuLab.text = [NSString stringWithFormat:@"相同初赔（%@）",model.similar.begin_count.total];
-    self.jiLab.text = [NSString stringWithFormat:@"相同即赔（%@）",model.similar.last_count.total];
+    self.chuLab.text = [NSString stringWithFormat:@"相同初指（%@）",model.similar.begin_count.total];
+    self.jiLab.text = [NSString stringWithFormat:@"相同即指（%@）",model.similar.last_count.total];
     
     self.homeWindLab.text = model.similar.begin_odds.won;
     self.homeEqualLab.text = model.similar.begin_odds.draw;
     self.homeLoseLab.text = model.similar.begin_odds.loss;
     self.awayWindLab.text = model.similar.last_odds.won;
-    self.awayEqualLab.text = model.similar.last_odds.won;
-    self.awayLoseLab.text = model.similar.last_odds.won;
-    self.historyLab.text = [NSString stringWithFormat:@"查询历史数据，找到相同初赔比赛%@场，相同即赔比赛%@场",model.similar.begin_count.total,model.similar.last_count.total];
+    self.awayEqualLab.text = model.similar.last_odds.draw;
+    self.awayLoseLab.text = model.similar.last_odds.loss;
+    self.historyLab.text = [NSString stringWithFormat:@"查询历史数据，找到相同初指比赛%@场，相同即指比赛%@场",model.similar.begin_count.total,model.similar.last_count.total];
     
     NSString *type = @"";
     if ([model.model_id integerValue] ==1) {
@@ -213,16 +213,16 @@
         type = @"泊松分布";
     }
     if ([model.model_id integerValue] ==5) {
-        type = @"凯利指数";
+        type = @"机构分歧";
     }
     if ([model.model_id integerValue] ==6) {
-        type = @"离散指数";
+        type = @"指数分歧";
     }
 
     
     [self.lockBtn setTitle:[NSString stringWithFormat:@"开通[%@]服务，解锁赛果详情",type] forState:0];
     
-    NSString *title = [NSString stringWithFormat:@"查询历史数据，找到相同初赔比赛%@场，相同即赔比赛%@场",NonNil(model.similar.begin_count.total),NonNil(model.similar.last_count.total)];
+    NSString *title = [NSString stringWithFormat:@"查询历史数据，找到相同初指比赛%@场，相同即指比赛%@场",NonNil(model.similar.begin_count.total),NonNil(model.similar.last_count.total)];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
     if (model.similar.begin_count.total.length>0) {
         NSRange range = [title rangeOfString:model.similar.begin_count.total];
@@ -316,8 +316,8 @@
 //    self.awayTeamLab.text = @"皇家马德里";
 //    self.homeTeamImgView.backgroundColor = JCBaseColor;
 //    self.awayTeamImgView.backgroundColor = JCBaseColor;
-//    self.chuLab.text = @"相同初赔（100）";
-//    self.jiLab.text = @"相同即赔（90）";
+//    self.chuLab.text = @"相同初指（100）";
+//    self.jiLab.text = @"相同即指（90）";
 //
 //    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"home_placeholder")];
 //    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"away_placeholder")];
@@ -327,7 +327,7 @@
 //    self.awayWindLab.text = @"4";
 //    self.awayEqualLab.text = @"5";
 //    self.awayLoseLab.text = @"6";
-//    self.historyLab.text = @"查询历史数据，找到相同初赔比赛100场，相同即赔比赛90场";
+//    self.historyLab.text = @"查询历史数据，找到相同初指比赛100场，相同即指比赛90场";
 //}
 
 - (UIView *)bgView {

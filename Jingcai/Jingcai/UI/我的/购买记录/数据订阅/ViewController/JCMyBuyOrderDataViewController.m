@@ -143,7 +143,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return AUTO(8);
+    if (section<self.dataArray.count-1) {
+        return AUTO(8);
+    }
+    return 0.01f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
