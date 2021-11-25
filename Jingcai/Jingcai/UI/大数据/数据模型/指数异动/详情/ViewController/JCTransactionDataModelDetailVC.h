@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *type;//0全部 1胜平负、2让球、3进球数
 
+@property (nonatomic, strong) NSString *model_id;//模型id
+
 @property (nonatomic,strong) NSString *match_id;
 
 @property (nonatomic,strong) JCDataModelTitleModel *titleModel;

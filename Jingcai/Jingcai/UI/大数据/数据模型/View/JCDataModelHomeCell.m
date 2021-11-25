@@ -71,8 +71,8 @@
     self.countLab.hidden = model.current_count>0?NO:YES;
     [self.buyBtn setTitle:@"立即查看" forState:0];
     self.priceLab.font = [UIFont fontWithName:@"PingFangSC-Semibold" size:AUTO(20)];
-    NSString *price = [NSString stringWithFormat:@"%@元/月",@(model.big_data_price/100)];
-    NSRange range = [price rangeOfString:@"元/月"];
+    NSString *price = [NSString stringWithFormat:@"%@红币/月",@(model.big_data_price/100)];
+    NSRange range = [price rangeOfString:@"红币/月"];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:price];
     [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:AUTO(11)]} range:range];
     self.priceLab.attributedText = attr;

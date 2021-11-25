@@ -45,6 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *match_id;
 
+@property (nonatomic,strong) NSString *model_id;
+
 @property (nonatomic,strong) JCKellyDataDetailModel *model;
 
 @property (nonatomic,strong) JCKellyDataModelModel *historyModel;

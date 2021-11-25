@@ -239,29 +239,24 @@
 #pragma mark - 扩展方法
 - (void)loadWebData {
     NSString *link_url = self.urlStr;
-//    if ([self.urlStr containsString:@"announcement"]) {
-//        link_url = [NSString stringWithFormat:@"%@?dev=1",self.urlStr];
-//    }
-//    if (<#condition#>) {
-//        <#statements#>
-//    }
-//    link_url = [NSString stringWithFormat:@"%@?dev=1",self.urlStr];
-    if ([JCWUserBall currentUser].token.length>0) {
-        NSString *appand = [NSString stringWithFormat:@"token=%@&native=ios&dev=1",[JCWUserBall currentUser].token];
-        if ([link_url containsString:@"?"]) {
-            link_url = [NSString stringWithFormat:@"%@&%@",link_url,appand];
-        }else{
-            link_url = [NSString stringWithFormat:@"%@?%@",link_url,appand];
+
+    if ([link_url containsString:@"#"]) {
+        NSArray *array = [link_url componentsSeparatedByString:@"#"];
+        NSLog(@"%@",array);
+        NSString *appand = [NSString stringWithFormat:@"?dev=1&sv=%@&token=%@&native=ios",[JCWInterfaceTool appVersion],NonNil([JCWUserBall currentUser].token)];
+        if (array.count>=2) {
+            link_url = [NSString stringWithFormat:@"%@%@#%@",array[0],appand,array[1]];
         }
     }else{
         if ([link_url containsString:@"?"]) {
-            link_url = [NSString stringWithFormat:@"%@&dev=1&native=ios",link_url];
+            link_url = [NSString stringWithFormat:@"%@&dev=1&sv=%@&native=ios",link_url,[JCWInterfaceTool appVersion]];
         }else{
-            link_url = [NSString stringWithFormat:@"%@?dev=1&native=ios",link_url];
+            link_url = [NSString stringWithFormat:@"%@?dev=1&sv=%@&native=ios",link_url,[JCWInterfaceTool appVersion]];
         }
-        
     }
+
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:link_url]];
+    NSLog(@"请求链接%@",link_url);
     [_wkWebView loadRequest:request];
 }
 

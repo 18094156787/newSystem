@@ -117,7 +117,7 @@
         WeakSelf;
         cell.JCDetailBlock = ^{
             JCMatchDetailWMStickVC *vc = [JCMatchDetailWMStickVC new];
-            vc.is_bigData = YES;
+            vc.model_id = @"1";
             vc.matchNum = weakSelf.detailModel.match_id;
             [ weakSelf.navigationController pushViewController:vc animated:YES];
         };

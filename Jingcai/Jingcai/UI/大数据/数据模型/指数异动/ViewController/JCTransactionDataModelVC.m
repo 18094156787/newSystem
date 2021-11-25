@@ -275,6 +275,7 @@
 
     
     JCTransactionDataModelDetailVC *vc = [JCTransactionDataModelDetailVC new];
+    vc.model_id = self.model_id;
     if (indexPath.section==0) {
         JCTransactionDataModel *model = self.newstArray[indexPath.row];
         vc.match_id = [NSString stringWithFormat:@"%ld",model.match_id];

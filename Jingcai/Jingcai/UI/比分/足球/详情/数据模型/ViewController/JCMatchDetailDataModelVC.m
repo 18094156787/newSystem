@@ -31,6 +31,8 @@
 
 @property (strong, nonatomic) NSMutableArray *titleArray;
 
+@property (strong, nonatomic) NSArray *titleModelArray;
+
 @property (assign, nonatomic) NSInteger is_have_ai_big_tab;
 
 @property (assign, nonatomic) float total_width;
@@ -125,7 +127,7 @@
             NSString *free_day = [NSString stringWithFormat:@"%@",object[@"data"][@"free_day"]];
             self.is_have_ai_big_tab = [is_have_ai_big_tab integerValue];
             NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCDataModelTitleModel class]];
-            
+            self.titleModelArray = [NSArray arrayWithArray:array];
             self.emptyView.hidden = array.count>0?YES:NO;
             self.titleArray = [NSMutableArray array];
             self.vcArr = [NSMutableArray array];
@@ -240,6 +242,17 @@
     self.tabSegment.delegate = self;
 
     [self.view addSubview:self.tabSegment];
+    
+    if (self.model_id.length>0) {
+        for (int i=0; i<self.titleModelArray.count; i++) {
+            JCDataModelTitleModel *model = self.titleModelArray[i];
+            if ([model.id integerValue]==[self.model_id integerValue]) {
+                self.tabSegment.selectIndex = i;
+                [self tab:self.tabSegment didSelectedItemNumber:i];
+                break;
+            }
+        }
+    }
 
 }
 

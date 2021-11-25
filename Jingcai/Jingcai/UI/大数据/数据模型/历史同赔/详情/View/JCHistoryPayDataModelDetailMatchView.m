@@ -122,6 +122,7 @@
         if (weakSelf.match_id.length>0) {
             JCMatchDetailWMStickVC *vc = [JCMatchDetailWMStickVC new];
             vc.matchNum = weakSelf.match_id;
+            vc.model_id = self.model_id;
             [[weakSelf getViewController].navigationController pushViewController:vc animated:YES];
         }
         

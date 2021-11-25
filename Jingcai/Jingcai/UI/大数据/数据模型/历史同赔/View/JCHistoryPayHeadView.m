@@ -153,6 +153,22 @@
     self.titleLab.text  = model.introduce;
     self.buyInfoView.dataModel = model;
     self.buyBgView.hidden= model.big_data_price==0?YES:NO;
+    NSString *type = @"";
+    if (self.type==0) {
+        type = @"历史同赔";
+    }
+    if (self.type==1) {
+        type = @"泊凇分布";
+    }
+    if (self.type==2) {
+        type = @"指数分歧";
+    }
+    if (self.type==3) {
+        type = @"机构分歧";
+    }
+    if (self.type==4) {
+        type = @"指数异动";
+    }
     if (model.show_status==1||model.show_status==3) {
         //免费体验,立即续费
         self.statusBtn.hidden = YES;
@@ -204,6 +220,7 @@
             [self.statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_gray") forState:0];
             [self.statusBtn setTitle:@"已下架" forState:0];
         }
+        
         if (model.model_status==4) {
             //免费
             self.statusBtn.hidden = YES;
@@ -211,23 +228,14 @@
 //            [self.sureBtn setTitle:@"" forState:0];
  
             [self.sureBtn setBackgroundImage:JCIMAGE(@"blank") forState:0];
-            NSString *type = @"";
-            if (self.type==0) {
-                type = @"历史同赔";
-            }
-            if (self.type==1) {
-                type = @"泊凇分布";
-            }
-            if (self.type==2) {
-                type = @"指数分歧";
-            }
-            if (self.type==3) {
-                type = @"机构分歧";
-            }
-            if (self.type==4) {
-                type = @"指数异动";
-            }
+
             [self.sureBtn setTitle:[NSString stringWithFormat:@"免费查看「%@」",type] forState:0];
+        }
+        if (model.model_status==5) {
+            //已购买,但是被调整为免费
+            [self.sureBtn setTitle:@"" forState:0];
+            [self.statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_gray") forState:0];
+            [self.statusBtn setTitle:@"立即续费" forState:0];
         }
 
 

@@ -74,6 +74,7 @@
             if (self.pageNo==1) {
                 [self.dataArray removeAllObjects];
                 self.detailModel = (JCKellyDataDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataDetailModel class]];
+                self.headView.model_id = self.model_id;
                 self.headView.match_id = self.match_id;
                 self.headView.model = self.detailModel;
             }

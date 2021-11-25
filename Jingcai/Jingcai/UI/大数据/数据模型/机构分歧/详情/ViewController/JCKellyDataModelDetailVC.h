@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *match_id;//比赛id
 
+@property (nonatomic, strong) NSString *model_id;//模型id
+
 @property (nonatomic,strong) JCDataModelTitleModel *titleModel;
 
 @end

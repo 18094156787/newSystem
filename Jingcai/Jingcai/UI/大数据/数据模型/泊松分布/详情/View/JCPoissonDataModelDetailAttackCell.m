@@ -88,7 +88,7 @@
 }
 - (void)setDataArray:(NSArray *)dataArray {
     _dataArray = dataArray;
-
+    [self layoutIfNeeded];
     if (dataArray.count==2) {
         NSString *left = [NSString stringWithFormat:@"%@",dataArray.firstObject];
         NSString *right = [NSString stringWithFormat:@"%@",dataArray.lastObject];

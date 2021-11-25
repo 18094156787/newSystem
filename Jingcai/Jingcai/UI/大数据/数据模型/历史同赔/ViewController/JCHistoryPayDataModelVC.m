@@ -180,7 +180,7 @@
     }else{
         JCHistoryPayDataModelDetailStickVC *vc = [JCHistoryPayDataModelDetailStickVC new];
         vc.match_id = [NSString stringWithFormat:@"%ld",model.id];
-        vc.model_id = model.model_id;
+        vc.model_id = self.model_id;
         [self.navigationController pushViewController:vc animated:YES];
     }
 

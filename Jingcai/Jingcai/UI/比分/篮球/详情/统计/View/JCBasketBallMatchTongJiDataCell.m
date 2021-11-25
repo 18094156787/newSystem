@@ -41,6 +41,7 @@
 
 - (void)setModel:(JCBasketBallMatchTongJiDataModel *)model {
     _model = model;
+    [self layoutIfNeeded];
     self.titleLab.text = model.desc;
         self.leftLab.text = model.away;
         self.rightLab.text = model.home;
@@ -59,29 +60,6 @@
             self.rightRateLab.text  = @"50%";
         }
 }
-
-//- (void)setModel:(JCWZBStatusModel *)model {
-//    _model = model;
-//    self.leftLab.text = model.home;
-//    self.rightLab.text = model.away;
-//    float total = [model.home floatValue]+[model.away floatValue];
-//
-//    if (total>0) {
-//        self.leftRateLab.text = [NSString stringWithFormat:@"%.0f%%",[model.home floatValue]/total*100];
-//        self.rightRateLab.text = [NSString stringWithFormat:@"%.0f%%",[model.away floatValue]/total*100];
-//        float homeRate = [model.home floatValue]/total;
-//        [self setupLineView:self.progressView colors:JCBaseColor startPoint:0 endPoint:homeRate];
-//        [self setupLineView:self.progressView colors:COLOR_002868 startPoint:homeRate endPoint:1];
-//    }else{
-//        [self setupLineView:self.progressView colors:JCBaseColor startPoint:0 endPoint:0.5];
-//        [self setupLineView:self.progressView colors:COLOR_002868 startPoint:0.5 endPoint:1];
-//        self.leftRateLab.text  = @"50%";
-//        self.rightRateLab.text  = @"50%";
-//    }
-//
-//}
-
-
 
 -(void)setupLineView:(UIView *)lineView colors:(UIColor *)color startPoint:(float)start endPoint:(float)end{
     UIBezierPath *linePath = [UIBezierPath bezierPath];

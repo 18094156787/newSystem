@@ -184,6 +184,7 @@
     }else{
         JCKellyDataModelDetailVC *vc = [JCKellyDataModelDetailVC new];
         vc.match_id = model.match_id;
+        vc.model_id = self.model_id;
         [self.navigationController pushViewController:vc animated:YES];
     }
 

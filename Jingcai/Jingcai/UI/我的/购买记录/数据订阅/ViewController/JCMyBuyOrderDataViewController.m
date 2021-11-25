@@ -163,7 +163,7 @@
     JCMyBuyOrderDataModel *model = self.dataArray[indexPath.section];
     if ([model.is_monthly intValue]==2) {
         JCMatchDetailWMStickVC *vc = [JCMatchDetailWMStickVC new];
-        vc.is_bigData = YES;
+        vc.model_id = @"1";
         vc.matchNum = model.match_id;
         [self.navigationController pushViewController:vc animated:YES];
         return;

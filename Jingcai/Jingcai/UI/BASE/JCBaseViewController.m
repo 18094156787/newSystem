@@ -123,6 +123,8 @@
             UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
             barApp.backgroundImage = nil;
             barApp.backgroundColor = [UIColor whiteColor];
+//            barApp.shadowImage = JCIMAGE(@"blank");
+            barApp.shadowColor = JCClearColor;
             barApp.titleTextAttributes = dic;
             barApp.shadowColor = [UIColor whiteColor];
             self.navigationController.navigationBar.scrollEdgeAppearance = barApp;
@@ -142,7 +144,9 @@
             barApp.backgroundColor = [UIColor clearColor];
             barApp.titleTextAttributes = dic;
             [barApp configureWithTransparentBackground];
-            barApp.shadowColor = [UIColor whiteColor];
+//            barApp.shadowImage = JCIMAGE(@"blank");
+            barApp.shadowColor = JCClearColor;
+            
             self.navigationController.navigationBar.scrollEdgeAppearance = nil;
             self.navigationController.navigationBar.standardAppearance = barApp;
         }
@@ -180,7 +184,7 @@
         
         barApp.backgroundImage = nil;
         barApp.backgroundColor = [UIColor whiteColor];
-        barApp.shadowColor = [UIColor whiteColor];
+        barApp.shadowColor = JCClearColor;
 //        barApp.shadowColor = [UIColor whiteColor];
 //        barApp.titleTextAttributes = dic;
         self.navigationController.navigationBar.scrollEdgeAppearance = barApp;
@@ -452,6 +456,9 @@
                 }
                 WebViewController *webVC = [WebViewController new];
                 webVC.urlStr = actModel.url;
+                webVC.JCCancelBlock = ^{
+                    [weakSelf showActivityViewWithVC:weakSelf];
+                };
                 [self.navigationController pushViewController:webVC animated:YES];
             }
 
@@ -501,14 +508,7 @@
                     [weakSelf showActivityViewWithVC:weakSelf];
                 };
             }
-            if ([actModel.type integerValue]==9) {
-                WebViewController *webVC = [WebViewController new];
-                webVC.urlStr = actModel.url;
-                webVC.JCCancelBlock = ^{
-                    [weakSelf showActivityViewWithVC:weakSelf];
-                };
-                [self.navigationController pushViewController:webVC animated:YES];
-            }
+
 
         };
         activityTipView.JCCancelBlock = ^{

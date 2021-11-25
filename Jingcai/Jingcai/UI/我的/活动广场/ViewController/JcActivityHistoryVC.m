@@ -196,11 +196,7 @@
         [self.navigationController pushViewController:vc animated:YES];
 
     }
-    if ([model.type integerValue]==9) {
-        WebViewController *webVC = [WebViewController new];
-        webVC.urlStr = model.url;
-        [self.navigationController pushViewController:webVC animated:YES];
-    }
+
     
 
 }

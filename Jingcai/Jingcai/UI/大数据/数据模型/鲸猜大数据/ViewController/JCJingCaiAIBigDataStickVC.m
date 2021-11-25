@@ -66,13 +66,18 @@ static CGFloat const kWMMenuViewHeight = 0;
 //    [self initViews];
     if (!self.topColorView) {
         [self setupColorView];
+        [self setNavEffect];
     }else{
         [self setNavEffect];
     }
 
-
 }
-
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.topColorView removeAllSubviews];
+    [self.topColorView removeFromSuperview];
+    self.topColorView = nil;
+}
 - (void)setNavEffect {
 
     CGFloat offsetY = self.contentView.contentOffset.y;
@@ -297,6 +302,10 @@ static CGFloat const kWMMenuViewHeight = 0;
             //免费,不能购买
             return;
         }
+        if (self.buyInfoModel.model_status==5) {
+            //原来是付费,但是后面被改为免费,不能购买
+            return;
+        }
     }
     if (self.buyInfoModel.show_status==4) {
         //下架
@@ -434,16 +443,6 @@ static CGFloat const kWMMenuViewHeight = 0;
         [self.view setNeedsLayout];
     }
     [self setNavEffect];
-//    if ([scrollView isKindOfClass:[WMMagicScrollView class]]) {
-//        if (scrollView.contentOffset.y>AUTO(50)) {
-//            self.autherHeadView.bgView.hidden = YES;
-////            self.title = self.expertDetailModel.user_name;
-//        }else {
-//            self.autherHeadView.bgView.hidden = NO;
-////            self.title = @"";
-//        }
-//    }
-
     NSLog(@"%.0f",scrollView.contentOffset.y);
 }
 

@@ -571,6 +571,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section==0) {
+        return 10;
+    }
     if (section==1) {
         return 0.001f;
     }
@@ -587,7 +590,8 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     JNMatchSJAgainstSectionTitleView *titleView = [JNMatchSJAgainstSectionTitleView new];
     if (section==0) {
-        titleView.titleLab.text = @"大数据预测";
+        return [UIView new];
+//        titleView.titleLab.text = @"大数据预测";
     }
     if (section==1) {
 //        titleView.titleLab.text = @"历史同赔数据";

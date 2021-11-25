@@ -237,7 +237,7 @@
         cell.labelTwo.text = @"最高";
         cell.labelThree.text = @"最低";
         cell.labelFour.text = @"平均";
-        cell.labelFive.text = @"趋势\n（相比初始）";
+        cell.labelFive.text = @"机构趋势\n（相比初始）";
 
         
     }else{

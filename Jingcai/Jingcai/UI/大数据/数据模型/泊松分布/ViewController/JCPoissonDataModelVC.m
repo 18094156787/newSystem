@@ -175,7 +175,7 @@
         }
     }else{
         JCPoissonDataModelDetailVC *vc = [JCPoissonDataModelDetailVC new];
-        model.id = [self.model_id integerValue];
+        vc.model_id = self.model_id;
         vc.match_id = model.match_id;
         [self.navigationController pushViewController:vc animated:YES];
     }

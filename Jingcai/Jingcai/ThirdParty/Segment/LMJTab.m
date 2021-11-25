@@ -124,8 +124,8 @@
         [self.scrollowView addSubview:button];
        
         
-        if (i < titles.count-1) {
-            UIView * line = [[UIView alloc] initWithFrame:CGRectMake(f_width*(i+1)-(_lineWidth/2), 0, _lineWidth, self.frame.size.height)];
+        if (i < titles.count) {
+            UIView * line = [[UIView alloc] initWithFrame:CGRectMake(f_width, 0, _lineWidth, self.frame.size.height)];
             line.backgroundColor = _lineColor;
             [self.scrollowView addSubview:line];
         }

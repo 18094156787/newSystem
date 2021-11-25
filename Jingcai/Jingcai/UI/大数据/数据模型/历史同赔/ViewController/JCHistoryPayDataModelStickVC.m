@@ -49,6 +49,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 //    [self initViews];
     if (!self.topColorView) {
         [self setupColorView];
+        [self setNavEffect];
     }else{
         [self setNavEffect];
     }
@@ -212,6 +213,10 @@ static CGFloat const kWMMenuViewHeight = 0;
         }
         if (self.buyInfoModel.model_status==4) {
             //免费,不能购买
+            return;
+        }
+        if (self.buyInfoModel.model_status==5) {
+            //原来是付费,但是后面被改为免费,不能购买
             return;
         }
     }

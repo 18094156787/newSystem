@@ -53,6 +53,7 @@
 
 - (void)setShoot_centerModel:(JCLiveDistributionModel *)shoot_centerModel {
     _shoot_centerModel = shoot_centerModel;
+    [self layoutIfNeeded];
     self.leftLab.text = shoot_centerModel.home.shoot_center;
         self.rightLab.text = shoot_centerModel.away.shoot_center;
 //        self.titleLab.text = model.desc;
@@ -74,6 +75,7 @@
 
 - (void)setShoot_awayModel:(JCLiveDistributionModel *)shoot_awayModel {
     _shoot_awayModel = shoot_awayModel;
+    [self layoutIfNeeded];
     self.leftLab.text = shoot_awayModel.home.shoot_way;
         self.rightLab.text = shoot_awayModel.away.shoot_way;
 //        self.titleLab.text = model.desc;
@@ -99,6 +101,7 @@
     self.leftLab.text = model.away;
     self.rightLab.text = model.home;
     self.titleLab.text = model.desc;
+    [self layoutIfNeeded];
     float total = [model.home floatValue]+[model.away floatValue];
     
     if (total>0) {
@@ -123,6 +126,7 @@
     self.titleLab.text = basketBallModel.desc;
     self.leftRateLab.text  = @"";
     self.rightRateLab.text  = @"";
+    [self layoutIfNeeded];
     float total = [basketBallModel.home floatValue]+[basketBallModel.away floatValue];
     if (total>0) {
 //        self.leftRateLab.text = [NSString stringWithFormat:@"%.0f%%",[basketBallModel.away floatValue]/total*100];

@@ -350,6 +350,12 @@
 
             [self.sureBtn setTitle:@"免费查看「鲸猜大数据」" forState:0];
         }
+        if (model.model_status==5) {
+            //已购买,但是被调整为免费
+            [self.sureBtn setTitle:@"" forState:0];
+            [self.statusBtn setBackgroundImage:JCIMAGE(@"ic_dataModel_button_gray") forState:0];
+            [self.statusBtn setTitle:@"立即续费" forState:0];
+        }
 
 
         
@@ -425,7 +431,7 @@
     JCJingCaiAINoticeModel *model = self.titleArray[index];
     JCMatchDetailWMStickVC *vc = [JCMatchDetailWMStickVC new];
     vc.matchNum = model.id;
-    vc.is_bigData = YES;
+    vc.model_id = @"1";
     [[self getViewController].navigationController pushViewController:vc animated:YES];
 }
 

@@ -54,6 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *match_id;
 
+@property (nonatomic,strong) NSString *model_id;
+
 @end
 
 NS_ASSUME_NONNULL_END

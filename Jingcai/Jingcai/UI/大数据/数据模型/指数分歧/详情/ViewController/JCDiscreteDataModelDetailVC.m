@@ -93,6 +93,7 @@
         if ([JCWJsonTool isSuccessResponse:object]) {
 
             self.detailModel = (JCKellyDataDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataDetailModel class]];
+            self.headView.model_id = self.model_id;
             self.headView.match_id = self.match_id;
             self.headView.model = self.detailModel;
             if (!self.hidetopMatch&&self.detailModel.competition_type!=1) {

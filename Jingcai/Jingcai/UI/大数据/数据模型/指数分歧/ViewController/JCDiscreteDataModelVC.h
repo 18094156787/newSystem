@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *date;
 
+@property (nonatomic, strong) NSString *model_id;//模型id
+
 @property (nonatomic,copy) void(^JCOpenBlock)(void);
 
 @end

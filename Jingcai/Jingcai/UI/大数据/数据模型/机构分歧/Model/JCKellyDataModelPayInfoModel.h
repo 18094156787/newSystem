@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger show_status;//状态，1展示免费体验按钮，2展示剩余订阅天数和立即续费按钮，3展示立即订阅按钮 4数据模型下架
 
-@property (nonatomic, assign) NSInteger model_status;//数据模型状态(status=2会用到),1免费体验中，2付费购买，显示立即续费,3下架 4免费（价格为0）
+@property (nonatomic, assign) NSInteger model_status;//数据模型状态(status=2会用到),1免费体验中，2付费购买，显示立即续费,3下架 4免费（价格为0）5.用户已购买后,但是之后被调整为免费
 
 @property (nonatomic, strong) NSArray<NSString *> *user_img;
 

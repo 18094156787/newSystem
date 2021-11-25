@@ -183,6 +183,7 @@
         }
     }else{
         JCDiscreteDataModelDetailVC *vc = [JCDiscreteDataModelDetailVC new];
+        vc.model_id = self.model_id;
         vc.match_id = model.match_id;
         [self.navigationController pushViewController:vc animated:YES];
     }

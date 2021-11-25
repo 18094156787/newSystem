@@ -87,7 +87,7 @@
                 }
             }
             self.twoLab.text = [NSString stringWithFormat:@"%@\n%@",rate,score];
-            self.twoLab.textColor = [color integerValue]==0?COLOR_EF2F2F:COLOR_2F2F2F;
+            self.twoLab.textColor = [color integerValue]==1?COLOR_EF2F2F:COLOR_2F2F2F;
 
         }
         if (i==2) {
@@ -103,7 +103,7 @@
                 }
             }
             self.threeLab.text = [NSString stringWithFormat:@"%@\n%@",rate,score];
-            self.threeLab.textColor = [color integerValue]==0?COLOR_EF2F2F:COLOR_2F2F2F;
+            self.threeLab.textColor = [color integerValue]==1?COLOR_EF2F2F:COLOR_2F2F2F;
 
         }
     }
@@ -146,7 +146,7 @@
                 }
             }
             self.twoLab.text = [NSString stringWithFormat:@"%@\n%@球",rate,score];
-            self.twoLab.textColor = [color integerValue]==0?COLOR_EF2F2F:COLOR_2F2F2F;
+            self.twoLab.textColor = [color integerValue]==1?COLOR_EF2F2F:COLOR_2F2F2F;
 
         }
         if (i==2) {
@@ -162,7 +162,7 @@
                 }
             }
             self.threeLab.text = [NSString stringWithFormat:@"%@\n%@球",rate,score];
-            self.threeLab.textColor = [color integerValue]==0?COLOR_EF2F2F:COLOR_2F2F2F;
+            self.threeLab.textColor = [color integerValue]==1?COLOR_EF2F2F:COLOR_2F2F2F;
 
         }
     }

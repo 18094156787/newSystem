@@ -47,6 +47,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 //    [self initViews];
     if (!self.topColorView) {
         [self setupColorView];
+        [self setNavEffect];
     }else{
         [self setNavEffect];
     }
@@ -220,6 +221,10 @@ static CGFloat const kWMMenuViewHeight = 0;
             //免费,不能购买
             return;
         }
+        if (self.buyInfoModel.model_status==5) {
+            //原来是付费,但是后面被改为免费,不能购买
+            return;
+        }
     }
     if (self.buyInfoModel.show_status==4) {
         //下架
@@ -379,7 +384,7 @@ static CGFloat const kWMMenuViewHeight = 0;
 }
 
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
-
+    self.dataVC.model_id = self.model_id;
     return self.dataVC;
 
 }

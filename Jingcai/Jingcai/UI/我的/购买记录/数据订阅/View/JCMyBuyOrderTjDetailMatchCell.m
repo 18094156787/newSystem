@@ -108,7 +108,7 @@
         if (self.detailModel.match_data.count>0) {
             JCDianPingMatchBall*matchModel = self.detailModel.match_data.firstObject;
             vc.matchNum = matchModel.match_num;
-            vc.is_bigData = YES;
+            vc.model_id = @"1";
             [[self getViewController].navigationController pushViewController:vc animated:YES];
         }
 

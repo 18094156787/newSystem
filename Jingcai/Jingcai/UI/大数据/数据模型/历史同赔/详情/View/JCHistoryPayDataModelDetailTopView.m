@@ -59,7 +59,7 @@
     [self.tpBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.matchView.mas_bottom).offset(0);
         make.left.right.offset(0);
-        make.height.mas_equalTo(AUTO(340));
+        make.height.mas_equalTo(AUTO(350));
     }];
     
     UIView *redLineView = [UIView new];
@@ -223,6 +223,11 @@
 - (void)setMatch_id:(NSString *)match_id {
     _match_id = match_id;
     self.matchView.match_id = match_id;
+}
+
+- (void)setModel_id:(NSString *)model_id {
+    _model_id = model_id;
+    self.matchView.model_id = model_id;
 }
 
 - (void)setModel:(JCKellyDataDetailModel *)model {

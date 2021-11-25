@@ -100,7 +100,7 @@ static CGFloat const kWMMenuViewHeight = 44;
 - (instancetype)init {
     
     if (self = [super init]) {
-        self.height = AUTO(625)+kNavigationBarHeight;
+        self.height = AUTO(635)+kNavigationBarHeight;
         self.titleSizeNormal = 16;
         self.titleSizeSelected = 16;
         self.titleColorSelected = JCBaseColor;//COLOR_FE1F19
@@ -166,6 +166,7 @@ static CGFloat const kWMMenuViewHeight = 44;
         if ([JCWJsonTool isSuccessResponse:object]) {
 
             self.detailModel = (JCKellyDataDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataDetailModel class]];
+            self.headView.model_id = self.model_id;
             self.headView.match_id = self.match_id;
             self.headView.model = self.detailModel;
             self.chuVC.dataArray = [NSMutableArray arrayWithArray:self.detailModel.similar_match.begin_similar_match];

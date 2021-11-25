@@ -63,6 +63,12 @@
     self.matchView.match_id = match_id;
 }
 
+- (void)setModel_id:(NSString *)model_id {
+    _model_id = model_id;
+    self.matchView.model_id = model_id;
+    
+}
+
 - (void)setModel:(JCKellyDataDetailModel *)model {
     _model = model;
     self.matchView.model = model;

@@ -16,8 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) JCMatchBall *matchBall;
 
-@property (nonatomic, assign) BOOL is_bigData;//跳转到 数据-鲸猜大数据
-
 - (void)loadDataWithMatchBall:(JCMatchBall *)matchBall;
 
 

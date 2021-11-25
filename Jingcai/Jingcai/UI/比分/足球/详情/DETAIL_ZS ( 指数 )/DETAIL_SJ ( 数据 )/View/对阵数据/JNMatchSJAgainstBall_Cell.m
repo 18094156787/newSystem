@@ -86,6 +86,7 @@
 
 - (void)setModel:(JCBigDataMonthProduceModel *)model {
     _model = model;
+    [self layoutIfNeeded];
     if (self.is_rq) {
         self.titleInfoLab.text = @"";
         self.homeProgressView.frame = CGRectMake(AUTO(16), AUTO(30), SCREEN_WIDTH-AUTO(32), AUTO(24));
@@ -140,7 +141,7 @@
 
 - (void)setAway_analysisModel:(JCBigDataAnalysisModel *)away_analysisModel {
     _away_analysisModel = away_analysisModel;
-   
+    [self layoutIfNeeded];
     if (self.is_win) {
 
         

@@ -222,8 +222,8 @@ static CGFloat const kWMMenuViewHeight = 44;
             weakSelf.titleLab.alpha =  0;
             weakSelf.titleLab.text= [NSString stringWithFormat:@"%@ VS %@",matchBall.home_team.name_zh,matchBall.away_team.name_zh];
 
-            if (self.is_bigData) {
-                self.selectIndex = 5;
+            if (self.model_id.length>0) {
+                self.selectIndex = 6;
             }
             [self reloadData];
         }
@@ -322,13 +322,13 @@ static CGFloat const kWMMenuViewHeight = 44;
 
         if (index==5) {
             JNMatchDetailSJVC *sjVC = [JNMatchDetailSJVC new];
-            sjVC.is_bigData = self.is_bigData;
+//            sjVC.is_bigData = self.is_bigData;
             sjVC.matchBall = self.matchBall;
             return sjVC;
         }
         if (index==6) {
             JCMatchDetailDataModelVC *dataVC = [JCMatchDetailDataModelVC new];
-            dataVC.is_bigData = self.is_bigData;
+            dataVC.model_id = self.model_id;
             dataVC.matchBall = self.matchBall;
             return dataVC;
         }
@@ -358,13 +358,13 @@ static CGFloat const kWMMenuViewHeight = 44;
 
         if (index==4) {
             JNMatchDetailSJVC *sjVC = [JNMatchDetailSJVC new];
-            sjVC.is_bigData = self.is_bigData;
+//            sjVC.is_bigData = self.is_bigData;
             sjVC.matchBall = self.matchBall;
             return sjVC;
         }
         if (index==5) {
             JCMatchDetailDataModelVC *dataVC = [JCMatchDetailDataModelVC new];
-            dataVC.is_bigData = self.is_bigData;
+            dataVC.model_id = self.model_id;
             dataVC.matchBall = self.matchBall;
             return dataVC;
         }
