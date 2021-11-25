@@ -7,48 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E97F0CE6-FCA7-4E0F-9E98-95E4A12D565F"
+            uuid = "E5B01E80-97DD-4099-B104-91B186F6D226"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x6bd4;&#x5206;/&#x8db3;&#x7403;/&#x8be6;&#x60c5;/&#x6570;&#x636e;&#x6a21;&#x578b;/ViewController/JCMatchDetailDataModelVC.m"
+            filePath = "Jingcai/UI/&#x5927;&#x6570;&#x636e;/&#x6570;&#x636e;&#x6a21;&#x578b;/&#x5386;&#x53f2;&#x540c;&#x8d54;/&#x8be6;&#x60c5;/ViewController/JCHistoryPayDataModelDetailVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
-            landmarkName = "-defaultData"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "-initViews"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6FDC2584-DF33-4B28-BCD2-3E1E94195C7E"
+            uuid = "5F56E3D3-B11D-419F-9CE8-A2B6EF0F7E4D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x6bd4;&#x5206;/&#x8db3;&#x7403;/&#x8be6;&#x60c5;/&#x6570;&#x636e;&#x6a21;&#x578b;/ViewController/JCMatchDetailDataModelVC.m"
+            filePath = "Jingcai/UI/&#x5927;&#x6570;&#x636e;/&#x6570;&#x636e;&#x6a21;&#x578b;/&#x5386;&#x53f2;&#x540c;&#x8d54;/&#x8be6;&#x60c5;/ViewController/JCHistoryPayDataModelDetailVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "-viewDidLayoutSubviews"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "856F6F8A-C4AF-44A6-81B3-BE22425B42F6"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x6bd4;&#x5206;/&#x8db3;&#x7403;/&#x8be6;&#x60c5;/&#x6570;&#x636e;&#x6a21;&#x578b;/ViewController/JCMatchDetailDataModelVC.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "-refreshData"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "-reloadData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

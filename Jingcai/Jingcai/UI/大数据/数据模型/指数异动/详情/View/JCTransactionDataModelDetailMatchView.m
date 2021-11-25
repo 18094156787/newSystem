@@ -91,7 +91,21 @@
 //        make.height.mas_greaterThanOrEqualTo(AUTO(21));
     }];
     
+    
+    WeakSelf;
+    [self bk_whenTapped:^{
+        if (weakSelf.match_id.length>0) {
+            JCMatchDetailWMStickVC *vc = [JCMatchDetailWMStickVC new];
+            vc.matchNum = weakSelf.match_id;
+            [[weakSelf getViewController].navigationController pushViewController:vc animated:YES];
+        }
+        
+    }];
 
+}
+
+- (void)setMatch_id:(NSString *)match_id {
+    _match_id = match_id;
 }
 
 - (void)setModel:(JCKellyDataDetailModel *)model {

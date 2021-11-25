@@ -72,7 +72,7 @@
     _detailModel = detailModel;
     self.titleInfoLab.text = detailModel.title;
     self.bgView.hidden = NO;
-    self.priceLab.text = [NSString stringWithFormat:@"%@红币/月",@([detailModel.pay_price floatValue])];
+//    self.priceLab.text = [NSString stringWithFormat:@"%@红币/月",@([detailModel.pay_price floatValue])];
     [self.headImgView sd_setImageWithURL:[NSURL URLWithString:detailModel.logo] placeholderImage:JCIMAGE(@"ic_data_robot")];
     self.contentLab.text = detailModel.desc;
 //    if ([detailModel.style integerValue]==1) {

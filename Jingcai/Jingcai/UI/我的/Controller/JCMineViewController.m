@@ -334,14 +334,14 @@
 - (void)pushAbout {
     WebViewController *vc = [WebViewController new];
     vc.titleStr = @"关于我们";
-    NSString *url = [NSString stringWithFormat:@"%@?dev=1&sv=%@",[JCConfigModel currentConfigModel].get_about,[JCWInterfaceTool appVersion]];
+    NSString *url = [JCConfigModel currentConfigModel].get_about;
     vc.urlStr = NonNil(url);
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)pushContact {
     WebViewController *vc = [WebViewController new];
     vc.titleStr = @"帮助&客服";
-    NSString *url = [NSString stringWithFormat:@"%@?dev=1",[JCConfigModel currentConfigModel].get_customer];
+    NSString *url = [JCConfigModel currentConfigModel].get_customer;
     vc.urlStr = NonNil(url);
     [self.navigationController pushViewController:vc animated:YES];
 
@@ -411,7 +411,7 @@
     }
     WebViewController *vc = [WebViewController new];
     vc.titleStr = @"规则说明";
-    NSString *url = [NSString stringWithFormat:@"%@?user_id=%@&dev=1&sv=%@",[JCConfigModel currentConfigModel].get_rule,[JCWUserBall currentUser].id,[JCWInterfaceTool appVersion]];
+    NSString *url = [NSString stringWithFormat:@"%@?user_id=%@&sv=%@",[JCConfigModel currentConfigModel].get_rule,[JCWUserBall currentUser].id,[JCWInterfaceTool appVersion]];
     vc.urlStr = NonNil(url);
     [self.navigationController pushViewController:vc animated:YES];
 }

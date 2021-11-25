@@ -63,6 +63,11 @@
     self.matchView.model = model;
 }
 
+- (void)setMatch_id:(NSString *)match_id {
+    _match_id = match_id;
+    self.matchView.match_id = match_id;
+}
+
 - (JCTransactionDataModelDetailMatchView *)matchView {
     if (!_matchView) {
         _matchView = [JCTransactionDataModelDetailMatchView new];

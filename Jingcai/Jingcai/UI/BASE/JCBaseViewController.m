@@ -124,8 +124,10 @@
             barApp.backgroundImage = nil;
             barApp.backgroundColor = [UIColor whiteColor];
             barApp.titleTextAttributes = dic;
+            barApp.shadowColor = [UIColor whiteColor];
             self.navigationController.navigationBar.scrollEdgeAppearance = barApp;
             self.navigationController.navigationBar.standardAppearance = barApp;
+            
         }
         
         return ;
@@ -140,6 +142,7 @@
             barApp.backgroundColor = [UIColor clearColor];
             barApp.titleTextAttributes = dic;
             [barApp configureWithTransparentBackground];
+            barApp.shadowColor = [UIColor whiteColor];
             self.navigationController.navigationBar.scrollEdgeAppearance = nil;
             self.navigationController.navigationBar.standardAppearance = barApp;
         }
@@ -165,6 +168,7 @@
         NSDictionary *dic = @{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]};
         barApp.titleTextAttributes = dic;
         barApp.backgroundImage = navImg;
+        barApp.shadowColor = [UIColor whiteColor];
         self.navigationController.navigationBar.scrollEdgeAppearance = barApp;
         self.navigationController.navigationBar.standardAppearance = barApp;
     }
@@ -176,6 +180,7 @@
         
         barApp.backgroundImage = nil;
         barApp.backgroundColor = [UIColor whiteColor];
+        barApp.shadowColor = [UIColor whiteColor];
 //        barApp.shadowColor = [UIColor whiteColor];
 //        barApp.titleTextAttributes = dic;
         self.navigationController.navigationBar.scrollEdgeAppearance = barApp;
@@ -429,12 +434,6 @@
         JCWSlideBall *actModel = self.activtyArray.firstObject;
         [activityTipView.imgView sd_setImageWithURL:[NSURL URLWithString:actModel.img_url]];
         activityTipView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-//        if (self.jcWindow.subviews.count>0) {
-//            NSArray *array = self.jcWindow.subviews;
-//            [self.jcWindow insertSubview:activityTipView atIndex:self.jcWindow.subviews.count-1];
-//        }else {
-//            [self.jcWindow addSubview:activityTipView];
-//        }
         [self.jcWindow addSubview:activityTipView];
         WeakSelf;
 
@@ -501,6 +500,14 @@
                 vc.JCCancelBlock = ^{
                     [weakSelf showActivityViewWithVC:weakSelf];
                 };
+            }
+            if ([actModel.type integerValue]==9) {
+                WebViewController *webVC = [WebViewController new];
+                webVC.urlStr = actModel.url;
+                webVC.JCCancelBlock = ^{
+                    [weakSelf showActivityViewWithVC:weakSelf];
+                };
+                [self.navigationController pushViewController:webVC animated:YES];
             }
 
         };

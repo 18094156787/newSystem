@@ -213,6 +213,12 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     
+    if ([model.type integerValue]==9) {
+        WebViewController *webVC = [WebViewController new];
+        webVC.urlStr = model.url;
+//        webVC.urlStr = @"http://h.yixinzuqiu.com/#/activity/coupon?id=658";
+        [self.navigationController pushViewController:webVC animated:YES];
+    }
     
 
 }

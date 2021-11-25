@@ -11,7 +11,7 @@
 #import "JCYCHomeWMStickVC.h"
 #import <WebKit/WebKit.h>
 #import "JCShareView.h"
-@interface WebViewController () <WKNavigationDelegate, WKUIDelegate>
+@interface WebViewController () <WKNavigationDelegate, WKUIDelegate,WKScriptMessageHandler>
 //@property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) WKWebView *wkWebView; //webview
 @property (strong, nonatomic) UIProgressView *progressView; //进度条
@@ -24,20 +24,38 @@
 
 @implementation WebViewController
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // 因此这里要记得移除handlers
+    [self.wkWebView.configuration.userContentController removeScriptMessageHandlerForName:@"Login"];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationBarStyle = JCNavigationBarStyleDefault;
-
+    [self setNavBackImg];
+    [self.wkWebView.configuration.userContentController addScriptMessageHandler:self name:@"Login"];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initSubviews];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:NotificationUserLogin object:nil];
-    
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginAction) name:NotificationUserLogin object:nil];
 }
 
+
+- (void)userLoginAction {
+    [self loadWebData];
+    [self loadWebData];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self loadWebData];
+//    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self loadWebData];
+//    });
+    
+}
 
 
 - (void)backItemClick {
@@ -73,16 +91,21 @@
         backItem.tintColor = COLOR_2F2F2F;
         self.navigationItem.leftBarButtonItem = backItem;
     }
+    WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
+    WKPreferences *preference = [WKPreferences new];
+    preference.javaScriptCanOpenWindowsAutomatically = YES;
+//    preference.minimumFontSize = 40.0;
+    configuration.preferences = preference;
     
     //wkWebView
-    _wkWebView = [[WKWebView alloc] initWithFrame:CGRectZero];
+    _wkWebView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
     _wkWebView.navigationDelegate = self;
     _wkWebView.UIDelegate = self;
     _wkWebView.allowsBackForwardNavigationGestures = YES;
     //kvo 添加进度监控
     [_wkWebView addObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress)) options:0 context:nil];
     [self.view addSubview:_wkWebView];
-    [self requestData];//请求数据
+    [self loadWebData];//请求数据
 
 
     
@@ -101,22 +124,7 @@
     }
 }
 
-- (void)requestData {
-    NSString *link_url = self.urlStr;
-    if ([self.urlStr containsString:@"announcement"]) {
-        link_url = [NSString stringWithFormat:@"%@?dev=1",self.urlStr];
-    }
-    if ([JCWUserBall currentUser].token.length>0) {
-        NSString *appand = [NSString stringWithFormat:@"token=%@&native=ios&dev=1",[JCWUserBall currentUser].token];
-        if ([link_url containsString:@"?"]) {
-            link_url = [NSString stringWithFormat:@"%@&%@",link_url,appand];
-        }else{
-            link_url = [NSString stringWithFormat:@"%@?%@",link_url,appand];
-        }
-    }
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:link_url]];
-    [_wkWebView loadRequest:request];
-}
+
 
 - (void)shareItemClick {
     WeakSelf;
@@ -160,6 +168,21 @@
     self.shareView.friend_url = slide.wechat_share.friend_url;
 }
 
+
+#pragma mark - WKScriptMessageHandler
+
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
+    // message.body  --  Allowed types are NSNumber, NSString, NSDate, NSArray,NSDictionary, and NSNull.
+    if ([message.name isEqualToString:@"Login"]) {
+        [self userLogin];
+    }
+    
+}
+
+- (void)userLogin {
+    [self presentLogin];
+}
+
 //KVO监听进度条
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
@@ -193,7 +216,7 @@
     [self.wkWebView removeObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
     [self.wkWebView removeObserver:self forKeyPath:@"title"];
 }
-
+//这个是prsentVC时,导航栏没有一个返回键,这边加上
 - (void)backItemClick:(UIButton *)sender {
     if (_wkWebView.canGoBack) {
         [_wkWebView goBack];
@@ -202,14 +225,44 @@
     }
 }
 
+- (void)back:(UIButton *)sender {
+    if (self.JCCancelBlock) {
+        self.JCCancelBlock();
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(void)closeItemClick:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 扩展方法
 - (void)loadWebData {
-    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.urlStr]];
-    [self.wkWebView loadRequest:request];
+    NSString *link_url = self.urlStr;
+//    if ([self.urlStr containsString:@"announcement"]) {
+//        link_url = [NSString stringWithFormat:@"%@?dev=1",self.urlStr];
+//    }
+//    if (<#condition#>) {
+//        <#statements#>
+//    }
+//    link_url = [NSString stringWithFormat:@"%@?dev=1",self.urlStr];
+    if ([JCWUserBall currentUser].token.length>0) {
+        NSString *appand = [NSString stringWithFormat:@"token=%@&native=ios&dev=1",[JCWUserBall currentUser].token];
+        if ([link_url containsString:@"?"]) {
+            link_url = [NSString stringWithFormat:@"%@&%@",link_url,appand];
+        }else{
+            link_url = [NSString stringWithFormat:@"%@?%@",link_url,appand];
+        }
+    }else{
+        if ([link_url containsString:@"?"]) {
+            link_url = [NSString stringWithFormat:@"%@&dev=1&native=ios",link_url];
+        }else{
+            link_url = [NSString stringWithFormat:@"%@?dev=1&native=ios",link_url];
+        }
+        
+    }
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:link_url]];
+    [_wkWebView loadRequest:request];
 }
 
 #pragma mark ================ 自定义返回/关闭按钮 ================
@@ -247,7 +300,10 @@
     // 获取加载网页的标题
 //    if (self.titleStr.length==0) {
 //        NSLog(@"%@",self.wkWebView.title);
-//        self.title = self.wkWebView.title;
+    if (self.titleStr.length==0) {
+        self.title = self.wkWebView.title;
+    }
+       
 //    }
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];

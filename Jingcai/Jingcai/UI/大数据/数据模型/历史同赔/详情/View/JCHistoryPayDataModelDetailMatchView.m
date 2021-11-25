@@ -117,6 +117,15 @@
     }];
     
 
+    WeakSelf;
+    [self bk_whenTapped:^{
+        if (weakSelf.match_id.length>0) {
+            JCMatchDetailWMStickVC *vc = [JCMatchDetailWMStickVC new];
+            vc.matchNum = weakSelf.match_id;
+            [[weakSelf getViewController].navigationController pushViewController:vc animated:YES];
+        }
+        
+    }];
 }
 
 - (void)setModel:(JCKellyDataDetailModel *)model {

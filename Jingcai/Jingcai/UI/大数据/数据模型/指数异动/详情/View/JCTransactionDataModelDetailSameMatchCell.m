@@ -62,9 +62,9 @@
         JCHistoryPayDataModel *model = self.dataArray.firstObject;
         if (indexPath.row==1) {
             cell.labelOne.text = @"场次";
-            cell.labelTwo.text = [NSString stringWithFormat:@"%@%%",model.last_count.won];
-            cell.labelThree.text =[NSString stringWithFormat:@"%@%%",model.last_count.draw];
-            cell.labelFour.text = [NSString stringWithFormat:@"%@%%",model.last_count.loss];
+            cell.labelTwo.text = model.last_count.won;
+            cell.labelThree.text = model.last_count.draw;
+            cell.labelFour.text = model.last_count.loss;
 
         }
         if (indexPath.row==2) {

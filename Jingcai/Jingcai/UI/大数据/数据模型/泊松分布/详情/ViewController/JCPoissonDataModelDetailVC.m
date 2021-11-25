@@ -48,6 +48,7 @@
     [super viewWillDisappear:animated];
 //      self.navigationBarStyle = JCNavigationBarStyleTransparent;
     self.topColorView.alpha = 0;
+    [self.topColorView removeFromSuperview];
 
 }
 - (void)viewDidDisappear:(BOOL)animated {
@@ -83,6 +84,7 @@
         if ([JCWJsonTool isSuccessResponse:object]) {
 
             self.detailModel = (JCKellyDataDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataDetailModel class]];
+            self.headView.match_id = self.match_id;
             self.headView.model = self.detailModel;
             if (!self.hidetopMatch&&self.detailModel.competition_type!=1) {
                 self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(160)+kNavigationBarHeight);

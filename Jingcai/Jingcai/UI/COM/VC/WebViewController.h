@@ -20,5 +20,6 @@ typedef void(^JCWebViewLoadFailureBlock)(void);
 @property (strong, nonatomic) JCWSlideBall *slide;
 @property (copy, nonatomic) JCWebViewLoadSuccessBlock loadSuccessBlock;
 @property (copy, nonatomic) JCWebViewLoadFailureBlock loadFailureBlock;
+@property (nonatomic,copy) void(^JCCancelBlock)(void);
 - (void)loadWebData;
 @end

@@ -55,6 +55,7 @@
     [super viewWillDisappear:animated];
 //      self.navigationBarStyle = JCNavigationBarStyleTransparent;
     self.topColorView.alpha = 0;
+    [self.topColorView removeFromSuperview];
 
 }
 
@@ -91,8 +92,8 @@
 
         if ([JCWJsonTool isSuccessResponse:object]) {
 
-//            JCKellyDataDetailModel *model = (JCKellyDataDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataDetailModel class]];
             self.detailModel = (JCKellyDataDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataDetailModel class]];
+            self.headView.match_id = self.match_id;
             self.headView.model = self.detailModel;
             if (!self.hidetopMatch&&self.detailModel.competition_type!=1) {
                 self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(160)+kNavigationBarHeight);
@@ -268,15 +269,7 @@
             return [UIView new];
         }
     }
-//    if (section==3) {
-//        JCPoissonDataModelDetailTitleView *headView = [JCPoissonDataModelDetailTitleView new];
-//        headView.titleLab.text = @"样本数据";
-//        return headView;
-//    }
-//    if (section==4) {
-//        JCDiscreteDataModelSampleTitleView *headView = [JCDiscreteDataModelSampleTitleView new];
-//        return headView;
-//    }
+
     return [UIView new];
 }
 
@@ -322,11 +315,6 @@
         cell.model = self.detailModel.discrete_sample_list[indexPath.row];
         return cell;
     }
-//    if (indexPath.section==4) {
-//        JCDiscreteDataModelSampleCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCDiscreteDataModelSampleCell"];
-//        cell.model = self.detailModel.sample_data[indexPath.row];
-//        return cell;
-//    }
 
     
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];

@@ -14,7 +14,7 @@
     [self.contentView addSubview:self.contentLab];
     [self.contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(15));
-        make.top.offset(AUTO(15));
+        make.top.offset(AUTO(5));
         make.right.offset(AUTO(-15));
         make.bottom.offset(AUTO(-20));
     }];

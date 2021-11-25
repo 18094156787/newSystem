@@ -20,14 +20,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initViews];
+    [self loadFanganDataWithMatchNum:self.matchNum];
+}
+
+- (void)initViews {
+    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.offset(0);
+    }];
+    
     self.tableView.scrollEnabled = YES;
     [self.tableView registerClass:[JCMatchParticipateCell class] forCellReuseIdentifier:@"JCMatchParticipateCell"];
     [self.tableView registerClass:[JCHongbangCommomCell class] forCellReuseIdentifier:@"JCHongbangCommomCell"];
-    
+//    self.view.backgroundColor = COLOR_F6F6F6;
     self.tableView.estimatedRowHeight = 100;
     self.tableView.backgroundColor = COLOR_F6F6F6;
-    [self loadFanganDataWithMatchNum:self.matchNum];
-    
     WeakSelf;
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [weakSelf loadFanganDataWithMatchNum:weakSelf.matchNum];
@@ -37,8 +44,9 @@
         
         [weakSelf loadFanganDataWithMatchNum:weakSelf.matchNum];
     }];
-
 }
+
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     CGFloat tableH = self.tableView.contentSize.height;

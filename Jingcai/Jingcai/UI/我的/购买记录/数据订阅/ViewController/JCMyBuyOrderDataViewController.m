@@ -20,6 +20,7 @@
 @implementation JCMyBuyOrderDataViewController
 
 - (void)viewDidLoad {
+    self.style = 1;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = COLOR_F4F6F9;
@@ -76,6 +77,7 @@
     [self.tableView registerClass:[JCBuyOrderDataSingleCell class] forCellReuseIdentifier:@"JCBuyOrderDataSingleCell"];
     
     WeakSelf;
+    self.tableView.separatorStyle = 0;
     JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
         [weakSelf refreshData];
     }];
@@ -143,10 +145,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section<self.dataArray.count-1) {
-        return AUTO(8);
+    if (section>self.dataArray.count-1) {
+        return 0.01f;
     }
-    return 0.01f;
+    return AUTO(8);
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {

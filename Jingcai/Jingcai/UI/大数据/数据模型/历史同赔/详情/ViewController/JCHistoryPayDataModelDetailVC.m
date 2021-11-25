@@ -52,7 +52,7 @@
     JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
         [weakSelf refreshData];
     }];
-    emptyView.contentViewOffset = -AUTO(100);
+    emptyView.contentViewOffset = -AUTO(150);
     self.tableView.ly_emptyView = emptyView;
     [self chageImageStr:@"jc_dataModel_empty" Title:@"当前暂无比赛数据~" BtnTitle:@""];
     
@@ -61,18 +61,7 @@
             make.bottom.offset(0);
         }];
     }
-//    [self showNoDataViewImageStr:@"empty_img_follow_expert" Title:@"暂时没有比赛" BtnTitle:@"" Btnwidth:0 HiddenBtn:YES];
-    
-//    self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
-//        [weakSelf refreshData];
-//    }];
 
-    
-//    MJRefreshBackNormalFooter *mj_foot = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-//        [weakSelf getDataList];
-//    }];
-//    self.tableView.mj_footer = mj_foot;
-//    [mj_foot setTitle:@"" forState:MJRefreshStateNoMoreData];
 
 
 }
@@ -137,8 +126,13 @@
 //    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
+
+
 - (void)reloadData {
+    
     [self.tableView reloadData];
+    [self chageImageStr:@"jc_dataModel_empty" Title:@"当前暂无比赛数据~" BtnTitle:@""];
+//    [self.tableView ly_showEmptyView];
 }
 
 

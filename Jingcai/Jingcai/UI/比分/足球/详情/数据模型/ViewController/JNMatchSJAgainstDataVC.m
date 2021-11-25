@@ -731,6 +731,7 @@
         
        
         //type 1是单场 2是包月
+//    ps:11.25去掉鲸猜大数据单场购买
         if (type==1) {
             JCJingCaiAIBigDataBuyVC *vc = [JCJingCaiAIBigDataBuyVC new];
             vc.is_dc = YES;
@@ -903,6 +904,7 @@
 - (JNMatchSJAgainstTipView *)tipView {
     if (!_tipView) {
         _tipView = [JNMatchSJAgainstTipView new];
+        _tipView.isOnlyMonth = YES;
     }
     return _tipView;
 }

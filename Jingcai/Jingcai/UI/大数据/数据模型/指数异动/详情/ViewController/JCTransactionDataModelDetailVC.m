@@ -53,6 +53,7 @@
     [super viewWillDisappear:animated];
 //      self.navigationBarStyle = JCNavigationBarStyleTransparent;
     self.topColorView.alpha = 0;
+    [self.topColorView removeFromSuperview];
 
 }
 
@@ -73,6 +74,7 @@
             if (self.pageNo==1) {
                 [self.dataArray removeAllObjects];
                 self.detailModel = (JCKellyDataDetailModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataDetailModel class]];
+                self.headView.match_id = self.match_id;
                 self.headView.model = self.detailModel;
             }
             NSArray *array = [JCWJsonTool arrayWithJson:object[@"data"][@"odds_list"] class:[JCTransactionDataOddsDetailModel class]];
