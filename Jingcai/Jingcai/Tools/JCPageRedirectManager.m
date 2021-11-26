@@ -27,6 +27,10 @@
 #import "JCArticleDetailVC.h"
 #import "JCActivityGuess_SPF_More_VC.h"
 #import "JCColumnDetailWMViewController.h"
+#import "JCCommunityWMStickHomeVC.h"
+#import "JCMatchDetailWMStickVC.h"
+#import "JCTeamDetailWMStickVC.h"
+
 @interface JCPageRedirectManager ()
 @property (nonatomic, strong) JCMainTabBarController * tabBarController;
 
@@ -140,6 +144,12 @@
 
 //跳转公众号文章详情
 - (void)redirectToGZH_ArticleWithArticleID:(NSString *)articleID ViewController:(UIViewController *)viewController {
+//    if (![JCWUserBall currentUser]) {
+//        //JCBaseViewController * currentVC = self.tabBarController.viewControllers[self.tabBarController.selectedIndex];
+//        JCBaseViewController * currentVC = (JCBaseViewController *)[self.tabBarController.view getCurrentVC];
+//        [currentVC presentLogin];
+//        return ;
+//    }
     [JCTuiJianManager loadGZH_ArticleDetailWithArticleID:articleID orderID:@"" type:@"" WithViewController:viewController is_push:YES];
 
 }
@@ -221,6 +231,45 @@
     JCBaseViewController * currentVC = (JCBaseViewController *)[self.tabBarController.view getCurrentVC];
     [currentVC.navigationController pushViewController:[JcActivitySquareVC new] animated:YES];
 }
+
+- (void)redirectToCommunity_HB {
+    JCMainTabBarController *tabVC = (JCMainTabBarController *)[UIApplication sharedApplication].delegate.window.rootViewController;
+//    JCBaseViewController * currentVC = (JCBaseViewController *)[self.tabBarController.view getCurrentVC];
+//    [currentVC.navigationController popViewControllerAnimated:YES];
+    [tabVC showHBVC];
+
+}
+
+- (void)redirectToCommunity_GZH {
+    JCMainTabBarController *tabVC = (JCMainTabBarController *)[UIApplication sharedApplication].delegate.window.rootViewController;
+//    JCBaseViewController * currentVC = (JCBaseViewController *)[self.tabBarController.view getCurrentVC];
+//    [currentVC.navigationController popViewControllerAnimated:YES];
+    [tabVC showGZHVC];
+
+}
+- (void)redirectToLogin {
+    JCBaseViewController * currentVC = (JCBaseViewController *)[self.tabBarController.view getCurrentVC];
+    [currentVC.navigationController pushViewController:[JCLoginWMStickVC new] animated:YES];
+ 
+}
+//联赛详情
+- (void)redirectToMatchDetailWithMatch_id:(NSString *)match_id ViewController:(UIViewController *)viewController {
+    JCMatchDetailWMStickVC *vc = [JCMatchDetailWMStickVC new];
+    vc.matchNum = match_id;
+    [viewController.navigationController pushViewController:vc animated:YES];
+}
+//球队详情
+- (void)redirectToMatchTeamDetailWithTeam_id:(NSString *)team_id ViewController:(UIViewController *)viewController {
+
+    JCTeamDetailWMStickVC *vc = [JCTeamDetailWMStickVC new];
+    vc.team_id = team_id;
+    [viewController.navigationController pushViewController:vc animated:YES];
+}
+
+
+//- (void)refreshData {
+//    NSLog(@"refreshData");
+//}
 
 - (JCMainTabBarController *)tabBarController {
     if (!_tabBarController) {
@@ -371,17 +420,90 @@
         vc.urlStr = app_weburl;
         [viewController.navigationController pushViewController:vc animated:YES];
     }
-//    else{
-//        if (app_weburl.length>0) {
-//            WebViewController *vc = [WebViewController new];
-//            vc.urlStr = app_weburl;
-//            [viewController.navigationController pushViewController:vc animated:YES];
-//        }
-//
-//    }
-    
+
+
+}
+#pragma mark h5与app交互跳转
++ (void)redirectHtmlWithRoute:(NSString *)route param:(id)param vc:(UIViewController *)vc {
+    if (![param isKindOfClass:[NSNull class]]&&![param isKindOfClass:[NSString class]]) {
+        return;
+    }
+    NSString *ID = (NSString *)param;
+    //充值
+    if ([route isEqualToString:@"startRecharge"]) {
+        [[JCPageRedirectManager sharedManager] redirectToCharge];
+        return ;
+    }
+    if ([route isEqualToString:@"Login"]) {
+        [[JCPageRedirectManager sharedManager] redirectToLogin];
+        return ;
+    }
     
 
+    //跳转公众号专家
+    if ([route isEqualToString:@"startExpert"]) {
+        if (ID.length>0) {
+            [[JCPageRedirectManager sharedManager] redirectToGZH_ExpertWithUserID:ID ViewController:vc];
+        }
+        return ;
+    }
+    //跳转红榜专家
+    if ([route isEqualToString:@"startTalent"]) {
+        if (ID.length>0) {
+            [[JCPageRedirectManager sharedManager] redirectToHB_ExpertWithUserID:ID ViewController:vc];
+        }
+        return ;
+    }
+    //跳转公众号文章详情
+    if ([route isEqualToString:@"startExpertArticle"]) {
+        if (ID.length>0) {
+            [[JCPageRedirectManager sharedManager] redirectToGZH_ArticleWithArticleID:ID ViewController:vc];
+        }
+
+        return ;
+    }
+
+    //跳转红榜文章详情
+    if ([route isEqualToString:@"startTalentArticle"]) {
+        if (ID.length>0) {
+            
+            [[JCPageRedirectManager sharedManager] redirectToHB_ArticleWithArticleID:ID ViewController:vc];
+        }
+        return;
+    }
+    if ([route isEqualToString:@"startExpertPage"]) {
+//
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [vc.navigationController popToRootViewControllerAnimated:YES];
+        });
+
+        [[JCPageRedirectManager sharedManager] redirectToCommunity_GZH];
+        return ;
+    }
+
+    if ([route isEqualToString:@"startTalentPage"]) {
+//        [vc.navigationController popViewControllerAnimated:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [vc.navigationController popToRootViewControllerAnimated:YES];
+        });
+        [[JCPageRedirectManager sharedManager] redirectToCommunity_HB];
+        return ;
+    }
+    if ([route isEqualToString:@"startMatchDetails"]) {
+        if (ID.length>0) {
+            [[JCPageRedirectManager sharedManager] redirectToMatchDetailWithMatch_id:ID ViewController:vc];
+        }
+        return;
+    }
+    if ([route isEqualToString:@"startTeamDetails"]) {
+        if (ID.length>0) {
+            [[JCPageRedirectManager sharedManager] redirectToMatchTeamDetailWithTeam_id:ID ViewController:vc];
+        }
+        return;
+    }
+
+    
+    
 }
 + (NSString *)getParamByName:(NSString *)name URLString:(NSString *)url {
 

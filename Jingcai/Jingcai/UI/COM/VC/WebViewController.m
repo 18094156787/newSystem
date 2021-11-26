@@ -11,6 +11,8 @@
 #import "JCYCHomeWMStickVC.h"
 #import <WebKit/WebKit.h>
 #import "JCShareView.h"
+#import "JCPageRedirectManager.h"
+
 @interface WebViewController () <WKNavigationDelegate, WKUIDelegate,WKScriptMessageHandler>
 //@property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) WKWebView *wkWebView; //webview
@@ -29,32 +31,47 @@
     
     // 因此这里要记得移除handlers
     [self.wkWebView.configuration.userContentController removeScriptMessageHandlerForName:@"Login"];
+    [self.wkWebView.configuration.userContentController removeScriptMessageHandlerForName:@"startExpert"];
+    [self.wkWebView.configuration.userContentController removeScriptMessageHandlerForName:@"startTalent"];
+    [self.wkWebView.configuration.userContentController removeScriptMessageHandlerForName:@"startExpertArticle"];
+    [self.wkWebView.configuration.userContentController removeScriptMessageHandlerForName:@"startTalentArticle"];
+    [self.wkWebView.configuration.userContentController removeScriptMessageHandlerForName:@"startExpertPage"];
+    [self.wkWebView.configuration.userContentController removeScriptMessageHandlerForName:@"startTalentPage"];
+    [self.wkWebView.configuration.userContentController removeScriptMessageHandlerForName:@"startRecharge"];
+    [self.wkWebView.configuration.userContentController removeScriptMessageHandlerForName:@"startMatchDetails"];
+    [self.wkWebView.configuration.userContentController removeScriptMessageHandlerForName:@"startTeamDetails"];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationBarStyle = JCNavigationBarStyleDefault;
     [self setNavBackImg];
+    [self loadWebData];//请求数据
     [self.wkWebView.configuration.userContentController addScriptMessageHandler:self name:@"Login"];
+    [self.wkWebView.configuration.userContentController addScriptMessageHandler:self name:@"startExpert"];
+    [self.wkWebView.configuration.userContentController addScriptMessageHandler:self name:@"startTalent"];
+    [self.wkWebView.configuration.userContentController addScriptMessageHandler:self name:@"startExpertArticle"];
+    [self.wkWebView.configuration.userContentController addScriptMessageHandler:self name:@"startTalentArticle"];
+    [self.wkWebView.configuration.userContentController addScriptMessageHandler:self name:@"startExpertPage"];
+    [self.wkWebView.configuration.userContentController addScriptMessageHandler:self name:@"startTalentPage"];
+    [self.wkWebView.configuration.userContentController addScriptMessageHandler:self name:@"startRecharge"];
+    [self.wkWebView.configuration.userContentController addScriptMessageHandler:self name:@"startMatchDetails"];
+    [self.wkWebView.configuration.userContentController addScriptMessageHandler:self name:@"startTeamDetails"];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initSubviews];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginAction) name:NotificationUserLogin object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginAction) name:UserRegisterSuccess object:nil];
 }
 
 
 - (void)userLoginAction {
+    //h5要连续调用2次才能成功刷新带有token页面
     [self loadWebData];
     [self loadWebData];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self loadWebData];
-//    });
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self loadWebData];
-//    });
-    
 }
 
 
@@ -105,7 +122,7 @@
     //kvo 添加进度监控
     [_wkWebView addObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress)) options:0 context:nil];
     [self.view addSubview:_wkWebView];
-    [self loadWebData];//请求数据
+  
 
 
     
@@ -173,9 +190,8 @@
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
     // message.body  --  Allowed types are NSNumber, NSString, NSDate, NSArray,NSDictionary, and NSNull.
-    if ([message.name isEqualToString:@"Login"]) {
-        [self userLogin];
-    }
+    [JCPageRedirectManager redirectHtmlWithRoute:message.name param:message.body vc:self];
+
     
 }
 
@@ -319,14 +335,6 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 
-//    if ([webView.URL.absoluteString containsString:@"app_jump"]) {
-//        [JCPageRedirectManager jumpVCWithRoute:webView.URL.absoluteString vc:self];
-//    }else{
-//        if ([webView.URL.absoluteString containsString:@"wap.jingcai.com"]) {
-//            [self.navigationController popViewControllerAnimated:YES];
-//        }
-//
-//    }
       
 }
 

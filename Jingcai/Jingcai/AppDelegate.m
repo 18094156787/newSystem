@@ -70,7 +70,11 @@
 //    [self configUM];
     [self configWXApp];
     [self configProgressHUD];
-    [self configJPushWithLaunchOptions:launchOptions];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"firstApp"]) {
+        //允许弹窗协议,才配置三方初始化
+        [self configThirdConfig];
+    }
+//    [self configJPushWithLaunchOptions:launchOptions];
     [self configIQKeyboard];
     [self clearAppBadge];
     [self netWorkMonitoring];//网络监听
@@ -263,46 +267,29 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
 }
-- (void)configJPushWithLaunchOptions:(NSDictionary *)launchOptions {
+- (void)configThirdConfig {
     
-    //确保权限只询问一次,首次是询问,以后都是获取
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"JpushAgree"]) {
-        //先访问用户的推送权限,当用户允许推送时,再初始化极光推送
-        UNUserNotificationCenter * center = [UNUserNotificationCenter currentNotificationCenter];
-    //    center.delegate = self;
-        [center requestAuthorizationWithOptions:UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound completionHandler:^(BOOL granted, NSError * _Nullable error) {
-            
-            if (granted) {
-                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JpushAgree"];//同意推送
-                if ([[NSUserDefaults standardUserDefaults] objectForKey:@"firstApp"]) {
-                    //首次安装,要同意推送,并且同意服务协议,才去初始化设置
-                    [self agreeConfigWithLaunchOptions];
-                }
-                
-            }else{
-                //不允许
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    //刷新UI的代码放到主线程执行
-                    [JCWToastTool showHint:@"您未开启通知权限，将无法即时收到方案等内容的更新提醒"];
-                });
-                
+    UNUserNotificationCenter * center = [UNUserNotificationCenter currentNotificationCenter];
+//    center.delegate = self;
+    [center requestAuthorizationWithOptions:UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        
+        if (granted) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JpushAgree"];//同意推送
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"firstApp"]) {
+                //首次安装,要同意推送,并且同意服务协议,才去初始化设置
+                [self agreeConfigWithLaunchOptions];
             }
-
-        }];
-    }else {
-        //当用户在app设置里打开同意推送的按钮后,重新注册极光推送
-            [JCWAppTool isUserNotificationEnable:^(BOOL isEnabled) {
-                if (isEnabled) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JpushAgree"];
-                        
-//                        [self agreeConfigWithLaunchOptions];
-                        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"firstApp"]) {
-                            //同意推送,并且同意服务协议,才去初始化设置
-                            [self agreeConfigWithLaunchOptions];
-                        }
-                    });
-                }else {
+            
+        }else{
+            //不允许
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //刷新UI的代码放到主线程执行
+               
+                if (![[NSUserDefaults standardUserDefaults] objectForKey:@"JpushTip"]) {
+                    //只提示一次
+                    [JCWToastTool showHint:@"您未开启通知权限，将无法即时收到方案等内容的更新提醒"];
+                    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"JpushTip"];
+                }else{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         NSString *day = [[NSUserDefaults standardUserDefaults] objectForKey:@"JpushUnalbe"];
                         //判断是否是同一天
@@ -323,22 +310,18 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
                         [[UIApplication sharedApplication].keyWindow addSubview:alertView];
                         [[NSUserDefaults standardUserDefaults] setValue:[NSDate currentDay] forKey:@"JpushUnalbe"];
                     });
-                    
-                    
-                    
 
                 }
+                if ([[NSUserDefaults standardUserDefaults] objectForKey:@"firstApp"]) {
+                    [self configUM];
+                }
+               
+               
+            });
+            
+        }
 
-        
-        
-            }];
-        
-        
-
-    }
-    
-
-    
+    }];
 
 }
 

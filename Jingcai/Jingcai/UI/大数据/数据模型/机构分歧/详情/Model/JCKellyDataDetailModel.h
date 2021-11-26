@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,assign) NSInteger company_num;//完成机构分歧计算的公司数
 
-@property (nonatomic,copy) NSString *introduce;
+@property (nonatomic,copy) NSString *more_introduce;
 
 #pragma mark 泊松分布
 @property (nonatomic, strong) NSArray<NSString *> *goals_avg;//场均进球：[主队,客队]

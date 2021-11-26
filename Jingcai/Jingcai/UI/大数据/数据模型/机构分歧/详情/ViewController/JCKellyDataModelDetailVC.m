@@ -267,7 +267,7 @@
         return [JCKellyDataModelTrackTitleView new];
     }
     if (section==3) {
-        if (self.detailModel.introduce.length>0) {
+        if (self.detailModel.more_introduce.length>0) {
             JCPoissonDataModelDetailTitleView *headView = [JCPoissonDataModelDetailTitleView new];
             headView.titleLab.text = @"说明";
             return headView;
@@ -287,7 +287,7 @@
         return AUTO(40);
     }
     if (section==3) {
-        if (self.detailModel.introduce.length>0) {
+        if (self.detailModel.more_introduce.length>0) {
             return AUTO(40);
         }
         return 0.01f;
@@ -311,7 +311,7 @@
     }
     if (indexPath.section==3) {
         JCKellyDataModelIntroduceModelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JCKellyDataModelIntroduceModelCell"];
-        cell.contentLab.text = self.detailModel.introduce;
+        cell.contentLab.text = self.detailModel.more_introduce;
         return cell;
     }
     

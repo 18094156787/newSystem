@@ -64,8 +64,8 @@
     [self layoutIfNeeded];
     if (self.againstModel) {
         self.titleLab.text = self.againstModel.title;
-        NSString *left = [NSString stringWithFormat:@"%@",self.againstModel.home_average_value];
-        NSString *right = [NSString stringWithFormat:@"%@",self.againstModel.away_average_value];
+        NSString *left = [NSString stringWithFormat:@"%@",@([self.againstModel.home_average_value floatValue])];
+        NSString *right = [NSString stringWithFormat:@"%@",@([self.againstModel.away_average_value floatValue])];
         self.homeRateLab.text = left;
         self.awayRateLab.text = right;
         float total = [left floatValue]+[right floatValue];

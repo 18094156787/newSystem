@@ -206,10 +206,11 @@
         return;
     }
     NSString *bankCard = [JCWAppTool getRSA_String:self.bankCard];
-
+    NSString *bankName = [JCWAppTool getRSA_String:self.bankName];
+    NSString *userName = [JCWAppTool getRSA_String:self.userName];
     [self.view showLoading];
     JCUserService_New *service = [JCUserService_New service];
-    [service getUserBindBankCardWithBankcard_number:bankCard Bank_name:self.bankName Nickname:self.userName success:^(id  _Nullable object) {
+    [service getUserBindBankCardWithBankcard_number:bankCard Bank_name:bankName Nickname:userName success:^(id  _Nullable object) {
         [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
             JCWUserBall *user = [JCWUserBall currentUser];

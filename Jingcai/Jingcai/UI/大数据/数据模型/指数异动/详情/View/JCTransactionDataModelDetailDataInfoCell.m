@@ -126,10 +126,10 @@
                     self.equalRateLab.text = [NSString stringWithFormat:@"(%@)",euqalValue];
                 }
                 if ([flagModel.flage integerValue]==1) {
-                    self.upImgView.image = JCIMAGE(@"ic_dataModel_zhishu_small_up");
+                    self.equalImgView.image = JCIMAGE(@"ic_dataModel_zhishu_small_up");
                     self.equalRateLab.textColor = COLOR_EF2F2F;
                 }else if([flagModel.flage integerValue]==2){
-                    self.upImgView.image = JCIMAGE(@"ic_dataModel_zhishu_small_down");
+                    self.equalImgView.image = JCIMAGE(@"ic_dataModel_zhishu_small_down");
                     self.equalRateLab.textColor = COLOR_30B27A;
                 }else{
                     self.equalRateLab.textColor = COLOR_2F2F2F;

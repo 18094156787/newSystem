@@ -830,11 +830,11 @@
         return;
     }
     
-    NSString *scene = @"7";
+    NSString *scene = @"3";
     //1.鲸猜大数据 2指数异动 3历史同赔 4泊松分布 5机构分歧 6.指数分歧
     [self.view showLoading];
     JCHomeService_New *service = [JCHomeService_New new];
-    [service getConfirmOrderWithUnique:self.titleModel.id scene:scene source:@"1" price:@"" Success:^(id  _Nullable object) {
+    [service getConfirmOrderWithUnique:@"0" scene:scene source:@"1" price:@"" Success:^(id  _Nullable object) {
         [self.view endLoading];
         if ([JCWJsonTool isSuccessResponse:object]) {
             NSString *order_key = object[@"data"][@"order_key"];

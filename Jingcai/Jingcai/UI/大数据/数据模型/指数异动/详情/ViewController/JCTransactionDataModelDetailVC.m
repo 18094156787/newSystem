@@ -344,8 +344,9 @@
     if (indexPath.section==0) {
         JCTransactionDataModelDetailDataCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCTransactionDataModelDetailDataCell"];
         cell.type = self.type;
-        cell.detailModel = self.detailModel;
+        
         cell.dataArray = self.detailModel.compare_odds;
+        cell.detailModel = self.detailModel;
         return cell;
     }
     if (indexPath.section==1) {

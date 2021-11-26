@@ -13,12 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedManager;
 + (void)redirectWithRoute:(NSString *)route vc:(UIViewController *)vc;
 + (void)jumpVCWithRoute:(NSString *)route vc:(UIViewController *)vc;
++ (void)redirectHtmlWithRoute:(NSString *)route param:(id)param vc:(UIViewController *)vc;
 - (void)redirectToCharge;
 - (void)redirectToHongbao;
 - (void)redirectToInviteFriend;//跳转邀请新人页面
 - (void)redirectToMyGuess;//跳转竞猜页面
 - (void)redirectToActivity;//跳转活动广场
-
 - (void)redirectToTjUserWithTjUserId:(NSString *)tjUserId;//专家主页
+
 @end
 NS_ASSUME_NONNULL_END

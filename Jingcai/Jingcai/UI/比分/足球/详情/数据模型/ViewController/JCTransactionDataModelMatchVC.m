@@ -185,8 +185,9 @@
     };
     
     headView.titleLab.text = model.title;
-
+    headView.detailView.hidden = NO;
     if(section==self.dataArray.count&&self.dataSource.count>0){
+        headView.detailView.hidden = YES;
         headView.titleLab.text = @"数据对比";
     }
 

@@ -221,11 +221,14 @@ static CGFloat const kWMMenuViewHeight = 44;
             weakSelf.titleView.matchBall = matchBall;
             weakSelf.titleLab.alpha =  0;
             weakSelf.titleLab.text= [NSString stringWithFormat:@"%@ VS %@",matchBall.home_team.name_zh,matchBall.away_team.name_zh];
-
-            if (self.model_id.length>0) {
-                self.selectIndex = 6;
-            }
             [self reloadData];
+            if (self.model_id.length>0) {
+//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    self.selectIndex = 6;
+//                });
+                self.selectIndex = 6;
+                
+            }
         }
     } failure:^(NSError * _Nonnull error) {
         [weakSelf.view endLoading];

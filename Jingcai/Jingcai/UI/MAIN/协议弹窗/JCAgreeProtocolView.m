@@ -77,11 +77,17 @@
     [self.sureBtn bk_whenTapped:^{
 //        confirmActionHandler();
         AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"JpushAgree"]) {
-            [app agreeConfigWithLaunchOptions];//同意推送的情况下,点击同意协议再初始化三方配置
-        }
-        
+//        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"JpushAgree"]) {
+////            [app agreeConfigWithLaunchOptions];//同意推送的情况下,点击同意协议再初始化三方配置
+//            [app configJPush];
+//        }else {
+//            //不同意推送,但是同意了协议,这时候只初始化友盟
+//            [app configUM];
+//        }
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"firstApp"];
+        [app configThirdConfig];
+        
+        
         [weakSelf removeFromSuperview];
     }];
     
