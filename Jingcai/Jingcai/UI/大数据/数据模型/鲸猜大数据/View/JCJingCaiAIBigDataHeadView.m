@@ -27,7 +27,7 @@
     [self.bgView addSubview:cornerView];
     [cornerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.bgView);
-        make.height.mas_equalTo(AUTO(16));
+        make.height.mas_equalTo(AUTO(12));
     }];
     
     UIButton *backBtn = [UIButton new];
@@ -139,7 +139,7 @@
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.offset(0);
         make.top.equalTo(self.bgView.mas_bottom).offset(0);
-        make.height.mas_equalTo(AUTO(36));
+        make.height.mas_equalTo(36);
     }];
     
     UIImageView *ycImgView = [UIImageView new];
@@ -161,7 +161,7 @@
         make.size.mas_equalTo(CGSizeMake(0.5, 28));
     }];
     
-    self.noticeCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(AUTO(60), 0, SCREEN_WIDTH-AUTO(40), AUTO(36)) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    self.noticeCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(AUTO(60), 0, SCREEN_WIDTH-AUTO(40), 36) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
     self.noticeCycleScrollView.clipsToBounds = YES;
     self.noticeCycleScrollView.showPageControl = NO;
     self.noticeCycleScrollView.autoScrollTimeInterval = 3;
@@ -232,58 +232,6 @@
 
 }
 
-
-
-- (void)setProductModel:(JCBigDataMonthProduceModel *)productModel {
-    _productModel = productModel;
-//    [self.buyBgView removeAllSubviews];
-//    self.buyInfoView.productModel = self.productModel;
-//
-//    if ([productModel.user_count integerValue]>0) {
-//        NSString *buyCount = [NSString stringWithFormat:@"%@人购买",productModel.user_count];
-//        self.countLab.text = buyCount;
-//
-//    }else{
-//        self.countLab.text = @"";
-//    }
-//    if (productModel.distance_day.length>0&&[productModel.is_buy integerValue]==1) {
-//        
-//        NSString *endDay = [NSString stringWithFormat:@"当前到期时间 %@ 天",productModel.distance_day];
-//        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:endDay];
-//        NSRange range = [endDay rangeOfString:productModel.distance_day];
-//        if (range.location!=NSNotFound) {
-//            [attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
-//            [attr addAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Medium" size:16]} range:range];
-//        }
-//        self.timeLab.attributedText = attr;
-//        
-//        [self.timeLab mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.width.mas_equalTo(164);
-//        }];
-//        
-//    }else{
-//        self.timeLab.text = @"";
-//        [self.timeLab mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.width.mas_equalTo(0);
-//        }];
-//    }
-//    
-//    if ([productModel.is_buy intValue]==1) {
-//        [self.sureBtn setTitle:@"立即续费" forState:0];
-//    }else{
-//        [self.sureBtn setTitle:@"立即开通" forState:0];
-//    }
-////    {
-////        [self.sureBtn setBackgroundImage:JCIMAGE(@"button_bg_new") forState:0];
-////        self.statusBtn.hidden = YES;
-////        self.timeLab.hidden = YES;
-////    }
-//    self.statusBtn.hidden = YES;
-//    self.timeLab.hidden = YES;
-
-
-    
-}
 - (void)setModel:(JCKellyDataModelPayInfoModel *)model {
     _model = model;
     self.titleLab.text  = model.introduce;

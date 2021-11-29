@@ -31,23 +31,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UILabel *scoreLab;//比分
 
-@property (nonatomic, strong) UILabel *chuLab;//初指
+@property (nonatomic, strong) UIView *progressView;
 
-@property (nonatomic, strong) UILabel *jiLab;//即指
+@property (nonatomic, strong) UILabel *zhishuLab;
 
-@property (nonatomic, strong) UIButton *lockBtn;
+@property (nonatomic, strong) UIView *winView;
 
-@property (nonatomic, strong) JCHistoryPayDataModelRateView *homeWinView;
+@property (nonatomic, strong) UIView *equalView;
 
-@property (nonatomic, strong) JCHistoryPayDataModelRateView *homeEqualView;
+@property (nonatomic, strong) UIView *loseView;
 
-@property (nonatomic, strong) JCHistoryPayDataModelRateView *homeLoseView;
+@property (nonatomic, strong) UILabel *winLab;
 
-@property (nonatomic, strong) JCHistoryPayDataModelRateView *awayWinView;
+@property (nonatomic, strong) UILabel *equalLab;
 
-@property (nonatomic, strong) JCHistoryPayDataModelRateView *awayEqualView;
-
-@property (nonatomic, strong) JCHistoryPayDataModelRateView *awayLoseView;
+@property (nonatomic, strong) UILabel *loseLab;
 
 @property (nonatomic,strong) UIImageView *resultImgView;
 

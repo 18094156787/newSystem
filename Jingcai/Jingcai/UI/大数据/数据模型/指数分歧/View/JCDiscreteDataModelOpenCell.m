@@ -285,7 +285,7 @@
     [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
     
 
-    NSString *title = [NSString stringWithFormat:@"查询到%@条赔率数据；已完成分歧数据运算",model.total_discrete_sample];
+    NSString *title = [NSString stringWithFormat:@"查询到%@条机构数据；已完成指数分歧数据运算",model.total_discrete_sample];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
     NSRange range = [title rangeOfString:[NSString stringWithFormat:@"%@",model.total_discrete_sample]];
     if (range.location!=NSNotFound) {

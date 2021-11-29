@@ -33,11 +33,6 @@
     [self addSubview:self.homeProgressView];
     self.homeProgressView.layer.cornerRadius = AUTO(4);
     self.homeProgressView.layer.masksToBounds = YES;
-//    [self.homeProgressView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.offset(AUTO(8));
-//        make.top.offset(AUTO(66));
-//        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH-AUTO(16), AUTO(20)));
-//    }];
     self.homeProgressView.frame = CGRectMake(AUTO(8), AUTO(30), SCREEN_WIDTH-AUTO(16), AUTO(24));
     
     [self addSubview:self.homeRateLab];

@@ -9,9 +9,10 @@
 #import "JCHistoryPayDataModelVC.h"
 #import "JCHistoryPayDataModelLockedCell.h"
 #import "JCHistoryPayDataModelOpenCell.h"
-#import "JCHistoryPayDataModelDetailStickVC.h"
+#import "JCHistoryPayDataModelDetailVC.h"
 #import "JCKellyDataModelModel.h"
 @interface JCHistoryPayDataModelVC ()
+
 
 @end
 
@@ -93,7 +94,7 @@
     JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
         [weakSelf refreshData];
     }];
-    emptyView.contentViewOffset = 0;
+    emptyView.contentViewOffset = -AUTO(150);
     self.tableView.ly_emptyView = emptyView;
 //    [self showNoDataViewImageStr:@"empty_img_follow_expert" Title:@"暂时没有比赛" BtnTitle:@"" Btnwidth:0 HiddenBtn:YES];
     
@@ -178,7 +179,7 @@
             self.JCOpenBlock();
         }
     }else{
-        JCHistoryPayDataModelDetailStickVC *vc = [JCHistoryPayDataModelDetailStickVC new];
+        JCHistoryPayDataModelDetailVC *vc = [JCHistoryPayDataModelDetailVC new];
         vc.match_id = [NSString stringWithFormat:@"%ld",model.id];
         vc.model_id = self.model_id;
         [self.navigationController pushViewController:vc animated:YES];

@@ -90,8 +90,8 @@
     _dataArray = dataArray;
     [self layoutIfNeeded];
     if (dataArray.count==2) {
-        NSString *left = [NSString stringWithFormat:@"%@",dataArray.firstObject];
-        NSString *right = [NSString stringWithFormat:@"%@",dataArray.lastObject];
+        NSString *left = [NSString stringWithFormat:@"%@",@([dataArray.firstObject floatValue])];
+        NSString *right = [NSString stringWithFormat:@"%@",@([dataArray.lastObject floatValue])];
         self.homeRateLab.text = left;
         self.awayRateLab.text = right;
         float total = [left floatValue]+[right floatValue];

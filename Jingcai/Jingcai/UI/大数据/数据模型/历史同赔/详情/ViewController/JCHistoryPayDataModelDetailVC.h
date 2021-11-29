@@ -7,16 +7,21 @@
 //
 
 #import "JCBaseTableViewController.h"
-
+#import "JCKellyDataDetailModel.h"
+#import "JCDataModelTitleModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCHistoryPayDataModelDetailVC : JCBaseTableViewController
 
-@property (nonatomic,strong) NSArray *dataSource;
-
 @property (nonatomic,assign) BOOL hidetopMatch;
 
-- (void)reloadData;
+@property (nonatomic,assign) BOOL isMatch;//标记联赛详情进来的
+
+@property (nonatomic,strong) JCDataModelTitleModel *titleModel;
+
+@property (nonatomic,strong) NSString *match_id;//比赛id
+
+@property (nonatomic,strong) NSString *model_id;//
 
 
 

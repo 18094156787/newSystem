@@ -150,6 +150,7 @@ static CGFloat const kWMMenuViewHeight = 44;
         [self.contentView.mj_header endRefreshing];
         if ([JCWJsonTool isSuccessResponse:object]) {
             JCKellyDataModelPayInfoModel *buyInfoModel = (JCKellyDataModelPayInfoModel *)[JCWJsonTool entityWithJson:object[@"data"] class:[JCKellyDataModelPayInfoModel class]];
+            
             self.buyInfoModel = buyInfoModel;
             self.headView.model = buyInfoModel;
             if (self.selectIndex==0) {

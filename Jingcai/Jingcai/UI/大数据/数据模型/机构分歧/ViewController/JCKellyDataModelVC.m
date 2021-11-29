@@ -104,7 +104,7 @@
     JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
         [weakSelf refreshData];
     }];
-    emptyView.contentViewOffset = -AUTO(208);
+    emptyView.contentViewOffset = -AUTO(150);
     self.tableView.ly_emptyView = emptyView;
 
     

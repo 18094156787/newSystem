@@ -17,6 +17,7 @@
 #import "JCTransactionDataOddsDetailModel.h"
 #import "JCDiscreteTrackRateModel.h"
 #import "JCKellyDataDetailSampleModel.h"
+#import "JCHistoryPayDataModeVSModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JCKellyDataDetailModel : JCWBaseBall
@@ -80,6 +81,8 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark 历史同赔
 
 @property (nonatomic, strong) JCHistoryPayDataModel *similar;
+
+@property (nonatomic, strong) JCHistoryPayDataModeVSModel *history_vs;
 
 @property (nonatomic, strong) JCHistoryPayMatchDataModel *similar_match;
 

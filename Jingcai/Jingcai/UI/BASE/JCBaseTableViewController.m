@@ -113,8 +113,8 @@
 - (void)chageImageStr:(NSString *)ImageStr Title:(NSString *)title BtnTitle:(NSString *)btnTtitle {
     self.tableView.ly_emptyView.imageStr = ImageStr;
     self.tableView.ly_emptyView.titleStr = title;
-    self.tableView.ly_emptyView.titleLabTextColor = COLOR_2F2F2F;
-    self.tableView.ly_emptyView.titleLabFont = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(13)];
+    self.tableView.ly_emptyView.titleLabTextColor = COLOR_9F9F9F;
+    self.tableView.ly_emptyView.titleLabFont = [UIFont fontWithName:@"PingFangSC-Regular" size:AUTO(12)];
     self.tableView.ly_emptyView.btnTitleStr = btnTtitle;
 //    [self.tableView ly_showEmptyView];
     self.tableView.ly_emptyView.actionButton.hidden = btnTtitle.length>0?NO:YES;

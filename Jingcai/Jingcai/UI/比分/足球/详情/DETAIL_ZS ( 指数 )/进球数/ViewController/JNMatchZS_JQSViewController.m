@@ -9,7 +9,6 @@
 #import "JNMatchZS_JQSViewController.h"
 #import "JNMatchZS_OP_TableViewCell.h"
 #import "JNMatchZS_OP_HeadView.h"
-#import "JCWMatchPLBall.h"
 #import "JNMatchZS_ZSDetailViewController.h"
 #import "JNMatchDetailZSVC.h"
 #import "JNMatchZS_PLInfoModel.h"

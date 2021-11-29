@@ -8,7 +8,6 @@
 
 #import "JCMineViewController.h"
 #import "JCContactUsVC.h"
-#import "JCAboutVC.h"
 #import "JCSettingVC.h"
 #import "JCWUserBall.h"
 #import "JCPopViewManager.h"

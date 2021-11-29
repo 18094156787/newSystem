@@ -14,6 +14,7 @@
 #import "JCTransactionDataModelLockedView.h"
 #import "JCKellyDataModelModel.h"
 #import "JCTransactionDataModel.h"
+#import "JCTransactionDataModelEmptyCell.h"
 @interface JCTransactionDataModelVC ()
 
 @property (nonatomic,strong) NSArray *newstArray;
@@ -49,21 +50,14 @@
         if ([JCWJsonTool isSuccessResponse:object]) {
 
             self.newstArray = [JCWJsonTool arrayWithJson:object[@"data"][@"list"] class:[JCTransactionDataModel class]];
-//             [self.newstArray addObjectsFromArray:array];
-//            if (array.count <PAGE_LIMIT) {
-//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-//            }
+
             [self.tableView reloadData];
 
-//            [self chageImageStr:@"jc_dataModel_empty" Title:@"" BtnTitle:@""];
-//
-//            if (array.count <PAGE_LIMIT&&self.dataArray.count>0) {
-//                  self.tableView.tableFooterView = self.noMore_footView;
-//                  self.tableView.mj_footer.hidden = YES;
-//              }else{
-//                  self.tableView.tableFooterView = [UIView new];
-//                  self.tableView.mj_footer.hidden = NO;
-//              }
+            if (self.newstArray.count==0&&self.historyArray.count==0) {
+                [self.tableView ly_showEmptyView];
+            }else{
+                [self.tableView ly_hideEmptyView];
+            }
 
         }else{
             [JCWToastTool showHint:object[@"msg"]];
@@ -95,16 +89,22 @@
             }
             self.pageNo++;
             [self.tableView reloadData];
+            
+            if (array.count <PAGE_LIMIT&&self.historyArray.count>0) {
+                  self.tableView.tableFooterView = self.noMore_footView;
+                  self.tableView.mj_footer.hidden = YES;
+              }else{
+                  self.tableView.tableFooterView = [UIView new];
+                  self.tableView.mj_footer.hidden = NO;
+              }
 
-//            [self chageImageStr:@"jc_dataModel_empty" Title:@"" BtnTitle:@""];
-//
-//            if (array.count <PAGE_LIMIT&&self.dataArray.count>0) {
-//                  self.tableView.tableFooterView = self.noMore_footView;
-//                  self.tableView.mj_footer.hidden = YES;
-//              }else{
-//                  self.tableView.tableFooterView = [UIView new];
-//                  self.tableView.mj_footer.hidden = NO;
-//              }
+            
+            if (self.newstArray.count==0&&self.historyArray.count==0) {
+                [self.tableView ly_showEmptyView];
+            }else{
+                [self.tableView ly_hideEmptyView];
+            }
+
 
         }else{
             [JCWToastTool showHint:object[@"msg"]];
@@ -120,17 +120,6 @@
 }
 
 - (void)initViews {
-//    JCJingCaiAIBigDataMatchTitleView *titleView = [[JCJingCaiAIBigDataMatchTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, AUTO(45))];
-//    titleView.backgroundColor = JCWhiteColor;
-//    titleView.titleLab.text = @"比赛列表";
-//    titleView.iconView.hidden = NO;
-//    self.tableView.tableHeaderView = titleView;
-//
-//    titleView.JCBlcok = ^{
-//        [weakSelf.navigationController pushViewController:[JCJingCaiAIBigDataHomeVC new] animated:YES];
-//    };
-    
-    
     WeakSelf;
     self.tableView.estimatedRowHeight = 300;
     self.tableView.backgroundColor = COLOR_F4F6F9;
@@ -140,6 +129,7 @@
     // 表格注册cell
     [self.tableView registerClass:[JCTransactionDataModelLockedCell class] forCellReuseIdentifier:@"JCTransactionDataModelLockedCell"];
     [self.tableView registerClass:[JCTransactionDataModelCell class] forCellReuseIdentifier:@"JCTransactionDataModelCell"];
+    [self.tableView registerClass:[JCTransactionDataModelEmptyCell class] forCellReuseIdentifier:@"JCTransactionDataModelEmptyCell"];
     
 //    self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(48));
 //    self.tableView.tableHeaderView = self.headView;
@@ -150,10 +140,10 @@
     JNDIYemptyView *emptyView = [JNDIYemptyView diyNoDataEmptyViewWithBlock:^{
         [weakSelf refreshData];
     }];
-    emptyView.contentViewOffset = 0;
+    emptyView.contentViewOffset = AUTO(-150);
     self.tableView.ly_emptyView = emptyView;
 //    [self showNoDataViewImageStr:@"empty_img_follow_expert" Title:@"暂时没有比赛" BtnTitle:@"" Btnwidth:0 HiddenBtn:YES];
-    
+    [self chageImageStr:@"jc_dataModel_empty" Title:@"当前暂无比赛数据~" BtnTitle:@""];
     self.tableView.mj_header = [JCFootBallHeader headerWithRefreshingBlock:^{
         if (weakSelf.JCRefreshBlock) {
             weakSelf.JCRefreshBlock();
@@ -180,11 +170,21 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section==0) {
-        if (self.buyInfoModel.show_status==2) {
+        if (self.buyInfoModel.show_status==2&&self.newstArray.count>0) {
             return self.newstArray.count;
+//            return 1;
         }
-        return 0;
+        if (self.newstArray.count==0&&self.historyArray.count==0) {
+            return 0;
+        }
+        return 1;
         
+    }
+    if (self.newstArray.count==0&&self.historyArray.count==0) {
+        return 0;
+    }
+    if (self.newstArray.count>0&&self.historyArray.count==0) {
+        return 1;
     }
     return self.historyArray.count;
 
@@ -200,7 +200,7 @@
     JCTransactionDataModelTitleView *headView = [JCTransactionDataModelTitleView new];
     headView.detailView.hidden = YES;
     if (section==0) {
-        if (self.newstArray.count==0) {
+        if (self.newstArray.count==0&&self.historyArray.count==0) {
             return [UIView new];
         }
         NSString *string = [NSString stringWithFormat:@"最新推荐（%ld场)",self.newstArray.count];
@@ -212,6 +212,9 @@
         }
         
     }else{
+        if (self.newstArray.count==0&&self.historyArray.count==0) {
+            return [UIView new];
+        }
         headView.titleLab.text = @"历史异动赛事";
     }
     return headView;
@@ -219,9 +222,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section==0) {
-        if (self.newstArray.count==0) {
+        if (self.newstArray.count==0&&self.historyArray.count==0) {
             return 0.01f;
         }
+        return AUTO(40);
+    }
+    if (self.historyArray.count==0&&self.newstArray.count==0) {
+        return 0.01f;
+        
     }
     return AUTO(40);
 }
@@ -231,10 +239,32 @@
  
     JCTransactionDataModelCell * cell = [tableView dequeueReusableCellWithIdentifier:@"JCTransactionDataModelCell"];
     if (indexPath.section==0) {
+        if (self.buyInfoModel.show_status==1||self.buyInfoModel.show_status==3) {
+            JCTransactionDataModelLockedCell *lockedCell = [tableView dequeueReusableCellWithIdentifier:@"JCTransactionDataModelLockedCell"];
+            WeakSelf;
+            lockedCell.JCOpenBlock = ^{
+                //未开通,前往开通
+                if (weakSelf.JCOpenBlock) {
+                    weakSelf.JCOpenBlock();
+                }
+            };
+
+            return lockedCell;
+
+        }
+        if (self.buyInfoModel.show_status==2&&self.newstArray.count==0) {
+            JCTransactionDataModelEmptyCell *emptyCell = [tableView dequeueReusableCellWithIdentifier:@"JCTransactionDataModelEmptyCell"];
+            return emptyCell;
+        }
         cell.model = self.newstArray[indexPath.row];
+        return cell;
     }
     if (indexPath.section==1) {
         cell.model = self.historyArray[indexPath.row];
+    }
+    if (self.historyArray.count==0) {
+        JCTransactionDataModelEmptyCell *emptyCell = [tableView dequeueReusableCellWithIdentifier:@"JCTransactionDataModelEmptyCell"];
+        return emptyCell;
     }
 //    JCMatchInfoModel *model = self.dataArray[indexPath.section];
 //    cell.model = model;
@@ -242,31 +272,31 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section==0) {
-        if (self.newstArray.count>0&&self.buyInfoModel.show_status!=2&&self.buyInfoModel.show_status!=4) {
-            return AUTO(55);
-        }
-
-    }
+//    if (section==0) {
+//        if (self.newstArray.count>0&&self.buyInfoModel.show_status!=2&&self.buyInfoModel.show_status!=4) {
+//            return AUTO(55);
+//        }
+//
+//    }
     return 0.01f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (section==0) {
-        if (self.buyInfoModel&&self.newstArray.count>0&&self.buyInfoModel.show_status!=2&&self.buyInfoModel.show_status!=4) {
-            JCTransactionDataModelLockedView *lockView = [JCTransactionDataModelLockedView new];
-            WeakSelf;
-            lockView.JCOpenBlock = ^{
-                //未开通,前往开通
-                if (weakSelf.JCOpenBlock) {
-                    weakSelf.JCOpenBlock();
-                }
-            };
-
-            return lockView;
-        }
-
-    }
+//    if (section==0) {
+//        if (self.buyInfoModel&&self.newstArray.count>0&&self.buyInfoModel.show_status!=2&&self.buyInfoModel.show_status!=4) {
+//            JCTransactionDataModelLockedView *lockView = [JCTransactionDataModelLockedView new];
+//            WeakSelf;
+//            lockView.JCOpenBlock = ^{
+//                //未开通,前往开通
+//                if (weakSelf.JCOpenBlock) {
+//                    weakSelf.JCOpenBlock();
+//                }
+//            };
+//
+//            return lockView;
+//        }
+//
+//    }
     return [UIView new];
 }
 
@@ -277,11 +307,17 @@
     JCTransactionDataModelDetailVC *vc = [JCTransactionDataModelDetailVC new];
     vc.model_id = self.model_id;
     if (indexPath.section==0) {
+        if (self.newstArray.count==0) {
+            return;
+        }
         JCTransactionDataModel *model = self.newstArray[indexPath.row];
         vc.match_id = [NSString stringWithFormat:@"%ld",model.match_id];
         vc.type = [NSString stringWithFormat:@"%ld",model.type];
     }
     if (indexPath.section==1) {
+        if (self.historyArray.count==0) {
+            return;
+        }
         JCTransactionDataModel *model = self.historyArray[indexPath.row];
         vc.match_id = [NSString stringWithFormat:@"%ld",model.match_id];
         vc.type = [NSString stringWithFormat:@"%ld",model.type];

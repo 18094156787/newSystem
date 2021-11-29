@@ -5,94 +5,34 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            uuid = "31D9B78B-C322-4971-93B9-6612EFE9BC4E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            breakpointStackSelectionBehavior = "1"
-            scope = "1"
-            stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7BECD4AD-BB83-48A2-8531-0C3171D7EABB"
+            uuid = "5804F60C-E26B-4DE1-8590-02E1518844ED"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/COM/VC/WebViewController.m"
+            filePath = "Jingcai/UI/&#x5927;&#x6570;&#x636e;/&#x6570;&#x636e;&#x6a21;&#x578b;/&#x5386;&#x53f2;&#x540c;&#x8d54;/&#x8be6;&#x60c5;/View/JCHistoryPayDataModelDetailHeadView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
-            landmarkName = "-userContentController:didReceiveScriptMessage:"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "-setModel:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "162F3A06-D004-4C08-B622-554D1189646E"
+            uuid = "0E632D73-F877-4C5A-A28C-55A3B41DFAF9"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/Tools/JCPageRedirectManager.m"
+            filePath = "Jingcai/UI/&#x5927;&#x6570;&#x636e;/&#x6570;&#x636e;&#x6a21;&#x578b;/&#x5386;&#x53f2;&#x540c;&#x8d54;/&#x8be6;&#x60c5;/View/JCHistoryPayDataModelDetailHeadView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "433"
-            endingLineNumber = "433"
-            landmarkName = "+redirectHtmlWithRoute:param:vc:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B3C66E12-DC58-4BFD-A5A2-BDE1E97F3D5C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/Tools/JCPageRedirectManager.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "428"
-            endingLineNumber = "428"
-            landmarkName = "+redirectHtmlWithRoute:param:vc:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1CDAC3DE-16D8-48E2-8629-FAD0F5370C6E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/Tools/JCPageRedirectManager.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "429"
-            endingLineNumber = "429"
-            landmarkName = "+redirectHtmlWithRoute:param:vc:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FBA19150-A0E2-4748-BD6B-2D3372FE1393"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Jingcai/Tools/JCPageRedirectManager.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "480"
-            endingLineNumber = "480"
-            landmarkName = "+redirectHtmlWithRoute:param:vc:"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-setModel:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

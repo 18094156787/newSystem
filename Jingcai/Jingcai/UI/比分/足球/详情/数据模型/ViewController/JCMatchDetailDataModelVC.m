@@ -16,7 +16,7 @@
 #import "JNMatchSJAgainstDataVC.h"
 #import "UISegmentedControl+Extension.h"
 #import "JCDiscreteDataModelDetailVC.h"
-#import "JCHistoryPayDataModelDetailStickVC.h"
+#import "JCHistoryPayDataModelDetailVC.h"
 #import "JCPoissonDataModelDetailVC.h"
 #import "JCKellyDataModelDetailVC.h"
 #import "JCTransactionDataModelMatchVC.h"
@@ -150,7 +150,7 @@
                     [self.vcArr addObject:vc];
                 }
                 if ([obj.id integerValue]==3) {
-                    JCHistoryPayDataModelDetailStickVC *vc = [JCHistoryPayDataModelDetailStickVC new];
+                    JCHistoryPayDataModelDetailVC *vc = [JCHistoryPayDataModelDetailVC new];
                     vc.hidetopMatch = YES;
                     vc.isMatch = YES;
                     vc.titleModel = obj;

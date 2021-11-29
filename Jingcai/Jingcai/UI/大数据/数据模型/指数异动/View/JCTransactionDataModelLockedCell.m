@@ -11,15 +11,23 @@
 @implementation JCTransactionDataModelLockedCell
 
 - (void)initViews {
-    self.contentView.backgroundColor = JCClearColor;
     self.backgroundColor = JCClearColor;
+    self.contentView.backgroundColor = JCClearColor;
     [self.contentView addSubview:self.lockBtn];
     [self.lockBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(8));
         make.right.offset(AUTO(-8));
-        make.top.offset(AUTO(15));
+//        make.top.offset(AUTO(15));
+        make.centerY.equalTo(self);
         make.height.mas_equalTo(AUTO(40));
-        make.bottom.offset(AUTO(-15));
+        make.bottom.offset(0);
+    }];
+    
+    WeakSelf;
+    [self.lockBtn bk_whenTapped:^{
+        if (weakSelf.JCOpenBlock) {
+            weakSelf.JCOpenBlock();
+        }
     }];
 }
 

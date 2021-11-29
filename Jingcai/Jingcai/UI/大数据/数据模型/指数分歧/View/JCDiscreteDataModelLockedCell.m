@@ -226,7 +226,7 @@
     [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:model.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
     
 
-    NSString *title = [NSString stringWithFormat:@"查询到%@条赔率数据；已完成分歧数据运算",model.total_discrete_sample];
+    NSString *title = [NSString stringWithFormat:@"查询到%@条机构数据；已完成指数分歧数据运算",model.total_discrete_sample];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
     NSRange range = [title rangeOfString:model.total_discrete_sample];
     if (range.location!=NSNotFound) {
@@ -376,7 +376,7 @@
     [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:kellyModel.away_team_logo] placeholderImage:JCIMAGE(@"away_placeholder")];
     
 
-    NSString *title = [NSString stringWithFormat:@"查询到%ld条赔率数据；已完成机构分歧数据运算",kellyModel.company_num];
+    NSString *title = [NSString stringWithFormat:@"查询到%ld条机构数据；已完成机构分歧数据运算",kellyModel.company_num];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
     NSRange range = [title rangeOfString:[NSString stringWithFormat:@"%ld",kellyModel.company_num]];
     if (range.location!=NSNotFound) {

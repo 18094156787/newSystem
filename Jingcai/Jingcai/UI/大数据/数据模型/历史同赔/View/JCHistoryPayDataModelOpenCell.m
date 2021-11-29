@@ -99,79 +99,94 @@
         make.centerY.equalTo(self.scoreLab);
         make.left.equalTo(self.scoreLab.mas_right);
     }];
+    self.progressView.frame = CGRectMake(AUTO(24), AUTO(115), SCREEN_WIDTH-AUTO(48), AUTO(12));
+
     
-    [self.contentView addSubview:self.chuLab];
-    [self.chuLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(0);
-        make.top.equalTo(self.homeTeamImgView.mas_bottom).offset(AUTO(16));
-        make.right.equalTo(self.contentView.mas_centerX);
-        make.height.mas_equalTo(AUTO(16));
-    }];
-    
-    [self.contentView addSubview:self.jiLab];
-    [self.jiLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(0);
-        make.top.equalTo(self.awayTeamImgView.mas_bottom).offset(AUTO(16));
-        make.left.equalTo(self.contentView.mas_centerX);
-        make.height.mas_equalTo(AUTO(16));
-    }];
-    
-    [self.contentView addSubview:self.homeWinView];
-    [self.homeWinView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(AUTO(24));
-        make.top.equalTo(self.chuLab.mas_bottom).offset(AUTO(12));
-        make.width.mas_equalTo(AUTO(52));
-        make.height.mas_equalTo(AUTO(56));
-    }];
-    
-    [self.contentView addSubview:self.homeEqualView];
-    [self.homeEqualView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.homeWinView.mas_right);
-        make.top.equalTo(self.homeWinView);
-        make.width.mas_equalTo(AUTO(52));
-        make.height.mas_equalTo(AUTO(56));
-    }];
-    
-    [self.contentView addSubview:self.homeLoseView];
-    [self.homeLoseView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.homeEqualView.mas_right);
-        make.top.equalTo(self.homeWinView);
-        make.width.mas_equalTo(AUTO(52));
-        make.height.mas_equalTo(AUTO(56));
-    }];
-    
-    [self.contentView addSubview:self.awayLoseView];
-    [self.awayLoseView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(AUTO(-24));
-        make.top.equalTo(self.homeWinView);
-        make.width.mas_equalTo(AUTO(52));
-        make.height.mas_equalTo(AUTO(56));
-    }];
-    
-    [self.contentView addSubview:self.awayEqualView];
-    [self.awayEqualView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.awayLoseView.mas_left);
-        make.top.equalTo(self.homeWinView);
-        make.width.mas_equalTo(AUTO(52));
-        make.height.mas_equalTo(AUTO(56));
-    }];
-    
-    [self.contentView addSubview:self.awayWinView];
-    [self.awayWinView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.awayEqualView.mas_left);
-        make.top.equalTo(self.homeWinView);
-        make.width.mas_equalTo(AUTO(52));
-        make.height.mas_equalTo(AUTO(56));
-    }];
-    
-//    [self.contentView addSubview:self.lockBtn];
-//    [self.lockBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.contentView addSubview:self.progressView];
+//    [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.left.offset(AUTO(24));
+//        make.top.equalTo(self.homeTeamImgView.mas_bottom).offset(AUTO(16));
 //        make.right.offset(AUTO(-24));
-//        make.top.equalTo(self.homeWinView.mas_bottom).offset(AUTO(12));
-//        make.height.mas_equalTo(AUTO(36));
-//        
+//        make.height.mas_equalTo(AUTO(12));
 //    }];
+//
+    [self.contentView addSubview:self.winView];
+    [self.winView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.progressView.mas_bottom).offset(AUTO(8));
+        make.left.offset(AUTO(24));
+        make.width.mas_equalTo(AUTO(110));
+        make.height.mas_equalTo(AUTO(30));
+//        make.bottom.offset(AUTO(-20));
+    }];
+    UIView *windian = [UIView new];
+    windian.backgroundColor = COLOR_EF2F2F;
+    [windian hg_setAllCornerWithCornerRadius:AUTO(3)];
+    [self.winView addSubview:windian];
+    [windian mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(0);
+        make.centerY.equalTo(self.winView);
+        make.width.height.mas_equalTo(AUTO(6));
+    }];
+    
+    [self.winView addSubview:self.winLab];
+    [self.winLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(windian.mas_right).offset(2);
+        make.centerY.equalTo(self.winView);
+        make.right.offset(0);
+    }];
+    
+    [self.contentView addSubview:self.equalView];
+    [self.equalView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.winView);
+        make.width.mas_equalTo(AUTO(110));
+        make.height.mas_equalTo(AUTO(30));
+        make.centerX.equalTo(self.contentView);
+    }];
+
+    
+    [self.equalView addSubview:self.equalLab];
+    [self.equalLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(equaldian.mas_right).offset(2);
+        make.centerY.equalTo(self.equalView);
+        make.centerX.equalTo(self.equalView);
+    }];
+    
+    UIView *equaldian = [UIView new];
+    equaldian.backgroundColor = COLOR_30B27A;
+    [equaldian hg_setAllCornerWithCornerRadius:AUTO(3)];
+    [self.equalView addSubview:equaldian];
+    [equaldian mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.equalLab.mas_left).offset(AUTO(-2));
+        make.centerY.equalTo(self.winView);
+        make.width.height.mas_equalTo(AUTO(6));
+    }];
+    
+    [self.contentView addSubview:self.loseView];
+    [self.loseView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.winView);
+        make.width.mas_equalTo(AUTO(110));
+        make.height.mas_equalTo(AUTO(30));
+        make.right.offset(AUTO(-24));
+    }];
+    
+    [self.loseView addSubview:self.loseLab];
+    [self.loseLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.loseView);
+        make.right.offset(0);
+    }];
+
+    UIView *losedian = [UIView new];
+    losedian.backgroundColor = COLOR_002868;
+    [losedian hg_setAllCornerWithCornerRadius:AUTO(3)];
+    [self.loseView addSubview:losedian];
+    [losedian mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.loseLab.mas_left).offset(AUTO(-2));
+        make.centerY.equalTo(self.loseView);
+        make.width.height.mas_equalTo(AUTO(6));
+    }];
+
+
+
     
     [self.contentView addSubview:self.bottomView];
 
@@ -180,7 +195,7 @@
     [self.historyLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(32));
         make.right.offset(AUTO(-32));
-        make.top.equalTo(self.homeWinView.mas_bottom).offset(AUTO(12));
+        make.top.equalTo(self.winView.mas_bottom).offset(AUTO(12));
 //        make.bottom.equalTo(self.contentView).offset(AUTO(-20));
     }];
     
@@ -213,6 +228,7 @@
 
 - (void)setModel:(JCKellyDataModelModel *)model {
     _model = model;
+   
     self.matchNameLab.text = model.short_name_zh;
     self.matchNameLab.textColor = model.competition_color.length>0?[UIColor colorWithHexString:NonNil(model.competition_color)]:UIColorFromRGB(0x606062);
     self.matchTimeLab.text = model.match_time_str;
@@ -230,45 +246,26 @@
     if (model.wl==2) {
         self.resultImgView.image = JCIMAGE(@"ic_dataModel_black");
     }
-    
-    self.chuLab.text = [NSString stringWithFormat:@"相同初指（%@）",NonNil(model.similar.begin_count.total)];
-    self.jiLab.text = [NSString stringWithFormat:@"相同即指（%@）",NonNil(model.similar.last_count.total)];
-    
-    self.homeWinView.topLab.text = model.similar.begin_count.won;
-    self.homeWinView.bottomLab.text = model.similar.begin_odds.won;
-    self.homeEqualView.topLab.text = model.similar.begin_count.draw;
-    self.homeEqualView.bottomLab.text = model.similar.begin_odds.draw;
-    self.homeLoseView.topLab.text = model.similar.begin_count.loss;
-    self.homeLoseView.bottomLab.text = model.similar.begin_odds.loss;
-    
-    self.awayWinView.topLab.text =  model.similar.last_count.won;
-    self.awayWinView.bottomLab.text = model.similar.last_odds.won;
-    self.awayEqualView.topLab.text = model.similar.last_count.draw;
-    self.awayEqualView.bottomLab.text = model.similar.last_odds.draw;
-    self.awayLoseView.topLab.text = model.similar.last_count.loss;
-    self.awayLoseView.bottomLab.text = model.similar.last_odds.loss;
-    
-    if ([model.similar.last_odds.won floatValue]>[model.similar.begin_odds.won floatValue]) {
-        self.awayWinView.bottomLab.textColor = COLOR_EF2F2F;
-    }else if ([model.similar.last_odds.won floatValue]==[model.similar.begin_odds.won floatValue]) {
-        self.awayWinView.bottomLab.textColor = COLOR_2F2F2F;
+    self.winLab.text = [NSString stringWithFormat:@"主胜：%@%%(%@场)",model.similar.begin_rate.won,model.similar.begin_count.won];
+    self.equalLab.text = [NSString stringWithFormat:@"平：%@%%(%@场)",model.similar.begin_rate.draw,model.similar.begin_count.draw];
+    self.loseLab.text = [NSString stringWithFormat:@"客胜：%@%%(%@场)",model.similar.begin_rate.loss,model.similar.begin_count.loss];
+
+    if ([model.similar.begin_rate.won integerValue]==0&&[model.similar.begin_rate.draw integerValue]==0&&[model.similar.begin_rate.loss integerValue]==0) {
+        [self setupLineView:self.progressView colors:UIColorFromRGB(0x0EEEEEE) startPoint:0 endPoint:1];
     }else{
-        self.awayWinView.bottomLab.textColor = COLOR_30B27A;
+        float homeRate = [model.similar.begin_rate.won integerValue]/100.0f;
+        float equalRate = [model.similar.begin_rate.won integerValue]/100.0f+[model.similar.begin_rate.draw integerValue]/100.0f;
+//        float lossRate =[model.similar.begin_rate.loss integerValue]/100.0f;
+//        [self layoutIfNeeded];
+        [self setupLineView:self.progressView colors:COLOR_EF2F2F startPoint:0 endPoint:homeRate];
+        [self setupLineView:self.progressView colors:COLOR_30B27A startPoint:homeRate endPoint:equalRate];
+        [self setupLineView:self.progressView colors:COLOR_002868 startPoint:equalRate endPoint:1];
+//        NSLog(@"是%@",NSStringFromCGRect(self.progressView.frame));
+        
     }
-    if ([model.similar.last_odds.draw floatValue]>[model.similar.begin_odds.draw floatValue]) {
-        self.awayEqualView.bottomLab.textColor = COLOR_EF2F2F;
-    }else if ([model.similar.last_odds.draw floatValue]==[model.similar.begin_odds.draw floatValue]) {
-        self.awayEqualView.bottomLab.textColor = COLOR_2F2F2F;
-    }else{
-        self.awayEqualView.bottomLab.textColor = COLOR_30B27A;
-    }
-    if ([model.similar.last_odds.loss floatValue]>[model.similar.begin_odds.loss floatValue]) {
-        self.awayLoseView.bottomLab.textColor = COLOR_EF2F2F;
-    }else if ([model.similar.last_odds.loss floatValue]==[model.similar.begin_odds.loss floatValue]) {
-        self.awayLoseView.bottomLab.textColor = COLOR_2F2F2F;
-    }else{
-        self.awayLoseView.bottomLab.textColor = COLOR_30B27A;
-    }
+    
+    
+
     
     NSString *title = [NSString stringWithFormat:@"查询历史数据，找到相同初指比赛%@场，%@%%比赛结果指向客胜；",NonNil(model.similar.begin_count.total),NonNil(model.similar.begin_big_rate.rate)];
     if ([model.similar.last_count.total integerValue]>0) {
@@ -353,48 +350,32 @@
         self.scoreLab.textColor = COLOR_9F9F9F;
     }
 }
+-(void)setupLineView:(UIView *)lineView colors:(UIColor *)color startPoint:(float)start endPoint:(float)end{
+    UIBezierPath *linePath = [UIBezierPath bezierPath];
+    [linePath moveToPoint:CGPointMake(0, lineView.bounds.size.height/2)];
+    [linePath addLineToPoint:CGPointMake(lineView.bounds.size.width, lineView.bounds.size.height/2)];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    //每次动画的持续时间
+    animation.duration = 0.25;
+    //动画起始位置
+    animation.fromValue = @(0);
+    //动画结束位置
+    animation.toValue = @(1);
+    
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    shapeLayer.path = linePath.CGPath;
+    shapeLayer.lineWidth = lineView.bounds.size.height;
+    shapeLayer.fillColor = nil;
+    shapeLayer.strokeColor = color.CGColor;
+    //strokeStart defaults to zero and strokeEnd to one.
+    shapeLayer.strokeStart = start;
+    //分成了多少段，每次加多少分之一
+    shapeLayer.strokeEnd = end;
+    //添加动画
+//    [shapeLayer addAnimation:animation forKey:@"strokeEndAnimation"];
+    [lineView.layer addSublayer:shapeLayer];
 
-//- (void)data {
-////    self.bgView.backgroundColor = JCBaseColor;
-////    self.matchNameLab.backgroundColor = JCBaseColor;
-//    self.matchNameLab.text = @"赛事名称";
-//    self.matchTimeLab.text = @"09-02 18:00";
-//    self.matchStatusLab.text = @"未";
-//    self.scoreLab.text = @"99 : 99";
-//    self.homeTeamLab.text = @"皇家马德里";
-//    self.awayTeamLab.text = @"皇家马德里";
-//    self.homeTeamImgView.backgroundColor = JCBaseColor;
-//    self.awayTeamImgView.backgroundColor = JCBaseColor;
-//    self.chuLab.text = @"相同初指（100）";
-//    self.jiLab.text = @"相同即指（90）";
-//
-//    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"home_placeholder")];
-//    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"away_placeholder")];
-//    self.resultImgView.image = JCIMAGE(@"ic_dataModel_black");
-//
-//    self.homeWinView.topLab.text = @"22";
-//    self.homeWinView.bottomLab.text = @"22";
-//    self.homeEqualView.topLab.text = @"23";
-//    self.homeEqualView.bottomLab.text = @"23";
-//    self.homeLoseView.topLab.text = @"24";
-//    self.homeLoseView.bottomLab.text = @"24";
-//
-//    self.awayWinView.topLab.text = @"32";
-//    self.awayWinView.bottomLab.text = @"32";
-//    self.awayEqualView.topLab.text = @"33";
-//    self.awayEqualView.bottomLab.text = @"33";
-//    self.awayLoseView.topLab.text = @"34";
-//    self.awayLoseView.bottomLab.text = @"34";
-//
-//    self.historyLab.text = @"查询历史数据，找到相同初指比赛100场，相同即指比赛90场";
-//
-//    NSString *result = [NSString stringWithFormat:@"本场推荐：%@",@"客胜"];
-//    NSRange range = [result rangeOfString:@"客胜"];
-//    NSMutableAttributedString *result_attr = [[NSMutableAttributedString alloc] initWithString:result];
-//    [result_attr addAttributes:@{NSForegroundColorAttributeName:JCBaseColor} range:range];
-//    self.resultLab.attributedText = result_attr;
-//
-//}
+}
 
 - (UIView *)bgView {
     if (!_bgView) {
@@ -464,83 +445,14 @@
     return _awayTeamImgView;
 }
 
-- (UILabel *)chuLab {
-    if (!_chuLab) {
-        _chuLab =[UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+- (UIView *)progressView {
+    if (!_progressView) {
+        _progressView = [UIView new];
+        _progressView.backgroundColor = UIColorFromRGB(0xEEEEEE);
+        _progressView.layer.cornerRadius = AUTO(6);
+        _progressView.layer.masksToBounds = YES;
     }
-    return _chuLab;
-}
-
-- (UILabel *)jiLab {
-    if (!_jiLab) {
-        _jiLab =[UILabel initWithTitle:@"" andFont:AUTO(12) andWeight:1 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
-    }
-    return _jiLab;
-}
-
-- (UIButton *)lockBtn {
-    if (!_lockBtn) {
-        _lockBtn = [UIButton initWithText:@"开通[同赔分析]服务，解锁赛果预测" FontSize:AUTO(14) Weight:1 BackGroundColor:[JCBaseColor colorWithAlphaComponent:0.1] TextColors:JCBaseColor];
-        [_lockBtn setImage:JCIMAGE(@"ic_dataModel_lock") forState:0];
-        [_lockBtn setImage:JCIMAGE(@"ic_dataModel_lock") forState:UIControlStateHighlighted];
-        [_lockBtn hg_setAllCornerWithCornerRadius:AUTO(22)];
-        [_lockBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, AUTO(10))];
-    }
-    return _lockBtn;
-}
-
-- (JCHistoryPayDataModelRateView *)homeWinView {
-    if (!_homeWinView) {
-        _homeWinView =  [JCHistoryPayDataModelRateView new];
-        _homeWinView.nameLab.text = @"主胜";
-        _homeWinView.topLab.textColor = COLOR_EF2F2F;
-    }
-    return _homeWinView;
-}
-
-- (JCHistoryPayDataModelRateView *)homeEqualView {
-    if (!_homeEqualView) {
-        _homeEqualView =  [JCHistoryPayDataModelRateView new];
-        _homeEqualView.nameLab.text = @"平";
-        _homeEqualView.topLab.textColor = COLOR_30B27A;
-    }
-    return _homeEqualView;
-}
-
-- (JCHistoryPayDataModelRateView *)homeLoseView {
-    if (!_homeLoseView) {
-        _homeLoseView =  [JCHistoryPayDataModelRateView new];
-        _homeLoseView.nameLab.text = @"客胜";
-        _homeLoseView.topLab.textColor = COLOR_002868;
-    }
-    return _homeLoseView;
-}
-
-- (JCHistoryPayDataModelRateView *)awayWinView {
-    if (!_awayWinView) {
-        _awayWinView =  [JCHistoryPayDataModelRateView new];
-        _awayWinView.nameLab.text = @"主胜";
-        _awayWinView.topLab.textColor = COLOR_EF2F2F;
-    }
-    return _awayWinView;
-}
-
-- (JCHistoryPayDataModelRateView *)awayEqualView {
-    if (!_awayEqualView) {
-        _awayEqualView =  [JCHistoryPayDataModelRateView new];
-        _awayEqualView.nameLab.text = @"平";
-        _awayEqualView.topLab.textColor = COLOR_30B27A;
-    }
-    return _awayEqualView;
-}
-
-- (JCHistoryPayDataModelRateView *)awayLoseView {
-    if (!_awayLoseView) {
-        _awayLoseView =  [JCHistoryPayDataModelRateView new];
-        _awayLoseView.nameLab.text = @"客胜";
-        _awayLoseView.topLab.textColor = COLOR_002868;
-    }
-    return _awayLoseView;
+    return _progressView;
 }
 
 - (UIView *)bottomView {
@@ -579,6 +491,47 @@
         _resultImgView = [UIImageView new];
     }
     return _resultImgView;
+}
+- (UILabel *)winLab {
+    if (!_winLab) {
+        _winLab =[UILabel initWithTitle:@"" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_1B1B1B andBackgroundColor:JCClearColor andTextAlignment:0];
+    }
+    return _winLab;
+}
+
+- (UILabel *)equalLab {
+    if (!_equalLab) {
+        _equalLab =[UILabel initWithTitle:@"" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_1B1B1B andBackgroundColor:JCClearColor andTextAlignment:0];
+    }
+    return _equalLab;
+}
+
+- (UILabel *)loseLab {
+    if (!_loseLab) {
+        _loseLab =[UILabel initWithTitle:@"" andFont:AUTO(11) andWeight:1 andTextColor:COLOR_1B1B1B andBackgroundColor:JCClearColor andTextAlignment:0];
+    }
+    return _loseLab;
+}
+
+- (UIView *)winView {
+    if (!_winView) {
+        _winView = [UIView new];
+    }
+    return _winView;
+}
+
+- (UIView *)equalView {
+    if (!_equalView) {
+        _equalView = [UIView new];
+    }
+    return _equalView;
+}
+
+- (UIView *)loseView {
+    if (!_loseView) {
+        _loseView = [UIView new];
+    }
+    return _loseView;
 }
 
 @end
