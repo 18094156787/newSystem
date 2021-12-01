@@ -74,13 +74,13 @@
 
             float homeRate = [right floatValue]/total;
             [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:homeRate endPoint:1];
-            [self setupLineView:self.awayProgressView colors:COLOR_002868 startPoint:0 endPoint:homeRate];
+            [self setupLineView:self.awayProgressView colors:UIColorFromRGB(0x3578E3) startPoint:0 endPoint:homeRate];
             
 
         }else{
             [self setupLineView:self.homeProgressView colors:JCBaseColor startPoint:0 endPoint:0];
 
-            [self setupLineView:self.awayProgressView colors:COLOR_002868 startPoint:0 endPoint:0];
+            [self setupLineView:self.awayProgressView colors:UIColorFromRGB(0x3578E3) startPoint:0 endPoint:0];
         }
     }
 

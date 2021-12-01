@@ -64,6 +64,7 @@ static CGFloat const kWMMenuViewHeight = 0;
     [super viewWillAppear:animated];
     self.navigationBarStyle = JCNavigationBarStyleTransparent;
 //    [self initViews];
+    
     if (!self.topColorView) {
         [self setupColorView];
         [self setNavEffect];

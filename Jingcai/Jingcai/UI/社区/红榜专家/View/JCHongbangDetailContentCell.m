@@ -181,7 +181,7 @@
     // 图片预览
     NSMutableArray *datas = [NSMutableArray array];
     [self.tjInfoDetailBall.image enumerateObjectsUsingBlock:^(JCPostImageModel *_Nonnull model, NSUInteger idx, BOOL * _Nonnull stop) {
-            JCImgCollectionViewCell *cell = (JCImgCollectionViewCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
+//            JCImgCollectionViewCell *cell = (JCImgCollectionViewCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
 //        // 网络图片
         YBIBImageData *data = [YBIBImageData new];
         data.imageURL = [NSURL URLWithString:model.url];

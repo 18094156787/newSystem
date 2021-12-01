@@ -40,7 +40,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
+//    self.navigationController.navigationBarHidden = NO;
      self.navigationBarStyle = JCNavigationBarStyleDefault;
     [self hideNavShadow];
     if (self.needNextGetData) {
@@ -291,7 +291,7 @@
 
 - (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
 
-    return CGRectMake(0, 0, self.view.frame.size.width, SCREEN_HEIGHT-NavigationStatusBarHeight-kTabBarHeight);
+    return CGRectMake(0, 0, self.view.frame.size.width, SCREEN_HEIGHT-NavigationStatusBarHeight-kTabBarHeight-10);
 }
 
 

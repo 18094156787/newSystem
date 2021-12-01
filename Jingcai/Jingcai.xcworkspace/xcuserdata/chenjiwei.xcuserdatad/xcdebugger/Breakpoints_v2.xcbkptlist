@@ -7,32 +7,80 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5804F60C-E26B-4DE1-8590-02E1518844ED"
+            uuid = "53ECF686-FCCE-4A59-B426-BDCE67738467"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/&#x4e13;&#x5bb6;&#x8be6;&#x60c5;/ViewController/JCFootBallAuthorDetailWMViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "-initViews"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "53ECF686-FCCE-4A59-B426-BDCE67738467 - 5177b0ce5c2526d8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__51-[JCFootBallAuthorDetailWMViewController initViews]_block_invoke"
+                  moduleName = "&#x9cb8;&#x731c;&#x8db3;&#x7403;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chenjiwei/Desktop/%E6%99%BA%E8%83%9C%E8%B6%B3%E7%90%83_git/Jingcai/Jingcai/UI/%E7%A4%BE%E5%8C%BA/%E5%85%AC%E4%BC%97%E5%8F%B7%E4%B8%93%E5%AE%B6/%E5%A4%A7%E5%92%96(%E8%AF%A6%E7%BB%86)/%E4%B8%93%E5%AE%B6%E8%AF%A6%E6%83%85/ViewController/JCFootBallAuthorDetailWMViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
+                  offsetFromSymbolStart = "200">
+               </Location>
+               <Location
+                  uuid = "53ECF686-FCCE-4A59-B426-BDCE67738467 - 5177b0ce5c2526d8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__51-[JCFootBallAuthorDetailWMViewController initViews]_block_invoke"
+                  moduleName = "&#x9cb8;&#x731c;&#x8db3;&#x7403;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chenjiwei/Desktop/%E6%99%BA%E8%83%9C%E8%B6%B3%E7%90%83_git/Jingcai/Jingcai/UI/%E7%A4%BE%E5%8C%BA/%E5%85%AC%E4%BC%97%E5%8F%B7%E4%B8%93%E5%AE%B6/%E5%A4%A7%E5%92%96(%E8%AF%A6%E7%BB%86)/%E4%B8%93%E5%AE%B6%E8%AF%A6%E6%83%85/ViewController/JCFootBallAuthorDetailWMViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
+                  offsetFromSymbolStart = "288">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CE28D689-A460-4989-BB6B-CFA90E63501E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x5927;&#x6570;&#x636e;/&#x6570;&#x636e;&#x6a21;&#x578b;/&#x5386;&#x53f2;&#x540c;&#x8d54;/&#x8be6;&#x60c5;/View/JCHistoryPayDataModelDetailHeadView.m"
+            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/&#x4e13;&#x5bb6;&#x8be6;&#x60c5;/ViewController/JCFootBallAuthorDetailWMViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "-setModel:"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "-initViews"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0E632D73-F877-4C5A-A28C-55A3B41DFAF9"
+            uuid = "4B38645C-12A3-44F5-ADA5-0992FF254699"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x5927;&#x6570;&#x636e;/&#x6570;&#x636e;&#x6a21;&#x578b;/&#x5386;&#x53f2;&#x540c;&#x8d54;/&#x8be6;&#x60c5;/View/JCHistoryPayDataModelDetailHeadView.m"
+            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/&#x4e13;&#x5bb6;&#x8be6;&#x60c5;/ViewController/JCFootBallAuthorDetailWMViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "-setModel:"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "-initViews"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

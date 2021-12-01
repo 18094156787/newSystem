@@ -98,6 +98,13 @@ static CGFloat const kWMMenuViewHeight = 44.0;
         [super viewDidLoad];
     // Do any additional setup after loading the view.
 //    self.view.backgroundColor = JCNavColor;
+//    [self initViews];
+    [self showActivityPresentWithPosition:@"5" ViewController:self];
+
+}
+
+- (void)initViews {
+    self.title = @"专家详情";
     self.autherHeadView = [[JCFootBall_GZH_AuthorHeadView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, kWHongbangHeaderViewHeight)];
     WeakSelf;
     self.autherHeadView.ShowAllBlock = ^(float height) {
@@ -119,11 +126,6 @@ static CGFloat const kWMMenuViewHeight = 44.0;
 
     };
     [self.view addSubview:self.autherHeadView];
-
-}
-
-- (void)initViews {
-    self.title = @"专家详情";
 
 }
 

@@ -268,9 +268,9 @@
 
     
     NSString *title = [NSString stringWithFormat:@"查询历史数据，找到相同初指比赛%@场，%@%%比赛结果指向客胜；",NonNil(model.similar.begin_count.total),NonNil(model.similar.begin_big_rate.rate)];
-    if ([model.similar.last_count.total integerValue]>0) {
-        title = [NSString stringWithFormat:@"%@相同即指比赛%@场，%@%%比赛指向客胜。",title,NonNil(model.similar.last_count.total),NonNil(model.similar.last_big_rate.rate)];
-    }
+//    if ([model.similar.last_count.total integerValue]>0) {
+//        title = [NSString stringWithFormat:@"%@相同即指比赛%@场，%@%%比赛指向客胜。",title,NonNil(model.similar.last_count.total),NonNil(model.similar.last_big_rate.rate)];
+//    }
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
     if (model.similar.begin_count.total.length>0) {
         NSRange range = [title rangeOfString:model.similar.begin_count.total];
@@ -284,18 +284,24 @@
             [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
         }
     }
-    if (model.similar.last_count.total.length>0) {
-        NSRange range = [title rangeOfString:model.similar.last_count.total];
+    if ([model.similar.last_count.total integerValue]>0) {
+       NSString * last_title = [NSString stringWithFormat:@"相同即指比赛%@场，%@%%比赛指向客胜。",NonNil(model.similar.last_count.total),NonNil(model.similar.last_big_rate.rate)];
+        NSMutableAttributedString *last_attr = [[NSMutableAttributedString alloc] initWithString:last_title];
+        NSRange range = [last_title rangeOfString:model.similar.last_count.total];
         if (range.location!=NSNotFound) {
-            [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
+            [last_attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
         }
-    }
-    if (model.similar.last_big_rate.rate.length>0) {
-        NSRange range = [title rangeOfString:[NSString stringWithFormat:@"%@%%",model.similar.last_big_rate.rate]];
-        if (range.location!=NSNotFound) {
-            [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
+        
+        if (model.similar.last_big_rate.rate.length>0) {
+            NSRange range = [last_title rangeOfString:[NSString stringWithFormat:@"%@%%",model.similar.last_big_rate.rate]];
+            if (range.location!=NSNotFound) {
+                [last_attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
+            }
         }
+        [attr appendAttributedString:last_attr];
     }
+
+
     self.historyLab.attributedText = attr;
     
         NSString *result = [NSString stringWithFormat:@"本场推荐：%@",NonNil(model.similar.begin_big_rate.spf_desc)];

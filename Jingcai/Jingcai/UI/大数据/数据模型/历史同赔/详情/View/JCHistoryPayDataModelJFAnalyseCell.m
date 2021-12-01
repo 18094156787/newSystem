@@ -123,9 +123,9 @@
     }
     
     self.teamLab.text = self.row==0?model.home_team.name_zh:model.away_team.name_zh;
-    self.winLab.text = [NSString stringWithFormat:@"主胜：%ld%%(%ld场)",home_Rate,home_Count];
+    self.winLab.text = [NSString stringWithFormat:@"胜：%ld%%(%ld场)",home_Rate,home_Count];
     self.equalLab.text = [NSString stringWithFormat:@"平：%ld%%(%ld场)",model.history_vs.draw_rate,model.history_vs.draw];
-    self.loseLab.text = [NSString stringWithFormat:@"客胜：%ld%%(%ld场)",away_Rate,away_Count];
+    self.loseLab.text = [NSString stringWithFormat:@"负：%ld%%(%ld场)",away_Rate,away_Count];
 
     if (model.history_vs.won_rate==0&&model.history_vs.draw_rate==0&&model.history_vs.loss_rate==0) {
         [self setupLineView:self.progressView colors:UIColorFromRGB(0x0EEEEEE) startPoint:0 endPoint:1];

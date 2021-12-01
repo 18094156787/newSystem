@@ -423,35 +423,7 @@
 }
 
 - (void)shareItemClick {
-    WeakSelf;
-    [JCWAppTool isUserNotificationEnable:^(BOOL isEnabled) {
-        if (!isEnabled) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
-                [alertView alertTitle:@"" TitleColor:COLOR_2F2F2F Mesasge:@"您未开启通知权限，开启后才能使用分享功能，是否前往开启？" MessageColor:COLOR_666666 SureTitle:@"确认" SureColor:JCWhiteColor SureHandler:^{
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
-                    [alertView removeFromSuperview];
-                } CancleTitle:@"取消" CancleColor:JCBaseColor CancelHandler:^{
-                   [alertView removeFromSuperview];
-                }];
-                alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-                [[UIApplication sharedApplication].keyWindow addSubview:alertView];
-
-            });
-
-
-
-        }else {
-
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.shareView show];
-
-            });
-
-        }
-    
-    }];
+    [self.shareView show];
 
 }
 

@@ -18,6 +18,7 @@
 #import "JCTransactionDataModelDetailVC.h"
 #import "JCKellyDataDetailModel.h"
 #import "JCTransactionDataContrastModel.h"
+#import "JCTransactionDataModelAgainstTitleView.h"
 @interface JCTransactionDataModelMatchVC ()
 
 @property (nonatomic,strong) JNMatchSJAgainstTipView *tipView;
@@ -187,8 +188,11 @@
     headView.titleLab.text = model.title;
     headView.detailView.hidden = NO;
     if(section==self.dataArray.count&&self.dataSource.count>0){
-        headView.detailView.hidden = YES;
-        headView.titleLab.text = @"数据对比";
+//        headView.detailView.hidden = YES;
+//        headView.titleLab.text = @"数据对比";
+        JCTransactionDataModelAgainstTitleView *againstView = [JCTransactionDataModelAgainstTitleView new];
+        againstView.titleLab.text = @"数据对比";
+        return againstView;
     }
 
     

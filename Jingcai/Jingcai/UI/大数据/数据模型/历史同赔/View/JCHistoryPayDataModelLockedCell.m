@@ -207,7 +207,7 @@
         type = @"指数异动";
     }
     if ([model.model_id integerValue] ==3) {
-        type = @"历史分析";
+        type = @"同赔分析";
     }
     if ([model.model_id integerValue] ==4) {
         type = @"泊松分布";

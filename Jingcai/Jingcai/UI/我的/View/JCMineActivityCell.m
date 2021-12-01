@@ -99,6 +99,7 @@
                 return ;
             }
             WebViewController *webVC = [WebViewController new];
+            webVC.titleStr = slide.title;
             webVC.urlStr = slide.url;
             [[self getViewController].navigationController pushViewController:webVC animated:YES];
         }

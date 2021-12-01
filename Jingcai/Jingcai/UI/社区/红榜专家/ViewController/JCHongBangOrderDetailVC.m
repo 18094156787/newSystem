@@ -26,6 +26,7 @@
     [super viewWillAppear:animated];
     self.navigationBarStyle = JCNavigationBarStyleDefault;
     [self setNavBackImg];
+    
 }
 
 - (void)viewDidLoad {

@@ -40,6 +40,7 @@
     [self.wkWebView.configuration.userContentController removeScriptMessageHandlerForName:@"startRecharge"];
     [self.wkWebView.configuration.userContentController removeScriptMessageHandlerForName:@"startMatchDetails"];
     [self.wkWebView.configuration.userContentController removeScriptMessageHandlerForName:@"startTeamDetails"];
+    [self.wkWebView.configuration.userContentController removeScriptMessageHandlerForName:@"userShare"];
     
 }
 
@@ -58,6 +59,7 @@
     [self.wkWebView.configuration.userContentController addScriptMessageHandler:self name:@"startRecharge"];
     [self.wkWebView.configuration.userContentController addScriptMessageHandler:self name:@"startMatchDetails"];
     [self.wkWebView.configuration.userContentController addScriptMessageHandler:self name:@"startTeamDetails"];
+    [self.wkWebView.configuration.userContentController addScriptMessageHandler:self name:@"userShare"];
 }
 
 - (void)viewDidLoad {
@@ -145,34 +147,7 @@
 
 - (void)shareItemClick {
     WeakSelf;
-    [JCWAppTool isUserNotificationEnable:^(BOOL isEnabled) {
-        if (!isEnabled) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                JCBaseTitleAlertView *alertView = [JCBaseTitleAlertView new];
-                [alertView alertTitle:@"" TitleColor:COLOR_2F2F2F Mesasge:@"您未开启通知权限，开启后才能使用分享功能，是否前往开启？" MessageColor:COLOR_666666 SureTitle:@"确认" SureColor:JCWhiteColor SureHandler:^{
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
-                    [alertView removeFromSuperview];
-                } CancleTitle:@"取消" CancleColor:JCBaseColor CancelHandler:^{
-                   [alertView removeFromSuperview];
-                }];
-                alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-                [[UIApplication sharedApplication].keyWindow addSubview:alertView];
-
-            });
-
-
-
-        }else {
-
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.shareView show];
-
-            });
-
-        }
-    
-    }];
+    [weakSelf.shareView show];
 
 }
 
@@ -190,7 +165,25 @@
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
     // message.body  --  Allowed types are NSNumber, NSString, NSDate, NSArray,NSDictionary, and NSNull.
-    [JCPageRedirectManager redirectHtmlWithRoute:message.name param:message.body vc:self];
+    if ([message.name isEqualToString:@"userShare"]) {
+        NSLog(@"%@",message.body);
+        if ([message.body isKindOfClass:[NSDictionary class]]) {
+//            NSDictionary *dic = [message.body isKindOfClass:[NSDictionary class]];
+            JCShareModel *slide = (JCShareModel *)[JCWJsonTool entityWithJson:message.body class:[JCShareModel class]];
+            self.shareView.title = slide.share_title;
+            self.shareView.content = slide.share_desc;
+            self.shareView.desc = slide.share_desc;
+            self.shareView.webPageUrl = slide.share_url;
+            self.shareView.friend_url = slide   .friend_url;
+            
+            UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"ic_share_black") style:0 target:self action:@selector(shareItemClick)];
+            shareItem.tintColor = JCBlackColor;
+            self.navigationItem.rightBarButtonItem = shareItem;
+        }
+    }else{
+        [JCPageRedirectManager redirectHtmlWithRoute:message.name param:message.body vc:self];
+    }
+    
 
     
 }

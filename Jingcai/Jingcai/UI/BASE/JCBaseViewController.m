@@ -85,7 +85,7 @@
 }
 - (void)setNavigationBarStyle:(JCNavigationBarStyle)navigationBarStyle {
     _navigationBarStyle = navigationBarStyle;
-    
+//    [self hideNavShadow];
     //statusbar设定
     if (navigationBarStyle == JCNavigationBarStyleDefault) {
 //        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
@@ -106,8 +106,10 @@
         [self.navigationController.navigationBar setTranslucent:YES];
         
     } else {
-        [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-        [self.navigationController.navigationBar setShadowImage:nil];
+//        [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+//        [self.navigationController.navigationBar setShadowImage:nil];
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        [self.navigationController.navigationBar setShadowImage:[UIImage new]];
         [self.navigationController.navigationBar setTranslucent:NO];
     }
     
@@ -153,8 +155,20 @@
         return ;
     } else if (navigationBarStyle == JCNavigationBarStyleWhite) {
         UIFont * font = [UIFont fontWithName:@"PingFangSC-Semibold" size:18];
-        [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        NSDictionary *dic = @{NSFontAttributeName:font, NSForegroundColorAttributeName:[UIColor whiteColor]};
+        [self.navigationController.navigationBar setTitleTextAttributes:dic];
         [self.navigationController.navigationBar setBarTintColor:COLOR_E4463E];
+        if (@available(iOS 15.0, *)) {
+            UINavigationBarAppearance *barApp = [UINavigationBarAppearance new];
+            barApp.backgroundColor = [UIColor whiteColor];
+            barApp.titleTextAttributes = dic;
+            [barApp configureWithTransparentBackground];
+//            barApp.shadowImage = JCIMAGE(@"blank");
+            barApp.shadowColor = JCClearColor;
+            
+            self.navigationController.navigationBar.scrollEdgeAppearance = nil;
+            self.navigationController.navigationBar.standardAppearance = barApp;
+        }
         return ;
     }
 }
@@ -192,13 +206,7 @@
     }
 }
 
-//- (void)changeNavAlphaByScrollView:(UIScrollView *)scrollView maxOffseY:(CGFloat)maxOffsetY {
-//    //self.hideNavBackWhenAppear = YES;
-//    self.hideNavTitleWhenAppear = YES;
-//    [scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
-//    self.observeScrollView = scrollView;
-//    self.maxOffsetY = maxOffsetY;
-//}
+
 - (void)setStatusBarBackgroundColor:(UIColor *)statusBarBackgroundColor {
     _statusBarBackgroundColor = statusBarBackgroundColor;
     UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
@@ -211,16 +219,6 @@
     _statusBarHidden = statusBarHidden;
     [self setNeedsStatusBarAppearanceUpdate];
 }
-
-//#pragma mark - Observe
-//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-//    CGPoint point = [((NSValue *)[self.observeScrollView valueForKey:keyPath]) CGPointValue];
-//    CGFloat alpha = point.y/self.maxOffsetY;
-//    if (self.isOnAppear) {
-//        [self setNavBackAlpha:alpha];
-//        [self setNavTitleAlpha:alpha];
-//    }
-//}
 
 #pragma mark - 
 - (CGFloat)contentH {
@@ -417,11 +415,7 @@
             }];
             if (actID_Array.count>0) {
                 [[NSUserDefaults standardUserDefaults] setValue:actID_Array forKey:JCActivity_data];
-//                if ([[NSUserDefaults standardUserDefaults] objectForKey:JCActivity_data]) {
-//                    [[NSUserDefaults standardUserDefaults] setValue:actID_Array forKey:JCActivity_data];
-//                }else{
-//                    [[NSUserDefaults standardUserDefaults] setValue:actID_Array forKey:JCActivity_data];
-//                }
+
 
             }
 
@@ -455,6 +449,7 @@
                     return ;
                 }
                 WebViewController *webVC = [WebViewController new];
+                webVC.titleStr = actModel.title;
                 webVC.urlStr = actModel.url;
                 webVC.JCCancelBlock = ^{
                     [weakSelf showActivityViewWithVC:weakSelf];

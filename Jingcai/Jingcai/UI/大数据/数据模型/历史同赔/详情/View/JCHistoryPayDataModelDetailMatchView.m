@@ -157,7 +157,7 @@
 
         if (model.status_id==2||model.status_id==4) {
 //            self.ongoingTimeLab.text = model.status_cn;
-            if (model.second_half_time>0) {
+            if ([model.second_half_time integerValue]>0) {
                 //计算时间差
                 double currentTime = [[NSDate date] timeIntervalSince1970];
                 double distance = currentTime-[model.second_half_time longValue];

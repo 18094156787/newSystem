@@ -162,6 +162,7 @@
             return ;
         }
         WebViewController *webVC = [WebViewController new];
+        webVC.titleStr = model.title;
         webVC.urlStr = model.url;
         [self.navigationController pushViewController:webVC animated:YES];
     }
