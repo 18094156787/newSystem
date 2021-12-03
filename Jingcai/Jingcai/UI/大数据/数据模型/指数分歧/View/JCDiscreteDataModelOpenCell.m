@@ -236,6 +236,7 @@
         make.width.mas_equalTo(SCREEN_WIDTH/3.0f);
         make.height.mas_equalTo(AUTO(20));
         make.top.equalTo(self.historyLab.mas_bottom).offset(AUTO(20));
+        make.bottom.offset(AUTO(-15));
     }];
     
     [self.contentView addSubview:self.winRateLab];
@@ -254,21 +255,21 @@
         make.left.equalTo(self.equalRateLab.mas_right);
     }];
     
-    [self.contentView addSubview:self.zhishuLab];
-    [self.zhishuLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.loseRateLab.mas_bottom).offset(AUTO(7));
-        make.right.offset(AUTO(-16));
-        make.height.mas_equalTo(AUTO(40));
-        make.bottom.offset(AUTO(-5));
-    }];
+//    [self.contentView addSubview:self.zhishuLab];
+//    [self.zhishuLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.loseRateLab.mas_bottom).offset(AUTO(7));
+//        make.right.offset(AUTO(-16));
+//        make.height.mas_equalTo(AUTO(40));
+//        make.bottom.offset(AUTO(-5));
+//    }];
     
-    WeakSelf;
-    [self.zhishuLab bk_whenTapped:^{
-        weakSelf.trajectoryView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-        weakSelf.trajectoryView.match_id = self.model.match_id;
-        [[UIApplication sharedApplication].keyWindow addSubview:weakSelf.trajectoryView];
-        [weakSelf.trajectoryView show];
-    }];
+//    WeakSelf;
+//    [self.zhishuLab bk_whenTapped:^{
+//        weakSelf.trajectoryView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+//        weakSelf.trajectoryView.match_id = self.model.match_id;
+//        [[UIApplication sharedApplication].keyWindow addSubview:weakSelf.trajectoryView];
+//        [weakSelf.trajectoryView show];
+//    }];
     
 }
 - (void)setModel:(JCKellyDataModelModel *)model {
@@ -487,7 +488,8 @@
 - (UIImageView *)homeTeamImgView {
     if (!_homeTeamImgView) {
         _homeTeamImgView = [UIImageView new];
-        [_homeTeamImgView hg_setAllCornerWithCornerRadius:AUTO(14)];
+        _homeTeamImgView.contentMode = UIViewContentModeScaleAspectFit;
+//        [_homeTeamImgView hg_setAllCornerWithCornerRadius:AUTO(14)];
     }
     return _homeTeamImgView;
 }
@@ -495,7 +497,8 @@
 - (UIImageView *)awayTeamImgView {
     if (!_awayTeamImgView) {
         _awayTeamImgView = [UIImageView new];
-        [_awayTeamImgView hg_setAllCornerWithCornerRadius:AUTO(14)];
+        _awayTeamImgView.contentMode = UIViewContentModeScaleAspectFit;
+//        [_awayTeamImgView hg_setAllCornerWithCornerRadius:AUTO(14)];
     }
     return _awayTeamImgView;
 }

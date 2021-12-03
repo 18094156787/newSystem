@@ -173,43 +173,10 @@
         make.left.offset(AUTO(24));
         make.top.equalTo(self.lockBtn.mas_bottom).offset(AUTO(12));
         make.bottom.equalTo(self.contentView).offset(AUTO(-12));
-    }];
-    
-//    UIView *homeView = [UIView new];
-//    [self.contentView addSubview:homeView];
-//    [homeView mas_makeConstraints:^(MASConstraintMaker *make) {
-//       make.left.offset()
-//    }];
-    
-    
+    }];    
 }
 
-//- (void)data {
-////    self.bgView.backgroundColor = JCBaseColor;
-////    self.matchNameLab.backgroundColor = JCBaseColor;
-//    self.matchNameLab.text = @"赛事名称";
-//    self.matchTimeLab.text = @"09-02 18:00";
-//    self.matchStatusLab.text = @"未";
-//    self.scoreLab.text = @"99 : 99";
-//    self.homeTeamLab.text = @"皇家马德里";
-//    self.awayTeamLab.text = @"皇家马德里";
-//    self.homeTeamImgView.backgroundColor = JCBaseColor;
-//    self.awayTeamImgView.backgroundColor = JCBaseColor;
-//
-//    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"home_placeholder")];
-//    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"away_placeholder")];
-//
-//
-//    self.homeWinView.bottomLab.text = @"22";
-//    self.homeEqualView.bottomLab.text = @"23";
-//    self.homeLoseView.bottomLab.text = @"24";
-//
-//    self.awayWinView.bottomLab.text = @"32";
-//    self.awayEqualView.bottomLab.text = @"33";
-//    self.awayLoseView.bottomLab.text = @"34";
-//
-//    self.historyLab.text = @"查询历史数据，找到相同初指比赛100场，相同即指比赛90场";
-//}
+
 
 
 - (void)setModel:(JCKellyDataModelModel *)model {
@@ -569,7 +536,8 @@
 - (UIImageView *)homeTeamImgView {
     if (!_homeTeamImgView) {
         _homeTeamImgView = [UIImageView new];
-        [_homeTeamImgView hg_setAllCornerWithCornerRadius:AUTO(14)];
+        _homeTeamImgView.contentMode = UIViewContentModeScaleAspectFit;
+//        [_homeTeamImgView hg_setAllCornerWithCornerRadius:AUTO(14)];
     }
     return _homeTeamImgView;
 }
@@ -577,7 +545,8 @@
 - (UIImageView *)awayTeamImgView {
     if (!_awayTeamImgView) {
         _awayTeamImgView = [UIImageView new];
-        [_awayTeamImgView hg_setAllCornerWithCornerRadius:AUTO(14)];
+        _awayTeamImgView.contentMode = UIViewContentModeScaleAspectFit;
+//        [_awayTeamImgView hg_setAllCornerWithCornerRadius:AUTO(14)];
     }
     return _awayTeamImgView;
 }

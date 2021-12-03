@@ -103,8 +103,8 @@
     
     [self.contentView addSubview:self.bottomView];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(AUTO(24));
-        make.right.offset(AUTO(-24));
+        make.left.offset(AUTO(15));
+        make.right.offset(AUTO(-15));
         make.top.equalTo(self.winView.mas_bottom).offset(AUTO(20));
         make.bottom.offset(AUTO(-20));
     }];
@@ -161,9 +161,6 @@
         
     }
     NSString *title = [NSString stringWithFormat:@"查询历史数据，找到相同初指比赛%@场，%@%%比赛结果指向客胜；",NonNil(model.similar.begin_count.total),NonNil(model.similar.begin_big_rate.rate)];
-    if ([model.similar.last_count.total integerValue]>0) {
-        title = [NSString stringWithFormat:@"%@相同即指比赛%@场，%@%%比赛指向客胜。",title,NonNil(model.similar.last_count.total),NonNil(model.similar.last_big_rate.rate)];
-    }
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
     if (model.similar.begin_count.total.length>0) {
         NSRange range = [title rangeOfString:model.similar.begin_count.total];
@@ -177,18 +174,7 @@
             [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
         }
     }
-    if (model.similar.last_count.total.length>0) {
-        NSRange range = [title rangeOfString:model.similar.last_count.total];
-        if (range.location!=NSNotFound) {
-            [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
-        }
-    }
-    if (model.similar.last_big_rate.rate.length>0) {
-        NSRange range = [title rangeOfString:[NSString stringWithFormat:@"%@%%",model.similar.last_big_rate.rate]];
-        if (range.location!=NSNotFound) {
-            [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
-        }
-    }
+
     self.historyLab.attributedText = attr;
     
         NSString *result = [NSString stringWithFormat:@"本场推荐：%@",NonNil(model.similar.begin_big_rate.spf_desc)];

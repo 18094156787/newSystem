@@ -493,7 +493,8 @@
 - (UIImageView *)homeTeamImgView {
     if (!_homeTeamImgView) {
         _homeTeamImgView = [UIImageView new];
-        [_homeTeamImgView hg_setAllCornerWithCornerRadius:AUTO(12)];
+        _homeTeamImgView.contentMode = UIViewContentModeScaleAspectFit;
+//        [_homeTeamImgView hg_setAllCornerWithCornerRadius:AUTO(12)];
     }
     return _homeTeamImgView;
 }
@@ -501,7 +502,8 @@
 - (UIImageView *)awayTeamImgView {
     if (!_awayTeamImgView) {
         _awayTeamImgView = [UIImageView new];
-        [_awayTeamImgView hg_setAllCornerWithCornerRadius:AUTO(12)];
+        _awayTeamImgView.contentMode = UIViewContentModeScaleAspectFit;
+//        [_awayTeamImgView hg_setAllCornerWithCornerRadius:AUTO(12)];
     }
     return _awayTeamImgView;
 }

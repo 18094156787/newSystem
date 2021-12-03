@@ -197,7 +197,7 @@
     self.awayWindLab.text = model.similar.last_odds.won;
     self.awayEqualLab.text = model.similar.last_odds.draw;
     self.awayLoseLab.text = model.similar.last_odds.loss;
-    self.historyLab.text = [NSString stringWithFormat:@"查询历史数据，找到相同初指比赛%@场，相同即指比赛%@场",model.similar.begin_count.total,model.similar.last_count.total];
+//    self.historyLab.text = [NSString stringWithFormat:@"查询历史数据，找到相同初指比赛%@场。",model.similar.begin_count.total];
     
     NSString *type = @"";
     if ([model.model_id integerValue] ==1) {
@@ -222,7 +222,7 @@
     
     [self.lockBtn setTitle:[NSString stringWithFormat:@"开通[%@]服务，解锁赛果详情",type] forState:0];
     
-    NSString *title = [NSString stringWithFormat:@"查询历史数据，找到相同初指比赛%@场，相同即指比赛%@场",NonNil(model.similar.begin_count.total),NonNil(model.similar.last_count.total)];
+    NSString *title = [NSString stringWithFormat:@"查询历史数据，找到相同初指比赛%@场。",NonNil(model.similar.begin_count.total)];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
     if (model.similar.begin_count.total.length>0) {
         NSRange range = [title rangeOfString:model.similar.begin_count.total];
@@ -230,12 +230,7 @@
             [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
         }
     }
-    if (model.similar.last_count.total.length>0) {
-        NSRange range = [title rangeOfString:model.similar.last_count.total];
-        if (range.location!=NSNotFound) {
-            [attr addAttributes:@{NSForegroundColorAttributeName:COLOR_EF2F2F} range:range];
-        }
-    }
+
     self.historyLab.attributedText = attr;
     
     if ([model.similar.last_odds.won floatValue]>[model.similar.begin_odds.won floatValue]) {
@@ -305,30 +300,6 @@
     }
 }
 
-//- (void)data {
-////    self.bgView.backgroundColor = JCBaseColor;
-////    self.matchNameLab.backgroundColor = JCBaseColor;
-//    self.matchNameLab.text = @"赛事名称";
-//    self.matchTimeLab.text = @"09-02 18:00";
-//    self.matchStatusLab.text = @"未";
-//    self.scoreLab.text = @"99 : 99";
-//    self.homeTeamLab.text = @"皇家马德里";
-//    self.awayTeamLab.text = @"皇家马德里";
-//    self.homeTeamImgView.backgroundColor = JCBaseColor;
-//    self.awayTeamImgView.backgroundColor = JCBaseColor;
-//    self.chuLab.text = @"相同初指（100）";
-//    self.jiLab.text = @"相同即指（90）";
-//
-//    [self.homeTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"home_placeholder")];
-//    [self.awayTeamImgView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:JCIMAGE(@"away_placeholder")];
-//    self.homeWindLab.text = @"1";
-//    self.homeEqualLab.text = @"2";
-//    self.homeLoseLab.text = @"3";
-//    self.awayWindLab.text = @"4";
-//    self.awayEqualLab.text = @"5";
-//    self.awayLoseLab.text = @"6";
-//    self.historyLab.text = @"查询历史数据，找到相同初指比赛100场，相同即指比赛90场";
-//}
 
 - (UIView *)bgView {
     if (!_bgView) {
@@ -385,7 +356,8 @@
 - (UIImageView *)homeTeamImgView {
     if (!_homeTeamImgView) {
         _homeTeamImgView = [UIImageView new];
-        [_homeTeamImgView hg_setAllCornerWithCornerRadius:AUTO(14)];
+        _homeTeamImgView.contentMode = UIViewContentModeScaleAspectFit;
+//        [_homeTeamImgView hg_setAllCornerWithCornerRadius:AUTO(14)];
     }
     return _homeTeamImgView;
 }
@@ -393,7 +365,8 @@
 - (UIImageView *)awayTeamImgView {
     if (!_awayTeamImgView) {
         _awayTeamImgView = [UIImageView new];
-        [_awayTeamImgView hg_setAllCornerWithCornerRadius:AUTO(14)];
+        _awayTeamImgView.contentMode = UIViewContentModeScaleAspectFit;
+//        [_awayTeamImgView hg_setAllCornerWithCornerRadius:AUTO(14)];
     }
     return _awayTeamImgView;
 }

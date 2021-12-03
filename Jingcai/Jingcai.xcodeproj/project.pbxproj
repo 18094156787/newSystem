@@ -198,7 +198,6 @@
 		59541D15273A7A1700D470EF /* JCHistoryPayDataModelOpenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59541D14273A7A1700D470EF /* JCHistoryPayDataModelOpenCell.m */; };
 		59541D18273B63E500D470EF /* JCHistoryPayDataModelRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59541D17273B63E500D470EF /* JCHistoryPayDataModelRateView.m */; };
 		59541D21273B718900D470EF /* JCHistoryPayDataModelDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59541D20273B718900D470EF /* JCHistoryPayDataModelDetailVC.m */; };
-		59541D24273B72B500D470EF /* JCHistoryPayDataModelDetailTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59541D23273B72B500D470EF /* JCHistoryPayDataModelDetailTopView.m */; };
 		59541D27273B777D00D470EF /* JCHistoryPayDataModelDetailMatchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59541D26273B777D00D470EF /* JCHistoryPayDataModelDetailMatchView.m */; };
 		59541D2A273B960000D470EF /* JCHistoryPayDataModelColumnarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59541D29273B960000D470EF /* JCHistoryPayDataModelColumnarView.m */; };
 		59541D2D273B9E4000D470EF /* JCHistoryPayDataModelDetailTitleHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59541D2C273B9E4000D470EF /* JCHistoryPayDataModelDetailTitleHeadView.m */; };
@@ -1130,7 +1129,6 @@
 		7BCA27DF252039F8008787FF /* JCMyBuyOrderDataHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCA27DE252039F8008787FF /* JCMyBuyOrderDataHeadView.m */; };
 		7BCA27E225203DCC008787FF /* JCMyBuyOrderDataCommomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCA27E125203DCC008787FF /* JCMyBuyOrderDataCommomCell.m */; };
 		7BCA27E525205D4B008787FF /* JCMyBuyOrderDataInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCA27E425205D4B008787FF /* JCMyBuyOrderDataInfoCell.m */; };
-		7BCA27EB25205FF2008787FF /* JCMyBuyOrderDataBuyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCA27EA25205FF2008787FF /* JCMyBuyOrderDataBuyCell.m */; };
 		7BCA27F425206589008787FF /* JCMyBuyOrderTtitleHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCA27F325206589008787FF /* JCMyBuyOrderTtitleHeadView.m */; };
 		7BCA27F725206BBA008787FF /* JCMyBuyOrderTjDetailMatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCA27F625206BBA008787FF /* JCMyBuyOrderTjDetailMatchCell.m */; };
 		7BCA27FA25206F4C008787FF /* JCMyBuyOrderTjDetailMatchInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCA27F925206F4C008787FF /* JCMyBuyOrderTjDetailMatchInfoCell.m */; };
@@ -1813,8 +1811,6 @@
 		59541D17273B63E500D470EF /* JCHistoryPayDataModelRateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCHistoryPayDataModelRateView.m; sourceTree = "<group>"; };
 		59541D1F273B718900D470EF /* JCHistoryPayDataModelDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCHistoryPayDataModelDetailVC.h; sourceTree = "<group>"; };
 		59541D20273B718900D470EF /* JCHistoryPayDataModelDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCHistoryPayDataModelDetailVC.m; sourceTree = "<group>"; wrapsLines = 0; };
-		59541D22273B72B500D470EF /* JCHistoryPayDataModelDetailTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCHistoryPayDataModelDetailTopView.h; sourceTree = "<group>"; };
-		59541D23273B72B500D470EF /* JCHistoryPayDataModelDetailTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCHistoryPayDataModelDetailTopView.m; sourceTree = "<group>"; };
 		59541D25273B777D00D470EF /* JCHistoryPayDataModelDetailMatchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCHistoryPayDataModelDetailMatchView.h; sourceTree = "<group>"; };
 		59541D26273B777D00D470EF /* JCHistoryPayDataModelDetailMatchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCHistoryPayDataModelDetailMatchView.m; sourceTree = "<group>"; };
 		59541D28273B960000D470EF /* JCHistoryPayDataModelColumnarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCHistoryPayDataModelColumnarView.h; sourceTree = "<group>"; };
@@ -3615,8 +3611,6 @@
 		7BCA27E125203DCC008787FF /* JCMyBuyOrderDataCommomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCMyBuyOrderDataCommomCell.m; sourceTree = "<group>"; };
 		7BCA27E325205D4B008787FF /* JCMyBuyOrderDataInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCMyBuyOrderDataInfoCell.h; sourceTree = "<group>"; };
 		7BCA27E425205D4B008787FF /* JCMyBuyOrderDataInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCMyBuyOrderDataInfoCell.m; sourceTree = "<group>"; };
-		7BCA27E925205FF2008787FF /* JCMyBuyOrderDataBuyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCMyBuyOrderDataBuyCell.h; sourceTree = "<group>"; };
-		7BCA27EA25205FF2008787FF /* JCMyBuyOrderDataBuyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCMyBuyOrderDataBuyCell.m; sourceTree = "<group>"; };
 		7BCA27F225206589008787FF /* JCMyBuyOrderTtitleHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCMyBuyOrderTtitleHeadView.h; sourceTree = "<group>"; };
 		7BCA27F325206589008787FF /* JCMyBuyOrderTtitleHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JCMyBuyOrderTtitleHeadView.m; sourceTree = "<group>"; };
 		7BCA27F525206BBA008787FF /* JCMyBuyOrderTjDetailMatchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCMyBuyOrderTjDetailMatchCell.h; sourceTree = "<group>"; };
@@ -4829,8 +4823,6 @@
 		59541D1B273B70D400D470EF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				59541D22273B72B500D470EF /* JCHistoryPayDataModelDetailTopView.h */,
-				59541D23273B72B500D470EF /* JCHistoryPayDataModelDetailTopView.m */,
 				598C9CE127549F7E00854F9E /* JCHistoryPayDataModelDetailHeadView.h */,
 				598C9CE227549F7E00854F9E /* JCHistoryPayDataModelDetailHeadView.m */,
 				59541D28273B960000D470EF /* JCHistoryPayDataModelColumnarView.h */,
@@ -9709,8 +9701,6 @@
 				7BCA27E125203DCC008787FF /* JCMyBuyOrderDataCommomCell.m */,
 				7BCA27E325205D4B008787FF /* JCMyBuyOrderDataInfoCell.h */,
 				7BCA27E425205D4B008787FF /* JCMyBuyOrderDataInfoCell.m */,
-				7BCA27E925205FF2008787FF /* JCMyBuyOrderDataBuyCell.h */,
-				7BCA27EA25205FF2008787FF /* JCMyBuyOrderDataBuyCell.m */,
 				7BCA27F525206BBA008787FF /* JCMyBuyOrderTjDetailMatchCell.h */,
 				7BCA27F625206BBA008787FF /* JCMyBuyOrderTjDetailMatchCell.m */,
 				7BCA27F825206F4C008787FF /* JCMyBuyOrderTjDetailMatchInfoCell.h */,
@@ -11902,7 +11892,6 @@
 				7BB8282024B45C9B0012EDA8 /* JCTeamMatchInfoScoreLianSaiCell.m in Sources */,
 				7BCA27D9252035C9008787FF /* JCBuyOrderDataSingleCell.m in Sources */,
 				7BCA278F251C6F5A008787FF /* JCWithDrawRecordItemCell.m in Sources */,
-				59541D24273B72B500D470EF /* JCHistoryPayDataModelDetailTopView.m in Sources */,
 				59145F9527425F5700DA5391 /* JCKellyDataModelOddsIndexModel.m in Sources */,
 				7BCA27D625202F1F008787FF /* JCBuyOrderDataMonthCell.m in Sources */,
 				7B1BDD4B250F15CC00D7C034 /* JCAAVC.m in Sources */,
@@ -12730,7 +12719,6 @@
 				7B206585256CA2B0006149BB /* JCYCNoMoreDataFootView.m in Sources */,
 				7B45F44325F0BD550099D108 /* JCActivityNewsHeadView.m in Sources */,
 				59EB4EA4271D5A1B00952D4D /* JCColumnDetailIntroduceCollectionCell.m in Sources */,
-				7BCA27EB25205FF2008787FF /* JCMyBuyOrderDataBuyCell.m in Sources */,
 				7B80CA5D24BD57DE00C14117 /* JNMatchZS_PLInfoModel.m in Sources */,
 				7B5D03D4265F6FC300C65F51 /* JCRechargeTextBannerView.m in Sources */,
 				7B80CAB024C1AA9100C14117 /* JNMatchSJZhanjiTableViewCell.m in Sources */,

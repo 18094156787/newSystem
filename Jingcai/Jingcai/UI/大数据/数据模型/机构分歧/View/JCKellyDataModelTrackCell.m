@@ -143,34 +143,7 @@
     if (self.row==self.dataArray.count-1) {
         self.timeLab.text = @"初指";
     }else {
-        if (model.type==2) {
-            self.timeLab.text = [NSString stringWithFormat:@"赛前48小时"];
-        }
-        if (model.type==3) {
-            self.timeLab.text = [NSString stringWithFormat:@"赛前24小时"];
-        }
-        if (model.type==4) {
-            self.timeLab.text = [NSString stringWithFormat:@"赛前12小时"];
-        }
-        if (model.type==5) {
-            self.timeLab.text = [NSString stringWithFormat:@"赛前6小时"];
-        }
-        if (model.type==6) {
-            self.timeLab.text = [NSString stringWithFormat:@"赛前3小时"];
-        }
-        if (model.type==7) {
-            self.timeLab.text = [NSString stringWithFormat:@"赛前1小时"];
-        }
-        if (model.type==8) {
-            self.timeLab.text = [NSString stringWithFormat:@"赛前30分钟"];
-        }
-        if (model.type==9) {
-            self.timeLab.text = [NSString stringWithFormat:@"赛前20分钟"];
-        }
-        if (model.type==10) {
-            self.timeLab.text = [NSString stringWithFormat:@"赛前10分钟"];
-        }
-        
+        self.timeLab.text = model.type_str;
     }
     
     self.winLab.textColor = COLOR_2F2F2F;

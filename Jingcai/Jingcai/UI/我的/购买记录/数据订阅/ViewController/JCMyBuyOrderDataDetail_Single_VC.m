@@ -10,7 +10,6 @@
 #import "JCMyBuyOrderDataHeadView.h"
 #import "JCMyBuyOrderDataCommomCell.h"
 #import "JCMyBuyOrderDataInfoCell.h"
-#import "JCMyBuyOrderDataBuyCell.h"
 #import "JCMyBuyOrderTtitleHeadView.h"
 #import "JCBigDataOrderDetailModel.h"
 #import "JCMyBuyOrderDataSingleHeadView.h"
@@ -74,7 +73,6 @@
 //    self.tableView.tableHeaderView = self.headView;
     [self.tableView registerClass:[JCMyBuyOrderDataCommomCell class] forCellReuseIdentifier:@"JCMyBuyOrderDataCommomCell"];
     [self.tableView registerClass:[JCMyBuyOrderDataInfoCell class] forCellReuseIdentifier:@"JCMyBuyOrderDataInfoCell"];
-    [self.tableView registerClass:[JCMyBuyOrderDataBuyCell class] forCellReuseIdentifier:@"JCMyBuyOrderDataBuyCell"];
     [self.tableView registerClass:[JCMyBuyOrderTjDetailMatchInfoCell class] forCellReuseIdentifier:@"JCMyBuyOrderTjDetailMatchInfoCell"];
     
 //    WeakSelf;

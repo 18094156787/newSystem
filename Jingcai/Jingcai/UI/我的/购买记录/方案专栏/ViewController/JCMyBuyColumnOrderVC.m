@@ -10,7 +10,6 @@
 #import "JCMyBuyOrderDataHeadView.h"
 #import "JCMyBuyOrderDataCommomCell.h"
 #import "JCMyBuyOrderDataInfoCell.h"
-#import "JCMyBuyOrderDataBuyCell.h"
 #import "JCMyBuyOrderTtitleHeadView.h"
 #import "JCBigDataOrderDetailModel.h"
 #import "JCMyBuyOrderDataSingleHeadView.h"

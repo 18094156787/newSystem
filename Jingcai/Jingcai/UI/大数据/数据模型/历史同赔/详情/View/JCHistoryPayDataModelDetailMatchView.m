@@ -252,10 +252,6 @@
     if (!_homeImgView) {
         _homeImgView = [UIImageView new];
         _homeImgView.contentMode = UIViewContentModeScaleAspectFit;
-//        _homeImgView.layer.borderWidth = 0.5;
-//        _homeImgView.layer.borderColor = COLOR_DDDDDD.CGColor;
-//        _homeImgView.layer.masksToBounds = YES;
-//        _homeImgView.layer.cornerRadius = AUTO(20);
     }
     return _homeImgView;
 }
@@ -264,10 +260,6 @@
     if (!_awayImgView) {
         _awayImgView = [UIImageView new];
         _awayImgView.contentMode = UIViewContentModeScaleAspectFit;
-//        _awayImgView.layer.borderWidth = 0.5;
-//        _awayImgView.layer.borderColor = COLOR_DDDDDD.CGColor;
-//        _awayImgView.layer.masksToBounds = YES;
-//        _awayImgView.layer.cornerRadius = AUTO(20);
     }
     return _awayImgView;
 }
