@@ -54,7 +54,7 @@
     if (self.detailModel.compare_odds.count>0) {
         self.headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AUTO(30));
         self.tableView.tableHeaderView = self.headView;
-        self.headView.type = detailModel.type;
+        self.headView.type = self.type;
         self.headView.detailModel = detailModel;
     }
     [self.tableView reloadData];

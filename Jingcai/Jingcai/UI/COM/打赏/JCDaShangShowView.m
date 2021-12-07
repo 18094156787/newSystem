@@ -399,7 +399,8 @@
         [JCWToastTool showHint:@"请输入正确的金额"];
         return;
     }
-    if ([self.priceTF.text floatValue]<0.01) {
+    if ([self.priceTF.text floatValue]<0.01f) {
+        NSLog(@"%f",[self.priceTF.text floatValue]);
         [JCWToastTool showHint:@"请填写大于等于0.01元的数字"];
         return;
     }

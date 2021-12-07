@@ -7,32 +7,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "70561390-1EFE-47ED-90CF-B48873B87A48"
+            uuid = "8380B209-41C8-44B9-ABE4-59C10711342A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x6211;&#x7684;/&#x8d2d;&#x4e70;&#x8bb0;&#x5f55;/&#x6570;&#x636e;&#x8ba2;&#x9605;/ViewController/JCMyBuyOrderDataDetailVC.m"
+            filePath = "Jingcai/UI/&#x5927;&#x6570;&#x636e;/ViewController/JCBigDataWMVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "-refreshData"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "-getHomeTab"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1086665F-0AD0-4226-B633-7FA2138600BF"
+            uuid = "800E2D47-78FB-4C7B-98D9-933399260C81"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Jingcai/UI/&#x6211;&#x7684;/&#x8d2d;&#x4e70;&#x8bb0;&#x5f55;/&#x6570;&#x636e;&#x8ba2;&#x9605;/ViewController/JCMyBuyOrderDataDetailVC.m"
+            filePath = "Jingcai/UI/&#x5927;&#x6570;&#x636e;/&#x6570;&#x636e;&#x5e93;/&#x8054;&#x8d5b;&#x8be6;&#x60c5;/&#x6bd4;&#x8d5b;/ViewController/JCTeamMatchInfoMatchVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "-refreshData"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "-getStage_list"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "796CE487-D370-455E-87E6-33FFB7060DBC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/Services_New/JCDataBaseService_New.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "-getDataBaseStage_listWithSeason_id:Success:failure:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4E715E54-0D24-44C3-B430-B84A9D60850C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Jingcai/UI/&#x793e;&#x533a;/&#x516c;&#x4f17;&#x53f7;&#x4e13;&#x5bb6;/&#x5927;&#x5496;(&#x8be6;&#x7ec6;)/&#x4e13;&#x5bb6;&#x8be6;&#x60c5;/ViewController/JCFootBallAuthorDetailWMViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "-initViews"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

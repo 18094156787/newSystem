@@ -475,7 +475,7 @@
     self.tipView.tipImgView.image= JCIMAGE(@"nodata_fangan_small");
     self.tipView.titleLab.text = @"您还未订阅该数据模型...";
     self.tipView.contentLab.text = @"计算各个机构的指数分歧、方差，发现机构的不同观点看法";
-    [self.tipView.buyMonthBtn setTitle:[NSString stringWithFormat:@"订阅此数据模型 %ld红币/月",[self.titleModel.big_data_price integerValue]/100] forState:0];
+    [self.tipView.buyMonthBtn setTitle:[NSString stringWithFormat:@"订阅此数据模型 %@红币/月",@([self.titleModel.big_data_price integerValue]/100.0f)] forState:0];
     if (self.titleModel.is_subscrib==3) {
         self.tipView.is_free = YES;
         self.tipView.tipImgView.image= JCIMAGE(@"nodata_bigdata_yidong");

@@ -23,16 +23,12 @@
 #import "JCWJsonTool.h"
 #import "JCWTjUserBall.h"
 #import "JCDianPingMatchBall.h"
-//#import "JCWCacheTool.h"
 #import "JCWUserBall.h"
-//#import "JCPayManager.h"
 #import "SDCycleScrollView.h"
-//#import <BlocksKit.h>
 #import <BlocksKit/UIView+BlocksKit.h>
 #import "HMSegmentedControl.h"
 #import "UIResponder+TPCategory.h"
 #import "EMTextView.h"
-//#import <ReactiveObjC.h.h>
 #import "ReactiveObjC.h"
 #import "JCBaseNavigationController.h"
 #import "JCWUserBall.h"

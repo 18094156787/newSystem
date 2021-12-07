@@ -64,7 +64,7 @@
         self.titleColorSelected = JCBaseColor;//COLOR_FE1F19
         self.titleColorNormal = COLOR_9F9F9F;
 //        self.menuViewStyle = WMMenuViewStyleFloodHollow;
-        self.itemsWidths = @[@(120),@(90),@(60)];
+        self.itemsWidths = @[@(100),@(70),@(70)];
 //        self.menuItemWidth = AUTO(90);
         self.menuViewLayoutMode = WMMenuViewLayoutModeLeft;
 //        self.menuViewContentMargin = -20;
@@ -124,56 +124,50 @@
              
              
              NSString *is_show_big_data   = object[@"data"][@"is_show_big_data"];
-//             is_show_big_data = @"1";
+//             is_show_big_data = @"0";
              NSString *is_show_whale_ai   = object[@"data"][@"is_show_whale_ai"];
-//             is_show_whale_ai = @"1";
+//             is_show_whale_ai = @"0";
              if ([is_show_big_data integerValue]==1&&[is_show_whale_ai integerValue]==1) {
                  return;
              }
              NSMutableArray *titleArray = [NSMutableArray array];
              [self.dataArray removeAllObjects];
-//             if ([is_show_big_data intValue]==1) {
-//                 JCShowModel *is_show_big_data_model = [JCShowModel new];
-//                 is_show_big_data_model.title = @"鲸猜大数据";
-//                 is_show_big_data_model.is_show_big_data = @"1";
-//                 [self.dataArray addObject:is_show_big_data_model];
-//                 [titleArray addObject:@"鲸猜大数据"];
-//                 [self.itemWidthArray addObject:@(120)];
-////                 self.itemsWidths = @[@(AUTO(90)),@(AUTO(90)),@(AUTO(50))];
-//             }
-             JCShowModel *is_data_model = [JCShowModel new];
-             is_data_model.title = @"数据模型";
-             is_data_model.is_show_dataModel = @"1";
-             [self.dataArray addObject:is_data_model];
-             [titleArray addObject:@"数据模型"];
-             [self.itemWidthArray addObject:@(90)];
+             if ([is_show_big_data intValue]==1){
+                 JCShowModel *is_data_model = [JCShowModel new];
+                 is_data_model.title = @"数据模型";
+                 is_data_model.is_show_dataModel = @"1";
+                 [self.dataArray addObject:is_data_model];
+                 [titleArray addObject:@"数据模型"];
+                 [self.itemWidthArray addObject:@(100)];
+             }
+
              if ([is_show_whale_ai intValue]==1) {
                  JCShowModel *is_show_whale_ai_model = [JCShowModel new];
                  is_show_whale_ai_model.title = @"鲸猜AI";
                  is_show_whale_ai_model.is_show_whale_ai = @"1";
                  [self.dataArray addObject:is_show_whale_ai_model];
                  [titleArray addObject:@"鲸猜AI"];
-                 [self.itemWidthArray addObject:@(80)];
+                 [self.itemWidthArray addObject:@(70)];
              }
              JCShowModel *is_show_big_data_model = [JCShowModel new];
              is_show_big_data_model.title = @"资料库";
              is_show_big_data_model.is_show_database = @"1";
              [self.dataArray addObject:is_show_big_data_model];
              [titleArray addObject:@"资料库"];
-             [self.itemWidthArray addObject:@(68)];
+             [self.itemWidthArray addObject:@(70)];
              
              self.titleArray = [NSArray arrayWithArray:titleArray];
 
-//             if (self.titleArray.count==1) {
-//                 UILabel *titleView = [UILabel initWithTitle:@"资料库" andFont:AUTO(18) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
-//                 titleView.frame = CGRectMake(50, 0, SCREEN_WIDTH-100, 44);
-//                 self.navigationItem.titleView = titleView;
-//                 
-//                 UIBarButtonItem *leftItem =  [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"icon_fagm") style:0 target:nil action:nil];
-//                 leftItem.tintColor = JCClearColor;
-//                 self.navigationItem.leftBarButtonItem = leftItem;
-//                 
-//             }
+             if (self.titleArray.count==1) {
+                 UILabel *titleView = [UILabel initWithTitle:@"资料库" andFont:AUTO(18) andWeight:2 andTextColor:COLOR_2F2F2F andBackgroundColor:JCClearColor andTextAlignment:NSTextAlignmentCenter];
+                 titleView.frame = CGRectMake(50, 0, SCREEN_WIDTH-100, 44);
+                 self.navigationItem.titleView = titleView;
+                 
+                 UIBarButtonItem *leftItem =  [[UIBarButtonItem alloc] initWithImage:JCIMAGE(@"icon_fagm") style:0 target:nil action:nil];
+                 leftItem.tintColor = JCClearColor;
+                 self.navigationItem.leftBarButtonItem = leftItem;
+                 
+             }
 //             self.itemsWidths = @[@(110),@(90)];
              self.itemsWidths = [NSArray arrayWithArray:self.itemWidthArray];
              [self forceLayoutSubviews];

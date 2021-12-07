@@ -30,6 +30,7 @@
 
 
 - (void)viewDidLoad {
+    self.style = 1;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"资料库";

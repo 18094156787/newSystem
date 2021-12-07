@@ -50,7 +50,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
     self.navigationController.navigationBarHidden = NO;
      self.navigationBarStyle = JCNavigationBarStyleTransparent;
     
-    [self initViews];
+//    [self initViews];
     [self setNavBackImgWhiteColor];
     
 }
@@ -98,7 +98,7 @@ static CGFloat const kWMMenuViewHeight = 44.0;
         [super viewDidLoad];
     // Do any additional setup after loading the view.
 //    self.view.backgroundColor = JCNavColor;
-//    [self initViews];
+    [self initViews];
     [self showActivityPresentWithPosition:@"5" ViewController:self];
 
 }

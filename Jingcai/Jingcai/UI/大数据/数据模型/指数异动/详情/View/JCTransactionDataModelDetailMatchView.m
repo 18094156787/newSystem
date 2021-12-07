@@ -18,14 +18,6 @@
         make.height.mas_equalTo(AUTO(20));
     }];
     
-//    [self addSubview:self.resultImgView];
-//    [self.resultImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.offset(AUTO(-12));
-//        make.top.offset(AUTO(12));
-//        make.size.mas_equalTo(CGSizeMake(AUTO(36), AUTO(36)));
-//    }];
-
-    
     [self addSubview:self.homeImgView];
     [self.homeImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(AUTO(60));
@@ -41,18 +33,20 @@
     }];
     
     
-    [self addSubview:self.scoreLab];
-    [self.scoreLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.homeImgView).offset(AUTO(15));
-        make.centerX.equalTo(self);
-        make.size.mas_equalTo(CGSizeMake(AUTO(80), AUTO(30)));
-    }];
+
     
     [self addSubview:self.statusLab];
     [self.statusLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
-        make.top.equalTo(self.scoreLab.mas_bottom).offset(AUTO(4));
+        make.top.equalTo(self.homeImgView).offset(AUTO(0));
         make.height.mas_equalTo(AUTO(20));
+    }];
+    
+    [self addSubview:self.scoreLab];
+    [self.scoreLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.statusLab.mas_bottom).offset(AUTO(4));
+        make.centerX.equalTo(self);
+        make.size.mas_equalTo(CGSizeMake(AUTO(80), AUTO(30)));
     }];
     
 
