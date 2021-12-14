@@ -234,7 +234,7 @@
         return 0.01f;
     }
     if (indexPath.section==2) {
-        return AUTO(65);
+        return AUTO(55);
     }
     
     return UITableViewAutomaticDimension;

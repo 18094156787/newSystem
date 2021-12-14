@@ -46,7 +46,7 @@ static CGFloat const kWMMenuViewHeight = 44;
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
      self.navigationBarStyle = JCNavigationBarStyleTransparent;
-    [self initViews];
+    self.title = self.isMine?@"个人中心":@"达人详情";
     [self setNavBackImgWhiteColor];
 }
 
@@ -96,12 +96,13 @@ static CGFloat const kWMMenuViewHeight = 44;
 }
 
 - (void)viewDidLoad {
-//    self.titleColorSelected = COLOR_FF4642;//COLOR_FE1F19
-//    self.titleColorNormal = COLOR_999999;
-//    self.view.backgroundColor = [UIColor greenColor]
-        [super viewDidLoad];
+    [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = COLOR_A32020;
+    [self initViews];
+}
+
+- (void)initViews {
     self.autherHeadView = [[JCFootBall_HB_AuthorHeadView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, kWHongbangHeaderViewHeight)];
     self.autherHeadView.isMine = self.isMine;
     WeakSelf;
@@ -125,11 +126,6 @@ static CGFloat const kWMMenuViewHeight = 44;
 
     };
     [self.view addSubview:self.autherHeadView];
-
-}
-
-- (void)initViews {
-    self.title = self.isMine?@"个人中心":@"达人详情";
 
 }
 

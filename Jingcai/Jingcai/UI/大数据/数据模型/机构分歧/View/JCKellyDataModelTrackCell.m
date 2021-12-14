@@ -34,51 +34,57 @@
     
     [self addSubview:self.zs_WinLab];
     [self.zs_WinLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(0);
+//        make.top.offset(0);
         make.bottom.equalTo(self.mas_centerY);
         make.left.equalTo(self.loseLab.mas_right).offset(0);
         make.width.mas_equalTo(AUTO(43));
+        make.height.mas_equalTo(AUTO(20));
     }];
     
     [self addSubview:self.zs_EqualLab];
     [self.zs_EqualLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(0);
+//        make.top.offset(0);
         make.bottom.equalTo(self.mas_centerY);
         make.left.equalTo(self.zs_WinLab.mas_right);
         make.width.mas_equalTo(AUTO(43));
+        make.height.mas_equalTo(AUTO(20));
     }];
     
     [self addSubview:self.zs_LoseLab];
     [self.zs_LoseLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(0);
+//        make.top.offset(0);
         make.bottom.equalTo(self.mas_centerY);
         make.left.equalTo(self.zs_EqualLab.mas_right);
         make.width.mas_equalTo(AUTO(43));
+        make.height.mas_equalTo(AUTO(20));
     }];
     
     [self addSubview:self.fc_WinLab];
     [self.fc_WinLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.offset(0);
+//        make.bottom.offset(0);
         make.top.equalTo(self.mas_centerY);
         make.left.equalTo(self.zs_WinLab);
         make.width.mas_equalTo(AUTO(43));
+        make.height.mas_equalTo(AUTO(20));
     }];
     
     
     [self addSubview:self.fc_EqualLab];
     [self.fc_EqualLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.offset(0);
+//        make.bottom.offset(0);
         make.top.equalTo(self.mas_centerY);
         make.left.equalTo(self.fc_WinLab.mas_right);
         make.width.mas_equalTo(AUTO(43));
+        make.height.mas_equalTo(AUTO(20));
     }];
     
     [self addSubview:self.fc_LoseLab];
     [self.fc_LoseLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.offset(0);
+//        make.bottom.offset(0);
         make.top.equalTo(self.mas_centerY);
         make.left.equalTo(self.fc_EqualLab.mas_right);
         make.width.mas_equalTo(AUTO(43));
+        make.height.mas_equalTo(AUTO(20));
     }];
     
     [self addSubview:self.rateLab];
